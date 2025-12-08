@@ -31,7 +31,7 @@ function CheckoutContent() {
   const [locale, setLocale] = useState('en')
   const [paymentMethod, setPaymentMethod] = useState<'tokens' | 'card'>('tokens')
   const [isProcessingPayment, setIsProcessingPayment] = useState(false)
-  const hasProcessedParams = useRef(false)
+  const [hasProcessedParams, setHasProcessedParams] = useState(false)
   const hasRedirected = useRef(false)
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function CheckoutContent() {
 
   // Process URL parameters (pack or custom top-up)
   useEffect(() => {
-    if (hasProcessedParams.current) return
+    if (hasProcessedParams) return
     
     const packId = searchParams.get('pack')
     const customAmount = searchParams.get('custom')
@@ -82,7 +82,7 @@ function CheckoutContent() {
         }
       }
       
-      hasProcessedParams.current = true
+      setHasProcessedParams(true)
     } else if (customAmount) {
       const amount = parseFloat(customAmount)
       
@@ -109,12 +109,12 @@ function CheckoutContent() {
         }
       }
       
-      hasProcessedParams.current = true
+      setHasProcessedParams(true)
     } else {
       // No URL params, mark as processed
-      hasProcessedParams.current = true
+      setHasProcessedParams(true)
     }
-  }, [searchParams, addToCart, items, router, tHome])
+  }, [searchParams, addToCart, items, router, tHome, hasProcessedParams])
 
   // Check if cart contains token packs or custom top-up
   const isTokenPurchase = () => {
@@ -141,10 +141,10 @@ function CheckoutContent() {
 
   // Redirect if cart is empty (but only after processing URL params and not during payment)
   useEffect(() => {
-    if (hasProcessedParams.current && items.length === 0 && !isProcessingPayment && !hasRedirected.current) {
+    if (hasProcessedParams && items.length === 0 && !isProcessingPayment && !hasRedirected.current) {
       router.push('/cart')
     }
-  }, [items.length, router, isProcessingPayment])
+  }, [items.length, router, isProcessingPayment, hasProcessedParams])
 
   const handleCardPayment = async (cardData: CardFormData) => {
     setIsProcessingPayment(true)
@@ -342,7 +342,7 @@ function CheckoutContent() {
   }
 
   // Show loading state while processing URL params
-  if (!hasProcessedParams.current) {
+  if (!hasProcessedParams) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-slate-400">Loading...</div>

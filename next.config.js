@@ -30,12 +30,12 @@ const nextConfig = {
   images: {
     remotePatterns,
   },
-  // Для Puppeteer в serverless функциях
+  // Для Puppeteer/Chromium в serverless функциях
   webpack: (config, { isServer }) => {
     if (isServer) {
-      config.externals.push('puppeteer');
+      config.externals.push('puppeteer')
     }
-    return config;
+    return config
   },
 }
 

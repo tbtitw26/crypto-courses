@@ -26,15 +26,22 @@ interface ReceiptData {
 export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buffer> {
   const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
 
+  // Ensure Chromium runs in Lambda/Vercel
+  chromium.setHeadlessMode = true
+  chromium.setGraphicsMode = false
+
   let browser
   try {
     if (isServerless) {
       // Serverless environment - use Chromium
+      const executablePath = await chromium.executablePath('/tmp')
+      console.log('[Receipts] Using Chromium path:', executablePath)
       browser = await puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
+        executablePath,
         headless: chromium.headless === 'new' ? true : chromium.headless,
+        ignoreHTTPSErrors: true,
       })
     } else {
       // Local development - use system Chrome/Chromium
