@@ -9,7 +9,7 @@ import { getModelForFeature } from '@/lib/openai/client'
 import { z } from 'zod'
 import { sendPurchaseConfirmationEmail, sendCourseDeliveryEmail } from '@/lib/email'
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
-import { clearAiStrategyStatus, updateAiStrategyStatus } from '@/lib/pdf/ai-strategy-status-tracker'
+import { updateAiStrategyStatus } from '@/lib/pdf/ai-strategy-status-tracker'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -127,8 +127,6 @@ export async function POST(request: NextRequest) {
       status: 'processing',
       message: 'Strategy generation started. You can close this window.',
     })
-
-    await clearAiStrategyStatus()
 
     generateStrategyInBackground(strategyRun.id, data, userId).catch((error) => {
       console.error('[AI Strategy API] Background generation error (unhandled):', error)

@@ -11,7 +11,7 @@ import { config } from '@/lib/config'
 import { z } from 'zod'
 import { sendPurchaseConfirmationEmail, sendCourseDeliveryEmail } from '@/lib/email'
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
-import { updateCustomCourseStatus, clearCustomCourseStatus, loadCustomCourseStatus } from '@/lib/pdf/custom-course-status-tracker'
+import { updateCustomCourseStatus } from '@/lib/pdf/custom-course-status-tracker'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -134,9 +134,6 @@ export async function POST(request: NextRequest) {
       message: 'Course generation started. You can close this window.',
       estimatedReadyAt: estimatedReadyAt.toISOString(),
     })
-
-    // Clear any previous status
-    await clearCustomCourseStatus()
 
     // Start generation in background (don't await - let it run asynchronously)
     // This allows the response to be sent immediately

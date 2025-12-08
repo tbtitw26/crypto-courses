@@ -173,6 +173,10 @@ model CustomCourseRequest {
   id                     Int       @id @default(autoincrement())
   user_id                Int
   status                 String // draft, pending_payment, in_queue, processing, ready, failed
+  status_stage           String? // generating_en, generating_cover, error, etc.
+  status_progress        Int?    // 0-100
+  status_message         String?
+  status_error           String?
   experience_years       String // 0, 1-2, 3+
   deposit_budget         String
   risk_tolerance         String // low, medium, high
@@ -203,6 +207,10 @@ model AiStrategyRun {
   id                     Int      @id @default(autoincrement())
   user_id                Int
   status                 String // processing, ready, failed
+  status_stage           String?
+  status_progress        Int?
+  status_message         String?
+  status_error           String?
   experience_years       String // 0, 1-2, 3+
   deposit_budget         String
   risk_tolerance         String // low, medium, high

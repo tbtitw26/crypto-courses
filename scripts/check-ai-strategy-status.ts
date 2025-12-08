@@ -8,16 +8,25 @@ config({ path: resolve(process.cwd(), '.env.local'), override: true })
 
 import { loadAiStrategyStatus } from '../lib/pdf/ai-strategy-status-tracker'
 
-async function displayStatus() {
-  const status = await loadAiStrategyStatus()
+async function displayStatus(idArg?: string) {
+  if (!idArg) {
+    console.error('Please provide strategyRunId: npm run ai-strategy:status -- <id>')
+    return
+  }
+  const strategyRunId = parseInt(idArg, 10)
+  if (Number.isNaN(strategyRunId)) {
+    console.error('Invalid strategyRunId provided.')
+    return
+  }
+  const status = await loadAiStrategyStatus(strategyRunId)
 
   if (!status) {
-    console.log('\n📊 No AI strategy generation in progress.\n')
+    console.log(`\n📊 No AI strategy generation found for ID ${strategyRunId}.\n`)
     return
   }
 
   console.log('\n🤖 AI Strategy Generation Status:')
-  console.log(`  Strategy Run ID: ${status.strategyRunId ?? 'N/A'}`)
+  console.log(`  Strategy Run ID: ${status.strategyRunId}`)
   console.log(`  Course ID: ${status.courseId ?? 'N/A'}`)
   console.log(`  Stage: ${status.stage}`)
   console.log(`  Progress: ${status.progress}%`)
@@ -59,11 +68,9 @@ async function displayStatus() {
   }
 
   console.log('')
-  console.log(`📄 Status file: public/courses/.ai-strategy-generation-status.json`)
-  console.log('')
 }
 
-displayStatus().catch((error) => {
+displayStatus(process.argv[2]).catch((error) => {
   console.error('Error:', error)
   process.exit(1)
 })

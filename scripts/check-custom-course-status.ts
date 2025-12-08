@@ -13,11 +13,20 @@ import { loadCustomCourseStatus } from '../lib/pdf/custom-course-status-tracker'
 /**
  * Display current generation status
  */
-async function displayStatus() {
-  const status = await loadCustomCourseStatus()
+async function displayStatus(idArg: string | undefined) {
+  if (!idArg) {
+    console.error('Please provide courseRequestId: npm run custom-course:status -- <id>')
+    return
+  }
+  const courseRequestId = parseInt(idArg, 10)
+  if (Number.isNaN(courseRequestId)) {
+    console.error('Invalid courseRequestId provided.')
+    return
+  }
+  const status = await loadCustomCourseStatus(courseRequestId)
   if (status) {
     console.log('\n📊 Custom Course Generation Status:')
-    console.log(`  Course Request ID: ${status.courseRequestId || 'N/A'}`)
+    console.log(`  Course Request ID: ${status.courseRequestId}`)
     console.log(`  Course ID: ${status.courseId || 'N/A'}`)
     console.log(`  Stage: ${status.stage}`)
     console.log(`  Progress: ${status.progress}%`)
@@ -52,16 +61,13 @@ async function displayStatus() {
         console.log(`    - Diagrams: ${Object.keys(status.intermediateFiles.diagrams).length} diagram(s)`)
       }
     }
-    console.log('')
-    console.log(`📄 Status file: public/courses/.custom-course-generation-status.json`)
-    console.log('')
   } else {
-    console.log('\n📊 No custom course generation in progress.\n')
+    console.log(`\n📊 No custom course generation found for ID ${courseRequestId}.\n`)
   }
 }
 
 async function main() {
-  await displayStatus()
+  await displayStatus(process.argv[2])
 }
 
 main().catch((error) => {

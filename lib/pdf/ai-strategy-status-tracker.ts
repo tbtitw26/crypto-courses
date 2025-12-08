@@ -1,14 +1,9 @@
 // lib/pdf/ai-strategy-status-tracker.ts - Track AI strategy generation progress
 
-import fs from 'fs/promises'
-import path from 'path'
-
-const STATUS_FILE = path.join(process.cwd(), 'public', 'courses', '.ai-strategy-generation-status.json')
-const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
-let memoryStatus: AiStrategyGenerationStatus | null = null
+import { prisma } from '@/lib/prisma'
 
 export interface AiStrategyGenerationStatus {
-  strategyRunId?: number
+  strategyRunId: number
   courseId?: string
   stage:
     | 'idle'
@@ -35,59 +30,53 @@ export interface AiStrategyGenerationStatus {
   }
 }
 
-async function saveAiStrategyStatus(status: AiStrategyGenerationStatus): Promise<void> {
-  if (isServerless) {
-    memoryStatus = status
-    return
-  }
-  try {
-    const statusDir = path.dirname(STATUS_FILE)
-    await fs.mkdir(statusDir, { recursive: true })
-    await fs.writeFile(STATUS_FILE, JSON.stringify(status, null, 2))
-  } catch (error) {
-    console.error('Failed to save AI strategy status:', error)
-  }
-}
+export async function loadAiStrategyStatus(strategyRunId: number): Promise<AiStrategyGenerationStatus | null> {
+  const record = await prisma.aiStrategyRun.findUnique({
+    where: { id: strategyRunId },
+    select: {
+      id: true,
+      status_stage: true,
+      status_progress: true,
+      status_message: true,
+      status_error: true,
+    },
+  })
 
-export async function loadAiStrategyStatus(): Promise<AiStrategyGenerationStatus | null> {
-  if (isServerless) {
-    return memoryStatus
-  }
-  try {
-    const content = await fs.readFile(STATUS_FILE, 'utf-8')
-    return JSON.parse(content)
-  } catch {
+  if (!record) {
     return null
   }
-}
 
-export async function clearAiStrategyStatus(): Promise<void> {
-  if (isServerless) {
-    memoryStatus = null
-    return
-  }
-  try {
-    await fs.unlink(STATUS_FILE)
-  } catch {
-    // ignore
+  return {
+    strategyRunId,
+    stage: (record.status_stage as AiStrategyGenerationStatus['stage']) || 'idle',
+    progress: record.status_progress ?? 0,
+    message: record.status_message || '',
+    error: record.status_error || undefined,
   }
 }
 
-export async function updateAiStrategyStatus(updates: Partial<AiStrategyGenerationStatus>): Promise<void> {
-  const current = await loadAiStrategyStatus()
-  const next: AiStrategyGenerationStatus = {
-    strategyRunId: updates.strategyRunId ?? current?.strategyRunId,
-    courseId: updates.courseId ?? current?.courseId,
-    stage: updates.stage || current?.stage || 'idle',
-    progress: updates.progress ?? current?.progress ?? 0,
-    message: updates.message || current?.message || '',
-    error: updates.error,
-    warnings: updates.warnings ?? current?.warnings,
-    startedAt: updates.startedAt ?? current?.startedAt,
-    completedAt: updates.completedAt ?? current?.completedAt,
-    intermediateFiles: updates.intermediateFiles ?? current?.intermediateFiles,
-  }
+export async function clearAiStrategyStatus(strategyRunId: number): Promise<void> {
+  await prisma.aiStrategyRun.update({
+    where: { id: strategyRunId },
+    data: {
+      status_stage: null,
+      status_progress: null,
+      status_message: null,
+      status_error: null,
+    },
+  })
+}
 
-  await saveAiStrategyStatus(next)
+export async function updateAiStrategyStatus(status: AiStrategyGenerationStatus): Promise<void> {
+  const { strategyRunId, stage, progress, message, error } = status
+  await prisma.aiStrategyRun.update({
+    where: { id: strategyRunId },
+    data: {
+      status_stage: stage,
+      status_progress: progress,
+      status_message: message,
+      status_error: error ?? null,
+    },
+  })
 }
 
