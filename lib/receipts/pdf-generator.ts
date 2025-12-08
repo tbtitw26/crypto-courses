@@ -34,8 +34,17 @@ export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buff
   try {
     if (isServerless) {
       // Serverless environment - use Chromium
-      const executablePath = await chromium.executablePath('/tmp')
-      console.log('[Receipts] Using Chromium path:', executablePath)
+      let executablePath: string
+      try {
+        executablePath = await chromium.executablePath('/tmp')
+      } catch (tmpError) {
+        console.warn('[Receipts] Failed to resolve Chromium in /tmp, falling back:', tmpError)
+        executablePath = await chromium.executablePath()
+      }
+      console.log('[Receipts] Using Chromium path:', executablePath, {
+        vercel: process.env.VERCEL,
+        lambda: process.env.AWS_LAMBDA_FUNCTION_NAME,
+      })
       browser = await puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,

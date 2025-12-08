@@ -30,6 +30,9 @@ const nextConfig = {
   images: {
     remotePatterns,
   },
+  experimental: {
+    serverComponentsExternalPackages: ['@sparticuz/chromium', 'puppeteer-core'],
+  },
   // Для Puppeteer/Chromium в serverless функциях
   webpack: (config, { isServer }) => {
     if (isServer) {
