@@ -3,6 +3,9 @@
 import puppeteer from 'puppeteer-core'
 import chromium from '@sparticuz/chromium'
 import { formatPrice, convertAmount } from '@/lib/currency-utils'
+import fs from 'fs/promises'
+import path from 'path'
+import crypto from 'crypto'
 
 interface ReceiptData {
   id: string
@@ -20,6 +23,24 @@ interface ReceiptData {
   }
 }
 
+const chromiumPathPromise = chromium
+  .executablePath('/tmp')
+  .catch(async (tmpError) => {
+    console.warn('[Receipts] Failed to resolve Chromium in /tmp, falling back:', tmpError)
+    return chromium.executablePath()
+  })
+
+async function prepareExecutable(originalPath: string) {
+  if (!originalPath) {
+    throw new Error('Chromium executable path is empty')
+  }
+  const uniqueName = `chromium-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`
+  const targetPath = path.join('/tmp', uniqueName)
+  await fs.copyFile(originalPath, targetPath)
+  await fs.chmod(targetPath, 0o755)
+  return targetPath
+}
+
 /**
  * Generate PDF receipt from receipt data
  */
@@ -31,24 +52,23 @@ export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buff
   chromium.setGraphicsMode = false
 
   let browser
+  let tempExecutable: string | undefined
   try {
     if (isServerless) {
       // Serverless environment - use Chromium
-      let executablePath: string
-      try {
-        executablePath = await chromium.executablePath('/tmp')
-      } catch (tmpError) {
-        console.warn('[Receipts] Failed to resolve Chromium in /tmp, falling back:', tmpError)
-        executablePath = await chromium.executablePath()
+      const basePath = await chromiumPathPromise
+      if (!basePath) {
+        throw new Error('Unable to resolve Chromium executable path')
       }
-      console.log('[Receipts] Using Chromium path:', executablePath, {
+      tempExecutable = await prepareExecutable(basePath)
+      console.log('[Receipts] Using Chromium path:', tempExecutable, {
         vercel: process.env.VERCEL,
         lambda: process.env.AWS_LAMBDA_FUNCTION_NAME,
       })
       browser = await puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
-        executablePath,
+        executablePath: tempExecutable,
         headless: chromium.headless === 'new' ? true : chromium.headless,
         ignoreHTTPSErrors: true,
       })
@@ -115,6 +135,9 @@ export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buff
     })
 
     await browser.close()
+    if (tempExecutable) {
+      await fs.rm(tempExecutable, { force: true })
+    }
 
     return pdfBuffer
   } catch (error) {
@@ -123,6 +146,13 @@ export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buff
         await browser.close()
       } catch (closeError) {
         console.error('Error closing browser:', closeError)
+      }
+    }
+    if (tempExecutable) {
+      try {
+        await fs.rm(tempExecutable, { force: true })
+      } catch (rmError) {
+        console.error('Failed to remove temp chromium executable:', rmError)
       }
     }
     console.error('Failed to generate receipt PDF:', error)
