@@ -1,10 +1,8 @@
 // lib/receipts/pdf-generator.ts - PDF receipt generation using Puppeteer
 
 import puppeteer from 'puppeteer-core'
-import chromium from '@sparticuz/chromium'
 import { formatPrice, convertAmount } from '@/lib/currency-utils'
-import fs from 'fs/promises'
-import path from 'path'
+import { config } from '@/lib/config'
 
 interface ReceiptData {
   id: string
@@ -22,87 +20,104 @@ interface ReceiptData {
   }
 }
 
-const chromiumPathPromise = chromium.executablePath()
+/**
+ * Connect to Browserless.io for remote Chrome
+ */
+async function connectToBrowserless(): Promise<ReturnType<typeof puppeteer.connect> | null> {
+  const { apiKey, endpoint } = config.browserless
+  if (!apiKey) {
+    console.log('[Receipts] No BROWSERLESS_API_KEY found, cannot use remote browser')
+    return null
+  }
+
+  const browserWSEndpoint = `${endpoint}?token=${apiKey}`
+  console.log('[Receipts] Connecting to Browserless.io...')
+
+  try {
+    const browser = await puppeteer.connect({
+      browserWSEndpoint,
+    })
+    console.log('[Receipts] Connected to Browserless.io successfully')
+    return browser
+  } catch (error) {
+    console.error('[Receipts] Failed to connect to Browserless.io:', error)
+    return null
+  }
+}
+
+/**
+ * Try to launch local Chrome (for development)
+ */
+async function launchLocalChrome(): Promise<ReturnType<typeof puppeteer.launch> | null> {
+  const possiblePaths = [
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium-browser',
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    process.env.CHROME_PATH,
+  ].filter(Boolean) as string[]
+
+  // First try without explicit path
+  try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    })
+    console.log('[Receipts] Local Chrome launched successfully')
+    return browser
+  } catch (e) {
+    // Try with explicit paths
+  }
+
+  for (const chromePath of possiblePaths) {
+    try {
+      const browser = await puppeteer.launch({
+        headless: true,
+        executablePath: chromePath,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      })
+      console.log('[Receipts] Local Chrome launched from:', chromePath)
+      return browser
+    } catch (e) {
+      // Try next path
+    }
+  }
+
+  console.log('[Receipts] No local Chrome found')
+  return null
+}
+
 /**
  * Generate PDF receipt from receipt data
+ * Returns null if PDF generation fails (allows graceful degradation)
  */
-export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buffer> {
+export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buffer | null> {
   const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+  let browser: Awaited<ReturnType<typeof puppeteer.connect>> | null = null
 
-  // Ensure Chromium runs in Lambda/Vercel
-  chromium.setHeadlessMode = true
-  chromium.setGraphicsMode = false
-
-  let browser
-  let executablePath: string | undefined
   try {
+    // Strategy:
+    // 1. On Vercel/serverless: use Browserless.io (remote Chrome)
+    // 2. On local dev: try local Chrome first, fallback to Browserless if available
     if (isServerless) {
-      // Serverless environment - use Chromium
-      executablePath = await chromiumPathPromise
-      if (!executablePath) {
-        throw new Error('Unable to resolve Chromium executable path')
+      // Serverless: must use Browserless
+      browser = await connectToBrowserless()
+      if (!browser) {
+        console.error('[Receipts] Cannot generate PDF: no Browserless API key on serverless')
+        return null
       }
-      // Ensure it is executable if located in /tmp
-      if (executablePath.startsWith('/tmp/')) {
-        await fs.chmod(executablePath, 0o755).catch(() => {})
-      }
-      console.log('[Receipts] Using Chromium path:', executablePath, {
-        vercel: process.env.VERCEL,
-        lambda: process.env.AWS_LAMBDA_FUNCTION_NAME,
-      })
-      browser = await puppeteer.launch({
-        args: [
-          ...chromium.args,
-          '--single-process',
-          '--no-zygote',
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-        ],
-        defaultViewport: chromium.defaultViewport,
-        executablePath,
-        headless: chromium.headless === 'new' ? true : chromium.headless,
-        ignoreHTTPSErrors: true,
-      })
     } else {
-      // Local development - use system Chrome/Chromium
-      try {
-        browser = await puppeteer.launch({
-          headless: true,
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        })
-      } catch (launchError) {
-        const possiblePaths = [
-          'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-          'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-          process.env.CHROME_PATH,
-        ].filter(Boolean)
-
-        let launched = false
-        for (const chromePath of possiblePaths) {
-          try {
-            browser = await puppeteer.launch({
-              headless: true,
-              executablePath: chromePath,
-              args: ['--no-sandbox', '--disable-setuid-sandbox'],
-            })
-            launched = true
-            break
-          } catch (e) {
-            // Try next path
-          }
-        }
-
-        if (!launched) {
-          throw new Error(
-            'Chrome/Chromium not found. Please install Chrome or set CHROME_PATH environment variable.'
-          )
-        }
+      // Local dev: try local Chrome first
+      browser = await launchLocalChrome()
+      if (!browser) {
+        // Fallback to Browserless if available
+        browser = await connectToBrowserless()
       }
-    }
-
-    if (!browser) {
-      throw new Error('Failed to launch browser')
+      if (!browser) {
+        console.error('[Receipts] Cannot generate PDF: no Chrome available locally or remotely')
+        return null
+      }
     }
 
     const page = await browser.newPage()
@@ -126,20 +141,29 @@ export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buff
       },
     })
 
-    await browser.close()
+    // For remote browser (Browserless), we disconnect instead of close
+    if (isServerless) {
+      await browser.disconnect()
+    } else {
+      await browser.close()
+    }
 
+    console.log('[Receipts] PDF generated successfully')
     return pdfBuffer
   } catch (error) {
+    console.error('[Receipts] Failed to generate receipt PDF:', error)
     if (browser) {
       try {
-        await browser.close()
+        if (isServerless) {
+          await browser.disconnect()
+        } else {
+          await browser.close()
+        }
       } catch (closeError) {
-        console.error('Error closing browser:', closeError)
+        console.error('[Receipts] Error closing browser:', closeError)
       }
     }
-    executablePath && console.error('[Receipts] Chromium path used:', executablePath)
-    console.error('Failed to generate receipt PDF:', error)
-    throw error
+    return null
   }
 }
 
@@ -363,4 +387,3 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
 </body>
 </html>`
 }
-

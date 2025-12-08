@@ -265,18 +265,22 @@ export async function POST(request: NextRequest) {
 
         const invoicePdfBuffer = await generateReceiptPdf(receiptData)
 
-        // Send email
+        // Send email (with or without PDF attachment)
         await sendPurchaseConfirmationEmail({
           type: 'course',
           transactionId: `course-${purchaseRecord.id}`,
           userEmail: purchaseRecord.user.email,
           userName: `${purchaseRecord.user.first_name} ${purchaseRecord.user.last_name || ''}`.trim(),
           locale,
-          invoicePdfBuffer,
+          invoicePdfBuffer: invoicePdfBuffer ?? undefined, // null -> undefined (no attachment)
           invoiceNumber,
           tokens: -tokensCost,
           amountGbp: amountGbp,
         })
+
+        if (!invoicePdfBuffer) {
+          console.warn('[Course Purchase API] PDF invoice could not be generated, email sent without attachment')
+        }
 
         console.log('[Course Purchase API] Email confirmation sent successfully:', {
           userId,

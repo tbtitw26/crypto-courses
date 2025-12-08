@@ -1,7 +1,6 @@
 // lib/pdf/pdf-generator.ts - PDF generation using Puppeteer
 
 import puppeteer from 'puppeteer-core'
-import chromium from '@sparticuz/chromium'
 import { saveCoursePdf } from '@/lib/storage'
 import { GeneratedCourse } from './types'
 import { generateCourseHtml } from './templates'
@@ -9,6 +8,74 @@ import { logger } from './logger'
 import { config } from '@/lib/config'
 import path from 'path'
 import fs from 'fs/promises'
+
+/**
+ * Connect to Browserless.io for remote Chrome
+ */
+async function connectToBrowserless(): Promise<ReturnType<typeof puppeteer.connect> | null> {
+  const { apiKey, endpoint } = config.browserless
+  if (!apiKey) {
+    await logger.info('[PDF] No BROWSERLESS_API_KEY found, cannot use remote browser')
+    return null
+  }
+
+  const browserWSEndpoint = `${endpoint}?token=${apiKey}`
+  await logger.info('[PDF] Connecting to Browserless.io...')
+
+  try {
+    const browser = await puppeteer.connect({
+      browserWSEndpoint,
+    })
+    await logger.info('[PDF] Connected to Browserless.io successfully')
+    return browser
+  } catch (error) {
+    await logger.error('[PDF] Failed to connect to Browserless.io:', error)
+    return null
+  }
+}
+
+/**
+ * Try to launch local Chrome (for development)
+ */
+async function launchLocalChrome(): Promise<ReturnType<typeof puppeteer.launch> | null> {
+  const possiblePaths = [
+    'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    '/usr/bin/google-chrome',
+    '/usr/bin/chromium-browser',
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    process.env.CHROME_PATH,
+  ].filter(Boolean) as string[]
+
+  // First try without explicit path
+  try {
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    })
+    await logger.info('[PDF] Local Chrome launched successfully')
+    return browser
+  } catch (e) {
+    // Try with explicit paths
+  }
+
+  for (const chromePath of possiblePaths) {
+    try {
+      const browser = await puppeteer.launch({
+        headless: true,
+        executablePath: chromePath,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      })
+      await logger.info(`[PDF] Local Chrome launched from: ${chromePath}`)
+      return browser
+    } catch (e) {
+      // Try next path
+    }
+  }
+
+  await logger.info('[PDF] No local Chrome found')
+  return null
+}
 
 /**
  * Generate PDF from course HTML using Puppeteer
@@ -31,58 +98,29 @@ export async function generateCoursePdf(
   // Determine if we're in serverless environment
   const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
 
-  let browser
+  let browser: Awaited<ReturnType<typeof puppeteer.connect>> | null = null
   try {
+    // Strategy:
+    // 1. On Vercel/serverless: use Browserless.io (remote Chrome)
+    // 2. On local dev: try local Chrome first, fallback to Browserless if available
     if (isServerless) {
-      // Serverless environment - use Chromium
-      browser = await puppeteer.launch({
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath(),
-        headless: chromium.headless === 'new' ? true : chromium.headless,
-      })
-    } else {
-      // Local development - use system Chrome/Chromium
-      // Try to find Chrome/Chromium
-      try {
-        browser = await puppeteer.launch({
-          headless: true,
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        })
-      } catch (launchError) {
-        // If launch fails, try with explicit executable path hints
-        const possiblePaths = [
-          'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-          'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-          process.env.CHROME_PATH,
-        ].filter(Boolean)
-
-        let launched = false
-        for (const chromePath of possiblePaths) {
-          try {
-            browser = await puppeteer.launch({
-              headless: true,
-              executablePath: chromePath,
-              args: ['--no-sandbox', '--disable-setuid-sandbox'],
-            })
-            launched = true
-            break
-          } catch (e) {
-            // Try next path
-          }
-        }
-
-        if (!launched) {
-          throw new Error(
-            'Chrome/Chromium not found. Please install Chrome or set CHROME_PATH environment variable.\n' +
-            'On Windows, Chrome is usually at: C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
-          )
-        }
+      // Serverless: must use Browserless
+      browser = await connectToBrowserless()
+      if (!browser) {
+        throw new Error('Cannot generate PDF: no BROWSERLESS_API_KEY on serverless environment')
       }
-    }
-
-    if (!browser) {
-      throw new Error('Failed to launch browser')
+    } else {
+      // Local dev: try local Chrome first
+      browser = await launchLocalChrome()
+      if (!browser) {
+        // Fallback to Browserless if available
+        browser = await connectToBrowserless()
+      }
+      if (!browser) {
+        throw new Error(
+          'Chrome/Chromium not found. Please install Chrome, set CHROME_PATH, or provide BROWSERLESS_API_KEY.'
+        )
+      }
     }
 
     const page = await browser.newPage()
@@ -114,11 +152,18 @@ export async function generateCoursePdf(
       preferCSSPageSize: true,
     })
 
-    await browser.close()
+    // For remote browser (Browserless), we disconnect instead of close
+    if (isServerless) {
+      await browser.disconnect()
+    } else {
+      await browser.close()
+    }
 
     // Save PDF
     const filename = `${courseId}-${language.toLowerCase()}.pdf`
     const { publicPath } = await saveCoursePdf(pdfBuffer, filename)
+
+    await logger.info(`[PDF] Generated ${language} PDF: ${publicPath}`)
 
     return {
       publicPath,
@@ -127,7 +172,11 @@ export async function generateCoursePdf(
   } catch (error) {
     if (browser) {
       try {
-        await browser.close()
+        if (isServerless) {
+          await browser.disconnect()
+        } else {
+          await browser.close()
+        }
       } catch (closeError) {
         console.error('Error closing browser:', closeError)
       }
@@ -243,4 +292,3 @@ async function prepareHtmlWithImages(
   
   return processedHtml
 }
-

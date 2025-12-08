@@ -95,6 +95,12 @@ export const config = {
     from: process.env.SMTP_FROM || '',
     fromName: process.env.SMTP_FROM_NAME || 'Avenqor Support',
   },
+  // Browserless.io for remote Chrome (PDF generation in serverless)
+  browserless: {
+    apiKey: process.env.BROWSERLESS_API_KEY || '',
+    // Free tier: 1000 units/month, plenty for 1-3 PDFs/week
+    endpoint: process.env.BROWSERLESS_ENDPOINT || 'wss://chrome.browserless.io',
+  },
   generation: {
     cost: 60.0, // Tokens per generation
   },

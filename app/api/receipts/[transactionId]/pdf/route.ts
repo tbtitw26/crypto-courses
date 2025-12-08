@@ -43,6 +43,13 @@ export async function GET(
     // Generate PDF
     const pdfBuffer = await generateReceiptPdf(receiptData)
 
+    if (!pdfBuffer) {
+      return NextResponse.json(
+        { error: 'PDF generation failed. Please try again later.' },
+        { status: 503 }
+      )
+    }
+
     // Return PDF as response
     return new NextResponse(pdfBuffer as any, {
       headers: {

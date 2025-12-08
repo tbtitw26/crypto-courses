@@ -30,17 +30,8 @@ const nextConfig = {
   images: {
     remotePatterns,
   },
-  experimental: {
-    serverComponentsExternalPackages: ['@sparticuz/chromium', 'puppeteer-core'],
-  },
-  // Для Puppeteer/Chromium в serverless функциях
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      config.externals.push('puppeteer')
-    }
-    return config
-  },
+  // Note: We use Browserless.io for PDF generation in serverless,
+  // so no special Chromium/Puppeteer configuration is needed here.
 }
 
 module.exports = nextConfig
-

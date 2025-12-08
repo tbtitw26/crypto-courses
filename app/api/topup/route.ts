@@ -213,19 +213,23 @@ export async function POST(request: NextRequest) {
 
         const invoicePdfBuffer = await generateReceiptPdf(receiptData)
 
-        // Send email
+        // Send email (with or without PDF attachment)
         await sendPurchaseConfirmationEmail({
           type: 'topup',
           transactionId: `topup-${topupRecord.id}`,
           userEmail: topupRecord.user.email,
           userName: `${topupRecord.user.first_name} ${topupRecord.user.last_name || ''}`.trim(),
           locale,
-          invoicePdfBuffer,
+          invoicePdfBuffer: invoicePdfBuffer ?? undefined, // null -> undefined (no attachment)
           invoiceNumber,
           tokens: topupRecord.tokens,
           amountGbp: Number(topupRecord.amount),
           newBalance: Number(updatedUser.balance),
         })
+
+        if (!invoicePdfBuffer) {
+          console.warn('[Topup API] PDF invoice could not be generated, email sent without attachment')
+        }
 
         console.log('[Topup API] Email confirmation sent successfully:', {
           userId,
