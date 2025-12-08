@@ -199,7 +199,7 @@ export interface PurchaseEmailData {
   userEmail: string
   userName: string
   locale: 'en' | 'ar'
-  invoicePdfBuffer: Buffer
+  invoicePdfBuffer?: Buffer // Optional: allow email to be sent without attachment
   invoiceNumber: string
   tokens: number
   amountGbp: number
@@ -800,18 +800,22 @@ If you have any questions, please contact our support team.
 This is an automated message. Please do not reply to this email.
   `.trim()
 
+  const attachments = data.invoicePdfBuffer
+    ? [
+        {
+          filename: `invoice-${data.transactionId}.pdf`,
+          content: data.invoicePdfBuffer,
+        },
+      ]
+    : []
+
   await transporter.sendMail({
     from: `"${config.smtp.fromName}" <${config.smtp.from}>`,
     to: data.userEmail,
     subject,
     text: textContent,
     html: htmlContent,
-    attachments: [
-      {
-        filename: `invoice-${data.transactionId}.pdf`,
-        content: data.invoicePdfBuffer,
-      },
-    ],
+    attachments,
   })
 }
 
