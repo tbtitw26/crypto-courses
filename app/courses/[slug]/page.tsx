@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/prisma'
 import { CourseDetailPage } from '@/components/CourseDetailPage'
 import { demoCourses } from '@/src/data/courses'
+import { resolvePublicUrl } from '@/lib/storage'
 
 interface CourseDetailPageProps {
   params: {
@@ -31,7 +32,7 @@ function transformStaticCourse(course: typeof demoCourses[0]) {
     tokens: course.price.tokens,
     price_gbp: course.price.GBP,
     pdf_path: course.pdfUrl,
-    cover_image: undefined,
+    cover_image: `/images/courses/${course.slug}-cover.webp`,
     featured: course.isFeatured,
     modules: course.modules.map((m) => ({
       order: m.order,
@@ -104,7 +105,14 @@ async function getCourse(slug: string) {
       },
     })
 
-    return course
+    if (!course) {
+      return null
+    }
+
+    return {
+      ...course,
+      cover_image: resolvePublicUrl(course.cover_image) ?? course.cover_image ?? undefined,
+    }
   } catch (error: any) {
     console.error('Error fetching course:', error)
     

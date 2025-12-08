@@ -24,6 +24,7 @@ interface FeaturedCourse {
   price_gbp: number
   tokens: number
   slug: string
+  cover_image?: string | null
 }
 
 export default function HomePage() {
@@ -64,6 +65,7 @@ export default function HomePage() {
               price_gbp: Number(beginnerCourse.price_gbp),
               tokens: beginnerCourse.tokens,
               slug: beginnerCourse.slug,
+              cover_image: beginnerCourse.cover_image,
             })
           }
           
@@ -76,6 +78,7 @@ export default function HomePage() {
               price_gbp: Number(intermediateCourse.price_gbp),
               tokens: intermediateCourse.tokens,
               slug: intermediateCourse.slug,
+              cover_image: intermediateCourse.cover_image,
             })
           }
           
@@ -88,6 +91,7 @@ export default function HomePage() {
               price_gbp: Number(advancedCourse.price_gbp),
               tokens: advancedCourse.tokens,
               slug: advancedCourse.slug,
+              cover_image: advancedCourse.cover_image,
             })
           }
           

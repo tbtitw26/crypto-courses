@@ -17,7 +17,7 @@ import fs from 'fs/promises'
 export async function generateCoursePdf(
   course: GeneratedCourse,
   coverImagePath: string,
-  diagramPaths: Record<string, { publicPath: string; localPath: string }>,
+  diagramPaths: Record<string, { publicPath: string; localPath?: string }>,
   courseId: string,
   language: 'EN' | 'AR'
 ): Promise<{ publicPath: string; buffer: Buffer }> {
@@ -143,7 +143,7 @@ export async function generateCoursePdf(
 async function prepareHtmlWithImages(
   html: string,
   coverImagePath: string,
-  diagramPaths: Record<string, { publicPath: string; localPath: string }>,
+  diagramPaths: Record<string, { publicPath: string; localPath?: string }>,
   isServerless: boolean
 ): Promise<string> {
   const publicPath = path.join(process.cwd(), 'public')
@@ -175,56 +175,69 @@ async function prepareHtmlWithImages(
     // Don't throw - continue without logo
   }
   
-  // Convert cover image to base64
-  if (coverImagePath.startsWith('/')) {
-    try {
-      const imagePath = path.join(publicPath, coverImagePath.replace(/^\//, ''))
-      await logger.info(`Loading cover image from: ${imagePath}`)
-      
-      // Check if file exists
-      await fs.access(imagePath)
-      
-      const imageBuffer = await fs.readFile(imagePath)
-      const base64Image = imageBuffer.toString('base64')
-      const mimeType = coverImagePath.endsWith('.webp') ? 'image/webp' : coverImagePath.endsWith('.png') ? 'image/png' : 'image/jpeg'
-      const dataUrl = `data:${mimeType};base64,${base64Image}`
-      
-      // Replace all occurrences of the cover image path
-      const escapedPath = coverImagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-      processedHtml = processedHtml.replace(new RegExp(escapedPath, 'g'), dataUrl)
-      
-      await logger.info(`Cover image converted to base64 (${imageBuffer.length} bytes)`)
-    } catch (error) {
-      await logger.error(`Failed to load cover image: ${coverImagePath}`, error)
-      // Don't throw - continue without image
-    }
+  const replaceImageWithDataUrl = (htmlContent: string, originalPath: string, dataUrl: string) => {
+    const escapedPath = originalPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    return htmlContent.replace(new RegExp(escapedPath, 'g'), dataUrl)
   }
-  
-  // Convert diagram images to base64
+
+  async function loadImageAsDataUrl(imagePath: string): Promise<string | null> {
+    if (!imagePath) return null
+
+    const isRemote = imagePath.startsWith('http://') || imagePath.startsWith('https://')
+    const isLocal = imagePath.startsWith('/')
+
+    try {
+      if (isRemote) {
+        const response = await fetch(imagePath)
+        if (!response.ok) {
+          throw new Error(`Failed to fetch remote image: ${response.status} ${response.statusText}`)
+        }
+        const arrayBuffer = await response.arrayBuffer()
+        const mimeType =
+          response.headers.get('content-type') ||
+          (imagePath.endsWith('.png')
+            ? 'image/png'
+            : imagePath.endsWith('.jpg') || imagePath.endsWith('.jpeg')
+            ? 'image/jpeg'
+            : 'image/webp')
+        const base64Image = Buffer.from(arrayBuffer).toString('base64')
+        return `data:${mimeType};base64,${base64Image}`
+      }
+
+      if (isLocal) {
+        const filePath = path.join(publicPath, imagePath.replace(/^\//, ''))
+        await fs.access(filePath)
+        const imageBuffer = await fs.readFile(filePath)
+        const mimeType =
+          imagePath.endsWith('.png')
+            ? 'image/png'
+            : imagePath.endsWith('.jpg') || imagePath.endsWith('.jpeg')
+            ? 'image/jpeg'
+            : 'image/webp'
+        const base64Image = imageBuffer.toString('base64')
+        return `data:${mimeType};base64,${base64Image}`
+      }
+    } catch (error) {
+      await logger.error(`Failed to load image for PDF: ${imagePath}`, error)
+      return null
+    }
+
+    return null
+  }
+
+  const coverDataUrl = await loadImageAsDataUrl(coverImagePath)
+  if (coverDataUrl) {
+    processedHtml = replaceImageWithDataUrl(processedHtml, coverImagePath, coverDataUrl)
+  }
+
   for (const [diagramId, paths] of Object.entries(diagramPaths)) {
     const diagramPath = paths.localPath || paths.publicPath
-    if (diagramPath && diagramPath.startsWith('/')) {
-      try {
-        const imagePath = path.join(publicPath, diagramPath.replace(/^\//, ''))
-        await logger.info(`Loading diagram ${diagramId} from: ${imagePath}`)
-        
-        // Check if file exists
-        await fs.access(imagePath)
-        
-        const imageBuffer = await fs.readFile(imagePath)
-        const base64Image = imageBuffer.toString('base64')
-        const mimeType = diagramPath.endsWith('.webp') ? 'image/webp' : diagramPath.endsWith('.png') ? 'image/png' : 'image/jpeg'
-        const dataUrl = `data:${mimeType};base64,${base64Image}`
-        
-        // Replace all occurrences of the diagram path
-        const escapedPath = diagramPath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-        processedHtml = processedHtml.replace(new RegExp(escapedPath, 'g'), dataUrl)
-        
-        await logger.info(`Diagram ${diagramId} converted to base64 (${imageBuffer.length} bytes)`)
-      } catch (error) {
-        await logger.error(`Failed to load diagram image ${diagramId}: ${diagramPath}`, error)
-        // Don't throw - continue without this diagram
-      }
+    const dataUrl = await loadImageAsDataUrl(diagramPath)
+    if (dataUrl) {
+      processedHtml = replaceImageWithDataUrl(processedHtml, diagramPath, dataUrl)
+      await logger.info(`Diagram ${diagramId} converted to base64`)
+    } else if (diagramPath) {
+      await logger.error(`Failed to convert diagram ${diagramId} at ${diagramPath} to base64`)
     }
   }
   

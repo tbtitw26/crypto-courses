@@ -9,6 +9,9 @@ import { cookies } from 'next/headers'
 import { sendPurchaseConfirmationEmail } from '@/lib/email'
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 const purchaseCourseSchema = z.object({
   courseSlug: z.string().min(1),
   language: z.enum(['en', 'ar']).optional(),

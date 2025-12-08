@@ -20,6 +20,7 @@ interface CourseCardProps {
     price_gbp: number
     tokens: number
     slug?: string
+    cover_image?: string | null
   }
 }
 
@@ -36,7 +37,7 @@ export function CourseCard({ course }: CourseCardProps) {
   const price = formatPrice(priceAmount, currency)
 
   // Get course image path
-  const imagePath = course.slug ? getCourseImagePath(course.slug) : null
+  const imagePath = course.cover_image ?? (course.slug ? getCourseImagePath(course.slug) : null)
   const hasImage = imagePath !== null
 
   return (

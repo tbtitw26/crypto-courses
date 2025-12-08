@@ -4,6 +4,11 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma } from '@/lib/prisma'
+import { resolvePublicUrl } from '@/lib/storage'
+import { resolveCoursePdfUrl } from '@/lib/course-pdf-utils'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function GET(request: NextRequest) {
   try {
@@ -46,14 +51,22 @@ export async function GET(request: NextRequest) {
         orderBy: { created_at: 'desc' },
       })
 
-      // Transform to include purchase metadata
-      const courses = purchases.map((purchase) => ({
-        ...purchase.course,
-        purchaseId: purchase.id,
-        purchasedAt: purchase.created_at,
-        purchaseLanguage: purchase.language,
-        tokensSpent: purchase.tokens_cost,
-      }))
+      const courses = await Promise.all(
+        purchases.map(async (purchase) => {
+          const coverImage = resolvePublicUrl(purchase.course.cover_image) ?? purchase.course.cover_image ?? null
+          const downloadUrl = await resolveCoursePdfUrl(purchase.course.pdf_path, purchase.language || 'en')
+
+          return {
+            ...purchase.course,
+            cover_image: coverImage,
+            downloadUrl,
+            purchaseId: purchase.id,
+            purchasedAt: purchase.created_at,
+            purchaseLanguage: purchase.language,
+            tokensSpent: purchase.tokens_cost,
+          }
+        })
+      )
 
       return NextResponse.json({ courses })
     } catch (dbError: any) {

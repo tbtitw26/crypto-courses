@@ -9,6 +9,9 @@ import { cookies } from 'next/headers'
 import { sendPurchaseConfirmationEmail } from '@/lib/email'
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 const topupSchema = z.object({
   items: z.array(
     z.object({

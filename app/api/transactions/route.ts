@@ -6,6 +6,9 @@ import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 type TopupRecord = {
   id: number
   tokens: number | null

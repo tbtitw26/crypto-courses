@@ -11,6 +11,9 @@ import { sendPurchaseConfirmationEmail, sendCourseDeliveryEmail } from '@/lib/em
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
 import { clearAiStrategyStatus, updateAiStrategyStatus } from '@/lib/pdf/ai-strategy-status-tracker'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 // Base price: €30 = 3,000 tokens
 const BASE_PRICE_TOKENS = 3000
 

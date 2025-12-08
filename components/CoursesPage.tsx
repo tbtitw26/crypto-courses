@@ -22,6 +22,7 @@ interface Course {
   description: string
   tokens: number
   price_gbp: number
+  cover_image?: string | null
 }
 
 function Section({

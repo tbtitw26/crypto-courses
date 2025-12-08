@@ -1,9 +1,35 @@
 // lib/config.ts - Configuration constants
 
+function resolveSupabaseStorageFlag(): boolean {
+  const explicit = process.env.USE_SUPABASE_STORAGE
+  if (explicit === 'true') return true
+  if (explicit === 'false') return false
+  const hasCreds = Boolean(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY)
+  return hasCreds
+}
+
+const useSupabaseStorage = resolveSupabaseStorageFlag()
+
+const supabaseBuckets = {
+  coursePdf: process.env.SUPABASE_BUCKET_COURSE_PDF || 'course-pdf',
+  courseImages: process.env.SUPABASE_BUCKET_COURSE_IMAGES || 'course-images',
+  courseMedia: process.env.SUPABASE_BUCKET_COURSE_MEDIA || 'course-madia',
+}
+
+const supabaseSignedUrlTtlPdf = parseInt(process.env.SUPABASE_SIGNED_URL_TTL_PDF || '86400', 10)
+
 export const config = {
   site: {
     baseUrl: process.env.SITE_BASE_URL || 'http://localhost:3000',
     name: 'Avenqor',
+  },
+  supabase: {
+    url: process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '',
+    useStorage: useSupabaseStorage,
+    buckets: supabaseBuckets,
+    signedUrlTtl: {
+      pdf: Number.isNaN(supabaseSignedUrlTtlPdf) ? 86400 : supabaseSignedUrlTtlPdf,
+    },
   },
   openai: {
     apiKey: process.env.OPENAI_API_KEY || '',

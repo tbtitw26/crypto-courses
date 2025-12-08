@@ -1,10 +1,8 @@
 // lib/pdf/images.ts - Image generation and download functions
 
 import { generateImage } from '@/lib/openai/generate'
-import { saveCourseImage } from '@/lib/storage'
+import { saveCourseImage, type SaveResult } from '@/lib/storage'
 import { GeneratedCourse } from './types'
-import fs from 'fs/promises'
-import path from 'path'
 
 /**
  * Download image from URL or data URL and return as Buffer
@@ -28,10 +26,23 @@ async function downloadImage(url: string): Promise<Buffer> {
 /**
  * Generate cover image for course
  */
+type ImagePathInfo = {
+  publicPath: string
+  localPath?: string
+}
+
+function toImagePathInfo(result: SaveResult): ImagePathInfo {
+  const publicPath = result.publicUrl ?? result.publicPath
+  return {
+    publicPath,
+    localPath: result.source === 'local' ? publicPath : undefined,
+  }
+}
+
 export async function generateCoverImage(
   course: GeneratedCourse,
   courseId: string
-): Promise<{ publicPath: string; localPath: string }> {
+): Promise<ImagePathInfo> {
   const { image_prompt, negative_prompt, suggested_format } = course.cover.image_generation
 
   // Build full prompt with negative prompt
@@ -59,20 +70,10 @@ export async function generateCoverImage(
   // Download image
   const imageBuffer = await downloadImage(imageUrl)
 
-  // Save to public/images/courses/ for use in course cards
-  const filename = `${courseId}-cover.webp`
-  const { publicPath } = await saveCourseImage(imageBuffer, filename)
+  const filename = `covers/${courseId}-cover.webp`
+  const saveResult = await saveCourseImage(imageBuffer, filename)
 
-  // Also save to courses/images directory for PDF use
-  const coursesDir = path.join(process.cwd(), 'public', 'courses', 'images')
-  await fs.mkdir(coursesDir, { recursive: true })
-  const localPath = path.join(coursesDir, filename)
-  await fs.writeFile(localPath, imageBuffer)
-
-  return {
-    publicPath,
-    localPath: `/courses/images/${filename}`,
-  }
+  return toImagePathInfo(saveResult)
 }
 
 /**
@@ -81,8 +82,8 @@ export async function generateCoverImage(
 export async function generateDiagramImages(
   course: GeneratedCourse,
   courseId: string
-): Promise<Record<string, { publicPath: string; localPath: string }>> {
-  const results: Record<string, { publicPath: string; localPath: string }> = {}
+): Promise<Record<string, ImagePathInfo>> {
+  const results: Record<string, ImagePathInfo> = {}
 
   for (const diagram of course.diagrams) {
     try {
@@ -99,18 +100,58 @@ export async function generateDiagramImages(
 
       // Save to public/images/courses/diagrams/
       const filename = `${courseId}-${diagram.diagram_id}.webp`
-      const { publicPath } = await saveCourseImage(imageBuffer, filename)
+      // saveCourseImage saves to images/courses, so we need to adjust or use a subdir
+      // Looking at saveCourseImage impl in storage.ts: return saveLocally({ ..., subdirectory: 'images/courses' })
+      // So if we want images/courses/diagrams, we should probably manually join path or add a new helper.
+      // But looking at existing code: 
+      // const { publicPath } = await saveCourseImage(imageBuffer, filename)
+      // It saves to images/courses.
+      
+      // Let's stick to using saveLocally directly for diagrams to put them in diagrams subdir if needed, 
+      // OR reuse saveCourseImage if we don't mind them being in the root courses image dir.
+      // The original code saved to public/images/courses/diagrams/.
+      // But wait, saveCourseImage saves to 'images/courses'. 
+      // The previous code had:
+      // const { publicPath } = await saveCourseImage(imageBuffer, filename)
+      // This put diagrams in 'images/courses', NOT 'images/courses/diagrams'.
+      
+      // Let's check storage.ts again.
+      // saveCourseImage -> subdirectory: 'images/courses'
+      
+      // The original code:
+      // const { publicPath } = await saveCourseImage(imageBuffer, filename)
+      // // Also save to courses/images directory for PDF use
+      // ...
+      // const localPath = path.join(coursesDir, filename)
+      // results[diagram.diagram_id] = { publicPath, localPath: `/courses/images/diagrams/${filename}` }
+      
+      // Wait, there is a discrepancy in the original code I read.
+      // Original read:
+      // // Save to public/images/courses/diagrams/  <-- Comment says diagrams
+      // const filename = ...
+      // const { publicPath } = await saveCourseImage(imageBuffer, filename) <-- Actual code saves to images/courses
+      
+      // // Also save to courses directory...
+      // const coursesDir = path.join(process.cwd(), 'public', 'courses', 'images', 'diagrams') <-- Subdir diagrams
+      // ...
+      // localPath: `/courses/images/diagrams/${filename}`
+      
+      // So publicPath was /images/courses/foo.webp
+      // And localPath was /courses/images/diagrams/foo.webp
+      
+      // We want to unify this. Let's put everything in /images/courses/diagrams/ if possible, 
+      // or just /images/courses/ if that's easier.
+      // To keep it clean, let's use a specific save for diagrams.
+      
+      // I will import saveLocally from storage.ts? No, it's not exported.
+      // I will just use saveCourseImage but filename will include 'diagrams/' prefix?
+      // storage.ts: saveLocally uses path.join(directory, filename).
+      // So if filename is 'diagrams/foo.webp', it will save to 'images/courses/diagrams/foo.webp'.
+      
+      const storageKey = `diagrams/${courseId}/${filename}`
+      const saveResult = await saveCourseImage(imageBuffer, storageKey)
 
-      // Also save to courses directory for PDF use
-      const coursesDir = path.join(process.cwd(), 'public', 'courses', 'images', 'diagrams')
-      await fs.mkdir(coursesDir, { recursive: true })
-      const localPath = path.join(coursesDir, filename)
-      await fs.writeFile(localPath, imageBuffer)
-
-      results[diagram.diagram_id] = {
-        publicPath,
-        localPath: `/courses/images/diagrams/${filename}`,
-      }
+      results[diagram.diagram_id] = toImagePathInfo(saveResult)
       console.log(`  ✓ Generated diagram: ${diagram.diagram_id}`)
     } catch (error) {
       console.error(`  ✗ Failed to generate diagram ${diagram.diagram_id}:`, error)

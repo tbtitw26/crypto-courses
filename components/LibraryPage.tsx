@@ -32,7 +32,6 @@ import { DashboardNavigation } from './DashboardNavigation'
 import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
-import { getCoursePdfPath } from '@/lib/course-pdf-utils'
 import Image from 'next/image'
 
 interface CourseItem {
@@ -45,7 +44,8 @@ interface CourseItem {
   purchaseLanguage?: string // Language used when purchasing (en | ar)
   description?: string // Course description
   description_ar?: string | null
-  cover_image?: string // Course cover image
+  cover_image?: string | null // Course cover image
+  downloadUrl?: string | null
 }
 
 function LibraryCard({ item, t, index }: { item: CourseItem; t: any; index?: number }) {
@@ -70,7 +70,7 @@ function LibraryCard({ item, t, index }: { item: CourseItem; t: any; index?: num
     locale === 'ar' && item.description_ar ? item.description_ar : (item.description || '')
   
   // Get course image path
-  const imagePath = item.slug ? getCourseImagePath(item.slug) : null
+  const imagePath = item.cover_image ?? (item.slug ? getCourseImagePath(item.slug) : null)
   
   // Add priority to first 4 images (above the fold)
   const shouldPrioritize = index !== undefined && index < 4
@@ -142,15 +142,19 @@ function LibraryCard({ item, t, index }: { item: CourseItem; t: any; index?: num
 
       <div className="mt-2 pt-3 border-t border-slate-900 flex items-center justify-between gap-3 text-sm">
         <div className="flex flex-col items-end gap-1">
-          {!isAI && item.slug ? (
-            <a
-              href={getCoursePdfPath(item.slug, item.purchaseLanguage || 'en')}
-              download
-              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-300 hover:text-slate-100 transition"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>{t('downloadPDF')}</span>
-            </a>
+          {!isAI ? (
+            item.downloadUrl ? (
+              <a
+                href={item.downloadUrl}
+                download
+                className="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-300 hover:text-slate-100 transition"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>{t('downloadPDF')}</span>
+              </a>
+            ) : (
+              <span className="text-[11px] text-slate-400">{t('downloadPDF')}</span>
+            )
           ) : (
             <span className="text-[11px] text-slate-400">{t('aiStrategy')}</span>
           )}
@@ -203,7 +207,8 @@ export function LibraryPage() {
           purchaseLanguage: course.purchaseLanguage || 'en',
           description: course.description,
           description_ar: course.description_ar || undefined,
-          cover_image: course.cover_image,
+          cover_image: course.cover_image || null,
+          downloadUrl: course.downloadUrl || null,
         }))
 
         setLibraryCourses(courseItems)

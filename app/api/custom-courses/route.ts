@@ -4,6 +4,10 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
+import { resolveDownloadUrl } from '@/lib/storage'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 export async function GET(request: NextRequest) {
   try {
@@ -41,7 +45,7 @@ export async function GET(request: NextRequest) {
     )
 
     // Transform to frontend format
-    const courses = customCourses.map((course) => {
+    const courses = await Promise.all(customCourses.map(async (course) => {
       // Determine level from experience_years
       let level = 'Beginner'
       if (course.experience_years === '1-2') {
@@ -62,6 +66,8 @@ export async function GET(request: NextRequest) {
         uiStatus = 'Processing'
       }
 
+      const resolvedPdfUrl = await resolveDownloadUrl(course.pdf_url)
+
       return {
         id: course.id.toString(),
         title: course.goals_free_text.substring(0, 100) + (course.goals_free_text.length > 100 ? '...' : ''),
@@ -72,9 +78,9 @@ export async function GET(request: NextRequest) {
         created: course.created_at.toISOString(),
         updated: course.updated_at.toISOString(),
         estimatedReadyAt: course.estimated_ready_at?.toISOString(),
-        pdfUrl: course.pdf_url,
+        pdfUrl: resolvedPdfUrl,
       }
-    })
+    }))
 
     return NextResponse.json({ courses })
   } catch (error) {

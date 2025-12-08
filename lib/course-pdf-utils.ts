@@ -1,36 +1,38 @@
 // lib/course-pdf-utils.ts - Utility functions for course PDF paths
 
-/**
- * Get PDF path for a course based on slug and locale
- * @param slug - Course slug
- * @param locale - User locale ('en' | 'ar')
- * @returns PDF path (EN version by default, AR version if locale is 'ar')
- */
-export function getCoursePdfPath(slug: string, locale: string = 'en'): string {
-  const basePath = `/courses/${slug}`
-  const suffix = locale === 'ar' ? '-ar.pdf' : '-en.pdf'
-  return `${basePath}${suffix}`
+import { decodeSupabasePath, encodeSupabasePath, isSupabasePath } from '@/lib/supabase/storage'
+import { resolveDownloadUrl } from '@/lib/storage'
+
+const EN_SUFFIX = '-en.pdf'
+const AR_SUFFIX = '-ar.pdf'
+
+function swapLocaleSuffix(path: string, locale: string): string {
+  const suffix = locale === 'ar' ? AR_SUFFIX : EN_SUFFIX
+  if (path.includes(EN_SUFFIX) || path.includes(AR_SUFFIX)) {
+    return path.replace(EN_SUFFIX, suffix).replace(AR_SUFFIX, suffix)
+  }
+  return path
 }
 
-/**
- * Get PDF path for a course from database pdf_path field, adjusting for locale
- * @param dbPdfPath - PDF path from database (usually EN version)
- * @param locale - User locale ('en' | 'ar')
- * @returns PDF path adjusted for locale
- */
-export function getCoursePdfPathFromDb(dbPdfPath: string, locale: string = 'en'): string {
-  // If database path is already locale-specific, return as is
-  if (dbPdfPath.includes('-ar.pdf') || dbPdfPath.includes('-en.pdf')) {
-    // Replace the locale suffix if needed
-    if (locale === 'ar') {
-      return dbPdfPath.replace('-en.pdf', '-ar.pdf')
-    } else {
-      return dbPdfPath.replace('-ar.pdf', '-en.pdf')
-    }
+function adjustSupabaseLocale(path: string, locale: string): string {
+  const { bucket, key } = decodeSupabasePath(path)
+  const suffix = locale === 'ar' ? AR_SUFFIX : EN_SUFFIX
+  const normalizedKey =
+    key.includes(EN_SUFFIX) || key.includes(AR_SUFFIX) ? key.replace(EN_SUFFIX, suffix).replace(AR_SUFFIX, suffix) : key
+  return encodeSupabasePath(bucket, normalizedKey)
+}
+
+export function ensureCoursePdfLocalePath(dbPdfPath: string, locale: string = 'en'): string {
+  if (!dbPdfPath) return dbPdfPath
+  if (isSupabasePath(dbPdfPath)) {
+    return adjustSupabaseLocale(dbPdfPath, locale)
   }
-  
-  // If database path doesn't have locale suffix, add it
-  const basePath = dbPdfPath.replace('.pdf', '')
-  return getCoursePdfPath(basePath.split('/').pop() || '', locale)
+  return swapLocaleSuffix(dbPdfPath, locale)
+}
+
+export async function resolveCoursePdfUrl(dbPdfPath?: string | null, locale: string = 'en') {
+  if (!dbPdfPath) return undefined
+  const localizedPath = ensureCoursePdfLocalePath(dbPdfPath, locale)
+  return resolveDownloadUrl(localizedPath)
 }
 

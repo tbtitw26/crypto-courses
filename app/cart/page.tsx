@@ -89,7 +89,7 @@ export default function CartPage() {
             <div className="lg:col-span-2 space-y-4">
               {items.map((item) => {
                 const itemType = getCartItemType(item.slug)
-                const imagePath = itemType === 'course' ? getCourseImagePath(item.slug) : null
+                const imagePath = itemType === 'course' ? item.image ?? getCourseImagePath(item.slug) : null
                 // Use localized title if available and locale is Arabic
                 const displayTitle = locale === 'ar' && item.title_ar ? item.title_ar : item.title
                 const itemPrice = calculatePriceForTokens(item.tokens, currency)

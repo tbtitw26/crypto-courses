@@ -73,7 +73,7 @@ export async function generateAIStrategyComplete(params: {
 
     // Step 2: Generate cover image
     await logger.info('🎨 Generating cover image...')
-    const { publicPath: coverImagePublicPath, localPath: coverImageLocalPath } = await generateCoverImage(courseEn, courseId)
+    const { publicPath: coverImagePublicPath } = await generateCoverImage(courseEn, courseId)
     await logger.info(`✅ Cover image saved: ${coverImagePublicPath}`)
 
     // Step 3: Generate diagram images
@@ -107,7 +107,7 @@ export async function generateAIStrategyComplete(params: {
 
     if (params.languages.includes('en')) {
       await logger.info('📄 Generating English PDF...')
-      const pdfEn = await generateCoursePdf(courseEn, coverImageLocalPath, diagramImagePaths, courseId, 'EN')
+      const pdfEn = await generateCoursePdf(courseEn, coverImagePublicPath, diagramImagePaths, courseId, 'EN')
       pdfEnPath = pdfEn.publicPath
       pdfEnBuffer = pdfEn.buffer
       await logger.info(`✅ English PDF saved: ${pdfEnPath}`)
@@ -115,7 +115,7 @@ export async function generateAIStrategyComplete(params: {
 
     if (needsArabic && courseAr) {
       await logger.info('📄 Generating Arabic PDF...')
-      const pdfAr = await generateCoursePdf(courseAr, coverImageLocalPath, diagramImagePaths, courseId, 'AR')
+      const pdfAr = await generateCoursePdf(courseAr, coverImagePublicPath, diagramImagePaths, courseId, 'AR')
       pdfArPath = pdfAr.publicPath
       pdfArBuffer = pdfAr.buffer
       await logger.info(`✅ Arabic PDF saved: ${pdfArPath}`)

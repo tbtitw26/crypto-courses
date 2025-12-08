@@ -13,6 +13,9 @@ import { sendPurchaseConfirmationEmail, sendCourseDeliveryEmail } from '@/lib/em
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
 import { updateCustomCourseStatus, clearCustomCourseStatus, loadCustomCourseStatus } from '@/lib/pdf/custom-course-status-tracker'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 // Base price: €200 = 20,000 tokens
 const BASE_PRICE_TOKENS = 20000
 

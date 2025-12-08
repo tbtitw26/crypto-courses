@@ -5,6 +5,9 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 type PrismaJson = Record<string, any> | Array<any> | string | number | boolean | null
 
 function extractCourseId(payload: PrismaJson | null): string | undefined {

@@ -28,6 +28,7 @@ interface CoursesPageCardProps {
     price_gbp: number
     modules?: number
     duration?: string
+    cover_image?: string | null
   }
 }
 
@@ -54,7 +55,7 @@ export function CoursesPageCard({ course }: CoursesPageCardProps) {
   }, [])
 
   const handleAddToCart = () => {
-    const imagePath = getCourseImagePath(course.slug)
+    const imagePath = course.cover_image ?? getCourseImagePath(course.slug)
     addToCart({
       id: course.id,
       slug: course.slug,
@@ -84,7 +85,7 @@ export function CoursesPageCard({ course }: CoursesPageCardProps) {
     locale === 'ar' && course.description_ar ? course.description_ar : course.description
 
   // Get course image path
-  const imagePath = getCourseImagePath(course.slug)
+  const imagePath = course.cover_image ?? getCourseImagePath(course.slug)
   const hasImage = imagePath !== null
 
   return (

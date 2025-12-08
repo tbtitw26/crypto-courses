@@ -46,7 +46,7 @@ interface CourseDetailPageProps {
     tokens: number
     price_gbp: number
     pdf_path: string
-    cover_image?: string
+    cover_image?: string | null
     featured: boolean
     modules?: CourseModule[] | null
     duration_hours_min?: number | null
@@ -124,6 +124,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
   const tBreadcrumb = useTranslations('courses.breadcrumb')
   const [currency, setCurrency] = useState('GBP')
   const [locale, setLocale] = useState('en')
+  const resolvedImagePath = course.cover_image ?? getCourseImagePath(course.slug)
 
   useEffect(() => {
     setCurrency(getUserCurrency())
@@ -139,7 +140,6 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
   }, [])
 
   const handleAddToCart = () => {
-    const imagePath = getCourseImagePath(course.slug)
     addToCart({
       id: course.id,
       slug: course.slug,
@@ -147,7 +147,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
       title_ar: course.title_ar,
       tokens: course.tokens,
       price_gbp: course.price_gbp,
-      image: imagePath || undefined,
+      image: resolvedImagePath || undefined,
     })
     showToast({
       title: tCart('addedToCart'),
@@ -174,9 +174,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
   const displayDescription =
     locale === 'ar' && course.description_ar ? course.description_ar : course.description
 
-  // Get course image path
-  const imagePath = getCourseImagePath(course.slug)
-  const hasImage = imagePath !== null
+  const hasImage = resolvedImagePath !== null
 
   // Use modules from DB if available, otherwise fallback to static data
   const dbModules = course.modules && Array.isArray(course.modules) ? course.modules : null
@@ -271,7 +269,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
                   {hasImage && (
                     <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-800">
                       <Image
-                        src={imagePath}
+                        src={resolvedImagePath!}
                         alt={displayTitle}
                         fill
                         className="object-cover"

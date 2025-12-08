@@ -138,7 +138,8 @@ export async function generateCompleteCourse(input: CourseGenerationInput): Prom
 
     // Step 5: Generate English PDF (always generate, even if translation failed)
     await logger.info('📄 Generating English PDF...')
-    const pdfEn = await generateCoursePdf(courseEn, coverImageLocalPath, diagramImagePaths, courseId, 'EN')
+    const coverImagePathForPdf = coverImageLocalPath ?? coverImagePublicPath
+    const pdfEn = await generateCoursePdf(courseEn, coverImagePathForPdf, diagramImagePaths, courseId, 'EN')
     await logger.info(`✅ English PDF saved: ${pdfEn.publicPath}`)
     
     // Step 6: Generate Arabic PDF (only if translation succeeded)
@@ -153,7 +154,7 @@ export async function generateCompleteCourse(input: CourseGenerationInput): Prom
       })
       
       await logger.info('📄 Generating Arabic PDF...')
-      pdfAr = await generateCoursePdf(courseAr, coverImageLocalPath, diagramImagePaths, courseId, 'AR')
+      pdfAr = await generateCoursePdf(courseAr, coverImagePathForPdf, diagramImagePaths, courseId, 'AR')
       await logger.info(`✅ Arabic PDF saved: ${pdfAr.publicPath}`)
     } else {
       await logger.info('⏭️ Skipping Arabic PDF generation (translation not available)')
@@ -285,7 +286,8 @@ export async function resumeCourseGeneration(courseId: string): Promise<CourseGe
 
     // Step 5: Generate English PDF (always generate, even if translation failed)
     await logger.info('📄 Generating English PDF...')
-    const pdfEn = await generateCoursePdf(courseEn, coverImageLocalPath, diagramImagePaths, courseId, 'EN')
+    const coverImagePathForPdf = coverImageLocalPath ?? coverImagePublicPath
+    const pdfEn = await generateCoursePdf(courseEn, coverImagePathForPdf, diagramImagePaths, courseId, 'EN')
     await logger.info(`✅ English PDF saved: ${pdfEn.publicPath}`)
     
     // Step 6: Generate Arabic PDF (only if translation succeeded)
@@ -300,7 +302,7 @@ export async function resumeCourseGeneration(courseId: string): Promise<CourseGe
       })
       
       await logger.info('📄 Generating Arabic PDF...')
-      pdfAr = await generateCoursePdf(courseAr, coverImageLocalPath, diagramImagePaths, courseId, 'AR')
+      pdfAr = await generateCoursePdf(courseAr, coverImagePathForPdf, diagramImagePaths, courseId, 'AR')
       await logger.info(`✅ Arabic PDF saved: ${pdfAr.publicPath}`)
     } else {
       await logger.info('⏭️ Skipping Arabic PDF generation (translation not available)')

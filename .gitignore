@@ -48,9 +48,24 @@ next-env.d.ts
 # course generation
 /logs/*
 !/logs/.gitkeep
+# course generation artifacts & migrated assets
+/public/courses/
+/public/images/courses/
+/public/videos/
+/public/media/
 /public/courses/.generation-status.json
 /public/courses/temp/*
 !/public/courses/temp/.gitkeep
+supabase-migration-map.*.json
+/supabase-migration-report*.json
+/logs/**/*.json
+console.log
+
+# tooling caches
+.turbo
+.vscode
+.idea
+*.tgz
 
 # Legacy PHP files (removed during migration)
 *.php

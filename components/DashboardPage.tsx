@@ -27,7 +27,6 @@ import { HomeSection } from './HomeSection'
 import { DashboardNavigation } from './DashboardNavigation'
 import { calculatePriceForTokens, formatPrice, convertAmount } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
-import { getCoursePdfPath } from '@/lib/course-pdf-utils'
 
 interface CourseItem {
   type: 'course' | 'ai' | 'custom'
@@ -39,6 +38,7 @@ interface CourseItem {
   slug?: string // Course slug for PDF download
   purchaseLanguage?: string // Language used when purchasing (en | ar)
   id?: string // Custom course ID
+  downloadUrl?: string | null
 }
 
 interface Transaction {
@@ -184,6 +184,7 @@ export function DashboardPage() {
           level: course.level,
           slug: course.slug,
           purchaseLanguage: course.purchaseLanguage || 'en',
+          downloadUrl: course.downloadUrl || null,
         }))
 
         // Combine and sort by date (most recent first)
@@ -448,9 +449,9 @@ export function DashboardPage() {
                         </div>
                       </div>
                       <div className="flex sm:flex-col items-end sm:items-end gap-2 text-[11px]">
-                        {item.type === 'course' && item.slug ? (
+                        {item.type === 'course' && item.downloadUrl ? (
                           <a
-                            href={getCoursePdfPath(item.slug, item.purchaseLanguage || 'en')}
+                            href={item.downloadUrl}
                             download
                             className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition"
                           >

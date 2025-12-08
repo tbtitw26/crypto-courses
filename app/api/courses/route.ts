@@ -2,6 +2,7 @@
 
 import { NextResponse } from 'next/server'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
+import { resolvePublicUrl } from '@/lib/storage'
 import { demoCourses } from '@/src/data/courses'
 
 // Helper function to capitalize first letter
@@ -22,6 +23,7 @@ function transformStaticCourse(course: typeof demoCourses[0], index: number) {
     description_ar: undefined, // Static courses don't have Arabic translations
     tokens: course.price.tokens,
     price_gbp: course.price.GBP,
+    cover_image: `/images/courses/${course.slug}-cover.webp`,
   }
 }
 
@@ -40,13 +42,19 @@ export async function GET() {
         description_ar: true,
         tokens: true,
         price_gbp: true,
+        cover_image: true,
       },
       orderBy: {
         created_at: 'desc',
       },
     }))
 
-    return NextResponse.json(courses)
+    const coursesWithAssets = courses.map((course) => ({
+      ...course,
+      cover_image: resolvePublicUrl(course.cover_image) ?? course.cover_image ?? null,
+    }))
+
+    return NextResponse.json(coursesWithAssets)
   } catch (error: any) {
     console.error('Error fetching courses:', error)
     

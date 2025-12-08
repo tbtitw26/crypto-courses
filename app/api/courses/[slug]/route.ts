@@ -3,6 +3,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { demoCourses } from '@/src/data/courses'
+import { resolvePublicUrl } from '@/lib/storage'
 
 // Helper function to capitalize first letter
 function capitalizeFirst(str: string): string {
@@ -23,7 +24,7 @@ function transformStaticCourse(course: typeof demoCourses[0]) {
     tokens: course.price.tokens,
     price_gbp: course.price.GBP,
     pdf_path: course.pdfUrl,
-    cover_image: null,
+    cover_image: `/images/courses/${course.slug}-cover.webp`,
     featured: course.isFeatured,
     modules: course.modules.map((m) => ({
       order: m.order,
@@ -71,7 +72,12 @@ export async function GET(
       )
     }
 
-    return NextResponse.json(course)
+    const courseWithAssets = {
+      ...course,
+      cover_image: resolvePublicUrl(course.cover_image) ?? course.cover_image ?? null,
+    }
+
+    return NextResponse.json(courseWithAssets)
   } catch (error: any) {
     console.error('Error fetching course:', error)
     
