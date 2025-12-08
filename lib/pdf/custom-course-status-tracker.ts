@@ -4,6 +4,8 @@ import fs from 'fs/promises'
 import path from 'path'
 
 const STATUS_FILE = path.join(process.cwd(), 'public', 'courses', '.custom-course-generation-status.json')
+const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+let memoryStatus: CustomCourseGenerationStatus | null = null
 
 export interface CustomCourseGenerationStatus {
   courseRequestId?: number
@@ -27,6 +29,10 @@ export interface CustomCourseGenerationStatus {
  * Save generation status
  */
 export async function saveCustomCourseStatus(status: CustomCourseGenerationStatus): Promise<void> {
+  if (isServerless) {
+    memoryStatus = status
+    return
+  }
   try {
     const statusDir = path.dirname(STATUS_FILE)
     await fs.mkdir(statusDir, { recursive: true })
@@ -40,6 +46,9 @@ export async function saveCustomCourseStatus(status: CustomCourseGenerationStatu
  * Load generation status
  */
 export async function loadCustomCourseStatus(): Promise<CustomCourseGenerationStatus | null> {
+  if (isServerless) {
+    return memoryStatus
+  }
   try {
     const content = await fs.readFile(STATUS_FILE, 'utf-8')
     return JSON.parse(content)
@@ -52,6 +61,10 @@ export async function loadCustomCourseStatus(): Promise<CustomCourseGenerationSt
  * Clear generation status
  */
 export async function clearCustomCourseStatus(): Promise<void> {
+  if (isServerless) {
+    memoryStatus = null
+    return
+  }
   try {
     await fs.unlink(STATUS_FILE)
   } catch (error) {

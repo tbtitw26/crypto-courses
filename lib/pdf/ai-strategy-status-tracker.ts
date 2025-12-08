@@ -4,6 +4,8 @@ import fs from 'fs/promises'
 import path from 'path'
 
 const STATUS_FILE = path.join(process.cwd(), 'public', 'courses', '.ai-strategy-generation-status.json')
+const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+let memoryStatus: AiStrategyGenerationStatus | null = null
 
 export interface AiStrategyGenerationStatus {
   strategyRunId?: number
@@ -34,6 +36,10 @@ export interface AiStrategyGenerationStatus {
 }
 
 async function saveAiStrategyStatus(status: AiStrategyGenerationStatus): Promise<void> {
+  if (isServerless) {
+    memoryStatus = status
+    return
+  }
   try {
     const statusDir = path.dirname(STATUS_FILE)
     await fs.mkdir(statusDir, { recursive: true })
@@ -44,6 +50,9 @@ async function saveAiStrategyStatus(status: AiStrategyGenerationStatus): Promise
 }
 
 export async function loadAiStrategyStatus(): Promise<AiStrategyGenerationStatus | null> {
+  if (isServerless) {
+    return memoryStatus
+  }
   try {
     const content = await fs.readFile(STATUS_FILE, 'utf-8')
     return JSON.parse(content)
@@ -53,6 +62,10 @@ export async function loadAiStrategyStatus(): Promise<AiStrategyGenerationStatus
 }
 
 export async function clearAiStrategyStatus(): Promise<void> {
+  if (isServerless) {
+    memoryStatus = null
+    return
+  }
   try {
     await fs.unlink(STATUS_FILE)
   } catch {

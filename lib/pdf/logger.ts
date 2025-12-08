@@ -5,6 +5,7 @@ import path from 'path'
 
 const LOG_DIR = path.join(process.cwd(), 'logs')
 const LOG_FILE = path.join(LOG_DIR, 'course-generation.log')
+const canWriteToFs = !(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
 
 // Ensure log directory exists
 async function ensureLogDir() {
@@ -29,6 +30,10 @@ export async function log(level: 'info' | 'error' | 'warn' | 'debug', message: s
     console.warn(message, data || '')
   } else {
     console.log(message, data || '')
+  }
+
+  if (!canWriteToFs) {
+    return
   }
 
   // Log to file

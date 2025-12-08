@@ -10,10 +10,22 @@ import fs from 'fs/promises'
 import path from 'path'
 import { config } from '@/lib/config'
 
+const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+const memoryCourses = new Map<string, GeneratedCourse>()
+
+function getMemoryKey(courseId: string, language: 'EN' | 'AR') {
+  return `${courseId}-${language}`
+}
+
 /**
  * Save intermediate course JSON to temp directory
  */
 async function saveIntermediateCourse(course: any, courseId: string, language: 'EN' | 'AR'): Promise<string> {
+  if (isServerless) {
+    const key = getMemoryKey(courseId, language)
+    memoryCourses.set(key, course)
+    return `memory://${key}`
+  }
   const tempDir = path.join(process.cwd(), 'public', 'courses', 'temp')
   await fs.mkdir(tempDir, { recursive: true })
   const filePath = path.join(tempDir, `${courseId}-${language.toLowerCase()}.json`)
@@ -25,6 +37,10 @@ async function saveIntermediateCourse(course: any, courseId: string, language: '
  * Load intermediate course JSON from temp directory
  */
 async function loadIntermediateCourse(courseId: string, language: 'EN' | 'AR'): Promise<GeneratedCourse | null> {
+  if (isServerless) {
+    const key = getMemoryKey(courseId, language)
+    return memoryCourses.get(key) ?? null
+  }
   try {
     const filePath = path.join(process.cwd(), 'public', 'courses', 'temp', `${courseId}-${language.toLowerCase()}.json`)
     const content = await fs.readFile(filePath, 'utf-8')

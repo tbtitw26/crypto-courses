@@ -4,6 +4,8 @@ import fs from 'fs/promises'
 import path from 'path'
 
 const STATUS_FILE = path.join(process.cwd(), 'public', 'courses', '.generation-status.json')
+const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+let memoryStatus: GenerationStatus | null = null
 
 export interface GenerationStatus {
   courseId?: string
@@ -26,6 +28,10 @@ export interface GenerationStatus {
  * Save generation status
  */
 export async function saveStatus(status: GenerationStatus): Promise<void> {
+  if (isServerless) {
+    memoryStatus = status
+    return
+  }
   try {
     const statusDir = path.dirname(STATUS_FILE)
     await fs.mkdir(statusDir, { recursive: true })
@@ -39,6 +45,9 @@ export async function saveStatus(status: GenerationStatus): Promise<void> {
  * Load generation status
  */
 export async function loadStatus(): Promise<GenerationStatus | null> {
+  if (isServerless) {
+    return memoryStatus
+  }
   try {
     const content = await fs.readFile(STATUS_FILE, 'utf-8')
     return JSON.parse(content)
@@ -51,6 +60,10 @@ export async function loadStatus(): Promise<GenerationStatus | null> {
  * Clear generation status
  */
 export async function clearStatus(): Promise<void> {
+  if (isServerless) {
+    memoryStatus = null
+    return
+  }
   try {
     await fs.unlink(STATUS_FILE)
   } catch (error) {
