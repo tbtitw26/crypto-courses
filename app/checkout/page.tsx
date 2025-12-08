@@ -19,7 +19,7 @@ import { useToast } from '@/hooks/use-toast'
 
 function CheckoutContent() {
   const { items, getCartTotal, clearCart, addToCart } = useCart()
-  const { data: session, update: updateSession } = useSession()
+  const { data: session, status: sessionStatus, update: updateSession } = useSession()
   const router = useRouter()
   const searchParams = useSearchParams()
   const { showToast } = useToast()
@@ -46,6 +46,13 @@ function CheckoutContent() {
       }
     }
   }, [])
+
+  // Redirect unauthenticated users to login with callback
+  useEffect(() => {
+    if (sessionStatus === 'unauthenticated') {
+      router.replace(`/login?callbackUrl=${encodeURIComponent('/checkout')}`)
+    }
+  }, [sessionStatus, router])
 
   // Process URL parameters (pack or custom top-up)
   useEffect(() => {
@@ -341,8 +348,8 @@ function CheckoutContent() {
     }
   }
 
-  // Show loading state while processing URL params
-  if (!hasProcessedParams) {
+  // Show loading state while processing URL params or auth
+  if (sessionStatus === 'loading' || sessionStatus === 'unauthenticated' || !hasProcessedParams) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-slate-400">Loading...</div>

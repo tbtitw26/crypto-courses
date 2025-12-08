@@ -22,25 +22,7 @@ interface ReceiptData {
   }
 }
 
-const chromiumPathPromise = chromium
-  .executablePath('/tmp')
-  .catch(async (tmpError) => {
-    console.warn('[Receipts] Failed to resolve Chromium in /tmp, falling back:', tmpError)
-    return chromium.executablePath()
-  })
-const cachedExecutablePathPromise = chromiumPathPromise.then(async (resolvedPath) => {
-  if (!resolvedPath) {
-    throw new Error('Chromium executable path is empty')
-  }
-  const targetPath = path.join('/tmp', 'chromium-avq')
-  await fs.copyFile(resolvedPath, targetPath).catch(async (copyError) => {
-    if (copyError.code !== 'EEXIST') {
-      await fs.copyFile(resolvedPath, targetPath)
-    }
-  })
-  await fs.chmod(targetPath, 0o755).catch(() => {})
-  return targetPath
-})
+const chromiumPathPromise = chromium.executablePath()
 /**
  * Generate PDF receipt from receipt data
  */
@@ -56,7 +38,14 @@ export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buff
   try {
     if (isServerless) {
       // Serverless environment - use Chromium
-      executablePath = await cachedExecutablePathPromise
+      executablePath = await chromiumPathPromise
+      if (!executablePath) {
+        throw new Error('Unable to resolve Chromium executable path')
+      }
+      // Ensure it is executable if located in /tmp
+      if (executablePath.startsWith('/tmp/')) {
+        await fs.chmod(executablePath, 0o755).catch(() => {})
+      }
       console.log('[Receipts] Using Chromium path:', executablePath, {
         vercel: process.env.VERCEL,
         lambda: process.env.AWS_LAMBDA_FUNCTION_NAME,
