@@ -130,11 +130,6 @@ export function RegisterPage() {
     }
   }
 
-  const handleGoogleSignUp = async () => {
-    setError(null)
-    await signIn('google', { callbackUrl: '/dashboard' })
-  }
-
   // Show loading state while checking auth
   if (status === 'loading') {
     return (
@@ -302,45 +297,6 @@ export function RegisterPage() {
                     {isLoading ? 'Creating account...' : success ? t('success') : t('submit')}
                   </button>
                 </form>
-
-                {/* Divider */}
-                <div className="relative">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-slate-800"></div>
-                  </div>
-                  <div className="relative flex justify-center text-xs">
-                    <span className="px-2 bg-slate-950 text-slate-400">Or continue with</span>
-                  </div>
-                </div>
-
-                {/* Google Sign Up */}
-                <button
-                  onClick={handleGoogleSignUp}
-                  type="button"
-                  className="group w-full py-2.5 px-4 text-sm font-medium rounded-full border border-slate-700 text-slate-100 hover:border-slate-500 transition flex items-center justify-center gap-2"
-                >
-                  <div className="relative w-5 h-5 flex items-center justify-center">
-                    {/* Default gray G */}
-                    <span className="text-slate-100 group-hover:opacity-0 transition-opacity duration-300 text-lg font-bold leading-none">
-                      G
-                    </span>
-                    {/* Colored G on hover with Google colors */}
-                    <span
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-lg font-bold leading-none"
-                      style={{
-                        backgroundImage:
-                          'linear-gradient(135deg, #EA4335 0%, #FBBC05 30%, #4285F4 60%, #34A853 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                        color: 'transparent',
-                      }}
-                    >
-                      G
-                    </span>
-                  </div>
-                  {t('googleSignUp')}
-                </button>
 
                 {/* Sign in link */}
                 <div className="text-center text-sm text-slate-400">

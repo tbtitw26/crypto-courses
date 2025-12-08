@@ -256,11 +256,15 @@ async function generateStrategyInBackground(
         userEmail: updatedStrategyRun.user.email,
         userName: `${updatedStrategyRun.user.first_name} ${updatedStrategyRun.user.last_name || ''}`.trim(),
         locale,
-        invoicePdfBuffer,
+        invoicePdfBuffer: invoicePdfBuffer ?? undefined, // null -> undefined (no attachment)
         invoiceNumber,
         tokens: -updatedStrategyRun.tokens_cost,
         amountGbp: 0,
       })
+
+      if (!invoicePdfBuffer) {
+        console.warn('[AI Strategy API] PDF invoice could not be generated, email sent without attachment')
+      }
     } catch (emailError: any) {
       console.error('[AI Strategy API] Error sending invoice email:', {
         userId,

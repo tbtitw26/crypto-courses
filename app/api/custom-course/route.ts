@@ -332,19 +332,23 @@ async function generateCourseInBackground(
 
         const invoicePdfBuffer = await generateReceiptPdf(receiptData)
 
-        // Send email
+        // Send email (with or without PDF attachment)
         await sendPurchaseConfirmationEmail({
           type: 'custom-course',
           transactionId: `custom-${updatedCourseRequest.id}`,
           userEmail: updatedCourseRequest.user.email,
           userName: `${updatedCourseRequest.user.first_name} ${updatedCourseRequest.user.last_name || ''}`.trim(),
           locale,
-          invoicePdfBuffer,
+          invoicePdfBuffer: invoicePdfBuffer ?? undefined, // null -> undefined (no attachment)
           invoiceNumber,
           tokens: -updatedCourseRequest.tokens_cost,
           amountGbp: 0,
           customCourseDeliveryInfo: false, // We'll send PDF separately
         })
+
+        if (!invoicePdfBuffer) {
+          console.warn('[Custom Course API] PDF invoice could not be generated, email sent without attachment')
+        }
 
         console.log('[Custom Course API] Invoice email sent successfully:', {
           userId: userIdForLogging,
