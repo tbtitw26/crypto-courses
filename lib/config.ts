@@ -70,7 +70,7 @@ export const config = {
     },
       // Timeouts (in milliseconds)
       timeouts: {
-        strategy: 60000, // 60 seconds
+        strategy: 90000, // 90 seconds for AI Strategy generation (reduce aborts)
         course: 1200000, // 1200 seconds (20 minutes) - increased for complex courses that may take longer
         translation: 2700000, // 2700 seconds (45 minutes) - translation can take longer for very large courses (80+ KB)
         image: 120000, // 120 seconds (2 minutes) - image generation can take time

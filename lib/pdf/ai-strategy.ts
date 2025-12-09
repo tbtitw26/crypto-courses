@@ -142,8 +142,13 @@ export async function generateAIStrategyComplete(params: {
       model,
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error)
-    await logger.error('❌ Error in AI Strategy generation:', error)
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : typeof error === 'object'
+        ? JSON.stringify(error)
+        : String(error)
+    await logger.error('❌ Error in AI Strategy generation:', { error: errorMessage })
     throw error
   }
 }

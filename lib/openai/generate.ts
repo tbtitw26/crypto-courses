@@ -55,80 +55,105 @@ export async function generateAIStrategy(params: {
   const courseId = generateCourseId(params.mainObjective.substring(0, 50))
   const userPrompt = buildAIStrategyPrompt({ ...params, courseId })
 
-  try {
-    const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), timeout)
+  const attempts = 2
+  let lastError: any = null
 
-    const response = await client.chat.completions.create(
-      {
-        model,
-        messages: [
-          { role: 'system', content: SYSTEM_MESSAGE_AI_STRATEGY },
-          { role: 'user', content: userPrompt },
-        ],
-        temperature: settings.temperature,
-        max_tokens: settings.maxTokens,
-        response_format: {
-          type: 'json_schema',
-          json_schema: {
-            name: 'avenqor_ai_strategy_v1',
-            strict: true,
-            schema: AI_STRATEGY_JSON_SCHEMA as any,
+  for (let i = 0; i < attempts; i++) {
+    const attempt = i + 1
+    try {
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), timeout)
+
+      const response = await client.chat.completions.create(
+        {
+          model,
+          messages: [
+            { role: 'system', content: SYSTEM_MESSAGE_AI_STRATEGY },
+            { role: 'user', content: userPrompt },
+          ],
+          temperature: settings.temperature,
+          max_tokens: settings.maxTokens,
+          response_format: {
+            type: 'json_schema',
+            json_schema: {
+              name: 'avenqor_ai_strategy_v1',
+              strict: true,
+              schema: AI_STRATEGY_JSON_SCHEMA as any,
+            },
           },
         },
-      },
-      { signal: controller.signal }
-    )
+        { signal: controller.signal }
+      )
 
-    clearTimeout(timeoutId)
+      clearTimeout(timeoutId)
 
-    const content = response.choices[0]?.message?.content
-    if (!content) {
-      throw new Error('No content in OpenAI response')
-    }
+      const content = response.choices[0]?.message?.content
+      if (!content) {
+        throw new Error('No content in OpenAI response')
+      }
 
-    // Parse and validate JSON
-    let parsedContent: GeneratedCourse
-    try {
-      parsedContent = JSON.parse(content) as GeneratedCourse
-      // Ensure course_id matches
-      parsedContent.meta.course_id = courseId
-    } catch (parseError) {
-      throw new Error(`Invalid JSON response from OpenAI: ${parseError instanceof Error ? parseError.message : 'Unknown error'}`)
-    }
+      // Parse and validate JSON
+      let parsedContent: GeneratedCourse
+      try {
+        parsedContent = JSON.parse(content) as GeneratedCourse
+        // Ensure course_id matches
+        parsedContent.meta.course_id = courseId
+      } catch (parseError) {
+        throw new Error(`Invalid JSON response from OpenAI: ${parseError instanceof Error ? parseError.message : 'Unknown error'}`)
+      }
 
-    return {
-      course: parsedContent,
-      tokens: {
-        prompt: response.usage?.prompt_tokens || 0,
-        completion: response.usage?.completion_tokens || 0,
-        total: response.usage?.total_tokens || 0,
-      },
-      model: response.model,
-    }
-  } catch (error: unknown) {
-    if (error instanceof Error && error.name === 'AbortError') {
+      return {
+        course: parsedContent,
+        tokens: {
+          prompt: response.usage?.prompt_tokens || 0,
+          completion: response.usage?.completion_tokens || 0,
+          total: response.usage?.total_tokens || 0,
+        },
+        model: response.model,
+      }
+    } catch (error: unknown) {
+      lastError = error
+      const isAbort =
+        (error instanceof Error && error.name === 'AbortError') ||
+        (error as any)?.message?.toString?.().toLowerCase?.().includes('aborted')
+      const isOpenAIError = error && typeof error === 'object' && 'code' in error
+
+      // Retry on first attempt for abort/unknown
+      if (attempt < attempts && (isAbort || isOpenAIError)) {
+        const delay = 1500 * attempt
+        await new Promise((res) => setTimeout(res, delay))
+        continue
+      }
+
+      if (isAbort) {
+        throw {
+          code: 'TIMEOUT',
+          message: 'Generation request timed out',
+          details: error,
+        } as GenerationError
+      }
+
+      if (isOpenAIError) {
+        throw {
+          code: (error as { code: string }).code || 'UNKNOWN',
+          message: error instanceof Error ? error.message : 'OpenAI API error',
+          details: error,
+        } as GenerationError
+      }
+
       throw {
-        code: 'TIMEOUT',
-        message: 'Generation request timed out',
+        code: 'UNKNOWN',
+        message: error instanceof Error ? error.message : 'Unknown error occurred',
         details: error,
       } as GenerationError
     }
-
-    if (error && typeof error === 'object' && 'code' in error) {
-      throw {
-        code: (error as { code: string }).code || 'UNKNOWN',
-        message: error instanceof Error ? error.message : 'OpenAI API error',
-        details: error,
-      } as GenerationError
-    }
-
-    throw {
-      code: 'UNKNOWN',
-      message: error instanceof Error ? error.message : 'Unknown error occurred',
-      details: error,
-    } as GenerationError
   }
+
+  throw {
+    code: 'UNKNOWN',
+    message: 'Failed after retries',
+    details: lastError,
+  } as GenerationError
 }
 
 /**
