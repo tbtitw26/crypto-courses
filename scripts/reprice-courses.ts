@@ -65,7 +65,6 @@ async function main() {
         market,
         price_gbp: priceGbp,
         tokens,
-        modules: meta?.modules ? course.modules : course.modules, // keep existing modules JSON if present
         duration_hours_max: durationMax,
         duration_hours_min: durationMin,
       },
