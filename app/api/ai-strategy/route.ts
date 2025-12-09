@@ -221,12 +221,12 @@ async function generateStrategyInBackground(
     await updateAiStrategyStatus({
       strategyRunId,
       courseId: result.courseId,
-      stage: 'en_generated',
+      stage: 'generating_pdf_en',
       progress: 50,
       message: 'English strategy generated, proceeding with assets...',
       warnings: result.warnings,
     })
-    safeLog('Stage: en_generated', {
+    safeLog('Stage: generating_pdf_en (post EN content)', {
       courseId: result.courseId,
       warnings: result.warnings,
     })
@@ -276,7 +276,7 @@ async function generateStrategyInBackground(
     await updateAiStrategyStatus({
       strategyRunId,
       courseId: result.courseId,
-      stage: 'persisted',
+      stage: 'generating_pdf_en',
       progress: 80,
       message: 'Generation persisted, sending emails...',
       warnings: result.warnings,
