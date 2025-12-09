@@ -147,7 +147,40 @@ async function generateStrategyInBackground(
   data: z.infer<typeof aiStrategySchema>,
   userId: number
 ) {
+  const WATCHDOG_MS = 12 * 60 * 1000 // 12 minutes safety cutoff
   const startedAt = new Date().toISOString()
+  let finished = false
+
+  const safeLog = (msg: string, payload?: Record<string, unknown>) => {
+    console.log(`[AI Strategy ${strategyRunId}] ${msg}`, payload || '')
+  }
+
+  const watchdog = setTimeout(async () => {
+    if (finished) return
+    try {
+      await updateAiStrategyStatus({
+        strategyRunId,
+        stage: 'error',
+        progress: 100,
+        message: 'Watchdog timeout during generation',
+        error: 'watchdog_timeout',
+        completedAt: new Date().toISOString(),
+      })
+      await prisma.aiStrategyRun.update({
+        where: { id: strategyRunId },
+        data: {
+          status: 'failed',
+          status_stage: 'error',
+          status_progress: 100,
+          status_message: 'Watchdog timeout during generation',
+          status_error: 'watchdog_timeout',
+        },
+      })
+      console.error('[AI Strategy API] Watchdog timeout - marked as failed', { strategyRunId })
+    } catch (err) {
+      console.error('[AI Strategy API] Watchdog update failed', err)
+    }
+  }, WATCHDOG_MS)
 
   try {
     await updateAiStrategyStatus({
@@ -157,6 +190,7 @@ async function generateStrategyInBackground(
       message: 'Generating English strategy...',
       startedAt,
     })
+    safeLog('Stage: generating_en (starting OpenAI)')
 
     const { logger } = await import('@/lib/pdf/logger')
     await logger.info(`[AI Strategy ${strategyRunId}] Starting generation...`, {
@@ -187,6 +221,19 @@ async function generateStrategyInBackground(
     await updateAiStrategyStatus({
       strategyRunId,
       courseId: result.courseId,
+      stage: 'en_generated',
+      progress: 50,
+      message: 'English strategy generated, proceeding with assets...',
+      warnings: result.warnings,
+    })
+    safeLog('Stage: en_generated', {
+      courseId: result.courseId,
+      warnings: result.warnings,
+    })
+
+    await updateAiStrategyStatus({
+      strategyRunId,
+      courseId: result.courseId,
       stage: 'generating_pdf_en',
       progress: 70,
       message: 'Strategy generated, preparing PDFs...',
@@ -197,6 +244,11 @@ async function generateStrategyInBackground(
         coverImage: result.coverImagePath,
         diagrams: result.diagramImagePaths,
       },
+    })
+    safeLog('Stage: generating_pdf_en', {
+      courseId: result.courseId,
+      cover: result.coverImagePath,
+      diagrams: result.diagramImagePaths,
     })
 
     const updatedStrategyRun = await prisma.aiStrategyRun.update({
@@ -219,6 +271,20 @@ async function generateStrategyInBackground(
           },
         },
       },
+    })
+
+    await updateAiStrategyStatus({
+      strategyRunId,
+      courseId: result.courseId,
+      stage: 'persisted',
+      progress: 80,
+      message: 'Generation persisted, sending emails...',
+      warnings: result.warnings,
+    })
+    safeLog('Stage: persisted', {
+      courseId: result.courseId,
+      tokens: result.tokens,
+      model: result.model,
     })
 
     await updateAiStrategyStatus({
@@ -338,8 +404,16 @@ async function generateStrategyInBackground(
       warnings: result.warnings,
       completedAt: new Date().toISOString(),
     })
+    safeLog('Stage: completed', { courseId: result.courseId })
+    finished = true
+    clearTimeout(watchdog)
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error)
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : typeof error === 'object'
+        ? JSON.stringify(error)
+        : String(error)
     await updateAiStrategyStatus({
       strategyRunId,
       stage: 'error',
@@ -353,6 +427,10 @@ async function generateStrategyInBackground(
       where: { id: strategyRunId },
       data: {
         status: 'failed',
+        status_stage: 'error',
+        status_progress: 100,
+        status_message: 'Strategy generation failed',
+        status_error: errorMessage,
       },
     })
 
@@ -362,6 +440,8 @@ async function generateStrategyInBackground(
       error: errorMessage,
       stack: error instanceof Error ? error.stack : undefined,
     })
+    finished = true
+    clearTimeout(watchdog)
   }
 }
 
