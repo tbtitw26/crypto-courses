@@ -44,7 +44,7 @@ async function main() {
 
     // PDF paths
     const pdfPath = '/courses/trading-foundations-how-markets-really-work-en.pdf'
-    const coverImage = '/images/courses/trading-foundations-how-markets-really-work-cover.webp'
+    const coverImage = '/images/courses/trading-foundations-how-markets-really-work-cover.png'
 
     // Transform modules from JSON to DB format
     const modules = courseEn.modules.map((m: any, idx: number) => ({

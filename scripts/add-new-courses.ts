@@ -88,7 +88,7 @@ async function addCourseToDb(slug: string) {
 
     // PDF paths
     const pdfPath = `/courses/${slug}-en.pdf`
-    const coverImage = `/images/courses/${slug}-cover.webp`
+    const coverImage = `/images/courses/${slug}-cover.png`
 
     // Add course to database
     const result = await prisma.course.upsert({

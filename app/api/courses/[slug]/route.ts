@@ -24,7 +24,7 @@ function transformStaticCourse(course: typeof demoCourses[0]) {
     tokens: course.price.tokens,
     price_gbp: course.price.GBP,
     pdf_path: course.pdfUrl,
-    cover_image: `/images/courses/${course.slug}-cover.webp`,
+    cover_image: `/images/courses/${course.slug}-cover.png`,
     featured: course.isFeatured,
     modules: course.modules.map((m) => ({
       order: m.order,

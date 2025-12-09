@@ -23,7 +23,7 @@ function transformStaticCourse(course: typeof demoCourses[0], index: number) {
     description_ar: undefined, // Static courses don't have Arabic translations
     tokens: course.price.tokens,
     price_gbp: course.price.GBP,
-    cover_image: `/images/courses/${course.slug}-cover.webp`,
+    cover_image: `/images/courses/${course.slug}-cover.png`,
   }
 }
 

@@ -14,7 +14,7 @@ function buildSupabaseImageUrl(key: string | null | undefined) {
 /**
  * Get the image path for a course by slug
  * Maps course slugs to image filenames
- * Uses standard pattern: covers/{slug}-cover.webp inside Supabase
+ * Uses standard pattern: covers/{slug}-cover.png inside Supabase
  */
 export function getCourseImagePath(slug: string): string | null {
   if (!slug) return null
@@ -25,7 +25,7 @@ export function getCourseImagePath(slug: string): string | null {
   }
 
   const mappedKey = imageMap[slug]
-  const supabaseKey = mappedKey ?? `covers/${slug}-cover.webp`
+  const supabaseKey = mappedKey ?? `covers/${slug}-cover.png`
   const supabaseUrl = buildSupabaseImageUrl(supabaseKey)
 
   if (supabaseUrl) {
@@ -33,7 +33,7 @@ export function getCourseImagePath(slug: string): string | null {
   }
 
   // Fallback to legacy public folder when Supabase URL isn't configured
-  return `/images/courses/${slug}-cover.webp`
+  return `/images/courses/${slug}-cover.png`
 }
 
 /**

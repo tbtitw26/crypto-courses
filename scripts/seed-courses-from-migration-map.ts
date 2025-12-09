@@ -41,14 +41,14 @@ async function main() {
 
   // Build cover map by slug (best-effort)
   const coverBySlug = new Map<string, string>()
-  for (const img of imageEntries) {
-    // Examples: course-images/courses/<slug>-cover.webp
-    const file = img.key.split('/').pop() || ''
-    const coverMatch = file.match(/^(.*?)-cover\.(png|jpg|jpeg|webp)$/)
-    if (coverMatch) {
-      coverBySlug.set(coverMatch[1], img.supabasePath)
-    }
+for (const img of imageEntries) {
+  // Examples: course-images/covers/<slug>-cover.png or legacy courses/<slug>-cover.webp
+  const file = img.key.split('/').pop() || ''
+  const coverMatch = file.match(/^(.*?)-cover\.(png|jpg|jpeg|webp)$/)
+  if (coverMatch) {
+    coverBySlug.set(coverMatch[1], img.supabasePath)
   }
+}
 
   const courses = new Map<
     string,

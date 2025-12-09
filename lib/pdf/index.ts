@@ -398,7 +398,7 @@ export async function generateEnglishPdfOnly(courseId: string): Promise<{ pdfEnP
       await logger.info('Image paths not found in status. Searching file system...')
       
       // Check cover image
-      const coverImagePath = `/images/courses/${courseId}-cover.webp`
+      const coverImagePath = `/images/courses/${courseId}-cover.png`
       const coverImageFullPath = path.join(process.cwd(), 'public', coverImagePath.replace(/^\//, ''))
       try {
         await fs.access(coverImageFullPath)
@@ -518,7 +518,7 @@ export async function generateArabicPdfOnly(courseId: string): Promise<{ pdfArPa
       await logger.info('Image paths not found in status. Searching file system...')
       
       // Check cover image
-      const coverImagePath = `/images/courses/${courseId}-cover.webp`
+      const coverImagePath = `/images/courses/${courseId}-cover.png`
       const coverImageFullPath = path.join(process.cwd(), 'public', coverImagePath.replace(/^\//, ''))
       try {
         await fs.access(coverImageFullPath)

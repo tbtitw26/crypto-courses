@@ -70,7 +70,7 @@ export async function generateCoverImage(
   // Download image
   const imageBuffer = await downloadImage(imageUrl)
 
-  const filename = `covers/${courseId}-cover.webp`
+  const filename = `covers/${courseId}-cover.png`
   const saveResult = await saveCourseImage(imageBuffer, filename)
 
   return toImagePathInfo(saveResult)

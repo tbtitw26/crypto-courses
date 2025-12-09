@@ -29,7 +29,7 @@ async function main() {
 
   for (const course of courses) {
     const expectedPdfPath = encodeSupabasePath(pdfBucket, `ready/${course.slug}-en.pdf`)
-    const expectedCoverPath = encodeSupabasePath(imageBucket, `covers/${course.slug}-cover.webp`)
+    const expectedCoverPath = encodeSupabasePath(imageBucket, `covers/${course.slug}-cover.png`)
 
     const data: Record<string, string> = {}
 
