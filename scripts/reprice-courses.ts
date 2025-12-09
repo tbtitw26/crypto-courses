@@ -70,6 +70,7 @@ async function main() {
     level: Level
     market: string
     priceEur: number
+  priceGbp?: number
     durationMax: number
     durationMin: number
   }
