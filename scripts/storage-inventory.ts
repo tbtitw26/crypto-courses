@@ -25,13 +25,14 @@ async function listAllObjects(bucket: string) {
 
     for (const item of data) {
       const path = prefix ? `${prefix}/${item.name}` : item.name
-      if (item.id && item.size !== undefined) {
+      const size = (item as any).metadata?.size ?? (item as any).size ?? 0
+      if (item.id && size !== undefined) {
         summaries.totalFiles += 1
-        summaries.totalBytes += item.size
+        summaries.totalBytes += size
         const top = path.split('/')[0] || ''
         summaries.byPrefix[top] = summaries.byPrefix[top] || { files: 0, bytes: 0 }
         summaries.byPrefix[top].files += 1
-        summaries.byPrefix[top].bytes += item.size
+        summaries.byPrefix[top].bytes += size
       }
       if (item.name && item.id === null) {
         // It's a folder; recurse
