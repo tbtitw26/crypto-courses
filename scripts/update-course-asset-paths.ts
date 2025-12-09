@@ -3,7 +3,7 @@
 import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
 import { config } from '@/lib/config'
-import { encodeSupabasePath } from '@/lib/supabase/storage'
+import { encodeSupabasePath, isSupabasePath, decodeSupabasePath, normalizeImageKey } from '@/lib/supabase/storage'
 
 const prisma = new PrismaClient()
 
@@ -33,12 +33,30 @@ async function main() {
 
     const data: Record<string, string> = {}
 
+    // Check PDF path
     if (course.pdf_path !== expectedPdfPath) {
       data.pdf_path = expectedPdfPath
+      console.log(`  PDF: ${course.pdf_path} → ${expectedPdfPath}`)
     }
 
-    if (course.cover_image !== expectedCoverPath) {
+    // Check cover image path - normalize legacy paths
+    let currentCoverPath = course.cover_image
+    if (currentCoverPath && isSupabasePath(currentCoverPath)) {
+      const { bucket, key } = decodeSupabasePath(currentCoverPath)
+      const normalizedKey = normalizeImageKey(key)
+      const normalizedPath = encodeSupabasePath(bucket, normalizedKey)
+      
+      if (normalizedPath !== expectedCoverPath) {
+        data.cover_image = expectedCoverPath
+        console.log(`  Cover: ${currentCoverPath} → ${expectedCoverPath}`)
+      } else if (currentCoverPath !== expectedCoverPath) {
+        // Path needs normalization but bucket/key are correct
+        data.cover_image = expectedCoverPath
+        console.log(`  Cover (normalized): ${currentCoverPath} → ${expectedCoverPath}`)
+      }
+    } else if (currentCoverPath !== expectedCoverPath) {
       data.cover_image = expectedCoverPath
+      console.log(`  Cover: ${currentCoverPath} → ${expectedCoverPath}`)
     }
 
     if (Object.keys(data).length > 0) {
@@ -47,7 +65,7 @@ async function main() {
         data,
       })
       updated += 1
-      console.log(`Updated asset paths for course: ${course.slug}`)
+      console.log(`✓ Updated asset paths for course: ${course.slug}`)
     }
   }
 

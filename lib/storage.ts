@@ -9,6 +9,7 @@ import {
   decodeSupabasePath,
   createSignedUrl,
   getPublicUrl,
+  normalizeImageKey,
 } from '@/lib/supabase/storage'
 
 export interface SaveResult {
@@ -152,7 +153,9 @@ export function resolvePublicUrl(storedPath?: string | null): string | undefined
   }
 
   const { bucket, key } = decodeSupabasePath(storedPath)
-  return getPublicUrl(bucket, key)
+  // Normalize legacy paths (courses/ → covers/, .webp → .png)
+  const normalizedKey = normalizeImageKey(key)
+  return getPublicUrl(bucket, normalizedKey)
 }
 
 

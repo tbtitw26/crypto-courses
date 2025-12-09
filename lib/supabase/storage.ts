@@ -13,6 +13,28 @@ export function normalizeStorageKey(key: string): string {
   return key.replace(/\\/g, '/').replace(/^\/+/, '')
 }
 
+/**
+ * Normalizes legacy image paths to new format:
+ * - courses/<slug>-cover.webp → covers/<slug>-cover.png
+ * - courses/<slug>-cover.png → covers/<slug>-cover.png
+ * - Any .webp → .png for cover images
+ */
+export function normalizeImageKey(key: string): string {
+  let normalized = normalizeStorageKey(key)
+  
+  // Replace courses/ prefix with covers/ for cover images
+  if (normalized.startsWith('courses/')) {
+    normalized = normalized.replace(/^courses\//, 'covers/')
+  }
+  
+  // Replace .webp with .png for cover images
+  if (normalized.includes('-cover.webp')) {
+    normalized = normalized.replace(/-cover\.webp$/, '-cover.png')
+  }
+  
+  return normalized
+}
+
 const SUPABASE_PROTOCOL = 'supabase://'
 
 export function encodeSupabasePath(bucket: string, key: string): string {
