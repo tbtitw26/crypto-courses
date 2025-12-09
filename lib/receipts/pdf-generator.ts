@@ -125,14 +125,32 @@ export async function generateReceiptPdf(receiptData: ReceiptData): Promise<Buff
     // Generate HTML for receipt
     const html = generateReceiptHtml(receiptData)
 
-    await page.setContent(html, {
-      waitUntil: 'networkidle0',
-    })
+    const setContentWithRetry = async () => {
+      try {
+        await page.setContent(html, {
+          waitUntil: 'networkidle0',
+          timeout: 60000, // 60s
+        })
+      } catch (err: any) {
+        if (err?.name === 'TimeoutError') {
+          console.warn('[Receipts] setContent timeout, retrying once...')
+          await page.setContent(html, {
+            waitUntil: 'networkidle0',
+            timeout: 60000,
+          })
+        } else {
+          throw err
+        }
+      }
+    }
+
+    await setContentWithRetry()
 
     // Generate PDF
     const pdfBuffer = await page.pdf({
       format: 'A4',
       printBackground: true,
+      timeout: 60000, // 60s
       margin: {
         top: '20mm',
         right: '20mm',
