@@ -248,7 +248,12 @@ async function generateStrategyInBackground(
         user: updatedStrategyRun.user,
       }
 
-      const invoicePdfBuffer = await generateReceiptPdf(receiptData)
+      // Try invoice PDF (1 retry if null)
+      let invoicePdfBuffer = await generateReceiptPdf(receiptData)
+      if (!invoicePdfBuffer) {
+        console.warn('[AI Strategy API] Invoice PDF null, retrying once...')
+        invoicePdfBuffer = await generateReceiptPdf(receiptData)
+      }
 
       await sendPurchaseConfirmationEmail({
         type: 'ai-strategy',

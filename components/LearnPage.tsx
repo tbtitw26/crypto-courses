@@ -977,7 +977,7 @@ function AIStrategyForm() {
       const userEmail = session.user?.email || 'your email'
       showToast({
         title: 'Request submitted',
-        description: `Your strategy has been passed to our trader. Expect delivery at ${userEmail} soon.`,
+        description: `Our AI is working on your strategy. Expect delivery at ${userEmail} soon.`,
         variant: 'success',
       })
 
