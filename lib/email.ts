@@ -1,18 +1,44 @@
 // lib/email.ts - Email sending utility using nodemailer
 
-import nodemailer from 'nodemailer'
 import { config } from './config'
+import { Resend } from 'resend'
 
-// Create transporter
-const transporter = nodemailer.createTransport({
-  host: config.smtp.host,
-  port: config.smtp.port,
-  secure: config.smtp.port === 465, // true for 465, false for other ports
-  auth: {
-    user: config.smtp.user,
-    pass: config.smtp.pass,
-  },
-})
+const resendApiKey = process.env.RESEND_API_KEY
+const resendClient = resendApiKey ? new Resend(resendApiKey) : null
+
+type AttachmentInput = { filename: string; buffer: Buffer; contentType?: string }
+
+async function sendEmail(options: {
+  to: string | string[]
+  subject: string
+  html: string
+  text?: string
+  replyTo?: string
+  attachments?: AttachmentInput[]
+}) {
+  if (!resendClient) {
+    throw new Error('RESEND_API_KEY is missing; cannot send email')
+  }
+
+  const from =
+    config.smtp.from && config.smtp.fromName
+      ? `"${config.smtp.fromName}" <${config.smtp.from}>`
+      : config.smtp.from || 'no-reply@example.com'
+
+  await resendClient.emails.send({
+    from,
+    to: options.to,
+    subject: options.subject,
+    html: options.html,
+    text: options.text,
+    reply_to: options.replyTo,
+    attachments: options.attachments?.map((att) => ({
+      filename: att.filename,
+      content: att.buffer.toString('base64'),
+      contentType: att.contentType || 'application/pdf',
+    })),
+  })
+}
 
 export interface ContactEmailData {
   name: string
@@ -102,9 +128,8 @@ Message:
 ${data.message}
   `.trim()
 
-  await transporter.sendMail({
-    from: `"${config.smtp.fromName}" <${config.smtp.from}>`,
-    to: config.smtp.from, // Send to support email
+  await sendEmail({
+    to: config.smtp.from,
     replyTo: data.email,
     subject,
     text: textContent,
@@ -184,8 +209,7 @@ If you have any questions, please contact our support team.
 This is an automated message. Please do not reply to this email.
   `.trim()
 
-  await transporter.sendMail({
-    from: `"${config.smtp.fromName}" <${config.smtp.from}>`,
+  await sendEmail({
     to: data.email,
     subject,
     text: textContent,
@@ -742,11 +766,11 @@ ${data.locale === 'ar' ? 'هذه رسالة آلية. يرجى عدم الرد �
   // Build attachments array
   const attachments = data.pdfBuffers.map((pdf) => ({
     filename: pdf.filename,
-    content: pdf.buffer,
+    buffer: pdf.buffer,
+    contentType: 'application/pdf',
   }))
 
-  await transporter.sendMail({
-    from: `"${config.smtp.fromName}" <${config.smtp.from}>`,
+  await sendEmail({
     to: data.userEmail,
     subject,
     text: textContent,
@@ -759,10 +783,6 @@ ${data.locale === 'ar' ? 'هذه رسالة آلية. يرجى عدم الرد �
  * Send purchase confirmation email with invoice PDF attachment
  */
 export async function sendPurchaseConfirmationEmail(data: PurchaseEmailData): Promise<void> {
-  if (!config.smtp.user || !config.smtp.pass) {
-    throw new Error('SMTP configuration is missing')
-  }
-
   const t = {
     en: {
       subject: 'Purchase Confirmation - Avenqor',
@@ -804,13 +824,13 @@ This is an automated message. Please do not reply to this email.
     ? [
         {
           filename: `invoice-${data.transactionId}.pdf`,
-          content: data.invoicePdfBuffer,
+          buffer: data.invoicePdfBuffer,
+          contentType: 'application/pdf',
         },
       ]
     : []
 
-  await transporter.sendMail({
-    from: `"${config.smtp.fromName}" <${config.smtp.from}>`,
+  await sendEmail({
     to: data.userEmail,
     subject,
     text: textContent,

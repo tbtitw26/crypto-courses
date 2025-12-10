@@ -27,6 +27,7 @@ if (SUPABASE_HOSTNAME) {
 
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone',
   images: {
     remotePatterns,
   },
