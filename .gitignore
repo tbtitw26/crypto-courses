@@ -60,6 +60,7 @@ supabase-migration-map.*.json
 /supabase-migration-report*.json
 /logs/**/*.json
 console.log
+powershell.log
 
 # tooling caches
 .turbo
