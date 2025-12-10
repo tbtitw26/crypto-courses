@@ -12,6 +12,7 @@ import { logger } from './logger'
  * Generate complete Custom Course with PDFs and images
  */
 export async function generateCustomCourseComplete(params: {
+  courseRequestId?: number // For logging
   experienceYears: string
   depositBudget: string
   riskTolerance: string
@@ -34,8 +35,13 @@ export async function generateCustomCourseComplete(params: {
   warnings?: string[]
 }> {
   try {
+    const courseRequestId = params.courseRequestId || 0
+    
     logger.startTiming('custom-course-generation')
     await logger.info('📝 Starting Custom Course generation...', {
+      courseRequestId,
+      runId: courseRequestId,
+      runType: 'custom-course',
       languages: params.languages,
       markets: params.markets,
       tradingStyle: params.tradingStyle,

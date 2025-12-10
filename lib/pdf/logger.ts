@@ -66,6 +66,20 @@ function formatElapsed(ms: number): string {
   return `${minutes}m ${seconds}s`
 }
 
+// Context for current generation (set at start of generation)
+let currentRunId: number | null = null
+let currentRunType: string | null = null
+
+export function setLogContext(runId: number, runType: 'custom-course' | 'ai-strategy') {
+  currentRunId = runId
+  currentRunType = runType
+}
+
+export function clearLogContext() {
+  currentRunId = null
+  currentRunType = null
+}
+
 /**
  * Log message to both console and file with enhanced formatting
  */
@@ -74,7 +88,14 @@ export async function log(level: 'info' | 'error' | 'warn' | 'debug', message: s
   const elapsed = timings.get('start') ? Date.now() - timings.get('start')! : 0
   const elapsedStr = elapsed > 0 ? `[+${formatElapsed(elapsed)}]` : ''
   
-  const formattedData = formatData(data)
+  // Merge context into data if available
+  const enrichedData = {
+    ...(currentRunId !== null && { runId: currentRunId, courseRequestId: currentRunId, strategyRunId: currentRunId }),
+    ...(currentRunType !== null && { runType: currentRunType }),
+    ...(data || {}),
+  }
+  
+  const formattedData = formatData(enrichedData)
   // File log: detailed format with timestamp
   const fileLogMessage = `[${timestamp}] ${elapsedStr} [${level.toUpperCase()}] ${message}${formattedData ? `\n${formattedData}` : ''}\n`
   
@@ -113,9 +134,34 @@ export async function log(level: 'info' | 'error' | 'warn' | 'debug', message: s
       const prisma = await getPrismaClient()
       // Trim message to avoid huge entries
       const msg = message.length > 2000 ? `${message.slice(0, 2000)}... [truncated]` : message
-      const meta = data ? JSON.parse(formatData(data)) : null
+      const meta = enrichedData ? JSON.parse(formatData(enrichedData)) : null
+      
+      // Extract run_id and run_type from enriched data or context
+      let runId = currentRunId || 0
+      let runType = currentRunType || 'unknown'
+      
+      if (enrichedData) {
+        // Try to extract from enriched data object
+        if (typeof enrichedData === 'object' && enrichedData !== null) {
+          if ('courseRequestId' in enrichedData) {
+            runId = Number(enrichedData.courseRequestId) || runId
+            runType = 'custom-course'
+          } else if ('strategyRunId' in enrichedData) {
+            runId = Number(enrichedData.strategyRunId) || runId
+            runType = 'ai-strategy'
+          } else if ('runId' in enrichedData) {
+            runId = Number(enrichedData.runId) || runId
+          }
+          if ('runType' in enrichedData && typeof enrichedData.runType === 'string') {
+            runType = enrichedData.runType
+          }
+        }
+      }
+      
       await prisma.generationLog.create({
         data: {
+          run_id: runId,
+          run_type: runType,
           level,
           message: msg,
           meta,

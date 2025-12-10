@@ -200,7 +200,8 @@ async function generateCourseInBackground(
     })
 
     // Import logger for detailed logging
-    const { logger } = await import('@/lib/pdf/logger')
+    const { logger, setLogContext } = await import('@/lib/pdf/logger')
+    setLogContext(courseRequestId, 'custom-course') // Set context for all subsequent logs
     await logger.info(`[Custom Course ${courseRequestId}] Starting generation...`, {
       courseRequestId,
       languages: data.languages,
@@ -210,6 +211,7 @@ async function generateCourseInBackground(
     // Generate complete Custom Course with PDFs
     // Note: generateCustomCourseComplete handles cover, diagrams, translation, and PDFs internally
     const result = await generateCustomCourseComplete({
+        courseRequestId, // Pass for logging
         experienceYears: data.experienceYears,
         depositBudget: data.depositBudget,
         riskTolerance: data.riskTolerance,

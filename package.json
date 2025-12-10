@@ -37,6 +37,9 @@
     "logs:watch": "powershell -ExecutionPolicy Bypass -File scripts/watch-logs.ps1",
     "logs:tail": "powershell -Command \"Get-Content logs/course-generation.log -Tail 50 -Wait\"",
     "logs:view": "powershell -Command \"Get-Content logs/course-generation.log -Tail 50\"",
+    "logs:vercel:ai": "powershell -ExecutionPolicy Bypass -File scripts/vercel-logs-ai-strategy.ps1",
+    "logs:vercel:course": "powershell -ExecutionPolicy Bypass -File scripts/vercel-logs-custom-course.ps1",
+    "logs:vercel:all": "powershell -ExecutionPolicy Bypass -File scripts/vercel-logs-all.ps1",
     "migrate:assets": "npx tsx scripts/migrate-public-assets-to-supabase.ts",
     "migration:check": "npx tsx scripts/check-migration-sync.ts",
     "courses:assets:update": "npx tsx scripts/update-course-asset-paths.ts"

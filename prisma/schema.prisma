@@ -241,11 +241,15 @@ model AiStrategyRun {
 // Generation logs for serverless (persisted debug)
 model GenerationLog {
   id         Int      @id @default(autoincrement())
+  run_id     Int      // ID of CustomCourseRequest or AiStrategyRun
+  run_type   String   // 'custom-course' or 'ai-strategy'
   level      String
   message    String   @db.Text
   meta       Json?
   created_at DateTime @default(now())
 
+  @@index([run_id])
+  @@index([run_type])
   @@index([created_at])
   @@index([level])
 }

@@ -192,7 +192,8 @@ async function generateStrategyInBackground(
     })
     safeLog('Stage: generating_en (starting OpenAI)')
 
-    const { logger } = await import('@/lib/pdf/logger')
+    const { logger, setLogContext } = await import('@/lib/pdf/logger')
+    setLogContext(strategyRunId, 'ai-strategy') // Set context for all subsequent logs
     await logger.info(`[AI Strategy ${strategyRunId}] Starting generation...`, {
       strategyRunId,
       userId,
