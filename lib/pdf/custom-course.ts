@@ -34,10 +34,17 @@ export async function generateCustomCourseComplete(params: {
   warnings?: string[]
 }> {
   try {
-    await logger.info('📝 Starting Custom Course generation...')
+    logger.startTiming('custom-course-generation')
+    await logger.info('📝 Starting Custom Course generation...', {
+      languages: params.languages,
+      markets: params.markets,
+      tradingStyle: params.tradingStyle,
+      goalsLength: params.goalsFreeText.length,
+    })
 
     // Step 1: Generate English course
-    await logger.info('📝 Generating Custom Course content...')
+    logger.startTiming('openai-generation')
+    await logger.info('📝 Step 1/5: Generating Custom Course content via OpenAI...')
     const { course: courseEn, tokens, model } = await generateCustomCourse({
       experienceYears: params.experienceYears,
       depositBudget: params.depositBudget,
@@ -49,19 +56,32 @@ export async function generateCustomCourseComplete(params: {
       additionalNotes: params.additionalNotes,
       languages: params.languages,
     })
+    await logger.endTiming('openai-generation', '✅ Step 1/5: Custom Course content generated')
 
     const courseId = courseEn.meta.course_id
-    await logger.info(`✅ Custom Course generated (ID: ${courseId}, tokens: ${tokens.total}, model: ${model})`)
+    await logger.info(`📊 Generation stats:`, {
+      courseId,
+      tokens: { prompt: tokens.prompt, completion: tokens.completion, total: tokens.total },
+      model,
+      modules: courseEn.modules?.length || 0,
+      lessons: courseEn.modules?.reduce((sum, m) => sum + (m.lessons?.length || 0), 0) || 0,
+    })
 
     // Step 2: Generate cover image
-    await logger.info('🎨 Generating cover image...')
+    logger.startTiming('cover-image')
+    await logger.info('🎨 Step 2/5: Generating cover image...')
     const { publicPath: coverImagePublicPath } = await generateCoverImage(courseEn, courseId)
-    await logger.info(`✅ Cover image saved: ${coverImagePublicPath}`)
+    await logger.endTiming('cover-image', `✅ Step 2/5: Cover image saved`)
+    await logger.info(`📸 Cover image path: ${coverImagePublicPath}`)
 
     // Step 3: Generate diagram images
-    await logger.info('📊 Generating diagram images...')
+    logger.startTiming('diagrams')
+    await logger.info('📊 Step 3/5: Generating diagram images...', {
+      diagramCount: courseEn.diagrams?.length || 0,
+    })
     const diagramImagePaths = await generateDiagramImages(courseEn, courseId)
-    await logger.info(`✅ Generated ${Object.keys(diagramImagePaths).length} diagram(s)`)
+    await logger.endTiming('diagrams', `✅ Step 3/5: Generated ${Object.keys(diagramImagePaths).length} diagram(s)`)
+    await logger.info(`📊 Diagram paths:`, Object.keys(diagramImagePaths))
 
     // Step 4: Translate to Arabic (if 'ar' in languages)
     let courseAr: GeneratedCourse | undefined
@@ -69,11 +89,13 @@ export async function generateCustomCourseComplete(params: {
     const needsArabic = params.languages.includes('ar')
 
     if (needsArabic) {
+      logger.startTiming('arabic-translation')
       try {
-        await logger.info('🌐 Translating course to Arabic...')
+        await logger.info('🌐 Step 4/5: Translating course to Arabic...')
         courseAr = await translateCourseToArabic(courseEn, CUSTOM_COURSE_JSON_SCHEMA)
-        await logger.info('✅ Arabic translation completed')
+        await logger.endTiming('arabic-translation', '✅ Step 4/5: Arabic translation completed')
       } catch (error) {
+        await logger.endTiming('arabic-translation')
         // Extract error message properly - check for message property in object first
         let errorMessage: string
         if (error instanceof Error) {
@@ -83,10 +105,12 @@ export async function generateCustomCourseComplete(params: {
         } else {
           errorMessage = String(error)
         }
-        await logger.warn(`⚠️ Arabic translation failed: ${errorMessage}`)
+        await logger.warn(`⚠️ Arabic translation failed: ${errorMessage}`, { error })
         warnings.push(`Arabic translation failed: ${errorMessage}`)
         // Continue without Arabic translation
       }
+    } else {
+      await logger.info('⏭️ Step 4/5: Skipping Arabic translation (not requested)')
     }
 
     // Step 5: Generate PDFs for selected languages
@@ -96,24 +120,37 @@ export async function generateCustomCourseComplete(params: {
     let pdfArBuffer: Buffer | undefined
 
     if (params.languages.includes('en')) {
-      await logger.info('📄 Generating English PDF...')
-      const pdfEn = await generateCoursePdf(courseEn, coverImagePublicPath, diagramImagePaths, courseId, 'EN')
+      logger.startTiming('pdf-en')
+      await logger.info('📄 Step 5/5: Generating English PDF...')
+      const pdfEn = await generateCoursePdf(courseEn, coverImagePublicPath, diagramImagePaths, courseId, 'EN', 'custom')
       pdfEnPath = pdfEn.publicPath
       pdfEnBuffer = pdfEn.buffer
-      await logger.info(`✅ English PDF saved: ${pdfEnPath}`)
+      await logger.endTiming('pdf-en', `✅ Step 5/5: English PDF saved`)
+      await logger.info(`📄 English PDF: ${pdfEnPath} (${(pdfEnBuffer.length / 1024).toFixed(2)} KB)`)
     }
 
     if (needsArabic && courseAr) {
+      logger.startTiming('pdf-ar')
       await logger.info('📄 Generating Arabic PDF...')
-      const pdfAr = await generateCoursePdf(courseAr, coverImagePublicPath, diagramImagePaths, courseId, 'AR')
+      const pdfAr = await generateCoursePdf(courseAr, coverImagePublicPath, diagramImagePaths, courseId, 'AR', 'custom')
       pdfArPath = pdfAr.publicPath
       pdfArBuffer = pdfAr.buffer
-      await logger.info(`✅ Arabic PDF saved: ${pdfArPath}`)
+      await logger.endTiming('pdf-ar', `✅ Arabic PDF saved`)
+      await logger.info(`📄 Arabic PDF: ${pdfArPath} (${(pdfArBuffer.length / 1024).toFixed(2)} KB)`)
     } else if (needsArabic && !courseAr) {
       warnings.push('Arabic PDF not generated due to translation failure')
     }
 
-    await logger.info('✅ Custom Course generation completed successfully!', { courseId })
+    const totalDuration = await logger.endTiming('custom-course-generation', '✅ Custom Course generation completed successfully!')
+    await logger.info('🎉 Generation summary:', {
+      courseId,
+      totalDuration: `${totalDuration}ms`,
+      pdfs: {
+        en: pdfEnPath ? 'generated' : 'skipped',
+        ar: pdfArPath ? 'generated' : needsArabic ? 'failed' : 'skipped',
+      },
+      warnings: warnings.length > 0 ? warnings : undefined,
+    })
 
     return {
       courseEn,

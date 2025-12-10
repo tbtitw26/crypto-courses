@@ -7,6 +7,9 @@ const LOG_DIR = path.join(process.cwd(), 'logs')
 const LOG_FILE = path.join(LOG_DIR, 'course-generation.log')
 const canWriteToFs = !(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
 
+// Track timing for operations
+const timings = new Map<string, number>()
+
 // Ensure log directory exists
 async function ensureLogDir() {
   try {
@@ -17,33 +20,120 @@ async function ensureLogDir() {
 }
 
 /**
- * Log message to both console and file
+ * Format data for logging (safe JSON stringify with error handling)
+ */
+function formatData(data?: any): string {
+  if (!data) return ''
+  try {
+    // Handle circular references and large objects
+    const seen = new WeakSet()
+    return JSON.stringify(data, (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (seen.has(value)) {
+          return '[Circular]'
+        }
+        seen.add(value)
+        // Truncate very long strings
+        if (typeof value === 'string' && value.length > 500) {
+          return value.substring(0, 500) + '... [truncated]'
+        }
+      }
+      return value
+    }, 2)
+  } catch (error) {
+    return String(data)
+  }
+}
+
+/**
+ * Format elapsed time in human-readable format
+ */
+function formatElapsed(ms: number): string {
+  if (ms < 1000) return `${ms}ms`
+  if (ms < 60000) return `${(ms / 1000).toFixed(1)}s`
+  const minutes = Math.floor(ms / 60000)
+  const seconds = Math.floor((ms % 60000) / 1000)
+  return `${minutes}m ${seconds}s`
+}
+
+/**
+ * Log message to both console and file with enhanced formatting
  */
 export async function log(level: 'info' | 'error' | 'warn' | 'debug', message: string, data?: any) {
   const timestamp = new Date().toISOString()
-  const logMessage = `[${timestamp}] [${level.toUpperCase()}] ${message}${data ? ` ${JSON.stringify(data)}` : ''}\n`
+  const elapsed = timings.get('start') ? Date.now() - timings.get('start')! : 0
+  const elapsedStr = elapsed > 0 ? `[+${formatElapsed(elapsed)}]` : ''
+  
+  const formattedData = formatData(data)
+  // File log: detailed format with timestamp
+  const fileLogMessage = `[${timestamp}] ${elapsedStr} [${level.toUpperCase()}] ${message}${formattedData ? `\n${formattedData}` : ''}\n`
+  
+  // Console log: cleaner format
+  const consoleMessage = `${elapsedStr} [${level.toUpperCase()}] ${message}`
 
-  // Log to console
-  if (level === 'error') {
-    console.error(message, data || '')
-  } else if (level === 'warn') {
-    console.warn(message, data || '')
+  // Enhanced console logging with colors (for local dev)
+  const isLocal = !process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME
+  if (isLocal) {
+    const colors = {
+      info: '\x1b[36m', // Cyan
+      error: '\x1b[31m', // Red
+      warn: '\x1b[33m', // Yellow
+      debug: '\x1b[90m', // Gray
+      reset: '\x1b[0m',
+    }
+    const color = colors[level] || colors.reset
+    console[level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log'](
+      `${color}[${level.toUpperCase()}]${colors.reset} ${elapsedStr} ${message}`,
+      data || ''
+    )
   } else {
-    console.log(message, data || '')
+    // Production: simple logging
+    if (level === 'error') {
+      console.error(consoleMessage, data || '')
+    } else if (level === 'warn') {
+      console.warn(consoleMessage, data || '')
+    } else {
+      console.log(consoleMessage, data || '')
+    }
   }
 
   if (!canWriteToFs) {
     return
   }
 
-  // Log to file
+  // Log to file (always write detailed format)
   try {
     await ensureLogDir()
-    await fs.appendFile(LOG_FILE, logMessage)
+    await fs.appendFile(LOG_FILE, fileLogMessage)
   } catch (error) {
     // Don't fail if logging fails
     console.error('Failed to write to log file:', error)
   }
+}
+
+/**
+ * Start timing an operation
+ */
+export function startTiming(label: string) {
+  timings.set(label, Date.now())
+  if (!timings.has('start')) {
+    timings.set('start', Date.now())
+  }
+}
+
+/**
+ * End timing and log duration
+ */
+export async function endTiming(label: string, message?: string) {
+  const start = timings.get(label)
+  if (start) {
+    const duration = Date.now() - start
+    timings.delete(label)
+    const msg = message || `${label} completed`
+    await log('info', `${msg} (took ${duration}ms)`)
+    return duration
+  }
+  return 0
 }
 
 export const logger = {
@@ -51,5 +141,7 @@ export const logger = {
   error: (message: string, data?: any) => log('error', message, data),
   warn: (message: string, data?: any) => log('warn', message, data),
   debug: (message: string, data?: any) => log('debug', message, data),
+  startTiming,
+  endTiming,
 }
 

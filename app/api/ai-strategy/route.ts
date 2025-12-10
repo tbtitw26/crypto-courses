@@ -251,12 +251,16 @@ async function generateStrategyInBackground(
       diagrams: result.diagramImagePaths,
     })
 
+    // Store PDF URLs (prefer EN, fallback to AR if EN not available)
+    const pdfUrl = result.pdfEnPath || result.pdfArPath || null
+
     const updatedStrategyRun = await prisma.aiStrategyRun.update({
       where: { id: strategyRunId },
       data: {
         status: 'ready',
         rendered_text: JSON.stringify(result.courseEn),
         ai_response_structured: result.courseEn as any,
+        pdf_url: pdfUrl, // Store Supabase path for download
         prompt_tokens: result.tokens?.prompt ?? null,
         completion_tokens: result.tokens?.completion ?? null,
         total_tokens: result.tokens?.total ?? null,

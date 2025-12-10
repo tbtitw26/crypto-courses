@@ -81,9 +81,9 @@ async function saveCourseImageSupabase(buffer: Buffer, filename: string): Promis
   }
 }
 
-async function saveCoursePdfSupabase(buffer: Buffer, filename: string): Promise<SaveResult> {
+async function saveCoursePdfSupabase(buffer: Buffer, filename: string, prefix?: string): Promise<SaveResult> {
   const bucket = supabaseBuckets.coursePdf
-  const key = normalizeStorageKey(filename)
+  const key = prefix ? normalizeStorageKey(prefix, filename) : normalizeStorageKey(filename)
 
   const { signedUrl } = await uploadPrivateAsset(bucket, key, buffer, {
     contentType: 'application/pdf',
@@ -115,14 +115,19 @@ export async function saveGeneratedPdf(buffer: Buffer, filename: string): Promis
 }
 
 /**
- * Saves course PDF to public/courses/
+ * Saves course PDF to public/courses/ or Supabase
+ * @param buffer - PDF buffer
+ * @param filename - PDF filename (e.g., "courseId-en.pdf")
+ * @param prefix - Optional prefix for Supabase storage (e.g., "ai-strategy/" or "custom/")
  * @returns Public path to the saved PDF
  */
-export async function saveCoursePdf(buffer: Buffer, filename: string): Promise<SaveResult> {
+export async function saveCoursePdf(buffer: Buffer, filename: string, prefix?: string): Promise<SaveResult> {
   if (useSupabaseStorage) {
-    return saveCoursePdfSupabase(buffer, filename)
+    return saveCoursePdfSupabase(buffer, filename, prefix)
   }
-  return saveLocally({ buffer, filename, subdirectory: 'courses' })
+  // For local storage, prefix is handled via subdirectory
+  const subdirectory = prefix ? `courses/${prefix.replace(/\/$/, '')}` : 'courses'
+  return saveLocally({ buffer, filename, subdirectory })
 }
 
 /**

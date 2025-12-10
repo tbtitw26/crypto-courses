@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
+import { resolveDownloadUrl } from '@/lib/storage'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -55,36 +56,51 @@ export async function GET() {
           language: true,
           ai_response_structured: true,
           rendered_text: true,
+          pdf_url: true, // Include PDF URL for download
         },
       })
     )
 
-    const strategies = aiRuns.map((run) => {
-      const courseId =
-        extractCourseId(run.ai_response_structured as PrismaJson) ||
-        extractCourseId(run.rendered_text as PrismaJson)
+    const strategies = await Promise.all(
+      aiRuns.map(async (run) => {
+        const courseId =
+          extractCourseId(run.ai_response_structured as PrismaJson) ||
+          extractCourseId(run.rendered_text as PrismaJson)
 
-      const primaryLanguage = (run.language || 'en').toLowerCase()
-      const pdfLinks: Array<{ language: 'en' | 'ar'; url: string }> = []
+        const primaryLanguage = (run.language || 'en').toLowerCase()
+        const pdfLinks: Array<{ language: 'en' | 'ar'; url: string }> = []
 
-      if (courseId) {
-        pdfLinks.push({ language: 'en', url: `/courses/${courseId}-en.pdf` })
-        if (primaryLanguage === 'ar') {
-          pdfLinks.push({ language: 'ar', url: `/courses/${courseId}-ar.pdf` })
+        // Use pdf_url from database if available, otherwise fallback to courseId-based URL
+        if (run.pdf_url) {
+          const downloadUrl = await resolveDownloadUrl(run.pdf_url)
+          if (downloadUrl) {
+            // Determine language from filename or use primary language
+            const isArabic = run.pdf_url.includes('-ar.pdf') || primaryLanguage === 'ar'
+            pdfLinks.push({
+              language: isArabic ? 'ar' : 'en',
+              url: downloadUrl,
+            })
+          }
+        } else if (courseId) {
+          // Fallback: construct URL from courseId (for backward compatibility)
+          pdfLinks.push({ language: 'en', url: `/courses/${courseId}-en.pdf` })
+          if (primaryLanguage === 'ar') {
+            pdfLinks.push({ language: 'ar', url: `/courses/${courseId}-ar.pdf` })
+          }
         }
-      }
 
-      return {
-        id: String(run.id),
-        title: run.main_objective?.trim() || `Strategy #${run.id}`,
-        markets: run.markets,
-        status: run.status as 'processing' | 'ready' | 'failed',
-        created: run.created_at.toISOString(),
-        tokens: run.tokens_cost,
-        languages: [primaryLanguage],
-        pdfLinks,
-      }
-    })
+        return {
+          id: String(run.id),
+          title: run.main_objective?.trim() || `Strategy #${run.id}`,
+          markets: run.markets,
+          status: run.status as 'processing' | 'ready' | 'failed',
+          created: run.created_at.toISOString(),
+          tokens: run.tokens_cost,
+          languages: [primaryLanguage],
+          pdfLinks,
+        }
+      })
+    )
 
     return NextResponse.json({ strategies })
   } catch (error) {

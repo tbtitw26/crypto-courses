@@ -86,89 +86,143 @@ export async function generateCoursePdf(
   coverImagePath: string,
   diagramPaths: Record<string, { publicPath: string; localPath?: string }>,
   courseId: string,
-  language: 'EN' | 'AR'
+  language: 'EN' | 'AR',
+  courseType?: 'ai-strategy' | 'custom' // Optional prefix for Supabase storage
 ): Promise<{ publicPath: string; buffer: Buffer }> {
+  logger.startTiming(`pdf-${language.toLowerCase()}`)
   const isArabic = language === 'AR'
+  
+  await logger.info(`📄 Generating ${language} PDF...`, {
+    courseId,
+    language,
+    diagramCount: Object.keys(diagramPaths).length,
+  })
+
   // Convert diagramPaths to simple string map for HTML generation
   const diagramPathsMap = Object.fromEntries(
     Object.entries(diagramPaths).map(([id, paths]) => [id, paths.localPath || paths.publicPath])
   )
+  
+  await logger.info(`📝 Generating HTML template...`)
   const html = generateCourseHtml(course, coverImagePath, diagramPathsMap, isArabic)
+  await logger.info(`📝 HTML generated (${(html.length / 1024).toFixed(2)} KB)`)
 
   // Determine if we're in serverless environment
   const isServerless = !!(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
 
-  let browser: Awaited<ReturnType<typeof puppeteer.connect>> | null = null
-  try {
-    // Strategy:
-    // 1. On Vercel/serverless: use Browserless.io (remote Chrome)
-    // 2. On local dev: try local Chrome first, fallback to Browserless if available
-    if (isServerless) {
-      // Serverless: must use Browserless
-      browser = await connectToBrowserless()
-      if (!browser) {
-        throw new Error('Cannot generate PDF: no BROWSERLESS_API_KEY on serverless environment')
-      }
-    } else {
-      // Local dev: try local Chrome first
-      browser = await launchLocalChrome()
-      if (!browser) {
-        // Fallback to Browserless if available
+    let browser: Awaited<ReturnType<typeof puppeteer.connect>> | null = null
+    try {
+      // Strategy:
+      // 1. On Vercel/serverless: use Browserless.io (remote Chrome)
+      // 2. On local dev: try local Chrome first, fallback to Browserless if available
+      await logger.info(`🌐 Connecting to browser (serverless: ${isServerless})...`)
+      if (isServerless) {
+        // Serverless: must use Browserless
         browser = await connectToBrowserless()
+        if (!browser) {
+          throw new Error('Cannot generate PDF: no BROWSERLESS_API_KEY on serverless environment')
+        }
+      } else {
+        // Local dev: try local Chrome first
+        browser = await launchLocalChrome()
+        if (!browser) {
+          // Fallback to Browserless if available
+          await logger.info('🌐 Local Chrome not found, trying Browserless.io...')
+          browser = await connectToBrowserless()
+        }
+        if (!browser) {
+          throw new Error(
+            'Chrome/Chromium not found. Please install Chrome, set CHROME_PATH, or provide BROWSERLESS_API_KEY.'
+          )
+        }
       }
-      if (!browser) {
-        throw new Error(
-          'Chrome/Chromium not found. Please install Chrome, set CHROME_PATH, or provide BROWSERLESS_API_KEY.'
-        )
+
+      await logger.info('📄 Creating new page...')
+      const page = await browser.newPage()
+
+      // Set content with base64 images or file paths
+      // For local development, use file:// protocol
+      // For serverless, we need to inline images as base64
+      await logger.info('🖼️ Preparing HTML with images...')
+      const htmlWithImages = await prepareHtmlWithImages(html, coverImagePath, diagramPaths, isServerless)
+      await logger.info(`🖼️ HTML prepared (${(htmlWithImages.length / 1024).toFixed(2)} KB)`)
+
+      // Set timeout for page content loading
+      // For large HTML with base64 images, we need more time
+      // Base64 images don't trigger network requests, so 'networkidle0' is not appropriate
+      const htmlSizeKB = htmlWithImages.length / 1024
+      const pdfTimeout = htmlSizeKB > 1000 
+        ? 300000 // 5 minutes for very large HTML (>1MB)
+        : htmlSizeKB > 500
+        ? 240000 // 4 minutes for large HTML (>500KB)
+        : config.openai.timeouts.pdf || 180000 // 3 minutes default
+      
+      page.setDefaultTimeout(pdfTimeout)
+      
+      await logger.info(`📄 Loading page content (timeout: ${(pdfTimeout / 1000).toFixed(0)}s, HTML size: ${htmlSizeKB.toFixed(2)} KB)...`)
+      
+      // For base64 images, use 'load' instead of 'networkidle0'
+      // 'networkidle0' waits for network requests, but base64 images are already in HTML
+      const waitUntil = isServerless ? 'load' : 'load' // Always use 'load' for base64 images
+      
+      try {
+        await page.setContent(htmlWithImages, {
+          waitUntil,
+          timeout: pdfTimeout,
+        })
+        await logger.info('✅ Page content loaded')
+      } catch (timeoutError: any) {
+        if (timeoutError.name === 'TimeoutError') {
+          await logger.warn('⚠️ First attempt timed out, retrying with domcontentloaded...')
+          // Retry with faster wait condition
+          await page.setContent(htmlWithImages, {
+            waitUntil: 'domcontentloaded',
+            timeout: pdfTimeout,
+          })
+          // Wait a bit for images to render
+          await new Promise((resolve) => setTimeout(resolve, 2000))
+          await logger.info('✅ Page content loaded (retry successful)')
+        } else {
+          throw timeoutError
+        }
       }
-    }
 
-    const page = await browser.newPage()
+      // Generate PDF
+      await logger.info('📄 Generating PDF...')
+      const pdfBuffer = await page.pdf({
+        format: 'A4',
+        printBackground: true,
+        margin: {
+          top: '18mm',
+          right: '16mm',
+          bottom: '18mm',
+          left: '16mm',
+        },
+        preferCSSPageSize: true,
+      })
+      await logger.info(`✅ PDF generated (${(pdfBuffer.length / 1024).toFixed(2)} KB)`)
 
-    // Set content with base64 images or file paths
-    // For local development, use file:// protocol
-    // For serverless, we need to inline images as base64
-    const htmlWithImages = await prepareHtmlWithImages(html, coverImagePath, diagramPaths, isServerless)
+      // For remote browser (Browserless), we disconnect instead of close
+      await logger.info('🔌 Closing browser...')
+      if (isServerless) {
+        await browser.disconnect()
+      } else {
+        await browser.close()
+      }
 
-    // Set timeout for page content loading (default is 30 seconds, increase for large courses)
-    const pdfTimeout = config.openai.timeouts.pdf || 120000
-    page.setDefaultTimeout(pdfTimeout)
-    
-    await page.setContent(htmlWithImages, {
-      waitUntil: 'networkidle0',
-      timeout: pdfTimeout,
-    })
+      // Save PDF
+      await logger.info('💾 Saving PDF...')
+      const filename = `${courseId}-${language.toLowerCase()}.pdf`
+      const prefix = courseType ? `${courseType}/` : undefined
+      const { publicPath } = await saveCoursePdf(pdfBuffer, filename, prefix)
 
-    // Generate PDF
-    const pdfBuffer = await page.pdf({
-      format: 'A4',
-      printBackground: true,
-      margin: {
-        top: '18mm',
-        right: '16mm',
-        bottom: '18mm',
-        left: '16mm',
-      },
-      preferCSSPageSize: true,
-    })
+      await logger.endTiming(`pdf-${language.toLowerCase()}`, `✅ ${language} PDF saved`)
+      await logger.info(`📄 PDF saved: ${publicPath} (${(pdfBuffer.length / 1024).toFixed(2)} KB)`)
 
-    // For remote browser (Browserless), we disconnect instead of close
-    if (isServerless) {
-      await browser.disconnect()
-    } else {
-      await browser.close()
-    }
-
-    // Save PDF
-    const filename = `${courseId}-${language.toLowerCase()}.pdf`
-    const { publicPath } = await saveCoursePdf(pdfBuffer, filename)
-
-    await logger.info(`[PDF] Generated ${language} PDF: ${publicPath}`)
-
-    return {
-      publicPath,
-      buffer: pdfBuffer,
-    }
+      return {
+        publicPath,
+        buffer: pdfBuffer,
+      }
   } catch (error) {
     if (browser) {
       try {

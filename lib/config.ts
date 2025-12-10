@@ -74,7 +74,7 @@ export const config = {
         course: 1200000, // 1200 seconds (20 minutes) - increased for complex courses that may take longer
         translation: 2700000, // 2700 seconds (45 minutes) - translation can take longer for very large courses (80+ KB)
         image: 120000, // 120 seconds (2 minutes) - image generation can take time
-        pdf: 120000, // 120 seconds (2 minutes) - PDF generation timeout for Puppeteer
+        pdf: 300000, // 300 seconds (5 minutes) - increased for large HTML with base64 images
       },
   },
   transfermit: {

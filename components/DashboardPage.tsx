@@ -141,21 +141,25 @@ export function DashboardPage() {
           purchasedCourses = coursesData.courses || []
         }
 
-        // Fetch AI strategies (from transactions or separate endpoint)
-        // For now, we'll get them from transactions
-        const transactionsResponse = await fetch('/api/transactions?limit=20')
-        let aiStrategies: any[] = []
-        if (transactionsResponse.ok) {
-          const txData = await transactionsResponse.json()
-          aiStrategies = txData.transactions
-            .filter((tx: any) => tx.type === 'AI strategy')
-            .map((tx: any) => ({
-              type: 'ai' as const,
-              label: 'AI Strategy',
-              title: tx.detail,
-              status: tx.meta?.split(' · ')[1] || 'ready',
-              market: tx.meta?.split(' · ')[0] || '',
-            }))
+        // Fetch AI strategies (with download URLs)
+        const aiStrategiesResponse = await fetch('/api/ai-strategies')
+        let aiStrategies: CourseItem[] = []
+        if (aiStrategiesResponse.ok) {
+          const aiData = await aiStrategiesResponse.json()
+          aiStrategies = (aiData.strategies || []).map((strategy: any) => ({
+            type: 'ai' as const,
+            label: 'AI Strategy',
+            title: strategy.title,
+            status:
+              strategy.status === 'ready'
+                ? 'Completed'
+                : strategy.status === 'failed'
+                ? 'Failed'
+                : 'Processing',
+            market: Array.isArray(strategy.markets) ? strategy.markets.join(', ') : '',
+            downloadUrl: strategy.pdfLinks?.[0]?.url || null,
+            id: strategy.id,
+          }))
         }
 
         // Fetch custom courses
@@ -449,7 +453,7 @@ export function DashboardPage() {
                         </div>
                       </div>
                       <div className="flex sm:flex-col items-end sm:items-end gap-2 text-[11px]">
-                        {item.type === 'course' && item.downloadUrl ? (
+                        {(item.type === 'course' || item.type === 'ai') && item.downloadUrl ? (
                           <a
                             href={item.downloadUrl}
                             download
@@ -468,9 +472,13 @@ export function DashboardPage() {
                           <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-800 text-slate-400 font-semibold">
                             <span>{t('library.item.status.inprogress')}</span>
                           </span>
+                        ) : item.type === 'ai' ? (
+                          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-800 text-slate-400 font-semibold">
+                            <span>{t('library.item.downloadPDF')}</span>
+                          </span>
                         ) : (
                           <button className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition">
-                            <span>{item.type === 'ai' ? t('library.item.openOutput') : t('library.item.downloadPDF')}</span>
+                            <span>{t('library.item.downloadPDF')}</span>
                           </button>
                         )}
                       </div>

@@ -3,6 +3,7 @@
 import { generateImage } from '@/lib/openai/generate'
 import { saveCourseImage, type SaveResult } from '@/lib/storage'
 import { GeneratedCourse } from './types'
+import { logger } from './logger'
 
 /**
  * Download image from URL or data URL and return as Buffer
@@ -43,6 +44,7 @@ export async function generateCoverImage(
   course: GeneratedCourse,
   courseId: string
 ): Promise<ImagePathInfo> {
+  logger.startTiming('cover-image-generation')
   const { image_prompt, negative_prompt, suggested_format } = course.cover.image_generation
 
   // Build full prompt with negative prompt
@@ -59,6 +61,11 @@ export async function generateCoverImage(
     size = '1536x1024' // Landscape (horizontal) - wider than tall
   }
 
+  await logger.info(`🎨 Generating cover image (size: ${size})...`, {
+    promptLength: fullPrompt.length,
+    aspectRatio: suggested_format.aspect_ratio,
+  })
+
   // Generate image
   const { url: imageUrl } = await generateImage({
     prompt: fullPrompt,
@@ -67,11 +74,17 @@ export async function generateCoverImage(
     n: 1,
   })
 
+  await logger.info(`📥 Downloading cover image from OpenAI...`)
+
   // Download image
   const imageBuffer = await downloadImage(imageUrl)
 
+  await logger.info(`💾 Saving cover image (${(imageBuffer.length / 1024).toFixed(2)} KB)...`)
+
   const filename = `covers/${courseId}-cover.png`
   const saveResult = await saveCourseImage(imageBuffer, filename)
+
+  await logger.endTiming('cover-image-generation', '✅ Cover image generated and saved')
 
   return toImagePathInfo(saveResult)
 }
@@ -83,10 +96,18 @@ export async function generateDiagramImages(
   course: GeneratedCourse,
   courseId: string
 ): Promise<Record<string, ImagePathInfo>> {
+  logger.startTiming('diagrams-generation')
   const results: Record<string, ImagePathInfo> = {}
+  const diagramCount = course.diagrams?.length || 0
 
-  for (const diagram of course.diagrams) {
+  await logger.info(`📊 Generating ${diagramCount} diagram image(s)...`)
+
+  for (let i = 0; i < diagramCount; i++) {
+    const diagram = course.diagrams[i]
     try {
+      logger.startTiming(`diagram-${diagram.diagram_id}`)
+      await logger.info(`  [${i + 1}/${diagramCount}] Generating diagram: ${diagram.diagram_id}...`)
+
       // Generate image
       const { url: imageUrl } = await generateImage({
         prompt: diagram.image_prompt,
@@ -95,69 +116,32 @@ export async function generateDiagramImages(
         n: 1,
       })
 
+      await logger.info(`  [${i + 1}/${diagramCount}] Downloading diagram image...`)
+
       // Download image
       const imageBuffer = await downloadImage(imageUrl)
 
+      await logger.info(`  [${i + 1}/${diagramCount}] Saving diagram (${(imageBuffer.length / 1024).toFixed(2)} KB)...`)
+
       // Save to public/images/courses/diagrams/
       const filename = `${courseId}-${diagram.diagram_id}.webp`
-      // saveCourseImage saves to images/courses, so we need to adjust or use a subdir
-      // Looking at saveCourseImage impl in storage.ts: return saveLocally({ ..., subdirectory: 'images/courses' })
-      // So if we want images/courses/diagrams, we should probably manually join path or add a new helper.
-      // But looking at existing code: 
-      // const { publicPath } = await saveCourseImage(imageBuffer, filename)
-      // It saves to images/courses.
-      
-      // Let's stick to using saveLocally directly for diagrams to put them in diagrams subdir if needed, 
-      // OR reuse saveCourseImage if we don't mind them being in the root courses image dir.
-      // The original code saved to public/images/courses/diagrams/.
-      // But wait, saveCourseImage saves to 'images/courses'. 
-      // The previous code had:
-      // const { publicPath } = await saveCourseImage(imageBuffer, filename)
-      // This put diagrams in 'images/courses', NOT 'images/courses/diagrams'.
-      
-      // Let's check storage.ts again.
-      // saveCourseImage -> subdirectory: 'images/courses'
-      
-      // The original code:
-      // const { publicPath } = await saveCourseImage(imageBuffer, filename)
-      // // Also save to courses/images directory for PDF use
-      // ...
-      // const localPath = path.join(coursesDir, filename)
-      // results[diagram.diagram_id] = { publicPath, localPath: `/courses/images/diagrams/${filename}` }
-      
-      // Wait, there is a discrepancy in the original code I read.
-      // Original read:
-      // // Save to public/images/courses/diagrams/  <-- Comment says diagrams
-      // const filename = ...
-      // const { publicPath } = await saveCourseImage(imageBuffer, filename) <-- Actual code saves to images/courses
-      
-      // // Also save to courses directory...
-      // const coursesDir = path.join(process.cwd(), 'public', 'courses', 'images', 'diagrams') <-- Subdir diagrams
-      // ...
-      // localPath: `/courses/images/diagrams/${filename}`
-      
-      // So publicPath was /images/courses/foo.webp
-      // And localPath was /courses/images/diagrams/foo.webp
-      
-      // We want to unify this. Let's put everything in /images/courses/diagrams/ if possible, 
-      // or just /images/courses/ if that's easier.
-      // To keep it clean, let's use a specific save for diagrams.
-      
-      // I will import saveLocally from storage.ts? No, it's not exported.
-      // I will just use saveCourseImage but filename will include 'diagrams/' prefix?
-      // storage.ts: saveLocally uses path.join(directory, filename).
-      // So if filename is 'diagrams/foo.webp', it will save to 'images/courses/diagrams/foo.webp'.
-      
       const storageKey = `diagrams/${courseId}/${filename}`
       const saveResult = await saveCourseImage(imageBuffer, storageKey)
 
       results[diagram.diagram_id] = toImagePathInfo(saveResult)
-      console.log(`  ✓ Generated diagram: ${diagram.diagram_id}`)
+      await logger.endTiming(`diagram-${diagram.diagram_id}`, `  ✓ [${i + 1}/${diagramCount}] Diagram ${diagram.diagram_id} generated`)
     } catch (error) {
-      console.error(`  ✗ Failed to generate diagram ${diagram.diagram_id}:`, error)
+      await logger.endTiming(`diagram-${diagram.diagram_id}`)
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      await logger.error(`  ✗ [${i + 1}/${diagramCount}] Failed to generate diagram ${diagram.diagram_id}:`, {
+        error: errorMessage,
+        diagramId: diagram.diagram_id,
+      })
       // Continue with other diagrams - don't fail the entire process
     }
   }
+
+  await logger.endTiming('diagrams-generation', `✅ Generated ${Object.keys(results).length}/${diagramCount} diagram(s)`)
 
   return results
 }
