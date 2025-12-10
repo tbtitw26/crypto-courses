@@ -1,275 +1,180 @@
-# 📋 Инструкция: Как отслеживать генерацию на Vercel
+# 📋 Vercel Logs Guide - Просмотр логов через PowerShell
 
-## 🎯 Быстрый старт
+## ⚠️ Важно: Изменения в Vercel CLI v49
 
-После того как вы запустили генерацию (AI Strategy или Custom Course), используйте одну из команд:
+В новой версии Vercel CLI (49.1.2) синтаксис команд изменился:
+- ❌ **Старый синтаксис** (не работает): `vercel logs --prod --follow`
+- ✅ **Новый синтаксис**: `vercel logs <deployment-url>`
 
-### Вариант 1: Готовые скрипты (РЕКОМЕНДУЕТСЯ)
+## 🚀 Быстрый старт
 
+### 1. Авторизация (один раз)
 ```powershell
-# Для AI Strategy
-npm run logs:vercel:ai
+vercel login
+```
 
-# Для Custom Course
+### 2. Просмотр логов Custom Course
+```powershell
+# Через npm script
 npm run logs:vercel:course
 
-# Для всех генераций сразу
+# Или напрямую
+.\scripts\vercel-logs-custom-course.ps1
+```
+
+### 3. Просмотр всех логов генерации
+```powershell
 npm run logs:vercel:all
 ```
 
-Эти команды будут показывать логи в реальном времени (как `tail -f`).
-
----
-
-## 📖 Детальная инструкция
-
-### Шаг 1: Откройте PowerShell в папке проекта
-
+### 4. Просмотр только ошибок
 ```powershell
-cd C:\Users\david\Documents\Web-Dev\Vitirni\forex_crypto
+.\scripts\vercel-logs-errors.ps1
 ```
 
-### Шаг 2: Выберите способ просмотра логов
+## 📝 Доступные скрипты
 
-#### Способ A: Готовые скрипты (проще всего)
+### `scripts/vercel-logs-custom-course.ps1`
+Фильтрует логи для Custom Course генерации:
+- Custom Course API
+- [ERROR], [GEN] префиксы
+- Generation failed
+- Error sending
+- Watchdog timeout
 
+**Использование:**
 ```powershell
-# Для AI Strategy
-npm run logs:vercel:ai
-
-# Для Custom Course  
-npm run logs:vercel:course
-
-# Для всех генераций
-npm run logs:vercel:all
+.\scripts\vercel-logs-custom-course.ps1
+.\scripts\vercel-logs-custom-course.ps1 --Follow
 ```
 
-#### Способ B: Прямые команды Vercel CLI
+### `scripts/vercel-logs-ai-strategy.ps1`
+Фильтрует логи для AI Strategy генерации:
+- AI Strategy
+- /api/ai-strategy
+- [GEN] префиксы
 
+**Использование:**
 ```powershell
-# Все логи за последний час (с фильтром по [GEN])
-vercel logs --follow --since 1h | Select-String -Pattern "\[GEN\]"
-
-# Только логи AI Strategy
-vercel logs --follow --since 1h | Select-String -Pattern "\[GEN\]|/api/ai-strategy"
-
-# Только логи Custom Course
-vercel logs --follow --since 1h | Select-String -Pattern "\[GEN\]|/api/custom-course"
+.\scripts\vercel-logs-ai-strategy.ps1
+.\scripts\vercel-logs-ai-strategy.ps1 --Follow
 ```
 
-#### Способ C: Через Vercel Dashboard (без терминала)
+### `scripts/vercel-logs-all.ps1`
+Показывает все логи генерации (Custom Course + AI Strategy):
+- [GEN] префиксы
+- Custom Course
+- AI Strategy
+- Generation
 
-1. Откройте https://vercel.com/dashboard
-2. Выберите ваш проект
-3. Перейдите в **Deployments** → выберите последний деплой
-4. Нажмите **Functions** → выберите `/api/ai-strategy` или `/api/custom-course`
-5. Откройте вкладку **Logs**
-6. Фильтруйте по тексту `[GEN]` в поиске
-
----
-
-## 🔍 Что вы увидите в логах
-
-### Структура логов
-
-Каждая строка с префиксом `[GEN]` содержит:
-
-```
-[GEN][INFO] [AI Strategy 5] Step 1/5: Generating English strategy... (elapsed: 12.3s)
-[GEN][INFO] [AI Strategy 5] Step 2/5: Generating cover image... (elapsed: 45.7s)
-[GEN][ERROR] [AI Strategy 5] Failed to generate PDF: TimeoutError
-```
-
-### Уровни логов
-
-- `[GEN][INFO]` — обычная информация (шаги генерации, прогресс)
-- `[GEN][WARN]` — предупреждения (медленная генерация, повторные попытки)
-- `[GEN][ERROR]` — ошибки (неудачная генерация, таймауты)
-
-### Примеры логов
-
-```
-[GEN][INFO] [AI Strategy 4] Starting generation... { strategyRunId: 4, userId: 1 }
-[GEN][INFO] [AI Strategy 4] Step 1/5: Generating English strategy... (elapsed: 15.2s)
-[GEN][INFO] [AI Strategy 4] Step 1 completed: English strategy generated (tokens: 1234, model: gpt-4o-mini)
-[GEN][INFO] [AI Strategy 4] Step 2/5: Generating cover image... (elapsed: 28.5s)
-[GEN][INFO] [AI Strategy 4] Step 2 completed: Cover image saved (size: 245KB)
-[GEN][INFO] [AI Strategy 4] Step 3/5: Generating diagrams... (elapsed: 1m 12s)
-[GEN][INFO] [AI Strategy 4] Step 3 completed: 2 diagrams saved
-[GEN][INFO] [AI Strategy 4] Step 4/5: Generating PDF (EN)... (elapsed: 2m 34s)
-[GEN][INFO] [AI Strategy 4] Step 4 completed: PDF saved (size: 1.2MB)
-[GEN][INFO] [AI Strategy 4] Step 5/5: Translating to Arabic... (elapsed: 3m 15s)
-[GEN][INFO] [AI Strategy 4] Generation completed successfully! (total time: 4m 23s)
-```
-
----
-
-## 🗄️ Просмотр логов в базе данных (Neon)
-
-Если `LOG_TO_DB=true`, все логи также сохраняются в таблицу `GenerationLog`.
-
-### SQL запросы для Neon
-
-1. Откройте Neon Dashboard: https://console.neon.tech
-2. Выберите ваш проект
-3. Перейдите в **SQL Editor**
-4. Выполните запросы:
-
-#### Последние 50 логов
-
-```sql
-SELECT 
-  id,
-  run_id,
-  run_type,
-  level,
-  message,
-  meta,
-  created_at
-FROM "GenerationLog"
-ORDER BY created_at DESC
-LIMIT 50;
-```
-
-#### Только ошибки
-
-```sql
-SELECT 
-  id,
-  run_id,
-  run_type,
-  message,
-  meta,
-  created_at
-FROM "GenerationLog"
-WHERE level = 'error'
-ORDER BY created_at DESC
-LIMIT 20;
-```
-
-#### Логи для конкретной генерации
-
-```sql
--- Для AI Strategy с ID = 5
-SELECT 
-  id,
-  level,
-  message,
-  meta,
-  created_at
-FROM "GenerationLog"
-WHERE run_type = 'ai-strategy' AND run_id = 5
-ORDER BY created_at ASC;
-```
-
----
-
-## 📊 Просмотр статуса генерации в БД
-
-### AI Strategy
-
-```sql
-SELECT 
-  id,
-  status,
-  status_stage,
-  status_progress,
-  status_message,
-  status_error,
-  pdf_url,
-  created_at,
-  updated_at
-FROM "AiStrategyRun"
-ORDER BY created_at DESC
-LIMIT 10;
-```
-
-### Custom Course
-
-```sql
-SELECT 
-  id,
-  status,
-  status_stage,
-  status_progress,
-  status_message,
-  status_error,
-  pdf_url,
-  created_at,
-  updated_at
-FROM "CustomCourseRequest"
-ORDER BY created_at DESC
-LIMIT 10;
-```
-
----
-
-## 🛠️ Устранение проблем
-
-### Проблема: Команда `vercel logs` не работает
-
-**Решение:**
-1. Убедитесь, что вы авторизованы: `vercel whoami`
-2. Если не авторизованы: `vercel login`
-3. Убедитесь, что проект привязан: `vercel link`
-
-### Проблема: Логи не появляются
-
-**Проверьте:**
-1. Переменная `LOG_TO_DB=true` установлена в Vercel Environment Variables
-2. Выполнен redeploy после установки переменной
-3. Генерация действительно запущена (проверьте статус в БД)
-
-### Проблема: Логи слишком много
-
-**Используйте фильтры:**
+**Использование:**
 ```powershell
-# Только ошибки
-vercel logs --follow --since 1h | Select-String -Pattern "\[GEN\]\[ERROR\]"
-
-# Только конкретная генерация (например, ID = 5)
-vercel logs --follow --since 1h | Select-String -Pattern "\[AI Strategy 5\]"
+.\scripts\vercel-logs-all.ps1
+.\scripts\vercel-logs-all.ps1 --Follow
 ```
 
----
+### `scripts/vercel-logs-errors.ps1`
+Показывает только ошибки:
+- error, Error, ERROR
+- failed, Failed, FAILED
+- exception, Exception
 
-## 📝 Полезные команды
-
+**Использование:**
 ```powershell
-# Проверить статус авторизации Vercel
-vercel whoami
-
-# Список всех проектов
-vercel projects
-
-# Логи конкретного деплоя (нужен deployment URL)
-vercel logs <deployment-url> --follow
-
-# Логи за последние 24 часа
-vercel logs --since 24h | Select-String -Pattern "\[GEN\]"
+.\scripts\vercel-logs-errors.ps1
+.\scripts\vercel-logs-errors.ps1 --Follow
 ```
 
----
+### `scripts/vercel-logs.ps1`
+Универсальный скрипт с фильтрацией:
+```powershell
+.\scripts\vercel-logs.ps1
+.\scripts\vercel-logs.ps1 --Follow
+.\scripts\vercel-logs.ps1 --Filter "Custom Course"
+```
 
-## ✅ Чеклист для отслеживания генерации
+## 🔧 Ручные команды
 
-- [ ] Установлена переменная `LOG_TO_DB=true` в Vercel
-- [ ] Выполнен redeploy после установки переменной
-- [ ] Запущена генерация (AI Strategy или Custom Course)
-- [ ] Открыт терминал с командой `npm run logs:vercel:all`
-- [ ] Видны логи с префиксом `[GEN]`
-- [ ] Проверен статус в БД (Neon) через SQL запросы
-- [ ] При ошибках проверены логи в таблице `GenerationLog`
+### Получить список деплоев
+```powershell
+vercel ls
+```
 
----
+### Получить последний production deployment
+```powershell
+$deployments = vercel ls --json | ConvertFrom-Json
+$prod = $deployments | Where-Object { $_.target -eq "production" } | Sort-Object -Property createdAt -Descending | Select-Object -First 1
+$prod.url
+```
+
+### Просмотр логов конкретного деплоя
+```powershell
+vercel logs https://forexcrypto-xxxxx.vercel.app
+```
+
+### Просмотр логов в JSON формате
+```powershell
+vercel logs https://forexcrypto-xxxxx.vercel.app --json
+```
+
+### Просмотр build логов
+```powershell
+vercel inspect https://forexcrypto-xxxxx.vercel.app --logs
+```
+
+## 📊 Что показывают логи
+
+### Runtime Logs (`vercel logs`)
+- Логи выполнения функций (API routes)
+- Console.log, console.error из вашего кода
+- Ошибки выполнения
+- **Важно**: Показывает логи только за последние 5 минут с момента запуска команды
+
+### Build Logs (`vercel inspect --logs`)
+- Логи сборки проекта
+- Ошибки компиляции
+- Ошибки установки зависимостей
 
 ## 🎯 Рекомендации
 
-1. **Для быстрого мониторинга**: Используйте `npm run logs:vercel:all` в отдельном окне терминала
-2. **Для детального анализа**: Используйте SQL запросы к таблице `GenerationLog`
-3. **Для отладки ошибок**: Комбинируйте Vercel Logs (консоль) + БД логи (детали в `meta`)
+1. **Для отслеживания Custom Course генерации:**
+   ```powershell
+   npm run logs:vercel:course
+   ```
 
----
+2. **Для поиска ошибок:**
+   ```powershell
+   .\scripts\vercel-logs-errors.ps1 --Follow
+   ```
 
-**Готово!** Теперь вы можете отслеживать генерацию в реальном времени на Vercel так же удобно, как локально.
+3. **Для общего мониторинга:**
+   ```powershell
+   npm run logs:vercel:all
+   ```
 
+## ⚡ NPM Scripts
+
+В `package.json` доступны удобные команды:
+- `npm run logs:vercel:course` - логи Custom Course
+- `npm run logs:vercel:ai` - логи AI Strategy  
+- `npm run logs:vercel:all` - все логи генерации
+
+## 🔍 Фильтрация в PowerShell
+
+Все скрипты используют `Select-String` для фильтрации. Вы можете модифицировать паттерны:
+
+```powershell
+# Пример: добавить свой фильтр
+vercel logs $deploymentUrl | Select-String -Pattern "ваш_паттерн"
+```
+
+## ⚠️ Ограничения
+
+1. **Runtime logs** показывают только логи за последние 5 минут с момента запуска команды
+2. Для просмотра старых логов используйте Vercel Dashboard или `vercel inspect --logs`
+3. Логи в реальном времени требуют активного деплоя
+
+## 📚 Дополнительные ресурсы
+
+- [Vercel CLI Documentation](https://vercel.com/docs/cli)
+- [Vercel Logs API](https://vercel.com/docs/observability/logs)
