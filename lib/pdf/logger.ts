@@ -134,7 +134,13 @@ export async function log(level: 'info' | 'error' | 'warn' | 'debug', message: s
       const prisma = await getPrismaClient()
       // Trim message to avoid huge entries
       const msg = message.length > 2000 ? `${message.slice(0, 2000)}... [truncated]` : message
-      const meta = enrichedData ? JSON.parse(formatData(enrichedData)) : null
+      let meta = null
+      try {
+        meta = enrichedData ? JSON.parse(formatData(enrichedData)) : null
+      } catch (parseError) {
+        // If meta parsing fails, use simplified version
+        meta = enrichedData ? { error: 'Failed to parse meta data' } : null
+      }
       
       // Extract run_id and run_type from enriched data or context
       let runId = currentRunId || 0
@@ -158,18 +164,51 @@ export async function log(level: 'info' | 'error' | 'warn' | 'debug', message: s
         }
       }
       
-      await prisma.generationLog.create({
-        data: {
-          run_id: runId,
-          run_type: runType,
+      // Retry DB logging up to 2 times
+      let lastError: any = null
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          await prisma.generationLog.create({
+            data: {
+              run_id: runId,
+              run_type: runType,
+              level,
+              message: msg,
+              meta,
+            },
+          })
+          // Success - break retry loop
+          break
+        } catch (dbError: any) {
+          lastError = dbError
+          if (attempt < 1) {
+            // Wait before retry (exponential backoff)
+            await new Promise((resolve) => setTimeout(resolve, 500 * (attempt + 1)))
+            continue
+          }
+        }
+      }
+      
+      // If all retries failed, log to console as fallback
+      if (lastError) {
+        console.error('[GEN][ERROR] Failed to write log to DB after retries:', {
           level,
-          message: msg,
-          meta,
-        },
-      })
+          message: msg.substring(0, 200),
+          runId,
+          runType,
+          error: lastError instanceof Error ? lastError.message : String(lastError),
+        })
+      }
     } catch (err) {
-      // Swallow DB logging errors to avoid breaking flow
-      console.warn('[GEN][WARN] Failed to write log to DB', err)
+      // Fallback to console if DB logging completely fails
+      const errorMsg = err instanceof Error ? err.message : String(err)
+      console.error('[GEN][ERROR] Failed to write log to DB (fallback to console):', {
+        level,
+        message: message.substring(0, 200),
+        error: errorMsg,
+        runId: currentRunId,
+        runType: currentRunType,
+      })
     }
   }
 

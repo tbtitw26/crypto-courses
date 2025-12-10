@@ -1,6 +1,6 @@
 // lib/pdf/custom-course-status-tracker.ts - Track custom course generation progress
 
-import { prisma } from '@/lib/prisma'
+import { prisma, withPrismaRetry } from '@/lib/prisma'
 
 export interface CustomCourseGenerationStatus {
   courseRequestId: number
@@ -21,16 +21,18 @@ export interface CustomCourseGenerationStatus {
 }
 
 export async function loadCustomCourseStatus(courseRequestId: number): Promise<CustomCourseGenerationStatus | null> {
-  const record = await prisma.customCourseRequest.findUnique({
-    where: { id: courseRequestId },
-    select: {
-      id: true,
-      status_stage: true,
-      status_progress: true,
-      status_message: true,
-      status_error: true,
-    },
-  })
+  const record = await withPrismaRetry(() =>
+    prisma.customCourseRequest.findUnique({
+      where: { id: courseRequestId },
+      select: {
+        id: true,
+        status_stage: true,
+        status_progress: true,
+        status_message: true,
+        status_error: true,
+      },
+    })
+  )
 
   if (!record) {
     return null
@@ -46,27 +48,31 @@ export async function loadCustomCourseStatus(courseRequestId: number): Promise<C
 }
 
 export async function clearCustomCourseStatus(courseRequestId: number): Promise<void> {
-  await prisma.customCourseRequest.update({
-    where: { id: courseRequestId },
-    data: {
-      status_stage: null,
-      status_progress: null,
-      status_message: null,
-      status_error: null,
-    },
-  })
+  await withPrismaRetry(() =>
+    prisma.customCourseRequest.update({
+      where: { id: courseRequestId },
+      data: {
+        status_stage: null,
+        status_progress: null,
+        status_message: null,
+        status_error: null,
+      },
+    })
+  )
 }
 
 export async function updateCustomCourseStatus(status: CustomCourseGenerationStatus): Promise<void> {
-  const { courseRequestId, stage, progress, message, error } = status
-  await prisma.customCourseRequest.update({
-    where: { id: courseRequestId },
-    data: {
-      status_stage: stage,
-      status_progress: progress,
-      status_message: message,
-      status_error: error ?? null,
-    },
-  })
+  const { courseRequestId, stage, progress, message, error, warnings, startedAt, completedAt, intermediateFiles } = status
+  await withPrismaRetry(() =>
+    prisma.customCourseRequest.update({
+      where: { id: courseRequestId },
+      data: {
+        status_stage: stage,
+        status_progress: progress,
+        status_message: message,
+        status_error: error ?? null,
+      },
+    })
+  )
 }
 
