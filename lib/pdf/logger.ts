@@ -3,9 +3,19 @@
 import fs from 'fs/promises'
 import path from 'path'
 
+// Lazy import prisma to avoid bundling in browser
+let prismaSingleton: typeof import('@/lib/prisma').prisma | null = null
+async function getPrismaClient() {
+  if (prismaSingleton) return prismaSingleton
+  const mod = await import('@/lib/prisma')
+  prismaSingleton = mod.prisma
+  return prismaSingleton
+}
+
 const LOG_DIR = path.join(process.cwd(), 'logs')
 const LOG_FILE = path.join(LOG_DIR, 'course-generation.log')
 const canWriteToFs = !(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+const logToDb = process.env.LOG_TO_DB === 'true'
 
 // Track timing for operations
 const timings = new Map<string, number>()
@@ -68,8 +78,8 @@ export async function log(level: 'info' | 'error' | 'warn' | 'debug', message: s
   // File log: detailed format with timestamp
   const fileLogMessage = `[${timestamp}] ${elapsedStr} [${level.toUpperCase()}] ${message}${formattedData ? `\n${formattedData}` : ''}\n`
   
-  // Console log: cleaner format
-  const consoleMessage = `${elapsedStr} [${level.toUpperCase()}] ${message}`
+  // Console log: cleaner format, with prefix for filtering
+  const consoleMessage = `[GEN] ${elapsedStr} [${level.toUpperCase()}] ${message}`
 
   // Enhanced console logging with colors (for local dev)
   const isLocal = !process.env.VERCEL && !process.env.AWS_LAMBDA_FUNCTION_NAME
@@ -94,6 +104,26 @@ export async function log(level: 'info' | 'error' | 'warn' | 'debug', message: s
       console.warn(consoleMessage, data || '')
     } else {
       console.log(consoleMessage, data || '')
+    }
+  }
+
+  // Optional DB log (server only)
+  if (logToDb && (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NODE_ENV === 'production')) {
+    try {
+      const prisma = await getPrismaClient()
+      // Trim message to avoid huge entries
+      const msg = message.length > 2000 ? `${message.slice(0, 2000)}... [truncated]` : message
+      const meta = data ? JSON.parse(formatData(data)) : null
+      await prisma.generationLog.create({
+        data: {
+          level,
+          message: msg,
+          meta,
+        },
+      })
+    } catch (err) {
+      // Swallow DB logging errors to avoid breaking flow
+      console.warn('[GEN][WARN] Failed to write log to DB', err)
     }
   }
 

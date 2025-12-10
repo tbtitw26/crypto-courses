@@ -238,6 +238,18 @@ model AiStrategyRun {
   @@index([created_at])
 }
 
+// Generation logs for serverless (persisted debug)
+model GenerationLog {
+  id         Int      @id @default(autoincrement())
+  level      String
+  message    String   @db.Text
+  meta       Json?
+  created_at DateTime @default(now())
+
+  @@index([created_at])
+  @@index([level])
+}
+
 // Password Reset Tokens
 model PasswordResetToken {
   id         String   @id @default(cuid())
