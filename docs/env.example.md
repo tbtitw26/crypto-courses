@@ -16,14 +16,18 @@
 
 ## Supabase
 - `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY` (server only, never expose to client)
 - `SUPABASE_ANON_KEY`
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `USE_SUPABASE_STORAGE=true`
-- `SUPABASE_BUCKET_COURSE_PDF=course-pdf`
-- `SUPABASE_BUCKET_COURSE_IMAGES=course-images`
+- `SUPABASE_BUCKET_COURSE_PDF=course-pdf` (private bucket for PDFs)
+- `SUPABASE_BUCKET_COURSE_IMAGES=course-images` (public bucket for images)
 - `SUPABASE_BUCKET_COURSE_MEDIA=course-media`
-- `SUPABASE_SIGNED_URL_TTL_PDF=86400`
+- `SUPABASE_SIGNED_URL_TTL_PDF=3600` (1 hour, recommended for security)
+
+## Inngest (Background Job Processing)
+- `INNGEST_EVENT_KEY` (required for sending events to Inngest)
+- `INNGEST_SIGNING_KEY` (required for Inngest to verify requests to `/api/inngest`)
 
 ## Browserless (PDF в serverless)
 - `BROWSERLESS_API_KEY`

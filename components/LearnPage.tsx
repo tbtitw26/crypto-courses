@@ -8,6 +8,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { motion } from 'framer-motion'
 import { useToast } from '@/hooks/use-toast'
+import { parseStartResponse } from '@/lib/jobs/parseStartResponse'
+import { useJobStatus } from '@/lib/jobs/useJobStatus'
 import {
   UserCog,
   Cpu,
@@ -30,6 +32,96 @@ import { getUserCurrency } from '@/lib/currency-client'
 type TabKey = 'custom' | 'ai'
 
 type StrategyPreset = 'conservative' | 'balanced' | 'scalping'
+
+// Component for displaying status of a single job
+function JobStatusBlock({
+  jobId,
+  language,
+  jobType,
+  onClear,
+}: {
+  jobId: string
+  language: string
+  jobType: 'custom-course' | 'ai-strategy'
+  onClear?: () => void
+}) {
+  const { data: jobStatus, isLoading: isPolling, isTerminal } = useJobStatus(jobType, jobId)
+  const langLabel = language === 'ar' ? 'AR' : 'EN'
+
+  if (!jobStatus) {
+    return null
+  }
+
+  return (
+    <div className="p-3 rounded-lg bg-slate-800/50 border border-slate-700 space-y-2">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] font-medium text-slate-300">
+            {langLabel} — {isTerminal ? 'Last run' : 'Status'}
+          </span>
+          {isPolling && <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />}
+        </div>
+        {isTerminal && onClear && (
+          <button
+            type="button"
+            onClick={onClear}
+            className="text-[10px] text-slate-400 hover:text-slate-200 transition"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+
+      <div className="space-y-1.5">
+        {/* Stage text */}
+        <div className="text-[11px] text-slate-200">
+          {jobStatus.stage || jobStatus.status || 'Unknown'}
+        </div>
+
+        {/* Progress bar (only if progress is a number) */}
+        {typeof jobStatus.progress === 'number' && (
+          <div className="w-full h-1.5 bg-slate-700 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-cyan-400 transition-all duration-300"
+              style={{ width: `${jobStatus.progress}%` }}
+            />
+          </div>
+        )}
+
+        {/* Progress percentage */}
+        {typeof jobStatus.progress === 'number' && (
+          <div className="text-[10px] text-slate-400">{jobStatus.progress}%</div>
+        )}
+
+        {/* Spinner if no progress but not terminal */}
+        {!isTerminal && typeof jobStatus.progress !== 'number' && (
+          <div className="flex items-center gap-2 text-[10px] text-slate-400">
+            <span className="animate-spin">⏳</span>
+            <span>Processing...</span>
+          </div>
+        )}
+
+        {/* Error message */}
+        {jobStatus.status === 'failed' && jobStatus.error && (
+          <div className="text-[10px] text-red-400 mt-1">{jobStatus.error}</div>
+        )}
+
+        {/* Success with PDF link */}
+        {jobStatus.status === 'ready' && jobStatus.result?.pdfUrl && (
+          <a
+            href={jobStatus.result.pdfUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-[11px] text-cyan-300 hover:text-cyan-200 transition mt-1"
+          >
+            <span>Open PDF</span>
+            <ArrowRight className="w-3 h-3" />
+          </a>
+        )}
+      </div>
+    </div>
+  )
+}
 
 const STRATEGY_PRESET_PROFILES: Record<
   StrategyPreset,
@@ -176,12 +268,28 @@ export function LearnPage() {
 function CustomCourseForm() {
   const { data: session } = useSession()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const { showToast } = useToast()
   const t = useTranslations('learn.custom')
   const tForm = useTranslations('learn.custom.form')
   const tSidebar = useTranslations('learn.custom.sidebar')
   const tAuth = useTranslations('learn.auth')
   const tCommon = useTranslations('common.auth')
+
+  // Read jobId(s) from URL or state
+  const jobIdFromUrl = searchParams.get('jobId') || undefined
+  const [activeJobs, setActiveJobs] = useState<Array<{ jobId: string; language: string }>>([])
+  
+  // For backward compatibility: if we have URL jobId but no activeJobs, use it
+  useEffect(() => {
+    if (jobIdFromUrl && activeJobs.length === 0) {
+      setActiveJobs([{ jobId: jobIdFromUrl, language: 'en' }])
+    }
+  }, [jobIdFromUrl])
+  
+  // For backward compatibility: use first job as main jobStatus if only one job
+  const mainJobId = activeJobs.length > 0 ? activeJobs[0].jobId : jobIdFromUrl
+  const { data: jobStatus, isLoading: isPolling, isTerminal } = useJobStatus('custom-course', mainJobId)
 
   const [experience, setExperience] = useState<string>('')
   const [markets, setMarkets] = useState<string[]>([])
@@ -197,6 +305,7 @@ function CustomCourseForm() {
   const [consentTerms, setConsentTerms] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [currency, setCurrency] = useState('GBP')
+  const [showNewGenerationConfirm, setShowNewGenerationConfirm] = useState(false)
 
   // Available days of the week
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -268,6 +377,31 @@ function CustomCourseForm() {
         return [...prev, lang]
       }
     })
+  }
+
+  // Check if there's an active job (not terminal)
+  const hasActiveJob = jobIdFromUrl && jobStatus && !isTerminal
+  const isGenerateDisabled = isLoading || hasActiveJob || (session ? !hasEnoughTokens : false)
+
+  const handleClearJobId = () => {
+    setActiveJobs([])
+    const tab = searchParams.get('tab') || 'custom'
+    router.replace(`/learn?tab=${tab}`)
+    setShowNewGenerationConfirm(false)
+  }
+
+  const handleStartNewGeneration = () => {
+    setShowNewGenerationConfirm(true)
+  }
+
+  const handleConfirmNewGeneration = async () => {
+    setShowNewGenerationConfirm(false)
+    // Continue with normal submit flow - jobId will be replaced in handleSubmit
+    const form = document.querySelector('form')
+    if (form) {
+      const event = new Event('submit', { bubbles: true, cancelable: true })
+      form.dispatchEvent(event)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -368,29 +502,36 @@ function CustomCourseForm() {
       }
 
       const data = await response.json()
+      const parsed = parseStartResponse(data)
 
-      // Get user email from session
-      const userEmail = session.user?.email || 'your email'
+      if (!parsed.ok) {
+        throw new Error(parsed.message || 'Failed to start generation')
+      }
+
+      // Handle multi-language response (jobs array) or single job (backward-compatible)
+      if (parsed.jobs && parsed.jobs.length > 0) {
+        // Multi-language: store all jobs in state
+        setActiveJobs(parsed.jobs)
+        // Also update URL with first jobId for backward compatibility
+        const tab = searchParams.get('tab') || 'custom'
+        router.replace(`/learn?tab=${tab}&jobId=${parsed.jobs[0].jobId}`)
+      } else if (parsed.jobId) {
+        // Single job (backward-compatible)
+        setActiveJobs([{ jobId: parsed.jobId, language: 'en' }])
+        const tab = searchParams.get('tab') || 'custom'
+        router.replace(`/learn?tab=${tab}&jobId=${parsed.jobId}`)
+      } else {
+        // If we have ok=true but no jobs/jobId, it's still an error
+        throw new Error(parsed.message || 'No job ID received from server')
+      }
 
       showToast({
         title: 'Request submitted',
-        description: `Your course has been passed to our trader. In the coming days, you will receive the completed course at ${userEmail}`,
+        description: parsed.message || `Course generation started for ${parsed.jobs?.length || 1} language(s). You can close this window.`,
         variant: 'success',
       })
 
-      // Reset form after successful submission
-      setExperience('')
-      setMarkets([])
-      setDeposit('')
-      setRiskTolerance('')
-      setTradingStyle('')
-      setSelectedDays([])
-      setSelectedPlatforms([])
-      setGoals('')
-      setNotes('')
-      setSelectedLanguages(['en'])
-      setConsentEducation(false)
-      setConsentTerms(false)
+      // Don't reset form - user can modify and start new generation if needed
     } catch (error) {
       console.error('Custom course submission error:', error)
       showToast({
@@ -704,25 +845,89 @@ function CustomCourseForm() {
             )}
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 pt-1">
-            <button
-              type="submit"
-              disabled={isLoading || (session ? !hasEnoughTokens : false)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? (
-                <>
-                  <span className="animate-spin">⏳</span>
-                  <span>Processing...</span>
-                </>
-              ) : (
-                <>
-                  <span>{tForm('submit')}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </>
+          <div className="space-y-3 pt-1">
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="submit"
+                disabled={isGenerateDisabled}
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isLoading ? (
+                  <>
+                    <span className="animate-spin">⏳</span>
+                    <span>Processing...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{tForm('submit')}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </>
+                )}
+              </button>
+              {hasActiveJob && !showNewGenerationConfirm && (
+                <button
+                  type="button"
+                  onClick={handleStartNewGeneration}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-full border border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700 transition"
+                >
+                  Start new generation
+                </button>
               )}
-            </button>
-            <p className="text-[11px] text-slate-400">{tForm('delivery')}</p>
+              {showNewGenerationConfirm && (
+                <div className="flex items-center gap-2 text-[11px] text-amber-200">
+                  <span>This will start a new task and replace the current one.</span>
+                  <button
+                    type="button"
+                    onClick={handleConfirmNewGeneration}
+                    className="px-2 py-1 rounded bg-amber-500/20 border border-amber-500/50 hover:bg-amber-500/30"
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowNewGenerationConfirm(false)}
+                    className="px-2 py-1 rounded bg-slate-700 border border-slate-600 hover:bg-slate-600"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+              <p className="text-[11px] text-slate-400">{tForm('delivery')}</p>
+            </div>
+
+            {/* Job Status UI - Support multiple jobs */}
+            {activeJobs.length > 0 ? (
+              <div className="space-y-2">
+                {activeJobs.map((job) => (
+                  <JobStatusBlock
+                    key={job.jobId}
+                    jobId={job.jobId}
+                    language={job.language}
+                    jobType="custom-course"
+                    onClear={activeJobs.length === 1 ? handleClearJobId : undefined}
+                  />
+                ))}
+                {activeJobs.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={handleClearJobId}
+                    className="text-[10px] text-slate-400 hover:text-slate-200 transition w-full text-center"
+                  >
+                    Clear all
+                  </button>
+                )}
+              </div>
+            ) : (
+              jobIdFromUrl &&
+              jobStatus && (
+                <JobStatusBlock
+                  jobId={jobIdFromUrl}
+                  language="en"
+                  jobType="custom-course"
+                  onClear={handleClearJobId}
+                />
+              )
+            )}
           </div>
         </form>
       </div>
@@ -789,12 +994,28 @@ function CustomCourseForm() {
 function AIStrategyForm() {
   const { data: session } = useSession()
   const router = useRouter()
+  const searchParams = useSearchParams()
   const { showToast } = useToast()
   const t = useTranslations('learn.ai')
   const tForm = useTranslations('learn.ai.form')
   const tSidebar = useTranslations('learn.ai.sidebar')
   const tAuth = useTranslations('learn.auth')
   const tCommon = useTranslations('common.auth')
+
+  // Read jobId(s) from URL or state
+  const jobIdFromUrl = searchParams.get('jobId') || undefined
+  const [activeJobs, setActiveJobs] = useState<Array<{ jobId: string; language: string }>>([])
+  
+  // For backward compatibility: if we have URL jobId but no activeJobs, use it
+  useEffect(() => {
+    if (jobIdFromUrl && activeJobs.length === 0) {
+      setActiveJobs([{ jobId: jobIdFromUrl, language: 'en' }])
+    }
+  }, [jobIdFromUrl])
+  
+  // For backward compatibility: use first job as main jobStatus if only one job
+  const mainJobId = activeJobs.length > 0 ? activeJobs[0].jobId : jobIdFromUrl
+  const { data: jobStatus, isLoading: isPolling, isTerminal } = useJobStatus('ai-strategy', mainJobId)
 
   const [preset, setPreset] = useState<StrategyPreset | ''>('')
   const [market, setMarket] = useState<'forex' | 'crypto' | 'binary'>('forex')
@@ -816,6 +1037,7 @@ function AIStrategyForm() {
   const [tradingStyle, setTradingStyle] = useState<'scalp' | 'day' | 'swing' | ''>('')
   const [isLoading, setIsLoading] = useState(false)
   const [currency, setCurrency] = useState('GBP')
+  const [showNewGenerationConfirm, setShowNewGenerationConfirm] = useState(false)
 
   useEffect(() => {
     setCurrency(getUserCurrency())
@@ -889,6 +1111,31 @@ function AIStrategyForm() {
   const hasEnoughTokens = userBalance >= totalTokens
   const priceInCurrency = calculatePriceForTokens(totalTokens, currency)
   const formattedPrice = formatPrice(priceInCurrency, currency)
+
+  // Check if there's an active job (not terminal)
+  const hasActiveJob = (activeJobs.length > 0 || jobIdFromUrl) && jobStatus && !isTerminal
+  const isGenerateDisabled = isLoading || hasActiveJob || (session ? !hasEnoughTokens : false)
+
+  const handleClearJobId = () => {
+    setActiveJobs([])
+    const tab = searchParams.get('tab') || 'ai'
+    router.replace(`/learn?tab=${tab}`)
+    setShowNewGenerationConfirm(false)
+  }
+
+  const handleStartNewGeneration = () => {
+    setShowNewGenerationConfirm(true)
+  }
+
+  const handleConfirmNewGeneration = async () => {
+    setShowNewGenerationConfirm(false)
+    // Continue with normal submit flow - jobId will be replaced in handleSubmit
+    const form = document.querySelector('form')
+    if (form) {
+      const event = new Event('submit', { bubbles: true, cancelable: true })
+      form.dispatchEvent(event)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -972,31 +1219,36 @@ function AIStrategyForm() {
         throw new Error(error.message || error.error || 'Failed to generate strategy')
       }
 
-      await response.json()
+      const data = await response.json()
+      const parsed = parseStartResponse(data)
 
-      const userEmail = session.user?.email || 'your email'
+      if (!parsed.ok) {
+        throw new Error(parsed.message || 'Failed to start generation')
+      }
+
+      // Handle multi-language response (jobs array) or single job (backward-compatible)
+      if (parsed.jobs && parsed.jobs.length > 0) {
+        // Multi-language: store all jobs in state
+        setActiveJobs(parsed.jobs)
+        // Also update URL with first jobId for backward compatibility
+        const tab = searchParams.get('tab') || 'ai'
+        router.replace(`/learn?tab=${tab}&jobId=${parsed.jobs[0].jobId}`)
+      } else if (parsed.jobId) {
+        // Single job (backward-compatible)
+        setActiveJobs([{ jobId: parsed.jobId, language: 'en' }])
+        const tab = searchParams.get('tab') || 'ai'
+        router.replace(`/learn?tab=${tab}&jobId=${parsed.jobId}`)
+      } else {
+        throw new Error('No job ID received from server')
+      }
+
       showToast({
         title: 'Request submitted',
-        description: `Our AI is working on your strategy. Expect delivery at ${userEmail} soon.`,
+        description: parsed.message || `Strategy generation started for ${parsed.jobs?.length || 1} language(s). You can close this window.`,
         variant: 'success',
       })
 
-      setPreset('')
-      setMarket('forex')
-      setTimeframe('H1')
-      setRiskPerTrade('')
-      setMaxTrades('')
-      setInstruments('')
-      setFocus('')
-      setDetailLevel('')
-      setSelectedLanguages(['en'])
-      setConsent(false)
-      setConsentTerms(false)
-      setExperienceYears('')
-      setDepositBudget('')
-      setRiskTolerance('')
-      setTradingStyle('')
-      setMarkets(['Forex'])
+      // Don't reset form - user can modify and start new generation if needed
     } catch (error) {
       console.error('[AI Strategy] submission error:', error)
       showToast({
@@ -1249,25 +1501,89 @@ function AIStrategyForm() {
           </div>
 
           {/* CTA + preview note */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            <button
-              type="submit"
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={!consent || !consentTerms || isLoading || (session ? !hasEnoughTokens : false)}
-            >
-              {isLoading ? (
-                <>
-                  <span className="animate-spin">⏳</span>
-                  <span>Generating...</span>
-                </>
-              ) : (
-                <>
-                  <span>{tForm('submit')}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </>
+          <div className="space-y-3 pt-2">
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="submit"
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={!consent || !consentTerms || isGenerateDisabled}
+              >
+                {isLoading ? (
+                  <>
+                    <span className="animate-spin">⏳</span>
+                    <span>Generating...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{tForm('submit')}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </>
+                )}
+              </button>
+              {hasActiveJob && !showNewGenerationConfirm && (
+                <button
+                  type="button"
+                  onClick={handleStartNewGeneration}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-full border border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700 transition"
+                >
+                  Start new generation
+                </button>
               )}
-            </button>
-            <p className="text-[11px] text-slate-400">{tForm('output')}</p>
+              {showNewGenerationConfirm && (
+                <div className="flex items-center gap-2 text-[11px] text-amber-200">
+                  <span>This will start a new task and replace the current one.</span>
+                  <button
+                    type="button"
+                    onClick={handleConfirmNewGeneration}
+                    className="px-2 py-1 rounded bg-amber-500/20 border border-amber-500/50 hover:bg-amber-500/30"
+                  >
+                    Confirm
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setShowNewGenerationConfirm(false)}
+                    className="px-2 py-1 rounded bg-slate-700 border border-slate-600 hover:bg-slate-600"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+              <p className="text-[11px] text-slate-400">{tForm('output')}</p>
+            </div>
+
+            {/* Job Status UI - Support multiple jobs */}
+            {activeJobs.length > 0 ? (
+              <div className="space-y-2">
+                {activeJobs.map((job) => (
+                  <JobStatusBlock
+                    key={job.jobId}
+                    jobId={job.jobId}
+                    language={job.language}
+                    jobType="ai-strategy"
+                    onClear={activeJobs.length === 1 ? handleClearJobId : undefined}
+                  />
+                ))}
+                {activeJobs.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={handleClearJobId}
+                    className="text-[10px] text-slate-400 hover:text-slate-200 transition w-full text-center"
+                  >
+                    Clear all
+                  </button>
+                )}
+              </div>
+            ) : (
+              jobIdFromUrl &&
+              jobStatus && (
+                <JobStatusBlock
+                  jobId={jobIdFromUrl}
+                  language="en"
+                  jobType="ai-strategy"
+                  onClear={handleClearJobId}
+                />
+              )
+            )}
           </div>
 
         </form>

@@ -206,7 +206,7 @@ model CustomCourseRequest {
 model AiStrategyRun {
   id                     Int      @id @default(autoincrement())
   user_id                Int
-  status                 String // processing, ready, failed
+  status                 String // in_queue, processing, ready, failed
   status_stage           String?
   status_progress        Int?
   status_message         String?

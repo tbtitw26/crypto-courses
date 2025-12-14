@@ -4,15 +4,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
-import { generateAIStrategyComplete } from '@/lib/pdf/ai-strategy'
 import { getModelForFeature } from '@/lib/openai/client'
 import { z } from 'zod'
-import { sendPurchaseConfirmationEmail, sendCourseDeliveryEmail } from '@/lib/email'
-import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
-import { updateAiStrategyStatus } from '@/lib/pdf/ai-strategy-status-tracker'
+import { inngest } from '@/inngest/client'
+import type { AIStrategyRequestedEvent } from '@/inngest/types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+export const runtime = 'nodejs'
 
 // Base price: €30 = 3,000 tokens
 const BASE_PRICE_TOKENS = 3000
@@ -90,49 +89,168 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Deduct tokens immediately (reserve for this request)
-    await withPrismaRetry(() =>
-      prisma.user.update({
-        where: { id: userId },
-        data: {
-          balance: {
-            decrement: tokensCost,
-          },
-        },
-      })
+    // Step 1: Create job row(s) in Neon - one per language
+    const languages = data.languages || ['en']
+    
+    const strategyRuns = await Promise.all(
+      languages.map((lang) =>
+        withPrismaRetry(() =>
+          prisma.aiStrategyRun.create({
+            data: {
+              user_id: userId,
+              status: 'in_queue',
+              status_stage: 'queued',
+              status_progress: 0,
+              experience_years: data.experienceYears,
+              deposit_budget: data.depositBudget,
+              risk_tolerance: data.riskTolerance,
+              markets: data.markets,
+              trading_style: data.tradingStyle,
+              time_commitment: data.timeCommitment,
+              main_objective: data.mainObjective,
+              language: lang,
+              tokens_cost: tokensCost,
+              ai_model: getModelForFeature('strategy'),
+            },
+          })
+        )
+      )
     )
 
-    // Create AI Strategy Run record
-    const strategyRun = await withPrismaRetry(() =>
-      prisma.aiStrategyRun.create({
+    // Step 2: Deduct tokens from user balance
+    try {
+      await withPrismaRetry(() =>
+        prisma.user.update({
+          where: { id: userId },
+          data: {
+            balance: {
+              decrement: tokensCost,
+            },
+          },
+        })
+      )
+    } catch (tokenError) {
+      // If token deduction fails, mark all jobs as failed
+      await Promise.all(
+        strategyRuns.map((strategyRun) =>
+          withPrismaRetry(() =>
+            prisma.aiStrategyRun.update({
+              where: { id: strategyRun.id },
+              data: {
+                status: 'failed',
+                status_stage: 'error',
+                status_error: `Token deduction failed: ${tokenError instanceof Error ? tokenError.message : String(tokenError)}`,
+              },
+            })
+          )
+        )
+      )
+      return NextResponse.json(
+        { error: 'Failed to deduct tokens', message: 'Token deduction failed. Please try again.' },
+        { status: 500 }
+      )
+    }
+
+    // Step 3: Send Inngest events (one per job)
+    const requestedAt = new Date().toISOString()
+    const inngestEvents = strategyRuns.map((strategyRun) => ({
+      id: `ai_strategy/requested:${strategyRun.id}`, // Dedupe: prevents duplicate events for 24h
+      name: 'ai_strategy/requested' as const,
       data: {
-        user_id: userId,
-        status: 'processing',
-        experience_years: data.experienceYears,
-        deposit_budget: data.depositBudget,
-        risk_tolerance: data.riskTolerance,
+        jobId: strategyRun.id,
+        userId,
+        language: strategyRun.language as 'en' | 'ar',
+        requestedAt,
+        experienceYears: data.experienceYears,
+        depositBudget: data.depositBudget,
+        riskTolerance: data.riskTolerance,
         markets: data.markets,
-        trading_style: data.tradingStyle,
-        time_commitment: data.timeCommitment,
-        main_objective: data.mainObjective,
-        language: data.languages[0] || 'en',
-        tokens_cost: tokensCost,
-        ai_model: getModelForFeature('strategy'),
-      },
+        tradingStyle: data.tradingStyle,
+        timeCommitment: data.timeCommitment,
+        mainObjective: data.mainObjective,
+        market: data.market,
+        timeframe: data.timeframe,
+        riskPerTrade: data.riskPerTrade,
+        maxTrades: data.maxTrades,
+        instruments: data.instruments,
+        focus: data.focus,
+        detailLevel: data.detailLevel,
+        tokensCost,
+      } as AIStrategyRequestedEvent,
     }))
 
-    const response = NextResponse.json({
+    try {
+      // Send all events in batch
+      await Promise.all(
+        inngestEvents.map((event) => inngest.send(event))
+      )
+    } catch (inngestError) {
+      // If Inngest send fails, mark all jobs as failed and refund tokens
+      console.error('[AI Strategy API] Failed to send Inngest events:', {
+        strategyRunIds: strategyRuns.map((r) => r.id),
+        userId,
+        error: inngestError instanceof Error ? inngestError.message : String(inngestError),
+      })
+
+      // Mark all jobs as failed
+      await Promise.all(
+        strategyRuns.map((strategyRun) =>
+          withPrismaRetry(() =>
+            prisma.aiStrategyRun.update({
+              where: { id: strategyRun.id },
+              data: {
+                status: 'failed',
+                status_stage: 'error',
+                status_error: `Failed to enqueue job: ${inngestError instanceof Error ? inngestError.message : String(inngestError)}`,
+              },
+            })
+          )
+        )
+      )
+
+      // Refund tokens
+      try {
+        await withPrismaRetry(() =>
+          prisma.user.update({
+            where: { id: userId },
+            data: {
+              balance: {
+                increment: tokensCost,
+              },
+            },
+          })
+        )
+      } catch (refundError) {
+        console.error('[AI Strategy API] Failed to refund tokens after Inngest error:', refundError)
+        // Log but don't fail - admin can manually refund if needed
+      }
+
+      return NextResponse.json(
+        { error: 'Failed to enqueue jobs', message: 'Job creation failed. Tokens have been refunded.' },
+        { status: 500 }
+      )
+    }
+
+    // Step 4: Return response with jobs array
+    const jobs = strategyRuns.map((strategyRun) => ({
+      jobId: strategyRun.id,
+      language: strategyRun.language,
+    }))
+
+    // Backward-compatible: if single job, also include top-level jobId
+    const singleJob = jobs.length === 1 ? jobs[0] : null
+
+    return NextResponse.json({
       success: true,
-      id: strategyRun.id,
-      status: 'processing',
-      message: 'Strategy generation started. You can close this window.',
+      ok: true,
+      jobs, // New format: array of jobs
+      ...(singleJob && {
+        id: singleJob.jobId, // Backward-compatible
+        jobId: singleJob.jobId, // Backward-compatible
+      }),
+      status: 'in_queue',
+      message: `Strategy generation queued for ${jobs.length} language(s). You can close this window.`,
     })
-
-    generateStrategyInBackground(strategyRun.id, data, userId).catch((error) => {
-      console.error('[AI Strategy API] Background generation error (unhandled):', error)
-    })
-
-    return response
   } catch (error) {
     console.error('AI Strategy API error:', error)
     return NextResponse.json(
@@ -142,311 +260,4 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function generateStrategyInBackground(
-  strategyRunId: number,
-  data: z.infer<typeof aiStrategySchema>,
-  userId: number
-) {
-  const WATCHDOG_MS = 12 * 60 * 1000 // 12 minutes safety cutoff
-  const startedAt = new Date().toISOString()
-  let finished = false
-
-  const safeLog = (msg: string, payload?: Record<string, unknown>) => {
-    console.log(`[AI Strategy ${strategyRunId}] ${msg}`, payload || '')
-  }
-
-  const watchdog = setTimeout(async () => {
-    if (finished) return
-    try {
-      await updateAiStrategyStatus({
-        strategyRunId,
-        stage: 'error',
-        progress: 100,
-        message: 'Watchdog timeout during generation',
-        error: 'watchdog_timeout',
-        completedAt: new Date().toISOString(),
-      })
-      await prisma.aiStrategyRun.update({
-        where: { id: strategyRunId },
-        data: {
-          status: 'failed',
-          status_stage: 'error',
-          status_progress: 100,
-          status_message: 'Watchdog timeout during generation',
-          status_error: 'watchdog_timeout',
-        },
-      })
-      console.error('[AI Strategy API] Watchdog timeout - marked as failed', { strategyRunId })
-    } catch (err) {
-      console.error('[AI Strategy API] Watchdog update failed', err)
-    }
-  }, WATCHDOG_MS)
-
-  try {
-    await updateAiStrategyStatus({
-      strategyRunId,
-      stage: 'generating_en',
-      progress: 10,
-      message: 'Generating English strategy...',
-      startedAt,
-    })
-    safeLog('Stage: generating_en (starting OpenAI)')
-
-    const { logger, setLogContext } = await import('@/lib/pdf/logger')
-    setLogContext(strategyRunId, 'ai-strategy') // Set context for all subsequent logs
-    await logger.info(`[AI Strategy ${strategyRunId}] Starting generation...`, {
-      strategyRunId,
-      userId,
-      languages: data.languages,
-      mainObjective: data.mainObjective.substring(0, 120),
-    })
-
-    const result = await generateAIStrategyComplete({
-      experienceYears: data.experienceYears,
-      depositBudget: data.depositBudget,
-      riskTolerance: data.riskTolerance,
-      markets: data.markets,
-      tradingStyle: data.tradingStyle,
-      timeCommitment: data.timeCommitment,
-      mainObjective: data.mainObjective,
-      market: data.market,
-      timeframe: data.timeframe,
-      riskPerTrade: data.riskPerTrade,
-      maxTrades: data.maxTrades,
-      instruments: data.instruments,
-      focus: data.focus,
-      detailLevel: data.detailLevel,
-      languages: data.languages,
-    })
-
-    await updateAiStrategyStatus({
-      strategyRunId,
-      courseId: result.courseId,
-      stage: 'generating_pdf_en',
-      progress: 50,
-      message: 'English strategy generated, proceeding with assets...',
-      warnings: result.warnings,
-    })
-    safeLog('Stage: generating_pdf_en (post EN content)', {
-      courseId: result.courseId,
-      warnings: result.warnings,
-    })
-
-    await updateAiStrategyStatus({
-      strategyRunId,
-      courseId: result.courseId,
-      stage: 'generating_pdf_en',
-      progress: 70,
-      message: 'Strategy generated, preparing PDFs...',
-      warnings: result.warnings,
-      intermediateFiles: {
-        courseEnJson: 'generated',
-        ...(result.courseAr && { courseArJson: 'generated' }),
-        coverImage: result.coverImagePath,
-        diagrams: result.diagramImagePaths,
-      },
-    })
-    safeLog('Stage: generating_pdf_en', {
-      courseId: result.courseId,
-      cover: result.coverImagePath,
-      diagrams: result.diagramImagePaths,
-    })
-
-    // Store PDF URLs (prefer EN, fallback to AR if EN not available)
-    const pdfUrl = result.pdfEnPath || result.pdfArPath || null
-
-    const updatedStrategyRun = await prisma.aiStrategyRun.update({
-      where: { id: strategyRunId },
-      data: {
-        status: 'ready',
-        rendered_text: JSON.stringify(result.courseEn),
-        ai_response_structured: result.courseEn as any,
-        pdf_url: pdfUrl, // Store Supabase path for download
-        prompt_tokens: result.tokens?.prompt ?? null,
-        completion_tokens: result.tokens?.completion ?? null,
-        total_tokens: result.tokens?.total ?? null,
-        ai_model: result.model ?? getModelForFeature('strategy'),
-      },
-      include: {
-        user: {
-          select: {
-            first_name: true,
-            last_name: true,
-            email: true,
-          },
-        },
-      },
-    })
-
-    await updateAiStrategyStatus({
-      strategyRunId,
-      courseId: result.courseId,
-      stage: 'generating_pdf_en',
-      progress: 80,
-      message: 'Generation persisted, sending emails...',
-      warnings: result.warnings,
-    })
-    safeLog('Stage: persisted', {
-      courseId: result.courseId,
-      tokens: result.tokens,
-      model: result.model,
-    })
-
-    await updateAiStrategyStatus({
-      strategyRunId,
-      courseId: result.courseId,
-      stage: 'sending_emails',
-      progress: 85,
-      message: 'Sending emails...',
-      warnings: result.warnings,
-    })
-
-    try {
-      const locale = (data.languages[0] === 'ar' ? 'ar' : 'en') as 'en' | 'ar'
-      const invoiceNumber = `INV-${updatedStrategyRun.created_at.getFullYear()}-${updatedStrategyRun.id
-        .toString()
-        .padStart(6, '0')}`
-
-      const receiptData = {
-        id: `ai-${updatedStrategyRun.id}`,
-        type: 'AI strategy',
-        invoiceNumber,
-        date: updatedStrategyRun.created_at,
-        amount: 0,
-        tokens: -updatedStrategyRun.tokens_cost,
-        description: 'AI strategy generation',
-        markets: updatedStrategyRun.markets,
-        user: updatedStrategyRun.user,
-      }
-
-      // Try invoice PDF (1 retry if null)
-      let invoicePdfBuffer = await generateReceiptPdf(receiptData)
-      if (!invoicePdfBuffer) {
-        console.warn('[AI Strategy API] Invoice PDF null, retrying once...')
-        invoicePdfBuffer = await generateReceiptPdf(receiptData)
-      }
-
-      await sendPurchaseConfirmationEmail({
-        type: 'ai-strategy',
-        transactionId: `ai-${updatedStrategyRun.id}`,
-        userEmail: updatedStrategyRun.user.email,
-        userName: `${updatedStrategyRun.user.first_name} ${updatedStrategyRun.user.last_name || ''}`.trim(),
-        locale,
-        invoicePdfBuffer: invoicePdfBuffer ?? undefined, // null -> undefined (no attachment)
-        invoiceNumber,
-        tokens: -updatedStrategyRun.tokens_cost,
-        amountGbp: 0,
-      })
-
-      if (!invoicePdfBuffer) {
-        console.warn('[AI Strategy API] PDF invoice could not be generated, email sent without attachment')
-      }
-    } catch (emailError: any) {
-      console.error('[AI Strategy API] Error sending invoice email:', {
-        userId,
-        strategyRunId,
-        error: emailError.message,
-        stack: emailError.stack,
-      })
-    }
-
-    try {
-      const locale = (data.languages[0] === 'ar' ? 'ar' : 'en') as 'en' | 'ar'
-      const pdfBuffers: Array<{ buffer: Buffer; filename: string; language: 'en' | 'ar' }> = []
-
-      if (result.pdfEnBuffer) {
-        const filename = result.pdfEnPath
-          ? result.pdfEnPath.split('/').pop() || `${result.courseId}-en.pdf`
-          : `${result.courseId}-en.pdf`
-        pdfBuffers.push({
-          buffer: result.pdfEnBuffer,
-          filename,
-          language: 'en',
-        })
-      }
-
-      if (result.pdfArBuffer) {
-        const filename = result.pdfArPath
-          ? result.pdfArPath.split('/').pop() || `${result.courseId}-ar.pdf`
-          : `${result.courseId}-ar.pdf`
-        pdfBuffers.push({
-          buffer: result.pdfArBuffer,
-          filename,
-          language: 'ar',
-        })
-      }
-
-      if (pdfBuffers.length > 0) {
-        await sendCourseDeliveryEmail({
-          type: 'ai-strategy',
-          userEmail: updatedStrategyRun.user.email,
-          userName: `${updatedStrategyRun.user.first_name} ${updatedStrategyRun.user.last_name || ''}`.trim(),
-          locale,
-          courseId: result.courseId,
-          pdfBuffers,
-        })
-      } else {
-        console.warn('[AI Strategy API] No PDF buffers to send:', {
-          userId,
-          strategyRunId,
-        })
-      }
-    } catch (emailError: any) {
-      console.error('[AI Strategy API] Error sending strategy delivery email:', {
-        userId,
-        strategyRunId,
-        error: emailError.message,
-        stack: emailError.stack,
-      })
-    }
-
-    await updateAiStrategyStatus({
-      strategyRunId,
-      courseId: result.courseId,
-      stage: 'completed',
-      progress: 100,
-      message: 'Strategy delivered via email',
-      warnings: result.warnings,
-      completedAt: new Date().toISOString(),
-    })
-    safeLog('Stage: completed', { courseId: result.courseId })
-    finished = true
-    clearTimeout(watchdog)
-  } catch (error) {
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : typeof error === 'object'
-        ? JSON.stringify(error)
-        : String(error)
-    await updateAiStrategyStatus({
-      strategyRunId,
-      stage: 'error',
-      progress: 100,
-      message: 'Strategy generation failed',
-      error: errorMessage,
-      completedAt: new Date().toISOString(),
-    })
-
-    await prisma.aiStrategyRun.update({
-      where: { id: strategyRunId },
-      data: {
-        status: 'failed',
-        status_stage: 'error',
-        status_progress: 100,
-        status_message: 'Strategy generation failed',
-        status_error: errorMessage,
-      },
-    })
-
-    console.error('[AI Strategy API] Background generation error:', {
-      strategyRunId,
-      userId,
-      error: errorMessage,
-      stack: error instanceof Error ? error.stack : undefined,
-    })
-    finished = true
-    clearTimeout(watchdog)
-  }
-}
 

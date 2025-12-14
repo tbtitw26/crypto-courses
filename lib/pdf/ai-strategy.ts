@@ -57,6 +57,9 @@ export async function generateAIStrategyComplete(params: {
     // Step 1: Generate English strategy
     logger.startTiming('openai-generation')
     await logger.info('📝 Step 1/5: Generating AI Strategy content via OpenAI...')
+    // Get language from params (default to 'en')
+    const language = params.languages?.[0] || 'en'
+    
     const { course: courseEn, tokens, model } = await generateAIStrategy({
       experienceYears: params.experienceYears,
       depositBudget: params.depositBudget,
@@ -72,7 +75,8 @@ export async function generateAIStrategyComplete(params: {
       instruments: params.instruments,
       focus: params.focus,
       detailLevel: params.detailLevel,
-      language: 'en',
+      language,
+      languages: params.languages, // Pass languages array for consistency
     })
     await logger.endTiming('openai-generation', '✅ Step 1/5: AI Strategy content generated')
 

@@ -428,7 +428,8 @@
     },
     "actions": {
       "viewBrief": "عرض الملخص",
-      "downloadPDF": "تحميل PDF"
+      "downloadPDF": "تحميل PDF",
+      "pdfPending": "PDF قيد الانتظار"
     },
     "emptyState": {
       "title": "لم يتم العثور على دورات",

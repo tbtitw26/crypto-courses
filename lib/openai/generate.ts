@@ -2,13 +2,12 @@
 
 import { getOpenAIClient, getModelForFeature, OPENAI_MODELS } from './client'
 import {
-  SYSTEM_MESSAGE_CUSTOM_COURSE,
-  SYSTEM_MESSAGE_AI_STRATEGY,
+  buildSystemMessageCompact,
   buildCustomCoursePrompt,
   buildAIStrategyPrompt,
 } from './prompts'
 import { config } from '@/lib/config'
-import { COURSE_JSON_SCHEMA, CUSTOM_COURSE_JSON_SCHEMA, AI_STRATEGY_JSON_SCHEMA } from '@/lib/pdf/schema'
+import { COURSE_JSON_SCHEMA, CUSTOM_COURSE_JSON_SCHEMA, AI_STRATEGY_JSON_SCHEMA, COMPACT_CUSTOM_COURSE_JSON_SCHEMA, COMPACT_AI_STRATEGY_JSON_SCHEMA } from '@/lib/pdf/schema'
 import { GeneratedCourse } from '@/lib/pdf/types'
 import { logger } from '@/lib/pdf/logger'
 
@@ -45,6 +44,7 @@ export async function generateAIStrategy(params: {
   focus?: string
   detailLevel?: string
   language?: string
+  languages?: string[] // Added for consistency with Custom Course
 }): Promise<{ course: GeneratedCourse; tokens: { prompt: number; completion: number; total: number }; model: string }> {
   const client = getOpenAIClient()
   const model = getModelForFeature('strategy')
@@ -53,7 +53,11 @@ export async function generateAIStrategy(params: {
 
   // Generate course ID from main objective
   const courseId = generateCourseId(params.mainObjective.substring(0, 50))
-  const userPrompt = buildAIStrategyPrompt({ ...params, courseId })
+  
+  // Get language from params (default to 'en')
+  const language = (params.language || 'en') as 'en' | 'ar'
+  const systemPrompt = buildSystemMessageCompact(language)
+  const userPrompt = buildAIStrategyPrompt({ ...params, courseId, languages: params.language ? [params.language] : undefined })
 
   const attempts = 2
   let lastError: any = null
@@ -68,19 +72,19 @@ export async function generateAIStrategy(params: {
         {
           model,
           messages: [
-            { role: 'system', content: SYSTEM_MESSAGE_AI_STRATEGY },
+            { role: 'system', content: systemPrompt },
             { role: 'user', content: userPrompt },
           ],
           temperature: settings.temperature,
           max_tokens: settings.maxTokens,
-          response_format: {
-            type: 'json_schema',
-            json_schema: {
-              name: 'avenqor_ai_strategy_v1',
-              strict: true,
-              schema: AI_STRATEGY_JSON_SCHEMA as any,
-            },
+        response_format: {
+          type: 'json_schema',
+          json_schema: {
+            name: 'avenqor_ai_strategy_compact_v1',
+            strict: true,
+            schema: COMPACT_AI_STRATEGY_JSON_SCHEMA as any,
           },
+        },
         },
         { signal: controller.signal }
       )
@@ -188,6 +192,10 @@ export async function generateCustomCourse(params: {
 
   // Generate course ID from goals (main objective)
   const courseId = generateCourseId(params.goalsFreeText.substring(0, 50))
+  
+  // Get language from params (default to 'en')
+  const language = (params.languages?.[0] || 'en') as 'en' | 'ar'
+  const systemPrompt = buildSystemMessageCompact(language)
   const userPrompt = buildCustomCoursePrompt({ ...params, courseId })
 
   try {
@@ -198,7 +206,7 @@ export async function generateCustomCourse(params: {
       {
         model,
         messages: [
-          { role: 'system', content: SYSTEM_MESSAGE_CUSTOM_COURSE },
+          { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt },
         ],
         temperature: settings.temperature,
@@ -206,9 +214,9 @@ export async function generateCustomCourse(params: {
         response_format: {
           type: 'json_schema',
           json_schema: {
-            name: 'avenqor_custom_course_v1',
+            name: 'avenqor_custom_course_compact_v1',
             strict: true,
-            schema: CUSTOM_COURSE_JSON_SCHEMA as any,
+            schema: COMPACT_CUSTOM_COURSE_JSON_SCHEMA as any,
           },
         },
       },

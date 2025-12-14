@@ -16,7 +16,7 @@ const supabaseBuckets = {
   courseMedia: process.env.SUPABASE_BUCKET_COURSE_MEDIA || 'course-madia',
 }
 
-const supabaseSignedUrlTtlPdf = parseInt(process.env.SUPABASE_SIGNED_URL_TTL_PDF || '86400', 10)
+const supabaseSignedUrlTtlPdf = parseInt(process.env.SUPABASE_SIGNED_URL_TTL_PDF || '3600', 10)
 
 export const config = {
   site: {
@@ -28,7 +28,7 @@ export const config = {
     useStorage: useSupabaseStorage,
     buckets: supabaseBuckets,
     signedUrlTtl: {
-      pdf: Number.isNaN(supabaseSignedUrlTtlPdf) ? 86400 : supabaseSignedUrlTtlPdf,
+      pdf: Number.isNaN(supabaseSignedUrlTtlPdf) ? 3600 : supabaseSignedUrlTtlPdf,
     },
   },
   openai: {
@@ -51,8 +51,8 @@ export const config = {
     // Generation settings
     settings: {
       strategy: {
-        temperature: 0.7, // Balanced for creative but structured output
-        maxTokens: 16384, // GPT-4o mini supports up to 16K output tokens
+        temperature: 0.4, // Lower temperature for more consistent, less verbose output (compact format)
+        maxTokens: 8000, // Compact format: 2-3 pages max (~8000 tokens with margin)
       },
       course: {
         temperature: 0.3, // Lower temperature for structured JSON output
@@ -60,7 +60,7 @@ export const config = {
       },
       customCourse: {
         temperature: 0.3, // Lower temperature for structured JSON output
-        maxTokens: 32768, // GPT-4.1-mini supports up to 32K output tokens (double the limit of gpt-4o)
+        maxTokens: 8000, // Compact format: 2-3 pages max (~8000 tokens with margin)
       },
       image: {
         size: '1024x1024', // GPT Image 1 mini: '1024x1024', '1024x1536', '1536x1024', 'auto'

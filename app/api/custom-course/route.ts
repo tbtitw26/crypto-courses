@@ -4,17 +4,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
-import { GenerationError } from '@/lib/openai/generate'
-import { generateCustomCourseComplete } from '@/lib/pdf/custom-course'
 import { getModelForFeature } from '@/lib/openai/client'
-import { config } from '@/lib/config'
 import { z } from 'zod'
-import { sendPurchaseConfirmationEmail, sendCourseDeliveryEmail } from '@/lib/email'
-import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
-import { updateCustomCourseStatus } from '@/lib/pdf/custom-course-status-tracker'
+import { inngest } from '@/inngest/client'
+import type { CustomCourseRequestedEvent } from '@/inngest/types'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+export const runtime = 'nodejs'
 
 // Base price: €200 = 20,000 tokens
 const BASE_PRICE_TOKENS = 20000
@@ -70,7 +67,7 @@ export async function POST(request: NextRequest) {
     const user = await withPrismaRetry(() =>
       prisma.user.findUnique({
         where: { id: userId },
-        select: { balance: true },
+        select: { balance: true, email: true },
       })
     )
 
@@ -89,80 +86,171 @@ export async function POST(request: NextRequest) {
     // Calculate estimated ready time (for testing: set to now, will be changed back to 48-96 hours later)
     const estimatedReadyAt = new Date(Date.now() + 5 * 60 * 1000) // For testing: 5 minutes from now (was: 72 hours)
 
-    // Deduct tokens from user balance FIRST (before creating request)
-    await withPrismaRetry(() =>
-      prisma.user.update({
-        where: { id: userId },
-        data: {
-          balance: {
-            decrement: tokensCost,
-          },
-        },
-      })
+    // Step 1: Create job row(s) in Neon - one per language
+    const languages = data.languages || ['en']
+    const userEmail = user.email || ''
+    
+    const courseRequests = await Promise.all(
+      languages.map((lang) =>
+        withPrismaRetry(() =>
+          prisma.customCourseRequest.create({
+            data: {
+              user_id: userId,
+              status: 'in_queue',
+              status_stage: 'queued',
+              status_progress: 0,
+              experience_years: data.experienceYears,
+              deposit_budget: data.depositBudget,
+              risk_tolerance: data.riskTolerance,
+              markets: data.markets,
+              trading_style: data.tradingStyle,
+              goals_free_text: data.goalsFreeText,
+              additional_notes: data.additionalNotes,
+              language: lang,
+              tokens_cost: tokensCost,
+              estimated_ready_at: estimatedReadyAt,
+              ai_model: getModelForFeature('course'),
+            },
+            include: {
+              user: {
+                select: {
+                  first_name: true,
+                  last_name: true,
+                  email: true,
+                },
+              },
+            },
+          })
+        )
+      )
     )
 
-    // Create Custom Course Request record with processing status
-    const courseRequest = await withPrismaRetry(() =>
-      prisma.customCourseRequest.create({
-      data: {
-        user_id: userId,
-        status: 'processing',
-        experience_years: data.experienceYears,
-        deposit_budget: data.depositBudget,
-        risk_tolerance: data.riskTolerance,
-        markets: data.markets,
-        trading_style: data.tradingStyle,
-        goals_free_text: data.goalsFreeText,
-        additional_notes: data.additionalNotes,
-        language: data.languages[0] || 'en', // Store first language for backward compatibility
-        tokens_cost: tokensCost,
-        estimated_ready_at: estimatedReadyAt,
-        ai_model: getModelForFeature('course'),
-      },
-      include: {
-        user: {
-          select: {
-            first_name: true,
-            last_name: true,
-            email: true,
+    // Step 2: Deduct tokens from user balance
+    try {
+      await withPrismaRetry(() =>
+        prisma.user.update({
+          where: { id: userId },
+          data: {
+            balance: {
+              decrement: tokensCost,
+            },
           },
-        },
-      },
-      })
-    )
-
-    // Return response immediately (don't wait for generation)
-    // Generation will happen in background
-    const response = NextResponse.json({
-      success: true,
-      id: courseRequest.id,
-      status: 'processing',
-      message: 'Course generation started. You can close this window.',
-      estimatedReadyAt: estimatedReadyAt.toISOString(),
-    })
-
-    // Start generation in background (don't await - let it run asynchronously)
-    // This allows the response to be sent immediately
-    generateCourseInBackground(courseRequest.id, data, tokensCost, courseRequest.user.email).catch((error) => {
-      console.error('[Custom Course API] Background generation error:', {
-        courseRequestId: courseRequest.id,
-        userId,
-        error: error instanceof Error ? error.message : String(error),
-        stack: error instanceof Error ? error.stack : undefined,
-      })
-
-      // Update status to failed
-      withPrismaRetry(() =>
+        })
+      )
+    } catch (tokenError) {
+      // If token deduction fails, mark job as failed
+      await withPrismaRetry(() =>
         prisma.customCourseRequest.update({
           where: { id: courseRequest.id },
-          data: { status: 'failed' },
+          data: {
+            status: 'failed',
+            status_stage: 'error',
+            status_error: `Token deduction failed: ${tokenError instanceof Error ? tokenError.message : String(tokenError)}`,
+          },
         })
-      ).catch((updateError) => {
-        console.error('[Custom Course API] Failed to update status to failed:', updateError)
-      })
-    })
+      )
+      return NextResponse.json(
+        { error: 'Failed to deduct tokens', message: 'Token deduction failed. Please try again.' },
+        { status: 500 }
+      )
+    }
 
-    return response
+    // Step 3: Send Inngest events (one per job)
+    const requestedAt = new Date().toISOString()
+    const inngestEvents = courseRequests.map((courseRequest) => ({
+      id: `custom_course/requested:${courseRequest.id}`, // Dedupe: prevents duplicate events for 24h
+      name: 'custom_course/requested' as const,
+      data: {
+        jobId: courseRequest.id,
+        userId,
+        language: courseRequest.language as 'en' | 'ar',
+        requestedAt,
+        experienceYears: data.experienceYears,
+        depositBudget: data.depositBudget,
+        riskTolerance: data.riskTolerance,
+        markets: data.markets,
+        tradingStyle: data.tradingStyle,
+        timeCommitment: data.timeCommitment,
+        goalsFreeText: data.goalsFreeText,
+        additionalNotes: data.additionalNotes,
+        tokensCost,
+        userEmail: courseRequest.user.email,
+      } as CustomCourseRequestedEvent,
+    }))
+
+    try {
+      // Send all events in batch
+      await Promise.all(
+        inngestEvents.map((event) => inngest.send(event))
+      )
+    } catch (inngestError) {
+      // If Inngest send fails, mark all jobs as failed and refund tokens
+      console.error('[Custom Course API] Failed to send Inngest events:', {
+        courseRequestIds: courseRequests.map((r) => r.id),
+        userId,
+        error: inngestError instanceof Error ? inngestError.message : String(inngestError),
+      })
+
+      // Mark all jobs as failed
+      await Promise.all(
+        courseRequests.map((courseRequest) =>
+          withPrismaRetry(() =>
+            prisma.customCourseRequest.update({
+              where: { id: courseRequest.id },
+              data: {
+                status: 'failed',
+                status_stage: 'error',
+                status_error: `Failed to enqueue job: ${inngestError instanceof Error ? inngestError.message : String(inngestError)}`,
+              },
+            })
+          )
+        )
+      )
+
+      // Refund tokens
+      try {
+        await withPrismaRetry(() =>
+          prisma.user.update({
+            where: { id: userId },
+            data: {
+              balance: {
+                increment: tokensCost,
+              },
+            },
+          })
+        )
+      } catch (refundError) {
+        console.error('[Custom Course API] Failed to refund tokens after Inngest error:', refundError)
+        // Log but don't fail - admin can manually refund if needed
+      }
+
+      return NextResponse.json(
+        { error: 'Failed to enqueue jobs', message: 'Job creation failed. Tokens have been refunded.' },
+        { status: 500 }
+      )
+    }
+
+    // Step 4: Return response with jobs array
+    const jobs = courseRequests.map((courseRequest) => ({
+      jobId: courseRequest.id,
+      language: courseRequest.language,
+    }))
+
+    // Backward-compatible: if single job, also include top-level jobId
+    const singleJob = jobs.length === 1 ? jobs[0] : null
+
+    return NextResponse.json({
+      success: true,
+      ok: true,
+      jobs, // New format: array of jobs
+      ...(singleJob && {
+        id: singleJob.jobId, // Backward-compatible
+        jobId: singleJob.jobId, // Backward-compatible
+      }),
+      status: 'in_queue',
+      message: `Course generation queued for ${jobs.length} language(s). You can close this window.`,
+      estimatedReadyAt: estimatedReadyAt.toISOString(),
+    })
   } catch (error: any) {
     console.error('Custom Course API error:', error)
     return NextResponse.json(
@@ -172,508 +260,4 @@ export async function POST(request: NextRequest) {
   }
 }
 
-/**
- * Generate course in background (async, non-blocking)
- */
-async function generateCourseInBackground(
-  courseRequestId: number,
-  data: z.infer<typeof customCourseSchema>,
-  tokensCost: number,
-  userEmail: string
-) {
-  const WATCHDOG_MS = 12 * 60 * 1000 // 12 minutes safety cutoff (same as AI Strategy)
-  const startedAt = new Date().toISOString()
-  let finished = false
-  
-  // Get userId early for logging (in case of errors)
-  let userIdForLogging: number | null = null
-  try {
-    const courseRequestForUserId = await withPrismaRetry(() =>
-      prisma.customCourseRequest.findUnique({
-        where: { id: courseRequestId },
-        select: { user_id: true },
-      })
-    )
-    userIdForLogging = courseRequestForUserId?.user_id || null
-  } catch (error) {
-    // If we can't get userId, continue anyway - it's just for logging
-    console.warn('[Custom Course API] Could not get userId for logging:', error)
-  }
-
-  const safeLog = (msg: string, payload?: Record<string, unknown>) => {
-    console.log(`[Custom Course ${courseRequestId}] ${msg}`, payload || '')
-  }
-
-  // Watchdog timeout to prevent hanging generations
-  const watchdog = setTimeout(async () => {
-    if (finished) return
-    try {
-      await updateCustomCourseStatus({
-        courseRequestId,
-        stage: 'error',
-        progress: 100,
-        message: 'Watchdog timeout during generation',
-        error: 'watchdog_timeout',
-        completedAt: new Date().toISOString(),
-      })
-      await withPrismaRetry(() =>
-        prisma.customCourseRequest.update({
-          where: { id: courseRequestId },
-          data: {
-            status: 'failed',
-            status_stage: 'error',
-            status_progress: 100,
-            status_message: 'Watchdog timeout during generation',
-            status_error: 'watchdog_timeout',
-          },
-        })
-      )
-      console.error('[Custom Course API] Watchdog timeout - marked as failed', { courseRequestId })
-    } catch (err) {
-      console.error('[Custom Course API] Watchdog update failed', err)
-    }
-  }, WATCHDOG_MS)
-  
-  try {
-    await updateCustomCourseStatus({
-      courseRequestId,
-      stage: 'generating_en',
-      progress: 10,
-      message: 'Generating English course content...',
-      startedAt,
-    })
-    safeLog('Stage: generating_en (starting OpenAI)')
-
-    // Import logger for detailed logging
-    const { logger, setLogContext } = await import('@/lib/pdf/logger')
-    setLogContext(courseRequestId, 'custom-course') // Set context for all subsequent logs
-    await logger.info(`[Custom Course ${courseRequestId}] Starting generation...`, {
-      courseRequestId,
-      userId: userIdForLogging,
-      languages: data.languages,
-      goalsFreeText: data.goalsFreeText.substring(0, 100),
-    })
-
-    // Generate complete Custom Course with PDFs
-    // Note: generateCustomCourseComplete handles cover, diagrams, translation, and PDFs internally
-    const result = await generateCustomCourseComplete({
-        courseRequestId, // Pass for logging
-        experienceYears: data.experienceYears,
-        depositBudget: data.depositBudget,
-        riskTolerance: data.riskTolerance,
-        markets: data.markets,
-        tradingStyle: data.tradingStyle,
-        timeCommitment: data.timeCommitment,
-        goalsFreeText: data.goalsFreeText,
-        additionalNotes: data.additionalNotes,
-        languages: data.languages,
-      })
-
-      await updateCustomCourseStatus({
-        courseRequestId,
-        courseId: result.courseId,
-        stage: 'generating_pdf_en',
-        progress: 50,
-        message: 'English course generated, proceeding with assets...',
-        warnings: result.warnings,
-      })
-      safeLog('Stage: generating_pdf_en (post EN content)', {
-        courseId: result.courseId,
-        warnings: result.warnings,
-      })
-
-      await updateCustomCourseStatus({
-        courseRequestId,
-        courseId: result.courseId,
-        stage: 'generating_pdf_en',
-        progress: 70,
-        message: 'Course generated, preparing PDFs...',
-        warnings: result.warnings,
-        intermediateFiles: {
-          courseEnJson: 'generated',
-          ...(result.courseAr && { courseArJson: 'generated' }),
-          coverImage: result.coverImagePath,
-          diagrams: result.diagramImagePaths,
-        },
-      })
-      safeLog('Stage: generating_pdf_en', {
-        courseId: result.courseId,
-        cover: result.coverImagePath,
-        diagrams: result.diagramImagePaths,
-      })
-
-      // Store PDF URLs (array for multiple languages)
-      const pdfUrls: string[] = []
-      if (result.pdfEnPath) pdfUrls.push(result.pdfEnPath)
-      if (result.pdfArPath) pdfUrls.push(result.pdfArPath)
-
-      // Get user data for emails
-      const courseRequestWithUser = await withPrismaRetry(() =>
-        prisma.customCourseRequest.findUnique({
-          where: { id: courseRequestId },
-          include: {
-            user: {
-              select: {
-                id: true,
-                first_name: true,
-                last_name: true,
-                email: true,
-              },
-            },
-          },
-        })
-      )
-
-      if (!courseRequestWithUser) {
-        throw new Error(`Course request ${courseRequestId} not found`)
-      }
-
-      // Get userId from courseRequestWithUser for logging
-      const userId = courseRequestWithUser.user.id
-
-      await updateCustomCourseStatus({
-        courseRequestId,
-        courseId: result.courseId,
-        stage: 'generating_pdf_en',
-        progress: 80,
-        message: 'Generation persisted, sending emails...',
-        warnings: result.warnings,
-      })
-      safeLog('Stage: persisted', {
-        courseId: result.courseId,
-        warnings: result.warnings,
-      })
-
-      // Update course request with results (status: ready)
-      const updatedCourseRequest = await withPrismaRetry(() =>
-        prisma.customCourseRequest.update({
-          where: { id: courseRequestId },
-          data: {
-            status: 'ready',
-            ai_response_structured: result.courseEn as any, // Store full course structure
-            ai_prompt: JSON.stringify({
-              experienceYears: data.experienceYears,
-              depositBudget: data.depositBudget,
-              riskTolerance: data.riskTolerance,
-              markets: data.markets,
-              tradingStyle: data.tradingStyle,
-              goalsFreeText: data.goalsFreeText,
-              languages: data.languages,
-            }),
-            pdf_url: pdfUrls.length > 0 ? pdfUrls[0] : undefined, // Store first PDF for backward compatibility
-          },
-          include: {
-            user: {
-              select: {
-                id: true,
-                first_name: true,
-                last_name: true,
-                email: true,
-              },
-            },
-          },
-        })
-      )
-
-      // Update userIdForLogging if we got it from updatedCourseRequest
-      if (updatedCourseRequest.user.id) {
-        userIdForLogging = updatedCourseRequest.user.id
-      }
-
-      await updateCustomCourseStatus({
-        courseRequestId,
-        courseId: result.courseId,
-        stage: 'sending_emails',
-        progress: 85,
-        message: 'Sending emails...',
-      })
-
-      // Send email confirmation with invoice (non-blocking)
-      try {
-        const locale = (data.languages[0] === 'ar' ? 'ar' : 'en') as 'en' | 'ar'
-
-        // Generate invoice PDF (with retry)
-        const invoiceNumber = `INV-${updatedCourseRequest.created_at.getFullYear()}-${updatedCourseRequest.id.toString().padStart(6, '0')}`
-        const receiptData = {
-          id: `custom-${updatedCourseRequest.id}`,
-          type: 'Custom course',
-          invoiceNumber,
-          date: updatedCourseRequest.created_at,
-          amount: 0, // Paid with tokens
-          tokens: -updatedCourseRequest.tokens_cost,
-          description: 'Custom course request',
-          markets: updatedCourseRequest.markets,
-          user: updatedCourseRequest.user,
-        }
-
-        // Try invoice PDF generation (1 retry if null)
-        let invoicePdfBuffer = await generateReceiptPdf(receiptData)
-        if (!invoicePdfBuffer) {
-          safeLog('Invoice PDF null, retrying once...')
-          invoicePdfBuffer = await generateReceiptPdf(receiptData)
-        }
-
-        // Send email with retry (up to 2 attempts)
-        let emailSent = false
-        let lastEmailError: any = null
-        for (let attempt = 0; attempt < 2; attempt++) {
-          try {
-            await sendPurchaseConfirmationEmail({
-              type: 'custom-course',
-              transactionId: `custom-${updatedCourseRequest.id}`,
-              userEmail: updatedCourseRequest.user.email,
-              userName: `${updatedCourseRequest.user.first_name} ${updatedCourseRequest.user.last_name || ''}`.trim(),
-              locale,
-              invoicePdfBuffer: invoicePdfBuffer ?? undefined, // null -> undefined (no attachment)
-              invoiceNumber,
-              tokens: -updatedCourseRequest.tokens_cost,
-              amountGbp: 0,
-              customCourseDeliveryInfo: false, // We'll send PDF separately
-            })
-            emailSent = true
-            break // Success - exit retry loop
-          } catch (emailAttemptError: any) {
-            lastEmailError = emailAttemptError
-            if (attempt < 1) {
-              // Wait before retry (exponential backoff)
-              await new Promise((resolve) => setTimeout(resolve, 1000 * (attempt + 1)))
-              continue
-            }
-          }
-        }
-
-        if (!emailSent) {
-          throw lastEmailError || new Error('Failed to send invoice email after retries')
-        }
-
-        if (!invoicePdfBuffer) {
-          safeLog('PDF invoice could not be generated, email sent without attachment')
-        }
-
-        safeLog('Invoice email sent successfully', {
-          userId: userIdForLogging,
-          transactionId: `custom-${updatedCourseRequest.id}`,
-          locale,
-        })
-        await logger.info('[Custom Course API] Invoice email sent successfully', {
-          userId: userIdForLogging,
-          transactionId: `custom-${updatedCourseRequest.id}`,
-          locale,
-        })
-      } catch (emailError: any) {
-        // Log error but don't block the purchase
-        const { logger: emailLogger } = await import('@/lib/pdf/logger')
-        await emailLogger.error('[Custom Course API] Error sending invoice email:', {
-          userId: userIdForLogging,
-          transactionId: `custom-${updatedCourseRequest.id}`,
-          error: emailError.message,
-          stack: emailError.stack,
-        })
-        console.error('[Custom Course API] Error sending invoice email:', {
-          userId: userIdForLogging,
-          transactionId: `custom-${updatedCourseRequest.id}`,
-          error: emailError.message,
-          stack: emailError.stack,
-        })
-      }
-
-      // Send course PDF delivery email (non-blocking)
-      try {
-        const locale = (data.languages[0] === 'ar' ? 'ar' : 'en') as 'en' | 'ar'
-        
-        // Build PDF attachments array
-        const pdfBuffers: Array<{ buffer: Buffer; filename: string; language: 'en' | 'ar' }> = []
-        
-        if (result.pdfEnBuffer) {
-          const filename = result.pdfEnPath 
-            ? result.pdfEnPath.split('/').pop() || `${result.courseId}-en.pdf`
-            : `${result.courseId}-en.pdf`
-          pdfBuffers.push({
-            buffer: result.pdfEnBuffer,
-            filename,
-            language: 'en',
-          })
-        }
-        
-        if (result.pdfArBuffer) {
-          const filename = result.pdfArPath
-            ? result.pdfArPath.split('/').pop() || `${result.courseId}-ar.pdf`
-            : `${result.courseId}-ar.pdf`
-          pdfBuffers.push({
-            buffer: result.pdfArBuffer,
-            filename,
-            language: 'ar',
-          })
-        }
-
-        if (pdfBuffers.length > 0) {
-          // Send email with retry (up to 2 attempts)
-          let emailSent = false
-          let lastEmailError: any = null
-          for (let attempt = 0; attempt < 2; attempt++) {
-            try {
-              await sendCourseDeliveryEmail({
-                type: 'custom-course',
-                userEmail: updatedCourseRequest.user.email,
-                userName: `${updatedCourseRequest.user.first_name} ${updatedCourseRequest.user.last_name || ''}`.trim(),
-                locale,
-                courseId: result.courseId,
-                pdfBuffers,
-              })
-              emailSent = true
-              break // Success - exit retry loop
-            } catch (emailAttemptError: any) {
-              lastEmailError = emailAttemptError
-              if (attempt < 1) {
-                // Wait before retry (exponential backoff)
-                await new Promise((resolve) => setTimeout(resolve, 1000 * (attempt + 1)))
-                continue
-              }
-            }
-          }
-
-          if (!emailSent) {
-            throw lastEmailError || new Error('Failed to send course delivery email after retries')
-          }
-
-          // Update status to completed after successful email delivery
-          await withPrismaRetry(() =>
-            prisma.customCourseRequest.update({
-              where: { id: courseRequestId },
-              data: { status: 'completed' },
-            })
-          )
-
-          await updateCustomCourseStatus({
-            courseRequestId,
-            courseId: result.courseId,
-            stage: 'completed',
-            progress: 100,
-            message: 'Course delivered via email',
-            warnings: result.warnings,
-            completedAt: new Date().toISOString(),
-          })
-
-          safeLog('Course delivery email sent successfully', {
-            courseRequestId,
-            courseId: result.courseId,
-            pdfCount: pdfBuffers.length,
-            locale,
-          })
-          await logger.info('[Custom Course API] Course delivery email sent successfully', {
-            courseRequestId,
-            courseId: result.courseId,
-            pdfCount: pdfBuffers.length,
-            locale,
-          })
-        } else {
-          safeLog('No PDF buffers to send', {
-            courseRequestId,
-            courseId: result.courseId,
-          })
-        }
-      } catch (emailError: any) {
-        // Log error but don't fail the generation
-        const { logger: emailLogger } = await import('@/lib/pdf/logger')
-        await emailLogger.error('[Custom Course API] Error sending course delivery email:', {
-          courseRequestId,
-          courseId: result.courseId,
-          userId: userIdForLogging,
-          error: emailError.message,
-          stack: emailError.stack,
-        })
-        console.error('[Custom Course API] Error sending course delivery email:', {
-          courseRequestId,
-          courseId: result.courseId,
-          userId: userIdForLogging,
-          error: emailError.message,
-          stack: emailError.stack,
-        })
-        // Status remains 'ready' if email fails
-      }
-
-      safeLog('Stage: completed', { courseId: result.courseId })
-      finished = true
-      clearTimeout(watchdog)
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : typeof error === 'object'
-          ? JSON.stringify(error)
-          : String(error)
-      
-      const genError = error as GenerationError
-      const finalErrorMessage = genError.message || errorMessage
-      const errorCode = genError.code || 'UNKNOWN'
-
-      // Import logger for detailed error logging
-      const { logger } = await import('@/lib/pdf/logger')
-      try {
-        await logger.error(`[Custom Course ${courseRequestId}] Generation failed:`, {
-          courseRequestId,
-          userId: userIdForLogging,
-          error: finalErrorMessage,
-          code: errorCode,
-          details: genError.details,
-          stack: error instanceof Error ? error.stack : undefined,
-        })
-      } catch (logError) {
-        // Fallback to console if DB logging fails
-        console.error('[Custom Course API] Failed to log error to DB, using console:', logError)
-        console.error(`[Custom Course ${courseRequestId}] Generation failed:`, {
-          courseRequestId,
-          userId: userIdForLogging,
-          error: finalErrorMessage,
-          code: errorCode,
-          details: genError.details,
-          stack: error instanceof Error ? error.stack : undefined,
-        })
-      }
-
-      // Update status tracker
-      await updateCustomCourseStatus({
-        courseRequestId,
-        stage: 'error',
-        progress: 100,
-        message: 'Custom course generation failed',
-        error: finalErrorMessage,
-        completedAt: new Date().toISOString(),
-      })
-
-      // Update course request with error status
-      await withPrismaRetry(() =>
-        prisma.customCourseRequest.update({
-          where: { id: courseRequestId },
-          data: {
-            status: 'failed',
-            status_stage: 'error',
-            status_progress: 100,
-            status_message: 'Generation failed',
-            status_error: errorMessage,
-          },
-        })
-      )
-
-      safeLog('Background generation error', {
-        courseRequestId,
-        error: errorMessage,
-        code: errorCode,
-        details: genError.details,
-      })
-
-      console.error('[Custom Course API] Background generation error:', {
-        courseRequestId,
-        error: errorMessage,
-        code: errorCode,
-        details: genError.details,
-      })
-
-      finished = true
-      clearTimeout(watchdog)
-      
-      // Re-throw to be caught by outer catch
-      throw error
-    }
-}
 

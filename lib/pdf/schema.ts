@@ -925,3 +925,137 @@ export const AI_STRATEGY_JSON_SCHEMA = (() => {
   return schema as typeof CUSTOM_COURSE_JSON_SCHEMA
 })()
 
+/**
+ * Compact JSON Schema for Custom Course generation (2-3 pages max)
+ * Hard limits to ensure PDF fits within 2-3 pages
+ */
+export const COMPACT_CUSTOM_COURSE_JSON_SCHEMA = (() => {
+  const schema: any = JSON.parse(JSON.stringify(CUSTOM_COURSE_JSON_SCHEMA))
+
+  // Modules: 1 only
+  schema.properties.modules.minItems = 1
+  schema.properties.modules.maxItems = 1
+
+  // Lessons per module: 1-2
+  schema.properties.modules.items.properties.lessons.minItems = 1
+  schema.properties.modules.items.properties.lessons.maxItems = 2
+
+  // Content blocks per lesson: 1 only
+  schema.properties.modules.items.properties.lessons.items.properties.content_blocks.minItems = 1
+  schema.properties.modules.items.properties.lessons.items.properties.content_blocks.maxItems = 1
+
+  // Checklist: 2-3 items
+  schema.properties.modules.items.properties.checklist.properties.items.minItems = 2
+  schema.properties.modules.items.properties.checklist.properties.items.maxItems = 3
+
+  // Exercise: 2-3 steps
+  schema.properties.modules.items.properties.exercise.properties.steps.minItems = 2
+  schema.properties.modules.items.properties.exercise.properties.steps.maxItems = 3
+
+  // Risk box: 2 points
+  schema.properties.modules.items.properties.risk_box.properties.points.minItems = 2
+  schema.properties.modules.items.properties.risk_box.properties.points.maxItems = 2
+
+  // Module summary: 2 takeaways
+  schema.properties.modules.items.properties.module_summary.properties.key_takeaways.minItems = 2
+  schema.properties.modules.items.properties.module_summary.properties.key_takeaways.maxItems = 2
+
+  // Diagrams: 0 (disabled in Step 4.1)
+  schema.properties.diagrams.minItems = 0
+  schema.properties.diagrams.maxItems = 0
+
+  // Preface: minimize
+  schema.properties.preface.properties.who_this_is_for.minItems = 2
+  schema.properties.preface.properties.who_this_is_for.maxItems = 3
+  schema.properties.preface.properties.what_you_will_learn.minItems = 3
+  schema.properties.preface.properties.what_you_will_learn.maxItems = 4
+  schema.properties.preface.properties.what_this_course_will_not_do.minItems = 2
+  schema.properties.preface.properties.what_this_course_will_not_do.maxItems = 3
+  schema.properties.preface.properties.prerequisites.minItems = 1
+  schema.properties.preface.properties.prerequisites.maxItems = 2
+
+  // One page summary: 2-3 sections
+  schema.properties.one_page_summary.properties.sections.minItems = 2
+  schema.properties.one_page_summary.properties.sections.maxItems = 3
+  schema.properties.one_page_summary.properties.sections.items.properties.bullets.minItems = 3
+  schema.properties.one_page_summary.properties.sections.items.properties.bullets.maxItems = 4
+
+  // Glossary: 0-4 terms
+  schema.properties.glossary.minItems = 0
+  schema.properties.glossary.maxItems = 4
+
+  // Quiz: 0-3 questions
+  schema.properties.quiz.properties.questions.minItems = 0
+  schema.properties.quiz.properties.questions.maxItems = 3
+
+  // Legal notice: minimize
+  schema.properties.legal_notice.properties.bullets.minItems = 3
+  schema.properties.legal_notice.properties.bullets.maxItems = 4
+  schema.properties.legal_notice.properties.who_this_is_not_for.minItems = 2
+  schema.properties.legal_notice.properties.who_this_is_not_for.maxItems = 3
+
+  // How to use: minimize
+  schema.properties.how_to_use.properties.recommended_pace.minItems = 2
+  schema.properties.how_to_use.properties.recommended_pace.maxItems = 3
+  schema.properties.how_to_use.properties.instructions.minItems = 4
+  schema.properties.how_to_use.properties.instructions.maxItems = 5
+
+  return schema as typeof CUSTOM_COURSE_JSON_SCHEMA
+})()
+
+/**
+ * Compact JSON Schema for AI Strategy generation (2-3 pages max)
+ * Even tighter limits than Custom Course
+ */
+export const COMPACT_AI_STRATEGY_JSON_SCHEMA = (() => {
+  const schema: any = JSON.parse(JSON.stringify(COMPACT_CUSTOM_COURSE_JSON_SCHEMA))
+
+  // Modules: 1-2 (slightly more flexible than Custom Course)
+  schema.properties.modules.minItems = 1
+  schema.properties.modules.maxItems = 2
+
+  // Lessons per module: 1-2
+  schema.properties.modules.items.properties.lessons.minItems = 1
+  schema.properties.modules.items.properties.lessons.maxItems = 2
+
+  // Content blocks per lesson: 1
+  schema.properties.modules.items.properties.lessons.items.properties.content_blocks.minItems = 1
+  schema.properties.modules.items.properties.lessons.items.properties.content_blocks.maxItems = 1
+
+  // Checklist: 2-3 items
+  schema.properties.modules.items.properties.checklist.properties.items.minItems = 2
+  schema.properties.modules.items.properties.checklist.properties.items.maxItems = 3
+
+  // Exercise: 2 steps
+  schema.properties.modules.items.properties.exercise.properties.steps.minItems = 2
+  schema.properties.modules.items.properties.exercise.properties.steps.maxItems = 2
+
+  // Risk box: 2 points
+  schema.properties.modules.items.properties.risk_box.properties.points.minItems = 2
+  schema.properties.modules.items.properties.risk_box.properties.points.maxItems = 2
+
+  // Module summary: 2 takeaways
+  schema.properties.modules.items.properties.module_summary.properties.key_takeaways.minItems = 2
+  schema.properties.modules.items.properties.module_summary.properties.key_takeaways.maxItems = 2
+
+  // Diagrams: 0 (disabled in Step 4.1)
+  schema.properties.diagrams.minItems = 0
+  schema.properties.diagrams.maxItems = 0
+
+  // One page summary: 2-3 sections
+  schema.properties.one_page_summary.properties.sections.minItems = 2
+  schema.properties.one_page_summary.properties.sections.maxItems = 3
+  schema.properties.one_page_summary.properties.sections.items.properties.bullets.minItems = 3
+  schema.properties.one_page_summary.properties.sections.items.properties.bullets.maxItems = 4
+
+  // Glossary: 0-3 terms
+  schema.properties.glossary.minItems = 0
+  schema.properties.glossary.maxItems = 3
+
+  // Quiz: 0-2 questions
+  schema.properties.quiz.properties.questions.minItems = 0
+  schema.properties.quiz.properties.questions.maxItems = 2
+
+  return schema as typeof CUSTOM_COURSE_JSON_SCHEMA
+})()
+
