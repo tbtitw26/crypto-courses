@@ -147,8 +147,14 @@ export async function resolveDownloadUrl(storedPath?: string | null): Promise<st
     return storedPath
   }
 
-  const { bucket, key } = decodeSupabasePath(storedPath)
-  return createSignedUrl(bucket, key)
+  try {
+    const { bucket, key } = decodeSupabasePath(storedPath)
+    return await createSignedUrl(bucket, key)
+  } catch (error) {
+    // Don't break callers if a single asset is malformed; log and continue
+    console.warn('[resolveDownloadUrl] failed for path:', storedPath, error)
+    return undefined
+  }
 }
 
 export function resolvePublicUrl(storedPath?: string | null): string | undefined {

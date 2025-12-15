@@ -8,6 +8,7 @@ import { resolveDownloadUrl } from '@/lib/storage'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+export const runtime = 'nodejs'
 
 export async function GET(request: NextRequest) {
   try {
@@ -66,7 +67,17 @@ export async function GET(request: NextRequest) {
         uiStatus = 'Processing'
       }
 
-      const resolvedPdfUrl = await resolveDownloadUrl(course.pdf_url)
+      let resolvedPdfUrl: string | undefined
+      try {
+        resolvedPdfUrl = await resolveDownloadUrl(course.pdf_url)
+      } catch (err) {
+        console.warn('[api/custom-courses] resolveDownloadUrl failed', {
+          courseId: course.id,
+          pdf_url: course.pdf_url,
+          error: err instanceof Error ? err.message : String(err),
+        })
+        resolvedPdfUrl = undefined
+      }
 
       return {
         id: course.id.toString(),
