@@ -191,9 +191,11 @@ export function DashboardPage() {
           downloadUrl: course.downloadUrl || null,
         }))
 
-        // Combine and sort by date (most recent first)
-        // Custom courses should appear first (most recent)
+        // Combine all items (custom courses, purchased courses, AI strategies)
+        // Note: AI strategies are already sorted by created_at desc from API
         const allItems = [...customCourses, ...courseItems, ...aiStrategies]
+        // Sort by creation date if available (most recent first)
+        // For now, keep API order (custom courses first, then purchased, then AI strategies)
         setRecentItems(allItems)
       } catch (error) {
         console.error('Failed to load courses:', error)
@@ -453,7 +455,26 @@ export function DashboardPage() {
                         </div>
                       </div>
                       <div className="flex sm:flex-col items-end sm:items-end gap-2 text-[11px]">
-                        {(item.type === 'course' || item.type === 'ai') && item.downloadUrl ? (
+                        {item.type === 'ai' && item.status === 'Completed' && item.downloadUrl ? (
+                          <a
+                            href={item.downloadUrl}
+                            download
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition"
+                          >
+                            <span>{t('library.item.downloadPDF')}</span>
+                          </a>
+                        ) : item.type === 'ai' && item.status === 'Processing' ? (
+                          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-800 text-slate-400 font-semibold">
+                            <span>{t('library.item.status.inprogress')}</span>
+                          </span>
+                        ) : item.type === 'ai' && item.status === 'Completed' ? (
+                          <a
+                            href={`/api/download/ai-strategy/${item.id}`}
+                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition"
+                          >
+                            <span>{t('library.item.downloadPDF')}</span>
+                          </a>
+                        ) : (item.type === 'course' || item.type === 'ai') && item.downloadUrl ? (
                           <a
                             href={item.downloadUrl}
                             download
@@ -472,15 +493,7 @@ export function DashboardPage() {
                           <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-800 text-slate-400 font-semibold">
                             <span>{t('library.item.status.inprogress')}</span>
                           </span>
-                        ) : item.type === 'ai' ? (
-                          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-800 text-slate-400 font-semibold">
-                            <span>{t('library.item.downloadPDF')}</span>
-                          </span>
-                        ) : (
-                          <button className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition">
-                            <span>{t('library.item.downloadPDF')}</span>
-                          </button>
-                        )}
+                        ) : null}
                       </div>
                     </motion.div>
                   ))}

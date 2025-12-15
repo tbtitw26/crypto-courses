@@ -8,6 +8,8 @@ import { generateImage } from "@/lib/openai/generate";
 import { generateCoursePdf } from "@/lib/pdf/pdf-generator";
 import { uploadPrivateAsset, uploadPublicAsset, encodeSupabasePath } from "@/lib/supabase/storage";
 import { GeneratedCourse } from "@/lib/pdf/types";
+import { config } from "@/lib/config";
+import { sendPdfReadyEmail } from "@/lib/email";
 
 const formatErrorMessage = (error: unknown) => {
   const msg = error instanceof Error ? error.message : String(error);
@@ -315,18 +317,57 @@ export const generateCustomCourse = inngest.createFunction(
         );
       });
 
-      // (J) Trigger assets generation (cover/diagrams) as a separate pipeline
-      await step.run("event:assets-request", async () => {
-        await inngest.send({
-          id: `custom_course/assets.requested:${jobId}:${language}`,
-          name: "custom_course/assets.requested",
-          data: {
-            jobId,
-            userId,
-            language,
-            type: "custom",
-          },
+      // (J) Trigger assets generation (cover/diagrams) as a separate pipeline (if enabled)
+      if (config.features.enableCourseImages) {
+        await step.run("event:assets-request", async () => {
+          await inngest.send({
+            id: `custom_course/assets.requested:${jobId}:${language}`,
+            name: "custom_course/assets.requested",
+            data: {
+              jobId,
+              userId,
+              language,
+              type: "custom",
+            },
+          });
         });
+      }
+
+      // (K) Send email notification with download link
+      await step.run("email:send-notification", async () => {
+        const user = await withPrismaRetry(() =>
+          prisma.user.findUnique({
+            where: { id: userId },
+            select: { email: true, first_name: true, last_name: true },
+          })
+        );
+
+        if (user?.email) {
+          const userName = `${user.first_name} ${user.last_name || ''}`.trim() || 'User';
+          const title = data.goalsFreeText.substring(0, 50) + (data.goalsFreeText.length > 50 ? '...' : '');
+          
+          const emailResult = await sendPdfReadyEmail({
+            userEmail: user.email,
+            userName,
+            jobId,
+            type: 'custom',
+            title,
+            locale: language === 'ar' ? 'ar' : 'en',
+          });
+
+          // Update email status in DB
+          await withPrismaRetry(() =>
+            prisma.customCourseRequest.update({
+              where: { id: jobId },
+              data: {
+                email_status: emailResult.error ? 'failed' : 'sent',
+                email_sent_at: emailResult.error ? null : new Date(),
+                email_error: emailResult.error || null,
+                email_message_id: emailResult.messageId || null,
+              },
+            })
+          );
+        }
       });
 
       // Return only small metadata (not PDF buffer)
@@ -647,18 +688,57 @@ export const generateAIStrategy = inngest.createFunction(
         );
       });
 
-      // (J) Trigger assets generation (cover/diagrams) as a separate pipeline
-      await step.run("event:assets-request", async () => {
-        await inngest.send({
-          id: `ai_strategy/assets.requested:${jobId}:${language}`,
-          name: "ai_strategy/assets.requested",
-          data: {
-            jobId,
-            userId,
-            language,
-            type: "ai",
-          },
+      // (J) Trigger assets generation (cover/diagrams) as a separate pipeline (if enabled)
+      if (config.features.enableCourseImages) {
+        await step.run("event:assets-request", async () => {
+          await inngest.send({
+            id: `ai_strategy/assets.requested:${jobId}:${language}`,
+            name: "ai_strategy/assets.requested",
+            data: {
+              jobId,
+              userId,
+              language,
+              type: "ai",
+            },
+          });
         });
+      }
+
+      // (K) Send email notification with download link
+      await step.run("email:send-notification", async () => {
+        const user = await withPrismaRetry(() =>
+          prisma.user.findUnique({
+            where: { id: userId },
+            select: { email: true, first_name: true, last_name: true },
+          })
+        );
+
+        if (user?.email) {
+          const userName = `${user.first_name} ${user.last_name || ''}`.trim() || 'User';
+          const title = data.mainObjective.substring(0, 50) + (data.mainObjective.length > 50 ? '...' : '');
+          
+          const emailResult = await sendPdfReadyEmail({
+            userEmail: user.email,
+            userName,
+            jobId,
+            type: 'ai-strategy',
+            title,
+            locale: language === 'ar' ? 'ar' : 'en',
+          });
+
+          // Update email status in DB
+          await withPrismaRetry(() =>
+            prisma.aiStrategyRun.update({
+              where: { id: jobId },
+              data: {
+                email_status: emailResult.error ? 'failed' : 'sent',
+                email_sent_at: emailResult.error ? null : new Date(),
+                email_error: emailResult.error || null,
+                email_message_id: emailResult.messageId || null,
+              },
+            })
+          );
+        }
       });
 
       // Return only small metadata (not PDF buffer)

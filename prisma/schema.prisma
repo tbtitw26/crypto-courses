@@ -181,6 +181,10 @@ model CustomCourseRequest {
   assets_error           String?
   cover_path             String?
   diagram_paths          Json?
+  email_status           String? // sent | failed
+  email_sent_at          DateTime?
+  email_error            String?
+  email_message_id       String?
   experience_years       String // 0, 1-2, 3+
   deposit_budget         String
   risk_tolerance         String // low, medium, high
@@ -219,6 +223,10 @@ model AiStrategyRun {
   assets_error           String?
   cover_path             String?
   diagram_paths          Json?
+  email_status           String? // sent | failed
+  email_sent_at          DateTime?
+  email_error            String?
+  email_message_id       String?
   experience_years       String // 0, 1-2, 3+
   deposit_budget         String
   risk_tolerance         String // low, medium, high

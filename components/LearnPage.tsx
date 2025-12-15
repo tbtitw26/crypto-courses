@@ -78,20 +78,7 @@ function JobStatusBlock({
           {jobStatus.stage || jobStatus.status || 'Unknown'}
         </div>
 
-        {/* Progress bar (only if progress is a number) */}
-        {typeof jobStatus.progress === 'number' && (
-          <div className="w-full h-1.5 bg-slate-700 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-cyan-400 transition-all duration-300"
-              style={{ width: `${jobStatus.progress}%` }}
-            />
-          </div>
-        )}
-
-        {/* Progress percentage */}
-        {typeof jobStatus.progress === 'number' && (
-          <div className="text-[10px] text-slate-400">{jobStatus.progress}%</div>
-        )}
+        {/* Progress removed per Step 8 - keep only status text */}
 
         {/* Spinner if no progress but not terminal */}
         {!isTerminal && typeof jobStatus.progress !== 'number' && (

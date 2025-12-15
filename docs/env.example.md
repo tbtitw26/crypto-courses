@@ -42,6 +42,16 @@
 - `SMTP_FROM`
 - `SMTP_FROM_NAME`
 
+## Resend (Email notifications)
+- `RESEND_API_KEY` (required for PDF ready emails)
+- `RESEND_FROM="Avenqor <no-reply@yourdomain.com>"` (verified domain)
+- `APP_BASE_URL="https://www.avenqor.net"` (base URL for download links)
+- `DOWNLOAD_SIGNED_URL_TTL_SECONDS=600` (10 minutes, TTL for signed download URLs)
+- `EMAIL_NOTIFICATIONS_ENABLED=true` (enable/disable email notifications)
+
+## Feature Flags
+- `ENABLE_COURSE_IMAGES=false` (disable cover/diagram generation to reduce load)
+
 ## TransferMit (если не используется – можно не задавать)
 - `TM_API_URL=https://app.transfermit.com/api/v1`
 - `TM_API_KEY`

@@ -839,3 +839,116 @@ This is an automated message. Please do not reply to this email.
   })
 }
 
+export interface PdfReadyEmailData {
+  userEmail: string
+  userName: string
+  jobId: number
+  type: 'custom' | 'ai-strategy'
+  title: string
+  locale?: 'en' | 'ar'
+}
+
+/**
+ * Send PDF ready email with download link (no attachment)
+ */
+export async function sendPdfReadyEmail(data: PdfReadyEmailData): Promise<{ messageId?: string; error?: string }> {
+  if (!config.features.emailNotifications) {
+    return { error: 'Email notifications disabled' }
+  }
+
+  if (!resendClient) {
+    return { error: 'RESEND_API_KEY is missing' }
+  }
+
+  const appBaseUrl = process.env.APP_BASE_URL || config.site.baseUrl
+  const downloadUrl = `${appBaseUrl}/api/download/${data.type}/${data.jobId}`
+
+  const t = {
+    en: {
+      subject: `Your PDF is ready — ${data.title}`,
+      greeting: `Hello ${data.userName},`,
+      body: 'Your PDF has been generated and is ready for download.',
+      cta: 'Download PDF',
+      fallback: `Or copy this link: ${downloadUrl}`,
+      footer: 'This is an automated message. Please do not reply to this email.',
+    },
+    ar: {
+      subject: `PDF جاهز — ${data.title}`,
+      greeting: `مرحباً ${data.userName},`,
+      body: 'تم إنشاء PDF الخاص بك وهو جاهز للتنزيل.',
+      cta: 'تنزيل PDF',
+      fallback: `أو انسخ هذا الرابط: ${downloadUrl}`,
+      footer: 'هذه رسالة آلية. يرجى عدم الرد على هذا البريد الإلكتروني.',
+    },
+  }
+
+  const locale = data.locale || 'en'
+  const translations = t[locale]
+
+  const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${translations.subject}</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px 20px;">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h1 style="color: #0f172a; font-size: 24px; margin: 0;">Avenqor</h1>
+    </div>
+    
+    <div style="color: #334155; font-size: 16px; line-height: 1.6;">
+      <p style="margin: 0 0 20px 0;">${translations.greeting}</p>
+      <p style="margin: 0 0 30px 0;">${translations.body}</p>
+      
+      <div style="text-align: center; margin: 40px 0;">
+        <a href="${downloadUrl}" style="display: inline-block; padding: 14px 28px; background-color: #06b6d4; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+          ${translations.cta}
+        </a>
+      </div>
+      
+      <p style="margin: 30px 0 0 0; font-size: 14px; color: #64748b;">
+        ${translations.fallback}
+      </p>
+    </div>
+    
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; font-size: 12px; color: #94a3b8;">
+      <p style="margin: 0;">${translations.footer}</p>
+    </div>
+  </div>
+</body>
+</html>
+  `.trim()
+
+  const textContent = `
+${translations.subject}
+
+${translations.greeting}
+
+${translations.body}
+
+${translations.cta}: ${downloadUrl}
+
+${translations.footer}
+  `.trim()
+
+  try {
+    const from = process.env.RESEND_FROM || config.smtp.from || 'no-reply@example.com'
+    const result = await resendClient.emails.send({
+      from,
+      to: data.userEmail,
+      subject: translations.subject,
+      html: htmlContent,
+      text: textContent,
+    })
+
+    return { messageId: result.data?.id }
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    console.error('[sendPdfReadyEmail] Failed to send email:', errorMessage)
+    return { error: errorMessage }
+  }
+}
+

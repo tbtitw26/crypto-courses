@@ -1,0 +1,8 @@
+/api/ai-strategy:1  Failed to load resource: the server responded with a status of 500 ()
+installHook.js:1 [AI Strategy] submission error: Error: 
+Invalid `prisma.aiStrategyRun.create()` invocation:
+
+
+The column `AiStrategyRun.assets_status` does not exist in the current database.
+    at eR (page-9cbf8abe5c68d81e.js:1:29946)
+overrideMethod @ installHook.js:1

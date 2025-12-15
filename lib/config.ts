@@ -95,6 +95,11 @@ export const config = {
     from: process.env.SMTP_FROM || '',
     fromName: process.env.SMTP_FROM_NAME || 'Avenqor Support',
   },
+  // Feature flags
+  features: {
+    enableCourseImages: process.env.ENABLE_COURSE_IMAGES === 'true',
+    emailNotifications: process.env.EMAIL_NOTIFICATIONS_ENABLED !== 'false', // Default to true
+  },
   // Browserless.io for remote Chrome (PDF generation in serverless)
   browserless: {
     apiKey: process.env.BROWSERLESS_API_KEY || '',
