@@ -475,9 +475,7 @@
       "fields": {
         "fullName": "الاسم الكامل",
         "email": "البريد الإلكتروني",
-        "region": "المنطقة",
-        "timezone": "المنطقة الزمنية",
-        "timezoneExample": "Europe/Riga (مثال)"
+        "region": "المنطقة"
       }
     },
     "preferences": {

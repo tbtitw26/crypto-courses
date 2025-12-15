@@ -478,9 +478,7 @@
       "fields": {
         "fullName": "Full name",
         "email": "Email",
-        "region": "Region",
-        "timezone": "Time zone",
-        "timezoneExample": "Europe/Riga (example)"
+        "region": "Region"
       }
     },
     "preferences": {

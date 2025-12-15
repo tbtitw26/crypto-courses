@@ -22,7 +22,6 @@ import {
   Info,
   AlertTriangle,
   CheckCircle2,
-  Clock,
   ArrowRight,
   Sparkles,
 } from 'lucide-react'
@@ -31,6 +30,8 @@ import { DashboardNavigation } from './DashboardNavigation'
 import { ChangePasswordModal } from './ChangePasswordModal'
 import { getUserCurrency, setUserCurrency } from '@/lib/currency-client'
 import { currencies } from '@/lib/currency-config'
+import { useToast } from '@/hooks/use-toast'
+import { X, Save } from 'lucide-react'
 
 const LOCALE_COOKIE_NAME = 'user_locale'
 
@@ -108,17 +109,150 @@ function Toggle({
 export function SettingsPage() {
   const t = useTranslations('dashboard.settingsPage')
   const tDashboard = useTranslations('dashboard')
-  const { data: session, status } = useSession()
+  const { data: session, status, update: updateSession } = useSession()
   const router = useRouter()
+  const { showToast } = useToast()
   const [currency, setCurrency] = useState('GBP')
   const [dashboardLanguage, setDashboardLanguage] = useState<'en' | 'ar'>('en')
   const [courseLanguage, setCourseLanguage] = useState('english')
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false)
+  
+  // Profile editing state
+  const [isEditingProfile, setIsEditingProfile] = useState(false)
+  const [isLoadingProfile, setIsLoadingProfile] = useState(false)
+  const [isSavingProfile, setIsSavingProfile] = useState(false)
+  const [profileData, setProfileData] = useState<{
+    firstName: string
+    lastName: string | null
+    email: string
+    citizenship: string | null
+  } | null>(null)
+  const [editedFirstName, setEditedFirstName] = useState('')
+  const [editedLastName, setEditedLastName] = useState('')
+  const [editedRegion, setEditedRegion] = useState('')
 
   useEffect(() => {
     setCurrency(getUserCurrency())
     setDashboardLanguage(getLocaleFromCookie())
   }, [])
+
+  // Load profile data when component mounts or session is available
+  useEffect(() => {
+    if (session?.user?.id && !profileData) {
+      loadProfileData()
+    }
+  }, [session?.user?.id])
+
+  const loadProfileData = async () => {
+    if (!session?.user?.id) return
+    
+    setIsLoadingProfile(true)
+    try {
+      const response = await fetch('/api/user/profile')
+      if (!response.ok) {
+        throw new Error('Failed to load profile data')
+      }
+      const data = await response.json()
+      if (data.success && data.user) {
+        setProfileData({
+          firstName: data.user.firstName,
+          lastName: data.user.lastName,
+          email: data.user.email,
+          citizenship: data.user.citizenship,
+        })
+        setEditedFirstName(data.user.firstName)
+        setEditedLastName(data.user.lastName || '')
+        setEditedRegion(data.user.citizenship || '')
+      }
+    } catch (error) {
+      console.error('Failed to load profile:', error)
+      showToast({
+        title: 'Error',
+        description: 'Failed to load profile data',
+        variant: 'error',
+      })
+    } finally {
+      setIsLoadingProfile(false)
+    }
+  }
+
+  const handleEditProfile = () => {
+    if (!profileData) {
+      loadProfileData()
+    }
+    setIsEditingProfile(true)
+  }
+
+  const handleCancelEdit = () => {
+    if (profileData) {
+      setEditedFirstName(profileData.firstName)
+      setEditedLastName(profileData.lastName || '')
+      setEditedRegion(profileData.citizenship || '')
+    }
+    setIsEditingProfile(false)
+  }
+
+  const handleSaveProfile = async () => {
+    if (!profileData) return
+
+    if (!editedFirstName.trim()) {
+      showToast({
+        title: 'Validation Error',
+        description: 'First name is required',
+        variant: 'error',
+      })
+      return
+    }
+
+    setIsSavingProfile(true)
+    try {
+      const response = await fetch('/api/user/profile', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: editedFirstName.trim(),
+          lastName: editedLastName.trim() || null,
+          citizenship: editedRegion.trim() || null,
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.error || 'Failed to update profile')
+      }
+
+      const data = await response.json()
+      if (data.success && data.user) {
+        setProfileData({
+          firstName: data.user.firstName,
+          lastName: data.user.lastName,
+          email: data.user.email,
+          citizenship: data.user.citizenship,
+        })
+        setIsEditingProfile(false)
+        
+        // Update session
+        await updateSession()
+        
+        showToast({
+          title: 'Success',
+          description: 'Profile updated successfully',
+          variant: 'success',
+        })
+      }
+    } catch (error: any) {
+      console.error('Failed to save profile:', error)
+      showToast({
+        title: 'Error',
+        description: error.message || 'Failed to update profile',
+        variant: 'error',
+      })
+    } finally {
+      setIsSavingProfile(false)
+    }
+  }
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -142,11 +276,15 @@ export function SettingsPage() {
   }
 
   const user = session.user
-  const fullName = user.name || 'User'
   const userEmail = user.email || ''
   
-  // Get region from citizenship or use default (citizenship not in session, using default)
-  const region = 'EU / UK / UAE'
+  // Use profile data if available, otherwise fallback to session data
+  const displayFirstName = profileData?.firstName || (user.name?.split(' ')[0] || 'User')
+  const displayLastName = profileData?.lastName || (user.name?.split(' ').slice(1).join(' ') || '')
+  const fullName = profileData 
+    ? `${profileData.firstName} ${profileData.lastName || ''}`.trim()
+    : (user.name || 'User')
+  const region = profileData?.citizenship || 'EU / UK / UAE'
 
   // Get currency symbol
   const currentCurrency = currencies[currency] || currencies.GBP
@@ -228,38 +366,97 @@ export function SettingsPage() {
                     </div>
                   </div>
                 </div>
-                <button className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-700 text-[11px] text-slate-100 hover:border-slate-500 transition">
-                  <span>{t('profile.editButton')}</span>
-                </button>
+                {!isEditingProfile ? (
+                  <button
+                    onClick={handleEditProfile}
+                    disabled={isLoadingProfile}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-700 text-[11px] text-slate-100 hover:border-slate-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <span>{t('profile.editButton')}</span>
+                  </button>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handleCancelEdit}
+                      disabled={isSavingProfile}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-slate-700 text-[11px] text-slate-100 hover:border-slate-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <X className="w-3 h-3" />
+                      <span>Cancel</span>
+                    </button>
+                    <button
+                      onClick={handleSaveProfile}
+                      disabled={isSavingProfile}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-cyan-400/20 border border-cyan-400/50 text-[11px] text-cyan-300 hover:bg-cyan-400/30 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Save className="w-3 h-3" />
+                      <span>{isSavingProfile ? 'Saving...' : 'Save'}</span>
+                    </button>
+                  </div>
+                )}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[11px]">
-                <div className="space-y-1">
-                  <div className="text-slate-400">{t('profile.fields.fullName')}</div>
-                  <div className="text-slate-100">{fullName}</div>
+              {isLoadingProfile ? (
+                <div className="text-[11px] text-slate-400 py-4">Loading profile data...</div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[11px]">
+                  {isEditingProfile ? (
+                    <>
+                      <div className="space-y-1">
+                        <label className="text-slate-400">{t('profile.fields.fullName')} (First)</label>
+                        <input
+                          type="text"
+                          value={editedFirstName}
+                          onChange={(e) => setEditedFirstName(e.target.value)}
+                          className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-100 text-[11px] focus:outline-none focus:border-cyan-400/50"
+                          placeholder="First name"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-slate-400">{t('profile.fields.fullName')} (Last)</label>
+                        <input
+                          type="text"
+                          value={editedLastName}
+                          onChange={(e) => setEditedLastName(e.target.value)}
+                          className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-100 text-[11px] focus:outline-none focus:border-cyan-400/50"
+                          placeholder="Last name (optional)"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-slate-400">{t('profile.fields.region')}</label>
+                        <input
+                          type="text"
+                          value={editedRegion}
+                          onChange={(e) => setEditedRegion(e.target.value)}
+                          className="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-100 text-[11px] focus:outline-none focus:border-cyan-400/50"
+                          placeholder="Region (optional)"
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="space-y-1">
+                        <div className="text-slate-400">{t('profile.fields.fullName')}</div>
+                        <div className="text-slate-100">{fullName}</div>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="text-slate-400">{t('profile.fields.email')}</div>
+                        <div className="inline-flex items-center gap-1 text-slate-100">
+                          <Mail className="w-3 h-3" />
+                          <span>{userEmail}</span>
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <div className="text-slate-400">{t('profile.fields.region')}</div>
+                        <div className="inline-flex items-center gap-1 text-slate-100">
+                          <Globe2 className="w-3 h-3" />
+                          <span>{region || 'Not set'}</span>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
-                <div className="space-y-1">
-                  <div className="text-slate-400">{t('profile.fields.email')}</div>
-                  <div className="inline-flex items-center gap-1 text-slate-100">
-                    <Mail className="w-3 h-3" />
-                    <span>{userEmail}</span>
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-slate-400">{t('profile.fields.region')}</div>
-                  <div className="inline-flex items-center gap-1 text-slate-100">
-                    <Globe2 className="w-3 h-3" />
-                    <span>{region}</span>
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <div className="text-slate-400">{t('profile.fields.timezone')}</div>
-                  <div className="inline-flex items-center gap-1 text-slate-100">
-                    <Clock className="w-3 h-3" />
-                    <span>{t('profile.fields.timezoneExample')}</span>
-                  </div>
-                </div>
-              </div>
+              )}
             </motion.div>
 
             {/* Preferences */}

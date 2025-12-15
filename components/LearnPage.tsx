@@ -33,83 +33,6 @@ type TabKey = 'custom' | 'ai'
 
 type StrategyPreset = 'conservative' | 'balanced' | 'scalping'
 
-// Component for displaying status of a single job
-function JobStatusBlock({
-  jobId,
-  language,
-  jobType,
-  onClear,
-}: {
-  jobId: string
-  language: string
-  jobType: 'custom-course' | 'ai-strategy'
-  onClear?: () => void
-}) {
-  const { data: jobStatus, isLoading: isPolling, isTerminal } = useJobStatus(jobType, jobId)
-  const langLabel = language === 'ar' ? 'AR' : 'EN'
-
-  if (!jobStatus) {
-    return null
-  }
-
-  return (
-    <div className="p-3 rounded-lg bg-slate-800/50 border border-slate-700 space-y-2">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-medium text-slate-300">
-            {langLabel} — {isTerminal ? 'Last run' : 'Status'}
-          </span>
-          {isPolling && <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />}
-        </div>
-        {isTerminal && onClear && (
-          <button
-            type="button"
-            onClick={onClear}
-            className="text-[10px] text-slate-400 hover:text-slate-200 transition"
-          >
-            Clear
-          </button>
-        )}
-      </div>
-
-      <div className="space-y-1.5">
-        {/* Stage text */}
-        <div className="text-[11px] text-slate-200">
-          {jobStatus.stage || jobStatus.status || 'Unknown'}
-        </div>
-
-        {/* Progress removed per Step 8 - keep only status text */}
-
-        {/* Spinner if no progress but not terminal */}
-        {!isTerminal && typeof jobStatus.progress !== 'number' && (
-          <div className="flex items-center gap-2 text-[10px] text-slate-400">
-            <span className="animate-spin">⏳</span>
-            <span>Processing...</span>
-          </div>
-        )}
-
-        {/* Error message */}
-        {jobStatus.status === 'failed' && jobStatus.error && (
-          <div className="text-[10px] text-red-400 mt-1">{jobStatus.error}</div>
-        )}
-
-        {/* Success with PDF link */}
-        {jobStatus.status === 'ready' && jobStatus.result?.pdfUrl && (
-          <a
-            href={jobStatus.result.pdfUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[11px] text-cyan-300 hover:text-cyan-200 transition mt-1"
-          >
-            <span>Open PDF</span>
-            <ArrowRight className="w-3 h-3" />
-          </a>
-        )}
-      </div>
-    </div>
-  )
-}
-
 const STRATEGY_PRESET_PROFILES: Record<
   StrategyPreset,
   {
@@ -513,8 +436,8 @@ function CustomCourseForm() {
       }
 
       showToast({
-        title: 'Request submitted',
-        description: parsed.message || `Course generation started for ${parsed.jobs?.length || 1} language(s). You can close this window.`,
+        title: t('form.submitSuccess.title'),
+        description: t('form.submitSuccess.description'),
         variant: 'success',
       })
 
@@ -882,39 +805,6 @@ function CustomCourseForm() {
               <p className="text-[11px] text-slate-400">{tForm('delivery')}</p>
             </div>
 
-            {/* Job Status UI - Support multiple jobs */}
-            {activeJobs.length > 0 ? (
-              <div className="space-y-2">
-                {activeJobs.map((job) => (
-                  <JobStatusBlock
-                    key={job.jobId}
-                    jobId={job.jobId}
-                    language={job.language}
-                    jobType="custom-course"
-                    onClear={activeJobs.length === 1 ? handleClearJobId : undefined}
-                  />
-                ))}
-                {activeJobs.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={handleClearJobId}
-                    className="text-[10px] text-slate-400 hover:text-slate-200 transition w-full text-center"
-                  >
-                    Clear all
-                  </button>
-                )}
-              </div>
-            ) : (
-              jobIdFromUrl &&
-              jobStatus && (
-                <JobStatusBlock
-                  jobId={jobIdFromUrl}
-                  language="en"
-                  jobType="custom-course"
-                  onClear={handleClearJobId}
-                />
-              )
-            )}
           </div>
         </form>
       </div>
@@ -1538,39 +1428,6 @@ function AIStrategyForm() {
               <p className="text-[11px] text-slate-400">{tForm('output')}</p>
             </div>
 
-            {/* Job Status UI - Support multiple jobs */}
-            {activeJobs.length > 0 ? (
-              <div className="space-y-2">
-                {activeJobs.map((job) => (
-                  <JobStatusBlock
-                    key={job.jobId}
-                    jobId={job.jobId}
-                    language={job.language}
-                    jobType="ai-strategy"
-                    onClear={activeJobs.length === 1 ? handleClearJobId : undefined}
-                  />
-                ))}
-                {activeJobs.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={handleClearJobId}
-                    className="text-[10px] text-slate-400 hover:text-slate-200 transition w-full text-center"
-                  >
-                    Clear all
-                  </button>
-                )}
-              </div>
-            ) : (
-              jobIdFromUrl &&
-              jobStatus && (
-                <JobStatusBlock
-                  jobId={jobIdFromUrl}
-                  language="en"
-                  jobType="ai-strategy"
-                  onClear={handleClearJobId}
-                />
-              )
-            )}
           </div>
 
         </form>
