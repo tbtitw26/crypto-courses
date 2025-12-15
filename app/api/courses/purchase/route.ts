@@ -276,6 +276,7 @@ export async function POST(request: NextRequest) {
           invoiceNumber,
           tokens: -tokensCost,
           amountGbp: amountGbp,
+          courseSlug: course.slug, // Add course slug for link in email
         })
 
         if (!invoicePdfBuffer) {
