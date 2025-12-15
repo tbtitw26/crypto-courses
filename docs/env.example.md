@@ -28,6 +28,7 @@
 ## Inngest (Background Job Processing)
 - `INNGEST_EVENT_KEY` (required for sending events to Inngest)
 - `INNGEST_SIGNING_KEY` (required for Inngest to verify requests to `/api/inngest`)
+- `JOB_TIMEOUT_MINUTES=20` (watchdog: fail processing jobs older than this)
 
 ## Browserless (PDF в serverless)
 - `BROWSERLESS_API_KEY`

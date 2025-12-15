@@ -8,6 +8,11 @@ import { generateCoursePdf } from "@/lib/pdf/pdf-generator";
 import { uploadPrivateAsset, encodeSupabasePath } from "@/lib/supabase/storage";
 import { GeneratedCourse } from "@/lib/pdf/types";
 
+const formatErrorMessage = (error: unknown) => {
+  const msg = error instanceof Error ? error.message : String(error);
+  return msg.slice(0, 500);
+};
+
 export const helloWorld = inngest.createFunction(
   { id: "hello-world" },
   { event: "test/hello.world" },
@@ -25,21 +30,23 @@ export const generateCustomCourse = inngest.createFunction(
   {
     id: "generate-custom-course",
     concurrency: [
-      { limit: 5 }, // Global limit: max 5 concurrent jobs
+      { limit: 3 }, // Global limit: max 3 concurrent jobs
       { key: "event.data.userId", limit: 1 }, // Per-user limit: 1 job at a time
     ],
     onFailure: async ({ event, error }) => {
       // Ensure job is marked as failed even if main function throws
       const data = event.data as unknown as CustomCourseRequestedEvent;
       const { jobId } = data;
+      const statusError = formatErrorMessage(error);
       try {
         await prisma.customCourseRequest.update({
           where: { id: jobId },
           data: {
             status: "failed",
-            status_stage: "error",
-            status_error: error instanceof Error ? error.message : String(error),
-            status_message: `Generation failed: ${error instanceof Error ? error.message : String(error)}`,
+            status_stage: "failed",
+            status_progress: 100,
+            status_error: statusError,
+            status_message: `Generation failed: ${statusError}`,
           },
         });
       } catch (dbError) {
@@ -299,15 +306,16 @@ export const generateCustomCourse = inngest.createFunction(
       return { ok: true, jobId, pdfUrl };
     } catch (error) {
       // Handle errors: mark job as failed
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      
+      const errorMessage = formatErrorMessage(error);
+
       await step.run("db:set-failed", async () => {
         await withPrismaRetry(() =>
           prisma.customCourseRequest.update({
             where: { id: jobId },
             data: {
               status: "failed",
-              status_stage: "error",
+              status_stage: "failed",
+              status_progress: 100,
               status_error: errorMessage,
               status_message: `Generation failed: ${errorMessage}`,
             },
@@ -329,21 +337,23 @@ export const generateAIStrategy = inngest.createFunction(
   {
     id: "generate-ai-strategy",
     concurrency: [
-      { limit: 5 }, // Global limit: max 5 concurrent jobs
+      { limit: 3 }, // Global limit: max 3 concurrent jobs
       { key: "event.data.userId", limit: 1 }, // Per-user limit: 1 job at a time
     ],
     onFailure: async ({ event, error }) => {
       // Ensure job is marked as failed even if main function throws
       const data = event.data as unknown as AIStrategyRequestedEvent;
       const { jobId } = data;
+      const statusError = formatErrorMessage(error);
       try {
         await prisma.aiStrategyRun.update({
           where: { id: jobId },
           data: {
             status: "failed",
-            status_stage: "error",
-            status_error: error instanceof Error ? error.message : String(error),
-            status_message: `Generation failed: ${error instanceof Error ? error.message : String(error)}`,
+            status_stage: "failed",
+            status_progress: 100,
+            status_error: statusError,
+            status_message: `Generation failed: ${statusError}`,
           },
         });
       } catch (dbError) {
@@ -614,15 +624,16 @@ export const generateAIStrategy = inngest.createFunction(
       return { ok: true, jobId, pdfUrl };
     } catch (error) {
       // Handle errors: mark job as failed
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      
+      const errorMessage = formatErrorMessage(error);
+
       await step.run("db:set-failed", async () => {
         await withPrismaRetry(() =>
           prisma.aiStrategyRun.update({
             where: { id: jobId },
             data: {
               status: "failed",
-              status_stage: "error",
+              status_stage: "failed",
+              status_progress: 100,
               status_error: errorMessage,
               status_message: `Generation failed: ${errorMessage}`,
             },
@@ -633,6 +644,85 @@ export const generateAIStrategy = inngest.createFunction(
       // Re-throw to let Inngest handle retries (unless NonRetriableError)
       throw error;
     }
+  }
+);
+
+/**
+ * Watchdog to fail stuck jobs (processing too long)
+ * Cron: every 5 minutes
+ */
+export const watchdogFailStuckJobs = inngest.createFunction(
+  { id: "watchdog-fail-stuck-jobs" },
+  { cron: "*/5 * * * *" },
+  async ({ step }) => {
+    const timeoutMinutes = Number(process.env.JOB_TIMEOUT_MINUTES ?? "20");
+    const cutoff = new Date(Date.now() - timeoutMinutes * 60 * 1000);
+
+    const timeoutMessage = "Timeout: job exceeded processing window";
+
+    const custom = await step.run("watchdog:custom-courses", async () => {
+      const stuck = await withPrismaRetry(() =>
+        prisma.customCourseRequest.findMany({
+          where: {
+            status: "processing",
+            updated_at: { lt: cutoff },
+          },
+          select: { id: true },
+        })
+      );
+
+      if (stuck.length > 0) {
+        await withPrismaRetry(() =>
+          prisma.customCourseRequest.updateMany({
+            where: { id: { in: stuck.map((s) => s.id) } },
+            data: {
+              status: "failed",
+              status_stage: "timeout",
+              status_progress: 100,
+              status_message: timeoutMessage,
+              status_error: timeoutMessage,
+            },
+          })
+        );
+      }
+
+      return { count: stuck.length };
+    });
+
+    const ai = await step.run("watchdog:ai-strategy", async () => {
+      const stuck = await withPrismaRetry(() =>
+        prisma.aiStrategyRun.findMany({
+          where: {
+            status: "processing",
+            updated_at: { lt: cutoff },
+          },
+          select: { id: true },
+        })
+      );
+
+      if (stuck.length > 0) {
+        await withPrismaRetry(() =>
+          prisma.aiStrategyRun.updateMany({
+            where: { id: { in: stuck.map((s) => s.id) } },
+            data: {
+              status: "failed",
+              status_stage: "timeout",
+              status_progress: 100,
+              status_message: timeoutMessage,
+              status_error: timeoutMessage,
+            },
+          })
+        );
+      }
+
+      return { count: stuck.length };
+    });
+
+    return {
+      timeoutMinutes,
+      customFailed: custom.count,
+      aiFailed: ai.count,
+    };
   }
 );
 
