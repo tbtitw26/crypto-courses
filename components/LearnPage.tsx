@@ -285,7 +285,7 @@ function CustomCourseForm() {
     if (jobIdFromUrl && activeJobs.length === 0) {
       setActiveJobs([{ jobId: jobIdFromUrl, language: 'en' }])
     }
-  }, [jobIdFromUrl])
+  }, [jobIdFromUrl, activeJobs.length])
   
   // For backward compatibility: use first job as main jobStatus if only one job
   const mainJobId = activeJobs.length > 0 ? activeJobs[0].jobId : jobIdFromUrl
@@ -1011,7 +1011,7 @@ function AIStrategyForm() {
     if (jobIdFromUrl && activeJobs.length === 0) {
       setActiveJobs([{ jobId: jobIdFromUrl, language: 'en' }])
     }
-  }, [jobIdFromUrl])
+  }, [jobIdFromUrl, activeJobs.length])
   
   // For backward compatibility: use first job as main jobStatus if only one job
   const mainJobId = activeJobs.length > 0 ? activeJobs[0].jobId : jobIdFromUrl

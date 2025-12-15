@@ -30,7 +30,7 @@ export const generateCustomCourse = inngest.createFunction(
     ],
     onFailure: async ({ event, error }) => {
       // Ensure job is marked as failed even if main function throws
-      const data = event.data as CustomCourseRequestedEvent;
+      const data = event.data as unknown as CustomCourseRequestedEvent;
       const { jobId } = data;
       try {
         await prisma.customCourseRequest.update({
@@ -334,7 +334,7 @@ export const generateAIStrategy = inngest.createFunction(
     ],
     onFailure: async ({ event, error }) => {
       // Ensure job is marked as failed even if main function throws
-      const data = event.data as AIStrategyRequestedEvent;
+      const data = event.data as unknown as AIStrategyRequestedEvent;
       const { jobId } = data;
       try {
         await prisma.aiStrategyRun.update({

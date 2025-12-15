@@ -138,16 +138,20 @@ export async function POST(request: NextRequest) {
         })
       )
     } catch (tokenError) {
-      // If token deduction fails, mark job as failed
-      await withPrismaRetry(() =>
-        prisma.customCourseRequest.update({
-          where: { id: courseRequest.id },
-          data: {
-            status: 'failed',
-            status_stage: 'error',
-            status_error: `Token deduction failed: ${tokenError instanceof Error ? tokenError.message : String(tokenError)}`,
-          },
-        })
+      // If token deduction fails, mark all jobs as failed
+      await Promise.all(
+        courseRequests.map((courseRequest) =>
+          withPrismaRetry(() =>
+            prisma.customCourseRequest.update({
+              where: { id: courseRequest.id },
+              data: {
+                status: 'failed',
+                status_stage: 'error',
+                status_error: `Token deduction failed: ${tokenError instanceof Error ? tokenError.message : String(tokenError)}`,
+              },
+            })
+          )
+        )
       )
       return NextResponse.json(
         { error: 'Failed to deduct tokens', message: 'Token deduction failed. Please try again.' },
