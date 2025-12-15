@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
-import { resolveDownloadUrl } from '@/lib/storage'
+import { resolveDownloadUrl, resolvePublicUrl } from '@/lib/storage'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -38,15 +38,19 @@ export async function GET(request: NextRequest) {
           risk_tolerance: true,
           trading_style: true,
           pdf_url: true,
+          cover_path: true,
+          assets_status: true,
+          assets_error: true,
           created_at: true,
           updated_at: true,
           estimated_ready_at: true,
         },
-      })
+      }) as any
     )
 
     // Transform to frontend format
-    const courses = await Promise.all(customCourses.map(async (course) => {
+    const coursesArray = customCourses as any[];
+    const courses = await Promise.all(coursesArray.map(async (course) => {
       // Determine level from experience_years
       let level = 'Beginner'
       if (course.experience_years === '1-2') {
@@ -68,6 +72,7 @@ export async function GET(request: NextRequest) {
       }
 
       let resolvedPdfUrl: string | undefined
+      let resolvedCoverUrl: string | undefined
       try {
         resolvedPdfUrl = await resolveDownloadUrl(course.pdf_url)
       } catch (err) {
@@ -77,6 +82,16 @@ export async function GET(request: NextRequest) {
           error: err instanceof Error ? err.message : String(err),
         })
         resolvedPdfUrl = undefined
+      }
+      try {
+        resolvedCoverUrl = resolvePublicUrl(course.cover_path || undefined)
+      } catch (err) {
+        console.warn('[api/custom-courses] resolvePublicUrl failed', {
+          courseId: course.id,
+          cover_path: course.cover_path,
+          error: err instanceof Error ? err.message : String(err),
+        })
+        resolvedCoverUrl = undefined
       }
 
       return {
@@ -90,6 +105,9 @@ export async function GET(request: NextRequest) {
         updated: course.updated_at.toISOString(),
         estimatedReadyAt: course.estimated_ready_at?.toISOString(),
         pdfUrl: resolvedPdfUrl,
+        coverUrl: resolvedCoverUrl,
+        assetsStatus: course.assets_status ?? null,
+        assetsError: course.assets_error ?? null,
       }
     }))
 

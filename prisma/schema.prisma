@@ -177,6 +177,10 @@ model CustomCourseRequest {
   status_progress        Int? // 0-100
   status_message         String?
   status_error           String?
+  assets_status          String?
+  assets_error           String?
+  cover_path             String?
+  diagram_paths          Json?
   experience_years       String // 0, 1-2, 3+
   deposit_budget         String
   risk_tolerance         String // low, medium, high
@@ -211,6 +215,10 @@ model AiStrategyRun {
   status_progress        Int?
   status_message         String?
   status_error           String?
+  assets_status          String?
+  assets_error           String?
+  cover_path             String?
+  diagram_paths          Json?
   experience_years       String // 0, 1-2, 3+
   deposit_budget         String
   risk_tolerance         String // low, medium, high

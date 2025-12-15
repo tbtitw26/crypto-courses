@@ -4,14 +4,27 @@ import { prisma, withPrismaRetry } from "@/lib/prisma";
 import type { CustomCourseRequestedEvent, AIStrategyRequestedEvent } from "./types";
 import { generateCustomCourse as generateCustomCourseLLM } from "@/lib/openai/generate";
 import { generateAIStrategy as generateAIStrategyLLM } from "@/lib/openai/generate";
+import { generateImage } from "@/lib/openai/generate";
 import { generateCoursePdf } from "@/lib/pdf/pdf-generator";
-import { uploadPrivateAsset, encodeSupabasePath } from "@/lib/supabase/storage";
+import { uploadPrivateAsset, uploadPublicAsset, encodeSupabasePath } from "@/lib/supabase/storage";
 import { GeneratedCourse } from "@/lib/pdf/types";
 
 const formatErrorMessage = (error: unknown) => {
   const msg = error instanceof Error ? error.message : String(error);
   return msg.slice(0, 500);
 };
+
+const courseImagesBucket =
+  process.env.SUPABASE_BUCKET_COURSE_IMAGES ?? process.env.SUPABASE_BUCKET_COURSE_MEDIA ?? "course-images";
+
+async function downloadBuffer(url: string): Promise<Buffer> {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Failed to download image: ${res.status} ${res.statusText}`);
+  }
+  const arr = await res.arrayBuffer();
+  return Buffer.from(arr);
+}
 
 export const helloWorld = inngest.createFunction(
   { id: "hello-world" },
@@ -300,6 +313,20 @@ export const generateCustomCourse = inngest.createFunction(
             },
           })
         );
+      });
+
+      // (J) Trigger assets generation (cover/diagrams) as a separate pipeline
+      await step.run("event:assets-request", async () => {
+        await inngest.send({
+          id: `custom_course/assets.requested:${jobId}:${language}`,
+          name: "custom_course/assets.requested",
+          data: {
+            jobId,
+            userId,
+            language,
+            type: "custom",
+          },
+        });
       });
 
       // Return only small metadata (not PDF buffer)
@@ -620,6 +647,20 @@ export const generateAIStrategy = inngest.createFunction(
         );
       });
 
+      // (J) Trigger assets generation (cover/diagrams) as a separate pipeline
+      await step.run("event:assets-request", async () => {
+        await inngest.send({
+          id: `ai_strategy/assets.requested:${jobId}:${language}`,
+          name: "ai_strategy/assets.requested",
+          data: {
+            jobId,
+            userId,
+            language,
+            type: "ai",
+          },
+        });
+      });
+
       // Return only small metadata (not PDF buffer)
       return { ok: true, jobId, pdfUrl };
     } catch (error) {
@@ -723,6 +764,259 @@ export const watchdogFailStuckJobs = inngest.createFunction(
       customFailed: custom.count,
       aiFailed: ai.count,
     };
+  }
+);
+
+/**
+ * Generate assets (cover/diagrams) for custom course after job is ready
+ */
+export const generateCustomCourseAssets = inngest.createFunction(
+  {
+    id: "generate-custom-course-assets",
+    concurrency: [{ limit: 2 }],
+    onFailure: async ({ event, error }) => {
+      const data = event.data as unknown as { jobId: number };
+      const statusError = formatErrorMessage(error);
+      if (!data?.jobId) return;
+      try {
+        await prisma.customCourseRequest.update({
+          where: { id: data.jobId },
+          data: {
+            assets_status: "failed" as any,
+            assets_error: statusError as any,
+          },
+        });
+      } catch (dbError) {
+        console.error("[assets onFailure custom course] failed to update job", dbError);
+      }
+    },
+  },
+  { event: "custom_course/assets.requested" },
+  async ({ event, step }) => {
+    const data = event.data as { jobId: number; userId: number; language: string };
+    const { jobId, userId, language } = data;
+    const lang = (language || "en") as "en" | "ar";
+
+    const timeoutSafe = formatErrorMessage;
+
+    try {
+      // Load job
+      const job = await step.run("db:load-job", async () => {
+        return (await withPrismaRetry(() =>
+          prisma.customCourseRequest.findUnique({
+            where: { id: jobId },
+            select: {
+              id: true,
+              user_id: true,
+              language: true,
+              markets: true,
+              goals_free_text: true,
+              ai_response_structured: true,
+              cover_path: true,
+              diagram_paths: true,
+            },
+          })
+        )) as any;
+      });
+
+      if (!job) {
+        throw new NonRetriableError(`Job not found: ${jobId}`);
+      }
+      if (job.user_id !== userId) {
+        throw new NonRetriableError(`Job ${jobId} does not belong to user ${userId}`);
+      }
+
+      // Mark assets processing
+      await step.run("db:set-assets-processing", async () => {
+        await withPrismaRetry(() =>
+          prisma.customCourseRequest.update({
+            where: { id: jobId },
+            data: {
+              assets_status: "processing" as any,
+              assets_error: null,
+            },
+          })
+        );
+      });
+
+      // Generate cover
+      const coverPath = await step.run("images:cover-upload", async () => {
+        const markets = Array.isArray(job.markets) ? job.markets.join(", ") : "";
+        const prompt = `Professional cover image for a custom trading course. Markets: ${markets}. Goal: ${job.goals_free_text || "trading education"}. Style: clean, modern, education-only.`;
+        const { url } = await generateImage({
+          prompt,
+          size: "1024x1536",
+          quality: "medium",
+          n: 1,
+        });
+        const buffer = await downloadBuffer(url);
+        const key = `covers/custom/${userId}/${jobId}-${lang}.webp`;
+        await uploadPublicAsset(courseImagesBucket, key, buffer, {
+          contentType: "image/webp",
+          upsert: true,
+        });
+        return encodeSupabasePath(courseImagesBucket, key);
+      });
+
+      // Diagrams (optional) - keep empty for now to stay within limits
+      const diagramPaths: string[] = [];
+
+      // Mark assets ready
+      await step.run("db:set-assets-ready", async () => {
+        await withPrismaRetry(() =>
+          prisma.customCourseRequest.update({
+            where: { id: jobId },
+            data: {
+              assets_status: "ready" as any,
+              assets_error: null,
+              cover_path: coverPath as any,
+              diagram_paths: diagramPaths as any,
+            },
+          })
+        );
+      });
+
+      return { ok: true, jobId, coverPath, diagramPaths };
+    } catch (error) {
+      const errMsg = timeoutSafe(error);
+      await step.run("db:set-assets-failed", async () => {
+        await withPrismaRetry(() =>
+          prisma.customCourseRequest.update({
+            where: { id: jobId },
+            data: {
+              assets_status: "failed" as any,
+              assets_error: errMsg as any,
+            },
+          })
+        );
+      });
+      throw error;
+    }
+  }
+);
+
+/**
+ * Generate assets (cover/diagrams) for AI strategy after job is ready
+ */
+export const generateAIStrategyAssets = inngest.createFunction(
+  {
+    id: "generate-ai-strategy-assets",
+    concurrency: [{ limit: 2 }],
+    onFailure: async ({ event, error }) => {
+      const data = event.data as unknown as { jobId: number };
+      const statusError = formatErrorMessage(error);
+      if (!data?.jobId) return;
+      try {
+        await prisma.aiStrategyRun.update({
+          where: { id: data.jobId },
+          data: {
+            assets_status: "failed" as any,
+            assets_error: statusError as any,
+          },
+        });
+      } catch (dbError) {
+        console.error("[assets onFailure ai strategy] failed to update job", dbError);
+      }
+    },
+  },
+  { event: "ai_strategy/assets.requested" },
+  async ({ event, step }) => {
+    const data = event.data as { jobId: number; userId: number; language: string };
+    const { jobId, userId, language } = data;
+    const lang = (language || "en") as "en" | "ar";
+
+    try {
+      // Load job
+      const job = await step.run("db:load-job", async () => {
+        return (await withPrismaRetry(() =>
+          prisma.aiStrategyRun.findUnique({
+            where: { id: jobId },
+            select: {
+              id: true,
+              user_id: true,
+              language: true,
+              main_objective: true,
+              markets: true,
+              cover_path: true,
+              diagram_paths: true,
+            },
+          })
+        )) as any;
+      });
+
+      if (!job) {
+        throw new NonRetriableError(`AI strategy job not found: ${jobId}`);
+      }
+      if (job.user_id !== userId) {
+        throw new NonRetriableError(`Job ${jobId} does not belong to user ${userId}`);
+      }
+
+      // Mark assets processing
+      await step.run("db:set-assets-processing", async () => {
+        await withPrismaRetry(() =>
+          prisma.aiStrategyRun.update({
+            where: { id: jobId },
+            data: {
+              assets_status: "processing" as any,
+              assets_error: null,
+            },
+          })
+        );
+      });
+
+      // Generate cover
+      const coverPath = await step.run("images:cover-upload", async () => {
+        const markets = Array.isArray(job.markets) ? job.markets.join(", ") : "";
+        const prompt = `Professional cover image for an AI trading strategy. Markets: ${markets}. Objective: ${job.main_objective || "strategy"}. Style: clean, modern, education-only.`;
+        const { url } = await generateImage({
+          prompt,
+          size: "1024x1536",
+          quality: "medium",
+          n: 1,
+        });
+        const buffer = await downloadBuffer(url);
+        const key = `covers/ai-strategy/${userId}/${jobId}-${lang}.webp`;
+        await uploadPublicAsset(courseImagesBucket, key, buffer, {
+          contentType: "image/webp",
+          upsert: true,
+        });
+        return encodeSupabasePath(courseImagesBucket, key);
+      });
+
+      // Diagrams (optional) - keep empty for now
+      const diagramPaths: string[] = [];
+
+      // Mark assets ready
+      await step.run("db:set-assets-ready", async () => {
+        await withPrismaRetry(() =>
+          prisma.aiStrategyRun.update({
+            where: { id: jobId },
+            data: {
+              assets_status: "ready" as any,
+              assets_error: null,
+              cover_path: coverPath as any,
+              diagram_paths: diagramPaths as any,
+            },
+          })
+        );
+      });
+
+      return { ok: true, jobId, coverPath, diagramPaths };
+    } catch (error) {
+      const errMsg = formatErrorMessage(error);
+      await step.run("db:set-assets-failed", async () => {
+        await withPrismaRetry(() =>
+          prisma.aiStrategyRun.update({
+            where: { id: jobId },
+            data: {
+              assets_status: "failed" as any,
+              assets_error: errMsg as any,
+            },
+          })
+        );
+      });
+      throw error;
+    }
   }
 );
 

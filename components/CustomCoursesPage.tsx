@@ -44,6 +44,8 @@ interface CustomCourse {
   created: string
   eta?: string
   pdfUrl?: string
+  coverUrl?: string | null
+  assetsStatus?: string | null
 }
 
 function StatusBadge({ status, t }: { status: CustomCourseStatus; t: any }) {
@@ -137,6 +139,8 @@ export function CustomCoursesPage() {
               created: new Date(course.created).toLocaleDateString(),
               eta: course.estimatedReadyAt ? new Date(course.estimatedReadyAt).toLocaleDateString() : undefined,
               pdfUrl: course.pdfUrl,
+              coverUrl: course.coverUrl,
+              assetsStatus: course.assetsStatus,
             }
           })
           setCustomCourses(courses)
@@ -312,11 +316,30 @@ export function CustomCoursesPage() {
                       whileHover={{ y: -1 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <div className="col-span-3 flex flex-col gap-0.5 pr-2">
-                        <span className="font-medium text-slate-50 truncate">
-                          {course.title}
-                        </span>
-                        <span className="text-slate-500">{course.id}</span>
+                      <div className="col-span-3 flex flex-col gap-1 pr-2">
+                        <div className="flex items-start gap-2">
+                          <div className="w-10 h-14 rounded-md bg-slate-900 border border-slate-800 overflow-hidden flex-shrink-0">
+                            {course.coverUrl ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={course.coverUrl}
+                                alt={`${course.title} cover`}
+                                className="w-full h-full object-cover"
+                                loading="lazy"
+                              />
+                            ) : (
+                              <div className="w-full h-full text-[10px] text-slate-500 flex items-center justify-center text-center px-1">
+                                No cover
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <span className="font-medium text-slate-50 truncate block">
+                              {course.title}
+                            </span>
+                            <span className="text-slate-500 block truncate">{course.id}</span>
+                          </div>
+                        </div>
                       </div>
                       <div className="col-span-2 flex flex-col gap-0.5">
                         <span className="text-slate-100">{course.market}</span>
