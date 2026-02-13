@@ -325,7 +325,7 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
         <div class="company-info">
           OVERSEAS SUPPORT LIMITED<br>
           Company Number: 15969862<br>
-          31 Auctioneers Way, Northampton, United Kingdom, NN1 1HF
+          Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF
         </div>
       </div>
       <div class="invoice-info">

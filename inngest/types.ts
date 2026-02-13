@@ -49,3 +49,16 @@ export interface AIStrategyRequestedEvent {
   tokensCost: number
 }
 
+/**
+ * Event payload for delayed email notification for custom course PDF ready
+ * This event is scheduled 48-96 hours after PDF generation
+ */
+export interface CustomCourseEmailDelayedEvent {
+  jobId: number // CustomCourseRequest.id
+  userId: number
+  language: "en" | "ar"
+  userEmail: string
+  userName: string
+  title: string
+}
+

@@ -1,7 +1,7 @@
 import { NonRetriableError } from "inngest";
 import { inngest } from "./client";
 import { prisma, withPrismaRetry } from "@/lib/prisma";
-import type { CustomCourseRequestedEvent, AIStrategyRequestedEvent } from "./types";
+import type { CustomCourseRequestedEvent, AIStrategyRequestedEvent, CustomCourseEmailDelayedEvent } from "./types";
 import { generateCustomCourse as generateCustomCourseLLM } from "@/lib/openai/generate";
 import { generateAIStrategy as generateAIStrategyLLM } from "@/lib/openai/generate";
 import { generateImage } from "@/lib/openai/generate";
@@ -333,8 +333,8 @@ export const generateCustomCourse = inngest.createFunction(
         });
       }
 
-      // (K) Send email notification with download link
-      await step.run("email:send-notification", async () => {
+      // (K) Schedule delayed email notification (48-96 hours after PDF generation)
+      await step.run("email:schedule-delayed-notification", async () => {
         const user = await withPrismaRetry(() =>
           prisma.user.findUnique({
             where: { id: userId },
@@ -346,24 +346,43 @@ export const generateCustomCourse = inngest.createFunction(
           const userName = `${user.first_name} ${user.last_name || ''}`.trim() || 'User';
           const title = data.goalsFreeText.substring(0, 50) + (data.goalsFreeText.length > 50 ? '...' : '');
           
-          const emailResult = await sendPdfReadyEmail({
-            userEmail: user.email,
-            userName,
-            jobId,
-            type: 'custom',
-            title,
-            locale: language === 'ar' ? 'ar' : 'en',
+          // Calculate random delay between 48-96 hours (in milliseconds)
+          // 48 hours = 48 * 60 * 60 * 1000 = 172,800,000 ms
+          // 96 hours = 96 * 60 * 60 * 1000 = 345,600,000 ms
+          const minDelayMs = 48 * 60 * 60 * 1000; // 48 hours
+          const maxDelayMs = 96 * 60 * 60 * 1000; // 96 hours
+          const randomDelayMs = Math.floor(Math.random() * (maxDelayMs - minDelayMs + 1)) + minDelayMs;
+          
+          // Calculate scheduled time (timestamp in milliseconds)
+          const scheduledTimestamp = Date.now() + randomDelayMs;
+          const scheduledTime = new Date(scheduledTimestamp);
+          
+          console.log(`[Inngest] Scheduling email for custom course ${jobId} at ${scheduledTime.toISOString()} (${Math.round(randomDelayMs / (60 * 60 * 1000))} hours delay)`);
+          
+          // Send delayed event (ts is timestamp in milliseconds)
+          await inngest.send({
+            id: `custom_course/email.delayed:${jobId}:${language}`,
+            name: "custom_course/email.delayed",
+            data: {
+              jobId,
+              userId,
+              language,
+              userEmail: user.email,
+              userName,
+              title,
+            } as CustomCourseEmailDelayedEvent,
+            ts: scheduledTimestamp, // Schedule event for future time (timestamp in milliseconds)
           });
-
-          // Update email status in DB
+          
+          // Update email status in DB (mark as scheduled, not sent yet)
           await withPrismaRetry(() =>
             prisma.customCourseRequest.update({
               where: { id: jobId },
               data: {
-                email_status: emailResult.error ? 'failed' : 'sent',
-                email_sent_at: emailResult.error ? null : new Date(),
-                email_error: emailResult.error || null,
-                email_message_id: emailResult.messageId || null,
+                email_status: 'scheduled',
+                email_sent_at: null,
+                email_error: null,
+                email_message_id: null,
               },
             })
           );
@@ -844,6 +863,85 @@ export const watchdogFailStuckJobs = inngest.createFunction(
       customFailed: custom.count,
       aiFailed: ai.count,
     };
+  }
+);
+
+/**
+ * Send delayed email notification for custom course PDF ready
+ * This function is triggered 48-96 hours after PDF generation
+ */
+export const sendCustomCourseDelayedEmail = inngest.createFunction(
+  {
+    id: "send-custom-course-delayed-email",
+    concurrency: [{ limit: 10 }], // Allow multiple emails to be sent concurrently
+  },
+  { event: "custom_course/email.delayed" },
+  async ({ event, step }) => {
+    const data = event.data as CustomCourseEmailDelayedEvent;
+    const { jobId, userId, language, userEmail, userName, title } = data;
+
+    await step.run("email:send-delayed-notification", async () => {
+      // Verify job still exists and is ready
+      const job = await withPrismaRetry(() =>
+        prisma.customCourseRequest.findUnique({
+          where: { id: jobId },
+          select: {
+            id: true,
+            status: true,
+            user_id: true,
+            pdf_url: true,
+          },
+        })
+      );
+
+      if (!job) {
+        console.error(`[Inngest] Job ${jobId} not found, skipping email`);
+        return { skipped: true, reason: "job_not_found" };
+      }
+
+      if (job.user_id !== userId) {
+        console.error(`[Inngest] User ${userId} does not own job ${jobId}, skipping email`);
+        return { skipped: true, reason: "unauthorized" };
+      }
+
+      if (job.status !== "ready") {
+        console.error(`[Inngest] Job ${jobId} status is ${job.status}, not ready, skipping email`);
+        return { skipped: true, reason: "job_not_ready", status: job.status };
+      }
+
+      // Send email
+      const emailResult = await sendPdfReadyEmail({
+        userEmail,
+        userName,
+        jobId,
+        type: "custom",
+        title,
+        locale: language === "ar" ? "ar" : "en",
+      });
+
+      // Update email status in DB
+      await withPrismaRetry(() =>
+        prisma.customCourseRequest.update({
+          where: { id: jobId },
+          data: {
+            email_status: emailResult.error ? "failed" : "sent",
+            email_sent_at: emailResult.error ? null : new Date(),
+            email_error: emailResult.error || null,
+            email_message_id: emailResult.messageId || null,
+          },
+        })
+      );
+
+      console.log(`[Inngest] Delayed email ${emailResult.error ? "failed" : "sent"} for custom course ${jobId}`);
+
+      return {
+        success: !emailResult.error,
+        error: emailResult.error,
+        messageId: emailResult.messageId,
+      };
+    });
+
+    return { ok: true, jobId };
   }
 );
 

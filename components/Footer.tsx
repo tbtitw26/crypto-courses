@@ -34,7 +34,7 @@ export default function Footer() {
               </li>
               <li>
                 <span className="text-sm text-slate-400">
-                  31 Auctioneers Way, Northampton, United Kingdom, NN1 1HF
+                  {tFooter('companyAddress')}
                 </span>
               </li>
             </ul>

@@ -146,20 +146,54 @@ export function DashboardPage() {
         let aiStrategies: CourseItem[] = []
         if (aiStrategiesResponse.ok) {
           const aiData = await aiStrategiesResponse.json()
-          aiStrategies = (aiData.strategies || []).map((strategy: any) => ({
-            type: 'ai' as const,
-            label: 'AI Strategy',
-            title: strategy.title,
-            status:
+          const strategiesArray = aiData.strategies || []
+          console.log('[Dashboard] Fetched AI strategies:', {
+            count: strategiesArray.length,
+            strategies: strategiesArray.map((s: any) => ({
+              id: s.id,
+              title: s.title,
+              status: s.status,
+              pdfLinksCount: s.pdfLinks?.length || 0,
+            })),
+          })
+          
+          aiStrategies = strategiesArray.map((strategy: any) => {
+            const status =
               strategy.status === 'ready'
                 ? 'Completed'
                 : strategy.status === 'failed'
                 ? 'Failed'
-                : 'Processing',
-            market: Array.isArray(strategy.markets) ? strategy.markets.join(', ') : '',
-            downloadUrl: strategy.pdfLinks?.[0]?.url || null,
-            id: strategy.id,
-          }))
+                : 'Processing'
+            
+            // Use pdfLinks URL if available, otherwise use fallback download endpoint for ready status
+            const downloadUrl = strategy.pdfLinks?.[0]?.url || 
+              (status === 'Completed' ? `/api/download/ai-strategy/${strategy.id}` : null)
+            
+            return {
+              type: 'ai' as const,
+              label: 'AI Strategy',
+              title: strategy.title,
+              status,
+              market: Array.isArray(strategy.markets) ? strategy.markets.join(', ') : '',
+              downloadUrl,
+              id: strategy.id,
+            }
+          })
+          
+          console.log('[Dashboard] Mapped AI strategies:', {
+            count: aiStrategies.length,
+            strategies: aiStrategies.map((s) => ({
+              id: s.id,
+              title: s.title,
+              status: s.status,
+              downloadUrl: s.downloadUrl ? 'present' : 'null',
+            })),
+          })
+        } else {
+          console.error('[Dashboard] Failed to fetch AI strategies:', {
+            status: aiStrategiesResponse.status,
+            statusText: aiStrategiesResponse.statusText,
+          })
         }
 
         // Fetch custom courses
@@ -455,26 +489,23 @@ export function DashboardPage() {
                         </div>
                       </div>
                       <div className="flex sm:flex-col items-end sm:items-end gap-2 text-[11px]">
+                        {/* AI Strategy: Completed with download */}
                         {item.type === 'ai' && item.status === 'Completed' && item.downloadUrl ? (
                           <a
                             href={item.downloadUrl}
-                            download
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition"
                           >
                             <span>{t('library.item.downloadPDF')}</span>
                           </a>
-                        ) : item.type === 'ai' && item.status === 'Processing' ? (
+                        ) : /* AI Strategy: Processing */
+                        item.type === 'ai' && (item.status === 'Processing' || item.status === 'processing') ? (
                           <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-800 text-slate-400 font-semibold">
                             <span>{t('library.item.status.inprogress')}</span>
                           </span>
-                        ) : item.type === 'ai' && item.status === 'Completed' ? (
-                          <a
-                            href={`/api/download/ai-strategy/${item.id}`}
-                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition"
-                          >
-                            <span>{t('library.item.downloadPDF')}</span>
-                          </a>
-                        ) : (item.type === 'course' || item.type === 'ai') && item.downloadUrl ? (
+                        ) : /* Course: Completed with download */
+                        item.type === 'course' && item.downloadUrl ? (
                           <a
                             href={item.downloadUrl}
                             download
@@ -482,14 +513,16 @@ export function DashboardPage() {
                           >
                             <span>{t('library.item.downloadPDF')}</span>
                           </a>
-                        ) : item.type === 'custom' && (item.status === 'Completed' || item.status === 'completed') ? (
+                        ) : /* Custom Course: Completed */
+                        item.type === 'custom' && (item.status === 'Completed' || item.status === 'completed') ? (
                           <Link
                             href="/dashboard/custom-courses"
                             className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition"
                           >
                             <span>{t('library.item.downloadPDF')}</span>
                           </Link>
-                        ) : item.type === 'custom' && (item.status === 'Processing' || item.status === 'processing') ? (
+                        ) : /* Custom Course: Processing */
+                        item.type === 'custom' && (item.status === 'Processing' || item.status === 'processing') ? (
                           <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-800 text-slate-400 font-semibold">
                             <span>{t('library.item.status.inprogress')}</span>
                           </span>
