@@ -4,14 +4,14 @@
 import { config } from 'dotenv'
 import { resolve } from 'path'
 
-// Load .env and .env.local files from project root
+// Load .env and .env files from project root
 config({ path: resolve(process.cwd(), '.env') })
-config({ path: resolve(process.cwd(), '.env.local'), override: true })
+config({ path: resolve(process.cwd(), '.env'), override: true })
 
 // Verify API key is loaded before proceeding
 if (!process.env.OPENAI_API_KEY) {
   console.error('❌ OPENAI_API_KEY not found in environment variables')
-  console.error('Please add OPENAI_API_KEY to your .env.local file')
+  console.error('Please add OPENAI_API_KEY to your .env file')
   process.exit(1)
 }
 
@@ -81,7 +81,7 @@ async function main() {
       try {
         // Verify API key is still available before each generation
         if (!process.env.OPENAI_API_KEY) {
-          throw new Error('OPENAI_API_KEY is not available. Please check your .env.local file.')
+          throw new Error('OPENAI_API_KEY is not available. Please check your .env file.')
         }
         
         const result = await generateArabicPdfOnly(courseId)

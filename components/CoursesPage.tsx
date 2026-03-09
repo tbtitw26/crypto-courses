@@ -7,7 +7,6 @@ import { useTranslations } from 'next-intl'
 import { motion, useInView } from 'framer-motion'
 import { SlidersHorizontal, Search, ShieldCheck, AlertTriangle, BookOpen } from 'lucide-react'
 import Link from 'next/link'
-import { HomeSection } from './HomeSection'
 import { CoursesPageCard } from './CoursesPageCard'
 
 type Level = 'General' | 'Beginner' | 'Intermediate' | 'Advanced'
@@ -67,8 +66,9 @@ export function CoursesPage() {
       try {
         const response = await fetch('/api/courses')
         if (response.ok) {
-          const data = await response.json()
-          setCourses(Array.isArray(data) ? data : [])
+          const payload = await response.json()
+          const courses = Array.isArray(payload) ? payload : payload?.data
+          setCourses(Array.isArray(courses) ? courses : [])
         } else {
           // Если API вернул ошибку, но это не критично - используем пустой массив
           const errorData = await response.json().catch(() => ({}))

@@ -16,6 +16,16 @@ type TopupRecord = {
   created_at: Date
 }
 
+type PendingTopupRecord = {
+  id: number
+  reference_id: string
+  tokens: number
+  amount: Prisma.Decimal
+  currency: string
+  state: string
+  created_at: Date
+}
+
 type CustomCourseRecord = {
   id: number
   tokens_cost: number
@@ -69,13 +79,14 @@ export async function GET(request: NextRequest) {
 
     // Fetch all transaction types with error handling
     let topups: TopupRecord[] = []
+    let pendingTopups: PendingTopupRecord[] = []
     let customCourses: CustomCourseRecord[] = []
     let aiStrategies: AiStrategyRecord[] = []
     let coursePurchases: CoursePurchaseRecord[] = []
 
     try {
       // Fetch topups, custom courses, and AI strategies with retry logic
-      [topups, customCourses, aiStrategies] = await Promise.all([
+      ;[topups, pendingTopups, customCourses, aiStrategies] = await Promise.all([
         // Top-ups (token purchases)
         withPrismaRetry(() =>
           prisma.topup.findMany({
@@ -87,6 +98,26 @@ export async function GET(request: NextRequest) {
               id: true,
               tokens: true,
               amount: true,
+              created_at: true,
+            },
+          })
+        ),
+        withPrismaRetry(() =>
+          prisma.transferMitTopup.findMany({
+            where: {
+              user_id: userId,
+              topup_id: null,
+            },
+            orderBy: { created_at: 'desc' },
+            take: limit,
+            skip: offset,
+            select: {
+              id: true,
+              reference_id: true,
+              tokens: true,
+              amount: true,
+              currency: true,
+              state: true,
               created_at: true,
             },
           })
@@ -194,8 +225,26 @@ export async function GET(request: NextRequest) {
             tokens: calculatedTokens,
             amount: amountGbp, // Amount in GBP for currency conversion
             meta: `${calculatedTokens.toLocaleString('en-US')} tokens`,
+            status: 'Completed',
+            receiptAvailable: true,
           }
         }),
+        ...pendingTopups.map((topup) => ({
+          id: `payment-${topup.id}`,
+          type: 'Top-up',
+          detail: 'Hosted token top-up',
+          date: topup.created_at.toISOString(),
+          tokens: topup.tokens,
+          amount: 0,
+          meta: `${topup.tokens.toLocaleString('en-US')} tokens · ${topup.amount.toFixed(2)} ${topup.currency}`,
+          status:
+            topup.state === 'COMPLETED'
+              ? 'Completed'
+              : topup.state === 'FAILED' || topup.state === 'CANCELLED' || topup.state === 'EXPIRED' || topup.state === 'REFUNDED'
+              ? 'Failed'
+              : 'Pending',
+          receiptAvailable: false,
+        })),
         // Custom courses (negative amounts)
         ...customCourses.map((course) => ({
           id: `custom-${course.id}`,
@@ -205,6 +254,8 @@ export async function GET(request: NextRequest) {
           tokens: -course.tokens_cost,
           amount: 0, // Paid with tokens, not fiat
           meta: `${course.markets.join(', ')} · ${course.status}`,
+          status: course.status === 'failed' ? 'Failed' : 'Completed',
+          receiptAvailable: true,
         })),
         // AI strategies (negative amounts)
         ...aiStrategies.map((strategy) => ({
@@ -215,6 +266,8 @@ export async function GET(request: NextRequest) {
           tokens: -strategy.tokens_cost,
           amount: 0, // Paid with tokens, not fiat
           meta: `${strategy.markets.join(', ')} · ${strategy.status}`,
+          status: strategy.status === 'failed' ? 'Failed' : 'Completed',
+          receiptAvailable: true,
         })),
         // Course purchases (negative amounts)
         ...coursePurchases.map((purchase) => ({
@@ -225,6 +278,8 @@ export async function GET(request: NextRequest) {
           tokens: -purchase.tokens_cost,
           amount: Number(purchase.amount_gbp), // Usually 0, but stored for consistency
           meta: `${purchase.course.level} · ${purchase.course.market}`,
+          status: 'Completed',
+          receiptAvailable: true,
         })),
       ]
         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -244,6 +299,7 @@ export async function GET(request: NextRequest) {
       userId,
       total: transactions.length,
       topups: topups.length,
+      pendingTopups: pendingTopups.length,
       customCourses: customCourses.length,
       aiStrategies: aiStrategies.length,
       coursePurchases: coursePurchases.length,
@@ -268,4 +324,3 @@ export async function GET(request: NextRequest) {
     )
   }
 }
-

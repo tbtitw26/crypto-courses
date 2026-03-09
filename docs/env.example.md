@@ -52,8 +52,17 @@
 ## Feature Flags
 - `ENABLE_COURSE_IMAGES=false` (disable cover/diagram generation to reduce load)
 
-## TransferMit (если не используется – можно не задавать)
+## Armenotech / APS (Hosted card deposits)
+- `ARMENOTECH_API_URL=https://fpf-api.armenotech.net`
+- `ARMENOTECH_MERCHANT_GUID`
+- `ARMENOTECH_APP_TOKEN`
+- `ARMENOTECH_APP_SECRET`
+- `ARMENOTECH_CALLBACK_SECRET`
+- `ARMENOTECH_METHOD_GUID_USD`
+- `ARMENOTECH_METHOD_GUID_EUR`
+- `ARMENOTECH_INIT_PATH_TEMPLATE` (optional override if APS changes the deposit init path)
+
+## TransferMit (legacy / optional)
 - `TM_API_URL=https://app.transfermit.com/api/v1`
 - `TM_API_KEY`
 - `TM_SIGNING_KEY`
-

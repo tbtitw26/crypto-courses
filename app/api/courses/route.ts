@@ -1,7 +1,7 @@
 // app/api/courses/route.ts - API route for fetching courses
 
 import { NextResponse } from 'next/server'
-import { prisma, withPrismaRetry } from '@/lib/prisma'
+import { prisma, withPrismaRetry, isPrismaConnectionError } from '@/lib/prisma'
 import { resolvePublicUrl } from '@/lib/storage'
 import { demoCourses } from '@/src/data/courses'
 
@@ -28,73 +28,95 @@ function transformStaticCourse(course: typeof demoCourses[0], index: number) {
 }
 
 export async function GET() {
+  const requestId = crypto.randomUUID()
+
   try {
-    const courses = await withPrismaRetry(() =>
-      prisma.course.findMany({
-      select: {
-        id: true,
-        slug: true,
-        level: true,
-        market: true,
-        title: true,
-        title_ar: true,
-        description: true,
-        description_ar: true,
-        tokens: true,
-        price_gbp: true,
-        cover_image: true,
-      },
-      orderBy: {
-        created_at: 'desc',
-      },
-    }))
+    const courses = await withPrismaRetry(
+      () =>
+        prisma.course.findMany({
+          select: {
+            id: true,
+            slug: true,
+            level: true,
+            market: true,
+            title: true,
+            title_ar: true,
+            description: true,
+            description_ar: true,
+            tokens: true,
+            price_gbp: true,
+            cover_image: true,
+          },
+          orderBy: {
+            created_at: 'desc',
+          },
+        }),
+      { maxRetries: 2, retryDelayMs: 200, timeoutMs: 2000 }
+    )
 
     const coursesWithAssets = courses.map((course) => ({
       ...course,
-      cover_image: resolvePublicUrl(course.cover_image) ?? course.cover_image ?? null,
+      cover_image:
+        resolvePublicUrl(course.cover_image) ?? course.cover_image ?? null,
     }))
 
-    return NextResponse.json(coursesWithAssets)
+    return NextResponse.json({ data: coursesWithAssets, source: 'db', requestId })
   } catch (error: any) {
-    console.error('Error fetching courses:', error)
-    
-    // Если БД недоступна, используем статические данные как fallback
-    const isDatabaseError = 
-      error?.code?.startsWith('P') || // Prisma error codes (P1001, P2025, etc.)
-      error?.message?.includes('does not exist') ||
-      error?.message?.includes('relation') ||
-      error?.message?.includes('table') ||
-      error?.message?.includes('database') ||
-      error?.message?.includes('connection') ||
-      error?.message?.includes('timeout') ||
-      error?.message?.includes('Can\'t reach database') ||
-      error?.name === 'PrismaClientInitializationError' ||
-      error?.name === 'PrismaClientKnownRequestError' ||
-      error?.name === 'PrismaClientUnknownRequestError'
-    
-    if (isDatabaseError) {
-      console.warn('Database connection issue, using static fallback data:', error?.code || error?.name)
-      
-      // Используем статические данные как fallback
+    const isConn = isPrismaConnectionError(error)
+
+    if (isConn) {
+      console.warn('Database connection issue in /api/courses, using static fallback', {
+        requestId,
+        code: error?.code,
+        name: error?.name,
+        message: error?.message,
+      })
+
       try {
-        const staticCourses = demoCourses.map((course, index) => 
+        const staticCourses = demoCourses.map((course, index) =>
           transformStaticCourse(course, index)
         )
-        return NextResponse.json(staticCourses)
-      } catch (fallbackError) {
-        console.error('Error loading static courses:', fallbackError)
-        return NextResponse.json([])
+
+        const staticCoursesWithAssets = staticCourses.map((course) => ({
+          ...course,
+          cover_image:
+            resolvePublicUrl(course.cover_image) ?? course.cover_image ?? null,
+        }))
+
+        return NextResponse.json({
+          data: staticCoursesWithAssets,
+          source: 'static',
+          requestId,
+        })
+      } catch (fallbackError: any) {
+        console.error('Error loading static courses fallback:', {
+          requestId,
+          message: fallbackError?.message,
+        })
+
+        return NextResponse.json(
+          { data: [], source: 'static', requestId },
+          { status: 200 }
+        )
       }
     }
 
-    // Для других ошибок возвращаем ошибку, но с более детальной информацией
+    console.error('Error fetching courses:', {
+      requestId,
+      code: error?.code,
+      name: error?.name,
+      message: error?.message,
+      meta: error?.meta,
+      stack: process.env.NODE_ENV === 'development' ? error?.stack : undefined,
+    })
+
     return NextResponse.json(
-      { 
+      {
         error: 'Failed to fetch courses',
-        message: process.env.NODE_ENV === 'development' ? error?.message : undefined
+        message: process.env.NODE_ENV === 'development' ? error?.message : undefined,
+        requestId,
       },
       { status: 500 }
     )
   }
 }
-

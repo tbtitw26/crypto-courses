@@ -1,5 +1,3 @@
-// app/api/topup/route.ts - Backward-compatible top-up init alias
-
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
@@ -23,18 +21,24 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const baseUrl = config.site.baseUrl || request.nextUrl.origin
+    const requestOrigin = request.nextUrl.origin
+    const isLocalRequest = /localhost|127\.0\.0\.1|0\.0\.0\.0/i.test(requestOrigin)
+    const baseUrl = isLocalRequest ? requestOrigin : config.site.baseUrl || requestOrigin
 
     const result = await createHostedTopupSession({
       userId,
       userEmail: session.user.email,
       body,
       baseUrl,
+      customerIpAddress:
+        request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+        request.headers.get('x-real-ip') ||
+        null,
     })
 
     return NextResponse.json(result)
   } catch (error: any) {
-    console.error('[Top-up API] Error:', error)
+    console.error('[Top-up Init API] Error:', error)
     return NextResponse.json(
       {
         error: 'Failed to create payment session',

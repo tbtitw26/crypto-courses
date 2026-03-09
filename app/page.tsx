@@ -29,7 +29,6 @@ interface FeaturedCourse {
 
 export default function HomePage() {
   const t = useTranslations('home')
-  const tCommon = useTranslations('common')
   const [featuredCourses, setFeaturedCourses] = useState<FeaturedCourse[]>([])
   const [isLoadingCourses, setIsLoadingCourses] = useState(true)
 
@@ -40,8 +39,17 @@ export default function HomePage() {
       try {
         const response = await fetch('/api/courses')
         if (response.ok) {
-          const courses = await response.json()
-          
+          const payload = await response.json()
+          const courses = Array.isArray(payload) ? payload : payload?.data
+
+          if (!Array.isArray(courses)) {
+            console.warn('Unexpected /api/courses payload shape, using empty array', {
+              keys: payload ? Object.keys(payload) : null,
+            })
+            setFeaturedCourses([])
+            return
+          }
+
           // Select one course from each level: Beginner, Intermediate, Advanced
           const beginnerCourse = courses.find((c: any) => c.level === 'Beginner')
           const intermediateCourse = courses.find((c: any) => c.level === 'Intermediate')
