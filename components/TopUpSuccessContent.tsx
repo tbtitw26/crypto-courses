@@ -24,15 +24,28 @@ type StatusResponse = {
 
 const terminalStates = new Set<TopupStatus>(['COMPLETED', 'FAILED', 'CANCELLED', 'EXPIRED', 'REFUNDED'])
 
+function isHostedTopupCartItem(slug: string): boolean {
+  return slug.startsWith('token-pack-') || slug.startsWith('custom-top-up')
+}
+
 export default function TopUpSuccessContent() {
   const searchParams = useSearchParams()
   const { update } = useSession()
-  const { clearCart } = useCart()
+  const { items, clearCart } = useCart()
   const referenceId = searchParams.get('reference')
   const [status, setStatus] = useState<StatusResponse | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const hasAppliedSuccessSideEffects = useRef(false)
+
+  const hasCourseItemsInCart = useMemo(
+    () => items.some((item) => !isHostedTopupCartItem(item.slug)),
+    [items]
+  )
+  const hasOnlyHostedTopupItems = useMemo(
+    () => items.length > 0 && items.every((item) => isHostedTopupCartItem(item.slug)),
+    [items]
+  )
 
   const statusTone = useMemo(() => {
     switch (status?.state) {
@@ -97,8 +110,11 @@ export default function TopUpSuccessContent() {
 
         if (data.state === 'COMPLETED' && !hasAppliedSuccessSideEffects.current) {
           hasAppliedSuccessSideEffects.current = true
-          clearCart()
           await update()
+
+          if (hasOnlyHostedTopupItems) {
+            clearCart()
+          }
         }
 
         if (data.state && !terminalStates.has(data.state)) {
@@ -120,7 +136,7 @@ export default function TopUpSuccessContent() {
         clearTimeout(timer)
       }
     }
-  }, [clearCart, referenceId, update])
+  }, [clearCart, hasOnlyHostedTopupItems, referenceId, update])
 
   if (isLoading) {
     return (
@@ -211,12 +227,26 @@ export default function TopUpSuccessContent() {
       {error ? <p className="mt-5 text-sm text-rose-300">{error}</p> : null}
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-        <Link
-          href="/dashboard"
-          className="inline-flex items-center justify-center rounded-full border border-transparent bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition hover:bg-cyan-300"
-        >
-          View My Account
-        </Link>
+        {status?.state === 'COMPLETED' && hasCourseItemsInCart ? (
+          <Link
+            href="/checkout"
+            className="inline-flex items-center justify-center rounded-full border border-transparent bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition hover:bg-cyan-300"
+          >
+            Return to checkout
+          </Link>
+        ) : (
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center justify-center rounded-full border border-transparent bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition hover:bg-cyan-300"
+          >
+            View My Account
+          </Link>
+        )}
+        {status?.state === 'COMPLETED' && hasCourseItemsInCart ? (
+          <div className="text-center text-xs text-slate-400 sm:self-center">
+            Your balance has been updated. Return to checkout to finish the course purchase with tokens.
+          </div>
+        ) : null}
         {status?.receiptAvailable && status?.topupId ? (
           <Link
             href="/dashboard/receipts"

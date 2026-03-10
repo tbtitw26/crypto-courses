@@ -7,8 +7,8 @@ const requiredEnvVars = {
   
   // NextAuth
   NEXTAUTH_SECRET: 'Secret for NextAuth.js (generate with: openssl rand -base64 32)',
-  NEXTAUTH_URL: 'Base URL of your application (e.g., https://yourdomain.com)',
-  
+  NEXTAUTH_URL: 'Base URL of your application (e.g., https://avenqor.net)',
+
   // Google OAuth
   GOOGLE_CLIENT_ID: 'Google OAuth Client ID from Google Cloud Console',
   GOOGLE_CLIENT_SECRET: 'Google OAuth Client Secret from Google Cloud Console',
@@ -17,7 +17,7 @@ const requiredEnvVars = {
   OPENAI_API_KEY: 'OpenAI API key for GPT-4o and DALL-E 3',
   
   // Armenotech / APS Payment Gateway
-  ARMENOTECH_API_URL: 'Armenotech API URL (stage: https://fpf-api.armenotech.net)',
+  ARMENOTECH_API_URL: 'Armenotech API URL (prod: https://fpf-api.proc-gw.com)',
   ARMENOTECH_MERCHANT_GUID: 'Merchant GUID provided by Armenotech / APS',
   ARMENOTECH_APP_TOKEN: 'Application token for Armenotech API authentication',
   ARMENOTECH_APP_SECRET: 'Application secret for Armenotech API authentication',

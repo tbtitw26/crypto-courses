@@ -4,8 +4,8 @@
 - `NODE_ENV=production`
 - `DATABASE_URL` – PostgreSQL (Neon)
 - `NEXTAUTH_SECRET`
-- `NEXTAUTH_URL` – `https://your-domain`
-- `SITE_BASE_URL` – `https://your-domain`
+- `NEXTAUTH_URL` – `https://avenqor.net`
+- `SITE_BASE_URL` – `https://avenqor.net`
 
 ## OpenAI
 - `OPENAI_API_KEY`
@@ -53,7 +53,7 @@
 - `ENABLE_COURSE_IMAGES=false` (disable cover/diagram generation to reduce load)
 
 ## Armenotech / APS (Hosted card deposits)
-- `ARMENOTECH_API_URL=https://fpf-api.armenotech.net`
+- `ARMENOTECH_API_URL=https://fpf-api.proc-gw.com` (production)
 - `ARMENOTECH_MERCHANT_GUID`
 - `ARMENOTECH_APP_TOKEN`
 - `ARMENOTECH_APP_SECRET`

@@ -2,7 +2,7 @@ import crypto from 'node:crypto'
 import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { config } from '@/lib/config'
-import { calculatePriceForTokens, calculateTokens, convertAmount } from '@/lib/currency-utils'
+import { calculateTokens, convertAmount } from '@/lib/currency-utils'
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
 import { sendPurchaseConfirmationEmail } from '@/lib/email'
 
@@ -176,8 +176,13 @@ function buildInitRequestBody(input: {
   customerIpAddress?: string | null
   refererDomain?: string | null
 }) {
+  const normalizedCurrency = normalizeCurrency(input.currency)
+  const isoCurrency = toIsoCurrency(input.currency)
+
   return {
     amount: input.amount,
+    currency: normalizedCurrency,
+    body_currency: isoCurrency,
     fields: {
       transaction: {
         deposit_method: input.methodGuid,
@@ -185,6 +190,9 @@ function buildInitRequestBody(input: {
           redirect_url: input.redirectUrl,
           status_callback_url: input.callbackUrl,
           external_id: input.referenceId,
+          merchant_external_id: input.referenceId,
+          currency: normalizedCurrency,
+          body_currency: isoCurrency,
           payer_id: input.payerId,
           from_email: input.payerEmail || undefined,
           customer_ip_address: input.customerIpAddress || undefined,

@@ -2,7 +2,7 @@
 
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useTranslations } from 'next-intl'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -28,7 +28,6 @@ import {
 import { HomeSection } from './HomeSection'
 import { DashboardNavigation } from './DashboardNavigation'
 import { ChangePasswordModal } from './ChangePasswordModal'
-import { getUserCurrency, setUserCurrency } from '@/lib/currency-client'
 import { currencies } from '@/lib/currency-config'
 import { useToast } from '@/hooks/use-toast'
 import { X, Save } from 'lucide-react'
@@ -112,7 +111,6 @@ export function SettingsPage() {
   const { data: session, status, update: updateSession } = useSession()
   const router = useRouter()
   const { showToast } = useToast()
-  const [currency, setCurrency] = useState('GBP')
   const [dashboardLanguage, setDashboardLanguage] = useState<'en' | 'ar'>('en')
   const [courseLanguage, setCourseLanguage] = useState('english')
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false)
@@ -132,18 +130,11 @@ export function SettingsPage() {
   const [editedRegion, setEditedRegion] = useState('')
 
   useEffect(() => {
-    setCurrency(getUserCurrency())
     setDashboardLanguage(getLocaleFromCookie())
   }, [])
 
   // Load profile data when component mounts or session is available
-  useEffect(() => {
-    if (session?.user?.id && !profileData) {
-      loadProfileData()
-    }
-  }, [session?.user?.id])
-
-  const loadProfileData = async () => {
+  const loadProfileData = useCallback(async () => {
     if (!session?.user?.id) return
     
     setIsLoadingProfile(true)
@@ -174,11 +165,17 @@ export function SettingsPage() {
     } finally {
       setIsLoadingProfile(false)
     }
-  }
+  }, [session?.user?.id, showToast])
+
+  useEffect(() => {
+    if (session?.user?.id && !profileData) {
+      void loadProfileData()
+    }
+  }, [session?.user?.id, profileData, loadProfileData])
 
   const handleEditProfile = () => {
     if (!profileData) {
-      loadProfileData()
+      void loadProfileData()
     }
     setIsEditingProfile(true)
   }
@@ -279,15 +276,11 @@ export function SettingsPage() {
   const userEmail = user.email || ''
   
   // Use profile data if available, otherwise fallback to session data
-  const displayFirstName = profileData?.firstName || (user.name?.split(' ')[0] || 'User')
-  const displayLastName = profileData?.lastName || (user.name?.split(' ').slice(1).join(' ') || '')
-  const fullName = profileData 
+  const fullName = profileData
     ? `${profileData.firstName} ${profileData.lastName || ''}`.trim()
     : (user.name || 'User')
   const region = profileData?.citizenship || 'EU / UK / UAE'
 
-  // Get currency symbol
-  const currentCurrency = currencies[currency] || currencies.GBP
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-50 pb-12">

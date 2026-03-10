@@ -14,7 +14,6 @@ import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useState, useEffect, useRef, Suspense } from 'react'
 import { HomeSection } from '@/components/HomeSection'
 import { useSession } from 'next-auth/react'
-import { CardPaymentForm, CardFormData } from '@/components/CardPaymentForm'
 import { useToast } from '@/hooks/use-toast'
 
 function CheckoutContent() {
@@ -152,112 +151,6 @@ function CheckoutContent() {
       router.push('/cart')
     }
   }, [items.length, router, isProcessingPayment, hasProcessedParams])
-
-  const handleCardPayment = async (cardData: CardFormData) => {
-    setIsProcessingPayment(true)
-    try {
-      // Check if this is a token purchase
-      if (isTokenPurchaseActive) {
-        // Calculate total tokens from cart items
-        const totalTokens = items.reduce((sum, item) => sum + item.tokens, 0)
-        
-        const response = await fetch('/api/topup/init', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            items: items.map((item) => ({
-              slug: item.slug,
-              tokens: item.tokens,
-              price_gbp: item.price_gbp,
-            })),
-            currency: currency,
-            totalTokens: totalTokens,
-          }),
-        })
-
-        const result = await response.json().catch(() => ({}))
-
-        if (!response.ok) {
-          throw new Error(result.error || result.message || 'Failed to create payment session')
-        }
-
-        if (!result.redirectUrl) {
-          throw new Error('No redirect URL received from payment gateway')
-        }
-
-        window.location.href = result.redirectUrl
-        return
-      } else {
-        // Process course purchases
-        // Get user locale from cookie
-        const getLocaleFromCookie = () => {
-          if (typeof document === 'undefined') return 'en'
-          const cookies = document.cookie.split(';')
-          const localeCookie = cookies.find((c) => c.trim().startsWith('user_locale='))
-          if (localeCookie) {
-            const locale = localeCookie.split('=')[1]?.trim()
-            if (locale === 'en' || locale === 'ar') return locale
-          }
-          return 'en'
-        }
-
-        const locale = getLocaleFromCookie()
-
-        // Process each course purchase
-        for (const item of items) {
-          // Skip token packs and custom top-ups (already handled above)
-          if (item.slug.startsWith('token-pack-') || item.slug.startsWith('custom-top-up')) {
-            continue
-          }
-
-          // Call course purchase API
-          const response = await fetch('/api/courses/purchase', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              courseSlug: item.slug,
-              language: locale,
-            }),
-          })
-
-          if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}))
-            throw new Error(errorData.error || `Failed to purchase course: ${item.title}`)
-          }
-
-          const result = await response.json()
-          console.log('[Checkout] Course purchased:', result)
-        }
-
-        // Update session to reflect new balance
-        await updateSession()
-
-        showToast({
-          title: t('payment.success'),
-          description: t('payment.successDescription'),
-          variant: 'success',
-        })
-        
-        clearCart()
-        router.push('/dashboard')
-        router.refresh()
-        return // Exit early after successful payment
-      }
-    } catch (error: any) {
-      showToast({
-        title: t('payment.failed'),
-        description: error.message || t('payment.failedDescription'),
-        variant: 'error',
-      })
-      throw error
-    } finally {
-      setIsProcessingPayment(false)
-    }
-  }
 
   const handleHostedTopupCheckout = async () => {
     setIsProcessingPayment(true)
@@ -485,34 +378,38 @@ function CheckoutContent() {
                 )}
               </div>
 
-              {/* Card Payment Form */}
+              {/* Hosted Payment */}
               {paymentMethod === 'card' && (
-                isTokenPurchaseActive ? (
-                  <div className="bg-slate-950/80 border border-slate-900 rounded-2xl p-5 sm:p-6 space-y-4">
-                    <div className="space-y-2">
-                      <h3 className="text-lg font-semibold text-slate-50">Hosted card payment</h3>
-                      <p className="text-sm text-slate-400">
-                        You’ll be redirected to our secure payment provider to complete this token purchase.
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={handleHostedTopupCheckout}
-                      disabled={isProcessingPayment}
-                      className="w-full px-4 py-3 text-sm font-semibold rounded-lg bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isProcessingPayment ? t('payment.processing') : 'Continue to secure payment'}
-                    </button>
+                <div className="bg-slate-950/80 border border-slate-900 rounded-2xl p-5 sm:p-6 space-y-4">
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold text-slate-50">Secure hosted payment</h3>
+                    <p className="text-sm text-slate-400">
+                      {isTokenPurchaseActive
+                        ? 'You’ll be redirected to APS to complete this token purchase securely.'
+                        : 'You’ll be redirected to APS to top up the exact token balance needed for this order. After payment, return here to complete your course purchase with tokens.'}
+                    </p>
                   </div>
-                ) : (
-                  <CardPaymentForm
-                    total={totalPrice}
-                    currency={currency}
-                    onSubmit={handleCardPayment}
-                    isLoading={isProcessingPayment}
-                    userEmail={session?.user?.email}
-                  />
-                )
+
+                  <div className="rounded-xl border border-slate-800 bg-slate-900/50 p-4 text-sm text-slate-300">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-slate-400">Amount</span>
+                      <span className="font-semibold text-slate-100">{formattedPrice}</span>
+                    </div>
+                    <div className="mt-2 flex items-center justify-between gap-4">
+                      <span className="text-slate-400">Tokens</span>
+                      <span className="font-semibold text-slate-100">{total.tokens.toLocaleString('en-US')}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handleHostedTopupCheckout}
+                    disabled={isProcessingPayment}
+                    className="w-full px-4 py-3 text-sm font-semibold rounded-lg bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isProcessingPayment ? t('payment.processing') : 'Continue to APS secure checkout'}
+                  </button>
+                </div>
               )}
             </div>
 
