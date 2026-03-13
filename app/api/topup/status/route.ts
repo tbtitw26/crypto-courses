@@ -1,16 +1,12 @@
-// app/api/topup/route.ts - Backward-compatible top-up init alias
-
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
-import { config } from '@/lib/config'
-import { createHostedTopupSession } from '@/lib/topup-payment-flow'
+import { getTopupStatus } from '@/lib/topup-payment-flow'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
-export const runtime = 'nodejs'
 
-export async function POST(request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
     if (!session?.user?.id) {
@@ -22,25 +18,26 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid user ID' }, { status: 400 })
     }
 
-    const body = await request.json()
-    const baseUrl = config.site.baseUrl || request.nextUrl.origin
+    const referenceId = request.nextUrl.searchParams.get('reference')
+    if (!referenceId) {
+      return NextResponse.json({ error: 'Missing reference parameter' }, { status: 400 })
+    }
 
-    const result = await createHostedTopupSession({
-      userId,
-      userEmail: session.user.email,
-      body,
-      baseUrl,
-    })
+    const status = await getTopupStatus(referenceId, userId)
+    if (!status.found) {
+      return NextResponse.json(status, { status: 404 })
+    }
 
-    return NextResponse.json(result)
+    return NextResponse.json(status)
   } catch (error: any) {
-    console.error('[Top-up API] Error:', error)
+    console.error('[Top-up Status API] Error:', error)
     return NextResponse.json(
       {
-        error: 'Failed to create payment session',
+        error: 'Failed to fetch top-up status',
         message: process.env.NODE_ENV === 'development' ? error.message : 'An unexpected error occurred',
       },
       { status: 500 }
     )
   }
 }
+

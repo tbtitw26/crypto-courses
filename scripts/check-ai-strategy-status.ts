@@ -4,7 +4,7 @@ import { config } from 'dotenv'
 import { resolve } from 'path'
 
 config({ path: resolve(process.cwd(), '.env') })
-config({ path: resolve(process.cwd(), '.env.local'), override: true })
+config({ path: resolve(process.cwd(), '.env'), override: true })
 
 import { loadAiStrategyStatus } from '../lib/pdf/ai-strategy-status-tracker'
 

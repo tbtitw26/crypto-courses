@@ -33,6 +33,8 @@ interface ReceiptTransaction {
   tokens: number
   amount: number // Amount in GBP
   meta: string
+  status?: 'Completed' | 'Pending' | 'Failed'
+  receiptAvailable?: boolean
 }
 
 export function ReceiptsPage() {
@@ -78,6 +80,8 @@ export function ReceiptsPage() {
             tokens: tx.tokens,
             amount: tx.amount || 0,
             meta: tx.meta,
+            status: tx.status,
+            receiptAvailable: tx.receiptAvailable !== false,
           }))
           setTransactions(formattedTransactions)
         }
@@ -262,6 +266,9 @@ export function ReceiptsPage() {
                           </div>
                           <div className="text-sm font-semibold text-slate-50">{tx.detail}</div>
                           <div className="text-xs text-slate-400">{tx.meta}</div>
+                          {tx.status && (
+                            <div className="text-[11px] text-slate-400">Status: {tx.status}</div>
+                          )}
                           <div className="flex items-center gap-4 text-xs text-slate-300">
                             {tx.tokens !== 0 && (
                               <span>
@@ -280,13 +287,19 @@ export function ReceiptsPage() {
                       </div>
                     </div>
                     <div className="flex sm:flex-col items-end sm:items-end gap-2">
-                      <button
-                        onClick={() => handleDownloadReceipt(tx.id)}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cyan-400 text-slate-950 text-xs font-semibold hover:bg-cyan-300 transition shadow-[0_10px_26px_rgba(8,145,178,0.55)]"
-                      >
-                        <Download className="w-3.5 h-3.5" />
-                        <span>{t('downloadPDF')}</span>
-                      </button>
+                      {tx.receiptAvailable ? (
+                        <button
+                          onClick={() => handleDownloadReceipt(tx.id)}
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-cyan-400 text-slate-950 text-xs font-semibold hover:bg-cyan-300 transition shadow-[0_10px_26px_rgba(8,145,178,0.55)]"
+                        >
+                          <Download className="w-3.5 h-3.5" />
+                          <span>{t('downloadPDF')}</span>
+                        </button>
+                      ) : (
+                        <span className="text-[11px] text-slate-500 text-right max-w-[180px]">
+                          Receipt becomes available after the provider confirms the payment.
+                        </span>
+                      )}
                     </div>
                   </motion.div>
                 )

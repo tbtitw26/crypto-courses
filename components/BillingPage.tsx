@@ -81,6 +81,8 @@ interface ApiTransaction {
   tokens: number
   amount: number
   meta: string
+  status?: TransactionStatus
+  receiptAvailable?: boolean
 }
 
 export function BillingPage() {
@@ -176,7 +178,7 @@ export function BillingPage() {
               currencyAmount,
               tokensDelta,
               balanceAfter,
-              status: 'Completed' as TransactionStatus, // All transactions from API are completed
+              status: (tx.status || 'Completed') as TransactionStatus,
               apiType: tx.type, // Store original API type
               tokens: tx.tokens, // Store original tokens value for calculations
               amountGBP,
@@ -186,12 +188,17 @@ export function BillingPage() {
           
           // Find last receipt (first transaction that has an invoice)
           if (formattedTransactions.length > 0) {
-            const lastTx = formattedTransactions[0] // Already sorted by date desc
-            // Generate transaction ID from API transaction
-            const apiTx = data.transactions[0]
-            if (apiTx) {
-              setLastReceiptId(apiTx.id)
-              setLastReceiptDate(`${lastTx.date} ${lastTx.time}`)
+            const firstReceiptIndex = data.transactions.findIndex((tx: ApiTransaction) => tx.receiptAvailable !== false)
+            if (firstReceiptIndex >= 0) {
+              const lastTx = formattedTransactions[firstReceiptIndex]
+              const apiTx = data.transactions[firstReceiptIndex]
+              if (apiTx && lastTx) {
+                setLastReceiptId(apiTx.id)
+                setLastReceiptDate(`${lastTx.date} ${lastTx.time}`)
+              }
+            } else {
+              setLastReceiptId(null)
+              setLastReceiptDate(null)
             }
           }
         }

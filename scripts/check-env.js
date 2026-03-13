@@ -7,8 +7,8 @@ const requiredEnvVars = {
   
   // NextAuth
   NEXTAUTH_SECRET: 'Secret for NextAuth.js (generate with: openssl rand -base64 32)',
-  NEXTAUTH_URL: 'Base URL of your application (e.g., https://yourdomain.com)',
-  
+  NEXTAUTH_URL: 'Base URL of your application (e.g., https://avenqor.net)',
+
   // Google OAuth
   GOOGLE_CLIENT_ID: 'Google OAuth Client ID from Google Cloud Console',
   GOOGLE_CLIENT_SECRET: 'Google OAuth Client Secret from Google Cloud Console',
@@ -16,7 +16,16 @@ const requiredEnvVars = {
   // OpenAI
   OPENAI_API_KEY: 'OpenAI API key for GPT-4o and DALL-E 3',
   
-  // TransferMit Payment Gateway
+  // Armenotech / APS Payment Gateway
+  ARMENOTECH_API_URL: 'Armenotech API URL (prod: https://fpf-api.proc-gw.com)',
+  ARMENOTECH_MERCHANT_GUID: 'Merchant GUID provided by Armenotech / APS',
+  ARMENOTECH_APP_TOKEN: 'Application token for Armenotech API authentication',
+  ARMENOTECH_APP_SECRET: 'Application secret for Armenotech API authentication',
+  ARMENOTECH_CALLBACK_SECRET: 'Secret used to validate Armenotech callbacks',
+  ARMENOTECH_METHOD_GUID_USD: 'Hosted payment method GUID for USD deposits',
+  ARMENOTECH_METHOD_GUID_EUR: 'Hosted payment method GUID for EUR deposits',
+
+  // TransferMit Payment Gateway (legacy)
   TM_API_KEY: 'TransferMit API key',
   TM_SIGNING_KEY: 'TransferMit signing key for webhook verification',
   
@@ -31,12 +40,16 @@ const requiredEnvVars = {
   // Optional
   SITE_BASE_URL: 'Base URL for the site (optional, defaults to NEXTAUTH_URL)',
   TM_API_URL: 'TransferMit API URL (optional, has default)',
+  ARMENOTECH_INIT_PATH_TEMPLATE: 'Optional override for the Armenotech deposit init path',
   PUPPETEER_EXECUTABLE_PATH: 'Path to Chromium executable (optional, for local dev)',
 }
 
 const optionalEnvVars = [
   'SITE_BASE_URL',
   'TM_API_URL',
+  'TM_API_KEY',
+  'TM_SIGNING_KEY',
+  'ARMENOTECH_INIT_PATH_TEMPLATE',
   'PUPPETEER_EXECUTABLE_PATH',
   'SMTP_FROM_NAME',
 ]
@@ -123,7 +136,7 @@ const isValid = checkEnv()
 
 if (!isValid) {
   console.log('\n📝 Next steps:')
-  console.log('1. Copy .env.example to .env.local')
+  console.log('1. Copy .env.example to .env')
   console.log('2. Fill in all required variables')
   console.log('3. Run this script again to verify\n')
   process.exit(1)
@@ -131,4 +144,3 @@ if (!isValid) {
   console.log('✅ Environment is ready for deployment!\n')
   process.exit(0)
 }
-

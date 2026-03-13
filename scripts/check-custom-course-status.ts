@@ -4,9 +4,9 @@
 import { config } from 'dotenv'
 import { resolve } from 'path'
 
-// Load .env and .env.local files from project root
+// Load .env and .env files from project root
 config({ path: resolve(process.cwd(), '.env') })
-config({ path: resolve(process.cwd(), '.env.local'), override: true })
+config({ path: resolve(process.cwd(), '.env'), override: true })
 
 import { loadCustomCourseStatus } from '../lib/pdf/custom-course-status-tracker'
 

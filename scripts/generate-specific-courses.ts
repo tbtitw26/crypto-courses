@@ -4,14 +4,14 @@
 import { config } from 'dotenv'
 import { resolve } from 'path'
 
-// Load .env and .env.local files from project root
+// Load .env and .env files from project root
 config({ path: resolve(process.cwd(), '.env') })
-config({ path: resolve(process.cwd(), '.env.local'), override: true })
+config({ path: resolve(process.cwd(), '.env'), override: true })
 
 // Check if API key is loaded
 if (!process.env.OPENAI_API_KEY) {
   console.error('❌ OPENAI_API_KEY not found in environment variables')
-  console.error('Please add OPENAI_API_KEY to your .env.local file')
+  console.error('Please add OPENAI_API_KEY to your .env file')
   process.exit(1)
 }
 

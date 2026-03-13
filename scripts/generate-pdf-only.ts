@@ -5,7 +5,7 @@ import { config } from 'dotenv'
 import { resolve } from 'path'
 
 config({ path: resolve(process.cwd(), '.env') })
-config({ path: resolve(process.cwd(), '.env.local'), override: true })
+config({ path: resolve(process.cwd(), '.env'), override: true })
 
 if (!process.env.OPENAI_API_KEY) {
   console.error('❌ OPENAI_API_KEY not found')
