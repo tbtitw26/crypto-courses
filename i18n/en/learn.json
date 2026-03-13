@@ -173,7 +173,7 @@
         "placeholder": "For example: EURUSD, GBPUSD, BTCUSDT..."
       },
       "focus": {
-        "label": "Key things to focus on (optional)",
+        "label": "Key things to focus on",
         "placeholder": "For example: fewer trades, clear rules, news avoidance..."
       },
       "detail": {

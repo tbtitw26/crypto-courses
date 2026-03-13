@@ -3,6 +3,21 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
+import { sendRegistrationConfirmationEmail } from '@/lib/email'
+
+function resolveRegistrationLocale(request: NextRequest): 'en' | 'ar' {
+  const cookieLocale = request.cookies.get('user_locale')?.value
+  if (cookieLocale === 'en' || cookieLocale === 'ar') {
+    return cookieLocale
+  }
+
+  const acceptLanguage = request.headers.get('accept-language')?.toLowerCase() || ''
+  if (acceptLanguage.includes('ar')) {
+    return 'ar'
+  }
+
+  return 'en'
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -122,6 +137,23 @@ export async function POST(request: NextRequest) {
         meta: dbError?.meta,
       })
       throw dbError // Re-throw for general error handling
+    }
+
+    const locale = resolveRegistrationLocale(request)
+    try {
+      await sendRegistrationConfirmationEmail({
+        userEmail: user.email,
+        userName: user.first_name,
+        locale,
+      })
+    } catch (emailError: any) {
+      console.error('Registration confirmation email failed:', {
+        userId: user.id,
+        email: user.email,
+        locale,
+        message: emailError?.message,
+        stack: emailError?.stack,
+      })
     }
 
     return NextResponse.json(

@@ -217,6 +217,185 @@ This is an automated message. Please do not reply to this email.
   })
 }
 
+export interface RegistrationConfirmationEmailData {
+  userEmail: string
+  userName: string
+  locale?: 'en' | 'ar'
+}
+
+export async function sendRegistrationConfirmationEmail(
+  data: RegistrationConfirmationEmailData
+): Promise<void> {
+  const locale = data.locale || 'en'
+  const isArabic = locale === 'ar'
+  const dashboardUrl = `${config.nextauth.url}/dashboard`
+  const loginUrl = `${config.nextauth.url}/login`
+
+  const t = {
+    en: {
+      subject: 'Welcome to Avenqor',
+      greeting: `Hello ${data.userName},`,
+      title: 'Thank you for registering.',
+      body: 'Your Avenqor account has been created successfully. You can now sign in and access your dashboard, courses, and AI tools.',
+      dashboard: 'Open Dashboard',
+      login: 'Sign In',
+      educationOnly:
+        'Education Only - Avenqor provides educational content only and does not offer financial advice, trading signals, or account management.',
+      support: 'If you did not create this account, please contact support immediately.',
+      footer: 'This is an automated message. Please do not reply to this email.',
+    },
+    ar: {
+      subject: 'Welcome to Avenqor',
+      greeting: `مرحبا ${data.userName}،`,
+      title: 'شكرا لتسجيلك.',
+      body: 'تم إنشاء حسابك في Avenqor بنجاح. يمكنك الآن تسجيل الدخول والوصول إلى لوحة التحكم والدورات وأدوات الذكاء الاصطناعي.',
+      dashboard: 'افتح لوحة التحكم',
+      login: 'تسجيل الدخول',
+      educationOnly:
+        'لأغراض تعليمية فقط - تقدم Avenqor محتوى تعليميا فقط ولا تقدم نصائح مالية أو إشارات تداول أو إدارة حسابات.',
+      support: 'إذا لم تقم بإنشاء هذا الحساب، يرجى التواصل مع الدعم فورا.',
+      footer: 'هذه رسالة آلية. يرجى عدم الرد على هذا البريد الإلكتروني.',
+    },
+  }
+
+  const translations = t[locale]
+  const dir = isArabic ? 'rtl' : 'ltr'
+  const textAlign = isArabic ? 'right' : 'left'
+
+  const htmlContent = `
+    <!DOCTYPE html>
+    <html dir="${dir}" lang="${locale}">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          body {
+            font-family: ${isArabic ? "'Segoe UI', Tahoma, Arial, sans-serif" : "Arial, sans-serif"};
+            line-height: 1.6;
+            color: #334155;
+            margin: 0;
+            padding: 0;
+            background: #f1f5f9;
+          }
+          .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+          .wrapper {
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+          .header {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 30px 20px;
+            text-align: center;
+          }
+          .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #06b6d4;
+          }
+          .content {
+            padding: 30px 20px;
+            text-align: ${textAlign};
+          }
+          .title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #06b6d4;
+            margin: 0 0 20px 0;
+          }
+          .actions {
+            margin: 30px 0;
+            text-align: center;
+          }
+          .button {
+            display: inline-block;
+            padding: 14px 28px;
+            background: #06b6d4;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 0 6px;
+          }
+          .note {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 15px;
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 20px;
+          }
+          .footer {
+            background: #f8fafc;
+            padding: 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+            border-top: 1px solid #e2e8f0;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="wrapper">
+            <div class="header">
+              <h1>Avenqor</h1>
+            </div>
+            <div class="content">
+              <p>${translations.greeting}</p>
+              <p class="title">${translations.title}</p>
+              <p>${translations.body}</p>
+              <div class="actions">
+                <a href="${dashboardUrl}" class="button">${translations.dashboard}</a>
+                <a href="${loginUrl}" class="button">${translations.login}</a>
+              </div>
+              <div class="note">
+                <p>${translations.educationOnly}</p>
+                <p>${translations.support}</p>
+              </div>
+            </div>
+            <div class="footer">
+              <p>${translations.footer}</p>
+            </div>
+          </div>
+        </div>
+      </body>
+    </html>
+  `.trim()
+
+  const textContent = `
+${translations.subject}
+
+${translations.greeting}
+
+${translations.title}
+
+${translations.body}
+
+${translations.dashboard}: ${dashboardUrl}
+${translations.login}: ${loginUrl}
+
+${translations.educationOnly}
+
+${translations.support}
+
+${translations.footer}
+  `.trim()
+
+  await sendEmail({
+    to: data.userEmail,
+    subject: translations.subject,
+    text: textContent,
+    html: htmlContent,
+  })
+}
+
 export interface PurchaseEmailData {
   type: 'topup' | 'custom-course' | 'ai-strategy' | 'course'
   transactionId: string // topup-1, custom-1, ai-1, course-1
