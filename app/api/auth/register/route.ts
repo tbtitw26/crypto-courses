@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import bcrypt from 'bcryptjs'
 import { sendRegistrationConfirmationEmail } from '@/lib/email'
+import { isAllowedCountryCode } from '@/lib/countries'
 
 function resolveRegistrationLocale(request: NextRequest): 'en' | 'ar' {
   const cookieLocale = request.cookies.get('user_locale')?.value
@@ -59,12 +60,29 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { firstName, lastName, email, password } = body
+    const firstName = typeof body.firstName === 'string' ? body.firstName.trim() : ''
+    const lastName = typeof body.lastName === 'string' ? body.lastName.trim() : ''
+    const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : ''
+    const password = typeof body.password === 'string' ? body.password : ''
+    const phone = typeof body.phone === 'string' ? body.phone.trim() : ''
+    const dateOfBirth = typeof body.dateOfBirth === 'string' ? body.dateOfBirth.trim() : ''
+    const street = typeof body.street === 'string' ? body.street.trim() : ''
+    const city = typeof body.city === 'string' ? body.city.trim() : ''
+    const country = typeof body.country === 'string' ? body.country.trim().toUpperCase() : ''
+    const postalCode = typeof body.postalCode === 'string' ? body.postalCode.trim() : ''
+    const acceptTerms = body.acceptTerms === true
 
     // Validation
-    if (!firstName || !email || !password) {
+    if (!firstName || !email || !password || !phone || !dateOfBirth || !street || !city || !country || !postalCode) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'MISSING_REQUIRED_FIELDS' },
+        { status: 400 }
+      )
+    }
+
+    if (!acceptTerms) {
+      return NextResponse.json(
+        { error: 'TERMS_NOT_ACCEPTED' },
         { status: 400 }
       )
     }
@@ -74,6 +92,21 @@ export async function POST(request: NextRequest) {
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: 'INVALID_EMAIL' },
+        { status: 400 }
+      )
+    }
+
+    const parsedDateOfBirth = new Date(`${dateOfBirth}T00:00:00.000Z`)
+    if (Number.isNaN(parsedDateOfBirth.getTime())) {
+      return NextResponse.json(
+        { error: 'INVALID_DATE_OF_BIRTH' },
+        { status: 400 }
+      )
+    }
+
+    if (!isAllowedCountryCode(country)) {
+      return NextResponse.json(
+        { error: 'INVALID_COUNTRY' },
         { status: 400 }
       )
     }
@@ -120,6 +153,12 @@ export async function POST(request: NextRequest) {
           password: hashedPassword,
           first_name: firstName,
           last_name: lastName || null,
+          date_of_birth: parsedDateOfBirth,
+          phone,
+          bill_address: street,
+          bill_city: city,
+          bill_country: country,
+          bill_postal: postalCode,
           balance: 0,
         },
         select: {

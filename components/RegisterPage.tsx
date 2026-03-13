@@ -8,8 +8,20 @@ import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Mail, Lock, User, AlertCircle, CheckCircle2 } from 'lucide-react'
+import {
+  Mail,
+  Lock,
+  User,
+  AlertCircle,
+  CheckCircle2,
+  Phone,
+  CalendarDays,
+  MapPin,
+  Globe,
+  BadgeCheck,
+} from 'lucide-react'
 import { HomeSection } from './HomeSection'
+import { allowedCountries } from '@/lib/countries'
 
 export function RegisterPage() {
   const t = useTranslations('auth.register')
@@ -17,9 +29,16 @@ export function RegisterPage() {
   const { data: session, status } = useSession()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
+  const [dateOfBirth, setDateOfBirth] = useState('')
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [street, setStreet] = useState('')
+  const [city, setCity] = useState('')
+  const [country, setCountry] = useState('')
+  const [postalCode, setPostalCode] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [acceptTerms, setAcceptTerms] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -41,6 +60,27 @@ export function RegisterPage() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return t('errors.emailInvalid')
     }
+    if (!phone.trim()) {
+      return t('errors.phoneRequired')
+    }
+    if (!dateOfBirth) {
+      return t('errors.dateOfBirthRequired')
+    }
+    if (Number.isNaN(new Date(`${dateOfBirth}T00:00:00.000Z`).getTime())) {
+      return t('errors.dateOfBirthInvalid')
+    }
+    if (!street.trim()) {
+      return t('errors.streetRequired')
+    }
+    if (!city.trim()) {
+      return t('errors.cityRequired')
+    }
+    if (!country) {
+      return t('errors.countryRequired')
+    }
+    if (!postalCode.trim()) {
+      return t('errors.postalCodeRequired')
+    }
     if (!password) {
       return t('errors.passwordRequired')
     }
@@ -52,6 +92,9 @@ export function RegisterPage() {
     }
     if (password !== confirmPassword) {
       return t('errors.passwordsDontMatch')
+    }
+    if (!acceptTerms) {
+      return t('errors.consentRequired')
     }
     return null
   }
@@ -77,8 +120,15 @@ export function RegisterPage() {
         body: JSON.stringify({
           firstName,
           lastName: lastName || null,
+          dateOfBirth,
           email,
+          phone,
+          street,
+          city,
+          country,
+          postalCode,
           password,
+          acceptTerms,
         }),
       })
 
@@ -100,10 +150,18 @@ export function RegisterPage() {
           setError(t('errors.emailExists'))
         } else if (data.error === 'INVALID_EMAIL') {
           setError(t('errors.emailInvalid'))
+        } else if (data.error === 'MISSING_REQUIRED_FIELDS') {
+          setError(t('errors.completeAllFields'))
+        } else if (data.error === 'INVALID_DATE_OF_BIRTH') {
+          setError(t('errors.dateOfBirthInvalid'))
+        } else if (data.error === 'INVALID_COUNTRY') {
+          setError(t('errors.countryInvalid'))
+        } else if (data.error === 'TERMS_NOT_ACCEPTED') {
+          setError(t('errors.consentRequired'))
         } else if (data.error === 'DATABASE_UNAVAILABLE' || data.error === 'DATABASE_CONFIGURATION_ERROR' || data.error === 'DATABASE_ERROR') {
           setError(t('errors.databaseUnavailable'))
         } else {
-          setError(data.error || t('errors.generic'))
+          setError(data.message || data.error || t('errors.generic'))
         }
         setIsLoading(false)
         return
@@ -206,7 +264,7 @@ export function RegisterPage() {
                   {/* Last Name */}
                   <div>
                     <label htmlFor="lastName" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('lastName')} <span className="text-slate-500">(optional)</span>
+                      {t('lastName')} <span className="text-slate-500">({t('optional')})</span>
                     </label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -219,6 +277,26 @@ export function RegisterPage() {
                         onChange={(e) => setLastName(e.target.value)}
                         className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
                         placeholder="Doe"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Date of Birth */}
+                  <div>
+                    <label htmlFor="dateOfBirth" className="block text-xs font-medium text-slate-300 mb-1.5">
+                      {t('dateOfBirth')}
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <CalendarDays className="w-4 h-4 text-slate-500" />
+                      </div>
+                      <input
+                        id="dateOfBirth"
+                        type="date"
+                        value={dateOfBirth}
+                        onChange={(e) => setDateOfBirth(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
                       />
                     </div>
                   </div>
@@ -240,6 +318,118 @@ export function RegisterPage() {
                         required
                         className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
                         placeholder="you@example.com"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Phone */}
+                  <div>
+                    <label htmlFor="phone" className="block text-xs font-medium text-slate-300 mb-1.5">
+                      {t('phone')}
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <Phone className="w-4 h-4 text-slate-500" />
+                      </div>
+                      <input
+                        id="phone"
+                        type="tel"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
+                        placeholder="+44 1234 567890"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Street */}
+                  <div>
+                    <label htmlFor="street" className="block text-xs font-medium text-slate-300 mb-1.5">
+                      {t('street')}
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <MapPin className="w-4 h-4 text-slate-500" />
+                      </div>
+                      <input
+                        id="street"
+                        type="text"
+                        value={street}
+                        onChange={(e) => setStreet(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
+                        placeholder="221B Baker Street"
+                      />
+                    </div>
+                  </div>
+
+                  {/* City */}
+                  <div>
+                    <label htmlFor="city" className="block text-xs font-medium text-slate-300 mb-1.5">
+                      {t('city')}
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <MapPin className="w-4 h-4 text-slate-500" />
+                      </div>
+                      <input
+                        id="city"
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
+                        placeholder="London"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Country */}
+                  <div>
+                    <label htmlFor="country" className="block text-xs font-medium text-slate-300 mb-1.5">
+                      {t('country')}
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <Globe className="w-4 h-4 text-slate-500" />
+                      </div>
+                      <select
+                        id="country"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        required
+                        className="w-full appearance-none pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
+                      >
+                        <option value="" className="text-slate-500">
+                          {t('selectCountry')}
+                        </option>
+                        {allowedCountries.map((countryOption) => (
+                          <option key={countryOption.code} value={countryOption.code}>
+                            {countryOption.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Post code */}
+                  <div>
+                    <label htmlFor="postalCode" className="block text-xs font-medium text-slate-300 mb-1.5">
+                      {t('postalCode')}
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <MapPin className="w-4 h-4 text-slate-500" />
+                      </div>
+                      <input
+                        id="postalCode"
+                        type="text"
+                        value={postalCode}
+                        onChange={(e) => setPostalCode(e.target.value)}
+                        required
+                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
+                        placeholder="NW1 6XE"
                       />
                     </div>
                   </div>
@@ -287,6 +477,27 @@ export function RegisterPage() {
                       />
                     </div>
                   </div>
+
+                  {/* Terms consent */}
+                  <label className="flex items-start gap-3 rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 text-sm text-slate-300">
+                    <input
+                      type="checkbox"
+                      checked={acceptTerms}
+                      onChange={(e) => setAcceptTerms(e.target.checked)}
+                      className="mt-0.5 h-4 w-4 rounded border-slate-600 bg-slate-950 text-cyan-400 focus:ring-cyan-400"
+                      required
+                    />
+                    <span className="flex-1 leading-6">
+                      <BadgeCheck className="mr-2 inline-block h-4 w-4 text-cyan-300" />
+                      {t.rich('termsConsent', {
+                        terms: (chunks) => (
+                          <Link href="/terms" className="text-cyan-300 hover:text-cyan-200 transition font-medium">
+                            {chunks}
+                          </Link>
+                        ),
+                      })}
+                    </span>
+                  </label>
 
                   {/* Submit button */}
                   <button
