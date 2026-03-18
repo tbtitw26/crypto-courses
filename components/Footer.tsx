@@ -212,7 +212,7 @@ export default function Footer() {
             </a>
             <div className="flex items-center gap-3 mt-4">
               <a
-                href="https://www.instagram.com/avenqor.ai"
+                href="https://www.instagram.com/avenqorofficial"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-cyan-300 transition-colors"
