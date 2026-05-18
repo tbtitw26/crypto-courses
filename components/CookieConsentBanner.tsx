@@ -173,7 +173,7 @@ export function CookieConsentBanner() {
                     <ShieldCheck className="w-4 h-4 text-cyan-300" />
                     <h3 className="text-sm font-semibold">{t('title')}</h3>
                   </div>
-                  <p className="text-[13px] text-slate-300/90 sm:max-w-2xl">{t('description')}</p>
+                  <p className="text-sm text-slate-300/90 sm:max-w-2xl">{t('description')}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   <button
@@ -209,7 +209,7 @@ export function CookieConsentBanner() {
                   >
                     <div className="space-y-1">
                       <p className="text-sm font-semibold text-slate-100">{t('preferences.title')}</p>
-                      <p className="text-[12px] text-slate-400">{t('preferences.description')}</p>
+                      <p className="text-sm text-slate-400">{t('preferences.description')}</p>
                       {consent.updatedAt && (
                         <p className="text-[11px] text-slate-500">
                           {t('preferences.lastUpdated')}: {new Date(consent.updatedAt).toLocaleDateString()}
@@ -236,12 +236,12 @@ export function CookieConsentBanner() {
                                 className="h-4 w-4 cursor-pointer accent-cyan-400 disabled:cursor-not-allowed"
                               />
                             </div>
-                            <p className="text-[12px] text-slate-400">{categoryValue.description}</p>
+                            <p className="text-sm text-slate-400">{categoryValue.description}</p>
                           </label>
                         )
                       })}
                     </div>
-                    <div className="flex items-center justify-between gap-3 text-[12px] text-slate-400">
+                    <div className="flex items-center justify-between gap-3 text-sm text-slate-400">
                       <Link href="/cookies" className="inline-flex items-center gap-1 text-cyan-300 underline decoration-dotted hover:text-cyan-200">
                         {t('footer.text')} · {t('footer.linkLabel')}
                       </Link>

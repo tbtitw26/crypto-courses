@@ -16,31 +16,30 @@ interface PathCardProps {
 
 export function PathCard({ icon: Icon, title, text, badge, cta, href = '#' }: PathCardProps) {
   return (
-    <div className="flex flex-col bg-slate-900/60 border border-slate-800 rounded-2xl p-5 gap-4 hover:border-cyan-400/70 hover:-translate-y-1 transition-all duration-150 shadow-[0_18px_40px_rgba(0,0,0,0.55)]">
+    <div className="group flex flex-col glass-panel rounded-2xl p-5 gap-4 hover:shadow-[0_8px_30px_rgba(139,92,246,0.15)] hover:-translate-y-1 transition-all duration-200">
       <div className="flex items-start gap-3">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400/20 to-slate-800 flex items-center justify-center flex-shrink-0">
-          <Icon className="w-5 h-5 text-cyan-400" />
+        <div className="w-12 h-12 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center flex-shrink-0">
+          <Icon className="w-5 h-5 text-brand-400" />
         </div>
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-sm font-semibold text-slate-50">{title}</h3>
+            <h3 className="font-heading text-base font-semibold text-text-main">{title}</h3>
             {badge && (
-              <span className="px-2 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/70 text-[10px] text-slate-300">
+              <span className="badge-brand">
                 {badge}
               </span>
             )}
           </div>
-          <p className="text-xs text-slate-300/80 leading-relaxed">{text}</p>
+          <p className="text-sm text-text-secondary leading-relaxed">{text}</p>
         </div>
       </div>
       <Link
         href={href}
-        className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-cyan-300 hover:text-cyan-200"
+        className="mt-auto inline-flex items-center gap-1 text-sm font-medium text-brand-400 hover:text-brand-300 transition-colors"
       >
         <span>{cta}</span>
-        <span className="inline-block translate-x-0 group-hover:translate-x-0.5 transition-transform">→</span>
+        <span className="inline-block translate-x-0 group-hover:translate-x-0.5 transition-transform">&rarr;</span>
       </Link>
     </div>
   )
 }
-

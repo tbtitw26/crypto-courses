@@ -15,7 +15,7 @@ export function HomeSection({ children, className = '' }: HomeSectionProps) {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full max-w-page mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
         ref={ref}
         className={className}

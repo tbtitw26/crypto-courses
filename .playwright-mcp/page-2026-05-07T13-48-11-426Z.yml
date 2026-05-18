@@ -1,0 +1,684 @@
+- generic [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "Avenqor home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "Avenqor" [ref=e6]
+      - generic [ref=e683]:
+        - link "Shopping cart" [ref=e684] [cursor=pointer]:
+          - /url: /cart
+          - img [ref=e685]
+        - button "Open main menu" [expanded] [active] [ref=e689] [cursor=pointer]:
+          - generic [ref=e690]: Open main menu
+          - img [ref=e705]
+    - generic [ref=e710]:
+      - generic [ref=e711]:
+        - button "Learn" [expanded] [ref=e712] [cursor=pointer]:
+          - generic [ref=e713]: Learn
+          - img [ref=e714]
+        - generic [ref=e716]:
+          - link "Courses Library" [ref=e717] [cursor=pointer]:
+            - /url: /courses
+            - generic [ref=e718]: Courses
+            - generic [ref=e719]: Library
+          - link "Custom Courses Tailored PDF" [ref=e720] [cursor=pointer]:
+            - /url: /learn?tab=custom
+            - generic [ref=e721]: Custom Courses
+            - generic [ref=e722]: Tailored PDF
+          - link "AI Strategy Builder Strategy PDF" [ref=e723] [cursor=pointer]:
+            - /url: /learn?tab=ai
+            - generic [ref=e724]: AI Strategy Builder
+            - generic [ref=e725]: Strategy PDF
+      - generic [ref=e726]:
+        - link "About" [ref=e727] [cursor=pointer]:
+          - /url: /about
+        - link "Pricing" [ref=e728] [cursor=pointer]:
+          - /url: /pricing
+        - link "FAQ" [ref=e729] [cursor=pointer]:
+          - /url: /faq
+        - link "Contact" [ref=e730] [cursor=pointer]:
+          - /url: /contact
+        - link "Cart" [ref=e731] [cursor=pointer]:
+          - /url: /cart
+          - generic [ref=e732]:
+            - img [ref=e733]
+            - text: Cart
+      - generic [ref=e737]:
+        - generic [ref=e738]:
+          - generic [ref=e739]: Currency
+          - generic [ref=e740]:
+            - button "🇬🇧 GBP" [ref=e741] [cursor=pointer]:
+              - generic [ref=e742]: 🇬🇧
+              - generic [ref=e743]: GBP
+            - button "🇪🇺 EUR" [ref=e744] [cursor=pointer]:
+              - generic [ref=e745]: 🇪🇺
+              - generic [ref=e746]: EUR
+            - button "🇺🇸 USD" [ref=e747] [cursor=pointer]:
+              - generic [ref=e748]: 🇺🇸
+              - generic [ref=e749]: USD
+            - button "🇸🇦 SR" [ref=e750] [cursor=pointer]:
+              - generic [ref=e751]: 🇸🇦
+              - generic [ref=e752]: SR
+        - generic [ref=e753]:
+          - generic [ref=e754]: Language
+          - generic [ref=e755]:
+            - button "EN" [ref=e756] [cursor=pointer]
+            - button "AR" [ref=e757] [cursor=pointer]
+      - generic [ref=e758]:
+        - link "Sign Up" [ref=e759] [cursor=pointer]:
+          - /url: /register
+        - link "Log in" [ref=e760] [cursor=pointer]:
+          - /url: /login
+  - main [ref=e33]:
+    - main [ref=e35]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - img [ref=e41]
+            - generic [ref=e44]: Avenqor Club
+            - generic [ref=e46]: Education only
+          - generic [ref=e47]:
+            - heading "Premium education for high-risk markets." [level=1] [ref=e48]
+            - paragraph [ref=e49]: Structured Forex, Crypto and Binary options courses with custom PDFs and AI-generated strategies. No signals, no promises – just clear learning paths.
+          - generic [ref=e50]:
+            - link "Explore courses" [ref=e51] [cursor=pointer]:
+              - /url: /courses
+              - text: Explore courses
+              - img [ref=e52]
+            - link "Request custom course" [ref=e54] [cursor=pointer]:
+              - /url: /learn?tab=custom
+          - generic [ref=e55]:
+            - generic [ref=e56]:
+              - img [ref=e57]
+              - generic [ref=e60]: No financial advice – education only.
+            - generic [ref=e61]:
+              - img [ref=e62]
+              - generic [ref=e65]: Courses delivered as structured PDFs.
+            - generic [ref=e66]:
+              - img [ref=e67]
+              - generic [ref=e70]: AI strategies with token-based access.
+        - generic [ref=e74]:
+          - generic [ref=e75]:
+            - generic [ref=e76]:
+              - generic [ref=e77]: Featured today
+              - generic [ref=e78]: Selected Avenqor courses
+            - generic [ref=e79]: Slide show
+          - generic [ref=e761]:
+            - img "Risk Management & Trading Discipline" [ref=e763]
+            - generic [ref=e765]:
+              - generic [ref=e766]:
+                - generic [ref=e767]: All levels
+                - generic [ref=e768]: Cross-market
+              - heading "Risk Management & Trading Discipline" [level=3] [ref=e769]
+              - paragraph [ref=e770]: A practical framework for managing risk, setting limits and using a trading journal across Forex, Crypto and Binary markets.
+              - link "View course →" [ref=e771] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e772]: View course
+                - generic [ref=e773]: →
+          - generic [ref=e94]:
+            - generic [ref=e95]:
+              - button [ref=e96] [cursor=pointer]
+              - button [ref=e97] [cursor=pointer]
+              - button [ref=e98] [cursor=pointer]
+              - button [ref=e99] [cursor=pointer]
+            - generic [ref=e100]: Slide 4 of 4
+      - generic [ref=e103]:
+        - generic [ref=e104]:
+          - heading "Market snapshot" [level=2] [ref=e105]
+          - paragraph [ref=e106]: Live prices from major markets to support your learning. Avenqor never provides trading signals or investment advice.
+          - generic [ref=e107]:
+            - img [ref=e108]
+            - generic [ref=e110]: Data is shown for educational purposes only.
+        - generic [ref=e112]:
+          - generic [ref=e113]:
+            - button "Advanced Real-Time Chart" [ref=e114] [cursor=pointer]
+            - button "Market Overview" [ref=e115] [cursor=pointer]
+            - button "Stock Market" [ref=e116] [cursor=pointer]
+          - iframe [ref=e119]:
+            - generic [ref=f1e2]:
+              - toolbar [ref=f1e6]:
+                - generic [ref=f1e10]:
+                  - generic [ref=f1e11]:
+                    - button "Symbol search" [ref=f1e12]:
+                      - img [ref=f1e13]:
+                        - img [ref=f1e14]
+                      - generic [ref=f1e16]: AAPL
+                    - button "Compare symbols" [ref=f1e17]:
+                      - img [ref=f1e18]:
+                        - img [ref=f1e19]
+                  - generic [ref=f1e25]:
+                    - radiogroup [ref=f1e26]:
+                      - radio "1 minute" [ref=f1e27]:
+                        - generic [ref=f1e29]: 1m
+                      - radio "30 minutes" [ref=f1e30]:
+                        - generic [ref=f1e32]: 30m
+                      - radio "1 hour" [ref=f1e33]:
+                        - generic [ref=f1e35]: 1h
+                      - radio "1 day" [checked] [ref=f1e36]:
+                        - generic [ref=f1e38]: D
+                    - button "Chart interval" [ref=f1e39]:
+                      - img [ref=f1e42]:
+                        - img [ref=f1e43]
+                  - generic [ref=f1e48]:
+                    - radiogroup [ref=f1e49]:
+                      - radio "Bars" [ref=f1e50]:
+                        - img [ref=f1e51]:
+                          - img [ref=f1e52]
+                      - radio "Candles" [checked] [ref=f1e54]:
+                        - img [ref=f1e55]:
+                          - img [ref=f1e56]
+                      - radio "Area" [ref=f1e61]:
+                        - img [ref=f1e62]:
+                          - img [ref=f1e63]
+                    - button "Bar's style" [ref=f1e65]:
+                      - img [ref=f1e68]:
+                        - img [ref=f1e69]
+                  - button "Indicators, metrics, and strategies" [ref=f1e75]:
+                    - img [ref=f1e76]:
+                      - img [ref=f1e77]
+                  - button "Take a snapshot" [ref=f1e83]:
+                    - img [ref=f1e85]:
+                      - img [ref=f1e86]
+              - 'region "Chart #1" [ref=f1e92]':
+                - generic [ref=f1e96]:
+                  - generic:
+                    - generic:
+                      - toolbar:
+                        - generic:
+                          - generic [ref=f1e97]:
+                            - generic "Change symbol" [ref=f1e98]:
+                              - generic [ref=f1e99]:
+                                - img [ref=f1e137]
+                                - generic [ref=f1e101]: A
+                              - button "Change symbol" [ref=f1e102]: Apple Inc
+                            - text: · ·
+                          - generic:
+                            - generic:
+                              - button "More":
+                                - generic:
+                                  - img
+                          - button "Market open · Data is delayed" [ref=f1e139]:
+                            - img [ref=f1e140]:
+                              - img [ref=f1e141]
+                            - img [ref=f1e143]:
+                              - img [ref=f1e144]
+                        - generic [ref=f1e108]:
+                          - generic [ref=f1e118]:
+                            - generic [ref=f1e119]: C
+                            - generic [ref=f1e120]: "289.34"
+                          - generic [ref=f1e122]: +1.83 (+0.64%)
+                    - generic:
+                      - button "Hide indicator legend" [ref=f1e146]:
+                        - img [ref=f1e148]
+                      - generic:
+                        - toolbar:
+                          - generic:
+                            - generic "Volume" [ref=f1e151]:
+                              - generic [ref=f1e152]: Vol
+                            - generic:
+                              - generic:
+                                - button "Hide":
+                                  - generic:
+                                    - img
+                                - button "Remove":
+                                  - generic:
+                                    - img
+                                - button "More":
+                                  - generic:
+                                    - img
+                          - generic "Volume" [ref=f1e156]: 741.58 K
+                  - generic "Chart for BATS_DLY:AAPL, 1 day" [ref=f1e124]
+      - generic [ref=e122]:
+        - generic [ref=e123]:
+          - generic [ref=e124]:
+            - img [ref=e125]
+            - generic [ref=e128]: Learning Paths
+          - heading "Three ways to learn with Avenqor." [level=2] [ref=e129]
+          - paragraph [ref=e130]: Pick the format that fits your current stage and time.
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - generic [ref=e133]:
+              - img [ref=e135]
+              - generic [ref=e139]:
+                - heading "Structured PDF courses" [level=3] [ref=e141]
+                - paragraph [ref=e142]: Pre-built learning paths for Forex, Crypto and Binary, organised by level.
+            - link "Browse courses →" [ref=e143] [cursor=pointer]:
+              - /url: /courses
+              - generic [ref=e144]: Browse courses
+              - generic [ref=e145]: →
+          - generic [ref=e146]:
+            - generic [ref=e147]:
+              - img [ref=e149]
+              - generic [ref=e161]:
+                - generic [ref=e162]:
+                  - heading "Custom course by a pro trader" [level=3] [ref=e163]
+                  - generic [ref=e164]: Delivered via email
+                - paragraph [ref=e165]: Share your experience, deposit size, risk tolerance and goals. Receive a tailored PDF.
+            - link "Request custom course →" [ref=e166] [cursor=pointer]:
+              - /url: /learn?tab=custom
+              - generic [ref=e167]: Request custom course
+              - generic [ref=e168]: →
+          - generic [ref=e169]:
+            - generic [ref=e170]:
+              - img [ref=e172]
+              - generic [ref=e175]:
+                - generic [ref=e176]:
+                  - heading "AI strategy in seconds" [level=3] [ref=e177]
+                  - generic [ref=e178]: Instant
+                - paragraph [ref=e179]: Generate a structured trading plan with entry/exit logic and a risk checklist, based on your inputs.
+            - link "Open AI Strategy Builder →" [ref=e180] [cursor=pointer]:
+              - /url: /learn?tab=ai
+              - generic [ref=e181]: Open AI Strategy Builder
+              - generic [ref=e182]: →
+      - generic [ref=e184]:
+        - generic [ref=e185]:
+          - generic [ref=e186]:
+            - generic [ref=e187]:
+              - img [ref=e188]
+              - generic [ref=e191]: Course Library
+            - heading "Courses designed for clarity, not hype." [level=2] [ref=e192]
+            - paragraph [ref=e193]: Choose by market and level. Each course is a structured PDF you can study at your own pace.
+          - link "View all courses" [ref=e194] [cursor=pointer]:
+            - /url: /courses
+            - generic [ref=e195]: View all courses
+            - img [ref=e196]
+        - generic [ref=e198]:
+          - generic [ref=e199]:
+            - img "Risk First Capital Protection For Beginners" [ref=e201]
+            - generic [ref=e202]:
+              - generic [ref=e203]: Beginner
+              - generic [ref=e204]: General
+              - generic [ref=e205]: PDF
+            - generic [ref=e206]:
+              - img [ref=e207]
+              - generic [ref=e209]:
+                - heading "Risk First Capital Protection For Beginners" [level=3] [ref=e210]
+                - paragraph [ref=e211]: Course Risk First Capital Protection For Beginners
+            - generic [ref=e212]:
+              - generic [ref=e213]:
+                - generic [ref=e214]: £113.00
+                - generic [ref=e215]: ≈ 11,300 tokens
+              - link "View details →" [ref=e216] [cursor=pointer]:
+                - /url: /courses/risk-first-capital-protection-for-beginners
+                - generic [ref=e217]: View details
+                - generic [ref=e218]: →
+          - generic [ref=e219]:
+            - img "Backtesting Vs Forward Testing Without False Confi" [ref=e221]
+            - generic [ref=e222]:
+              - generic [ref=e223]: Intermediate
+              - generic [ref=e224]: General
+              - generic [ref=e225]: PDF
+            - generic [ref=e226]:
+              - img [ref=e227]
+              - generic [ref=e229]:
+                - heading "Backtesting Vs Forward Testing Without False Confi" [level=3] [ref=e230]
+                - paragraph [ref=e231]: Course Backtesting Vs Forward Testing Without False Confi
+            - generic [ref=e232]:
+              - generic [ref=e233]:
+                - generic [ref=e234]: £218.00
+                - generic [ref=e235]: ≈ 21,800 tokens
+              - link "View details →" [ref=e236] [cursor=pointer]:
+                - /url: /courses/backtesting-vs-forward-testing-without-false-confi
+                - generic [ref=e237]: View details
+                - generic [ref=e238]: →
+          - generic [ref=e239]:
+            - img "Advanced Risk In High Volatility" [ref=e241]
+            - generic [ref=e242]:
+              - generic [ref=e243]: Advanced
+              - generic [ref=e244]: General
+              - generic [ref=e245]: PDF
+            - generic [ref=e246]:
+              - img [ref=e247]
+              - generic [ref=e249]:
+                - heading "Advanced Risk In High Volatility" [level=3] [ref=e250]
+                - paragraph [ref=e251]: Course Advanced Risk In High Volatility
+            - generic [ref=e252]:
+              - generic [ref=e253]:
+                - generic [ref=e254]: £338.00
+                - generic [ref=e255]: ≈ 33,800 tokens
+              - link "View details →" [ref=e256] [cursor=pointer]:
+                - /url: /courses/advanced-risk-in-high-volatility
+                - generic [ref=e257]: View details
+                - generic [ref=e258]: →
+      - generic [ref=e261]:
+        - generic [ref=e262]:
+          - heading "What our students say" [level=2] [ref=e263]
+          - paragraph [ref=e264]: Real feedback from traders who use Avenqor courses and strategies.
+        - generic [ref=e265]:
+          - generic "Student testimonial video 1" [ref=e270]: Your browser does not support the video tag.
+          - generic "Student testimonial video 2" [ref=e275]: Your browser does not support the video tag.
+      - generic [ref=e278]:
+        - generic [ref=e279]:
+          - generic [ref=e280]:
+            - img [ref=e281]
+            - generic [ref=e283]: How It Works
+          - heading "How Avenqor fits into your learning." [level=2] [ref=e284]
+          - paragraph [ref=e285]: A simple sequence that keeps education and risk awareness at the center.
+        - generic [ref=e286]:
+          - generic [ref=e287]:
+            - generic [ref=e288]:
+              - img [ref=e290]
+              - generic [ref=e293]: Step 1
+            - heading "Define your path" [level=3] [ref=e294]
+            - paragraph [ref=e295]: Choose between ready-made courses, a custom PDF or an AI-generated strategy.
+          - generic [ref=e296]:
+            - generic [ref=e297]:
+              - img [ref=e299]
+              - generic [ref=e301]: Step 2
+            - heading "Add balance or pay directly" [level=3] [ref=e302]
+            - paragraph [ref=e303]: Use tokens across products or pay in EUR, GBP, USD or SR at checkout.
+          - generic [ref=e304]:
+            - generic [ref=e305]:
+              - img [ref=e307]
+              - generic [ref=e310]: Step 3
+            - heading "Get your PDF" [level=3] [ref=e311]
+            - paragraph [ref=e312]: Download and study at your own pace with a clear module structure.
+          - generic [ref=e313]:
+            - generic [ref=e314]:
+              - img [ref=e316]
+              - generic [ref=e321]: Step 4
+            - heading "Refine with AI strategies" [level=3] [ref=e322]
+            - paragraph [ref=e323]: Generate additional AI plans as your understanding and needs evolve.
+      - generic [ref=e326]:
+        - generic [ref=e327]:
+          - generic [ref=e328]:
+            - img [ref=e329]
+            - generic [ref=e334]: Token System
+          - heading "Tokens and direct payments." [level=2] [ref=e335]
+          - paragraph [ref=e336]: "Pick what's more convenient: token packs, custom top-ups or direct payments for courses."
+        - generic [ref=e337]:
+          - generic [ref=e338]:
+            - img [ref=e340]
+            - heading "Token packs" [level=3] [ref=e345]
+            - paragraph [ref=e346]: Buy predefined token packs and use them across all Avenqor products.
+          - generic [ref=e347]:
+            - img [ref=e349]
+            - heading "Custom top-up" [level=3] [ref=e351]
+            - paragraph [ref=e352]: Add any amount to your balance and spend tokens as you go.
+          - generic [ref=e353]:
+            - img [ref=e355]
+            - heading "Direct course payments" [level=3] [ref=e359]
+            - paragraph [ref=e360]: Pay for ready-made courses in EUR, GBP, USD or SR at checkout.
+        - link "View full pricing & tokens" [ref=e361] [cursor=pointer]:
+          - /url: /pricing
+          - generic [ref=e362]: View full pricing & tokens
+          - img [ref=e363]
+      - generic [ref=e367]:
+        - generic [ref=e368]:
+          - heading "Token packs & custom top-up." [level=2] [ref=e369]
+          - paragraph [ref=e370]: Start small or load a balance – tokens work across Avenqor courses and AI strategies.
+        - generic [ref=e371]:
+          - generic [ref=e372]:
+            - generic [ref=e373]:
+              - img [ref=e375]
+              - generic [ref=e380]:
+                - generic [ref=e381]: Focused Start
+                - generic [ref=e382]: First courses and AI plans.
+            - generic [ref=e383]:
+              - generic [ref=e384]: £43.86
+              - generic [ref=e385]: 4,386 tokens · simple entry pack.
+            - list [ref=e386]:
+              - listitem [ref=e387]:
+                - img [ref=e388]
+                - generic [ref=e390]: Good for starting with one course or a few AI strategies.
+              - listitem [ref=e391]:
+                - img [ref=e392]
+                - generic [ref=e394]: Stay small while you test Avenqor workflows.
+            - link "Buy Starter pack" [ref=e396] [cursor=pointer]:
+              - /url: /checkout?pack=focused-start
+          - generic [ref=e397]:
+            - generic [ref=e399]: Most popular
+            - generic [ref=e400]:
+              - img [ref=e402]
+              - generic [ref=e407]:
+                - generic [ref=e408]: Structured Growth
+                - generic [ref=e409]: Most popular balance.
+            - generic [ref=e410]:
+              - generic [ref=e411]: £175.44
+              - generic [ref=e412]: 17,544 tokens · better rate per token.
+            - list [ref=e413]:
+              - listitem [ref=e414]:
+                - img [ref=e415]
+                - generic [ref=e417]: Comfortable room for several courses and AI strategies.
+              - listitem [ref=e418]:
+                - img [ref=e419]
+                - generic [ref=e421]: Good fit if you plan to explore more than one market.
+            - link "Buy Growth pack" [ref=e423] [cursor=pointer]:
+              - /url: /checkout?pack=structured-growth
+          - generic [ref=e424]:
+            - generic [ref=e425]:
+              - img [ref=e427]
+              - generic [ref=e432]:
+                - generic [ref=e433]: Discipline Pro
+                - generic [ref=e434]: For long-term learners.
+            - generic [ref=e435]:
+              - generic [ref=e436]: £307.02
+              - generic [ref=e437]: 30,702 tokens · best value per token.
+            - list [ref=e438]:
+              - listitem [ref=e439]:
+                - img [ref=e440]
+                - generic [ref=e442]: For systematic study across levels and markets.
+              - listitem [ref=e443]:
+                - img [ref=e444]
+                - generic [ref=e446]: Leave headroom for future AI strategies and custom content.
+            - link "Buy Pro pack" [ref=e448] [cursor=pointer]:
+              - /url: /checkout?pack=discipline-pro
+          - generic [ref=e449]:
+            - generic [ref=e450]:
+              - img [ref=e452]
+              - generic [ref=e454]:
+                - generic [ref=e455]: Custom top-up
+                - generic [ref=e456]: Set any amount, we convert it to tokens.
+            - generic [ref=e457]:
+              - generic [ref=e458]:
+                - generic:
+                  - generic: £
+                - textbox "0.01" [ref=e459]
+              - paragraph [ref=e460]: Minimum 0.01 in the currency selected in the header. No maximum – larger top-ups are simply converted to tokens.
+            - link "Preview top-up in tokens" [ref=e462] [cursor=pointer]:
+              - /url: /checkout?custom=0.01&currency=GBP
+      - generic [ref=e465]:
+        - generic [ref=e466]:
+          - generic [ref=e467]:
+            - img [ref=e469]
+            - generic [ref=e472]:
+              - heading "Glossary" [level=3] [ref=e473]
+              - paragraph [ref=e474]: Clear explanations of key Forex, Crypto and Binary terms – without jargon.
+          - list [ref=e475]:
+            - listitem [ref=e476]: Leverage – How much exposure you control per unit of capital.
+            - listitem [ref=e477]: Drawdown – The peak-to-trough decline of your account.
+            - listitem [ref=e478]: Risk per trade – The percentage of capital you put at stake in one idea.
+          - link "Open full glossary" [ref=e479] [cursor=pointer]:
+            - /url: /glossary
+            - generic [ref=e480]: Open full glossary
+            - img [ref=e481]
+        - generic [ref=e483]:
+          - generic [ref=e484]:
+            - img [ref=e486]
+            - generic [ref=e488]:
+              - heading "Resources" [level=3] [ref=e489]
+              - paragraph [ref=e490]: Printable PDFs and templates to support your daily routine.
+          - list [ref=e491]:
+            - listitem [ref=e492]: Risk Management Checklist (PDF) – A step-by-step list to review before any trade.
+            - listitem [ref=e493]: Position Sizing Template (PDF) – A simple structure to calculate lot size based on risk.
+          - link "View all resources" [ref=e494] [cursor=pointer]:
+            - /url: /resources
+            - generic [ref=e495]: View all resources
+            - img [ref=e496]
+      - generic [ref=e500]:
+        - img [ref=e502]
+        - generic [ref=e504]:
+          - heading "High-risk markets require high awareness." [level=3] [ref=e505]
+          - paragraph [ref=e506]: Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. Avenqor provides education only. We do not manage funds, execute trades or offer financial advice.
+          - link "Read full risk & disclaimer" [ref=e507] [cursor=pointer]:
+            - /url: /risk-and-disclaimer
+            - generic [ref=e508]: Read full risk & disclaimer
+            - img [ref=e509]
+      - generic [ref=e513]:
+        - generic [ref=e514]:
+          - heading "Frequently asked questions" [level=2] [ref=e515]
+          - paragraph [ref=e516]: Key points about what Avenqor is – and what it is not.
+        - generic [ref=e518]:
+          - button "What is Avenqor?" [ref=e520] [cursor=pointer]:
+            - generic [ref=e521]: What is Avenqor?
+            - img [ref=e522]
+          - button "How do tokens work?" [ref=e525] [cursor=pointer]:
+            - generic [ref=e526]: How do tokens work?
+            - img [ref=e527]
+          - button "What is included in the courses?" [ref=e530] [cursor=pointer]:
+            - generic [ref=e531]: What is included in the courses?
+            - img [ref=e532]
+          - button "Can I cancel an order?" [ref=e535] [cursor=pointer]:
+            - generic [ref=e536]: Can I cancel an order?
+            - img [ref=e537]
+          - button "What is your refund policy?" [ref=e540] [cursor=pointer]:
+            - generic [ref=e541]: What is your refund policy?
+            - img [ref=e542]
+          - button "Do I need an account?" [ref=e545] [cursor=pointer]:
+            - generic [ref=e546]: Do I need an account?
+            - img [ref=e547]
+          - button "Does Avenqor provide financial advice?" [ref=e550] [cursor=pointer]:
+            - generic [ref=e551]: Does Avenqor provide financial advice?
+            - img [ref=e552]
+          - button "How do I access my purchased course?" [ref=e555] [cursor=pointer]:
+            - generic [ref=e556]: How do I access my purchased course?
+            - img [ref=e557]
+      - generic [ref=e563]:
+        - generic [ref=e564]:
+          - heading "Start with one course or a single AI plan." [level=2] [ref=e565]
+          - paragraph [ref=e566]: No signals. No promises. Just structured education for Forex, Crypto and Binary markets.
+        - generic [ref=e567]:
+          - link "Explore courses" [ref=e568] [cursor=pointer]:
+            - /url: /courses
+            - text: Explore courses
+            - img [ref=e569]
+          - link "Request custom course" [ref=e571] [cursor=pointer]:
+            - /url: /learn?tab=custom
+  - contentinfo [ref=e572]:
+    - generic [ref=e573]:
+      - generic [ref=e574]:
+        - generic [ref=e575]:
+          - link "Avenqor home" [ref=e576] [cursor=pointer]:
+            - /url: /
+            - img "Avenqor" [ref=e578]
+          - paragraph [ref=e579]: Avenqor provides education only. We do not offer financial advice. Courses, token top-ups, custom PDFs, and AI strategy documents are provided for education and research workflows.
+          - generic [ref=e580]:
+            - paragraph [ref=e581]: Risk notice
+            - paragraph [ref=e582]: Trading in high-risk markets can result in losses. Avenqor does not provide investment advice, trade signals, brokerage, or account management.
+        - generic [ref=e583]:
+          - generic [ref=e584]:
+            - heading "Company" [level=2] [ref=e585]
+            - list [ref=e586]:
+              - listitem [ref=e587]:
+                - link "About" [ref=e588] [cursor=pointer]:
+                  - /url: /about
+              - listitem [ref=e589]:
+                - link "Pricing" [ref=e590] [cursor=pointer]:
+                  - /url: /pricing
+              - listitem [ref=e591]:
+                - link "FAQ" [ref=e592] [cursor=pointer]:
+                  - /url: /faq
+              - listitem [ref=e593]:
+                - link "Contact Us" [ref=e594] [cursor=pointer]:
+                  - /url: /contact
+          - generic [ref=e595]:
+            - heading "Learn" [level=2] [ref=e596]
+            - list [ref=e597]:
+              - listitem [ref=e598]:
+                - link "Courses" [ref=e599] [cursor=pointer]:
+                  - /url: /courses
+              - listitem [ref=e600]:
+                - link "Custom Courses" [ref=e601] [cursor=pointer]:
+                  - /url: /learn?tab=custom
+              - listitem [ref=e602]:
+                - link "AI Strategy Builder" [ref=e603] [cursor=pointer]:
+                  - /url: /learn?tab=ai
+              - listitem [ref=e604]:
+                - link "Glossary" [ref=e605] [cursor=pointer]:
+                  - /url: /glossary
+              - listitem [ref=e606]:
+                - link "Resources" [ref=e607] [cursor=pointer]:
+                  - /url: /resources
+          - generic [ref=e608]:
+            - heading "Useful Links" [level=2] [ref=e609]
+            - list [ref=e610]:
+              - listitem [ref=e611]:
+                - link "Risk Management" [ref=e612] [cursor=pointer]:
+                  - /url: /learn/risk-management
+              - listitem [ref=e613]:
+                - link "Trade Journal" [ref=e614] [cursor=pointer]:
+                  - /url: /learn/trade-journal
+              - listitem [ref=e615]:
+                - link "Weekly Review" [ref=e616] [cursor=pointer]:
+                  - /url: /learn/weekly-review
+              - listitem [ref=e617]:
+                - link "Pre-Session" [ref=e618] [cursor=pointer]:
+                  - /url: /learn/pre-session
+              - listitem [ref=e619]:
+                - link "Position Sizing" [ref=e620] [cursor=pointer]:
+                  - /url: /learn/position-sizing
+              - listitem [ref=e621]:
+                - link "Strategy Snapshot" [ref=e622] [cursor=pointer]:
+                  - /url: /learn/strategy-snapshot
+          - generic [ref=e623]:
+            - heading "Legal" [level=2] [ref=e624]
+            - list [ref=e625]:
+              - listitem [ref=e626]:
+                - link "Risk & Disclaimer" [ref=e627] [cursor=pointer]:
+                  - /url: /risk-and-disclaimer
+              - listitem [ref=e628]:
+                - link "Terms & Conditions" [ref=e629] [cursor=pointer]:
+                  - /url: /terms
+              - listitem [ref=e630]:
+                - link "Privacy Policy" [ref=e631] [cursor=pointer]:
+                  - /url: /privacy
+              - listitem [ref=e632]:
+                - link "Cookies" [ref=e633] [cursor=pointer]:
+                  - /url: /cookies
+              - listitem [ref=e634]:
+                - link "Refund Policy" [ref=e635] [cursor=pointer]:
+                  - /url: /refund-policy
+      - generic [ref=e636]:
+        - generic [ref=e637]:
+          - paragraph [ref=e638]: OVERSEAS SUPPORT LIMITED
+          - paragraph [ref=e639]:
+            - text: "Company number: 15969862"
+            - text: Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF
+        - generic [ref=e640]:
+          - paragraph [ref=e641]: Get In Touch
+          - generic [ref=e642]:
+            - link "info@avenqor.net" [ref=e643] [cursor=pointer]:
+              - /url: mailto:info@avenqor.net
+              - img [ref=e644]
+              - text: info@avenqor.net
+            - link "+44 7457 424685" [ref=e647] [cursor=pointer]:
+              - /url: tel:+447457424685
+              - img [ref=e648]
+              - text: +44 7457 424685
+        - generic [ref=e650]:
+          - paragraph [ref=e651]: Social
+          - generic [ref=e652]:
+            - link "Instagram" [ref=e653] [cursor=pointer]:
+              - /url: https://www.instagram.com/avenqorofficial
+              - img [ref=e654]
+            - link "LinkedIn" [ref=e657] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/avenqor/
+              - img [ref=e658]
+      - generic [ref=e662]:
+        - paragraph [ref=e663]: © 2026 OVERSEAS SUPPORT LIMITED. All Rights Reserved.
+        - generic [ref=e664]:
+          - img "Visa" [ref=e665]
+          - img "MasterCard" [ref=e666]
+  - alert [ref=e667]
+  - generic [ref=e670]:
+    - generic [ref=e671]:
+      - generic [ref=e672]:
+        - img [ref=e673]
+        - heading "We use cookies to deliver, secure and improve Avenqor." [level=3] [ref=e676]
+      - paragraph [ref=e677]: Pick which categories you want to allow. Essential cookies always stay on so that login, payments and PDF delivery keep working.
+    - generic [ref=e678]:
+      - button "Accept all" [ref=e679] [cursor=pointer]
+      - button "Reject non-essential" [ref=e680] [cursor=pointer]
+      - button "Manage preferences" [ref=e681] [cursor=pointer]:
+        - img [ref=e682]
+        - text: Manage preferences

@@ -1,5 +1,3 @@
-// components/HeroSlideshow.tsx - Hero slideshow component
-
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -62,45 +60,47 @@ export function HeroSlideshow() {
 
   return (
     <>
-      <div className="flex items-center justify-between mb-3">
+      <div className="mb-4 flex items-center justify-between gap-3">
         <div>
-          <div className="text-[11px] uppercase tracking-[0.16em] text-slate-400">{t('labelTop')}</div>
-          <div className="text-xs text-slate-300">{t('labelSub')}</div>
+          <div className="font-heading text-xs font-bold uppercase text-text-muted">{t('labelTop')}</div>
+          <div className="text-sm text-text-secondary">{t('labelSub')}</div>
         </div>
-        <div className="h-8 w-24 rounded-xl bg-gradient-to-r from-cyan-400/40 to-slate-800 flex items-center justify-center text-[10px] text-slate-100/90 border border-cyan-400/40">
-          {t('slideShow')}
-        </div>
+        <div className="badge-brand">{t('slideShow')}</div>
       </div>
-      <div className="relative overflow-hidden rounded-2xl">
+      <div className="relative overflow-hidden rounded-xl">
         <motion.div
           key={active.title}
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: 'easeOut' }}
-          className="relative rounded-2xl bg-slate-900/80 border border-slate-800 overflow-hidden min-h-[280px] sm:min-h-[320px]"
+          className="relative min-h-[300px] overflow-hidden rounded-xl border border-surface-300 bg-white sm:min-h-[340px]"
         >
-          {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <Image
               src={active.imagePath}
               alt={active.title}
               fill
-              className="object-cover opacity-30"
+              className="object-cover opacity-45"
               sizes="(max-width: 768px) 100vw, 50vw"
               priority={index === 0}
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/78 to-white/10" />
           </div>
-          
-          {/* Content Overlay */}
-          <div className="relative z-10 px-4 py-4 sm:px-5 sm:py-5 flex flex-col gap-2.5">
-            <div className="text-[11px] text-slate-400 mb-0.5">
-              {active.level} · {active.market}
+
+          <div className="relative z-10 flex flex-col gap-3 px-5 py-6 sm:px-6 sm:py-7">
+            <div className="flex items-center gap-2">
+              <span className="badge-neutral">{active.level}</span>
+              <span className="badge-neutral">{active.market}</span>
             </div>
-            <div className="text-sm sm:text-base font-semibold text-slate-50 mb-1.5">{active.title}</div>
-            <div className="text-xs sm:text-sm text-slate-300/90 mb-3 leading-relaxed">{active.summary}</div>
+            <h3 className="font-heading text-lg sm:text-xl font-semibold text-text-main tracking-heading">
+              {active.title}
+            </h3>
+            <p className="text-sm text-text-secondary leading-relaxed max-w-lg">
+              {active.summary}
+            </p>
             <Link
-              href="#"
-              className="self-start inline-flex items-center gap-1 text-xs font-medium text-cyan-300 hover:text-cyan-200"
+              href="/courses"
+              className="mt-2 inline-flex self-start items-center gap-2 rounded-lg bg-surface-950 px-3 py-2 text-sm font-semibold text-white transition hover:bg-brand-900"
             >
               <span>{t('ctaViewCourse')}</span>
               <span>→</span>
@@ -108,23 +108,23 @@ export function HeroSlideshow() {
           </div>
         </motion.div>
       </div>
-      <div className="mt-3 flex items-center justify-between text-[11px] text-slate-400">
-        <div className="flex items-center gap-1.5">
+      <div className="mt-4 flex items-center justify-between gap-4">
+        <div className="flex items-center gap-2">
           {slides.map((slide, i) => (
             <button
               key={slide.title}
               onClick={() => setIndex(i)}
-              className={`h-1.5 rounded-full transition-all duration-200 ${
-                i === index ? 'w-6 bg-cyan-400' : 'w-2 bg-slate-600'
+              aria-label={`Show ${slide.title}`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === index ? 'w-8 bg-brand-700' : 'w-2 bg-surface-400 hover:bg-surface-500'
               }`}
             />
           ))}
         </div>
-        <span className="text-slate-500">
+        <span className="text-xs text-text-muted font-heading">
           {t('slideCounterPrefix')} {index + 1} {t('slideCounterOf')} {slides.length}
         </span>
       </div>
     </>
   )
 }
-

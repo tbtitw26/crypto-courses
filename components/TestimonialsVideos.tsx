@@ -107,10 +107,10 @@ export function TestimonialsVideos() {
   }, [])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="max-w-xl">
-        <h2 className="text-lg sm:text-xl font-semibold text-slate-50 mb-1">{t('title')}</h2>
-        <p className="text-sm text-slate-300/90">{t('subtitle')}</p>
+        <h2 className="section-heading">{t('title')}</h2>
+        <p className="section-subheading">{t('subtitle')}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -122,9 +122,9 @@ export function TestimonialsVideos() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.45, ease: 'easeOut' }}
         >
-          <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/15 via-slate-900/60 to-indigo-500/10 blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(15,23,42,0.95)]">
-            <div className="relative w-full h-[400px] sm:h-[450px] rounded-xl overflow-hidden border border-slate-700/50 bg-slate-900/50 flex items-center justify-center">
+          <div className="absolute -inset-4 bg-gradient-to-br from-brand-500/15 via-surface-100/60 to-brand-400/10 blur-2xl -z-10 opacity-60" />
+          <div className="glass-panel rounded-2xl p-5 sm:p-6">
+            <div className="relative w-full h-[420px] sm:h-[480px] rounded-xl overflow-hidden border border-surface-300 bg-surface-50 flex items-center justify-center">
               <video
                 ref={video1Ref}
                 src="/video1.mp4"
@@ -148,9 +148,9 @@ export function TestimonialsVideos() {
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.45, ease: 'easeOut', delay: 0.1 }}
         >
-          <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/15 via-slate-900/60 to-indigo-500/10 blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          <div className="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(15,23,42,0.95)]">
-            <div className="relative w-full h-[400px] sm:h-[450px] rounded-xl overflow-hidden border border-slate-700/50 bg-slate-900/50">
+          <div className="absolute -inset-4 bg-gradient-to-br from-brand-500/15 via-surface-100/60 to-brand-400/10 blur-2xl -z-10 opacity-60" />
+          <div className="glass-panel rounded-2xl p-5 sm:p-6">
+            <div className="relative w-full h-[420px] sm:h-[480px] rounded-xl overflow-hidden border border-surface-300 bg-surface-50">
               <video
                 ref={video2Ref}
                 src="/video2.mp4"
@@ -169,4 +169,3 @@ export function TestimonialsVideos() {
     </div>
   )
 }
-

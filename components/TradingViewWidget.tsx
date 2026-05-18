@@ -288,33 +288,33 @@ export function TradingViewWidget() {
   return (
     <div className="w-full">
       {/* Tabs */}
-      <div className="flex items-center gap-2 mb-3 border-b border-slate-800">
+      <div className="mb-3 flex flex-wrap items-center gap-2 border-b border-white/10 pb-2">
         <button
           onClick={() => setActiveTab('chart')}
-          className={`px-4 py-2 text-xs font-medium transition-colors ${
+          className={`rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
             activeTab === 'chart'
-              ? 'text-cyan-300 border-b-2 border-cyan-400'
-              : 'text-slate-400 hover:text-slate-300'
+              ? 'bg-white text-surface-950'
+              : 'text-surface-300 hover:bg-white/10 hover:text-white'
           }`}
         >
           {t('tabs.chart')}
         </button>
         <button
           onClick={() => setActiveTab('overview')}
-          className={`px-4 py-2 text-xs font-medium transition-colors ${
+          className={`rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
             activeTab === 'overview'
-              ? 'text-cyan-300 border-b-2 border-cyan-400'
-              : 'text-slate-400 hover:text-slate-300'
+              ? 'bg-white text-surface-950'
+              : 'text-surface-300 hover:bg-white/10 hover:text-white'
           }`}
         >
           {t('tabs.overview')}
         </button>
         <button
           onClick={() => setActiveTab('stock')}
-          className={`px-4 py-2 text-xs font-medium transition-colors ${
+          className={`rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
             activeTab === 'stock'
-              ? 'text-cyan-300 border-b-2 border-cyan-400'
-              : 'text-slate-400 hover:text-slate-300'
+              ? 'bg-white text-surface-950'
+              : 'text-surface-300 hover:bg-white/10 hover:text-white'
           }`}
         >
           {t('tabs.stock')}
@@ -322,7 +322,7 @@ export function TradingViewWidget() {
       </div>
 
       {/* Widget Container */}
-      <div className="w-full h-[400px] rounded-xl bg-slate-900/60 border border-slate-800 overflow-hidden">
+      <div className="h-[400px] w-full overflow-hidden rounded-2xl border border-white/10 bg-surface-900/80">
         <div
           ref={containerRef}
           className="tradingview-widget-container w-full h-full"
@@ -332,4 +332,3 @@ export function TradingViewWidget() {
     </div>
   )
 }
-

@@ -179,56 +179,19 @@ export async function POST(request: NextRequest) {
       } as AIStrategyRequestedEvent,
     }))
 
+    let inngestQueued = false
     try {
-      // Send all events in batch
       await Promise.all(
         inngestEvents.map((event) => inngest.send(event))
       )
+      inngestQueued = true
     } catch (inngestError) {
-      // If Inngest send fails, mark all jobs as failed and refund tokens
-      console.error('[AI Strategy API] Failed to send Inngest events:', {
+      console.warn('[AI Strategy API] Inngest event send failed (non-fatal):', {
         strategyRunIds: strategyRuns.map((r) => r.id),
         userId,
         error: inngestError instanceof Error ? inngestError.message : String(inngestError),
+        hint: 'If running locally, start the Inngest dev server: npx inngest-cli@latest dev -u http://localhost:3001/api/inngest',
       })
-
-      // Mark all jobs as failed
-      await Promise.all(
-        strategyRuns.map((strategyRun) =>
-          withPrismaRetry(() =>
-            prisma.aiStrategyRun.update({
-              where: { id: strategyRun.id },
-              data: {
-                status: 'failed',
-                status_stage: 'error',
-                status_error: `Failed to enqueue job: ${inngestError instanceof Error ? inngestError.message : String(inngestError)}`,
-              },
-            })
-          )
-        )
-      )
-
-      // Refund tokens
-      try {
-        await withPrismaRetry(() =>
-          prisma.user.update({
-            where: { id: userId },
-            data: {
-              balance: {
-                increment: tokensCost,
-              },
-            },
-          })
-        )
-      } catch (refundError) {
-        console.error('[AI Strategy API] Failed to refund tokens after Inngest error:', refundError)
-        // Log but don't fail - admin can manually refund if needed
-      }
-
-      return NextResponse.json(
-        { error: 'Failed to enqueue jobs', message: 'Job creation failed. Tokens have been refunded.' },
-        { status: 500 }
-      )
     }
 
     // Step 4: Return response with jobs array
@@ -237,19 +200,20 @@ export async function POST(request: NextRequest) {
       language: strategyRun.language,
     }))
 
-    // Backward-compatible: if single job, also include top-level jobId
     const singleJob = jobs.length === 1 ? jobs[0] : null
 
     return NextResponse.json({
       success: true,
       ok: true,
-      jobs, // New format: array of jobs
+      jobs,
       ...(singleJob && {
-        id: singleJob.jobId, // Backward-compatible
-        jobId: singleJob.jobId, // Backward-compatible
+        id: singleJob.jobId,
+        jobId: singleJob.jobId,
       }),
       status: 'in_queue',
-      message: `Strategy generation queued for ${jobs.length} language(s). You can close this window.`,
+      message: inngestQueued
+        ? `Strategy generation queued for ${jobs.length} language(s). You can close this window.`
+        : `Strategy request created for ${jobs.length} language(s). Background processing could not be started — generation will begin when the job queue is available.`,
     })
   } catch (error) {
     console.error('AI Strategy API error:', error)

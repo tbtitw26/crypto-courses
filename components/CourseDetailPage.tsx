@@ -179,7 +179,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
   // Use modules from DB if available, otherwise fallback to static data
   const dbModules = course.modules && Array.isArray(course.modules) ? course.modules : null
   const fallbackModules = getDefaultModules(course.market, course.level)
-  
+
   // Transform DB modules to display format
   const displayModules = dbModules
     ? dbModules
@@ -198,28 +198,24 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
       : `${displayModules.length * 1}–${displayModules.length * 1.5} hours`
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-16">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
-
+    <div className="min-h-screen pb-16">
       {/* Header */}
-      <header className="sticky top-0 z-20 border-b border-slate-900/80 bg-slate-950/90 backdrop-blur-xl">
+      <header className="sticky top-0 z-20 border-b border-surface-300 glass-panel">
         <HomeSection className="py-3 flex items-center justify-between gap-4">
-          <div className="hidden md:flex items-center gap-3 text-[11px] text-slate-400 ml-auto">
+          <div className="hidden md:flex items-center gap-3 text-xs text-text-muted ml-auto">
             <span className="inline-flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3 text-cyan-300" />
+              <ShieldCheck className="w-3 h-3 text-brand-400" />
               {t('header.educationOnly')}
             </span>
             <span className="inline-flex items-center gap-1">
-              <BookOpen className="w-3 h-3 text-cyan-300" />
+              <BookOpen className="w-3 h-3 text-brand-400" />
               {t('header.pdfFormat')}
             </span>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={() => router.push('/courses')}
-              className="inline-flex items-center px-3 py-1.5 text-[11px] font-medium rounded-full border border-slate-700 text-slate-100 hover:border-slate-500"
+              className="btn-secondary inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-full"
             >
               {t('header.backToCourses')}
             </button>
@@ -231,43 +227,43 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
         {/* Breadcrumb + hero meta */}
         <HomeSection className="pb-6 space-y-6">
           <div className="flex flex-col gap-3">
-            <div className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Link href="/" className="hover:text-slate-300">
+            <div className="text-xs text-text-muted flex items-center gap-1">
+              <Link href="/" className="hover:text-text-secondary">
                 {tBreadcrumb('home')}
               </Link>
-              <span className="text-slate-600">/</span>
-              <Link href="/courses" className="hover:text-slate-300">
+              <span className="text-text-muted/50">/</span>
+              <Link href="/courses" className="hover:text-text-secondary">
                 {tBreadcrumb('courses')}
               </Link>
-              <span className="text-slate-600">/</span>
-              <span className="text-slate-300">{displayTitle}</span>
+              <span className="text-text-muted/50">/</span>
+              <span className="text-text-secondary">{displayTitle}</span>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* Left: main info */}
               <div className="lg:col-span-7 space-y-4">
-                <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-200">
-                  <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-950 font-medium">
+                <div className="flex flex-wrap items-center gap-2 text-[11px] text-text-main">
+                  <span className="btn-primary px-2.5 py-1 rounded-full font-medium text-[11px]">
                     {course.level}
                   </span>
-                  <span className="px-2.5 py-1 rounded-full bg-slate-950/90 border border-slate-700">
+                  <span className="badge-neutral px-2.5 py-1 rounded-full">
                     {course.market}
                   </span>
-                  <span className="px-2.5 py-1 rounded-full bg-slate-950/90 border border-slate-700">
+                  <span className="badge-neutral px-2.5 py-1 rounded-full">
                     {t('meta.pdfCourse')}
                   </span>
-                  <span className="px-2.5 py-1 rounded-full bg-slate-950/90 border border-slate-700 flex items-center gap-1">
+                  <span className="badge-neutral px-2.5 py-1 rounded-full flex items-center gap-1">
                     <Globe2 className="w-3 h-3" />
                     {t('meta.languages')}
                   </span>
                 </div>
 
                 <div className="space-y-3">
-                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-slate-50">
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-semibold font-heading text-text-main">
                     {displayTitle}
                   </h1>
                   {hasImage && (
-                    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-slate-800">
+                    <div className="relative w-full aspect-video rounded-xl overflow-hidden border border-surface-300">
                       <Image
                         src={resolvedImagePath!}
                         alt={displayTitle}
@@ -278,44 +274,44 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
                       />
                     </div>
                   )}
-                  <p className="text-sm text-slate-300/90 max-w-2xl">{displayDescription}</p>
+                  <p className="text-sm sm:text-base text-text-secondary max-w-2xl">{displayDescription}</p>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[11px] text-slate-300">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs text-text-secondary">
                   <div className="space-y-0.5">
-                    <div className="flex items-center gap-1 text-slate-400">
+                    <div className="flex items-center gap-1 text-text-muted">
                       <Gauge className="w-3 h-3" />
                       <span>{t('meta.duration')}</span>
                     </div>
-                    <div className="text-slate-100">{estimatedDuration} · self-paced</div>
+                    <div className="text-text-main">{estimatedDuration} · self-paced</div>
                   </div>
                   <div className="space-y-0.5">
-                    <div className="flex items-center gap-1 text-slate-400">
+                    <div className="flex items-center gap-1 text-text-muted">
                       <Layers className="w-3 h-3" />
                       <span>{t('meta.modules')}</span>
                     </div>
-                    <div className="text-slate-100">
+                    <div className="text-text-main">
                       {displayModules.length} {t('meta.modules').toLowerCase()}
                     </div>
                   </div>
                   <div className="space-y-0.5">
-                    <div className="flex items-center gap-1 text-slate-400">
+                    <div className="flex items-center gap-1 text-text-muted">
                       <FileText className="w-3 h-3" />
                       <span>{t('meta.format')}</span>
                     </div>
-                    <div className="text-slate-100">{t('meta.pdfDownload')}</div>
+                    <div className="text-text-main">{t('meta.pdfDownload')}</div>
                   </div>
                   <div className="space-y-0.5">
-                    <div className="flex items-center gap-1 text-slate-400">
+                    <div className="flex items-center gap-1 text-text-muted">
                       <ShieldCheck className="w-3 h-3" />
                       <span>{t('meta.focus')}</span>
                     </div>
-                    <div className="text-slate-100">{t('meta.riskAwareness')}</div>
+                    <div className="text-text-main">{t('meta.riskAwareness')}</div>
                   </div>
                 </div>
 
-                <div className="rounded-2xl bg-slate-950/80 border border-slate-900 p-3 text-[11px] text-slate-300/90 space-y-1.5">
-                  <div className="font-semibold text-slate-100 text-xs">
+                <div className="glass-panel rounded-2xl p-3 text-xs text-text-secondary space-y-1.5">
+                  <div className="font-semibold text-text-main text-xs">
                     {t('whatYouWillLearn.title')}
                   </div>
                   <ul className="space-y-1 list-disc list-inside">
@@ -333,28 +329,28 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
               {/* Right: pricing & purchase */}
               <div className="lg:col-span-5">
                 <motion.div
-                  className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 sm:p-5 flex flex-col gap-3 shadow-[0_18px_40px_rgba(15,23,42,0.95)]"
+                  className="glass-panel rounded-2xl p-4 sm:p-5 flex flex-col gap-3"
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, ease: 'easeOut' }}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
-                      <div className="h-9 w-9 rounded-xl bg-slate-900 flex items-center justify-center border border-slate-700">
-                        <BookOpen className="w-4 h-4 text-cyan-300" />
+                      <div className="h-9 w-9 rounded-xl bg-surface-200 flex items-center justify-center border border-surface-400">
+                        <BookOpen className="w-4 h-4 text-brand-400" />
                       </div>
                       <div>
-                        <div className="text-xs font-semibold text-slate-50">
+                        <div className="text-xs font-semibold text-text-main">
                           {t('pricing.courseAccess')}
                         </div>
-                        <div className="text-[11px] text-slate-400">
+                        <div className="text-xs text-text-muted">
                           {t('pricing.immediateDownload')}
                         </div>
                       </div>
                     </div>
                     <div className="text-right text-xs">
-                      <div className="font-semibold text-slate-50">{price}</div>
-                      <div className="text-[11px] text-slate-400">
+                      <div className="font-semibold text-text-main">{price}</div>
+                      <div className="text-xs text-text-muted">
                         ≈ {tokensFormatted} tokens
                       </div>
                     </div>
@@ -363,35 +359,35 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
                   <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
                     <button
                       onClick={handleBuyWithTokens}
-                      className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-cyan-400 text-slate-950 font-semibold text-xs hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition"
+                      className="btn-primary inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs"
                     >
                       <span>{t('pricing.buyWithTokens')}</span>
                     </button>
                     <button
                       onClick={handleBuyWithCard}
-                      className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-slate-700 text-slate-100 font-medium hover:border-slate-500 transition"
+                      className="btn-secondary inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl font-medium transition"
                     >
                       <span>{t('pricing.buyWithCard')}</span>
                     </button>
                   </div>
 
-                  <div className="text-[11px] text-slate-400 space-y-1.5">
+                  <div className="text-xs text-text-muted space-y-1.5">
                     <div>{t('pricing.paymentNote')}</div>
                     <div className="flex items-start gap-2">
-                      <ShieldCheck className="w-3.5 h-3.5 text-cyan-300 mt-0.5" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-brand-400 mt-0.5" />
                       <span>{t('pricing.educationDisclaimer')}</span>
                     </div>
                   </div>
 
-                  <div className="mt-2 pt-3 border-t border-slate-900 text-[11px] text-slate-400 space-y-1.5">
-                    <div className="font-medium text-slate-200">{t('pricing.beforeBuying')}</div>
+                  <div className="mt-2 pt-3 border-t border-surface-300 text-xs text-text-muted space-y-1.5">
+                    <div className="font-medium text-text-main">{t('pricing.beforeBuying')}</div>
                     <ul className="space-y-1 list-disc list-inside">
                       <li>{t('pricing.riskNote1')}</li>
                       <li>{t('pricing.riskNote2')}</li>
                     </ul>
                     <Link
                       href="/risk-and-disclaimer"
-                      className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200"
+                      className="inline-flex items-center gap-1 text-xs font-medium text-brand-400 hover:text-brand-300"
                     >
                       <span>{t('pricing.readDisclaimer')}</span>
                       <span>→</span>
@@ -409,10 +405,10 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
             <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center justify-between gap-2">
                 <div>
-                  <h2 className="text-sm sm:text-base font-semibold text-slate-50 mb-1">
+                  <h2 className="text-sm sm:text-base font-semibold font-heading text-text-main mb-1">
                     {t('outline.title')}
                   </h2>
-                  <p className="text-xs text-slate-300/90">{t('outline.description')}</p>
+                  <p className="text-sm text-text-secondary">{t('outline.description')}</p>
                 </div>
               </div>
 
@@ -420,16 +416,16 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
                 {displayModules.map((m) => (
                   <motion.div
                     key={m.no}
-                    className="flex gap-3 rounded-2xl bg-slate-950/80 border border-slate-900 p-3"
+                    className="flex gap-3 glass-panel rounded-2xl p-3"
                     whileHover={{ y: -2 }}
                     transition={{ type: 'spring', stiffness: 260, damping: 22 }}
                   >
-                    <div className="h-8 w-8 rounded-xl bg-slate-900 flex items-center justify-center border border-slate-700 text-[11px] text-slate-300">
+                    <div className="h-8 w-8 rounded-xl bg-surface-200 flex items-center justify-center border border-surface-400 text-[11px] text-text-secondary">
                       {m.no}
                     </div>
                     <div className="space-y-0.5">
-                      <div className="text-xs font-semibold text-slate-50">{m.title}</div>
-                      <div className="text-[11px] text-slate-300/90">{m.desc}</div>
+                      <div className="text-sm font-semibold text-text-main">{m.title}</div>
+                      <div className="text-xs text-text-secondary">{m.desc}</div>
                     </div>
                   </motion.div>
                 ))}
@@ -439,14 +435,14 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
             {/* Who this is for / not for */}
             <div className="lg:col-span-5 space-y-4 lg:pt-[70px]">
               <motion.div
-                className="bg-slate-950/80 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
+                className="glass-panel rounded-2xl p-4 flex flex-col gap-2"
                 whileHover={{ y: -3 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 22 }}
               >
-                <h2 className="text-xs font-semibold text-slate-50 mb-1">
+                <h2 className="text-xs font-semibold font-heading text-text-main mb-1">
                   {t('sidebar.whoIsFor.title')}
                 </h2>
-                <ul className="text-[11px] text-slate-300/90 space-y-1.5">
+                <ul className="text-xs text-text-secondary space-y-1.5">
                   <li>
                     Complete beginners who want a structured, non-hyped introduction to{' '}
                     {course.market}.
@@ -462,14 +458,14 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
               </motion.div>
 
               <motion.div
-                className="bg-slate-950/80 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
+                className="glass-panel rounded-2xl p-4 flex flex-col gap-2"
                 whileHover={{ y: -3 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 22 }}
               >
-                <h2 className="text-xs font-semibold text-slate-50 mb-1">
+                <h2 className="text-xs font-semibold font-heading text-text-main mb-1">
                   {t('sidebar.notFor.title')}
                 </h2>
-                <ul className="text-[11px] text-slate-300/90 space-y-1.5">
+                <ul className="text-xs text-text-secondary space-y-1.5">
                   <li>It will not give you trade calls or entry alerts.</li>
                   <li>It will not promise you any monthly percentage return.</li>
                   <li>
@@ -479,20 +475,20 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
               </motion.div>
 
               <motion.div
-                className="bg-slate-950/80 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
+                className="glass-panel rounded-2xl p-4 flex flex-col gap-2"
                 whileHover={{ y: -3 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 22 }}
               >
-                <h2 className="text-xs font-semibold text-slate-50 mb-1">
+                <h2 className="text-xs font-semibold font-heading text-text-main mb-1">
                   {t('sidebar.materials.title')}
                 </h2>
-                <ul className="text-[11px] text-slate-300/90 space-y-1.5">
-                  <li>Full PDF course (around 80–100 pages).</li>
+                <ul className="text-xs text-text-secondary space-y-1.5">
+                  <li>Full PDF course (around 80-100 pages).</li>
                   <li>
                     Simple printable risk checklist you can keep near your screen.
                   </li>
                   <li>
-                    Basic journaling template to log your first 50–100 trades.
+                    Basic journaling template to log your first 50-100 trades.
                   </li>
                 </ul>
               </motion.div>
@@ -505,48 +501,48 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             <div className="lg:col-span-7 space-y-3">
               <div className="max-w-xl">
-                <h2 className="text-sm sm:text-base font-semibold text-slate-50 mb-1">
+                <h2 className="text-sm sm:text-base font-semibold font-heading text-text-main mb-1">
                   {t('faq.title')}
                 </h2>
-                <p className="text-xs text-slate-300/90">{t('faq.description')}</p>
+                <p className="text-sm text-text-secondary">{t('faq.description')}</p>
               </div>
               <div className="space-y-2">
-                <details className="group bg-slate-950/80 border border-slate-900 rounded-2xl px-3 py-2 text-sm">
+                <details className="group glass-panel rounded-2xl px-3 py-2 text-sm">
                   <summary className="flex items-center justify-between cursor-pointer list-none">
-                    <span className="text-xs font-medium text-slate-100 pr-4">
+                    <span className="text-sm font-medium text-text-main pr-4">
                       {t('faq.items.receivePdf.question')}
                     </span>
-                    <span className="text-slate-500 text-xs group-open:rotate-90 transition-transform">
+                    <span className="text-text-muted text-xs group-open:rotate-90 transition-transform">
                       ›
                     </span>
                   </summary>
-                  <div className="mt-2 text-[11px] text-slate-300/90 leading-relaxed">
+                  <div className="mt-2 text-xs text-text-secondary leading-relaxed">
                     {t('faq.items.receivePdf.answer')}
                   </div>
                 </details>
-                <details className="group bg-slate-950/80 border border-slate-900 rounded-2xl px-3 py-2 text-sm">
+                <details className="group glass-panel rounded-2xl px-3 py-2 text-sm">
                   <summary className="flex items-center justify-between cursor-pointer list-none">
-                    <span className="text-xs font-medium text-slate-100 pr-4">
+                    <span className="text-sm font-medium text-text-main pr-4">
                       {t('faq.items.refund.question')}
                     </span>
-                    <span className="text-slate-500 text-xs group-open:rotate-90 transition-transform">
+                    <span className="text-text-muted text-xs group-open:rotate-90 transition-transform">
                       ›
                     </span>
                   </summary>
-                  <div className="mt-2 text-[11px] text-slate-300/90 leading-relaxed">
+                  <div className="mt-2 text-xs text-text-secondary leading-relaxed">
                     {t('faq.items.refund.answer')}
                   </div>
                 </details>
-                <details className="group bg-slate-950/80 border border-slate-900 rounded-2xl px-3 py-2 text-sm">
+                <details className="group glass-panel rounded-2xl px-3 py-2 text-sm">
                   <summary className="flex items-center justify-between cursor-pointer list-none">
-                    <span className="text-xs font-medium text-slate-100 pr-4">
+                    <span className="text-sm font-medium text-text-main pr-4">
                       {t('faq.items.signals.question')}
                     </span>
-                    <span className="text-slate-500 text-xs group-open:rotate-90 transition-transform">
+                    <span className="text-text-muted text-xs group-open:rotate-90 transition-transform">
                       ›
                     </span>
                   </summary>
-                  <div className="mt-2 text-[11px] text-slate-300/90 leading-relaxed">
+                  <div className="mt-2 text-xs text-text-secondary leading-relaxed">
                     {t('faq.items.signals.answer')}
                   </div>
                 </details>
@@ -555,20 +551,20 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
 
             <div className="lg:col-span-5 space-y-3 lg:pt-[70px]">
               <motion.div
-                className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
+                className="glass-panel rounded-2xl p-4 flex flex-col gap-2"
                 whileHover={{ y: -3 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 22 }}
               >
-                <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-slate-900/90 border border-slate-800 text-[10px] text-slate-300 w-max">
-                  <CheckCircle2 className="w-3 h-3 text-cyan-300" />
+                <div className="badge-neutral inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] w-max">
+                  <CheckCircle2 className="w-3 h-3 text-brand-400" />
                   <span>{t('sidebar.customCourse.badge')}</span>
                 </div>
-                <p className="text-[11px] text-slate-300/90">
+                <p className="text-xs text-text-secondary">
                   {t('sidebar.customCourse.description')}
                 </p>
                 <Link
                   href="/learn"
-                  className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-brand-400 hover:text-brand-300"
                 >
                   <span>{t('sidebar.customCourse.cta')}</span>
                   <ChevronRight className="w-3 h-3" />
@@ -576,18 +572,18 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
               </motion.div>
 
               <motion.div
-                className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
+                className="glass-panel rounded-2xl p-4 flex flex-col gap-2"
                 whileHover={{ y: -3 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 22 }}
               >
-                <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-slate-900/90 border border-slate-800 text-[10px] text-slate-300 w-max">
-                  <Cpu className="w-3 h-3 text-cyan-300" />
+                <div className="badge-neutral inline-flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] w-max">
+                  <Cpu className="w-3 h-3 text-brand-400" />
                   <span>{t('sidebar.aiStrategy.badge')}</span>
                 </div>
-                <p className="text-[11px] text-slate-300/90">{t('sidebar.aiStrategy.description')}</p>
+                <p className="text-xs text-text-secondary">{t('sidebar.aiStrategy.description')}</p>
                 <Link
                   href="/learn"
-                  className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-brand-400 hover:text-brand-300"
                 >
                   <span>{t('sidebar.aiStrategy.cta')}</span>
                   <ChevronRight className="w-3 h-3" />
@@ -595,7 +591,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
               </motion.div>
 
               <motion.div
-                className="bg-slate-950/90 border border-amber-500/40 rounded-2xl p-4 flex flex-col gap-2"
+                className="glass-panel rounded-2xl border-amber-500/40 p-4 flex flex-col gap-2"
                 whileHover={{ y: -3 }}
                 transition={{ type: 'spring', stiffness: 260, damping: 22 }}
               >
@@ -603,12 +599,12 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
                   <AlertTriangle className="w-4 h-4" />
                   <span className="font-semibold">{t('sidebar.riskReminder.title')}</span>
                 </div>
-                <p className="text-[11px] text-slate-200/90">
+                <p className="text-xs text-text-main/90">
                   {t('sidebar.riskReminder.description')}
                 </p>
                 <Link
                   href="/risk-and-disclaimer"
-                  className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200 mt-1"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-brand-400 hover:text-brand-300 mt-1"
                 >
                   <span>{t('sidebar.riskReminder.cta')}</span>
                   <ChevronRight className="w-3 h-3" />
@@ -621,26 +617,26 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
         {/* Bottom CTA */}
         <HomeSection className="pb-10">
           <motion.div
-            className="bg-slate-950/90 border border-slate-900 rounded-2xl px-5 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+            className="glass-panel rounded-2xl px-5 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
             whileHover={{ y: -3 }}
             transition={{ type: 'spring', stiffness: 260, damping: 22 }}
           >
             <div>
-              <h2 className="text-sm sm:text-base font-semibold text-slate-50 mb-1">
+              <h2 className="text-sm sm:text-base font-semibold font-heading text-text-main mb-1">
                 {t('cta.title', { courseTitle: displayTitle })}
               </h2>
-              <p className="text-xs text-slate-300/90 max-w-xl">{t('cta.description')}</p>
+              <p className="text-sm text-text-secondary max-w-xl">{t('cta.description')}</p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <button
                 onClick={handleAddToCart}
-                className="inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition"
+                className="btn-primary inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full"
               >
                 {t('cta.buyCourse')}
               </button>
               <Link
                 href="/courses"
-                className="inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full border border-slate-700 text-slate-100 hover:border-slate-500 transition"
+                className="btn-secondary inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full"
               >
                 {t('cta.viewMore')}
               </Link>
@@ -651,4 +647,3 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
     </div>
   )
 }
-

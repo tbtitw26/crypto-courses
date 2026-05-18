@@ -52,14 +52,14 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
   if (items.length === 0) {
     return (
       <div
-        className="w-80 bg-slate-950 border border-slate-800 rounded-xl shadow-2xl z-50 p-6"
+        className="w-80 glass-panel rounded-xl z-50 p-6"
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
         <div className="flex flex-col items-center justify-center text-center py-8">
-          <ShoppingCart className="w-12 h-12 text-slate-600 mb-3" />
-          <h3 className="text-sm font-semibold text-slate-200 mb-1">{tEmpty('title')}</h3>
-          <p className="text-xs text-slate-400">{tEmpty('description')}</p>
+          <ShoppingCart className="w-12 h-12 text-text-muted/50 mb-3" />
+          <h3 className="text-sm font-semibold text-text-main mb-1">{tEmpty('title')}</h3>
+          <p className="text-sm text-text-muted">{tEmpty('description')}</p>
         </div>
       </div>
     )
@@ -67,25 +67,25 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
 
   return (
     <div
-      className="w-80 bg-slate-950 border border-slate-800 rounded-xl shadow-2xl z-50 max-h-[600px] flex flex-col"
+      className="w-80 glass-panel rounded-xl z-50 max-h-[600px] flex flex-col"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className="p-4 border-b border-slate-800">
-        <h3 className="text-sm font-semibold text-slate-50">{t('title')}</h3>
+      <div className="p-4 border-b border-surface-300">
+        <h3 className="text-sm font-semibold text-text-main">{t('title')}</h3>
       </div>
-      
+
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {items.map((item) => {
           const itemType = getCartItemType(item.slug)
           const imagePath = itemType === 'course' ? item.image ?? getCourseImagePath(item.slug) : null
           // Use localized title if available and locale is Arabic
           const displayTitle = locale === 'ar' && item.title_ar ? item.title_ar : item.title
-          
+
           return (
-            <div key={item.slug} className="flex items-start gap-3 p-2 rounded-lg bg-slate-900/50 border border-slate-800">
+            <div key={item.slug} className="flex items-start gap-3 p-2 rounded-lg bg-surface-200/50 border border-surface-300">
               {imagePath ? (
-                <div className="relative h-12 w-12 rounded-lg overflow-hidden border border-slate-700 flex-shrink-0">
+                <div className="relative h-12 w-12 rounded-lg overflow-hidden border border-surface-400 flex-shrink-0">
                   <Image
                     src={imagePath}
                     alt={displayTitle}
@@ -95,31 +95,31 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
                   />
                 </div>
               ) : (
-                <div className="h-12 w-12 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center flex-shrink-0">
+                <div className="h-12 w-12 rounded-lg bg-surface-200 border border-surface-400 flex items-center justify-center flex-shrink-0">
                   {itemType === 'token-pack' && (
-                    <Coins className="w-5 h-5 text-cyan-300" />
+                    <Coins className="w-5 h-5 text-brand-400" />
                   )}
                   {itemType === 'custom-top-up' && (
-                    <PlusCircle className="w-5 h-5 text-cyan-300" />
+                    <PlusCircle className="w-5 h-5 text-brand-400" />
                   )}
                   {itemType === 'course' && (
-                    <BookOpen className="w-5 h-5 text-cyan-300" />
+                    <BookOpen className="w-5 h-5 text-brand-400" />
                   )}
                 </div>
               )}
-              
+
               <div className="flex-1 min-w-0">
-                <h4 className="text-xs font-medium text-slate-200 line-clamp-2 mb-1">
+                <h4 className="text-sm font-medium text-text-main line-clamp-2 mb-1">
                   {displayTitle}
                 </h4>
-                <p className="text-[10px] text-slate-400">
+                <p className="text-xs text-text-muted">
                   {item.tokens.toLocaleString('en-US')} {tCommon('tokens')}
                 </p>
               </div>
-              
+
               <button
                 onClick={() => removeFromCart(item.slug)}
-                className="flex-shrink-0 p-1 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded transition"
+                className="flex-shrink-0 p-1 text-text-muted hover:text-text-main hover:bg-surface-200/50 rounded transition"
                 aria-label={t('remove')}
               >
                 <X className="w-3 h-3" />
@@ -128,27 +128,27 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
           )
         })}
       </div>
-      
-      <div className="p-4 border-t border-slate-800 space-y-2">
+
+      <div className="p-4 border-t border-surface-300 space-y-2">
         <div className="flex items-center justify-between text-sm">
-          <span className="text-slate-400">{tCommon('tokens')}:</span>
-          <span className="font-semibold text-slate-50">{total.tokens.toLocaleString('en-US')}</span>
+          <span className="text-text-muted">{tCommon('tokens')}:</span>
+          <span className="font-semibold text-text-main">{total.tokens.toLocaleString('en-US')}</span>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <span className="text-slate-400">Total:</span>
-          <span className="font-semibold text-slate-50">{formattedPrice}</span>
+          <span className="text-text-muted">Total:</span>
+          <span className="font-semibold text-text-main">{formattedPrice}</span>
         </div>
-        
+
         <div className="flex flex-col gap-2 pt-2">
           <Link
             href="/checkout"
-            className="inline-flex items-center justify-center px-4 py-2 text-xs font-semibold rounded-lg bg-cyan-400 text-slate-950 hover:bg-cyan-300 transition"
+            className="btn-primary inline-flex items-center justify-center px-4 py-2 text-sm font-semibold rounded-lg transition"
           >
             {t('goToCheckout')}
           </Link>
           <Link
             href="/cart"
-            className="inline-flex items-center justify-center px-4 py-2 text-xs font-medium rounded-lg border border-slate-700 text-slate-200 hover:border-slate-500 transition"
+            className="btn-secondary inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg transition"
           >
             {t('goToCart')}
           </Link>
@@ -157,4 +157,3 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
     </div>
   )
 }
-

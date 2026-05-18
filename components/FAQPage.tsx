@@ -1,9 +1,7 @@
-// components/FAQPage.tsx - FAQ page component
-
 'use client'
 
+import { useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
   ShieldCheck,
@@ -17,12 +15,12 @@ import {
   Globe2,
   Clock,
   ArrowRight,
+  Search,
+  ChevronDown,
 } from 'lucide-react'
-import { HomeSection } from './HomeSection'
 
 export function FAQPage() {
   const t = useTranslations('faq')
-  const tBreadcrumb = useTranslations('courses.breadcrumb')
 
   const faqItems = (t.raw('faq') as any)?.items as Array<{
     category: string
@@ -30,206 +28,256 @@ export function FAQPage() {
     answer: string
   }>
 
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [openItems, setOpenItems] = useState<Set<number>>(new Set())
+
+  const categories = useMemo(() => {
+    const cats = new Set(faqItems.map((item) => item.category))
+    return ['All', ...Array.from(cats)]
+  }, [faqItems])
+
+  const filteredItems = useMemo(() => {
+    return faqItems.filter((item, index) => {
+      const matchesSearch =
+        searchQuery === '' ||
+        item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.answer.toLowerCase().includes(searchQuery.toLowerCase())
+
+      const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory
+
+      return matchesSearch && matchesCategory
+    })
+  }, [faqItems, searchQuery, selectedCategory])
+
+  const toggleItem = (globalIndex: number) => {
+    setOpenItems((prev) => {
+      const next = new Set(prev)
+      if (next.has(globalIndex)) {
+        next.delete(globalIndex)
+      } else {
+        next.add(globalIndex)
+      }
+      return next
+    })
+  }
+
+  const getGlobalIndex = (item: { question: string; category: string }) => {
+    return faqItems.findIndex((f) => f.question === item.question && f.category === item.category)
+  }
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-16">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
-
-      <main className="pt-6">
-        {/* Hero */}
-        <HomeSection className="pb-10 space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="text-[11px] text-slate-500 flex items-center gap-1">
-                <Link href="/" className="hover:text-slate-300 transition">
-                  {t('breadcrumb.home')}
-                </Link>
-                <span className="text-slate-600">/</span>
-                <span className="text-slate-300">{t('breadcrumb.faq')}</span>
-              </div>
-              <div className="space-y-3">
-                <h1 className="text-2xl sm:text-3xl font-semibold text-slate-50">{t('hero.title')}</h1>
-                <p className="text-sm sm:text-base text-slate-300/90 max-w-xl">{t('hero.subtitle')}</p>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px] text-slate-300">
-                <div className="flex items-start gap-2">
-                  <BookOpen className="w-4 h-4 text-cyan-300 mt-0.5 flex-shrink-0" />
-                  <span>{t('hero.bullets.courses')}</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Cpu className="w-4 h-4 text-cyan-300 mt-0.5 flex-shrink-0" />
-                  <span>{t('hero.bullets.ai')}</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <ShieldCheck className="w-4 h-4 text-cyan-300 mt-0.5 flex-shrink-0" />
-                  <span>{t('hero.bullets.noSignals')}</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Hero side card */}
-            <div className="lg:col-span-5">
-              <motion.div
-                className="rounded-2xl bg-slate-950/90 border border-slate-800 p-4 flex flex-col gap-3"
-                whileHover={{ y: -4, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-amber-400/60">
-                    <AlertTriangle className="w-4 h-4 text-amber-300" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-slate-50">{t('hero.sideCard.title')}</div>
-                    <div className="text-[11px] text-slate-400">{t('hero.sideCard.subtitle')}</div>
-                  </div>
-                </div>
-                <p className="text-[11px] text-slate-300/90">{t('hero.sideCard.paragraph1')}</p>
-                <p className="text-[11px] text-slate-300/90">{t('hero.sideCard.paragraph2')}</p>
-                <Link
-                  href="/risk-and-disclaimer"
-                  className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200 transition"
-                >
-                  <span>{t('hero.sideCard.cta')}</span>
-                  <ArrowRight className="w-3 h-3" />
-                </Link>
-              </motion.div>
-            </div>
+    <div className="min-h-screen">
+      {/* Dark support hero */}
+      <section className="bg-surface-900 pb-10 pt-8">
+        <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div className="mb-4 flex items-center gap-1 text-xs text-surface-500">
+            <Link href="/" className="transition hover:text-surface-300">
+              {t('breadcrumb.home')}
+            </Link>
+            <span>/</span>
+            <span className="text-surface-400">{t('breadcrumb.faq')}</span>
           </div>
-        </HomeSection>
 
-        {/* FAQ grid */}
-        <HomeSection className="pb-10 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div className="mb-6 flex items-start gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
+              <HelpCircle className="h-6 w-6 text-brand-400" />
+            </div>
             <div>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-50 mb-1">{t('faq.title')}</h2>
-              <p className="text-sm text-slate-300/90 max-w-xl">{t('faq.subtitle')}</p>
-            </div>
-            <div className="text-[11px] text-slate-400 flex flex-col items-start sm:items-end gap-1">
-              <span className="inline-flex items-center gap-1">
-                <Info className="w-3 h-3 text-cyan-300" />
-                <span>{t('faq.disclaimer')}</span>
-              </span>
+              <h1 className="text-2xl font-semibold text-white sm:text-3xl">{t('hero.title')}</h1>
+              <p className="mt-1 max-w-lg text-sm text-surface-400">{t('hero.subtitle')}</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            {faqItems.map((item, index) => (
-              <motion.div
-                key={`${item.category}-${index}`}
-                className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-sm"
-                whileHover={{ y: -3, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+          <div className="grid grid-cols-1 gap-3 text-xs text-surface-400 sm:grid-cols-3">
+            <div className="flex items-start gap-2">
+              <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
+              <span>{t('hero.bullets.courses')}</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <Cpu className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
+              <span>{t('hero.bullets.ai')}</span>
+            </div>
+            <div className="flex items-start gap-2">
+              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
+              <span>{t('hero.bullets.noSignals')}</span>
+            </div>
+          </div>
+
+          {/* Search bar embedded in hero */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="relative flex-1 sm:max-w-md">
+              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-500" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search questions..."
+                className="w-full rounded-lg border border-surface-700 bg-surface-800 py-2.5 pl-10 pr-4 text-sm text-white placeholder:text-surface-500 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
+              />
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {categories.map((cat) => (
+                <button
+                  type="button"
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-medium transition ${
+                    selectedCategory === cat
+                      ? 'border-brand-500 bg-brand-500/20 text-brand-300'
+                      : 'border-surface-700 text-surface-400 hover:border-surface-600 hover:text-surface-300'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Risk side note */}
+      <section className="border-b border-surface-200 bg-gold-50 py-4">
+        <div className="mx-auto flex max-w-page items-center gap-3 px-4 sm:px-6 lg:px-8">
+          <AlertTriangle className="h-4 w-4 shrink-0 text-gold-600" />
+          <p className="flex-1 text-xs text-text-secondary">
+            {t('hero.sideCard.paragraph1')}{' '}
+            <Link href="/risk-and-disclaimer" className="font-medium text-brand-600 underline underline-offset-2 transition hover:text-brand-700">
+              {t('hero.sideCard.cta')}
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ accordion */}
+      <section className="bg-surface-50 py-10">
+        <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <div>
+              <h2 className="text-lg font-semibold text-text-main sm:text-xl">{t('faq.title')}</h2>
+              <p className="mt-1 max-w-xl text-sm sm:text-base text-text-secondary">{t('faq.subtitle')}</p>
+            </div>
+            <span className="hidden items-center gap-1 text-xs text-text-muted sm:inline-flex">
+              <Info className="h-3 w-3 text-brand-600" />
+              {t('faq.disclaimer')}
+            </span>
+          </div>
+
+          {filteredItems.length === 0 ? (
+            <div className="rounded-xl border border-surface-200 bg-white p-12 text-center shadow-card">
+              <HelpCircle className="mx-auto mb-3 h-8 w-8 text-surface-300" />
+              <p className="text-sm text-text-muted">No questions match your search.</p>
+              <button
+                type="button"
+                onClick={() => {
+                  setSearchQuery('')
+                  setSelectedCategory('All')
+                }}
+                className="mt-3 text-xs font-medium text-brand-600 transition hover:text-brand-700"
               >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-[10px] text-slate-300">
-                    {item.category}
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <HelpCircle className="w-4 h-4 text-cyan-300 mt-0.5 flex-shrink-0" />
-                  <div>
-                    <div className="text-xs font-semibold text-slate-50 mb-1">{item.question}</div>
-                    <p className="text-[11px] text-slate-300/90 leading-relaxed">{item.answer}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </HomeSection>
-
-        {/* Tokens & payments mini-section */}
-        <HomeSection className="pb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
-            <motion.div
-              className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3"
-              whileHover={{ y: -3, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            >
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                  <Wallet className="w-4 h-4 text-cyan-300" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-slate-50">{t('tokensCard.title')}</div>
-                  <div className="text-[11px] text-slate-400">{t('tokensCard.subtitle')}</div>
-                </div>
+                Clear filters
+              </button>
+            </div>
+          ) : (
+            <div className="overflow-hidden rounded-xl border border-surface-200 bg-white shadow-card">
+              <div className="divide-y divide-surface-100">
+                {filteredItems.map((item) => {
+                  const globalIdx = getGlobalIndex(item)
+                  const isOpen = openItems.has(globalIdx)
+                  return (
+                    <div key={globalIdx}>
+                      <button
+                        type="button"
+                        onClick={() => toggleItem(globalIdx)}
+                        aria-expanded={isOpen}
+                        className="flex w-full items-center gap-3 px-5 py-4 text-left transition-colors hover:bg-surface-50"
+                      >
+                        <span className="shrink-0 rounded-full border border-surface-200 bg-surface-50 px-2 py-0.5 text-[11px] font-medium text-text-muted">
+                          {item.category}
+                        </span>
+                        <span className="flex-1 text-sm font-medium text-text-main">{item.question}</span>
+                        <ChevronDown
+                          className={`h-4 w-4 shrink-0 text-text-muted transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                        />
+                      </button>
+                      {isOpen && (
+                        <div className="border-t border-surface-100 bg-surface-50 px-5 py-4">
+                          <p className="max-w-2xl text-sm leading-relaxed text-text-secondary">{item.answer}</p>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
               </div>
-              <p className="text-[11px] text-slate-300/90">{t('tokensCard.description')}</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Support info cards */}
+      <section className="border-t border-surface-200 bg-white py-10">
+        <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+              <div className="mb-3 flex items-center gap-2">
+                <Wallet className="h-4 w-4 text-brand-600" />
+                <h3 className="text-xs font-semibold text-text-main">{t('tokensCard.title')}</h3>
+              </div>
+              <p className="mb-1 text-xs text-text-muted">{t('tokensCard.subtitle')}</p>
+              <p className="text-xs leading-relaxed text-text-secondary">{t('tokensCard.description')}</p>
               <Link
                 href="/pricing"
-                className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200 transition"
+                className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-brand-600 transition hover:text-brand-700"
               >
-                <span>{t('tokensCard.cta')}</span>
-                <ArrowRight className="w-3 h-3" />
+                {t('tokensCard.cta')}
+                <ArrowRight className="h-3 w-3" />
               </Link>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3"
-              whileHover={{ y: -3, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            >
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                  <CreditCard className="w-4 h-4 text-cyan-300" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-slate-50">{t('paymentsCard.title')}</div>
-                  <div className="text-[11px] text-slate-400">{t('paymentsCard.subtitle')}</div>
-                </div>
+            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+              <div className="mb-3 flex items-center gap-2">
+                <CreditCard className="h-4 w-4 text-brand-600" />
+                <h3 className="text-xs font-semibold text-text-main">{t('paymentsCard.title')}</h3>
               </div>
-              <p className="text-[11px] text-slate-300/90">{t('paymentsCard.description')}</p>
-              <div className="flex items-center gap-2 text-[11px] text-slate-400">
-                <Globe2 className="w-3 h-3 text-cyan-300" />
-                <span>{t('paymentsCard.regions')}</span>
+              <p className="mb-1 text-xs text-text-muted">{t('paymentsCard.subtitle')}</p>
+              <p className="text-xs leading-relaxed text-text-secondary">{t('paymentsCard.description')}</p>
+              <div className="mt-3 flex items-center gap-1.5 text-xs text-text-muted">
+                <Globe2 className="h-3 w-3 text-brand-600" />
+                {t('paymentsCard.regions')}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3"
-              whileHover={{ y: -3, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            >
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                  <Clock className="w-4 h-4 text-cyan-300" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-slate-50">{t('deliveryCard.title')}</div>
-                  <div className="text-[11px] text-slate-400">{t('deliveryCard.subtitle')}</div>
-                </div>
+            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+              <div className="mb-3 flex items-center gap-2">
+                <Clock className="h-4 w-4 text-brand-600" />
+                <h3 className="text-xs font-semibold text-text-main">{t('deliveryCard.title')}</h3>
               </div>
-              <p className="text-[11px] text-slate-300/90">{t('deliveryCard.description')}</p>
-            </motion.div>
+              <p className="mb-1 text-xs text-text-muted">{t('deliveryCard.subtitle')}</p>
+              <p className="text-xs leading-relaxed text-text-secondary">{t('deliveryCard.description')}</p>
+            </div>
           </div>
-        </HomeSection>
+        </div>
+      </section>
 
-        {/* Final contact / help CTA */}
-        <HomeSection className="pb-12">
-          <div className="bg-slate-950/90 border border-slate-800 rounded-2xl px-5 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      {/* Contact CTA */}
+      <section className="border-t border-surface-200 bg-surface-50 py-10">
+        <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-start justify-between gap-4 rounded-xl border border-surface-200 bg-white p-6 shadow-card md:flex-row md:items-center">
             <div>
-              <h2 className="text-lg font-semibold text-slate-50 mb-1">{t('cta.title')}</h2>
-              <p className="text-sm text-slate-300/90">{t('cta.subtitle')}</p>
+              <h2 className="text-lg font-semibold text-text-main">{t('cta.title')}</h2>
+              <p className="mt-1 text-sm sm:text-base text-text-secondary">{t('cta.subtitle')}</p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/contact"
-                className="inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition"
-              >
+              <Link href="/contact" className="btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold">
                 {t('cta.contact')}
               </Link>
-              <Link
-                href="/"
-                className="inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full border border-slate-700 text-slate-100 hover:border-slate-500 transition"
-              >
+              <Link href="/" className="btn-secondary rounded-lg px-5 py-2.5 text-sm">
                 {t('cta.backToHome')}
               </Link>
             </div>
           </div>
-        </HomeSection>
-      </main>
+        </div>
+      </section>
     </div>
   )
 }
-

@@ -1,5 +1,3 @@
-// components/ContactPage.tsx - Contact page component
-
 'use client'
 
 import { useState } from 'react'
@@ -7,7 +5,6 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslations } from 'next-intl'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
   Mail,
@@ -21,8 +18,8 @@ import {
   MapPin,
   BookOpenCheck,
   Info,
+  ShieldCheck,
 } from 'lucide-react'
-import { HomeSection } from './HomeSection'
 import { useToast } from '@/hooks/use-toast'
 
 const contactFormSchema = z.object({
@@ -95,7 +92,6 @@ export function ContactPage() {
     }
   }
 
-  // Get data from translations
   const quickNotes = t.raw('hero.quickNotes') as any
   const sideCard = t.raw('hero.sideCard') as any
   const sideInfo = t.raw('sideInfo') as any
@@ -111,428 +107,350 @@ export function ContactPage() {
   const languages = ['English', 'Arabic']
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-16">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
-
-      <main className="pt-6">
-        {/* Hero / Intro */}
-        <HomeSection className="pb-10 space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="text-[11px] text-slate-500 flex items-center gap-1">
-                <Link href="/" className="hover:text-slate-300 transition">
-                  {tBreadcrumb('home')}
-                </Link>
-                <span className="text-slate-600">/</span>
-                <span className="text-slate-300">{t('breadcrumb.contact')}</span>
-              </div>
-              <div className="space-y-3">
-                <h1 className="text-2xl sm:text-3xl font-semibold text-slate-50">{t('hero.title')}</h1>
-                <p className="text-sm sm:text-base text-slate-300/90 max-w-xl">{t('hero.subtitle')}</p>
-              </div>
-
-              {/* Quick notes */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px] text-slate-300">
-                <div className="flex items-start gap-2">
-                  <Clock className="w-4 h-4 text-cyan-300 mt-0.5" />
-                  <span>
-                    {quickNotes?.responseWindow?.label}{' '}
-                    <span className="font-medium text-slate-100">
-                      {quickNotes?.responseWindow?.value}
-                    </span>
-                    .
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <BookOpenCheck className="w-4 h-4 text-cyan-300 mt-0.5" />
-                  <span>
-                    {quickNotes?.faq?.text}{' '}
-                    <Link href="/faq" className="underline underline-offset-2 decoration-slate-500 hover:text-slate-100">
-                      {quickNotes?.faq?.link}
-                    </Link>{' '}
-                    {quickNotes?.faq?.suffix}
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <AlertTriangle className="w-4 h-4 text-amber-300 mt-0.5" />
-                  <span>
-                    {quickNotes?.noTrades?.text}{' '}
-                    <span className="font-medium text-slate-100">
-                      {quickNotes?.noTrades?.highlight}
-                    </span>
-                    {quickNotes?.noTrades?.suffix}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact summary card */}
-            <div className="lg:col-span-5">
-              <motion.div
-                className="rounded-2xl bg-slate-950/90 border border-slate-800 p-4 flex flex-col gap-3"
-                whileHover={{ y: -4, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                    <Mail className="w-4 h-4 text-cyan-300" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-slate-50">{sideCard?.title}</div>
-                    <div className="text-[11px] text-slate-400">{sideCard?.subtitle}</div>
-                  </div>
-                </div>
-                <div className="space-y-2 text-[11px] text-slate-300/90">
-                  {sideCard?.channels?.map((channel: any, idx: number) => {
-                    const icons = [MessageSquare, Mail, FileText]
-                    const Icon = icons[idx] || MessageSquare
-                    return (
-                      <div key={idx} className="flex items-start gap-2">
-                        <Icon className="w-3.5 h-3.5 text-cyan-300 mt-0.5" />
-                        <div>
-                          <div className="font-medium text-slate-100">{channel.title}</div>
-                          <div>{channel.description}</div>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-                <div className="mt-1 flex items-start gap-2 text-[11px] text-slate-400">
-                  <Info className="w-3 h-3 mt-0.5" />
-                  <span>
-                    {sideCard?.urgentNote?.text}{' '}
-                    <span className="font-medium text-slate-100">
-                      {sideCard?.urgentNote?.highlight}
-                    </span>
-                    {sideCard?.urgentNote?.suffix}
-                  </span>
-                </div>
-              </motion.div>
-            </div>
+    <div className="min-h-screen lg:grid lg:grid-cols-5">
+      {/* Left — context panel */}
+      <div className="hidden bg-surface-900 px-8 py-10 lg:col-span-2 lg:flex lg:flex-col lg:justify-between xl:px-12">
+        <div>
+          <div className="mb-1 flex items-center gap-1 text-xs text-surface-500">
+            <Link href="/" className="transition hover:text-surface-300">
+              {tBreadcrumb('home')}
+            </Link>
+            <span>/</span>
+            <span className="text-surface-400">{t('breadcrumb.contact')}</span>
           </div>
-        </HomeSection>
 
-        {/* Contact form */}
-        <HomeSection className="pb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-7">
-              <motion.form
-                onSubmit={handleSubmit(onSubmit)}
-                className="bg-slate-950/80 border border-slate-800 rounded-2xl px-4 sm:px-5 py-5 flex flex-col gap-4 text-sm"
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, ease: 'easeOut' }}
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                    <MessageSquare className="w-4 h-4 text-cyan-300" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-slate-50">{t('form.title')}</div>
-                    <div className="text-[11px] text-slate-400">{t('form.subtitle')}</div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-medium text-slate-200">
-                      {t('form.fields.fullName.label')}
-                    </label>
-                    <div
-                      className={`rounded-xl bg-slate-950 border px-3 py-2 flex items-center gap-2 ${
-                        errors.name ? 'border-rose-500' : 'border-slate-800'
-                      }`}
-                    >
-                      <User className="w-3.5 h-3.5 text-slate-500" />
-                      <input
-                        {...register('name')}
-                        placeholder={t('form.fields.fullName.placeholder')}
-                        className="bg-transparent border-0 outline-none text-xs text-slate-100 placeholder:text-slate-500 flex-1"
-                      />
-                    </div>
-                    {errors.name && (
-                      <p className="text-[10px] text-rose-400">{errors.name.message}</p>
-                    )}
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-medium text-slate-200">
-                      {t('form.fields.email.label')}
-                    </label>
-                    <div
-                      className={`rounded-xl bg-slate-950 border px-3 py-2 flex items-center gap-2 ${
-                        errors.email ? 'border-rose-500' : 'border-slate-800'
-                      }`}
-                    >
-                      <Mail className="w-3.5 h-3.5 text-slate-500" />
-                      <input
-                        type="email"
-                        {...register('email')}
-                        placeholder={t('form.fields.email.placeholder')}
-                        className="bg-transparent border-0 outline-none text-xs text-slate-100 placeholder:text-slate-500 flex-1"
-                      />
-                    </div>
-                    {errors.email && (
-                      <p className="text-[10px] text-rose-400">{errors.email.message}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-medium text-slate-200">
-                      {t('form.fields.region.label')}
-                    </label>
-                    <div
-                      className={`rounded-xl bg-slate-950 border px-3 py-2 flex items-center gap-2 ${
-                        errors.region ? 'border-rose-500' : 'border-slate-800'
-                      }`}
-                    >
-                      <Globe2 className="w-3.5 h-3.5 text-slate-500" />
-                      <select
-                        {...register('region')}
-                        className="bg-transparent border-0 outline-none text-xs text-slate-100 flex-1 cursor-pointer"
-                      >
-                        <option value="">{t('form.fields.region.placeholder')}</option>
-                        {regions.map((region) => (
-                          <option key={region} value={region} className="bg-slate-950">
-                            {region}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    {errors.region && (
-                      <p className="text-[10px] text-rose-400">{errors.region.message}</p>
-                    )}
-                    <p className="text-[10px] text-slate-500">{t('form.fields.region.hint')}</p>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-medium text-slate-200">
-                      {t('form.fields.topic.label')}
-                    </label>
-                    <div
-                      className={`rounded-xl bg-slate-950 border px-3 py-2 flex items-center gap-2 ${
-                        errors.topic ? 'border-rose-500' : 'border-slate-800'
-                      }`}
-                    >
-                      <HelpCircle className="w-3.5 h-3.5 text-slate-500" />
-                      <select
-                        {...register('topic')}
-                        className="bg-transparent border-0 outline-none text-xs text-slate-100 flex-1 cursor-pointer"
-                      >
-                        <option value="">{t('form.fields.topic.placeholder')}</option>
-                        {topics.map((topic) => (
-                          <option key={topic} value={topic} className="bg-slate-950">
-                            {topic}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    {errors.topic && (
-                      <p className="text-[10px] text-rose-400">{errors.topic.message}</p>
-                    )}
-                    <p className="text-[10px] text-slate-500">{t('form.fields.topic.hint')}</p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-medium text-slate-200">
-                      {t('form.fields.accountId.label')}
-                    </label>
-                    <div className="rounded-xl bg-slate-950 border border-slate-800 px-3 py-2 flex items-center gap-2">
-                      <FileText className="w-3.5 h-3.5 text-slate-500" />
-                      <input
-                        {...register('accountId')}
-                        placeholder={t('form.fields.accountId.placeholder')}
-                        className="bg-transparent border-0 outline-none text-xs text-slate-100 placeholder:text-slate-500 flex-1"
-                      />
-                    </div>
-                    <p className="text-[10px] text-slate-500">{t('form.fields.accountId.hint')}</p>
-                  </div>
-                  <div className="flex flex-col gap-1.5">
-                    <label className="text-[11px] font-medium text-slate-200">
-                      {t('form.fields.language.label')}
-                    </label>
-                    <div className="rounded-xl bg-slate-950 border border-slate-800 px-3 py-2 flex items-center gap-2">
-                      <Globe2 className="w-3.5 h-3.5 text-slate-500" />
-                      <select
-                        {...register('language')}
-                        className="bg-transparent border-0 outline-none text-xs text-slate-100 flex-1 cursor-pointer"
-                      >
-                        <option value="">{t('form.fields.language.placeholder')}</option>
-                        {languages.map((lang) => (
-                          <option key={lang} value={lang} className="bg-slate-950">
-                            {lang}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                    {errors.language && (
-                      <p className="text-[10px] text-rose-400">{errors.language.message}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-medium text-slate-200">
-                    {t('form.fields.message.label')}
-                  </label>
-                  <div
-                    className={`rounded-2xl bg-slate-950 border px-3 py-2 ${
-                      errors.message ? 'border-rose-500' : 'border-slate-800'
-                    }`}
-                  >
-                    <textarea
-                      {...register('message')}
-                      rows={5}
-                      placeholder={t('form.fields.message.placeholder')}
-                      className="bg-transparent border-0 outline-none text-xs text-slate-100 placeholder:text-slate-500 w-full resize-none"
-                    />
-                  </div>
-                  {errors.message && (
-                    <p className="text-[10px] text-rose-400">{errors.message.message}</p>
-                  )}
-                  <div className="flex items-start gap-2 text-[10px] text-slate-500">
-                    <AlertTriangle className="w-3 h-3 mt-0.5 text-amber-300" />
-                    <span>{t('form.warning.text')}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2 text-[11px] text-slate-400">
-                  <input
-                    type="checkbox"
-                    {...register('consent')}
-                    className="mt-0.5 h-3 w-3 rounded border-slate-700 bg-slate-950 text-cyan-400 focus:ring-cyan-400"
-                  />
-                  <span>{t('form.consent.text')}</span>
-                </div>
-                {errors.consent && (
-                  <p className="text-[10px] text-rose-400">{errors.consent.message}</p>
-                )}
-
-                <div className="flex items-center gap-3 pt-1">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? t('form.submit.sending') : t('form.submit.button')}
-                  </button>
-                </div>
-              </motion.form>
+          <div className="mt-6 flex items-start gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
+              <Mail className="h-5 w-5 text-brand-400" />
             </div>
-
-            {/* Side info: before you write */}
-            <div className="lg:col-span-5 space-y-4">
-              <motion.div
-                className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3"
-                whileHover={{ y: -4, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                    <HelpCircle className="w-4 h-4 text-cyan-300" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-slate-50">
-                      {sideInfo?.beforeYouSend?.title}
-                    </div>
-                    <div className="text-[11px] text-slate-400">
-                      {sideInfo?.beforeYouSend?.subtitle}
-                    </div>
-                  </div>
-                </div>
-                <ul className="text-[11px] text-slate-300/90 space-y-1.5">
-                  {sideInfo?.beforeYouSend?.items?.map((item: any, idx: number) => (
-                    <li key={idx}>
-                      • {item.text}{' '}
-                      {item.link ? (
-                        <Link
-                          href="/faq"
-                          className="underline underline-offset-2 decoration-slate-500 hover:text-slate-100"
-                        >
-                          {item.link}
-                        </Link>
-                      ) : (
-                        <>
-                          <Link
-                            href="/risk-and-disclaimer"
-                            className="underline underline-offset-2 decoration-slate-500 hover:text-slate-100"
-                          >
-                            {item.link1}
-                          </Link>{' '}
-                          {item.and}{' '}
-                          <Link
-                            href="/privacy-policy"
-                            className="underline underline-offset-2 decoration-slate-500 hover:text-slate-100"
-                          >
-                            {item.link2}
-                          </Link>
-                        </>
-                      )}{' '}
-                      {item.suffix}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              <motion.div
-                className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3"
-                whileHover={{ y: -4, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                    <MapPin className="w-4 h-4 text-cyan-300" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-slate-50">
-                      {sideInfo?.regions?.title}
-                    </div>
-                    <div className="text-[11px] text-slate-400">{sideInfo?.regions?.subtitle}</div>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-[11px] text-slate-300/90">
-                  {sideInfo?.regions?.items?.map((item: any, idx: number) => (
-                    <div key={idx} className="rounded-xl bg-slate-950 border border-slate-800 p-2">
-                      <div className="font-medium text-slate-100 mb-0.5">{item.name}</div>
-                      <div>{item.description}</div>
-                    </div>
-                  ))}
-                </div>
-                <div className="text-[11px] text-slate-400">{sideInfo?.regions?.note}</div>
-              </motion.div>
-            </div>
-          </div>
-        </HomeSection>
-
-        {/* Final CTA */}
-        <HomeSection className="pb-12">
-          <div className="bg-slate-950/90 border border-slate-800 rounded-2xl px-5 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div>
-              <h2 className="text-lg font-semibold text-slate-50 mb-1">{t('cta.title')}</h2>
-              <p className="text-sm text-slate-300/90">{t('cta.subtitle')}</p>
+              <p className="text-sm font-semibold text-white">{sideCard?.title}</p>
+              <p className="text-xs text-surface-500">{sideCard?.subtitle}</p>
             </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/faq"
-                className="inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition"
-              >
+          </div>
+
+          <div className="mt-6 space-y-3">
+            {sideCard?.channels?.map((channel: any, idx: number) => {
+              const icons = [MessageSquare, Mail, FileText]
+              const Icon = icons[idx] || MessageSquare
+              return (
+                <div key={idx} className="flex items-start gap-2 text-xs">
+                  <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-400" />
+                  <div>
+                    <p className="font-medium text-surface-200">{channel.title}</p>
+                    <p className="text-surface-500">{channel.description}</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+          {sideCard?.urgentNote && (
+            <div className="mt-6 flex items-start gap-2 text-xs text-surface-500">
+              <Info className="mt-0.5 h-3 w-3 shrink-0" />
+              <span>
+                {sideCard.urgentNote.text}{' '}
+                <span className="font-medium text-surface-300">{sideCard.urgentNote.highlight}</span>
+                {sideCard.urgentNote.suffix}
+              </span>
+            </div>
+          )}
+
+          {/* Quick notes */}
+          <div className="mt-8 space-y-3 border-t border-surface-800 pt-6">
+            <div className="flex items-start gap-2 text-xs text-surface-400">
+              <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-400" />
+              <span>
+                {quickNotes?.responseWindow?.label}{' '}
+                <span className="font-medium text-surface-200">{quickNotes?.responseWindow?.value}</span>.
+              </span>
+            </div>
+            <div className="flex items-start gap-2 text-xs text-surface-400">
+              <BookOpenCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-400" />
+              <span>
+                {quickNotes?.faq?.text}{' '}
+                <Link href="/faq" className="text-brand-400 underline underline-offset-2 transition hover:text-brand-300">
+                  {quickNotes?.faq?.link}
+                </Link>{' '}
+                {quickNotes?.faq?.suffix}
+              </span>
+            </div>
+            <div className="flex items-start gap-2 text-xs text-surface-400">
+              <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" />
+              <span>
+                {quickNotes?.noTrades?.text}{' '}
+                <span className="font-medium text-surface-200">{quickNotes?.noTrades?.highlight}</span>
+                {quickNotes?.noTrades?.suffix}
+              </span>
+            </div>
+          </div>
+
+          {/* Region info */}
+          {sideInfo?.regions && (
+            <div className="mt-8 border-t border-surface-800 pt-6">
+              <div className="mb-3 flex items-center gap-2">
+                <MapPin className="h-3.5 w-3.5 text-brand-400" />
+                <p className="text-xs font-semibold text-surface-200">{sideInfo.regions.title}</p>
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                {sideInfo.regions.items?.map((item: any, idx: number) => (
+                  <div key={idx} className="rounded-lg border border-surface-700 bg-surface-800 p-2.5">
+                    <p className="text-xs font-medium text-surface-200">{item.name}</p>
+                    <p className="text-xs text-surface-500">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-2 text-xs text-surface-600">{sideInfo.regions.note}</p>
+            </div>
+          )}
+        </div>
+
+        <p className="mt-8 text-xs leading-relaxed text-surface-600">
+          Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+        </p>
+      </div>
+
+      {/* Right — form */}
+      <div className="flex min-h-screen flex-col justify-start bg-white px-6 py-8 sm:px-10 lg:col-span-3 lg:min-h-0 lg:px-12 xl:px-16">
+        <div className="mx-auto w-full max-w-xl">
+          {/* Mobile header */}
+          <div className="mb-6 lg:hidden">
+            <div className="mb-2 flex items-center gap-1 text-xs text-text-muted">
+              <Link href="/" className="transition hover:text-text-secondary">{tBreadcrumb('home')}</Link>
+              <span className="text-text-muted/50">/</span>
+              <span className="text-text-secondary">{t('breadcrumb.contact')}</span>
+            </div>
+            <h1 className="text-xl font-semibold text-text-main sm:text-2xl">{t('hero.title')}</h1>
+            <p className="mt-1 text-sm sm:text-base text-text-secondary">{t('hero.subtitle')}</p>
+          </div>
+
+          {/* Desktop title */}
+          <div className="mb-6 hidden lg:block">
+            <h1 className="text-2xl font-semibold text-text-main">{t('hero.title')}</h1>
+            <p className="mt-1 text-sm sm:text-base text-text-secondary">{t('hero.subtitle')}</p>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            <div className="mb-4 flex items-center gap-2 border-b border-surface-100 pb-4">
+              <MessageSquare className="h-4 w-4 text-brand-600" />
+              <div>
+                <p className="text-xs font-semibold text-text-main">{t('form.title')}</p>
+                <p className="text-xs text-text-muted">{t('form.subtitle')}</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-text-main">
+                  {t('form.fields.fullName.label')}
+                </label>
+                <div className="relative">
+                  <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
+                  <input
+                    id="contact-name"
+                    {...register('name')}
+                    placeholder={t('form.fields.fullName.placeholder')}
+                    className={`input-field w-full rounded-lg py-2.5 pl-11 pr-4 text-sm ${errors.name ? 'border-rose-400 focus:ring-rose-400' : ''}`}
+                  />
+                </div>
+                {errors.name && <p className="mt-1 text-xs text-rose-600">{errors.name.message}</p>}
+              </div>
+
+              <div>
+                <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium text-text-main">
+                  {t('form.fields.email.label')}
+                </label>
+                <div className="relative">
+                  <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
+                  <input
+                    id="contact-email"
+                    type="email"
+                    {...register('email')}
+                    placeholder={t('form.fields.email.placeholder')}
+                    className={`input-field w-full rounded-lg py-2.5 pl-11 pr-4 text-sm ${errors.email ? 'border-rose-400 focus:ring-rose-400' : ''}`}
+                  />
+                </div>
+                {errors.email && <p className="mt-1 text-xs text-rose-600">{errors.email.message}</p>}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="contact-region" className="mb-1.5 block text-sm font-medium text-text-main">
+                  {t('form.fields.region.label')}
+                </label>
+                <div className="relative">
+                  <Globe2 className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
+                  <select
+                    id="contact-region"
+                    {...register('region')}
+                    className={`input-field w-full cursor-pointer rounded-lg py-2.5 pl-11 pr-4 text-sm ${errors.region ? 'border-rose-400 focus:ring-rose-400' : ''}`}
+                  >
+                    <option value="">{t('form.fields.region.placeholder')}</option>
+                    {regions.map((r) => (
+                      <option key={r} value={r}>{r}</option>
+                    ))}
+                  </select>
+                </div>
+                {errors.region && <p className="mt-1 text-xs text-rose-600">{errors.region.message}</p>}
+                <p className="mt-1 text-xs text-text-muted">{t('form.fields.region.hint')}</p>
+              </div>
+
+              <div>
+                <label htmlFor="contact-topic" className="mb-1.5 block text-sm font-medium text-text-main">
+                  {t('form.fields.topic.label')}
+                </label>
+                <div className="relative">
+                  <HelpCircle className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
+                  <select
+                    id="contact-topic"
+                    {...register('topic')}
+                    className={`input-field w-full cursor-pointer rounded-lg py-2.5 pl-11 pr-4 text-sm ${errors.topic ? 'border-rose-400 focus:ring-rose-400' : ''}`}
+                  >
+                    <option value="">{t('form.fields.topic.placeholder')}</option>
+                    {topics.map((tp) => (
+                      <option key={tp} value={tp}>{tp}</option>
+                    ))}
+                  </select>
+                </div>
+                {errors.topic && <p className="mt-1 text-xs text-rose-600">{errors.topic.message}</p>}
+                <p className="mt-1 text-xs text-text-muted">{t('form.fields.topic.hint')}</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="contact-account" className="mb-1.5 block text-sm font-medium text-text-main">
+                  {t('form.fields.accountId.label')}
+                </label>
+                <div className="relative">
+                  <FileText className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
+                  <input
+                    id="contact-account"
+                    {...register('accountId')}
+                    placeholder={t('form.fields.accountId.placeholder')}
+                    className="input-field w-full rounded-lg py-2.5 pl-11 pr-4 text-sm"
+                  />
+                </div>
+                <p className="mt-1 text-xs text-text-muted">{t('form.fields.accountId.hint')}</p>
+              </div>
+
+              <div>
+                <label htmlFor="contact-language" className="mb-1.5 block text-sm font-medium text-text-main">
+                  {t('form.fields.language.label')}
+                </label>
+                <div className="relative">
+                  <Globe2 className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
+                  <select
+                    id="contact-language"
+                    {...register('language')}
+                    className={`input-field w-full cursor-pointer rounded-lg py-2.5 pl-11 pr-4 text-sm ${errors.language ? 'border-rose-400 focus:ring-rose-400' : ''}`}
+                  >
+                    <option value="">{t('form.fields.language.placeholder')}</option>
+                    {languages.map((lang) => (
+                      <option key={lang} value={lang}>{lang}</option>
+                    ))}
+                  </select>
+                </div>
+                {errors.language && <p className="mt-1 text-xs text-rose-600">{errors.language.message}</p>}
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium text-text-main">
+                {t('form.fields.message.label')}
+              </label>
+              <textarea
+                id="contact-message"
+                {...register('message')}
+                rows={5}
+                placeholder={t('form.fields.message.placeholder')}
+                className={`input-field w-full resize-none rounded-lg px-4 py-2.5 text-sm ${errors.message ? 'border-rose-400 focus:ring-rose-400' : ''}`}
+              />
+              {errors.message && <p className="mt-1 text-xs text-rose-600">{errors.message.message}</p>}
+              <div className="mt-1.5 flex items-start gap-2 text-xs text-text-muted">
+                <AlertTriangle className="mt-0.5 h-3 w-3 shrink-0 text-gold-500" />
+                <span>{t('form.warning.text')}</span>
+              </div>
+            </div>
+
+            {/* Consent */}
+            <div className="rounded-lg border border-surface-200 bg-surface-50 p-4">
+              <label className="flex items-start gap-2.5 text-xs text-text-secondary">
+                <input
+                  type="checkbox"
+                  {...register('consent')}
+                  className="mt-0.5 h-4 w-4 rounded border-surface-300 accent-brand-600"
+                />
+                <span>{t('form.consent.text')}</span>
+              </label>
+              {errors.consent && <p className="mt-1.5 text-xs text-rose-600">{errors.consent.message}</p>}
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn-primary w-full rounded-lg py-2.5 text-sm font-semibold"
+            >
+              {isSubmitting ? t('form.submit.sending') : t('form.submit.button')}
+            </button>
+          </form>
+
+          {/* Before you send — mobile only */}
+          <div className="mt-8 space-y-4 lg:hidden">
+            <div className="rounded-xl border border-surface-200 bg-surface-50 p-4">
+              <div className="mb-2 flex items-center gap-2">
+                <HelpCircle className="h-4 w-4 text-brand-600" />
+                <p className="text-xs font-semibold text-text-main">{sideInfo?.beforeYouSend?.title}</p>
+              </div>
+              <ul className="space-y-1.5 text-xs text-text-secondary">
+                {sideInfo?.beforeYouSend?.items?.map((item: any, idx: number) => (
+                  <li key={idx}>
+                    • {item.text}{' '}
+                    {item.link ? (
+                      <Link href="/faq" className="font-medium text-brand-600 underline underline-offset-2">{item.link}</Link>
+                    ) : (
+                      <>
+                        <Link href="/risk-and-disclaimer" className="font-medium text-brand-600 underline underline-offset-2">{item.link1}</Link>{' '}
+                        {item.and}{' '}
+                        <Link href="/privacy" className="font-medium text-brand-600 underline underline-offset-2">{item.link2}</Link>
+                      </>
+                    )}{' '}
+                    {item.suffix}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Desktop before-you-send sidebar content replicated in left panel */}
+          {/* Bottom CTA */}
+          <div className="mt-8 flex flex-col items-start justify-between gap-3 rounded-xl border border-surface-200 bg-surface-50 p-5 sm:flex-row sm:items-center">
+            <div>
+              <h2 className="text-sm font-semibold text-text-main">{t('cta.title')}</h2>
+              <p className="text-sm text-text-secondary">{t('cta.subtitle')}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <Link href="/faq" className="btn-primary rounded-lg px-4 py-2 text-xs font-semibold">
                 {t('cta.openFaq')}
               </Link>
-              <Link
-                href="/resources"
-                className="inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full border border-slate-700 text-slate-100 hover:border-slate-500 transition"
-              >
+              <Link href="/resources" className="btn-secondary rounded-lg px-4 py-2 text-xs">
                 {t('cta.viewResources')}
               </Link>
             </div>
           </div>
-        </HomeSection>
-      </main>
+
+          {/* Mobile trust strip */}
+          <div className="mt-6 border-t border-surface-200 pt-4 lg:hidden">
+            <p className="text-center text-xs leading-relaxed text-text-muted">
+              Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop left panel — before you send info */}
+      {/* This content is embedded in the left dark panel above */}
     </div>
   )
 }
-

@@ -1,4 +1,4 @@
-// components/LearnPage.tsx - Learn page component with Custom Course and AI Strategy tabs
+// components/LearnPage.tsx - Course & Strategy Builder Studio
 
 'use client'
 
@@ -6,24 +6,27 @@ import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { motion } from 'framer-motion'
 import { useToast } from '@/hooks/use-toast'
 import { parseStartResponse } from '@/lib/jobs/parseStartResponse'
 import { useJobStatus } from '@/lib/jobs/useJobStatus'
 import {
-  UserCog,
-  Cpu,
-  ShieldCheck,
   AlertTriangle,
-  SlidersHorizontal,
-  Clock,
-  Layers,
   ArrowRight,
-  Info,
+  BookOpen,
+  CheckCircle2,
+  Clock,
   Coins,
+  Cpu,
+  FileText,
+  Layers,
+  Loader2,
+  Shield,
+  SlidersHorizontal,
+  Sparkles,
+  UserCog,
+  Wallet,
 } from 'lucide-react'
 import Link from 'next/link'
-import { HomeSection } from './HomeSection'
 import { calculateCustomCoursePrice } from '@/lib/custom-course-pricing'
 import { calculateAIStrategyPrice } from '@/lib/ai-strategy-pricing'
 import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
@@ -68,61 +71,61 @@ const MARKET_LABELS: Record<'forex' | 'crypto' | 'binary', 'Forex' | 'Crypto' | 
   binary: 'Binary',
 }
 
-function LearnTabSwitcher({
+// ─── Chip toggle button ───
+
+function Chip({
   active,
-  onChange,
+  onClick,
+  children,
 }: {
-  active: TabKey
-  onChange: (key: TabKey) => void
+  active: boolean
+  onClick: () => void
+  children: React.ReactNode
 }) {
-  const t = useTranslations('learn.tabs')
-
-  const tabs: { key: TabKey; label: string; icon: typeof UserCog }[] = [
-    {
-      key: 'custom',
-      label: t('custom'),
-      icon: UserCog,
-    },
-    {
-      key: 'ai',
-      label: t('ai'),
-      icon: Cpu,
-    },
-  ]
-
   return (
-    <div className="inline-flex items-stretch rounded-full bg-slate-950/90 border border-slate-800 p-1 text-xs">
-      {tabs.map((tab) => {
-        const Icon = tab.icon
-        const isActive = active === tab.key
-        return (
-          <button
-            key={tab.key}
-            type="button"
-            onClick={() => onChange(tab.key)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all ${
-              isActive
-                ? 'bg-slate-100 text-slate-950 shadow-sm'
-                : 'text-slate-300 hover:text-cyan-300'
-            }`}
-          >
-            <Icon
-              className={`w-3.5 h-3.5 ${isActive ? 'text-slate-900' : 'text-cyan-300'}`}
-            />
-            <span className="font-medium">{tab.label}</span>
-          </button>
-        )
-      })}
+    <button
+      type="button"
+      onClick={onClick}
+      className={`rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
+        active
+          ? 'border-brand-600 bg-brand-50 text-brand-700'
+          : 'border-surface-300 bg-white text-text-secondary hover:border-surface-400'
+      }`}
+    >
+      {children}
+    </button>
+  )
+}
+
+// ─── Form section card ───
+
+function FormSection({
+  title,
+  hint,
+  children,
+}: {
+  title: string
+  hint?: string
+  children: React.ReactNode
+}) {
+  return (
+    <div className="rounded-xl border border-surface-300 bg-white shadow-card">
+      <div className="flex items-center justify-between gap-2 border-b border-surface-200 px-5 py-3">
+        <h3 className="text-xs font-bold uppercase tracking-wider text-text-muted">{title}</h3>
+        {hint && <span className="text-xs text-text-muted">{hint}</span>}
+      </div>
+      <div className="px-5 py-4">{children}</div>
     </div>
   )
 }
+
+// ─── Main page ───
 
 export function LearnPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState<TabKey>('custom')
   const t = useTranslations('learn')
-  const tBreadcrumb = useTranslations('learn.breadcrumb')
   const tInfo = useTranslations('learn.info')
 
   useEffect(() => {
@@ -138,42 +141,100 @@ export function LearnPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-16">
-      <main className="pt-6">
-        <HomeSection className="pb-6 space-y-6">
-          <div className="flex flex-col gap-3">
-            <div className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Link href="/" className="hover:text-slate-300 transition">
-                {tBreadcrumb('home')}
-              </Link>
-              <span className="text-slate-600">/</span>
-              <span className="text-slate-300">{tBreadcrumb('learn')}</span>
+    <div className="min-h-screen">
+      {/* ─── Studio hero ─── */}
+      <section className="bg-surface-900">
+        <div className="mx-auto max-w-page px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
+              <Sparkles className="h-5 w-5 text-brand-400" />
             </div>
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
-              <div className="space-y-2">
-                <h1 className="text-xl sm:text-2xl font-semibold text-slate-50">{t('title')}</h1>
-                <p className="text-sm text-slate-300/90 max-w-xl">{t('subtitle')}</p>
-              </div>
-              <div className="flex flex-col items-start lg:items-end gap-2">
-                <LearnTabSwitcher active={activeTab} onChange={handleTabChange} />
-                <div className="flex items-center gap-2 text-[11px] text-slate-400">
-                  <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-950/90 border border-slate-800">
-                    <Info className="w-3 h-3 text-cyan-300" />
-                    <span>{tInfo('educationOnly')}</span>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <h1 className="font-heading text-2xl font-semibold text-white sm:text-3xl">
+                {t('title')}
+              </h1>
             </div>
           </div>
-        </HomeSection>
+          <p className="max-w-lg text-sm sm:text-base text-surface-400">{t('subtitle')}</p>
+          <div className="mt-4 inline-flex items-center gap-1.5 rounded-md border border-surface-700 bg-surface-800 px-2.5 py-1 text-xs font-medium text-surface-300">
+            <Shield className="h-3 w-3 text-surface-400" />
+            {tInfo('educationOnly')}
+          </div>
+        </div>
+      </section>
 
-        <HomeSection className="pb-10">
-          {activeTab === 'custom' ? <CustomCourseForm /> : <AIStrategyForm />}
-        </HomeSection>
-      </main>
+      {/* ─── Mode switcher ─── */}
+      <section className="mx-auto max-w-page px-4 -mt-5 sm:px-6 lg:px-8">
+        <div className="grid gap-3 sm:grid-cols-2">
+          <button
+            onClick={() => handleTabChange('custom')}
+            className={`group flex items-start gap-4 rounded-xl border-2 p-5 text-left transition-all ${
+              activeTab === 'custom'
+                ? 'border-brand-600 bg-brand-50/50 shadow-card'
+                : 'border-surface-300 bg-white hover:border-surface-400'
+            }`}
+          >
+            <div
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border ${
+                activeTab === 'custom' ? 'border-brand-200 bg-brand-100' : 'border-surface-200 bg-surface-100'
+              }`}
+            >
+              <UserCog className={`h-5 w-5 ${activeTab === 'custom' ? 'text-brand-700' : 'text-text-muted'}`} />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-text-main">Custom Course Builder</p>
+              <p className="mt-0.5 text-sm text-text-secondary">
+                Tailored PDF course based on your trading profile and goals
+              </p>
+            </div>
+            {activeTab === 'custom' && (
+              <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-600">
+                <CheckCircle2 className="h-3.5 w-3.5 text-white" />
+              </div>
+            )}
+          </button>
+
+          <button
+            onClick={() => handleTabChange('ai')}
+            className={`group flex items-start gap-4 rounded-xl border-2 p-5 text-left transition-all ${
+              activeTab === 'ai'
+                ? 'border-brand-600 bg-brand-50/50 shadow-card'
+                : 'border-surface-300 bg-white hover:border-surface-400'
+            }`}
+          >
+            <div
+              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border ${
+                activeTab === 'ai' ? 'border-[#c7c9f5] bg-[#eef0ff]' : 'border-surface-200 bg-surface-100'
+              }`}
+            >
+              <Cpu className={`h-5 w-5 ${activeTab === 'ai' ? 'text-ai' : 'text-text-muted'}`} />
+            </div>
+            <div className="flex-1">
+              <p className="text-sm font-semibold text-text-main">AI Strategy Builder</p>
+              <p className="mt-0.5 text-sm text-text-secondary">
+                AI-generated strategy PDF with entry, exit, and risk rules
+              </p>
+            </div>
+            {activeTab === 'ai' && (
+              <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-600">
+                <CheckCircle2 className="h-3.5 w-3.5 text-white" />
+              </div>
+            )}
+          </button>
+        </div>
+      </section>
+
+      {/* ─── Workspace ─── */}
+      <section className="mx-auto max-w-page px-4 py-10 sm:px-6 lg:px-8">
+        {activeTab === 'custom' ? <CustomCourseForm /> : <AIStrategyForm />}
+      </section>
     </div>
   )
 }
+
+// ═══════════════════════════════════════════════
+//  CUSTOM COURSE FORM
+// ═══════════════════════════════════════════════
 
 function CustomCourseForm() {
   const { data: session } = useSession()
@@ -186,18 +247,15 @@ function CustomCourseForm() {
   const tAuth = useTranslations('learn.auth')
   const tCommon = useTranslations('common.auth')
 
-  // Read jobId(s) from URL or state
   const jobIdFromUrl = searchParams.get('jobId') || undefined
   const [activeJobs, setActiveJobs] = useState<Array<{ jobId: string; language: string }>>([])
-  
-  // For backward compatibility: if we have URL jobId but no activeJobs, use it
+
   useEffect(() => {
     if (jobIdFromUrl && activeJobs.length === 0) {
       setActiveJobs([{ jobId: jobIdFromUrl, language: 'en' }])
     }
   }, [jobIdFromUrl, activeJobs.length])
-  
-  // For backward compatibility: use first job as main jobStatus if only one job
+
   const mainJobId = activeJobs.length > 0 ? activeJobs[0].jobId : jobIdFromUrl
   const { data: jobStatus, isLoading: isPolling, isTerminal } = useJobStatus('custom-course', mainJobId)
 
@@ -217,31 +275,16 @@ function CustomCourseForm() {
   const [currency, setCurrency] = useState('GBP')
   const [showNewGenerationConfirm, setShowNewGenerationConfirm] = useState(false)
 
-  // Available days of the week
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-
-  // Available platforms
   const availablePlatforms = [
-    'MT4',
-    'MT5',
-    'TradingView',
-    'Binance',
-    'MetaTrader',
-    'cTrader',
-    'Interactive Brokers',
-    'eToro',
-    'Plus500',
-    'OANDA',
-    'IG',
-    'FXCM',
-    'Other',
+    'MT4', 'MT5', 'TradingView', 'Binance', 'MetaTrader', 'cTrader',
+    'Interactive Brokers', 'eToro', 'Plus500', 'OANDA', 'IG', 'FXCM', 'Other',
   ]
 
   useEffect(() => {
     setCurrency(getUserCurrency())
   }, [])
 
-  // Calculate price based on selections
   const totalTokens = calculateCustomCoursePrice({
     experience: experience as 'beginner' | 'intermediate' | 'advanced' | '',
     deposit: deposit as 'low' | 'medium' | 'high' | 'veryHigh' | '',
@@ -278,18 +321,15 @@ function CustomCourseForm() {
   const handleLanguageToggle = (lang: 'en' | 'ar') => {
     setSelectedLanguages((prev) => {
       if (prev.includes(lang)) {
-        // Don't allow removing the last language
         if (prev.length === 1) return prev
         return prev.filter((l) => l !== lang)
       } else {
-        // Don't allow more than 2 languages
         if (prev.length >= 2) return prev
         return [...prev, lang]
       }
     })
   }
 
-  // Check if there's an active job (not terminal)
   const hasActiveJob = jobIdFromUrl && jobStatus && !isTerminal
   const isGenerateDisabled = isLoading || hasActiveJob || (session ? !hasEnoughTokens : false)
 
@@ -306,7 +346,6 @@ function CustomCourseForm() {
 
   const handleConfirmNewGeneration = async () => {
     setShowNewGenerationConfirm(false)
-    // Continue with normal submit flow - jobId will be replaced in handleSubmit
     const form = document.querySelector('form')
     if (form) {
       const event = new Event('submit', { bubbles: true, cancelable: true })
@@ -316,7 +355,7 @@ function CustomCourseForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!session) {
       showToast({
         title: tAuth('required'),
@@ -327,7 +366,6 @@ function CustomCourseForm() {
       return
     }
 
-    // Validate required fields
     if (!experience || markets.length === 0 || !deposit || !riskTolerance || !tradingStyle || !goals || selectedLanguages.length === 0 || !consentEducation || !consentTerms) {
       showToast({
         title: 'Please fill all required fields',
@@ -336,7 +374,15 @@ function CustomCourseForm() {
       return
     }
 
-    // Check token balance
+    if (goals.trim().length < 10) {
+      showToast({
+        title: 'Goals too short',
+        description: 'Please describe your goals in at least 10 characters.',
+        variant: 'error',
+      })
+      return
+    }
+
     if (!hasEnoughTokens) {
       showToast({
         title: tForm('calculator.insufficientBalance.title'),
@@ -350,7 +396,6 @@ function CustomCourseForm() {
     setIsLoading(true)
 
     try {
-      // Map form data to API format
       const experienceYearsMap: Record<string, string> = {
         beginner: '0',
         intermediate: '1-2',
@@ -370,12 +415,10 @@ function CustomCourseForm() {
         veryHigh: '€20,000+',
       }
 
-      // Format time commitment from selected days
       const timeCommitment = selectedDays.length > 0
         ? `${selectedDays.length} day(s) per week: ${selectedDays.join(', ')}`
         : undefined
 
-      // Format platforms
       const platformsText = selectedPlatforms.length > 0
         ? selectedPlatforms.join(', ')
         : undefined
@@ -399,7 +442,7 @@ function CustomCourseForm() {
           markets: markets.map((m) => marketsMap[m] || m),
           tradingStyle: tradingStyleMap[tradingStyle] || tradingStyle,
           timeCommitment,
-          goalsFreeText: goals,
+          goalsFreeText: goals.trim(),
           additionalNotes: notes || (platformsText ? `Platforms: ${platformsText}` : undefined),
           languages: selectedLanguages,
           tokensCost: totalTokens,
@@ -407,8 +450,15 @@ function CustomCourseForm() {
       })
 
       if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.message || error.error || 'Failed to submit request')
+        const errorData = await response.json()
+        let errorMessage = errorData.message || errorData.error || 'Failed to submit request'
+        if (errorData.details && Array.isArray(errorData.details) && errorData.details.length > 0) {
+          const fieldErrors = errorData.details.map((d: { path?: string[]; message?: string }) =>
+            d.path?.length ? `${d.path.join('.')}: ${d.message}` : d.message
+          ).join('; ')
+          errorMessage = fieldErrors || errorMessage
+        }
+        throw new Error(errorMessage)
       }
 
       const data = await response.json()
@@ -418,20 +468,15 @@ function CustomCourseForm() {
         throw new Error(parsed.message || 'Failed to start generation')
       }
 
-      // Handle multi-language response (jobs array) or single job (backward-compatible)
       if (parsed.jobs && parsed.jobs.length > 0) {
-        // Multi-language: store all jobs in state
         setActiveJobs(parsed.jobs)
-        // Also update URL with first jobId for backward compatibility
         const tab = searchParams.get('tab') || 'custom'
         router.replace(`/learn?tab=${tab}&jobId=${parsed.jobs[0].jobId}`)
       } else if (parsed.jobId) {
-        // Single job (backward-compatible)
         setActiveJobs([{ jobId: parsed.jobId, language: 'en' }])
         const tab = searchParams.get('tab') || 'custom'
         router.replace(`/learn?tab=${tab}&jobId=${parsed.jobId}`)
       } else {
-        // If we have ok=true but no jobs/jobId, it's still an error
         throw new Error(parsed.message || 'No job ID received from server')
       }
 
@@ -440,8 +485,6 @@ function CustomCourseForm() {
         description: t('form.submitSuccess.description'),
         variant: 'success',
       })
-
-      // Don't reset form - user can modify and start new generation if needed
     } catch (error) {
       console.error('Custom course submission error:', error)
       showToast({
@@ -455,418 +498,365 @@ function CustomCourseForm() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      {/* LEFT: form */}
-      <div className="lg:col-span-7 space-y-4">
-        <div className="space-y-2">
-          <h2 className="text-sm sm:text-base font-semibold text-slate-50">{t('title')}</h2>
-          <p className="text-xs sm:text-sm text-slate-300/90">{t('description')}</p>
+    <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+      {/* ─── Form workspace ─── */}
+      <div className="space-y-5">
+        <div>
+          <h2 className="font-heading text-lg font-semibold text-text-main">{t('title')}</h2>
+          <p className="mt-1 text-sm sm:text-base text-text-secondary">{t('description')}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-          {/* Experience */}
-          <div className="space-y-1.5">
-            <label className="flex items-center justify-between gap-2">
-              <span className="text-slate-200">{tForm('experience.label')}</span>
-              <span className="text-[11px] text-slate-500">{tForm('experience.required')}</span>
-            </label>
-            <div className="flex flex-wrap gap-1.5">
-              {(['beginner', 'intermediate', 'advanced'] as const).map((key) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => setExperience(key)}
-                  className={`px-2.5 py-1 rounded-full border transition ${
-                    experience === key
-                      ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                      : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                  }`}
-                >
-                  {tForm(`experience.options.${key}`)}
-                </button>
-              ))}
-            </div>
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Profile */}
+          <FormSection title="Trader profile" hint={tForm('experience.required')}>
+            <div className="space-y-4">
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                  {tForm('experience.label')}
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {(['beginner', 'intermediate', 'advanced'] as const).map((key) => (
+                    <Chip key={key} active={experience === key} onClick={() => setExperience(key)}>
+                      {tForm(`experience.options.${key}`)}
+                    </Chip>
+                  ))}
+                </div>
+              </div>
 
-          {/* Markets */}
-          <div className="space-y-1.5">
-            <label className="flex items-center justify-between gap-2">
-              <span className="text-slate-200">{tForm('markets.label')}</span>
-              <span className="text-[11px] text-slate-500">{tForm('markets.hint')}</span>
-            </label>
-            <div className="flex flex-wrap gap-1.5">
-              {(['forex', 'crypto', 'binary'] as const).map((key) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => handleMarketToggle(key)}
-                  className={`px-2.5 py-1 rounded-full border transition ${
-                    markets.includes(key)
-                      ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                      : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                  }`}
-                >
-                  {tForm(`markets.${key}`)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Deposit size */}
-          <div className="space-y-1.5">
-            <label className="flex items-center justify-between gap-2">
-              <span className="text-slate-200">{tForm('deposit.label')}</span>
-              <span className="text-[11px] text-slate-500">{tForm('deposit.hint')}</span>
-            </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {(['low', 'medium', 'high', 'veryHigh'] as const).map((key) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => setDeposit(key)}
-                  className={`px-2.5 py-1.5 rounded-xl border transition text-[11px] ${
-                    deposit === key
-                      ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                      : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                  }`}
-                >
-                  {tForm(`deposit.options.${key}`)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Risk & style */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="space-y-1.5">
-              <label className="flex items-center justify-between gap-2">
-                <span className="text-slate-200">{tForm('risk.label')}</span>
-                <span className="text-[11px] text-slate-500">{tForm('risk.hint')}</span>
-              </label>
-              <div className="flex flex-wrap gap-1.5">
-                {(['low', 'medium', 'high'] as const).map((key) => (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => setRiskTolerance(key)}
-                    className={`px-2.5 py-1 rounded-full border transition ${
-                      riskTolerance === key
-                        ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                        : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                    }`}
-                  >
-                    {tForm(`risk.${key}`)}
-                  </button>
-                ))}
+              <div>
+                <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
+                  <span>{tForm('markets.label')}</span>
+                  <span className="text-xs text-text-muted">{tForm('markets.hint')}</span>
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {(['forex', 'crypto', 'binary'] as const).map((key) => (
+                    <Chip key={key} active={markets.includes(key)} onClick={() => handleMarketToggle(key)}>
+                      {tForm(`markets.${key}`)}
+                    </Chip>
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="space-y-1.5">
-              <label className="flex items-center justify-between gap-2">
-                <span className="text-slate-200">{tForm('style.label')}</span>
-                <span className="text-[11px] text-slate-500">{tForm('style.hint')}</span>
-              </label>
-              <div className="flex flex-wrap gap-1.5">
-                {(['scalping', 'day', 'swing', 'position'] as const).map((key) => (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => setTradingStyle(key)}
-                    className={`px-2.5 py-1 rounded-full border transition ${
-                      tradingStyle === key
-                        ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                        : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                    }`}
-                  >
-                    {tForm(`style.${key}`)}
-                  </button>
-                ))}
+          </FormSection>
+
+          {/* Market & Risk */}
+          <FormSection title="Market & Risk">
+            <div className="space-y-4">
+              <div>
+                <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
+                  <span>{tForm('deposit.label')}</span>
+                  <span className="text-xs text-text-muted">{tForm('deposit.hint')}</span>
+                </label>
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                  {(['low', 'medium', 'high', 'veryHigh'] as const).map((key) => (
+                    <Chip key={key} active={deposit === key} onClick={() => setDeposit(key)}>
+                      {tForm(`deposit.options.${key}`)}
+                    </Chip>
+                  ))}
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
+                    <span>{tForm('risk.label')}</span>
+                    <span className="text-xs text-text-muted">{tForm('risk.hint')}</span>
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {(['low', 'medium', 'high'] as const).map((key) => (
+                      <Chip key={key} active={riskTolerance === key} onClick={() => setRiskTolerance(key)}>
+                        {tForm(`risk.${key}`)}
+                      </Chip>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
+                    <span>{tForm('style.label')}</span>
+                    <span className="text-xs text-text-muted">{tForm('style.hint')}</span>
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {(['scalping', 'day', 'swing', 'position'] as const).map((key) => (
+                      <Chip key={key} active={tradingStyle === key} onClick={() => setTradingStyle(key)}>
+                        {tForm(`style.${key}`)}
+                      </Chip>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </FormSection>
 
-          {/* Time available per week - Day selector */}
-          <div className="space-y-1.5">
-            <label className="text-slate-200">{tForm('time.label')}</label>
-            <div className="flex flex-wrap gap-1.5">
-              {weekDays.map((day) => (
-                <button
-                  key={day}
-                  type="button"
-                  onClick={() => handleDayToggle(day)}
-                  className={`px-2.5 py-1 rounded-full border transition text-[11px] ${
-                    selectedDays.includes(day)
-                      ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                      : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                  }`}
-                >
-                  {tForm(`time.days.${day.toLowerCase()}`)}
-                </button>
-              ))}
-            </div>
-          </div>
+          {/* Schedule & Tools */}
+          <FormSection title="Schedule & tools">
+            <div className="space-y-4">
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                  {tForm('time.label')}
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {weekDays.map((day) => (
+                    <Chip key={day} active={selectedDays.includes(day)} onClick={() => handleDayToggle(day)}>
+                      {tForm(`time.days.${day.toLowerCase()}`)}
+                    </Chip>
+                  ))}
+                </div>
+              </div>
 
-          {/* Platforms / brokers - Multi-select */}
-          <div className="space-y-1.5">
-            <label className="text-slate-200">{tForm('platforms.label')}</label>
-            <div className="flex flex-wrap gap-1.5">
-              {availablePlatforms.map((platform) => (
-                <button
-                  key={platform}
-                  type="button"
-                  onClick={() => handlePlatformToggle(platform)}
-                  className={`px-2.5 py-1 rounded-full border transition text-[11px] ${
-                    selectedPlatforms.includes(platform)
-                      ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                      : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                  }`}
-                >
-                  {platform}
-                </button>
-              ))}
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                  {tForm('platforms.label')}
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {availablePlatforms.map((platform) => (
+                    <Chip key={platform} active={selectedPlatforms.includes(platform)} onClick={() => handlePlatformToggle(platform)}>
+                      {platform}
+                    </Chip>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
+          </FormSection>
 
           {/* Goals */}
-          <div className="space-y-1.5">
-            <label className="flex items-center justify-between gap-2">
-              <span className="text-slate-200">{tForm('goals.label')}</span>
-              <span className="text-[11px] text-slate-500">{tForm('goals.hint')}</span>
-            </label>
-            <textarea
-              rows={4}
-              value={goals}
-              onChange={(e) => setGoals(e.target.value)}
-              className="w-full rounded-2xl bg-slate-950/80 border border-slate-800 px-3 py-2 text-[11px] text-slate-100 placeholder:text-slate-500 outline-none resize-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-              placeholder={tForm('goals.placeholder')}
-            />
-          </div>
-
-          {/* Extra notes */}
-          <div className="space-y-1.5">
-            <label className="text-slate-200">{tForm('notes.label')}</label>
-            <textarea
-              rows={3}
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              className="w-full rounded-2xl bg-slate-950/80 border border-slate-800 px-3 py-2 text-[11px] text-slate-100 placeholder:text-slate-500 outline-none resize-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-              placeholder={tForm('notes.placeholder')}
-            />
-          </div>
-
-          {/* Language selection */}
-          <div className="space-y-1.5">
-            <label className="flex items-center justify-between gap-2">
-              <span className="text-slate-200">{tForm('language.label')}</span>
-              <span className="text-[11px] text-slate-500">{tForm('language.required')}</span>
-            </label>
-            <div className="flex flex-wrap gap-1.5">
-              {(['en', 'ar'] as const).map((lang) => (
-                <button
-                  key={lang}
-                  type="button"
-                  onClick={() => handleLanguageToggle(lang)}
-                  className={`px-2.5 py-1 rounded-full border transition ${
-                    selectedLanguages.includes(lang)
-                      ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                      : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                  }`}
-                >
-                  {tForm(`language.${lang}`)}
-                </button>
-              ))}
+          <FormSection title="Goals & notes">
+            <div className="space-y-4">
+              <div>
+                <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
+                  <span>{tForm('goals.label')}</span>
+                  <span className="text-xs text-text-muted">{tForm('goals.hint')}</span>
+                </label>
+                <textarea
+                  rows={4}
+                  value={goals}
+                  onChange={(e) => setGoals(e.target.value)}
+                  className="input-field w-full resize-none text-sm"
+                  placeholder={tForm('goals.placeholder')}
+                />
+              </div>
+              <div>
+                <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                  {tForm('notes.label')}
+                </label>
+                <textarea
+                  rows={3}
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  className="input-field w-full resize-none text-sm"
+                  placeholder={tForm('notes.placeholder')}
+                />
+              </div>
             </div>
-            {selectedLanguages.length === 2 && (
-              <p className="text-[11px] text-slate-400">{tForm('language.hint')}</p>
+          </FormSection>
+
+          {/* Output settings */}
+          <FormSection title="Output settings">
+            <div>
+              <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
+                <span>{tForm('language.label')}</span>
+                <span className="text-xs text-text-muted">{tForm('language.required')}</span>
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {(['en', 'ar'] as const).map((lang) => (
+                  <Chip key={lang} active={selectedLanguages.includes(lang)} onClick={() => handleLanguageToggle(lang)}>
+                    {tForm(`language.${lang}`)}
+                  </Chip>
+                ))}
+              </div>
+              {selectedLanguages.length === 2 && (
+                <p className="mt-1.5 text-xs text-text-muted">{tForm('language.hint')}</p>
+              )}
+            </div>
+          </FormSection>
+
+          {/* Consent */}
+          <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
+              Consent & acknowledgement
+            </p>
+            <div className="space-y-3">
+              <label className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary">
+                <input
+                  type="checkbox"
+                  checked={consentEducation}
+                  onChange={(e) => setConsentEducation(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-surface-400 accent-brand-600"
+                />
+                <span>{tForm('consents.education')}</span>
+              </label>
+              <label className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary">
+                <input
+                  type="checkbox"
+                  checked={consentTerms}
+                  onChange={(e) => setConsentTerms(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-surface-400 accent-brand-600"
+                />
+                <span>
+                  {tForm('consents.termsBefore')}{' '}
+                  <Link href="/terms" className="font-medium text-brand-700 underline hover:text-brand-800">
+                    {tForm('consents.termsLink')}
+                  </Link>{' '}
+                  {tForm('consents.termsAnd')}{' '}
+                  <Link href="/risk-and-disclaimer" className="font-medium text-brand-700 underline hover:text-brand-800">
+                    {tForm('consents.riskLink')}
+                  </Link>
+                  .
+                </span>
+              </label>
+            </div>
+          </div>
+
+          {/* Submit area */}
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <button type="submit" disabled={isGenerateDisabled} className="btn-primary">
+              {isLoading ? (
+                <span className="inline-flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Processing…
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-2">
+                  {tForm('submit')}
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              )}
+            </button>
+            {hasActiveJob && !showNewGenerationConfirm && (
+              <button type="button" onClick={handleStartNewGeneration} className="btn-secondary">
+                Start new generation
+              </button>
             )}
+            {showNewGenerationConfirm && (
+              <div className="flex items-center gap-2 rounded-lg border border-gold-200 bg-gold-50 px-3 py-2 text-xs text-gold-800">
+                <span>This will start a new task and replace the current one.</span>
+                <button
+                  type="button"
+                  onClick={handleConfirmNewGeneration}
+                  className="rounded-md bg-gold-200 px-2 py-1 font-medium transition-colors hover:bg-gold-300"
+                >
+                  Confirm
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowNewGenerationConfirm(false)}
+                  className="font-medium text-text-secondary hover:text-text-main"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+            <p className="text-xs text-text-muted">{tForm('delivery')}</p>
           </div>
+        </form>
+      </div>
 
-          {/* Consents */}
-          <div className="space-y-2 text-[11px] text-slate-300">
-            <label className="flex items-start gap-2">
-              <input
-                type="checkbox"
-                checked={consentEducation}
-                onChange={(e) => setConsentEducation(e.target.checked)}
-                className="mt-0.5 h-3 w-3 rounded border border-slate-600 bg-slate-950 text-cyan-400 focus:ring-1 focus:ring-cyan-400"
-              />
-              <span>{tForm('consents.education')}</span>
-            </label>
-            <label className="flex items-start gap-2">
-              <input
-                type="checkbox"
-                checked={consentTerms}
-                onChange={(e) => setConsentTerms(e.target.checked)}
-                className="mt-0.5 h-3 w-3 rounded border border-slate-600 bg-slate-950 text-cyan-400 focus:ring-1 focus:ring-cyan-400"
-              />
-              <span className="text-[11px] text-slate-300">
-                {tForm('consents.termsBefore')}{' '}
-                <Link href="/terms" className="text-cyan-300 hover:text-cyan-200 underline">
-                  {tForm('consents.termsLink')}
-                </Link>{' '}
-                {tForm('consents.termsAnd')}{' '}
-                <Link href="/risk-and-disclaimer" className="text-cyan-300 hover:text-cyan-200 underline">
-                  {tForm('consents.riskLink')}
-                </Link>
-                .
-              </span>
-            </label>
+      {/* ─── Sidebar ─── */}
+      <div className="space-y-5 lg:sticky lg:top-24">
+        {/* Estimate */}
+        <div className="rounded-xl border border-surface-300 bg-white shadow-card">
+          <div className="flex items-center gap-2.5 border-b border-surface-200 px-5 py-3">
+            <Coins className="h-4 w-4 text-gold-600" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-text-muted">
+              {tForm('calculator.title')}
+            </h3>
           </div>
-
-          {/* Price Calculator */}
-          <div className="bg-slate-950/90 border border-slate-800 rounded-xl p-4 space-y-2">
-            <div className="flex items-center gap-2 text-xs text-slate-200">
-              <Coins className="w-4 h-4 text-cyan-300" />
-              <span className="font-semibold">{tForm('calculator.title')}</span>
-            </div>
+          <div className="px-5 py-4">
             <div className="flex items-baseline justify-between">
-              <span className="text-[11px] text-slate-400">{tForm('calculator.total')}</span>
+              <span className="text-xs text-text-muted">{tForm('calculator.total')}</span>
               <div className="text-right">
-                <div className="text-lg font-bold text-cyan-300">
-                  {totalTokens.toLocaleString('en-US')} {tForm('calculator.tokens')}
-                </div>
-                <div className="text-[11px] text-slate-400">
-                  ≈ {formattedPrice}
-                </div>
+                <p className="font-heading text-2xl font-bold text-text-main">
+                  {totalTokens.toLocaleString('en-US')}
+                </p>
+                <p className="text-xs text-text-muted">
+                  {tForm('calculator.tokens')} ≈ {formattedPrice}
+                </p>
               </div>
             </div>
             {session && (
-              <div className="pt-2 border-t border-slate-800">
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="text-slate-400">{tForm('calculator.balance')}</span>
-                  <span className={`font-medium ${hasEnoughTokens ? 'text-green-400' : 'text-amber-400'}`}>
+              <div className="mt-3 border-t border-surface-200 pt-3">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-text-muted">{tForm('calculator.balance')}</span>
+                  <span className={`font-semibold ${hasEnoughTokens ? 'text-brand-700' : 'text-rose-600'}`}>
                     {userBalance.toLocaleString('en-US')} {tForm('calculator.tokens')}
                   </span>
                 </div>
                 {!hasEnoughTokens && (
-                  <div className="mt-2 p-2 rounded-lg bg-amber-500/10 border border-amber-500/30">
-                    <p className="text-[11px] text-amber-200">
-                      {tForm('calculator.insufficientBalance.message')}
-                    </p>
+                  <div className="mt-2.5 rounded-lg border border-gold-200 bg-gold-50 px-3 py-2.5">
+                    <p className="text-xs text-gold-800">{tForm('calculator.insufficientBalance.message')}</p>
                     <Link
                       href="/top-up"
-                      className="inline-flex items-center gap-1 mt-1.5 text-[11px] font-medium text-cyan-300 hover:text-cyan-200"
+                      className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-brand-700 hover:text-brand-800"
                     >
                       {tForm('calculator.insufficientBalance.topUp')}
-                      <ArrowRight className="w-3 h-3" />
+                      <ArrowRight className="h-3 w-3" />
                     </Link>
                   </div>
                 )}
               </div>
             )}
           </div>
+        </div>
 
-          <div className="space-y-3 pt-1">
-            <div className="flex flex-wrap items-center gap-3">
-              <button
-                type="submit"
-                disabled={isGenerateDisabled}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading ? (
-                  <>
-                    <span className="animate-spin">⏳</span>
-                    <span>Processing...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>{tForm('submit')}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </>
-                )}
-              </button>
-              {hasActiveJob && !showNewGenerationConfirm && (
-                <button
-                  type="button"
-                  onClick={handleStartNewGeneration}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-full border border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700 transition"
-                >
-                  Start new generation
-                </button>
-              )}
-              {showNewGenerationConfirm && (
-                <div className="flex items-center gap-2 text-[11px] text-amber-200">
-                  <span>This will start a new task and replace the current one.</span>
-                  <button
-                    type="button"
-                    onClick={handleConfirmNewGeneration}
-                    className="px-2 py-1 rounded bg-amber-500/20 border border-amber-500/50 hover:bg-amber-500/30"
-                  >
-                    Confirm
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowNewGenerationConfirm(false)}
-                    className="px-2 py-1 rounded bg-slate-700 border border-slate-600 hover:bg-slate-600"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              )}
-              <p className="text-[11px] text-slate-400">{tForm('delivery')}</p>
-            </div>
-
+        {/* Deliverables */}
+        <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+          <div className="mb-2.5 inline-flex items-center gap-1.5 rounded-md border border-brand-200 bg-brand-50 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-700">
+            <Clock className="h-3 w-3" />
+            {tSidebar('delivery.badge')}
           </div>
-        </form>
-      </div>
-
-      {/* RIGHT: explainer / risk / pricing note */}
-      <div className="lg:col-span-5 space-y-4">
-        <motion.div
-          className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-          whileHover={{ y: -3 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-        >
-          <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-slate-900/90 border border-slate-800 text-[10px] text-slate-300 w-max">
-            <Clock className="w-3 h-3 text-cyan-300" />
-            <span>{tSidebar('delivery.badge')}</span>
-          </div>
-          <p className="text-[11px] text-slate-300/90">{tSidebar('delivery.description')}</p>
-          <ul className="text-[11px] text-slate-300/90 space-y-1.5">
-            <li>{tSidebar('delivery.points.modules')}</li>
-            <li>{tSidebar('delivery.points.examples')}</li>
-            <li>{tSidebar('delivery.points.checklist')}</li>
+          <p className="text-sm leading-relaxed text-text-secondary">{tSidebar('delivery.description')}</p>
+          <ul className="mt-3 space-y-2">
+            {[tSidebar('delivery.points.modules'), tSidebar('delivery.points.examples'), tSidebar('delivery.points.checklist')].map(
+              (point, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                  <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600" />
+                  <span>{point}</span>
+                </li>
+              )
+            )}
           </ul>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="bg-slate-950/90 border border-amber-500/40 rounded-2xl p-4 flex flex-col gap-2"
-          whileHover={{ y: -3 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-        >
-          <div className="flex items-center gap-2 text-xs text-amber-200">
-            <AlertTriangle className="w-4 h-4" />
-            <span className="font-semibold">{tSidebar('risk.title')}</span>
+        {/* Pricing */}
+        <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+          <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-text-muted">
+            {tSidebar('pricing.title')}
+          </h3>
+          <p className="text-sm leading-relaxed text-text-secondary">{tSidebar('pricing.description')}</p>
+          <ul className="mt-3 space-y-2">
+            {[tSidebar('pricing.points.tokens'), tSidebar('pricing.points.currencies')].map((point, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                <Layers className="mt-0.5 h-3.5 w-3.5 shrink-0 text-text-muted" />
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Risk notice */}
+        <div className="rounded-xl border border-gold-200 bg-gold-50 p-5">
+          <div className="mb-2 flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4 text-gold-600" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-gold-800">
+              {tSidebar('risk.title')}
+            </h3>
           </div>
-          <p className="text-[11px] text-slate-100/90">{tSidebar('risk.description')}</p>
+          <p className="text-sm leading-relaxed text-gold-800/80">{tSidebar('risk.description')}</p>
           <Link
             href="/risk-and-disclaimer"
-            className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200 mt-1"
+            className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand-700 hover:text-brand-800"
           >
-            <span>{tSidebar('risk.link')}</span>
-            <ArrowRight className="w-3 h-3" />
+            {tSidebar('risk.link')}
+            <ArrowRight className="h-3 w-3" />
           </Link>
-        </motion.div>
-
-        <motion.div
-          className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-          whileHover={{ y: -3 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-        >
-          <h3 className="text-xs font-semibold text-slate-50 mb-1">{tSidebar('pricing.title')}</h3>
-          <p className="text-[11px] text-slate-300/90">{tSidebar('pricing.description')}</p>
-          <ul className="text-[11px] text-slate-300/90 space-y-1.5">
-            <li>{tSidebar('pricing.points.tokens')}</li>
-            <li>{tSidebar('pricing.points.currencies')}</li>
-          </ul>
-          <div className="mt-1 inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-slate-900/90 border border-slate-800 text-[10px] text-slate-300 w-max">
-            <Layers className="w-3 h-3 text-cyan-300" />
-            <span>{tSidebar('pricing.badge')}</span>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   )
 }
+
+// ═══════════════════════════════════════════════
+//  AI STRATEGY FORM
+// ═══════════════════════════════════════════════
 
 function AIStrategyForm() {
   const { data: session } = useSession()
@@ -879,18 +869,15 @@ function AIStrategyForm() {
   const tAuth = useTranslations('learn.auth')
   const tCommon = useTranslations('common.auth')
 
-  // Read jobId(s) from URL or state
   const jobIdFromUrl = searchParams.get('jobId') || undefined
   const [activeJobs, setActiveJobs] = useState<Array<{ jobId: string; language: string }>>([])
-  
-  // For backward compatibility: if we have URL jobId but no activeJobs, use it
+
   useEffect(() => {
     if (jobIdFromUrl && activeJobs.length === 0) {
       setActiveJobs([{ jobId: jobIdFromUrl, language: 'en' }])
     }
   }, [jobIdFromUrl, activeJobs.length])
-  
-  // For backward compatibility: use first job as main jobStatus if only one job
+
   const mainJobId = activeJobs.length > 0 ? activeJobs[0].jobId : jobIdFromUrl
   const { data: jobStatus, isLoading: isPolling, isTerminal } = useJobStatus('ai-strategy', mainJobId)
 
@@ -952,8 +939,6 @@ function AIStrategyForm() {
     })
   }
 
-  // Map experienceYears, depositBudget, riskTolerance, markets, tradingStyle for pricing
-  // These fields are required by API but may not be visible in UI
   const experienceMap: Record<string, 'beginner' | 'intermediate' | 'advanced' | ''> = {
     '0': 'beginner',
     '1-2': 'intermediate',
@@ -967,7 +952,6 @@ function AIStrategyForm() {
     '€20,000+': 'veryHigh',
   }
 
-  // Calculate price based on selections
   const totalTokens = calculateAIStrategyPrice({
     preset: preset as 'conservative' | 'balanced' | 'scalping' | '',
     market: market as 'forex' | 'crypto' | 'binary' | '',
@@ -989,7 +973,6 @@ function AIStrategyForm() {
   const priceInCurrency = calculatePriceForTokens(totalTokens, currency)
   const formattedPrice = formatPrice(priceInCurrency, currency)
 
-  // Check if there's an active job (not terminal)
   const hasActiveJob = (activeJobs.length > 0 || jobIdFromUrl) && jobStatus && !isTerminal
   const isGenerateDisabled = isLoading || hasActiveJob || (session ? !hasEnoughTokens : false)
 
@@ -1006,7 +989,6 @@ function AIStrategyForm() {
 
   const handleConfirmNewGeneration = async () => {
     setShowNewGenerationConfirm(false)
-    // Continue with normal submit flow - jobId will be replaced in handleSubmit
     const form = document.querySelector('form')
     if (form) {
       const event = new Event('submit', { bubbles: true, cancelable: true })
@@ -1016,7 +998,7 @@ function AIStrategyForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!session) {
       showToast({
         title: tAuth('required'),
@@ -1027,7 +1009,6 @@ function AIStrategyForm() {
       return
     }
 
-    // Validate required fields
     if (
       !preset ||
       !market ||
@@ -1053,7 +1034,6 @@ function AIStrategyForm() {
       return
     }
 
-    // Check token balance
     if (!hasEnoughTokens) {
       showToast({
         title: tForm('calculator.insufficientBalance.title'),
@@ -1103,15 +1083,11 @@ function AIStrategyForm() {
         throw new Error(parsed.message || 'Failed to start generation')
       }
 
-      // Handle multi-language response (jobs array) or single job (backward-compatible)
       if (parsed.jobs && parsed.jobs.length > 0) {
-        // Multi-language: store all jobs in state
         setActiveJobs(parsed.jobs)
-        // Also update URL with first jobId for backward compatibility
         const tab = searchParams.get('tab') || 'ai'
         router.replace(`/learn?tab=${tab}&jobId=${parsed.jobs[0].jobId}`)
       } else if (parsed.jobId) {
-        // Single job (backward-compatible)
         setActiveJobs([{ jobId: parsed.jobId, language: 'en' }])
         const tab = searchParams.get('tab') || 'ai'
         router.replace(`/learn?tab=${tab}&jobId=${parsed.jobId}`)
@@ -1124,8 +1100,6 @@ function AIStrategyForm() {
         description: parsed.message || `Strategy generation started for ${parsed.jobs?.length || 1} language(s). You can close this window.`,
         variant: 'success',
       })
-
-      // Don't reset form - user can modify and start new generation if needed
     } catch (error) {
       console.error('[AI Strategy] submission error:', error)
       showToast({
@@ -1139,343 +1113,327 @@ function AIStrategyForm() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      {/* LEFT: form */}
-      <div className="lg:col-span-7 space-y-4">
-        <div className="space-y-2">
-          <h2 className="text-sm sm:text-base font-semibold text-slate-50">{t('title')}</h2>
-          <p className="text-xs sm:text-sm text-slate-300/90">{t('description')}</p>
+    <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+      {/* ─── Form workspace ─── */}
+      <div className="space-y-5">
+        <div>
+          <h2 className="font-heading text-lg font-semibold text-text-main">{t('title')}</h2>
+          <p className="mt-1 text-sm sm:text-base text-text-secondary">{t('description')}</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Presets */}
-          <div className="space-y-1.5 text-[11px]">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-slate-200">{tForm('presets.label')}</span>
-              <span className="text-slate-500">{tForm('presets.hint')}</span>
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Strategy preset */}
+          <FormSection title="Strategy preset" hint={tForm('presets.hint')}>
+            <div>
+              <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                {tForm('presets.label')}
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {(['conservative', 'balanced', 'scalping'] as const).map((key) => (
+                  <Chip key={key} active={preset === key} onClick={() => setPreset(key)}>
+                    {tForm(`presets.${key}`)}
+                  </Chip>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-1.5">
-              {(['conservative', 'balanced', 'scalping'] as const).map((key) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => setPreset(key)}
-                  className={`px-2.5 py-1.5 rounded-full border transition ${
-                    preset === key
-                      ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                      : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                  }`}
-                >
-                  {tForm(`presets.${key}`)}
-                </button>
-              ))}
-            </div>
-          </div>
+          </FormSection>
 
-          {/* Core profile */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 text-xs">
-            <div className="space-y-1.5">
-              <label className="text-slate-200">{tForm('market.label')}</label>
-              <select
-                value={market}
-                onChange={(e) =>
-                  setMarket(e.target.value as 'forex' | 'crypto' | 'binary')
-                }
-                className="w-full rounded-xl bg-slate-950/80 border border-slate-800 px-3 py-2 text-[11px] text-slate-100 outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-              >
-                <option value="forex">Forex</option>
-                <option value="crypto">Crypto</option>
-                <option value="binary">Binary options</option>
-              </select>
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-slate-200">{tForm('timeframe.label')}</label>
-              <select
-                value={timeframe}
-                onChange={(e) =>
-                  setTimeframe(e.target.value as 'M15' | 'M30' | 'H1' | 'H4' | 'D1')
-                }
-                className="w-full rounded-xl bg-slate-950/80 border border-slate-800 px-3 py-2 text-[11px] text-slate-100 outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-              >
-                <option value="M15">M15</option>
-                <option value="M30">M30</option>
-                <option value="H1">H1</option>
-                <option value="H4">H4</option>
-                <option value="D1">D1</option>
-              </select>
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-slate-200">{tForm('risk.label')}</label>
-              <input
-                type="number"
-                step="0.1"
-                value={riskPerTrade}
-                onChange={(e) => setRiskPerTrade(e.target.value)}
-                className="w-full rounded-xl bg-slate-950/80 border border-slate-800 px-3 py-2 text-[11px] text-slate-100 placeholder:text-slate-500 outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                placeholder={tForm('risk.placeholder')}
-              />
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-slate-200">{tForm('maxTrades.label')}</label>
-              <input
-                type="number"
-                value={maxTrades}
-                onChange={(e) => setMaxTrades(e.target.value)}
-                className="w-full rounded-xl bg-slate-950/80 border border-slate-800 px-3 py-2 text-[11px] text-slate-100 placeholder:text-slate-500 outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                placeholder={tForm('maxTrades.placeholder')}
-              />
-            </div>
-          </div>
-
-          {/* Instruments + notes */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3 text-xs">
-            <div className="space-y-1.5">
-              <label className="text-slate-200">{tForm('instruments.label')}</label>
-              <input
-                type="text"
-                value={instruments}
-                onChange={(e) => setInstruments(e.target.value)}
-                className="w-full rounded-xl bg-slate-950/80 border border-slate-800 px-3 py-2 text-[11px] text-slate-100 placeholder:text-slate-500 outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                placeholder={tForm('instruments.placeholder')}
-              />
-            </div>
-            <div className="space-y-1.5">
-              <label className="text-slate-200">{tForm('focus.label')}</label>
-              <input
-                type="text"
-                value={focus}
-                onChange={(e) => setFocus(e.target.value)}
-                className="w-full rounded-xl bg-slate-950/80 border border-slate-800 px-3 py-2 text-[11px] text-slate-100 placeholder:text-slate-500 outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                placeholder={tForm('focus.placeholder')}
-              />
-            </div>
-          </div>
-
-          {/* Output options */}
-          <div className="mt-4 space-y-1.5 text-[11px]">
-            <div className="flex items-center justify-between gap-2">
-              <span className="text-slate-200">{tForm('detail.label')}</span>
-              <span className="text-slate-500">{tForm('detail.hint')}</span>
-            </div>
-            <div className="flex flex-wrap gap-1.5">
-              {(['quick', 'standard', 'deep'] as const).map((key) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => setDetailLevel(key)}
-                  className={`px-2.5 py-1.5 rounded-full border transition ${
-                    detailLevel === key
-                      ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                      : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                  }`}
-                >
-                  {tForm(`detail.${key}`)}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Language selection */}
-          <div className="mt-4 space-y-1.5">
-            <label className="flex items-center justify-between gap-2">
-              <span className="text-slate-200">{tForm('language.label')}</span>
-              <span className="text-[11px] text-slate-500">{tForm('language.required')}</span>
-            </label>
-            <div className="flex flex-wrap gap-1.5">
-              {(['en', 'ar'] as const).map((lang) => (
-                <button
-                  key={lang}
-                  type="button"
-                  onClick={() => handleLanguageToggle(lang)}
-                  className={`px-2.5 py-1 rounded-full border transition ${
-                    selectedLanguages.includes(lang)
-                      ? 'border-cyan-400 bg-cyan-400/10 text-cyan-300'
-                      : 'border-slate-800 bg-slate-950/80 text-slate-200 hover:border-slate-600'
-                  }`}
-                >
-                  {tForm(`language.${lang}`)}
-                </button>
-              ))}
-            </div>
-            {selectedLanguages.length === 2 && (
-              <p className="text-[11px] text-slate-400">{tForm('language.hint')}</p>
-            )}
-          </div>
-
-          {/* Consents */}
-          <div className="mt-4 space-y-2 text-[11px] text-slate-300">
-            <label className="flex items-start gap-2">
-              <input
-                type="checkbox"
-                checked={consent}
-                onChange={(e) => setConsent(e.target.checked)}
-                className="mt-0.5 h-3 w-3 rounded border border-slate-600 bg-slate-950 text-cyan-400 focus:ring-1 focus:ring-cyan-400"
-              />
-              <span>{tForm('consent')}</span>
-            </label>
-            <label className="flex items-start gap-2">
-              <input
-                type="checkbox"
-                checked={consentTerms}
-                onChange={(e) => setConsentTerms(e.target.checked)}
-                className="mt-0.5 h-3 w-3 rounded border border-slate-600 bg-slate-950 text-cyan-400 focus:ring-1 focus:ring-cyan-400"
-              />
-              <span className="text-[11px] text-slate-300">
-                {tForm('consentTermsBefore')}{' '}
-                <Link href="/terms" className="text-cyan-300 hover:text-cyan-200 underline">
-                  {tForm('consentTermsLink')}
-                </Link>{' '}
-                {tForm('consentTermsAnd')}{' '}
-                <Link href="/risk-and-disclaimer" className="text-cyan-300 hover:text-cyan-200 underline">
-                  {tForm('consentRiskLink')}
-                </Link>
-                .
-              </span>
-            </label>
-          </div>
-
-          {/* Price Calculator */}
-          <div className="bg-slate-950/90 border border-slate-800 rounded-xl p-4 space-y-2">
-            <div className="flex items-center gap-2 text-xs text-slate-200">
-              <Coins className="w-4 h-4 text-cyan-300" />
-              <span className="font-semibold">{tForm('calculator.title')}</span>
-            </div>
-            <div className="flex items-baseline justify-between">
-              <span className="text-[11px] text-slate-400">{tForm('calculator.total')}</span>
-              <div className="text-right">
-                <div className="text-lg font-bold text-cyan-300">
-                  {totalTokens.toLocaleString('en-US')} {tForm('calculator.tokens')}
+          {/* Core parameters */}
+          <FormSection title="Core parameters">
+            <div className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                    {tForm('market.label')}
+                  </label>
+                  <select
+                    value={market}
+                    onChange={(e) => setMarket(e.target.value as 'forex' | 'crypto' | 'binary')}
+                    className="input-field w-full text-sm"
+                  >
+                    <option value="forex">Forex</option>
+                    <option value="crypto">Crypto</option>
+                    <option value="binary">Binary options</option>
+                  </select>
                 </div>
-                <div className="text-[11px] text-slate-400">
-                  ≈ {formattedPrice}
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                    {tForm('timeframe.label')}
+                  </label>
+                  <select
+                    value={timeframe}
+                    onChange={(e) => setTimeframe(e.target.value as 'M15' | 'M30' | 'H1' | 'H4' | 'D1')}
+                    className="input-field w-full text-sm"
+                  >
+                    <option value="M15">M15</option>
+                    <option value="M30">M30</option>
+                    <option value="H1">H1</option>
+                    <option value="H4">H4</option>
+                    <option value="D1">D1</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                    {tForm('risk.label')}
+                  </label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={riskPerTrade}
+                    onChange={(e) => setRiskPerTrade(e.target.value)}
+                    className="input-field w-full text-sm"
+                    placeholder={tForm('risk.placeholder')}
+                  />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                    {tForm('maxTrades.label')}
+                  </label>
+                  <input
+                    type="number"
+                    value={maxTrades}
+                    onChange={(e) => setMaxTrades(e.target.value)}
+                    className="input-field w-full text-sm"
+                    placeholder={tForm('maxTrades.placeholder')}
+                  />
+                </div>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                    {tForm('instruments.label')}
+                  </label>
+                  <input
+                    type="text"
+                    value={instruments}
+                    onChange={(e) => setInstruments(e.target.value)}
+                    className="input-field w-full text-sm"
+                    placeholder={tForm('instruments.placeholder')}
+                  />
+                </div>
+                <div>
+                  <label className="mb-1.5 block text-sm font-medium text-text-secondary">
+                    {tForm('focus.label')}
+                  </label>
+                  <input
+                    type="text"
+                    value={focus}
+                    onChange={(e) => setFocus(e.target.value)}
+                    className="input-field w-full text-sm"
+                    placeholder={tForm('focus.placeholder')}
+                  />
                 </div>
               </div>
             </div>
+          </FormSection>
+
+          {/* Output options */}
+          <FormSection title="Output settings">
+            <div className="space-y-4">
+              <div>
+                <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
+                  <span>{tForm('detail.label')}</span>
+                  <span className="text-xs text-text-muted">{tForm('detail.hint')}</span>
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {(['quick', 'standard', 'deep'] as const).map((key) => (
+                    <Chip key={key} active={detailLevel === key} onClick={() => setDetailLevel(key)}>
+                      {tForm(`detail.${key}`)}
+                    </Chip>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
+                  <span>{tForm('language.label')}</span>
+                  <span className="text-xs text-text-muted">{tForm('language.required')}</span>
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {(['en', 'ar'] as const).map((lang) => (
+                    <Chip key={lang} active={selectedLanguages.includes(lang)} onClick={() => handleLanguageToggle(lang)}>
+                      {tForm(`language.${lang}`)}
+                    </Chip>
+                  ))}
+                </div>
+                {selectedLanguages.length === 2 && (
+                  <p className="mt-1.5 text-xs text-text-muted">{tForm('language.hint')}</p>
+                )}
+              </div>
+            </div>
+          </FormSection>
+
+          {/* Consent */}
+          <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
+              Consent & acknowledgement
+            </p>
+            <div className="space-y-3">
+              <label className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary">
+                <input
+                  type="checkbox"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-surface-400 accent-brand-600"
+                />
+                <span>{tForm('consent')}</span>
+              </label>
+              <label className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary">
+                <input
+                  type="checkbox"
+                  checked={consentTerms}
+                  onChange={(e) => setConsentTerms(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-surface-400 accent-brand-600"
+                />
+                <span>
+                  {tForm('consentTermsBefore')}{' '}
+                  <Link href="/terms" className="font-medium text-brand-700 underline hover:text-brand-800">
+                    {tForm('consentTermsLink')}
+                  </Link>{' '}
+                  {tForm('consentTermsAnd')}{' '}
+                  <Link href="/risk-and-disclaimer" className="font-medium text-brand-700 underline hover:text-brand-800">
+                    {tForm('consentRiskLink')}
+                  </Link>
+                  .
+                </span>
+              </label>
+            </div>
+          </div>
+
+          {/* Submit area */}
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <button
+              type="submit"
+              className="btn-primary"
+              disabled={!consent || !consentTerms || isGenerateDisabled}
+            >
+              {isLoading ? (
+                <span className="inline-flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Generating…
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-2">
+                  {tForm('submit')}
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
+              )}
+            </button>
+            {hasActiveJob && !showNewGenerationConfirm && (
+              <button type="button" onClick={handleStartNewGeneration} className="btn-secondary">
+                Start new generation
+              </button>
+            )}
+            {showNewGenerationConfirm && (
+              <div className="flex items-center gap-2 rounded-lg border border-gold-200 bg-gold-50 px-3 py-2 text-xs text-gold-800">
+                <span>This will start a new task and replace the current one.</span>
+                <button
+                  type="button"
+                  onClick={handleConfirmNewGeneration}
+                  className="rounded-md bg-gold-200 px-2 py-1 font-medium transition-colors hover:bg-gold-300"
+                >
+                  Confirm
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowNewGenerationConfirm(false)}
+                  className="font-medium text-text-secondary hover:text-text-main"
+                >
+                  Cancel
+                </button>
+              </div>
+            )}
+            <p className="text-xs text-text-muted">{tForm('output')}</p>
+          </div>
+        </form>
+      </div>
+
+      {/* ─── Sidebar ─── */}
+      <div className="space-y-5 lg:sticky lg:top-24">
+        {/* Estimate */}
+        <div className="rounded-xl border border-surface-300 bg-white shadow-card">
+          <div className="flex items-center gap-2.5 border-b border-surface-200 px-5 py-3">
+            <Coins className="h-4 w-4 text-gold-600" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-text-muted">
+              {tForm('calculator.title')}
+            </h3>
+          </div>
+          <div className="px-5 py-4">
+            <div className="flex items-baseline justify-between">
+              <span className="text-xs text-text-muted">{tForm('calculator.total')}</span>
+              <div className="text-right">
+                <p className="font-heading text-2xl font-bold text-text-main">
+                  {totalTokens.toLocaleString('en-US')}
+                </p>
+                <p className="text-xs text-text-muted">
+                  {tForm('calculator.tokens')} ≈ {formattedPrice}
+                </p>
+              </div>
+            </div>
             {session && (
-              <div className="pt-2 border-t border-slate-800">
-                <div className="flex items-center justify-between text-[11px]">
-                  <span className="text-slate-400">{tForm('calculator.balance')}</span>
-                  <span className={`font-medium ${hasEnoughTokens ? 'text-green-400' : 'text-amber-400'}`}>
+              <div className="mt-3 border-t border-surface-200 pt-3">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-text-muted">{tForm('calculator.balance')}</span>
+                  <span className={`font-semibold ${hasEnoughTokens ? 'text-brand-700' : 'text-rose-600'}`}>
                     {userBalance.toLocaleString('en-US')} {tForm('calculator.tokens')}
                   </span>
                 </div>
                 {!hasEnoughTokens && (
-                  <div className="mt-2 p-2 rounded-lg bg-amber-500/10 border border-amber-500/30">
-                    <p className="text-[11px] text-amber-200">
-                      {tForm('calculator.insufficientBalance.message')}
-                    </p>
+                  <div className="mt-2.5 rounded-lg border border-gold-200 bg-gold-50 px-3 py-2.5">
+                    <p className="text-xs text-gold-800">{tForm('calculator.insufficientBalance.message')}</p>
                     <Link
                       href="/top-up"
-                      className="inline-flex items-center gap-1 mt-1.5 text-[11px] font-medium text-cyan-300 hover:text-cyan-200"
+                      className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-brand-700 hover:text-brand-800"
                     >
                       {tForm('calculator.insufficientBalance.topUp')}
-                      <ArrowRight className="w-3 h-3" />
+                      <ArrowRight className="h-3 w-3" />
                     </Link>
                   </div>
                 )}
               </div>
             )}
           </div>
+        </div>
 
-          {/* CTA + preview note */}
-          <div className="space-y-3 pt-2">
-            <div className="flex flex-wrap items-center gap-3">
-              <button
-                type="submit"
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={!consent || !consentTerms || isGenerateDisabled}
-              >
-                {isLoading ? (
-                  <>
-                    <span className="animate-spin">⏳</span>
-                    <span>Generating...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>{tForm('submit')}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </>
-                )}
-              </button>
-              {hasActiveJob && !showNewGenerationConfirm && (
-                <button
-                  type="button"
-                  onClick={handleStartNewGeneration}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-full border border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700 transition"
-                >
-                  Start new generation
-                </button>
-              )}
-              {showNewGenerationConfirm && (
-                <div className="flex items-center gap-2 text-[11px] text-amber-200">
-                  <span>This will start a new task and replace the current one.</span>
-                  <button
-                    type="button"
-                    onClick={handleConfirmNewGeneration}
-                    className="px-2 py-1 rounded bg-amber-500/20 border border-amber-500/50 hover:bg-amber-500/30"
-                  >
-                    Confirm
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setShowNewGenerationConfirm(false)}
-                    className="px-2 py-1 rounded bg-slate-700 border border-slate-600 hover:bg-slate-600"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              )}
-              <p className="text-[11px] text-slate-400">{tForm('output')}</p>
-            </div>
-
+        {/* AI depth */}
+        <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+          <div className="mb-2.5 inline-flex items-center gap-1.5 rounded-md border border-[#c7c9f5] bg-[#eef0ff] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-ai">
+            <SlidersHorizontal className="h-3 w-3" />
+            {tSidebar('depth.badge')}
           </div>
+          <p className="text-sm leading-relaxed text-text-secondary">{tSidebar('depth.description')}</p>
+        </div>
 
-        </form>
-      </div>
+        {/* Courses */}
+        <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+          <h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-text-muted">
+            {tSidebar('courses.title')}
+          </h3>
+          <p className="text-sm leading-relaxed text-text-secondary">{tSidebar('courses.description')}</p>
+        </div>
 
-      {/* RIGHT: info cards */}
-      <div className="lg:col-span-5 space-y-4">
-        <motion.div
-          className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-          whileHover={{ y: -3 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-        >
-          <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-slate-900/90 border border-slate-800 text-[10px] text-slate-300 w-max">
-            <SlidersHorizontal className="w-3 h-3 text-cyan-300" />
-            <span>{tSidebar('depth.badge')}</span>
+        {/* Risk notice */}
+        <div className="rounded-xl border border-gold-200 bg-gold-50 p-5">
+          <div className="mb-2 flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4 text-gold-600" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-gold-800">
+              {tSidebar('risk.title')}
+            </h3>
           </div>
-          <p className="text-[11px] text-slate-300/90">{tSidebar('depth.description')}</p>
-        </motion.div>
-
-        <motion.div
-          className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-          whileHover={{ y: -3 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-        >
-          <h3 className="text-xs font-semibold text-slate-50 mb-1">{tSidebar('courses.title')}</h3>
-          <p className="text-[11px] text-slate-300/90">{tSidebar('courses.description')}</p>
-        </motion.div>
-
-        <motion.div
-          className="bg-slate-950/90 border border-amber-500/40 rounded-2xl p-4 flex flex-col gap-2"
-          whileHover={{ y: -3 }}
-          transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-        >
-          <div className="flex items-center gap-2 text-xs text-amber-200">
-            <AlertTriangle className="w-4 h-4" />
-            <span className="font-semibold">{tSidebar('risk.title')}</span>
-          </div>
-          <p className="text-[11px] text-slate-100/90">{tSidebar('risk.description')}</p>
+          <p className="text-sm leading-relaxed text-gold-800/80">{tSidebar('risk.description')}</p>
           <Link
             href="/risk-and-disclaimer"
-            className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200 mt-1"
+            className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand-700 hover:text-brand-800"
           >
-            <span>{tSidebar('risk.link')}</span>
-            <ArrowRight className="w-3 h-3" />
+            {tSidebar('risk.link')}
+            <ArrowRight className="h-3 w-3" />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </div>
   )
 }
-

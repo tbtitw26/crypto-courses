@@ -1,368 +1,248 @@
-// components/WeeklyReviewPage.tsx - Weekly Review Playbook page component
-
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
-  Calendar,
-  BarChart3,
-  ListChecks,
-  Target,
-  Info,
   AlertTriangle,
-  HelpCircle,
+  ArrowRight,
+  BarChart3,
+  Calendar,
+  CheckCircle2,
   Clock,
+  HelpCircle,
+  Info,
+  ListChecks,
+  PenSquare,
+  ShieldCheck,
+  Target,
 } from 'lucide-react'
-import { HomeSection } from './HomeSection'
 
 export function WeeklyReviewPage() {
   const t = useTranslations('learn.weeklyReview')
   const tBreadcrumb = useTranslations('learn.breadcrumb')
 
-  // Get data from translations
   const hero = t.raw('hero') as any
   const sections = t.raw('sections') as any
   const sidebar = t.raw('sidebar') as any
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-14">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
-
-      <main className="pt-8">
-        {/* Header */}
-        <HomeSection className="pb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-2">
-            <div className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Link href="/" className="hover:text-slate-300 transition">
-                {tBreadcrumb('home')}
-              </Link>
-              <span className="text-slate-600">/</span>
-              <Link href="/learn" className="hover:text-slate-300 transition">
-                {tBreadcrumb('learn')}
-              </Link>
-              <span className="text-slate-600">/</span>
-              <span className="text-slate-300">{t('breadcrumb.weeklyReview')}</span>
+    <div className="min-h-screen bg-white">
+      {/* ─── Hero ─── */}
+      <section className="border-b border-surface-200 bg-gradient-to-b from-surface-0 to-white">
+        <div className="mx-auto max-w-page px-4 pb-10 pt-8 sm:px-6 lg:px-8 lg:pb-14 lg:pt-10">
+          <nav className="mb-6 flex items-center gap-1.5 text-xs text-text-muted">
+            <Link href="/" className="transition-colors hover:text-brand-700">{tBreadcrumb('home')}</Link>
+            <span>/</span>
+            <Link href="/learn" className="transition-colors hover:text-brand-700">{tBreadcrumb('learn')}</Link>
+            <span>/</span>
+            <span className="font-medium text-text-main">{t('breadcrumb.weeklyReview')}</span>
+          </nav>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-brand-200 bg-brand-50 text-brand-700">
+                  <Calendar className="h-5 w-5" />
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-md border border-gold-200 bg-gold-50 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-gold-700">{hero?.badges?.educationOnly}</span>
+                  <span className="rounded-md border border-surface-200 bg-surface-100 px-2 py-0.5 text-xs font-medium text-text-muted">{hero?.badges?.worksWith}</span>
+                </div>
+              </div>
+              <h1 className="font-heading text-3xl font-semibold leading-tight text-text-main sm:text-4xl">{hero?.title}</h1>
+              <p className="mt-3 text-base leading-relaxed text-text-secondary sm:text-lg">{hero?.subtitle}</p>
             </div>
-            <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-cyan-300" />
-              <h1 className="text-xl sm:text-2xl font-semibold text-slate-50">
-                {hero?.title}
-              </h1>
-            </div>
-            <p className="text-xs sm:text-sm text-slate-300/90 max-w-2xl">
-              {hero?.subtitle}
-            </p>
-            <div className="inline-flex flex-wrap items-center gap-2 text-[10px]">
-              <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-slate-300">
-                {hero?.badges?.educationOnly}
-              </span>
-              <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-slate-400">
-                {hero?.badges?.worksWith}
-              </span>
+            <div className="flex items-center gap-4 shrink-0">
+              <div className="flex items-center gap-2.5 rounded-xl border border-surface-200 bg-surface-0 px-4 py-2.5">
+                <BarChart3 className="h-4 w-4 text-brand-600" />
+                <div>
+                  <p className="text-xs font-semibold text-text-main">{hero?.conceptCard?.title}</p>
+                  <p className="text-xs text-text-muted">{hero?.conceptCard?.subtitle}</p>
+                </div>
+              </div>
+              <span className="text-xs text-text-muted">{hero?.readingTime}</span>
             </div>
           </div>
-          <div className="text-[11px] text-slate-400 flex flex-col items-start sm:items-end gap-2">
-            <div className="inline-flex items-center gap-2 rounded-xl bg-slate-950/90 border border-slate-800 px-3 py-2">
-              <div className="h-7 w-7 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                <BarChart3 className="w-3.5 h-3.5 text-cyan-300" />
+        </div>
+      </section>
+
+      {/* ─── Content ─── */}
+      <div className="mx-auto max-w-page px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        {/* Why Weekly Review */}
+        <div className="mb-14">
+          <h2 className="font-heading text-xl font-semibold text-text-main sm:text-2xl">{sections?.whyWeeklyReview?.title}</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-relaxed text-text-secondary">{sections?.whyWeeklyReview?.description}</p>
+          <ul className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {sections?.whyWeeklyReview?.points?.map((p: string, i: number) => (
+              <li key={i} className="flex items-start gap-2.5 rounded-xl border border-surface-200 bg-surface-0 p-4 text-sm text-text-secondary">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs text-text-muted">{sections?.whyWeeklyReview?.note}</p>
+        </div>
+
+        {/* Review Structure — vertical timeline rail */}
+        <div className="mb-14">
+          <div className="mb-6 flex items-center gap-2.5">
+            <ListChecks className="h-5 w-5 text-brand-700" />
+            <h2 className="font-heading text-xl font-semibold text-text-main sm:text-2xl">{sections?.reviewStructure?.title}</h2>
+          </div>
+          <p className="mb-6 max-w-3xl text-sm leading-relaxed text-text-secondary">{sections?.reviewStructure?.description}</p>
+
+          <div className="relative space-y-4 pl-8 before:absolute before:bottom-4 before:left-[11px] before:top-4 before:w-px before:bg-brand-200">
+            {[sections?.reviewStructure?.snapshot, sections?.reviewStructure?.process, sections?.reviewStructure?.setups, sections?.reviewStructure?.risk].map((card: any, i: number) => {
+              const stepIcons = [BarChart3, ListChecks, Target, ShieldCheck]
+              const StepIcon = stepIcons[i]
+              return (
+                <div key={i} className="relative">
+                  <span className="absolute -left-8 top-4 flex h-[22px] w-[22px] items-center justify-center rounded-full border-2 border-brand-200 bg-white">
+                    <StepIcon className="h-3 w-3 text-brand-600" />
+                  </span>
+                  <div className="rounded-2xl border border-surface-200 bg-white p-5 shadow-sm">
+                    <p className="mb-3 font-heading text-sm font-semibold text-text-main">{card?.title}</p>
+                    <ul className="space-y-1.5">{card?.items?.map((it: string, j: number) => (
+                      <li key={j} className="flex items-start gap-2 text-sm text-text-secondary">
+                        <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600" /><span>{it}</span>
+                      </li>
+                    ))}</ul>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Metrics — useful vs careful */}
+        <div className="mb-14 rounded-2xl border border-surface-200 bg-white shadow-card">
+          <div className="flex items-center gap-2.5 border-b border-surface-200 px-6 py-4">
+            <BarChart3 className="h-4 w-4 text-brand-700" />
+            <h2 className="font-heading text-base font-semibold text-text-main">{sections?.metrics?.title}</h2>
+          </div>
+          <div className="px-6 py-5">
+            <p className="mb-5 text-sm text-text-secondary">{sections?.metrics?.description}</p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-xl border border-brand-200 bg-brand-50/30 p-5">
+                <p className="mb-3 text-xs font-bold uppercase tracking-wider text-brand-700">{sections?.metrics?.lightMetrics?.title}</p>
+                <ul className="space-y-2">{sections?.metrics?.lightMetrics?.items?.map((it: string, i: number) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600" /><span>{it}</span>
+                  </li>
+                ))}</ul>
               </div>
-              <div className="flex flex-col">
-                <span className="text-slate-200 font-medium">
-                  {hero?.conceptCard?.title}
-                </span>
-                <span className="text-slate-500">
-                  {hero?.conceptCard?.subtitle}
-                </span>
+              <div className="rounded-xl border border-gold-200 bg-gold-50/50 p-5">
+                <p className="mb-3 text-xs font-bold uppercase tracking-wider text-gold-700">{sections?.metrics?.carefulWith?.title}</p>
+                <ul className="space-y-2">{sections?.metrics?.carefulWith?.items?.map((it: string, i: number) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                    <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-500" /><span>{it}</span>
+                  </li>
+                ))}</ul>
               </div>
             </div>
-            <span>{hero?.readingTime}</span>
           </div>
-        </HomeSection>
+        </div>
 
-        {/* Main content grid */}
-        <HomeSection className="pb-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Left column */}
-          <div className="lg:col-span-8 space-y-6 text-[13px] leading-relaxed">
-            {/* Intro */}
-            <motion.article
-              className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 sm:p-5 space-y-3"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut' }}
-            >
-              <h2 className="text-sm font-semibold text-slate-50 flex items-center gap-2">
-                {sections?.whyWeeklyReview?.title}
-              </h2>
-              <p className="text-slate-300/95">
-                {sections?.whyWeeklyReview?.description}
-              </p>
-              <ul className="list-disc list-inside text-slate-300/95 space-y-1.5">
-                {sections?.whyWeeklyReview?.points?.map((point: string, idx: number) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
-              <p className="text-slate-400 text-[12px]">
-                {sections?.whyWeeklyReview?.note}
-              </p>
-            </motion.article>
-
-            {/* Structure of a weekly review */}
-            <motion.section
-              className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 sm:p-5 space-y-4"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: 0.05 }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <ListChecks className="w-4 h-4 text-cyan-300" />
-                <h3 className="text-sm font-semibold text-slate-50">
-                  {sections?.reviewStructure?.title}
-                </h3>
-              </div>
-              <p className="text-slate-300/95">
-                {sections?.reviewStructure?.description}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[12px]">
-                <div className="rounded-xl bg-slate-950 border border-slate-900 p-3 space-y-1.5">
-                  <div className="text-[11px] font-semibold text-slate-100">
-                    {sections?.reviewStructure?.snapshot?.title}
-                  </div>
-                  <ul className="list-disc list-inside text-slate-300/90 space-y-1">
-                    {sections?.reviewStructure?.snapshot?.items?.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="rounded-xl bg-slate-950 border border-slate-900 p-3 space-y-1.5">
-                  <div className="text-[11px] font-semibold text-slate-100">
-                    {sections?.reviewStructure?.process?.title}
-                  </div>
-                  <ul className="list-disc list-inside text-slate-300/90 space-y-1">
-                    {sections?.reviewStructure?.process?.items?.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[12px]">
-                <div className="rounded-xl bg-slate-950 border border-slate-900 p-3 space-y-1.5">
-                  <div className="text-[11px] font-semibold text-slate-100">
-                    {sections?.reviewStructure?.setups?.title}
-                  </div>
-                  <ul className="list-disc list-inside text-slate-300/90 space-y-1">
-                    {sections?.reviewStructure?.setups?.items?.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="rounded-xl bg-slate-950 border border-slate-900 p-3 space-y-1.5">
-                  <div className="text-[11px] font-semibold text-slate-100">
-                    {sections?.reviewStructure?.risk?.title}
-                  </div>
-                  <ul className="list-disc list-inside text-slate-300/90 space-y-1">
-                    {sections?.reviewStructure?.risk?.items?.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </motion.section>
-
-            {/* Working with metrics */}
-            <motion.section
-              className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 sm:p-5 space-y-3"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: 0.08 }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <BarChart3 className="w-4 h-4 text-cyan-300" />
-                <h3 className="text-sm font-semibold text-slate-50">
-                  {sections?.metrics?.title}
-                </h3>
-              </div>
-              <p className="text-slate-300/95">
-                {sections?.metrics?.description}
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-[12px]">
-                <div className="rounded-xl bg-slate-950 border border-slate-900 p-3 space-y-1.5">
-                  <div className="text-[11px] font-semibold text-slate-100">
-                    {sections?.metrics?.lightMetrics?.title}
-                  </div>
-                  <ul className="list-disc list-inside text-slate-300/90 space-y-1">
-                    {sections?.metrics?.lightMetrics?.items?.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="rounded-xl bg-slate-950 border border-slate-900 p-3 space-y-1.5">
-                  <div className="text-[11px] font-semibold text-slate-100">
-                    {sections?.metrics?.carefulWith?.title}
-                  </div>
-                  <ul className="list-disc list-inside text-slate-300/90 space-y-1">
-                    {sections?.metrics?.carefulWith?.items?.map((item: string, idx: number) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </motion.section>
-
-            {/* Turning review into adjustments */}
-            <motion.section
-              className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 sm:p-5 space-y-3"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: 0.12 }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <Target className="w-4 h-4 text-cyan-300" />
-                <h3 className="text-sm font-semibold text-slate-50">
-                  {sections?.adjustments?.title}
-                </h3>
-              </div>
-              <p className="text-slate-300/95">
-                {sections?.adjustments?.description}
-              </p>
-              <ol className="list-decimal list-inside text-slate-300/95 space-y-1.5 text-[12px]">
-                {sections?.adjustments?.steps?.map((step: string, idx: number) => (
-                  <li key={idx}>{step}</li>
-                ))}
-              </ol>
-              <p className="text-slate-400 text-[12px]">
-                {sections?.adjustments?.note}
-              </p>
-            </motion.section>
-
-            {/* Timing & routine */}
-            <motion.section
-              className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 sm:p-5 space-y-3"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: 0.16 }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <Clock className="w-4 h-4 text-cyan-300" />
-                <h3 className="text-sm font-semibold text-slate-50">
-                  {sections?.timing?.title}
-                </h3>
-              </div>
-              <p className="text-slate-300/95">
-                {sections?.timing?.description}
-              </p>
-              <ul className="list-disc list-inside text-slate-300/95 space-y-1.5 text-[12px]">
-                {sections?.timing?.points?.map((point: string, idx: number) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
-              <p className="text-slate-400 text-[12px]">
-                {sections?.timing?.note}
-              </p>
-            </motion.section>
+        {/* Adjustments — numbered steps */}
+        <div className="mb-14">
+          <div className="mb-4 flex items-center gap-2.5">
+            <Target className="h-5 w-5 text-brand-700" />
+            <h2 className="font-heading text-xl font-semibold text-text-main sm:text-2xl">{sections?.adjustments?.title}</h2>
           </div>
-
-          {/* Right column – checklist, prompts, risk note */}
-          <div className="lg:col-span-4 space-y-5 text-[12px]">
-            {/* Weekly review checklist */}
-            <motion.aside
-              className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 space-y-2"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: 0.1 }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <ListChecks className="w-3.5 h-3.5 text-cyan-300" />
-                <div className="text-xs font-semibold text-slate-50">
-                  {sidebar?.checklist?.title}
-                </div>
+          <p className="mb-5 max-w-3xl text-sm leading-relaxed text-text-secondary">{sections?.adjustments?.description}</p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {sections?.adjustments?.steps?.map((s: string, i: number) => (
+              <div key={i} className="flex items-start gap-3 rounded-xl border border-surface-200 bg-white p-4 shadow-sm">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-brand-50 font-heading text-sm font-bold text-brand-700">{i + 1}</span>
+                <p className="pt-0.5 text-sm leading-relaxed text-text-secondary">{s}</p>
               </div>
-              <p className="text-slate-300/95">
-                {sidebar?.checklist?.description}
-              </p>
-              <ul className="space-y-1.5 text-slate-300/95">
-                {sidebar?.checklist?.items?.map((item: string, idx: number) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </motion.aside>
-
-            {/* Reflection prompts */}
-            <motion.aside
-              className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 space-y-2"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: 0.14 }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <Info className="w-3.5 h-3.5 text-cyan-300" />
-                <div className="text-xs font-semibold text-slate-50">
-                  {sidebar?.prompts?.title}
-                </div>
-              </div>
-              <p className="text-slate-300/95">
-                {sidebar?.prompts?.description}
-              </p>
-              <ul className="list-disc list-inside text-slate-300/95 space-y-1">
-                {sidebar?.prompts?.items?.map((item: string, idx: number) => (
-                  <li key={idx}>{item}</li>
-                ))}
-              </ul>
-            </motion.aside>
-
-            {/* Risk / expectation note */}
-            <motion.aside
-              className="bg-slate-950/90 border border-amber-500/40 rounded-2xl p-4 space-y-2"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: 0.18 }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <AlertTriangle className="w-3.5 h-3.5 text-amber-300" />
-                <div className="text-xs font-semibold text-slate-50">
-                  {sidebar?.expectations?.title}
-                </div>
-              </div>
-              <p className="text-slate-300/95">
-                {sidebar?.expectations?.description}
-              </p>
-              <p className="text-slate-400">
-                {sidebar?.expectations?.note}
-              </p>
-            </motion.aside>
-
-            {/* Continue learning */}
-            <motion.aside
-              className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 space-y-2"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: 0.22 }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <HelpCircle className="w-3.5 h-3.5 text-cyan-300" />
-                <div className="text-xs font-semibold text-slate-50">
-                  {sidebar?.continueLearning?.title}
-                </div>
-              </div>
-              <p className="text-slate-300/95">
-                {sidebar?.continueLearning?.description}
-              </p>
-              <ul className="list-disc list-inside text-slate-300/95 space-y-1">
-                {sidebar?.continueLearning?.topics?.map((topic: string, idx: number) => (
-                  <li key={idx}>{topic}</li>
-                ))}
-              </ul>
-              <p className="text-slate-400">
-                {sidebar?.continueLearning?.note}
-              </p>
-            </motion.aside>
+            ))}
           </div>
-        </HomeSection>
-      </main>
+          <p className="mt-4 text-xs text-text-muted">{sections?.adjustments?.note}</p>
+        </div>
+
+        {/* Timing */}
+        <div className="mb-10 flex items-start gap-4 rounded-2xl border border-surface-200 bg-surface-0 p-6">
+          <Clock className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" />
+          <div>
+            <h3 className="mb-2 font-heading text-base font-semibold text-text-main">{sections?.timing?.title}</h3>
+            <p className="mb-3 text-sm text-text-secondary">{sections?.timing?.description}</p>
+            <ul className="space-y-1.5">{sections?.timing?.points?.map((p: string, i: number) => (
+              <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600" /><span>{p}</span>
+              </li>
+            ))}</ul>
+            <p className="mt-3 text-xs text-text-muted">{sections?.timing?.note}</p>
+          </div>
+        </div>
+
+        {/* Checklist Module */}
+        <div className="mb-10 rounded-2xl border border-surface-200 bg-surface-0 p-6 lg:p-8">
+          <div className="mb-5 flex items-center gap-2.5">
+            <ListChecks className="h-5 w-5 text-brand-700" />
+            <h3 className="font-heading text-base font-semibold text-text-main">{sidebar?.checklist?.title}</h3>
+          </div>
+          <p className="mb-4 text-sm text-text-secondary">{sidebar?.checklist?.description}</p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {sidebar?.checklist?.items?.map((it: string, i: number) => (
+              <div key={i} className="flex items-start gap-2.5 rounded-lg border border-surface-200 bg-white p-3 text-sm text-text-secondary">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" /><span>{it}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Prompts */}
+        <div className="mb-6 flex items-start gap-3 rounded-xl border border-surface-200 bg-surface-0 px-5 py-4">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
+          <div>
+            <p className="text-xs font-semibold text-text-main">{sidebar?.prompts?.title}</p>
+            <p className="mt-1 text-sm leading-relaxed text-text-secondary">{sidebar?.prompts?.description}</p>
+            <ul className="mt-2 space-y-1">{sidebar?.prompts?.items?.map((it: string, i: number) => (
+              <li key={i} className="text-sm text-text-secondary">• {it}</li>
+            ))}</ul>
+          </div>
+        </div>
+
+        {/* Expectations Warning */}
+        <div className="mb-10 rounded-2xl border border-gold-200 bg-gold-50 px-6 py-5">
+          <div className="flex items-start gap-3">
+            <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-gold-800">{sidebar?.expectations?.title}</p>
+              <p className="mt-2 text-sm leading-relaxed text-gold-800/80">{sidebar?.expectations?.description}</p>
+              <p className="mt-2 text-xs text-gold-700">{sidebar?.expectations?.note}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Cross-navigation */}
+        <div className="rounded-2xl border border-surface-200 bg-white p-6 shadow-card">
+          <div className="mb-3 flex items-center gap-2">
+            <HelpCircle className="h-4 w-4 text-brand-700" />
+            <h3 className="font-heading text-sm font-semibold text-text-main">{sidebar?.continueLearning?.title}</h3>
+          </div>
+          <p className="mb-4 text-sm text-text-secondary">{sidebar?.continueLearning?.description}</p>
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {sidebar?.continueLearning?.topics?.map((topic: string, i: number) => (
+              <div key={i} className="flex items-start gap-2 text-sm text-text-secondary">
+                <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600" /><span>{topic}</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-text-muted">{sidebar?.continueLearning?.note}</p>
+          <div className="mt-5 flex flex-wrap gap-3 border-t border-surface-200 pt-5">
+            <Link href="/learn/trade-journal" className="inline-flex items-center gap-2 rounded-xl border border-surface-200 px-4 py-2.5 text-sm font-medium text-text-main transition-colors hover:bg-surface-0">
+              <PenSquare className="h-4 w-4 text-brand-600" /> Trade Journal
+            </Link>
+            <Link href="/learn/risk-management" className="inline-flex items-center gap-2 rounded-xl border border-surface-200 px-4 py-2.5 text-sm font-medium text-text-main transition-colors hover:bg-surface-0">
+              <ShieldCheck className="h-4 w-4 text-brand-600" /> Risk Management
+            </Link>
+            <Link href="/courses" className="inline-flex items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-4 py-2.5 text-sm font-medium text-brand-700 transition-colors hover:bg-brand-100">
+              Explore Courses <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
-

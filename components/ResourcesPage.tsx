@@ -1,9 +1,6 @@
-// components/ResourcesPage.tsx - Resources page component
-
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
   ClipboardList,
@@ -16,8 +13,9 @@ import {
   Activity,
   BookOpen,
   Compass,
+  ArrowRight,
+  AlertTriangle,
 } from 'lucide-react'
-import { HomeSection } from './HomeSection'
 
 interface ResourceItem {
   type: 'checklist' | 'template' | 'worksheet'
@@ -34,279 +32,234 @@ export function ResourcesPage() {
   const t = useTranslations('resources')
   const tBreadcrumb = useTranslations('courses.breadcrumb')
 
-  // Get resources from translations
   const resources = (t.raw('resources') as any)?.items as ResourceItem[]
 
-  // Get resource type icon
   const getResourceIcon = (type: string) => {
     if (type === 'checklist') {
-      return <ClipboardList className="w-4 h-4 text-cyan-300" />
+      return <ClipboardList className="h-4 w-4 text-brand-600" />
     }
     if (type === 'template') {
-      return <Layers className="w-4 h-4 text-cyan-300" />
+      return <Layers className="h-4 w-4 text-brand-600" />
     }
     if (type === 'worksheet') {
-      return <Activity className="w-4 h-4 text-cyan-300" />
+      return <Activity className="h-4 w-4 text-brand-600" />
     }
     return null
   }
 
+  const getResourceHref = (title: string): string | null => {
+    const routeMap: Record<string, string> = {
+      'Risk Management Foundations': '/learn/risk-management',
+      'Daily Trade Journal Principles': '/learn/trade-journal',
+      'Weekly Review Playbook': '/learn/weekly-review',
+      'Pre-Session Preparation': '/learn/pre-session',
+      'Position Sizing Made Simple': '/learn/position-sizing',
+      'Strategy Snapshot Overview': '/learn/strategy-snapshot',
+    }
+    return routeMap[title] || null
+  }
+
+  const typeLabel = (type: string) => {
+    switch (type) {
+      case 'checklist':
+        return 'Checklist'
+      case 'template':
+        return 'Template'
+      case 'worksheet':
+        return 'Worksheet'
+      default:
+        return type
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-16">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
+    <div className="min-h-screen">
+      {/* Dark catalog hero */}
+      <section className="bg-surface-900 pb-10 pt-8">
+        <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div className="mb-4 flex items-center gap-1 text-xs text-surface-500">
+            <Link href="/" className="transition hover:text-surface-300">
+              {tBreadcrumb('home')}
+            </Link>
+            <span>/</span>
+            <span className="text-surface-400">{t('breadcrumb.resources')}</span>
+          </div>
 
-      <main className="pt-6">
-        {/* Hero */}
-        <HomeSection className="pb-10 space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-7 space-y-4">
-              <div className="text-[11px] text-slate-500 flex items-center gap-1">
-                <Link href="/" className="hover:text-slate-300 transition">
-                  {tBreadcrumb('home')}
-                </Link>
-                <span className="text-slate-600">/</span>
-                <span className="text-slate-300">{t('breadcrumb.resources')}</span>
+          <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-5">
+            <div className="space-y-5 lg:col-span-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
+                <FolderKanban className="h-6 w-6 text-brand-400" />
               </div>
-              <div className="space-y-3">
-                <h1 className="text-2xl sm:text-3xl font-semibold text-slate-50">{t('hero.title')}</h1>
-                <p className="text-sm sm:text-base text-slate-300/90 max-w-xl">{t('hero.subtitle')}</p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[11px] text-slate-300">
+              <h1 className="text-2xl font-semibold text-white sm:text-3xl">{t('hero.title')}</h1>
+              <p className="max-w-lg text-sm leading-relaxed text-surface-400">{t('hero.subtitle')}</p>
+              <div className="grid grid-cols-1 gap-3 text-xs text-surface-400 sm:grid-cols-3">
                 <div className="flex items-start gap-2">
-                  <ClipboardList className="w-4 h-4 text-cyan-300 mt-0.5" />
+                  <ClipboardList className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
                   <span>{t('hero.features.checklists')}</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Target className="w-4 h-4 text-cyan-300 mt-0.5" />
+                  <Target className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
                   <span>{t('hero.features.templates')}</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Brain className="w-4 h-4 text-cyan-300 mt-0.5" />
+                  <Brain className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
                   <span>{t('hero.features.behaviour')}</span>
                 </div>
               </div>
             </div>
 
-            {/* Hero side card */}
-            <div className="lg:col-span-5">
-              <motion.div
-                className="rounded-2xl bg-slate-950/90 border border-slate-800 p-4 flex flex-col gap-3"
-                whileHover={{ y: -4, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                    <FolderKanban className="w-4 h-4 text-cyan-300" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-slate-50">{t('hero.sideCard.title')}</div>
-                    <div className="text-[11px] text-slate-400">{t('hero.sideCard.subtitle')}</div>
-                  </div>
+            {/* Context panel */}
+            <div className="rounded-xl border border-surface-700 bg-surface-800/60 p-5 lg:col-span-2">
+              <div className="mb-3 flex items-center gap-2">
+                <Info className="h-4 w-4 text-brand-400" />
+                <div>
+                  <p className="text-xs font-semibold text-white">{t('hero.sideCard.title')}</p>
+                  <p className="text-xs text-surface-500">{t('hero.sideCard.subtitle')}</p>
                 </div>
-                <p className="text-[11px] text-slate-300/90">{t('hero.sideCard.paragraph1')}</p>
-                <p className="text-[11px] text-slate-300/90">{t('hero.sideCard.paragraph2')}</p>
-              </motion.div>
+              </div>
+              <p className="text-xs leading-relaxed text-surface-400">{t('hero.sideCard.paragraph1')}</p>
+              <p className="mt-2 text-xs leading-relaxed text-surface-400">{t('hero.sideCard.paragraph2')}</p>
             </div>
           </div>
-        </HomeSection>
+        </div>
+      </section>
 
-        {/* Resource list */}
-        <HomeSection className="pb-10 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <div>
-              <h2 className="text-lg sm:text-xl font-semibold text-slate-50 mb-1">{t('resources.title')}</h2>
-              <p className="text-sm text-slate-300/90 max-w-xl">{t('resources.subtitle')}</p>
-            </div>
-            <div className="text-[11px] text-slate-400 flex flex-col items-start sm:items-end gap-1">
-              <span className="inline-flex items-center gap-1">
-                <Info className="w-3 h-3 text-cyan-300" />
-                <span>{t('resources.disclaimer')}</span>
-              </span>
-            </div>
+      {/* Risk notice */}
+      <section className="border-b border-surface-200 bg-gold-50 py-4">
+        <div className="mx-auto flex max-w-page items-center gap-3 px-4 sm:px-6 lg:px-8">
+          <AlertTriangle className="h-4 w-4 shrink-0 text-gold-600" />
+          <p className="flex-1 text-xs text-text-secondary">
+            {t('resources.disclaimer')}
+          </p>
+        </div>
+      </section>
+
+      {/* Resource catalog — stacked cards */}
+      <section className="bg-surface-50 py-10">
+        <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div className="mb-6">
+            <h2 className="text-lg font-semibold text-text-main sm:text-xl">{t('resources.title')}</h2>
+            <p className="mt-1 max-w-xl text-sm sm:text-base text-text-secondary">{t('resources.subtitle')}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {resources.map((item) => (
-              <motion.div
-                key={item.title}
-                className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-2 text-sm"
-                whileHover={{ y: -3, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
+          <div className="space-y-4">
+            {resources.map((item) => {
+              const href = getResourceHref(item.title)
+              return (
+                <div
+                  key={item.title}
+                  className="rounded-xl border border-surface-200 bg-white p-5 shadow-card"
+                >
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-surface-200 bg-surface-50">
                       {getResourceIcon(item.type)}
                     </div>
-                    <div>
-                      <div className="text-xs font-semibold text-slate-50">{item.title}</div>
-                      {item.subtitle ? (
-                        <div className="text-[11px] text-slate-400">{item.subtitle}</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="mb-1 flex flex-wrap items-center gap-2">
+                        <h3 className="text-sm font-semibold text-text-main">{item.title}</h3>
+                        <span className="rounded-full border border-surface-200 bg-surface-50 px-2 py-0.5 text-[11px] font-medium text-text-muted">
+                          {typeLabel(item.type)}
+                        </span>
+                        {item.tag && (
+                          <span className="rounded-full border border-brand-200 bg-brand-50 px-2 py-0.5 text-[11px] font-medium text-brand-600">
+                            {item.tag}
+                          </span>
+                        )}
+                      </div>
+                      {item.subtitle && (
+                        <p className="mb-1 text-xs text-text-muted">{item.subtitle}</p>
+                      )}
+                      <p className="text-xs leading-relaxed text-text-secondary">{item.description}</p>
+                      <div className="mt-2 flex flex-wrap items-center gap-4 text-xs text-text-muted">
+                        <span>{item.format}</span>
+                        <span className="hidden h-3 w-px bg-surface-200 sm:block" />
+                        <span>{item.focus}</span>
+                      </div>
+                    </div>
+                    <div className="shrink-0 sm:self-center">
+                      {item.cta ? (
+                        href ? (
+                          <Link
+                            href={href}
+                            className="btn-primary inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-medium"
+                          >
+                            <span>{item.cta}</span>
+                            <ArrowRight className="h-3 w-3" />
+                          </Link>
+                        ) : (
+                          <button type="button" className="btn-primary inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-medium">
+                            <span>{item.cta}</span>
+                            <ArrowRight className="h-3 w-3" />
+                          </button>
+                        )
                       ) : (
-                        <div className="text-[11px] text-slate-400">{item.format}</div>
+                        <button type="button" className="btn-secondary inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-medium">
+                          <Download className="h-3.5 w-3.5" />
+                          <span>{t('resources.downloadPreview')}</span>
+                        </button>
                       )}
                     </div>
                   </div>
-                  {item.tag && (
-                    <div className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-800 text-[10px] text-slate-300">
-                      {item.tag}
-                    </div>
-                  )}
                 </div>
-                <div className="text-[11px] text-slate-300/90">{item.description}</div>
-                <div className="flex items-center justify-between gap-2 text-[11px] text-slate-400 mt-1">
-                  <span>{item.focus}</span>
-                  {item.cta ? (
-                    item.title === 'Risk Management Foundations' ? (
-                      <Link
-                        href="/learn/risk-management"
-                        className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200 transition font-medium"
-                      >
-                        <span>{item.cta}</span>
-                        <span>→</span>
-                      </Link>
-                    ) : item.title === 'Daily Trade Journal Principles' ? (
-                      <Link
-                        href="/learn/trade-journal"
-                        className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200 transition font-medium"
-                      >
-                        <span>{item.cta}</span>
-                        <span>→</span>
-                      </Link>
-                    ) : item.title === 'Weekly Review Playbook' ? (
-                      <Link
-                        href="/learn/weekly-review"
-                        className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200 transition font-medium"
-                      >
-                        <span>{item.cta}</span>
-                        <span>→</span>
-                      </Link>
-                    ) : item.title === 'Pre-Session Preparation' ? (
-                      <Link
-                        href="/learn/pre-session"
-                        className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200 transition font-medium"
-                      >
-                        <span>{item.cta}</span>
-                        <span>→</span>
-                      </Link>
-                    ) : item.title === 'Position Sizing Made Simple' ? (
-                      <Link
-                        href="/learn/position-sizing"
-                        className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200 transition font-medium"
-                      >
-                        <span>{item.cta}</span>
-                        <span>→</span>
-                      </Link>
-                    ) : item.title === 'Strategy Snapshot Overview' ? (
-                      <Link
-                        href="/learn/strategy-snapshot"
-                        className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200 transition font-medium"
-                      >
-                        <span>{item.cta}</span>
-                        <span>→</span>
-                      </Link>
-                    ) : (
-                      <button className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200 transition font-medium">
-                        <span>{item.cta}</span>
-                        <span>→</span>
-                      </button>
-                    )
-                  ) : (
-                    <button className="inline-flex items-center gap-1 text-cyan-300 hover:text-cyan-200 transition">
-                      <Download className="w-3 h-3" />
-                      <span>{t('resources.downloadPreview')}</span>
-                    </button>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+              )
+            })}
           </div>
-        </HomeSection>
+        </div>
+      </section>
 
-        {/* How to integrate resources */}
-        <HomeSection className="pb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
-            <motion.div
-              className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3"
-              whileHover={{ y: -3, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            >
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                  <BookOpen className="w-4 h-4 text-cyan-300" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-slate-50">{t('infoCards.useWithCourses.title')}</div>
-                  <div className="text-[11px] text-slate-400">{t('infoCards.useWithCourses.subtitle')}</div>
-                </div>
+      {/* Integration info cards */}
+      <section className="border-t border-surface-200 bg-white py-10">
+        <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+              <div className="mb-3 flex items-center gap-2">
+                <BookOpen className="h-4 w-4 text-brand-600" />
+                <h3 className="text-xs font-semibold text-text-main">{t('infoCards.useWithCourses.title')}</h3>
               </div>
-              <p className="text-[11px] text-slate-300/90">{t('infoCards.useWithCourses.description')}</p>
-            </motion.div>
+              <p className="mb-1 text-xs text-text-muted">{t('infoCards.useWithCourses.subtitle')}</p>
+              <p className="text-xs leading-relaxed text-text-secondary">{t('infoCards.useWithCourses.description')}</p>
+            </div>
 
-            <motion.div
-              className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3"
-              whileHover={{ y: -3, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            >
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                  <Compass className="w-4 h-4 text-cyan-300" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-slate-50">{t('infoCards.buildRoutines.title')}</div>
-                  <div className="text-[11px] text-slate-400">{t('infoCards.buildRoutines.subtitle')}</div>
-                </div>
+            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+              <div className="mb-3 flex items-center gap-2">
+                <Compass className="h-4 w-4 text-brand-600" />
+                <h3 className="text-xs font-semibold text-text-main">{t('infoCards.buildRoutines.title')}</h3>
               </div>
-              <p className="text-[11px] text-slate-300/90">{t('infoCards.buildRoutines.description')}</p>
-            </motion.div>
+              <p className="mb-1 text-xs text-text-muted">{t('infoCards.buildRoutines.subtitle')}</p>
+              <p className="text-xs leading-relaxed text-text-secondary">{t('infoCards.buildRoutines.description')}</p>
+            </div>
 
-            <motion.div
-              className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3"
-              whileHover={{ y: -3, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            >
-              <div className="flex items-center gap-2">
-                <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                  <Brain className="w-4 h-4 text-cyan-300" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-slate-50">{t('infoCards.focusBehaviour.title')}</div>
-                  <div className="text-[11px] text-slate-400">{t('infoCards.focusBehaviour.subtitle')}</div>
-                </div>
+            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+              <div className="mb-3 flex items-center gap-2">
+                <Brain className="h-4 w-4 text-brand-600" />
+                <h3 className="text-xs font-semibold text-text-main">{t('infoCards.focusBehaviour.title')}</h3>
               </div>
-              <p className="text-[11px] text-slate-300/90">{t('infoCards.focusBehaviour.description')}</p>
-            </motion.div>
+              <p className="mb-1 text-xs text-text-muted">{t('infoCards.focusBehaviour.subtitle')}</p>
+              <p className="text-xs leading-relaxed text-text-secondary">{t('infoCards.focusBehaviour.description')}</p>
+            </div>
           </div>
-        </HomeSection>
+        </div>
+      </section>
 
-        {/* Risk note / positioning */}
-        <HomeSection className="pb-12">
-          <div className="bg-slate-950/90 border border-slate-800 rounded-2xl px-5 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div className="space-y-1">
-              <h2 className="text-lg font-semibold text-slate-50">{t('cta.title')}</h2>
-              <p className="text-sm text-slate-300/90">{t('cta.subtitle')}</p>
+      {/* CTA */}
+      <section className="border-t border-surface-200 bg-surface-50 py-10">
+        <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-start justify-between gap-4 rounded-xl border border-surface-200 bg-white p-6 shadow-card md:flex-row md:items-center">
+            <div>
+              <h2 className="text-lg font-semibold text-text-main">{t('cta.title')}</h2>
+              <p className="mt-1 text-sm sm:text-base text-text-secondary">{t('cta.subtitle')}</p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/courses"
-                className="inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition"
-              >
+              <Link href="/courses" className="btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold">
                 {t('cta.browseCourses')}
               </Link>
-              <Link
-                href="/learn?tab=ai"
-                className="inline-flex items-center px-4 py-2 text-xs sm:text-sm font-semibold rounded-full border border-slate-700 text-slate-100 hover:border-slate-500 transition"
-              >
+              <Link href="/learn?tab=ai" className="btn-secondary rounded-lg px-5 py-2.5 text-sm">
                 {t('cta.generateAI')}
               </Link>
             </div>
           </div>
-        </HomeSection>
-      </main>
+        </div>
+      </section>
     </div>
   )
 }
-

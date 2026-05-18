@@ -1,29 +1,23 @@
-// components/DashboardPage.tsx - Dashboard page component
-
 'use client'
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
-  Wallet,
-  Sparkles,
-  BookOpen,
-  Cpu,
-  Clock,
-  CheckCircle2,
-  ArrowRight,
   AlertTriangle,
-  FileText,
+  ArrowRight,
+  BookOpen,
+  CheckCircle2,
+  Clock,
+  Cpu,
   CreditCard,
+  FileText,
   Settings,
-  BarChart3,
-  History,
+  Sparkles,
+  Wallet,
 } from 'lucide-react'
-import { HomeSection } from './HomeSection'
 import { DashboardNavigation } from './DashboardNavigation'
 import { calculatePriceForTokens, formatPrice, convertAmount } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
@@ -35,9 +29,9 @@ interface CourseItem {
   status: string
   market: string
   level?: string
-  slug?: string // Course slug for PDF download
-  purchaseLanguage?: string // Language used when purchasing (en | ar)
-  id?: string // Custom course ID
+  slug?: string
+  purchaseLanguage?: string
+  id?: string
   downloadUrl?: string | null
 }
 
@@ -47,8 +41,8 @@ interface Transaction {
   date: string
   amount: string
   meta: string
-  amountGbp?: number // Amount in GBP for currency conversion
-  tokens?: number // Token amount for display
+  amountGbp?: number
+  tokens?: number
 }
 
 export function DashboardPage() {
@@ -66,7 +60,6 @@ export function DashboardPage() {
     setCurrency(getUserCurrency())
   }, [])
 
-  // Load transactions from API
   useEffect(() => {
     async function fetchTransactions() {
       if (!session?.user?.id) return
@@ -76,22 +69,17 @@ export function DashboardPage() {
         const response = await fetch('/api/transactions?limit=10')
         if (response.ok) {
           const data = await response.json()
-          // Transform API response to Transaction format
           const formattedTransactions: Transaction[] = data.transactions.map((tx: any) => {
-            // Calculate price in selected currency
             let priceInCurrency = ''
             if (tx.amount && tx.amount > 0) {
-              // For top-ups: convert GBP amount to selected currency
               const priceAmount = convertAmount(tx.amount, 'GBP', currency)
               priceInCurrency = formatPrice(priceAmount, currency)
             } else if (tx.tokens && tx.tokens < 0) {
-              // For token deductions: calculate price from tokens
               const tokensAbs = Math.abs(tx.tokens)
               const priceAmount = calculatePriceForTokens(tokensAbs, currency)
               priceInCurrency = formatPrice(priceAmount, currency)
             }
 
-            // Format amount display: price + tokens
             const tokensDisplay =
               tx.tokens > 0
                 ? `+${tx.tokens.toLocaleString('en-US')} tokens`
@@ -125,15 +113,13 @@ export function DashboardPage() {
     }
   }, [session?.user?.id, status, currency])
 
-  // Load purchased courses and AI strategies from API
   useEffect(() => {
     async function fetchCourses() {
       if (!session?.user?.id) return
 
       try {
         setIsLoadingCourses(true)
-        
-        // Fetch purchased courses
+
         const coursesResponse = await fetch('/api/courses/purchased')
         let purchasedCourses: any[] = []
         if (coursesResponse.ok) {
@@ -141,7 +127,6 @@ export function DashboardPage() {
           purchasedCourses = coursesData.courses || []
         }
 
-        // Fetch AI strategies (with download URLs)
         const aiStrategiesResponse = await fetch('/api/ai-strategies')
         let aiStrategies: CourseItem[] = []
         if (aiStrategiesResponse.ok) {
@@ -156,7 +141,7 @@ export function DashboardPage() {
               pdfLinksCount: s.pdfLinks?.length || 0,
             })),
           })
-          
+
           aiStrategies = strategiesArray.map((strategy: any) => {
             const status =
               strategy.status === 'ready'
@@ -164,11 +149,10 @@ export function DashboardPage() {
                 : strategy.status === 'failed'
                 ? 'Failed'
                 : 'Processing'
-            
-            // Use pdfLinks URL if available, otherwise use fallback download endpoint for ready status
-            const downloadUrl = strategy.pdfLinks?.[0]?.url || 
+
+            const downloadUrl = strategy.pdfLinks?.[0]?.url ||
               (status === 'Completed' ? `/api/download/ai-strategy/${strategy.id}` : null)
-            
+
             return {
               type: 'ai' as const,
               label: 'AI Strategy',
@@ -179,7 +163,7 @@ export function DashboardPage() {
               id: strategy.id,
             }
           })
-          
+
           console.log('[Dashboard] Mapped AI strategies:', {
             count: aiStrategies.length,
             strategies: aiStrategies.map((s) => ({
@@ -196,7 +180,6 @@ export function DashboardPage() {
           })
         }
 
-        // Fetch custom courses
         const customCoursesResponse = await fetch('/api/custom-courses')
         let customCourses: CourseItem[] = []
         if (customCoursesResponse.ok) {
@@ -205,14 +188,13 @@ export function DashboardPage() {
             type: 'custom' as const,
             label: 'Custom Course',
             title: course.title,
-            status: course.status, // 'Processing' or 'Completed'
+            status: course.status,
             market: course.market,
             level: course.level,
             id: course.id,
           }))
         }
 
-        // Transform purchased courses to CourseItem format
         const courseItems: CourseItem[] = purchasedCourses.map((course: any) => ({
           type: 'course' as const,
           label: 'Course',
@@ -225,11 +207,7 @@ export function DashboardPage() {
           downloadUrl: course.downloadUrl || null,
         }))
 
-        // Combine all items (custom courses, purchased courses, AI strategies)
-        // Note: AI strategies are already sorted by created_at desc from API
         const allItems = [...customCourses, ...courseItems, ...aiStrategies]
-        // Sort by creation date if available (most recent first)
-        // For now, keep API order (custom courses first, then purchased, then AI strategies)
         setRecentItems(allItems)
       } catch (error) {
         console.error('Failed to load courses:', error)
@@ -243,23 +221,20 @@ export function DashboardPage() {
     }
   }, [session?.user?.id, status])
 
-  // Redirect if not authenticated
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/login?callbackUrl=/dashboard')
     }
   }, [status, router])
 
-  // Show loading state while checking auth
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-50 flex items-center justify-center">
-        <div className="text-slate-400">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center bg-surface-50">
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" />
       </div>
     )
   }
 
-  // Don't render if not authenticated (redirect will happen)
   if (status === 'unauthenticated' || !session?.user) {
     return null
   }
@@ -268,455 +243,403 @@ export function DashboardPage() {
   const balancePrice = calculatePriceForTokens(userBalance, currency)
   const formattedBalancePrice = formatPrice(balancePrice, currency)
 
-  // Custom course status (will be loaded from API later if needed)
-  const customCourseStatus = null // 'pending' | 'inProgress' | 'ready' | null
+  const customCourseStatus = null
   const customCourseTitle = ''
 
-  // Statistics (will be replaced with real data from API later)
   const tokensSpentLast30Days = 0
   const aiStrategiesGenerated = 0
   const coursesUnlocked = 0
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-16">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
+    <div className="min-h-screen bg-surface-50">
+      {/* Command header */}
+      <section className="bg-surface-900">
+        <div className="mx-auto max-w-page px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+          <nav className="mb-4 flex items-center gap-1.5 text-xs text-surface-500">
+            <Link href="/" className="transition-colors hover:text-surface-300">{t('breadcrumb.home')}</Link>
+            <span>/</span>
+            <span className="text-surface-300">{t('breadcrumb.dashboard')}</span>
+          </nav>
 
-      <main className="pt-6">
-        {/* Dashboard Navigation */}
-        <DashboardNavigation />
-
-        {/* Overview */}
-        <HomeSection className="pb-8 space-y-5">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
-            <div className="space-y-1">
-              <div className="text-[11px] text-slate-500 flex items-center gap-1">
-                <Link href="/" className="hover:text-slate-300 transition">
-                  {t('breadcrumb.home')}
-                </Link>
-                <span className="text-slate-600">/</span>
-                <span className="text-slate-300">{t('breadcrumb.dashboard')}</span>
-              </div>
-              <h1 className="text-xl sm:text-2xl font-semibold text-slate-50">{t('overview.title')}</h1>
-              <p className="text-sm text-slate-300/90 max-w-xl">{t('overview.subtitle')}</p>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <h1 className="font-heading text-2xl font-semibold text-white sm:text-3xl">{t('overview.title')}</h1>
+              <p className="mt-1.5 max-w-lg text-sm text-surface-400">{t('overview.subtitle')}</p>
             </div>
-            <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-400">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-900/80 border border-slate-800">
-                <BarChart3 className="w-3 h-3 text-cyan-300" />
-                <span>{t('overview.badges.learningOverview')}</span>
-              </span>
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-900/80 border border-slate-800">
-                <History className="w-3 h-3 text-cyan-300" />
-                <span>{t('overview.badges.recentActivity')}</span>
-              </span>
-            </div>
-          </div>
 
-          {/* KPI cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            {/* Balance */}
-            <motion.div
-              className="bg-slate-950/80 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-              whileHover={{ y: -4, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            >
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] text-slate-400">{t('kpi.balance.title')}</span>
-                <Wallet className="w-4 h-4 text-cyan-300" />
+            {/* Wallet card */}
+            <div className="rounded-xl border border-surface-700 bg-surface-800 p-5 sm:min-w-[320px]">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-surface-600 bg-surface-700">
+                    <Wallet className="h-5 w-5 text-gold-400" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-surface-400">{t('kpi.balance.title')}</p>
+                    <p className="font-heading text-xl font-bold text-white">
+                      {userBalance.toLocaleString('en-US')} <span className="text-sm font-normal text-surface-400">{tCommon('tokens')}</span>
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="text-lg font-semibold text-slate-50">
-                {userBalance.toLocaleString('en-US')} {tCommon('tokens')}
-              </div>
-              <div className="text-[11px] text-slate-400">
+              <p className="mt-2 text-xs text-surface-500">
                 {t('kpi.balance.subtitle', { price: formattedBalancePrice })}
-              </div>
-              <div className="mt-1 flex flex-wrap gap-2">
-                <Link
-                  href="/top-up"
-                  className="inline-flex items-center px-2.5 py-1 rounded-full bg-cyan-400 text-slate-950 text-[11px] font-semibold hover:bg-cyan-300 shadow-[0_10px_26px_rgba(8,145,178,0.55)] transition"
-                >
+              </p>
+              <div className="mt-4 flex gap-2">
+                <Link href="/top-up" className="btn-primary px-4 py-2 text-xs">
                   {t('kpi.balance.topUp')}
                 </Link>
-                <Link
-                  href="/pricing"
-                  className="inline-flex items-center px-2.5 py-1 rounded-full border border-slate-700 text-[11px] text-slate-100 hover:border-slate-500 transition"
-                >
+                <Link href="/pricing" className="inline-flex items-center rounded-lg border border-surface-600 bg-surface-700 px-4 py-2 text-xs font-medium text-surface-200 transition-colors hover:bg-surface-600">
                   {t('kpi.balance.viewPricing')}
                 </Link>
               </div>
-            </motion.div>
-
-            {/* Custom course status */}
-            <motion.div
-              className="bg-slate-950/80 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-              whileHover={{ y: -4, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            >
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] text-slate-400">{t('kpi.customCourse.title')}</span>
-                <Clock className="w-4 h-4 text-cyan-300" />
-              </div>
-              {customCourseStatus ? (
-                <>
-                  <div className="text-sm font-semibold text-slate-50">{customCourseTitle}</div>
-                  <div className="flex items-center gap-2 text-[11px] text-slate-300">
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-400/60 text-amber-200">
-                      <Clock className="w-3 h-3" />
-                      <span>
-                        {customCourseStatus === 'pending' && t('kpi.customCourse.status.pending')}
-                        {customCourseStatus === 'inProgress' && t('kpi.customCourse.status.inProgress')}
-                        {customCourseStatus === 'ready' && t('kpi.customCourse.status.ready')}
-                      </span>
-                    </span>
-                  </div>
-                  <div className="text-[11px] text-slate-400">{t('kpi.customCourse.explanation')}</div>
-                </>
-              ) : (
-                <div className="text-sm text-slate-300">{t('kpi.customCourse.noActive')}</div>
-              )}
-            </motion.div>
-
-            {/* Recent activity */}
-            <motion.div
-              className="bg-slate-950/80 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-              whileHover={{ y: -4, scale: 1.01 }}
-              transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-            >
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] text-slate-400">{t('kpi.recentActivity.title')}</span>
-                <Sparkles className="w-4 h-4 text-cyan-300" />
-              </div>
-              {recentItems.length > 0 ? (
-                <>
-                  <div className="text-sm font-semibold text-slate-50">
-                    {t('kpi.recentActivity.subtitle', { count: recentItems.length })}
-                  </div>
-                  <ul className="mt-1 space-y-1.5 text-[11px] text-slate-300/90">
-                    {recentItems.slice(0, 3).map((item, index) => (
-                      <li key={index}>
-                        {item.type === 'course' && t('kpi.recentActivity.completedCourse', { title: item.title })}
-                        {item.type === 'ai' && t('kpi.recentActivity.generatedAI', { title: item.title })}
-                        {item.type === 'custom' && t('kpi.recentActivity.requestedCustom', { market: item.market.toLowerCase() })}
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              ) : (
-                <div className="text-sm text-slate-300">{t('kpi.recentActivity.noActivity')}</div>
-              )}
-            </motion.div>
+            </div>
           </div>
-        </HomeSection>
+        </div>
+      </section>
 
-        {/* Main content grid */}
-        <HomeSection className="pb-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-            {/* Left: Library */}
-            <div className="lg:col-span-2 space-y-4">
-              {/* Library header */}
-              <div className="flex items-center justify-between gap-2">
-                <div>
-                  <div className="text-xs font-semibold text-slate-50">{t('library.title')}</div>
-                  <div className="text-[11px] text-slate-400">{t('library.subtitle')}</div>
+      {/* Navigation */}
+      <DashboardNavigation />
+
+      {/* Main content */}
+      <div className="mx-auto max-w-page px-4 py-8 sm:px-6 lg:px-8">
+        <div className="grid gap-8 lg:grid-cols-[1fr_340px]">
+          {/* Left column */}
+          <div className="space-y-8">
+            {/* Status strip */}
+            <div className="grid gap-4 sm:grid-cols-3">
+              {/* Custom course status */}
+              <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-medium text-text-muted">{t('kpi.customCourse.title')}</p>
+                  <Clock className="h-4 w-4 text-brand-600" />
                 </div>
-                <div className="flex flex-wrap gap-2 text-[11px]">
-                  <Link
-                    href="/courses"
-                    className="inline-flex items-center px-2.5 py-1 rounded-full border border-slate-700 text-slate-100 hover:border-slate-500 transition"
-                  >
-                    <BookOpen className="w-3 h-3 mr-1" />
-                    <span>{t('library.browseCourses')}</span>
+                {customCourseStatus ? (
+                  <div className="mt-3">
+                    <p className="text-sm font-semibold text-text-main">{customCourseTitle}</p>
+                    <span className={`mt-1.5 inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                      customCourseStatus === 'ready'
+                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                        : 'bg-gold-50 text-gold-700 border border-gold-200'
+                    }`}>
+                      <Clock className="h-2.5 w-2.5" />
+                      {customCourseStatus === 'pending' && t('kpi.customCourse.status.pending')}
+                      {customCourseStatus === 'inProgress' && t('kpi.customCourse.status.inProgress')}
+                      {customCourseStatus === 'ready' && t('kpi.customCourse.status.ready')}
+                    </span>
+                    <p className="mt-2 text-xs text-text-muted">{t('kpi.customCourse.explanation')}</p>
+                  </div>
+                ) : (
+                  <p className="mt-3 text-sm text-text-secondary">{t('kpi.customCourse.noActive')}</p>
+                )}
+              </div>
+
+              {/* Recent activity */}
+              <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-medium text-text-muted">{t('kpi.recentActivity.title')}</p>
+                  <Sparkles className="h-4 w-4 text-brand-600" />
+                </div>
+                {recentItems.length > 0 ? (
+                  <div className="mt-3">
+                    <p className="text-sm font-semibold text-text-main">
+                      {t('kpi.recentActivity.subtitle', { count: recentItems.length })}
+                    </p>
+                    <ul className="mt-2 space-y-1.5 text-xs text-text-secondary">
+                      {recentItems.slice(0, 3).map((item, index) => (
+                        <li key={index} className="truncate">
+                          {item.type === 'course' && t('kpi.recentActivity.completedCourse', { title: item.title })}
+                          {item.type === 'ai' && t('kpi.recentActivity.generatedAI', { title: item.title })}
+                          {item.type === 'custom' && t('kpi.recentActivity.requestedCustom', { market: item.market.toLowerCase() })}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : (
+                  <p className="mt-3 text-sm text-text-secondary">{t('kpi.recentActivity.noActivity')}</p>
+                )}
+              </div>
+
+              {/* Billing snapshot */}
+              <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs font-medium text-text-muted">{t('sidebar.billing.title')}</p>
+                  <CreditCard className="h-4 w-4 text-brand-600" />
+                </div>
+                <div className="mt-3 space-y-2 text-xs text-text-secondary">
+                  <div className="flex items-center justify-between">
+                    <span>{t('sidebar.billing.tokensSpent')}</span>
+                    <span className="font-semibold text-text-main">{tokensSpentLast30Days.toLocaleString('en-US')}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>{t('sidebar.billing.aiGenerated')}</span>
+                    <span className="font-semibold text-text-main">{aiStrategiesGenerated}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>{t('sidebar.billing.coursesUnlocked')}</span>
+                    <span className="font-semibold text-text-main">{coursesUnlocked}</span>
+                  </div>
+                </div>
+                <Link
+                  href="/dashboard/transactions"
+                  className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-brand-600 transition-colors hover:text-brand-700"
+                >
+                  {t('sidebar.billing.viewHistory')}
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Library */}
+            <section>
+              <div className="mb-4 flex items-center justify-between">
+                <div>
+                  <h2 className="font-heading text-base font-semibold text-text-main">{t('library.title')}</h2>
+                  <p className="mt-0.5 text-xs text-text-muted">{t('library.subtitle')}</p>
+                </div>
+                <div className="flex gap-2">
+                  <Link href="/courses" className="btn-secondary inline-flex items-center gap-1.5 px-3 py-1.5 text-xs">
+                    <BookOpen className="h-3.5 w-3.5" />
+                    {t('library.browseCourses')}
                   </Link>
-                  <Link
-                    href="/learn?tab=ai"
-                    className="inline-flex items-center px-2.5 py-1 rounded-full border border-slate-700 text-slate-100 hover:border-slate-500 transition"
-                  >
-                    <Cpu className="w-3 h-3 mr-1" />
-                    <span>{t('library.newAIStrategy')}</span>
+                  <Link href="/learn?tab=ai" className="btn-secondary inline-flex items-center gap-1.5 px-3 py-1.5 text-xs">
+                    <Cpu className="h-3.5 w-3.5" />
+                    {t('library.newAIStrategy')}
                   </Link>
                 </div>
               </div>
 
-              {/* Library list */}
-              {recentItems.length > 0 ? (
-                <div className="space-y-3">
+              {isLoadingCourses ? (
+                <div className="flex items-center justify-center rounded-xl border border-surface-300 bg-white p-12 shadow-card">
+                  <div className="h-5 w-5 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" />
+                </div>
+              ) : recentItems.length > 0 ? (
+                <div className="overflow-hidden rounded-xl border border-surface-300 bg-white shadow-card">
                   {recentItems.map((item, index) => (
-                    <motion.div
+                    <div
                       key={index}
-                      className="bg-slate-950/80 border border-slate-900 rounded-2xl p-3.5 flex flex-col sm:flex-row sm:items-center gap-3"
-                      whileHover={{ y: -3, scale: 1.01 }}
-                      transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+                      className={`flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between ${
+                        index > 0 ? 'border-t border-surface-200' : ''
+                      }`}
                     >
-                      <div className="flex items-start gap-3 flex-1">
-                        <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700 mt-0.5">
-                          {item.type === 'course' && <BookOpen className="w-4 h-4 text-cyan-300" />}
-                          {item.type === 'ai' && <Cpu className="w-4 h-4 text-cyan-300" />}
-                          {item.type === 'custom' && <FileText className="w-4 h-4 text-cyan-300" />}
+                      <div className="flex items-start gap-3 min-w-0">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-surface-200 bg-surface-50">
+                          {item.type === 'course' && <BookOpen className="h-4 w-4 text-brand-600" />}
+                          {item.type === 'ai' && <Cpu className="h-4 w-4 text-brand-600" />}
+                          {item.type === 'custom' && <FileText className="h-4 w-4 text-brand-600" />}
                         </div>
-                        <div className="space-y-1">
-                          <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
-                            <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-200">
+                        <div className="min-w-0 space-y-1">
+                          <div className="flex flex-wrap items-center gap-1.5">
+                            <span className="rounded border border-brand-200 bg-brand-50 px-1.5 py-0.5 text-[10px] font-semibold text-brand-700">
                               {item.label}
                             </span>
-                            <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-300">
+                            <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-medium text-text-muted">
                               {item.market}
                             </span>
                             {item.level && (
-                              <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-300">
+                              <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-medium text-text-muted">
                                 {item.level}
                               </span>
                             )}
-                            <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-300">
-                              PDF
-                            </span>
                           </div>
-                          <div className="text-xs font-semibold text-slate-50">{item.title}</div>
-                          <div className="flex flex-wrap items-center gap-2 text-[11px] text-slate-400">
-                            <span className="inline-flex items-center gap-1">
-                              {(item.status === 'Completed' || item.status === 'completed') && <CheckCircle2 className="w-3 h-3 text-emerald-300" />}
-                              {(item.status === 'Processing' || item.status === 'processing' || item.status === 'In progress') && <Clock className="w-3 h-3 text-amber-300" />}
-                              {item.status === 'Ready' && <Sparkles className="w-3 h-3 text-cyan-300" />}
-                              <span>
-                                {(item.status === 'Completed' || item.status === 'completed') && t('library.item.status.completed')}
-                                {(item.status === 'Processing' || item.status === 'processing' || item.status === 'In progress') && t('library.item.status.inprogress')}
-                                {item.status === 'Ready' && t('library.item.status.ready')}
+                          <p className="truncate text-sm font-medium text-text-main">{item.title}</p>
+                          <div className="flex items-center gap-2 text-xs text-text-muted">
+                            {(item.status === 'Completed' || item.status === 'completed') && (
+                              <span className="inline-flex items-center gap-1 text-emerald-600">
+                                <CheckCircle2 className="h-3 w-3" />
+                                {t('library.item.status.completed')}
                               </span>
-                            </span>
-                            <span className="text-slate-600">·</span>
+                            )}
+                            {(item.status === 'Processing' || item.status === 'processing' || item.status === 'In progress') && (
+                              <span className="inline-flex items-center gap-1 text-amber-600">
+                                <Clock className="h-3 w-3" />
+                                {t('library.item.status.inprogress')}
+                              </span>
+                            )}
+                            {item.status === 'Ready' && (
+                              <span className="inline-flex items-center gap-1 text-brand-600">
+                                <Sparkles className="h-3 w-3" />
+                                {t('library.item.status.ready')}
+                              </span>
+                            )}
+                            <span className="text-surface-300">·</span>
                             <span>{t('library.item.educationOnly')}</span>
                           </div>
                         </div>
                       </div>
-                      <div className="flex sm:flex-col items-end sm:items-end gap-2 text-[11px]">
-                        {/* AI Strategy: Completed with download */}
+                      <div className="shrink-0 sm:text-right">
                         {item.type === 'ai' && item.status === 'Completed' && item.downloadUrl ? (
                           <a
                             href={item.downloadUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition"
+                            className="btn-primary inline-flex items-center gap-1.5 px-4 py-2 text-xs"
                           >
-                            <span>{t('library.item.downloadPDF')}</span>
+                            {t('library.item.downloadPDF')}
                           </a>
-                        ) : /* AI Strategy: Processing */
-                        item.type === 'ai' && (item.status === 'Processing' || item.status === 'processing') ? (
-                          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-800 text-slate-400 font-semibold">
-                            <span>{t('library.item.status.inprogress')}</span>
+                        ) : item.type === 'ai' && (item.status === 'Processing' || item.status === 'processing') ? (
+                          <span className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 bg-surface-50 px-3 py-1.5 text-xs font-medium text-text-muted">
+                            {t('library.item.status.inprogress')}
                           </span>
-                        ) : /* Course: Completed with download */
-                        item.type === 'course' && item.downloadUrl ? (
+                        ) : item.type === 'course' && item.downloadUrl ? (
                           <a
                             href={item.downloadUrl}
                             download
-                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition"
+                            className="btn-primary inline-flex items-center gap-1.5 px-4 py-2 text-xs"
                           >
-                            <span>{t('library.item.downloadPDF')}</span>
+                            {t('library.item.downloadPDF')}
                           </a>
-                        ) : /* Custom Course: Completed */
-                        item.type === 'custom' && (item.status === 'Completed' || item.status === 'completed') ? (
+                        ) : item.type === 'custom' && (item.status === 'Completed' || item.status === 'completed') ? (
                           <Link
                             href="/dashboard/custom-courses"
-                            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100 text-slate-950 font-semibold hover:bg-slate-200 transition"
+                            className="btn-primary inline-flex items-center gap-1.5 px-4 py-2 text-xs"
                           >
-                            <span>{t('library.item.downloadPDF')}</span>
+                            {t('library.item.downloadPDF')}
                           </Link>
-                        ) : /* Custom Course: Processing */
-                        item.type === 'custom' && (item.status === 'Processing' || item.status === 'processing') ? (
-                          <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-800 text-slate-400 font-semibold">
-                            <span>{t('library.item.status.inprogress')}</span>
+                        ) : item.type === 'custom' && (item.status === 'Processing' || item.status === 'processing') ? (
+                          <span className="inline-flex items-center gap-1.5 rounded-lg border border-surface-200 bg-surface-50 px-3 py-1.5 text-xs font-medium text-text-muted">
+                            {t('library.item.status.inprogress')}
                           </span>
                         ) : null}
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               ) : (
-                <div className="bg-slate-950/80 border border-slate-900 rounded-2xl p-8 flex flex-col items-center justify-center text-center">
-                  <BookOpen className="w-12 h-12 text-slate-600 mb-3" />
-                  <h3 className="text-sm font-semibold text-slate-200 mb-1">{t('library.empty.title')}</h3>
-                  <p className="text-xs text-slate-400 mb-4">{t('library.empty.description')}</p>
-                  <div className="flex flex-wrap gap-2">
-                    <Link
-                      href="/courses"
-                      className="inline-flex items-center px-4 py-2 text-xs font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition"
-                    >
+                <div className="rounded-xl border border-surface-300 bg-white p-12 text-center shadow-card">
+                  <BookOpen className="mx-auto h-12 w-12 text-surface-300" />
+                  <h3 className="mt-4 font-heading text-base font-semibold text-text-main">{t('library.empty.title')}</h3>
+                  <p className="mt-1.5 text-sm text-text-muted">{t('library.empty.description')}</p>
+                  <div className="mt-6 flex flex-wrap justify-center gap-3">
+                    <Link href="/courses" className="btn-primary px-5 py-2.5 text-sm">
                       {t('library.empty.browseCourses')}
                     </Link>
-                    <Link
-                      href="/learn?tab=ai"
-                      className="inline-flex items-center px-4 py-2 text-xs font-semibold rounded-full border border-slate-700 text-slate-100 hover:border-slate-500 transition"
-                    >
+                    <Link href="/learn?tab=ai" className="btn-secondary px-5 py-2.5 text-sm">
                       {t('library.empty.generateAI')}
                     </Link>
                   </div>
                 </div>
               )}
-            </div>
+            </section>
 
-            {/* Right: Side column */}
-            <div className="space-y-4">
-              {/* Risk reminder */}
-              <motion.div
-                className="bg-slate-950/90 border border-amber-500/40 rounded-2xl p-4 flex flex-col gap-2"
-                whileHover={{ y: -3, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-              >
-                <div className="flex items-start gap-2">
-                  <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-amber-400/60">
-                    <AlertTriangle className="w-4 h-4 text-amber-300" />
-                  </div>
-                  <div className="space-y-1">
-                    <div className="text-xs font-semibold text-slate-50">{t('sidebar.riskReminder.title')}</div>
-                    <div className="text-[11px] text-slate-300/90">{t('sidebar.riskReminder.description')}</div>
-                    <Link
-                      href="/risk-and-disclaimer"
-                      className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200 transition"
-                    >
-                      <span>{t('sidebar.riskReminder.cta')}</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Billing snapshot */}
-              <motion.div
-                className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-                whileHover={{ y: -3, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-              >
-                <div className="flex items-center gap-2">
-                  <div className="h-8 w-8 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                    <CreditCard className="w-4 h-4 text-cyan-300" />
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-slate-50">{t('sidebar.billing.title')}</div>
-                    <div className="text-[11px] text-slate-400">{t('sidebar.billing.subtitle')}</div>
-                  </div>
-                </div>
-                <div className="mt-1 space-y-2 text-[11px] text-slate-300/90">
-                  <div className="flex items-center justify-between">
-                    <span>{t('sidebar.billing.tokensSpent')}</span>
-                    <span className="font-semibold text-slate-50">{tokensSpentLast30Days.toLocaleString('en-US')}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>{t('sidebar.billing.aiGenerated')}</span>
-                    <span className="font-semibold text-slate-50">{aiStrategiesGenerated}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>{t('sidebar.billing.coursesUnlocked')}</span>
-                    <span className="font-semibold text-slate-50">{coursesUnlocked}</span>
-                  </div>
+            {/* Transactions */}
+            <section>
+              <div className="mb-4 flex items-center justify-between">
+                <div>
+                  <h2 className="font-heading text-base font-semibold text-text-main">{t('transactions.title')}</h2>
+                  <p className="mt-0.5 text-xs text-text-muted">{t('transactions.subtitle')}</p>
                 </div>
                 <Link
                   href="/dashboard/transactions"
-                  className="mt-1 inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200 transition"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 transition-colors hover:text-brand-700"
                 >
-                  <span>{t('sidebar.billing.viewHistory')}</span>
-                  <ArrowRight className="w-3 h-3" />
+                  {t('transactions.viewAll')}
+                  <ArrowRight className="h-3 w-3" />
                 </Link>
-              </motion.div>
-
-              {/* Quick actions */}
-              <motion.div
-                className="bg-slate-950/85 border border-slate-900 rounded-2xl p-4 flex flex-col gap-3"
-                whileHover={{ y: -3, scale: 1.01 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-              >
-                <div className="text-xs font-semibold text-slate-50">{t('sidebar.quickActions.title')}</div>
-                <div className="space-y-2 text-[11px] text-slate-300/90">
-                  <Link
-                    href="/courses"
-                    className="w-full inline-flex items-center justify-between px-3 py-2 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-400/60 hover:bg-slate-900 transition"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <BookOpen className="w-3 h-3 text-cyan-300" />
-                      <span>{t('sidebar.quickActions.browseAll')}</span>
-                    </span>
-                    <ArrowRight className="w-3 h-3 text-slate-400" />
-                  </Link>
-                  <Link
-                    href="/learn?tab=custom"
-                    className="w-full inline-flex items-center justify-between px-3 py-2 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-400/60 hover:bg-slate-900 transition"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <FileText className="w-3 h-3 text-cyan-300" />
-                      <span>{t('sidebar.quickActions.requestCustom')}</span>
-                    </span>
-                    <ArrowRight className="w-3 h-3 text-slate-400" />
-                  </Link>
-                  <Link
-                    href="/learn?tab=ai"
-                    className="w-full inline-flex items-center justify-between px-3 py-2 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-400/60 hover:bg-slate-900 transition"
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <Cpu className="w-3 h-3 text-cyan-300" />
-                      <span>{t('sidebar.quickActions.generateAI')}</span>
-                    </span>
-                    <ArrowRight className="w-3 h-3 text-slate-400" />
-                  </Link>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </HomeSection>
-
-        {/* Transactions */}
-        <HomeSection className="pb-12 space-y-4">
-          <div className="flex items-center justify-between gap-2">
-            <div>
-              <div className="text-xs font-semibold text-slate-50">{t('transactions.title')}</div>
-              <div className="text-[11px] text-slate-400">{t('transactions.subtitle')}</div>
-            </div>
-            <Link
-              href="/dashboard/transactions"
-              className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200 transition"
-            >
-              <span>{t('transactions.viewAll')}</span>
-              <ArrowRight className="w-3 h-3" />
-            </Link>
-          </div>
-          {isLoadingTransactions ? (
-            <div className="bg-slate-950/80 border border-slate-900 rounded-2xl p-8 flex flex-col items-center justify-center text-center">
-              <div className="text-sm text-slate-400">Loading transactions...</div>
-            </div>
-          ) : transactions.length > 0 ? (
-            <div className="overflow-hidden rounded-2xl border border-slate-900 bg-slate-950/80">
-              <div className="grid grid-cols-12 px-3 py-2 border-b border-slate-900 text-[11px] text-slate-400">
-                <div className="col-span-3">{t('transactions.table.type')}</div>
-                <div className="col-span-5">{t('transactions.table.detail')}</div>
-                <div className="col-span-2">{t('transactions.table.date')}</div>
-                <div className="col-span-2 text-right">{t('transactions.table.amount')}</div>
               </div>
-              <div className="divide-y divide-slate-900">
-                {transactions.map((tx, index) => (
-                  <div key={index} className="grid grid-cols-12 px-3 py-2.5 text-[11px] text-slate-300/90">
-                    <div className="col-span-3 flex items-center gap-1.5">
-                      <span className="px-2 py-0.5 rounded-full bg-slate-900/80 border border-slate-800 text-slate-200">
-                        {tx.type}
-                      </span>
-                    </div>
-                    <div className="col-span-5 flex flex-col">
-                      <span className="text-slate-100">{tx.detail}</span>
-                      <span className="text-slate-500">{tx.meta}</span>
-                    </div>
-                    <div className="col-span-2 text-slate-400">{tx.date}</div>
-                    <div className="col-span-2 text-right font-semibold text-slate-100">{tx.amount}</div>
+
+              {isLoadingTransactions ? (
+                <div className="flex items-center justify-center rounded-xl border border-surface-300 bg-white p-12 shadow-card">
+                  <div className="h-5 w-5 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" />
+                </div>
+              ) : transactions.length > 0 ? (
+                <div className="overflow-hidden rounded-xl border border-surface-300 bg-white shadow-card">
+                  <div className="hidden border-b border-surface-200 bg-surface-50 px-5 py-3 sm:grid sm:grid-cols-12 sm:gap-4">
+                    <div className="col-span-3 text-xs font-bold uppercase tracking-wider text-text-muted">{t('transactions.table.type')}</div>
+                    <div className="col-span-4 text-xs font-bold uppercase tracking-wider text-text-muted">{t('transactions.table.detail')}</div>
+                    <div className="col-span-2 text-xs font-bold uppercase tracking-wider text-text-muted">{t('transactions.table.date')}</div>
+                    <div className="col-span-3 text-right text-xs font-bold uppercase tracking-wider text-text-muted">{t('transactions.table.amount')}</div>
                   </div>
+                  <div>
+                    {transactions.map((tx, index) => (
+                      <div key={index} className={`px-5 py-3.5 ${index > 0 ? 'border-t border-surface-200' : ''}`}>
+                        {/* Mobile layout */}
+                        <div className="flex items-center justify-between sm:hidden">
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-semibold text-text-muted">{tx.type}</span>
+                              <span className="text-xs text-text-muted">{tx.date}</span>
+                            </div>
+                            <p className="mt-1 truncate text-sm text-text-main">{tx.detail}</p>
+                            {tx.meta && <p className="text-xs text-text-muted">{tx.meta}</p>}
+                          </div>
+                          <span className="shrink-0 pl-3 text-right text-xs font-semibold text-text-main">{tx.amount}</span>
+                        </div>
+                        {/* Desktop layout */}
+                        <div className="hidden sm:grid sm:grid-cols-12 sm:items-center sm:gap-4">
+                          <div className="col-span-3">
+                            <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-semibold text-text-muted">{tx.type}</span>
+                          </div>
+                          <div className="col-span-4 min-w-0">
+                            <p className="truncate text-sm text-text-main">{tx.detail}</p>
+                            {tx.meta && <p className="truncate text-xs text-text-muted">{tx.meta}</p>}
+                          </div>
+                          <div className="col-span-2 text-xs text-text-muted">{tx.date}</div>
+                          <div className="col-span-3 text-right text-sm font-semibold text-text-main">{tx.amount}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div className="rounded-xl border border-surface-300 bg-white p-12 text-center shadow-card">
+                  <CreditCard className="mx-auto h-12 w-12 text-surface-300" />
+                  <h3 className="mt-4 font-heading text-base font-semibold text-text-main">{t('transactions.empty.title')}</h3>
+                  <p className="mt-1.5 text-sm text-text-muted">{t('transactions.empty.description')}</p>
+                </div>
+              )}
+            </section>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-5 lg:sticky lg:top-24">
+            {/* Quick actions */}
+            <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-text-muted">{t('sidebar.quickActions.title')}</h3>
+              <div className="mt-3 space-y-2">
+                {[
+                  { href: '/courses', icon: BookOpen, label: t('sidebar.quickActions.browseAll') },
+                  { href: '/learn?tab=custom', icon: FileText, label: t('sidebar.quickActions.requestCustom') },
+                  { href: '/learn?tab=ai', icon: Cpu, label: t('sidebar.quickActions.generateAI') },
+                  { href: '/dashboard/settings', icon: Settings, label: 'Account settings' },
+                ].map(({ href, icon: Icon, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="flex w-full items-center justify-between rounded-lg border border-surface-200 bg-surface-50 px-3.5 py-2.5 text-xs text-text-secondary transition-colors hover:border-brand-200 hover:bg-brand-50"
+                  >
+                    <span className="inline-flex items-center gap-2">
+                      <Icon className="h-3.5 w-3.5 text-brand-600" />
+                      {label}
+                    </span>
+                    <ArrowRight className="h-3 w-3 text-text-muted" />
+                  </Link>
                 ))}
               </div>
             </div>
-          ) : (
-            <div className="bg-slate-950/80 border border-slate-900 rounded-2xl p-8 flex flex-col items-center justify-center text-center">
-              <CreditCard className="w-12 h-12 text-slate-600 mb-3" />
-              <h3 className="text-sm font-semibold text-slate-200 mb-1">{t('transactions.empty.title')}</h3>
-              <p className="text-xs text-slate-400">{t('transactions.empty.description')}</p>
+
+            {/* Risk reminder */}
+            <div className="rounded-xl border border-gold-200 bg-gold-50 p-5">
+              <div className="flex items-start gap-3">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gold-200 bg-gold-100">
+                  <AlertTriangle className="h-4 w-4 text-gold-600" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-gold-800">{t('sidebar.riskReminder.title')}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-gold-800/80">{t('sidebar.riskReminder.description')}</p>
+                  <Link
+                    href="/risk-and-disclaimer"
+                    className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-gold-700 transition-colors hover:text-gold-800"
+                  >
+                    {t('sidebar.riskReminder.cta')}
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
             </div>
-          )}
-        </HomeSection>
-      </main>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
-

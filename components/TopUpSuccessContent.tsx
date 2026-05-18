@@ -1,4 +1,4 @@
-// components/TopUpSuccessContent.tsx - Top-up success content
+// components/TopUpSuccessContent.tsx - Payment status center
 
 'use client'
 
@@ -7,6 +7,16 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
 import { useCart } from '@/contexts/CartContext'
+import {
+  ArrowRight,
+  CheckCircle2,
+  Clock,
+  FileText,
+  Loader2,
+  ReceiptText,
+  ShoppingCart,
+  XCircle,
+} from 'lucide-react'
 
 type TopupStatus = 'INITIATED' | 'PENDING' | 'COMPLETED' | 'FAILED' | 'CANCELLED' | 'EXPIRED' | 'REFUNDED'
 
@@ -47,16 +57,18 @@ export default function TopUpSuccessContent() {
     [items]
   )
 
-  const statusTone = useMemo(() => {
+  const statusConfig = useMemo(() => {
     switch (status?.state) {
       case 'COMPLETED':
         return {
           title: 'Payment Successful!',
           description:
             status.message || 'Your payment has been confirmed and the tokens were added to your account.',
-          badgeClasses: 'bg-emerald-500/15 border-emerald-400/35 text-emerald-300 shadow-[0_0_0_1px_rgba(52,211,153,0.08)]',
-          iconPath: 'M5 13l4 4L19 7',
-          accentClasses: 'from-emerald-500/20 via-emerald-400/5 to-transparent',
+          icon: CheckCircle2,
+          iconBg: 'border-emerald-200 bg-emerald-50',
+          iconColor: 'text-emerald-600',
+          badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+          tone: 'success' as const,
         }
       case 'FAILED':
       case 'CANCELLED':
@@ -65,18 +77,22 @@ export default function TopUpSuccessContent() {
         return {
           title: 'Payment Not Completed',
           description: status?.message || 'The payment was not completed. You can try again whenever you are ready.',
-          badgeClasses: 'bg-rose-500/15 border-rose-400/35 text-rose-300 shadow-[0_0_0_1px_rgba(251,113,133,0.08)]',
-          iconPath: 'M6 18L18 6M6 6l12 12',
-          accentClasses: 'from-rose-500/20 via-rose-400/5 to-transparent',
+          icon: XCircle,
+          iconBg: 'border-rose-200 bg-rose-50',
+          iconColor: 'text-rose-600',
+          badgeBg: 'bg-rose-50 text-rose-700 border-rose-200',
+          tone: 'error' as const,
         }
       default:
         return {
           title: 'Payment Pending',
           description:
             status?.message || 'Your payment is still processing. This page will update automatically.',
-          badgeClasses: 'bg-amber-500/15 border-amber-400/35 text-amber-300 shadow-[0_0_0_1px_rgba(251,191,36,0.08)]',
-          iconPath: 'M12 8v4l3 3M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z',
-          accentClasses: 'from-amber-500/20 via-amber-400/5 to-transparent',
+          icon: Clock,
+          iconBg: 'border-gold-200 bg-gold-50',
+          iconColor: 'text-gold-600',
+          badgeBg: 'bg-gold-50 text-gold-700 border-gold-200',
+          tone: 'pending' as const,
         }
     }
   }, [status])
@@ -138,123 +154,157 @@ export default function TopUpSuccessContent() {
     }
   }, [clearCart, hasOnlyHostedTopupItems, referenceId, update])
 
+  const StatusIcon = statusConfig.icon
+
+  // ─── LOADING STATE ───
   if (isLoading) {
     return (
-      <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-950/75 p-8 text-center shadow-[0_30px_80px_rgba(2,6,23,0.85)] backdrop-blur-xl sm:p-10">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-cyan-400/30 bg-cyan-500/10 text-cyan-300">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-cyan-300/30 border-t-cyan-300" />
-        </div>
-        <h2 className="mt-6 text-2xl font-semibold tracking-tight text-slate-50">Checking payment status</h2>
-        <p className="mt-3 text-sm leading-6 text-slate-300 sm:text-base">
-          We’re confirming your transaction with the payment provider. This usually takes a few seconds.
-        </p>
-        {referenceId ? (
-          <div className="mt-6 inline-flex max-w-full items-center gap-2 rounded-full border border-slate-700/80 bg-slate-900/80 px-4 py-2 text-xs text-slate-300">
-            <span className="text-slate-400">Reference</span>
-            <span className="truncate font-mono text-slate-100">{referenceId}</span>
+      <div className="mx-auto w-full max-w-lg">
+        <div className="rounded-xl border border-surface-300 bg-white p-8 text-center shadow-card sm:p-10">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-surface-300 bg-surface-100">
+            <Loader2 className="h-6 w-6 animate-spin text-brand-700" />
           </div>
-        ) : null}
+          <h2 className="mt-5 font-heading text-xl font-semibold text-text-main">
+            Checking payment status
+          </h2>
+          <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-secondary">
+            Confirming your transaction with the payment provider. This usually takes a few seconds.
+          </p>
+          {referenceId && (
+            <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-surface-200 bg-surface-100 px-3 py-1.5 text-sm">
+              <span className="text-text-muted">Reference</span>
+              <span className="truncate font-mono text-text-main">{referenceId}</span>
+            </div>
+          )}
+        </div>
       </div>
     )
   }
 
+  // ─── STATUS RESULT ───
   return (
-    <div className="relative w-full max-w-xl overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-950/75 p-8 text-center shadow-[0_30px_80px_rgba(2,6,23,0.85)] backdrop-blur-xl sm:p-10">
-      <div className={`absolute inset-x-0 top-0 h-24 bg-gradient-to-b ${statusTone.accentClasses}`} />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/20 to-transparent" />
-
-      <div className={`relative mx-auto flex h-16 w-16 items-center justify-center rounded-full border ${statusTone.badgeClasses}`}>
-        <svg className="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={statusTone.iconPath} />
-        </svg>
-      </div>
-
-      <div className="relative mt-6 space-y-3">
-        <div className={`mx-auto inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] ${statusTone.badgeClasses}`}>
-          {status?.state || 'PENDING'}
-        </div>
-        <h2 className="text-3xl font-semibold tracking-tight text-slate-50">{statusTone.title}</h2>
-        <p className="mx-auto max-w-md text-sm leading-6 text-slate-300 sm:text-base">{statusTone.description}</p>
-      </div>
-
-      <div className="relative mt-8 rounded-2xl border border-slate-800 bg-slate-900/55 p-5 text-left shadow-inner shadow-black/10">
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <div>
-            <div className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Payment details</div>
-            <div className="mt-1 text-sm text-slate-300">Live payment status for your top-up session.</div>
+    <div className="mx-auto w-full max-w-lg space-y-5">
+      {/* Status card */}
+      <div className="rounded-xl border border-surface-300 bg-white shadow-card">
+        <div className="px-6 py-8 text-center sm:px-8 sm:py-10">
+          <div
+            className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border ${statusConfig.iconBg}`}
+          >
+            <StatusIcon className={`h-7 w-7 ${statusConfig.iconColor}`} />
           </div>
-        </div>
 
-        <div className="space-y-3 text-sm text-slate-300">
-          <div className="flex items-start justify-between gap-4">
-            <span className="text-slate-500">Reference</span>
-            <span className="max-w-[65%] break-all text-right font-mono text-xs text-slate-100">
-              {status?.referenceId || referenceId || '—'}
+          <div className="mt-5">
+            <span
+              className={`inline-flex items-center rounded-md border px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider ${statusConfig.badgeBg}`}
+            >
+              {status?.state || 'PENDING'}
             </span>
           </div>
 
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-slate-500">Status</span>
-            <span className="font-medium text-slate-100">{status?.state || 'PENDING'}</span>
-          </div>
+          <h2 className="mt-3 font-heading text-2xl font-semibold text-text-main">
+            {statusConfig.title}
+          </h2>
+          <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-secondary">
+            {statusConfig.description}
+          </p>
+        </div>
 
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-slate-500">Tokens</span>
-            <span className="font-medium text-slate-100">
-              {typeof status?.tokens === 'number' ? status.tokens.toLocaleString('en-US') : '—'}
-            </span>
-          </div>
+        {/* Payment details */}
+        <div className="border-t border-surface-200 px-6 py-5 sm:px-8">
+          <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
+            Payment details
+          </p>
 
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-slate-500">Charged</span>
-            <span className="font-medium text-slate-100">
-              {typeof status?.amount === 'number' && status?.currency
-                ? `${status.amount.toFixed(2)} ${status.currency}`
-                : '—'}
-            </span>
-          </div>
+          <dl className="space-y-2.5 text-sm">
+            <div className="flex items-center justify-between gap-4">
+              <dt className="text-text-secondary">Reference</dt>
+              <dd className="max-w-[60%] truncate text-right font-mono text-sm font-medium text-text-main">
+                {status?.referenceId || referenceId || '—'}
+              </dd>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <dt className="text-text-secondary">Status</dt>
+              <dd className="font-medium text-text-main">{status?.state || 'PENDING'}</dd>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <dt className="text-text-secondary">Tokens</dt>
+              <dd className="font-medium text-text-main">
+                {typeof status?.tokens === 'number' ? status.tokens.toLocaleString('en-US') : '—'}
+              </dd>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <dt className="text-text-secondary">Charged</dt>
+              <dd className="font-medium text-text-main">
+                {typeof status?.amount === 'number' && status?.currency
+                  ? `${status.amount.toFixed(2)} ${status.currency}`
+                  : '—'}
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
 
-      {status?.state && !terminalStates.has(status.state) ? (
-        <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-amber-400/20 bg-amber-500/10 px-3 py-1.5 text-xs text-amber-200">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-amber-300" />
+      {/* Polling indicator */}
+      {status?.state && !terminalStates.has(status.state) && (
+        <div className="flex items-center justify-center gap-2 rounded-lg border border-gold-200 bg-gold-50 px-4 py-3 text-sm font-medium text-gold-800">
+          <span className="h-2 w-2 animate-pulse rounded-full bg-gold-500" />
           Auto-refreshing until the provider confirms your payment
         </div>
-      ) : null}
+      )}
 
-      {error ? <p className="mt-5 text-sm text-rose-300">{error}</p> : null}
+      {/* Error message */}
+      {error && (
+        <div className="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+          {error}
+        </div>
+      )}
 
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-        {status?.state === 'COMPLETED' && hasCourseItemsInCart ? (
-          <Link
-            href="/checkout"
-            className="inline-flex items-center justify-center rounded-full border border-transparent bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition hover:bg-cyan-300"
-          >
-            Return to checkout
-          </Link>
-        ) : (
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center justify-center rounded-full border border-transparent bg-cyan-400 px-5 py-2.5 text-sm font-semibold text-slate-950 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition hover:bg-cyan-300"
-          >
-            View My Account
-          </Link>
-        )}
-        {status?.state === 'COMPLETED' && hasCourseItemsInCart ? (
-          <div className="text-center text-xs text-slate-400 sm:self-center">
-            Your balance has been updated. Return to checkout to finish the course purchase with tokens.
+      {/* Course continuation notice */}
+      {status?.state === 'COMPLETED' && hasCourseItemsInCart && (
+        <div className="flex items-start gap-3 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3">
+          <ShoppingCart className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" />
+          <div>
+            <p className="text-sm font-medium text-brand-800">
+              Your balance has been updated. Return to checkout to finish the course purchase with tokens.
+            </p>
           </div>
-        ) : null}
-        {status?.receiptAvailable && status?.topupId ? (
-          <Link
-            href="/dashboard/receipts"
-            className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900/70 px-5 py-2.5 text-sm font-semibold text-slate-100 transition hover:bg-slate-800"
-          >
-            View Receipt
-          </Link>
-        ) : null}
+        </div>
+      )}
+
+      {/* Action buttons */}
+      <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+        <div className="flex flex-col gap-2.5">
+          {status?.state === 'COMPLETED' && hasCourseItemsInCart ? (
+            <Link href="/checkout" className="btn-primary flex w-full items-center justify-center gap-2 text-center">
+              Return to checkout
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          ) : (
+            <Link href="/dashboard" className="btn-primary flex w-full items-center justify-center gap-2 text-center">
+              <FileText className="h-4 w-4" />
+              View my account
+            </Link>
+          )}
+
+          {status?.receiptAvailable && status?.topupId && (
+            <Link
+              href="/dashboard/receipts"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-surface-300 bg-white py-2.5 text-sm font-medium text-text-secondary transition-colors hover:border-surface-400 hover:text-text-main"
+            >
+              <ReceiptText className="h-4 w-4" />
+              View receipt
+            </Link>
+          )}
+
+          {(status?.state === 'FAILED' || status?.state === 'CANCELLED' || status?.state === 'EXPIRED') && (
+            <Link
+              href="/top-up"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-surface-300 bg-white py-2.5 text-sm font-medium text-text-secondary transition-colors hover:border-surface-400 hover:text-text-main"
+            >
+              Try again
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   )

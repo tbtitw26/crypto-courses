@@ -1,26 +1,26 @@
-// components/RegisterPage.tsx - Register page component
-
 'use client'
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
-  Mail,
-  Lock,
-  User,
   AlertCircle,
-  CheckCircle2,
-  Phone,
-  CalendarDays,
-  MapPin,
-  Globe,
   BadgeCheck,
+  BookOpen,
+  CalendarDays,
+  CheckCircle2,
+  Globe,
+  GraduationCap,
+  Lock,
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+  User,
+  Wallet,
 } from 'lucide-react'
-import { HomeSection } from './HomeSection'
 import { allowedCountries } from '@/lib/countries'
 
 export function RegisterPage() {
@@ -43,7 +43,6 @@ export function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
-  // Redirect if already authenticated
   useEffect(() => {
     if (status === 'authenticated' && session) {
       router.push('/dashboard')
@@ -132,7 +131,6 @@ export function RegisterPage() {
         }),
       })
 
-      // Safely parse JSON response
       let data: any = {}
       try {
         const text = await response.text()
@@ -141,7 +139,6 @@ export function RegisterPage() {
         }
       } catch (parseError) {
         console.error('Failed to parse response:', parseError)
-        // If JSON parsing fails, use empty object
         data = {}
       }
 
@@ -167,7 +164,6 @@ export function RegisterPage() {
         return
       }
 
-      // Registration successful, sign in automatically
       setSuccess(true)
       const result = await signIn('credentials', {
         email,
@@ -176,7 +172,6 @@ export function RegisterPage() {
       })
 
       if (result?.error) {
-        // If auto sign-in fails, redirect to login
         router.push('/login?registered=true')
       } else {
         router.push('/dashboard')
@@ -188,340 +183,375 @@ export function RegisterPage() {
     }
   }
 
-  // Show loading state while checking auth
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-50 flex items-center justify-center">
-        <div className="text-slate-400">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center bg-surface-50">
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" />
       </div>
     )
   }
 
-  // Don't render if already authenticated (redirect will happen)
   if (status === 'authenticated') {
     return null
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-6">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
+    <div className="min-h-screen lg:grid lg:grid-cols-[420px_1fr] xl:grid-cols-[480px_1fr]">
+      {/* Left — context panel */}
+      <div className="hidden lg:flex lg:flex-col lg:justify-between bg-surface-900 px-10 py-12">
+        <div>
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-surface-700 bg-surface-800">
+              <GraduationCap className="h-4.5 w-4.5 text-brand-400" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-white">Avenqor</p>
+              <p className="text-[11px] uppercase tracking-widest text-surface-500">Create Account</p>
+            </div>
+          </Link>
 
-      <main className="pt-6">
-        <HomeSection className="pb-6">
-          <div className="max-w-md mx-auto">
-            <div className="space-y-6">
-              {/* Header */}
-              <div className="text-center space-y-2">
-                <h1 className="text-2xl sm:text-3xl font-semibold text-slate-50">{t('title')}</h1>
-                <p className="text-sm text-slate-300/90">{t('subtitle')}</p>
+          <div className="mt-14 max-w-xs">
+            <h2 className="font-heading text-xl font-semibold text-white">
+              Start your trading education journey
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-surface-400">
+              Create your account to access courses, build custom strategies, and manage your learning wallet.
+            </p>
+          </div>
+
+          <ul className="mt-10 space-y-4">
+            {[
+              { icon: BookOpen, text: 'Instant access to curated course library' },
+              { icon: Wallet, text: 'Token wallet with GBP/EUR/USD/SR support' },
+              { icon: GraduationCap, text: 'Custom course & AI strategy generation' },
+              { icon: ShieldCheck, text: 'Secure, education-only platform' },
+            ].map(({ icon: Icon, text }, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-surface-700 bg-surface-800">
+                  <Icon className="h-3.5 w-3.5 text-brand-400" />
+                </div>
+                <span className="pt-1 text-sm text-surface-300">{text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p className="text-xs leading-relaxed text-surface-600">
+          Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+        </p>
+      </div>
+
+      {/* Right — form */}
+      <div className="bg-white px-6 py-10 sm:px-12 lg:overflow-y-auto lg:px-16 xl:px-20">
+        <div className="mx-auto max-w-[520px]">
+          {/* Mobile brand */}
+          <div className="mb-8 flex items-center gap-2.5 lg:hidden">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-surface-200 bg-surface-50">
+              <GraduationCap className="h-4 w-4 text-brand-600" />
+            </div>
+            <span className="text-sm font-semibold text-text-main">Avenqor</span>
+          </div>
+
+          <div className="mb-8">
+            <h1 className="font-heading text-2xl font-semibold text-text-main">{t('title')}</h1>
+            <p className="mt-2 text-sm text-text-secondary">{t('subtitle')}</p>
+          </div>
+
+          {error && (
+            <div className="mb-6 flex items-center gap-2.5 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              <span>{error}</span>
+            </div>
+          )}
+
+          {success && (
+            <div className="mb-6 flex items-center gap-2.5 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+              <CheckCircle2 className="h-4 w-4 shrink-0" />
+              <span>{t('success')}</span>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-8">
+            {/* Section 1: Identity */}
+            <fieldset>
+              <legend className="mb-4 flex items-center gap-2 border-b border-surface-200 pb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
+                <User className="h-3.5 w-3.5" />
+                Account Identity
+              </legend>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="firstName" className="mb-1.5 block text-sm font-medium text-text-main">
+                    {t('firstName')}
+                  </label>
+                  <input
+                    id="firstName"
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                    className="input-field w-full"
+                    placeholder="John"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="mb-1.5 block text-sm font-medium text-text-main">
+                    {t('lastName')} <span className="text-text-muted">({t('optional')})</span>
+                  </label>
+                  <input
+                    id="lastName"
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="input-field w-full"
+                    placeholder="Doe"
+                  />
+                </div>
               </div>
-
-              {/* Form */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="bg-slate-950/80 border border-slate-900 rounded-2xl p-6 sm:p-8 space-y-5"
-              >
-                {error && (
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-rose-500/10 border border-rose-500/40 text-rose-300 text-sm">
-                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                    <span>{error}</span>
+              <div className="mt-4">
+                <label htmlFor="dateOfBirth" className="mb-1.5 block text-sm font-medium text-text-main">
+                  {t('dateOfBirth')}
+                </label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                    <CalendarDays className="h-4 w-4 text-surface-400" />
                   </div>
-                )}
+                  <input
+                    id="dateOfBirth"
+                    type="date"
+                    value={dateOfBirth}
+                    onChange={(e) => setDateOfBirth(e.target.value)}
+                    required
+                    className="input-field w-full pl-11"
+                  />
+                </div>
+              </div>
+            </fieldset>
 
-                {success && (
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/40 text-emerald-300 text-sm">
-                    <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-                    <span>{t('success')}</span>
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* First Name */}
-                  <div>
-                    <label htmlFor="firstName" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('firstName')}
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <User className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="firstName"
-                        type="text"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                        placeholder="John"
-                      />
+            {/* Section 2: Contact */}
+            <fieldset>
+              <legend className="mb-4 flex items-center gap-2 border-b border-surface-200 pb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
+                <Mail className="h-3.5 w-3.5" />
+                Contact Details
+              </legend>
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-text-main">
+                    {t('email')}
+                  </label>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                      <Mail className="h-4 w-4 text-surface-400" />
                     </div>
+                    <input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="input-field w-full pl-11"
+                      placeholder="you@example.com"
+                    />
                   </div>
-
-                  {/* Last Name */}
-                  <div>
-                    <label htmlFor="lastName" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('lastName')} <span className="text-slate-500">({t('optional')})</span>
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <User className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="lastName"
-                        type="text"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                        placeholder="Doe"
-                      />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-text-main">
+                    {t('phone')}
+                  </label>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                      <Phone className="h-4 w-4 text-surface-400" />
                     </div>
+                    <input
+                      id="phone"
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      required
+                      className="input-field w-full pl-11"
+                      placeholder="+44 1234 567890"
+                    />
                   </div>
+                </div>
+              </div>
+            </fieldset>
 
-                  {/* Date of Birth */}
+            {/* Section 3: Address */}
+            <fieldset>
+              <legend className="mb-4 flex items-center gap-2 border-b border-surface-200 pb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
+                <MapPin className="h-3.5 w-3.5" />
+                Billing Address
+              </legend>
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="street" className="mb-1.5 block text-sm font-medium text-text-main">
+                    {t('street')}
+                  </label>
+                  <input
+                    id="street"
+                    type="text"
+                    value={street}
+                    onChange={(e) => setStreet(e.target.value)}
+                    required
+                    className="input-field w-full"
+                    placeholder="221B Baker Street"
+                  />
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="dateOfBirth" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('dateOfBirth')}
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <CalendarDays className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="dateOfBirth"
-                        type="date"
-                        value={dateOfBirth}
-                        onChange={(e) => setDateOfBirth(e.target.value)}
-                        required
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <label htmlFor="email" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('email')}
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Mail className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                        placeholder="you@example.com"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Phone */}
-                  <div>
-                    <label htmlFor="phone" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('phone')}
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Phone className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="phone"
-                        type="tel"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        required
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                        placeholder="+44 1234 567890"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Street */}
-                  <div>
-                    <label htmlFor="street" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('street')}
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <MapPin className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="street"
-                        type="text"
-                        value={street}
-                        onChange={(e) => setStreet(e.target.value)}
-                        required
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                        placeholder="221B Baker Street"
-                      />
-                    </div>
-                  </div>
-
-                  {/* City */}
-                  <div>
-                    <label htmlFor="city" className="block text-xs font-medium text-slate-300 mb-1.5">
+                    <label htmlFor="city" className="mb-1.5 block text-sm font-medium text-text-main">
                       {t('city')}
                     </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <MapPin className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="city"
-                        type="text"
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
-                        required
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                        placeholder="London"
-                      />
-                    </div>
+                    <input
+                      id="city"
+                      type="text"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      required
+                      className="input-field w-full"
+                      placeholder="London"
+                    />
                   </div>
-
-                  {/* Country */}
                   <div>
-                    <label htmlFor="country" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('country')}
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Globe className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <select
-                        id="country"
-                        value={country}
-                        onChange={(e) => setCountry(e.target.value)}
-                        required
-                        className="w-full appearance-none pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                      >
-                        <option value="" className="text-slate-500">
-                          {t('selectCountry')}
-                        </option>
-                        {allowedCountries.map((countryOption) => (
-                          <option key={countryOption.code} value={countryOption.code}>
-                            {countryOption.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Post code */}
-                  <div>
-                    <label htmlFor="postalCode" className="block text-xs font-medium text-slate-300 mb-1.5">
+                    <label htmlFor="postalCode" className="mb-1.5 block text-sm font-medium text-text-main">
                       {t('postalCode')}
                     </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <MapPin className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="postalCode"
-                        type="text"
-                        value={postalCode}
-                        onChange={(e) => setPostalCode(e.target.value)}
-                        required
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                        placeholder="NW1 6XE"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Password */}
-                  <div>
-                    <label htmlFor="password" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('password')}
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Lock className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="password"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                        minLength={8}
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                        placeholder="••••••••"
-                      />
-                    </div>
-                    <p className="mt-1 text-[11px] text-slate-400">At least 8 characters</p>
-                  </div>
-
-                  {/* Confirm Password */}
-                  <div>
-                    <label htmlFor="confirmPassword" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('confirmPassword')}
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Lock className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="confirmPassword"
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                        className="w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border border-slate-700 focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400"
-                        placeholder="••••••••"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Terms consent */}
-                  <label className="flex items-start gap-3 rounded-xl border border-slate-800 bg-slate-900/70 px-4 py-3 text-sm text-slate-300">
                     <input
-                      type="checkbox"
-                      checked={acceptTerms}
-                      onChange={(e) => setAcceptTerms(e.target.checked)}
-                      className="mt-0.5 h-4 w-4 rounded border-slate-600 bg-slate-950 text-cyan-400 focus:ring-cyan-400"
+                      id="postalCode"
+                      type="text"
+                      value={postalCode}
+                      onChange={(e) => setPostalCode(e.target.value)}
                       required
+                      className="input-field w-full"
+                      placeholder="NW1 6XE"
                     />
-                    <span className="flex-1 leading-6">
-                      <BadgeCheck className="mr-2 inline-block h-4 w-4 text-cyan-300" />
-                      {t.rich('termsConsent', {
-                        terms: (chunks) => (
-                          <Link href="/terms" className="text-cyan-300 hover:text-cyan-200 transition font-medium">
-                            {chunks}
-                          </Link>
-                        ),
-                      })}
-                    </span>
-                  </label>
-
-                  {/* Submit button */}
-                  <button
-                    type="submit"
-                    disabled={isLoading || success}
-                    className="w-full py-2.5 px-4 text-sm font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? 'Creating account...' : success ? t('success') : t('submit')}
-                  </button>
-                </form>
-
-                {/* Sign in link */}
-                <div className="text-center text-sm text-slate-400">
-                  <span>{t('haveAccount')} </span>
-                  <Link href="/login" className="text-cyan-300 hover:text-cyan-200 transition font-medium">
-                    {t('signIn')}
-                  </Link>
+                  </div>
                 </div>
-              </motion.div>
+                <div>
+                  <label htmlFor="country" className="mb-1.5 block text-sm font-medium text-text-main">
+                    {t('country')}
+                  </label>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                      <Globe className="h-4 w-4 text-surface-400" />
+                    </div>
+                    <select
+                      id="country"
+                      value={country}
+                      onChange={(e) => setCountry(e.target.value)}
+                      required
+                      className="input-field w-full appearance-none pl-11"
+                    >
+                      <option value="" className="text-text-muted">
+                        {t('selectCountry')}
+                      </option>
+                      {allowedCountries.map((countryOption) => (
+                        <option key={countryOption.code} value={countryOption.code}>
+                          {countryOption.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            {/* Section 4: Security */}
+            <fieldset>
+              <legend className="mb-4 flex items-center gap-2 border-b border-surface-200 pb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
+                <Lock className="h-3.5 w-3.5" />
+                Security
+              </legend>
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="password" className="mb-1.5 block text-sm font-medium text-text-main">
+                    {t('password')}
+                  </label>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                      <Lock className="h-4 w-4 text-surface-400" />
+                    </div>
+                    <input
+                      id="password"
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      minLength={8}
+                      className="input-field w-full pl-11"
+                      placeholder="••••••••"
+                    />
+                  </div>
+                  <p className="mt-1 text-xs text-text-muted">At least 8 characters</p>
+                </div>
+                <div>
+                  <label htmlFor="confirmPassword" className="mb-1.5 block text-sm font-medium text-text-main">
+                    {t('confirmPassword')}
+                  </label>
+                  <div className="relative">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                      <Lock className="h-4 w-4 text-surface-400" />
+                    </div>
+                    <input
+                      id="confirmPassword"
+                      type="password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      required
+                      className="input-field w-full pl-11"
+                      placeholder="••••••••"
+                    />
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            {/* Consent */}
+            <div className="rounded-lg border border-surface-200 bg-surface-50 p-4">
+              <label className="flex items-start gap-3 text-sm text-text-secondary cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={acceptTerms}
+                  onChange={(e) => setAcceptTerms(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-surface-300 bg-white accent-brand-600 focus:ring-brand-500"
+                  required
+                />
+                <span className="flex-1 leading-relaxed">
+                  <BadgeCheck className="mr-1.5 inline-block h-4 w-4 text-brand-600" />
+                  {t.rich('termsConsent', {
+                    terms: (chunks) => (
+                      <Link href="/terms" className="font-medium text-brand-600 transition-colors hover:text-brand-700">
+                        {chunks}
+                      </Link>
+                    ),
+                  })}
+                </span>
+              </label>
             </div>
+
+            <button
+              type="submit"
+              disabled={isLoading || success}
+              className="btn-primary w-full"
+            >
+              {isLoading ? 'Creating account...' : success ? t('success') : t('submit')}
+            </button>
+          </form>
+
+          <p className="mt-8 text-center text-sm text-text-secondary">
+            {t('haveAccount')}{' '}
+            <Link href="/login" className="font-medium text-brand-600 transition-colors hover:text-brand-700">
+              {t('signIn')}
+            </Link>
+          </p>
+
+          {/* Mobile trust strip */}
+          <div className="mt-8 border-t border-surface-200 pt-6 lg:hidden">
+            <p className="text-center text-xs leading-relaxed text-text-muted">
+              Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+            </p>
           </div>
-        </HomeSection>
-      </main>
+        </div>
+      </div>
     </div>
   )
 }
-

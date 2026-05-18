@@ -45,8 +45,15 @@ export async function POST(request: NextRequest) {
     const validationResult = customCourseSchema.safeParse(body)
 
     if (!validationResult.success) {
+      const fieldErrors = validationResult.error.errors.map((e) =>
+        e.path.length ? `${e.path.join('.')}: ${e.message}` : e.message
+      )
       return NextResponse.json(
-        { error: 'Invalid request data', details: validationResult.error.errors },
+        {
+          error: 'Invalid request data',
+          message: fieldErrors.join('; '),
+          details: validationResult.error.errors,
+        },
         { status: 400 }
       )
     }
@@ -182,56 +189,19 @@ export async function POST(request: NextRequest) {
       } as CustomCourseRequestedEvent,
     }))
 
+    let inngestQueued = false
     try {
-      // Send all events in batch
       await Promise.all(
         inngestEvents.map((event) => inngest.send(event))
       )
+      inngestQueued = true
     } catch (inngestError) {
-      // If Inngest send fails, mark all jobs as failed and refund tokens
-      console.error('[Custom Course API] Failed to send Inngest events:', {
+      console.warn('[Custom Course API] Inngest event send failed (non-fatal):', {
         courseRequestIds: courseRequests.map((r) => r.id),
         userId,
         error: inngestError instanceof Error ? inngestError.message : String(inngestError),
+        hint: 'If running locally, start the Inngest dev server: npx inngest-cli@latest dev -u http://localhost:3001/api/inngest',
       })
-
-      // Mark all jobs as failed
-      await Promise.all(
-        courseRequests.map((courseRequest) =>
-          withPrismaRetry(() =>
-            prisma.customCourseRequest.update({
-              where: { id: courseRequest.id },
-              data: {
-                status: 'failed',
-                status_stage: 'error',
-                status_error: `Failed to enqueue job: ${inngestError instanceof Error ? inngestError.message : String(inngestError)}`,
-              },
-            })
-          )
-        )
-      )
-
-      // Refund tokens
-      try {
-        await withPrismaRetry(() =>
-          prisma.user.update({
-            where: { id: userId },
-            data: {
-              balance: {
-                increment: tokensCost,
-              },
-            },
-          })
-        )
-      } catch (refundError) {
-        console.error('[Custom Course API] Failed to refund tokens after Inngest error:', refundError)
-        // Log but don't fail - admin can manually refund if needed
-      }
-
-      return NextResponse.json(
-        { error: 'Failed to enqueue jobs', message: 'Job creation failed. Tokens have been refunded.' },
-        { status: 500 }
-      )
     }
 
     // Step 4: Return response with jobs array
@@ -246,13 +216,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       ok: true,
-      jobs, // New format: array of jobs
+      jobs,
       ...(singleJob && {
-        id: singleJob.jobId, // Backward-compatible
-        jobId: singleJob.jobId, // Backward-compatible
+        id: singleJob.jobId,
+        jobId: singleJob.jobId,
       }),
       status: 'in_queue',
-      message: `Course generation queued for ${jobs.length} language(s). You can close this window.`,
+      message: inngestQueued
+        ? `Course generation queued for ${jobs.length} language(s). You can close this window.`
+        : `Course request created for ${jobs.length} language(s). Background processing could not be started — generation will begin when the job queue is available.`,
       estimatedReadyAt: estimatedReadyAt.toISOString(),
     })
   } catch (error: any) {

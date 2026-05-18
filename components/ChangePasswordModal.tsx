@@ -117,7 +117,7 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-surface-0/80 backdrop-blur-sm z-50"
           />
 
           {/* Modal */}
@@ -127,22 +127,22 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-slate-950 border border-slate-800 rounded-2xl p-6 w-full max-w-md shadow-2xl pointer-events-auto"
+              className="glass-panel-strong rounded-2xl p-6 w-full max-w-md shadow-2xl pointer-events-auto"
             >
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                    <Lock className="w-5 h-5 text-cyan-300" />
+                  <div className="h-10 w-10 rounded-full bg-surface-200 flex items-center justify-center border border-surface-400">
+                    <Lock className="w-5 h-5 text-brand-400" />
                   </div>
                   <div>
-                    <h2 className="text-lg font-semibold text-slate-50">{t('title')}</h2>
-                    <p className="text-xs text-slate-400">{t('subtitle')}</p>
+                    <h2 className="text-lg font-heading font-semibold text-text-main">{t('title')}</h2>
+                    <p className="text-sm text-text-muted">{t('subtitle')}</p>
                   </div>
                 </div>
                 <button
                   onClick={onClose}
-                  className="p-2 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-lg transition"
+                  className="p-2 text-text-muted hover:text-text-main hover:bg-surface-200/50 rounded-lg transition"
                   aria-label="Close"
                 >
                   <X className="w-5 h-5" />
@@ -153,7 +153,7 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* Current Password */}
                 <div className="space-y-2">
-                  <label htmlFor="currentPassword" className="text-xs font-medium text-slate-200">
+                  <label htmlFor="currentPassword" className="text-xs font-medium text-text-main">
                     {t('currentPassword.label')}
                   </label>
                   <div className="relative">
@@ -161,14 +161,14 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
                       {...register('currentPassword')}
                       type={showCurrentPassword ? 'text' : 'password'}
                       id="currentPassword"
-                      className="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400/50 transition"
+                      className="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-400 text-sm text-text-main placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 transition"
                       placeholder={t('currentPassword.placeholder')}
                       disabled={isSubmitting}
                     />
                     <button
                       type="button"
                       onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-main transition"
                     >
                       {showCurrentPassword ? (
                         <EyeOff className="w-4 h-4" />
@@ -187,7 +187,7 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
 
                 {/* New Password */}
                 <div className="space-y-2">
-                  <label htmlFor="newPassword" className="text-xs font-medium text-slate-200">
+                  <label htmlFor="newPassword" className="text-xs font-medium text-text-main">
                     {t('newPassword.label')}
                   </label>
                   <div className="relative">
@@ -195,14 +195,14 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
                       {...register('newPassword')}
                       type={showNewPassword ? 'text' : 'password'}
                       id="newPassword"
-                      className="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400/50 transition"
+                      className="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-400 text-sm text-text-main placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 transition"
                       placeholder={t('newPassword.placeholder')}
                       disabled={isSubmitting}
                     />
                     <button
                       type="button"
                       onClick={() => setShowNewPassword(!showNewPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-main transition"
                     >
                       {showNewPassword ? (
                         <EyeOff className="w-4 h-4" />
@@ -217,12 +217,12 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
                       <span>{errors.newPassword.message}</span>
                     </div>
                   )}
-                  <p className="text-xs text-slate-500">{t('newPassword.hint')}</p>
+                  <p className="text-sm text-text-muted">{t('newPassword.hint')}</p>
                 </div>
 
                 {/* Confirm Password */}
                 <div className="space-y-2">
-                  <label htmlFor="confirmPassword" className="text-xs font-medium text-slate-200">
+                  <label htmlFor="confirmPassword" className="text-xs font-medium text-text-main">
                     {t('confirmPassword.label')}
                   </label>
                   <div className="relative">
@@ -230,14 +230,14 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
                       {...register('confirmPassword')}
                       type={showConfirmPassword ? 'text' : 'password'}
                       id="confirmPassword"
-                      className="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-slate-50 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-400/50 transition"
+                      className="w-full px-4 py-2.5 rounded-xl bg-surface-50 border border-surface-400 text-sm text-text-main placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/50 transition"
                       placeholder={t('confirmPassword.placeholder')}
                       disabled={isSubmitting}
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 transition"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text-main transition"
                     >
                       {showConfirmPassword ? (
                         <EyeOff className="w-4 h-4" />
@@ -260,14 +260,14 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
                     type="button"
                     onClick={onClose}
                     disabled={isSubmitting}
-                    className="flex-1 px-4 py-2.5 rounded-xl border border-slate-700 text-sm font-medium text-slate-200 hover:border-slate-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-secondary flex-1 px-4 py-2.5 rounded-xl text-sm font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {t('cancel')}
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 px-4 py-2.5 rounded-xl bg-cyan-400 text-slate-950 text-sm font-semibold hover:bg-cyan-300 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="btn-primary flex-1 px-4 py-2.5 rounded-xl text-sm font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? t('submitting') : t('submit')}
                   </button>
@@ -280,4 +280,3 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
     </AnimatePresence>
   )
 }
-

@@ -1,11 +1,42 @@
-// components/Footer.tsx - Main footer component
-
 'use client'
 
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { Instagram, Linkedin } from 'lucide-react'
+import { Instagram, Linkedin, Mail, Phone } from 'lucide-react'
+import type { ReactNode } from 'react'
+
+const companyLinks = [
+  { href: '/about', key: 'about' },
+  { href: '/pricing', key: 'pricing' },
+  { href: '/faq', key: 'faq' },
+  { href: '/contact', key: 'contactUs' },
+] as const
+
+const learnLinks = [
+  { href: '/courses', key: 'courses' },
+  { href: '/learn?tab=custom', key: 'customCourses' },
+  { href: '/learn?tab=ai', key: 'aiStrategyBuilder' },
+  { href: '/glossary', key: 'glossary' },
+  { href: '/resources', key: 'resources' },
+] as const
+
+const toolLinks = [
+  { href: '/learn/risk-management', key: 'riskManagement' },
+  { href: '/learn/trade-journal', key: 'tradeJournal' },
+  { href: '/learn/weekly-review', key: 'weeklyReview' },
+  { href: '/learn/pre-session', key: 'preSession' },
+  { href: '/learn/position-sizing', key: 'positionSizing' },
+  { href: '/learn/strategy-snapshot', key: 'strategySnapshot' },
+] as const
+
+const legalLinks = [
+  { href: '/risk-and-disclaimer', key: 'riskDisclaimer' },
+  { href: '/terms', key: 'terms' },
+  { href: '/privacy', key: 'privacy' },
+  { href: '/cookies', key: 'cookies' },
+  { href: '/refund-policy', key: 'refundPolicy' },
+] as const
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -14,244 +45,136 @@ export default function Footer() {
   const tFooter = useTranslations('common.footer')
 
   return (
-    <footer className="relative z-10 bg-slate-950/95 border-t border-slate-900">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
-          {/* Column 1: Company Info */}
-          <div className="col-span-2 md:col-span-1">
-            <Link
-              href="/"
-              className="inline-flex items-center text-lg font-semibold tracking-wide text-slate-50 hover:text-cyan-300 transition"
-            >
-              {t('brand.name')}
+    <footer className="relative z-10 border-t border-surface-300 bg-white">
+      <div className="mx-auto max-w-page px-4 pt-12 sm:px-6 lg:px-8 lg:pt-16">
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_2fr] lg:gap-16">
+          <div className="max-w-sm">
+            <Link href="/" className="inline-flex items-center rounded-lg" aria-label={`${t('brand.name')} home`}>
+              <span className="relative block h-10 w-[140px]">
+                <Image
+                  src="/logo.png"
+                  alt={t('brand.name')}
+                  fill
+                  sizes="140px"
+                  className="object-contain object-left"
+                />
+              </span>
             </Link>
-            <p className="mt-2 text-xs text-slate-400">
-              {tFooter('educationOnlyLine')}
+            <p className="mt-4 text-sm leading-relaxed text-text-secondary">
+              {tFooter('educationOnlyLine')} Courses, token top-ups, custom PDFs, and AI strategy documents are provided for education and research workflows.
             </p>
-            <ul className="mt-4 space-y-1.5">
-              <li className="text-sm font-semibold text-slate-200">OVERSEAS SUPPORT LIMITED</li>
-              <li>
-                <span className="text-sm text-slate-400">{tFooter('companyNumber')}: 15969862</span>
-              </li>
-              <li>
-                <span className="text-sm text-slate-400">
-                  {tFooter('companyAddress')}
-                </span>
-              </li>
-            </ul>
+
+            <div className="mt-6 rounded-xl border border-gold-200 bg-gold-50/60 p-4">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-gold-600">Risk notice</p>
+              <p className="mt-1.5 text-[13px] leading-relaxed text-text-secondary">
+                Trading in high-risk markets can result in losses. Avenqor does not provide investment advice, trade signals, brokerage, or account management.
+              </p>
+            </div>
           </div>
 
-          {/* Column 2: Company */}
-          <div>
-            <h4 className="text-sm font-semibold text-slate-200 tracking-wider uppercase">
-              {tFooter('companyTitle')}
-            </h4>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <Link href="/contact" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('contactUs')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('about')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/pricing" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('pricing')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('faq')}
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+            <FooterColumn title={tFooter('companyTitle')}>
+              {companyLinks.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-sm text-text-secondary transition-colors hover:text-brand-800">
+                    {tNav(item.key)}
+                  </Link>
+                </li>
+              ))}
+            </FooterColumn>
 
-          {/* Column 3: Learn */}
-          <div>
-            <h4 className="text-sm font-semibold text-slate-200 tracking-wider uppercase">
-              {tFooter('learnTitle')}
-            </h4>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <Link href="/courses" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('courses')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/learn?tab=custom" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('customCourses')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/learn?tab=ai" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('aiStrategyBuilder')}
-                </Link>
-              </li>
-            </ul>
-          </div>
+            <FooterColumn title={tFooter('learnTitle')}>
+              {learnLinks.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-sm text-text-secondary transition-colors hover:text-brand-800">
+                    {tNav(item.key)}
+                  </Link>
+                </li>
+              ))}
+            </FooterColumn>
 
-          {/* Column 4: Useful Links */}
-          <div>
-            <h4 className="text-sm font-semibold text-slate-200 tracking-wider uppercase">
-              {tFooter('usefulLinksTitle')}
-            </h4>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <Link href="/glossary" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('glossary')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('resources')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/learn/risk-management" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('riskManagement')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/learn/trade-journal" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('tradeJournal')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/learn/weekly-review" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('weeklyReview')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/learn/pre-session" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('preSession')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/learn/position-sizing" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('positionSizing')}
-                </Link>
-              </li>
-              <li>
-                <Link href="/learn/strategy-snapshot" className="text-sm text-slate-400 hover:text-cyan-300 transition">
-                  {tNav('strategySnapshot')}
-                </Link>
-              </li>
-            </ul>
-          </div>
+            <FooterColumn title={tFooter('usefulLinksTitle')}>
+              {toolLinks.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-sm text-text-secondary transition-colors hover:text-brand-800">
+                    {tNav(item.key)}
+                  </Link>
+                </li>
+              ))}
+            </FooterColumn>
 
-          {/* Column 5: Legal */}
-          <div>
-            <h4 className="text-sm font-semibold text-slate-200 tracking-wider uppercase">{tFooter('legalTitle')}</h4>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <Link
-                  href="/risk-and-disclaimer"
-                  className="text-sm text-slate-400 hover:text-cyan-300 transition"
-                >
-                  {tFooter('links.riskDisclaimer')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/terms"
-                  className="text-sm text-slate-400 hover:text-cyan-300 transition"
-                >
-                  {tFooter('links.terms')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/privacy"
-                  className="text-sm text-slate-400 hover:text-cyan-300 transition"
-                >
-                  {tFooter('links.privacy')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cookies"
-                  className="text-sm text-slate-400 hover:text-cyan-300 transition"
-                >
-                  {tFooter('links.cookies')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/refund-policy"
-                  className="text-sm text-slate-400 hover:text-cyan-300 transition"
-                >
-                  {tFooter('links.refundPolicy')}
-                </Link>
-              </li>
-            </ul>
+            <FooterColumn title={tFooter('legalTitle')}>
+              {legalLinks.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-sm text-text-secondary transition-colors hover:text-brand-800">
+                    {tFooter(`links.${item.key}`)}
+                  </Link>
+                </li>
+              ))}
+            </FooterColumn>
           </div>
+        </div>
 
-          {/* Column 6: Get in Touch */}
+        <div className="mt-12 grid gap-6 border-t border-surface-200 pt-8 lg:grid-cols-3 lg:items-start">
           <div>
-            <h4 className="text-sm font-semibold text-slate-200 tracking-wider uppercase">
-              {tFooter('getInTouchTitle')}
-            </h4>
-            <p className="mt-4 text-sm text-slate-400">
-              {tFooter('haveQuestions')}
+            <p className="font-heading text-sm font-bold text-text-main">OVERSEAS SUPPORT LIMITED</p>
+            <p className="mt-1.5 text-sm leading-relaxed text-text-muted">
+              {tFooter('companyNumber')}: 15969862
+              <br />
+              {tFooter('companyAddress')}
             </p>
-            <a
-              href="mailto:info@avenqor.net"
-              className="text-sm font-semibold text-cyan-300 hover:text-cyan-200 hover:underline block mt-2"
-            >
-              info@avenqor.net
-            </a>
-            <a
-              href="tel:+447457424685"
-              className="text-sm font-semibold text-cyan-300 hover:text-cyan-200 hover:underline block mt-2"
-            >
-              +44 7457 424685
-            </a>
-            <div className="flex items-center gap-3 mt-4">
+          </div>
+
+          <div>
+            <p className="font-heading text-sm font-bold text-text-main">{tFooter('getInTouchTitle')}</p>
+            <div className="mt-2 grid gap-1.5">
+              <a href="mailto:info@avenqor.net" className="inline-flex items-center gap-2 text-sm font-medium text-brand-800 hover:text-brand-900">
+                <Mail className="h-4 w-4" />
+                info@avenqor.net
+              </a>
+              <a href="tel:+447457424685" className="inline-flex items-center gap-2 text-sm font-medium text-brand-800 hover:text-brand-900">
+                <Phone className="h-4 w-4" />
+                +44 7457 424685
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <p className="font-heading text-sm font-bold text-text-main">Social</p>
+            <div className="mt-2 flex items-center gap-2">
               <a
                 href="https://www.instagram.com/avenqorofficial"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-cyan-300 transition-colors"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-surface-300 text-text-secondary transition-colors hover:border-brand-600/40 hover:bg-brand-50 hover:text-brand-800"
                 aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="h-4 w-4" />
               </a>
               <a
                 href="https://www.linkedin.com/company/avenqor/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-slate-400 hover:text-cyan-300 transition-colors"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-surface-300 text-text-secondary transition-colors hover:border-brand-600/40 hover:bg-brand-50 hover:text-brand-800"
                 aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="h-4 w-4" />
               </a>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="mt-8 border-t border-slate-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-slate-400">
-            © {currentYear} OVERSEAS SUPPORT LIMITED. {tFooter('allRightsReserved')}.
+      <div className="mt-8 border-t border-surface-200 bg-surface-100/50">
+        <div className="mx-auto flex max-w-page flex-col gap-3 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+          <p className="text-[13px] text-text-muted">
+            &copy; {currentYear} OVERSEAS SUPPORT LIMITED. {tFooter('allRightsReserved')}.
           </p>
-          <div className="flex items-center gap-4">
-            <Image
-              src="/visa-logo.svg"
-              alt="Visa"
-              width={40}
-              height={25}
-              className="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity"
-            />
-            <Image
-              src="/mastercard-logo.svg"
-              alt="MasterCard"
-              width={40}
-              height={25}
-              className="h-6 w-auto opacity-80 hover:opacity-100 transition-opacity"
-            />
+          <div className="flex items-center gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/visa-logo.svg" alt="Visa" width={44} height={28} className="h-7 w-auto opacity-70" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/mastercard-logo.svg" alt="MasterCard" width={44} height={28} className="h-7 w-auto opacity-70" />
           </div>
         </div>
       </div>
@@ -259,3 +182,11 @@ export default function Footer() {
   )
 }
 
+function FooterColumn({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div>
+      <h2 className="text-xs font-bold uppercase tracking-wider text-text-main">{title}</h2>
+      <ul className="mt-3 grid gap-2">{children}</ul>
+    </div>
+  )
+}

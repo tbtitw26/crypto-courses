@@ -3,8 +3,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
-import { getAvailableCurrenciesList, getCurrencyConfigByCode } from '@/lib/currency-config'
+import { getAvailableCurrenciesList } from '@/lib/currency-config'
 import { getUserCurrency, setUserCurrency } from '@/lib/currency-client'
 
 export function CurrencySelector() {
@@ -40,34 +39,30 @@ export function CurrencySelector() {
     window.location.reload()
   }
 
-  const currencyConfig = getCurrencyConfigByCode(currentCurrency)
   const allCurrencies = getAvailableCurrenciesList()
 
   return (
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="currency-button inline-flex items-center px-2 py-1.5 border border-slate-700 rounded-full text-[11px] font-medium text-slate-200 hover:text-cyan-300 hover:border-slate-600 transition whitespace-nowrap bg-slate-900/80"
+        className="inline-flex items-center gap-1 rounded-lg border border-surface-300 bg-white px-2 py-1.5 text-xs font-semibold text-text-secondary transition-colors hover:border-surface-400 hover:text-text-main"
       >
         <span>{currentCurrency}</span>
-        <svg className="ml-1 h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          />
+        <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-40 bg-slate-900 rounded-md shadow-lg border border-slate-800 z-50">
+        <div className="absolute right-0 mt-1.5 w-40 rounded-xl border border-surface-300 bg-white p-1 shadow-card z-50">
           {Object.entries(allCurrencies).map(([code, currency]) => (
             <button
               key={code}
               onClick={() => handleCurrencyChange(code)}
-              className={`block w-full text-left px-4 py-2 text-sm text-slate-300 hover:bg-slate-800 hover:text-cyan-300 transition ${
-                code === currentCurrency ? 'bg-slate-800 font-semibold text-cyan-300' : ''
+              className={`flex w-full items-center rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+                code === currentCurrency
+                  ? 'bg-brand-50 font-semibold text-brand-800'
+                  : 'text-text-secondary hover:bg-surface-100 hover:text-text-main'
               }`}
             >
               <span>
@@ -97,20 +92,20 @@ export function CurrencySelectorMobile() {
   const allCurrencies = getAvailableCurrenciesList()
 
   return (
-    <div className="px-2 pt-2 pb-2 border-b border-slate-900">
-      <label className="block text-xs font-medium text-slate-400 mb-2">Currency</label>
-      <div className="flex gap-2">
+    <div>
+      <p className="px-2 text-xs font-bold uppercase tracking-wide text-text-muted mb-2">Currency</p>
+      <div className="flex gap-1.5">
         {Object.entries(allCurrencies).map(([code, currency]) => (
           <button
             key={code}
             onClick={() => handleCurrencyChange(code)}
-            className={`flex-1 flex items-center justify-center px-3 py-2 border rounded-full text-xs font-medium transition ${
+            className={`flex flex-1 items-center justify-center gap-1 rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
               code === currentCurrency
-                ? 'border-cyan-400 bg-slate-100 text-slate-950'
-                : 'border-slate-700 text-slate-300 hover:bg-slate-800 hover:border-slate-600'
+                ? 'bg-brand-700 text-white'
+                : 'border border-surface-300 bg-white text-text-secondary hover:bg-surface-100'
             }`}
           >
-            <span className="mr-1">{currency.flag}</span>
+            <span>{currency.flag}</span>
             <span>{code}</span>
           </button>
         ))}
@@ -118,4 +113,3 @@ export function CurrencySelectorMobile() {
     </div>
   )
 }
-

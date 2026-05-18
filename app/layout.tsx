@@ -1,12 +1,20 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { Providers } from './providers'
 import { LocaleProvider } from './locale-provider'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -57,11 +65,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} flex min-h-screen flex-col font-body antialiased`}>
         <LocaleProvider>
           <Providers>
             <Header />
-            <main>{children}</main>
+            <main className="flex-1 min-w-0">{children}</main>
             <Footer />
           </Providers>
         </LocaleProvider>
@@ -69,4 +77,3 @@ export default function RootLayout({
     </html>
   )
 }
-

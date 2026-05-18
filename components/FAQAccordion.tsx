@@ -53,16 +53,16 @@ export default function FAQAccordion({ searchQuery, selectedCategory }: FAQAccor
   if (filteredFAQs.length === 0) {
     return (
       <div className="text-center py-12">
-        <h3 className="text-2xl font-bold text-slate-50 mb-4">
+        <h3 className="text-2xl font-bold text-text-main mb-4">
           {t('noQuestionsMatch')}
         </h3>
-        <p className="text-slate-300">
+        <p className="text-text-secondary">
           {t('tryAdjusting')}{' '}
-          <a href="/#pricing" className="text-cyan-300 hover:text-cyan-200 hover:underline">
+          <a href="/#pricing" className="text-brand-400 hover:text-brand-400/80 hover:underline">
             {t('pricing')}
           </a>{' '}
           {t('and')}{' '}
-          <a href="/allergens" className="text-cyan-300 hover:text-cyan-200 hover:underline">
+          <a href="/allergens" className="text-brand-400 hover:text-brand-400/80 hover:underline">
             allergen
           </a>{' '}
           {t('guides')}
@@ -80,17 +80,17 @@ export default function FAQAccordion({ searchQuery, selectedCategory }: FAQAccor
         {displayedFAQs.map((faq) => (
           <div
             key={faq.id}
-            className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden shadow-lg"
+            className="glass-panel rounded-xl overflow-hidden"
           >
             <button
               onClick={() => toggleItem(faq.id)}
-              className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-slate-800 transition"
+              className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-surface-200/50 transition"
               aria-expanded={openItems.has(faq.id)}
             >
-              <span className="font-semibold text-slate-50">{faq.question}</span>
+              <span className="font-heading text-base font-semibold text-text-main">{faq.question}</span>
               <svg
-                className={`h-5 w-5 text-slate-400 transition-transform ${
-                  openItems.has(faq.id) ? 'transform rotate-180' : ''
+                className={`h-5 w-5 flex-shrink-0 ml-3 transition-transform duration-200 ${
+                  openItems.has(faq.id) ? 'rotate-180 text-brand-400' : 'text-text-muted'
                 }`}
                 fill="none"
                 stroke="currentColor"
@@ -105,7 +105,7 @@ export default function FAQAccordion({ searchQuery, selectedCategory }: FAQAccor
               </svg>
             </button>
             {openItems.has(faq.id) && (
-              <div className="px-6 py-4 border-t border-slate-800 text-slate-300">
+              <div className="px-6 py-5 border-t border-surface-300 text-text-secondary text-sm leading-relaxed">
                 <p>{faq.answer}</p>
               </div>
             )}
@@ -115,4 +115,3 @@ export default function FAQAccordion({ searchQuery, selectedCategory }: FAQAccor
     </div>
   )
 }
-

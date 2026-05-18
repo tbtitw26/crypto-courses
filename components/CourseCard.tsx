@@ -41,9 +41,9 @@ export function CourseCard({ course }: CourseCardProps) {
   const hasImage = imagePath !== null
 
   return (
-    <div className="flex flex-col bg-slate-900/60 border border-slate-800 rounded-2xl p-5 gap-4 hover:border-cyan-400/70 hover:-translate-y-1 transition-all duration-150 shadow-[0_18px_40px_rgba(0,0,0,0.55)]">
+    <div className="group flex flex-col rounded-2xl border border-surface-200 bg-white p-5 gap-4 shadow-sm hover:shadow-card-hover hover:-translate-y-1 transition-all duration-200">
       {hasImage && imagePath ? (
-        <div className="aspect-[16/9] rounded-xl overflow-hidden bg-slate-900 relative">
+        <div className="aspect-[16/9] rounded-xl overflow-hidden bg-surface-100 relative">
           <Image
             src={imagePath}
             alt={course.title}
@@ -53,44 +53,43 @@ export function CourseCard({ course }: CourseCardProps) {
           />
         </div>
       ) : (
-        <div className="aspect-[16/9] rounded-xl bg-gradient-to-br from-slate-700/40 via-slate-900 to-slate-950 flex items-center justify-center text-xs text-slate-300/70">
+        <div className="aspect-[16/9] rounded-xl bg-gradient-to-br from-brand-500/20 via-surface-200 to-surface-100 flex items-center justify-center text-xs text-text-muted">
           {t('courseCover')}
         </div>
       )}
-      <div className="flex items-center gap-2 text-xs font-medium text-slate-300">
-        <span className="px-2 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/70">
+      <div className="flex items-center gap-2 text-xs">
+        <span className="badge-neutral font-heading">
           {course.level}
         </span>
-        <span className="px-2 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/70">
+        <span className="badge-neutral font-heading">
           {course.market}
         </span>
-        <span className="px-2 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/70">
+        <span className="badge-neutral font-heading">
           PDF
         </span>
       </div>
       <div className="flex items-start gap-2">
-        <BookOpen className="w-5 h-5 text-cyan-400 mt-1 flex-shrink-0" />
+        <BookOpen className="w-5 h-5 text-brand-400 mt-1 flex-shrink-0" />
         <div>
-          <h3 className="text-sm font-semibold text-slate-50 mb-1">{course.title}</h3>
-          <p className="text-xs text-slate-300/80 leading-relaxed">{course.desc}</p>
+          <h3 className="font-heading text-base font-semibold text-text-main mb-1">{course.title}</h3>
+          <p className="text-sm text-text-secondary leading-relaxed">{course.desc}</p>
         </div>
       </div>
-      <div className="mt-auto flex items-center justify-between pt-3 border-t border-slate-800/80 text-sm">
+      <div className="mt-auto flex items-center justify-between pt-3 border-t border-surface-300">
         <div>
-          <div className="font-semibold text-slate-50">{price}</div>
-          <div className="text-[11px] text-slate-400">≈ {course.tokens.toLocaleString('en-US')} {t('tokens')}</div>
+          <div className="font-heading text-lg font-bold text-text-main">{price}</div>
+          <div className="text-xs text-text-muted">{'≈'} {course.tokens.toLocaleString('en-US')} {t('tokens')}</div>
         </div>
         <Link
           href={course.slug ? `/courses/${course.slug}` : '#'}
-          className="inline-flex items-center gap-1 text-xs font-medium text-cyan-300 hover:text-cyan-200"
+          className="inline-flex items-center gap-1 text-brand-400 hover:text-brand-300 font-medium text-sm"
         >
           <span>{t('viewDetails')}</span>
           <span className="inline-block translate-x-0 group-hover:translate-x-0.5 transition-transform">
-            →
+            &rarr;
           </span>
         </Link>
       </div>
     </div>
   )
 }
-

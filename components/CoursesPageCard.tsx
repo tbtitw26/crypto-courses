@@ -2,7 +2,8 @@
 
 'use client'
 
-import { BookOpen, Gauge } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { BookOpen, Gauge, Layers, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
@@ -12,9 +13,9 @@ import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useCart } from '@/contexts/CartContext'
 import { useToast } from '@/hooks/use-toast'
-import { useState, useEffect } from 'react'
 
 interface CoursesPageCardProps {
+  priority?: boolean
   course: {
     id: number
     slug: string
@@ -32,7 +33,7 @@ interface CoursesPageCardProps {
   }
 }
 
-export function CoursesPageCard({ course }: CoursesPageCardProps) {
+export function CoursesPageCard({ course, priority = false }: CoursesPageCardProps) {
   const [currency, setCurrency] = useState('GBP')
   const [locale, setLocale] = useState('en')
   const { addToCart } = useCart()
@@ -43,9 +44,8 @@ export function CoursesPageCard({ course }: CoursesPageCardProps) {
 
   useEffect(() => {
     setCurrency(getUserCurrency())
-    // Get locale from cookie
     const cookies = document.cookie.split(';')
-    const localeCookie = cookies.find((c) => c.trim().startsWith('user_locale='))
+    const localeCookie = cookies.find((cookie) => cookie.trim().startsWith('user_locale='))
     if (localeCookie) {
       const loc = localeCookie.split('=')[1]?.trim()
       if (loc === 'ar' || loc === 'en') {
@@ -71,108 +71,91 @@ export function CoursesPageCard({ course }: CoursesPageCardProps) {
     })
   }
 
-  // Calculate price from tokens: 1.00 GBP = 100 tokens
   const priceAmount = calculatePriceForTokens(course.tokens, currency)
   const price = formatPrice(priceAmount, currency)
   const tokensFormatted = course.tokens.toLocaleString('en-US')
-  
-  // Estimate modules count (can be enhanced with actual data later)
-  const estimatedModules = Math.ceil(course.tokens / 1000) || 7
-
-  // Use localized title and description if available
+  const estimatedModules = course.modules ?? (Math.ceil(course.tokens / 1000) || 7)
   const displayTitle = locale === 'ar' && course.title_ar ? course.title_ar : course.title
   const displayDescription =
     locale === 'ar' && course.description_ar ? course.description_ar : course.description
-
-  // Get course image path
   const imagePath = course.cover_image ?? getCourseImagePath(course.slug)
   const hasImage = imagePath !== null
 
   return (
     <motion.article
-      whileHover={{ y: -4, scale: 1.01 }}
+      whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-      className="flex flex-col bg-slate-950/80 border border-slate-900 rounded-2xl p-4 sm:p-5 gap-3 shadow-[0_18px_40px_rgba(15,23,42,0.75)]"
+      className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-surface-300 bg-white shadow-sm transition-shadow hover:shadow-card"
     >
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-slate-300">
-          <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700/80">
-            {course.level}
-          </span>
-          <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700/80">
-            {course.market}
-          </span>
-          <span className="px-2 py-0.5 rounded-full bg-slate-900/90 border border-slate-700/80">
-            {t('format')}
-          </span>
-        </div>
-        {course.duration && (
-          <span className="text-[11px] text-slate-500 flex items-center gap-1">
-            <Gauge className="w-3 h-3" />
-            {course.duration}
-          </span>
-        )}
-      </div>
-
-      <div className="flex items-start gap-3">
+      <Link href={`/courses/${course.slug}`} className="block">
         {hasImage ? (
-          <div className="relative h-24 w-24 sm:h-32 sm:w-32 rounded-xl overflow-hidden border border-slate-700 flex-shrink-0">
+          <div className="relative aspect-[16/9] overflow-hidden bg-surface-100">
             <Image
               src={imagePath}
               alt={displayTitle}
               fill
-              className="object-cover"
-              sizes="(max-width: 640px) 96px, 128px"
+              className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+              sizes="(max-width: 1280px) 100vw, 50vw"
               quality={95}
+              priority={priority}
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-950/50 via-transparent to-transparent" />
           </div>
         ) : (
-          <div className="h-24 w-24 sm:h-32 sm:w-32 rounded-xl bg-slate-900 flex items-center justify-center border border-slate-700 flex-shrink-0">
-            <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-cyan-300" />
+          <div className="flex aspect-[16/9] items-center justify-center bg-brand-50 text-brand-800">
+            <BookOpen className="h-9 w-9" />
           </div>
         )}
-        <div className="space-y-1">
-          <h2 className="text-sm sm:text-[15px] font-semibold text-slate-50">
+      </Link>
+
+      <div className="flex flex-1 flex-col p-5">
+        <div className="mb-4 flex flex-wrap items-center gap-2">
+          <span className="badge-neutral">{course.market}</span>
+          <span className="badge-neutral">{course.level}</span>
+          <span className="badge-brand">{t('format')}</span>
+        </div>
+
+        <Link href={`/courses/${course.slug}`} className="group/title">
+          <h2 className="font-heading text-xl font-semibold leading-snug text-text-main transition-colors group-hover/title:text-brand-900">
             {displayTitle}
           </h2>
-          <p className="text-xs text-slate-300/90 leading-relaxed">
-            {displayDescription}
-          </p>
+        </Link>
+        <p className="mt-3 line-clamp-4 text-sm leading-6 text-text-secondary">{displayDescription}</p>
+
+        <div className="mt-5 grid gap-2 border-y border-surface-300 py-4 text-sm text-text-secondary sm:grid-cols-2">
+          <span className="inline-flex items-center gap-2">
+            <Layers className="h-4 w-4 text-brand-800" />
+            {estimatedModules} {t('modules')}
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <Gauge className="h-4 w-4 text-brand-800" />
+            {course.duration || `${t('format')} ${t('download')}`}
+          </span>
         </div>
-      </div>
 
-      <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-400">
-        <span>
-          {estimatedModules} {t('modules')} · {t('format')} {t('download')}
-        </span>
-        <span className="h-1 w-1 rounded-full bg-slate-600" />
-        <span>{t('educationOnly')}</span>
-      </div>
-
-      <div className="mt-2 pt-3 border-t border-slate-900 flex items-center justify-between gap-3 text-sm">
-        <div>
-          <div className="font-semibold text-slate-50">{price}</div>
-          <div className="text-[11px] text-slate-400">
-            ≈ {tokensFormatted} {tCommon('tokens')} · {t('payWithTokens')}
+        <div className="mt-auto flex flex-col gap-4 pt-5 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="font-heading text-2xl font-semibold text-text-main">{price}</div>
+            <div className="mt-1 text-xs text-text-muted">
+              {'≈'} {tokensFormatted} {tCommon('tokens')} · {t('payWithTokens')}
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col items-end gap-1">
-          <Link
-            href={`/courses/${course.slug}`}
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-cyan-300 hover:text-cyan-200"
-          >
-            <span>{t('viewCourse')}</span>
-            <span>→</span>
-          </Link>
-          <button
-            onClick={handleAddToCart}
-            className="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-300 hover:text-slate-100 transition"
-          >
-            <span>{t('addToCart')}</span>
-          </button>
+
+          <div className="flex flex-col gap-2 sm:items-end">
+            <Link href={`/courses/${course.slug}`} className="btn-secondary !rounded-lg !px-4 !py-2 !text-xs">
+              {t('viewCourse')}
+            </Link>
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold text-text-secondary transition hover:bg-brand-50 hover:text-brand-900"
+            >
+              <ShoppingCart className="h-4 w-4" />
+              {t('addToCart')}
+            </button>
+          </div>
         </div>
       </div>
     </motion.article>
   )
 }
-

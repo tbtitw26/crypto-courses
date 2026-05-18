@@ -1,5 +1,3 @@
-// components/ForgotPasswordPage.tsx - Forgot password page component
-
 'use client'
 
 import { useState } from 'react'
@@ -7,10 +5,16 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslations } from 'next-intl'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { Mail, ArrowLeft, Info } from 'lucide-react'
-import { HomeSection } from './HomeSection'
+import {
+  AlertTriangle,
+  ArrowLeft,
+  CheckCircle2,
+  Info,
+  KeyRound,
+  Mail,
+  ShieldCheck,
+} from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 const forgotPasswordSchema = z.object({
@@ -72,106 +76,151 @@ export function ForgotPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-16">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
-
-      {/* Header */}
-      <header className="py-4">
-        <HomeSection className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center text-xs font-bold tracking-tight">
-              AV
+    <div className="min-h-screen lg:grid lg:grid-cols-2">
+      {/* Left — context panel */}
+      <div className="hidden lg:flex lg:flex-col lg:justify-between bg-surface-900 px-10 py-12 xl:px-16">
+        <div>
+          <Link href="/" className="inline-flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-surface-700 bg-surface-800">
+              <ShieldCheck className="h-4.5 w-4.5 text-brand-400" />
             </div>
-            <div className="flex flex-col">
-              <span className="font-semibold tracking-tight text-sm">Avenqor</span>
-              <span className="text-[11px] uppercase tracking-[0.16em] text-slate-400">
-                Account security
-              </span>
+            <div>
+              <p className="text-sm font-semibold text-white">Avenqor</p>
+              <p className="text-[11px] uppercase tracking-widest text-surface-500">Account Recovery</p>
+            </div>
+          </Link>
+
+          <div className="mt-16 max-w-sm">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
+              <KeyRound className="h-7 w-7 text-brand-400" />
+            </div>
+            <h2 className="font-heading text-2xl font-semibold text-white">
+              Secure account recovery
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-surface-400">
+              We take your account security seriously. If an account exists with the email you provide, we will send password reset instructions.
+            </p>
+          </div>
+
+          <div className="mt-12 space-y-4 rounded-xl border border-surface-700 bg-surface-800/50 p-5">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" />
+              <div>
+                <p className="text-xs font-semibold text-surface-200">Security notice</p>
+                <p className="mt-1 text-xs leading-relaxed text-surface-400">
+                  For your protection, we do not confirm whether an email address is registered. You will receive instructions only if a matching account exists.
+                </p>
+              </div>
             </div>
           </div>
+        </div>
+
+        <p className="text-xs leading-relaxed text-surface-600">
+          Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+        </p>
+      </div>
+
+      {/* Right — form */}
+      <div className="flex min-h-screen flex-col justify-center bg-white px-6 py-12 sm:px-12 lg:min-h-0 lg:px-16 xl:px-24">
+        <div className="mx-auto w-full max-w-[400px]">
+          {/* Mobile brand */}
+          <div className="mb-8 flex items-center justify-between lg:hidden">
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-surface-200 bg-surface-50">
+                <ShieldCheck className="h-4 w-4 text-brand-600" />
+              </div>
+              <span className="text-sm font-semibold text-text-main">Avenqor</span>
+            </div>
+            <Link
+              href="/login"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-brand-600 transition-colors hover:text-brand-700"
+            >
+              <ArrowLeft className="h-3 w-3" />
+              {t('backToSignIn')}
+            </Link>
+          </div>
+
+          {/* Desktop back link */}
           <Link
             href="/login"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-medium rounded-full border border-slate-700 text-slate-100 hover:border-slate-500 transition"
+            className="mb-8 hidden items-center gap-1.5 text-xs font-medium text-text-muted transition-colors hover:text-text-main lg:inline-flex"
           >
-            <ArrowLeft className="w-3 h-3" />
-            <span>{t('backToSignIn')}</span>
+            <ArrowLeft className="h-3 w-3" />
+            {t('backToSignIn')}
           </Link>
-        </HomeSection>
-      </header>
 
-      <main className="pt-4">
-        <HomeSection className="pb-10">
-          <div className="max-w-md mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="bg-slate-950/80 border border-slate-900 rounded-2xl p-6 sm:p-8 space-y-5"
-            >
-              <div className="text-center space-y-2">
-                <h1 className="text-2xl sm:text-3xl font-semibold text-slate-50">{t('title')}</h1>
-                <p className="text-sm text-slate-300/90">{t('subtitle')}</p>
-              </div>
-
-              {isSuccess ? (
-                <div className="rounded-xl bg-emerald-500/10 border border-emerald-500/40 px-4 py-3 text-sm text-emerald-300">
-                  {t('success')}
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                  <div>
-                    <label htmlFor="email" className="block text-xs font-medium text-slate-300 mb-1.5">
-                      {t('email')}
-                    </label>
-                    <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Mail className="w-4 h-4 text-slate-500" />
-                      </div>
-                      <input
-                        id="email"
-                        type="email"
-                        {...register('email')}
-                        className={`w-full pl-10 pr-3 py-2.5 text-sm text-slate-100 rounded-xl bg-slate-900 border ${
-                          errors.email ? 'border-rose-500' : 'border-slate-700'
-                        } focus:outline-none focus:ring-1 focus:ring-cyan-400 focus:border-cyan-400`}
-                        placeholder={t('emailPlaceholder')}
-                      />
-                    </div>
-                    {errors.email && (
-                      <p className="mt-1 text-xs text-rose-400">{errors.email.message}</p>
-                    )}
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-2.5 px-4 text-sm font-semibold rounded-full bg-cyan-400 text-slate-950 hover:bg-cyan-300 shadow-[0_14px_32px_rgba(8,145,178,0.65)] transition disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? 'Sending...' : t('submit')}
-                  </button>
-                </form>
-              )}
-
-              <div className="flex items-start gap-2 text-[11px] text-slate-400">
-                <Info className="w-3.5 h-3.5 text-cyan-300 mt-0.5 flex-shrink-0" />
-                <p>{t('note')}</p>
-              </div>
-
-              <div className="text-center">
-                <Link
-                  href="/login"
-                  className="text-xs text-cyan-300 hover:text-cyan-200 transition"
-                >
-                  {t('backToSignIn')}
-                </Link>
-              </div>
-            </motion.div>
+          <div className="mb-8">
+            <h1 className="font-heading text-2xl font-semibold text-text-main sm:text-3xl">
+              {t('title')}
+            </h1>
+            <p className="mt-2 text-sm text-text-secondary">{t('subtitle')}</p>
           </div>
-        </HomeSection>
-      </main>
+
+          {isSuccess ? (
+            <div className="space-y-6">
+              <div className="flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 p-4">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
+                <div>
+                  <p className="text-sm font-medium text-emerald-800">Instructions sent</p>
+                  <p className="mt-1 text-xs leading-relaxed text-emerald-700">{t('success')}</p>
+                </div>
+              </div>
+
+              <Link
+                href="/login"
+                className="btn-primary block w-full text-center"
+              >
+                {t('backToSignIn')}
+              </Link>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <div>
+                <label htmlFor="email" className="mb-1.5 block text-sm font-medium text-text-main">
+                  {t('email')}
+                </label>
+                <div className="relative">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                    <Mail className="h-4 w-4 text-surface-400" />
+                  </div>
+                  <input
+                    id="email"
+                    type="email"
+                    {...register('email')}
+                    className={`input-field w-full pl-11 ${
+                      errors.email ? 'border-rose-400 focus:ring-rose-400' : ''
+                    }`}
+                    placeholder={t('emailPlaceholder')}
+                  />
+                </div>
+                {errors.email && (
+                  <p className="mt-1.5 text-xs text-rose-600">{errors.email.message}</p>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-primary w-full"
+              >
+                {isSubmitting ? 'Sending...' : t('submit')}
+              </button>
+            </form>
+          )}
+
+          <div className="mt-8 flex items-start gap-2.5 rounded-lg border border-surface-200 bg-surface-50 px-4 py-3">
+            <Info className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
+            <p className="text-xs leading-relaxed text-text-muted">{t('note')}</p>
+          </div>
+
+          {/* Mobile trust strip */}
+          <div className="mt-8 border-t border-surface-200 pt-6 lg:hidden">
+            <p className="text-center text-xs leading-relaxed text-text-muted">
+              Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
-

@@ -2,10 +2,21 @@
 
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { motion, useInView } from 'framer-motion'
-import { SlidersHorizontal, Search, ShieldCheck, AlertTriangle, BookOpen } from 'lucide-react'
+import {
+  AlertTriangle,
+  ArrowRight,
+  BookOpen,
+  BookOpenCheck,
+  FileText,
+  Filter,
+  Loader2,
+  Search,
+  ShieldCheck,
+  SlidersHorizontal,
+} from 'lucide-react'
 import Link from 'next/link'
 import { CoursesPageCard } from './CoursesPageCard'
 
@@ -35,7 +46,7 @@ function Section({
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="mx-auto w-full max-w-page px-4 sm:px-6 lg:px-8">
       <motion.div
         ref={ref}
         className={className}
@@ -70,14 +81,12 @@ export function CoursesPage() {
           const courses = Array.isArray(payload) ? payload : payload?.data
           setCourses(Array.isArray(courses) ? courses : [])
         } else {
-          // Если API вернул ошибку, но это не критично - используем пустой массив
           const errorData = await response.json().catch(() => ({}))
           console.warn('API returned error, using empty array:', errorData)
           setCourses([])
         }
       } catch (error) {
         console.error('Error fetching courses:', error)
-        // В случае ошибки сети используем пустой массив
         setCourses([])
         setError('Unable to load courses. Please try again later.')
       } finally {
@@ -103,229 +112,298 @@ export function CoursesPage() {
     'Binary',
   ]
 
-  const filteredCourses = courses.filter((course) => {
-    if (activeLevel !== 'All levels' && course.level !== activeLevel) {
-      return false
-    }
-    if (activeMarket !== 'All markets' && course.market !== activeMarket) {
-      return false
-    }
-    if (!search.trim()) return true
-    const term = search.toLowerCase()
-    return (
-      course.title.toLowerCase().includes(term) ||
-      course.description.toLowerCase().includes(term)
-    )
-  })
+  const filteredCourses = useMemo(() => {
+    return courses.filter((course) => {
+      if (activeLevel !== 'All levels' && course.level !== activeLevel) return false
+      if (activeMarket !== 'All markets' && course.market !== activeMarket) return false
+      if (!search.trim()) return true
+      const term = search.toLowerCase()
+      return (
+        course.title.toLowerCase().includes(term) ||
+        (course.description || '').toLowerCase().includes(term)
+      )
+    })
+  }, [activeLevel, activeMarket, courses, search])
+
+  const hasActiveFilters = activeLevel !== 'All levels' || activeMarket !== 'All markets' || search.trim().length > 0
+  const resultLabel = isLoading
+    ? 'Loading catalog'
+    : `${filteredCourses.length} of ${courses.length} ${t('meta.coursesAvailable')}`
+
+  const resetFilters = () => {
+    setActiveLevel('All levels')
+    setActiveMarket('All markets')
+    setSearch('')
+  }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-16">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
+    <div className="min-h-screen overflow-x-hidden text-text-main">
+      <main>
+        <Section className="pb-10 pt-8 lg:pb-12 lg:pt-10">
+          <nav className="mb-6 flex items-center gap-1.5 text-xs text-text-muted">
+            <Link href="/" className="transition hover:text-text-secondary">
+              {tBreadcrumb('home')}
+            </Link>
+            <span className="text-text-muted/50">/</span>
+            <span className="text-text-secondary">{tBreadcrumb('courses')}</span>
+          </nav>
 
-      <main className="pt-6">
-        {/* Intro & controls */}
-        <Section className="pb-6 space-y-6">
-          <div className="flex flex-col gap-3">
-            <div className="text-[11px] text-slate-500 flex items-center gap-1">
-              <Link href="/" className="hover:text-slate-300 transition">
-                {tBreadcrumb('home')}
-              </Link>
-              <span className="text-slate-600">/</span>
-              <span className="text-slate-300">{tBreadcrumb('courses')}</span>
-            </div>
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-              <div className="space-y-2">
-                <h1 className="text-xl sm:text-2xl font-semibold text-slate-50">
+          <div className="grid gap-6 rounded-3xl border border-surface-300 bg-white p-5 shadow-card sm:p-7 lg:grid-cols-[1fr_360px] lg:p-8">
+            <div className="space-y-6">
+              <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-3 py-2 text-sm">
+                <BookOpenCheck className="h-4 w-4 text-brand-800" />
+                <span className="font-semibold text-brand-900">Course catalog</span>
+                <span className="h-1 w-1 rounded-full bg-gold-500" />
+                <span className="font-heading text-xs font-bold uppercase text-text-muted">
+                  {t('detail.header.educationOnly')}
+                </span>
+              </div>
+
+              <div className="max-w-3xl space-y-4">
+                <h1 className="font-heading text-4xl font-semibold leading-tight tracking-display text-text-main sm:text-5xl lg:text-6xl">
                   {t('title')}
                 </h1>
-                <p className="text-sm text-slate-300/90 max-w-xl">
-                  {t('subtitle')}
+                <p className="text-base leading-7 text-text-secondary sm:text-lg">
+                  {t('subtitle')} Browse structured PDFs by market and level, then use tokens or checkout to access your course.
                 </p>
               </div>
-              <div className="flex flex-col items-start md:items-end gap-2 text-[11px] text-slate-400">
-                <span>
-                  {courses.length} {t('meta.coursesAvailable')}
-                </span>
-                <span>{t('meta.paymentInfo')}</span>
-              </div>
-            </div>
-          </div>
 
-          {/* Filters row */}
-          <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between text-[11px]">
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-950/90 border border-slate-800 text-slate-200">
-                <SlidersHorizontal className="w-3 h-3" />
-                <span>{t('filters.label')}</span>
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {levelFilters.map((lvl) => {
-                  const label = lvl === 'All levels' 
-                    ? t('filters.level.all') 
-                    : t(`filters.level.${lvl.toLowerCase()}`)
-                  return (
-                    <button
-                      key={lvl}
-                      onClick={() => setActiveLevel(lvl)}
-                      className={`px-2.5 py-1 rounded-full border transition ${
-                        activeLevel === lvl
-                          ? 'bg-slate-100 text-slate-950 border-slate-100'
-                          : 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-slate-600'
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  )
-                })}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {marketFilters.map((mkt) => {
-                  const label = mkt === 'All markets'
-                    ? t('filters.market.all')
-                    : t(`filters.market.${mkt.toLowerCase()}`)
-                  return (
-                    <button
-                      key={mkt}
-                      onClick={() => setActiveMarket(mkt)}
-                      className={`px-2.5 py-1 rounded-full border transition ${
-                        activeMarket === mkt
-                          ? 'bg-slate-100 text-slate-950 border-slate-100'
-                          : 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-slate-600'
-                      }`}
-                    >
-                      {label}
-                    </button>
-                  )
-                })}
+              <div className="grid gap-3 sm:grid-cols-3">
+                <CatalogStat icon={BookOpen} label={resultLabel} text={t('meta.paymentInfo')} />
+                <CatalogStat icon={ShieldCheck} label={t('detail.header.educationOnly')} text={t('course.educationOnly')} />
+                <CatalogStat icon={FileText} label={t('detail.header.pdfFormat')} text="Downloadable course materials" />
               </div>
             </div>
 
-            <div className="flex flex-1 lg:flex-none items-center gap-2">
-              <div className="flex-1 flex items-center gap-2 rounded-full bg-slate-950/90 border border-slate-800 px-3 py-1.5">
-                <Search className="w-3.5 h-3.5 text-slate-500" />
-                <input
-                  type="text"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="flex-1 bg-transparent text-[11px] text-slate-100 placeholder:text-slate-500 outline-none"
-                  placeholder={t('search.placeholder')}
-                />
+            <div className="rounded-2xl border border-surface-300 bg-surface-950 p-5 text-white">
+              <p className="font-heading text-xs font-bold uppercase text-gold-300">Need a different path?</p>
+              <h2 className="mt-3 font-heading text-2xl font-semibold">Custom and AI options sit beside the catalog.</h2>
+              <p className="mt-3 text-sm leading-6 text-surface-300">
+                If the ready-made library does not match your current level, request a tailored PDF or generate an education-only strategy document.
+              </p>
+              <div className="mt-5 grid gap-2">
+                <Link href="/learn?tab=custom" className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3 text-sm font-semibold text-surface-950 transition hover:bg-brand-50">
+                  {t('sidebar.customCourse.cta')}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link href="/learn?tab=ai" className="inline-flex items-center justify-between rounded-xl border border-white/15 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                  {t('sidebar.aiStrategy.cta')}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             </div>
           </div>
         </Section>
 
-        {/* Courses grid & sidebar */}
-        <Section className="pb-10">
-          {isLoading ? (
-            <div className="text-center py-12 text-slate-400">
-              Loading courses...
-            </div>
-          ) : error ? (
-            <div className="rounded-2xl border border-amber-900/50 bg-amber-950/20 p-4 text-sm flex items-start gap-3">
-              <AlertTriangle className="w-4 h-4 text-amber-300 mt-0.5 flex-shrink-0" />
-              <div className="space-y-1">
-                <div className="text-slate-100 font-medium text-xs">
-                  {error}
+        <Section className="pb-12">
+          <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
+            <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+              <div className="rounded-2xl border border-surface-300 bg-white p-4 shadow-sm">
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <div className="inline-flex items-center gap-2 font-heading text-sm font-semibold text-text-main">
+                    <SlidersHorizontal className="h-4 w-4 text-brand-800" />
+                    {t('filters.label')}
+                  </div>
+                  {hasActiveFilters && (
+                    <button
+                      type="button"
+                      onClick={resetFilters}
+                      className="text-xs font-semibold text-brand-800 hover:text-brand-900"
+                    >
+                      Reset
+                    </button>
+                  )}
                 </div>
-                <div className="text-[11px] text-slate-300/90">
-                  The courses list is temporarily unavailable. Please refresh the page or try again later.
+
+                <div className="space-y-5">
+                  <FilterGroup title="Level">
+                    {levelFilters.map((lvl) => {
+                      const label = lvl === 'All levels'
+                        ? t('filters.level.all')
+                        : t(`filters.level.${lvl.toLowerCase()}`)
+                      return (
+                        <FilterButton
+                          key={lvl}
+                          isActive={activeLevel === lvl}
+                          onClick={() => setActiveLevel(lvl)}
+                        >
+                          {label}
+                        </FilterButton>
+                      )
+                    })}
+                  </FilterGroup>
+
+                  <FilterGroup title="Market">
+                    {marketFilters.map((mkt) => {
+                      const label = mkt === 'All markets'
+                        ? t('filters.market.all')
+                        : t(`filters.market.${mkt.toLowerCase()}`)
+                      return (
+                        <FilterButton
+                          key={mkt}
+                          isActive={activeMarket === mkt}
+                          onClick={() => setActiveMarket(mkt)}
+                        >
+                          {label}
+                        </FilterButton>
+                      )
+                    })}
+                  </FilterGroup>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-              <div className="lg:col-span-8 space-y-4">
-                {filteredCourses.length === 0 ? (
-                  <div className="rounded-2xl border border-slate-900 bg-slate-950/80 p-4 text-sm flex items-start gap-3">
-                    <AlertTriangle className="w-4 h-4 text-amber-300 mt-0.5" />
-                    <div className="space-y-1">
-                      <div className="text-slate-100 font-medium text-xs">
-                        {t('empty.title')}
-                      </div>
-                      <div className="text-[11px] text-slate-300/90">
-                        {t('empty.description')}
-                      </div>
+
+              <div className="rounded-2xl border border-gold-200 bg-gold-50 p-4">
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-gold-700" />
+                  <p className="text-sm leading-6 text-text-secondary">{t('sidebar.educationOnly.description')}</p>
+                </div>
+              </div>
+            </aside>
+
+            <div className="space-y-5">
+              <div className="rounded-2xl border border-surface-300 bg-white p-4 shadow-sm">
+                <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                  <div>
+                    <div className="inline-flex items-center gap-2 text-sm font-semibold text-text-main">
+                      <Filter className="h-4 w-4 text-brand-800" />
+                      {resultLabel}
                     </div>
+                    <p className="mt-1 text-sm text-text-muted">
+                      {hasActiveFilters
+                        ? `Filtered by ${activeLevel}, ${activeMarket}${search.trim() ? `, search: "${search.trim()}"` : ''}`
+                        : 'Showing the full course library.'}
+                    </p>
                   </div>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {filteredCourses.map((course) => (
-                      <CoursesPageCard key={course.id} course={course} />
-                    ))}
+
+                  <div className="relative w-full lg:w-80">
+                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
+                    <input
+                      type="text"
+                      value={search}
+                      onChange={(event) => setSearch(event.target.value)}
+                      className="input-field w-full rounded-xl pl-9"
+                      placeholder={t('search.placeholder')}
+                    />
                   </div>
-                )}
+                </div>
               </div>
 
-              {/* Right-side panel */}
-              <aside className="lg:col-span-4 space-y-4">
-                <motion.div
-                  className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-                  whileHover={{ y: -3 }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                >
-                  <div className="flex items-center justify-end gap-3 text-[11px] text-slate-400">
-                    <span className="inline-flex items-center gap-1">
-                      <ShieldCheck className="w-3 h-3 text-cyan-300" />
-                      {t('detail.header.educationOnly')}
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <BookOpen className="w-3 h-3 text-cyan-300" />
-                      {t('detail.header.pdfFormat')}
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-300/90 mt-1">
-                    {t('sidebar.educationOnly.description')}
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-                  whileHover={{ y: -3 }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                >
-                  <h2 className="text-xs font-semibold text-slate-50 mb-1">
-                    {t('sidebar.customCourse.title')}
-                  </h2>
-                  <p className="text-[11px] text-slate-300/90 mb-2">
-                    {t('sidebar.customCourse.description')}
-                  </p>
-                  <Link
-                    href="/learn?tab=custom"
-                    className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200"
-                  >
-                    <span>{t('sidebar.customCourse.cta')}</span>
-                    <span>→</span>
-                  </Link>
-                </motion.div>
-
-                <motion.div
-                  className="bg-slate-950/90 border border-slate-900 rounded-2xl p-4 flex flex-col gap-2"
-                  whileHover={{ y: -3 }}
-                  transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                >
-                  <h2 className="text-xs font-semibold text-slate-50 mb-1">
-                    {t('sidebar.aiStrategy.title')}
-                  </h2>
-                  <p className="text-[11px] text-slate-300/90 mb-2">
-                    {t('sidebar.aiStrategy.description')}
-                  </p>
-                  <Link
-                    href="/learn?tab=ai"
-                    className="inline-flex items-center gap-1 text-[11px] font-medium text-cyan-300 hover:text-cyan-200"
-                  >
-                    <span>{t('sidebar.aiStrategy.cta')}</span>
-                    <span>→</span>
-                  </Link>
-                </motion.div>
-              </aside>
+              {isLoading ? (
+                <LoadingCatalog />
+              ) : error ? (
+                <ErrorCatalog message={error} />
+              ) : filteredCourses.length === 0 ? (
+                <EmptyCatalog onReset={resetFilters} />
+              ) : (
+                <div className="grid gap-5 xl:grid-cols-2">
+                  {filteredCourses.map((course, index) => (
+                    <CoursesPageCard key={course.id} course={course} priority={index < 2} />
+                  ))}
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </Section>
       </main>
     </div>
   )
 }
 
+function CatalogStat({
+  icon: Icon,
+  label,
+  text,
+}: {
+  icon: typeof BookOpen
+  label: string
+  text: string
+}) {
+  return (
+    <div className="rounded-2xl border border-surface-300 bg-surface-50 p-4">
+      <Icon className="mb-4 h-5 w-5 text-brand-800" />
+      <p className="text-sm font-semibold text-text-main">{label}</p>
+      <p className="mt-1 text-sm leading-5 text-text-muted">{text}</p>
+    </div>
+  )
+}
+
+function FilterGroup({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h2 className="mb-2 font-heading text-xs font-bold uppercase text-text-muted">{title}</h2>
+      <div className="flex flex-wrap gap-2 lg:grid">{children}</div>
+    </div>
+  )
+}
+
+function FilterButton({
+  isActive,
+  onClick,
+  children,
+}: {
+  isActive: boolean
+  onClick: () => void
+  children: React.ReactNode
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`rounded-lg border px-3 py-2 text-left text-sm font-semibold transition ${
+        isActive
+          ? 'border-brand-600 bg-brand-50 text-brand-900'
+          : 'border-surface-300 bg-white text-text-secondary hover:border-brand-200 hover:bg-brand-50'
+      }`}
+    >
+      {children}
+    </button>
+  )
+}
+
+function LoadingCatalog() {
+  return (
+    <div className="grid gap-5 xl:grid-cols-2">
+      {Array.from({ length: 4 }).map((_, index) => (
+        <div key={index} className="rounded-2xl border border-surface-300 bg-white p-5 shadow-sm">
+          <div className="skeleton aspect-[16/9]" />
+          <div className="mt-5 h-4 w-3/4 rounded bg-surface-200" />
+          <div className="mt-4 h-3 w-full rounded bg-surface-200" />
+          <div className="mt-2 h-3 w-5/6 rounded bg-surface-200" />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ErrorCatalog({ message }: { message: string }) {
+  return (
+    <div className="rounded-2xl border border-gold-200 bg-gold-50 p-6">
+      <div className="flex items-start gap-3">
+        <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-gold-700" />
+        <div>
+          <h2 className="font-heading text-base font-semibold text-text-main">{message}</h2>
+          <p className="mt-2 text-sm leading-6 text-text-secondary">
+            The courses list is temporarily unavailable. Please refresh the page or try again later.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function EmptyCatalog({ onReset }: { onReset: () => void }) {
+  return (
+    <div className="rounded-2xl border border-dashed border-surface-300 bg-white p-8 text-center shadow-sm">
+      <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-800">
+        <Search className="h-5 w-5" />
+      </div>
+      <h2 className="mt-4 font-heading text-lg font-semibold text-text-main">No courses match this view.</h2>
+      <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-text-secondary">
+        Try a broader market, a different level, or clear the search query.
+      </p>
+      <button type="button" onClick={onReset} className="btn-secondary mt-5">
+        Clear filters
+      </button>
+    </div>
+  )
+}

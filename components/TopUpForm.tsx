@@ -82,7 +82,7 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
 
   const handleSubmit = async (button: HTMLButtonElement) => {
     const numAmount = parseFloat(sanitize(amount))
-    
+
     if (isNaN(numAmount) || numAmount < 0.01) {
       const validationMessage = 'Please enter a valid amount (minimum 0.01)'
       setError(validationMessage)
@@ -141,66 +141,66 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
     <>
       <form id="topup-form" className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-slate-50">Choose a package</label>
+          <label className="block text-sm font-medium text-text-main">Choose a package</label>
           <div className="mt-2 grid grid-cols-2 gap-4">
             <button
               type="button"
               onClick={() => handlePresetClick('1000')}
               className={`px-4 py-3 rounded-xl border transition ${
                 selectedPreset === '1000'
-                  ? 'border-cyan-400 bg-slate-900/80 text-slate-50'
-                  : 'border-slate-800 bg-slate-950/70 text-slate-300 hover:border-slate-700'
+                  ? 'border-brand-400 bg-surface-200 text-text-main'
+                  : 'border-surface-300 glass-panel text-text-secondary hover:border-surface-400'
               }`}
             >
               <div className="font-semibold">{formatPrice(presets.preset1000.amount, currency)}</div>
-              <div className="text-xs font-normal mt-1">1,000 Tokens</div>
+              <div className="text-sm font-normal mt-1">1,000 Tokens</div>
             </button>
             <button
               type="button"
               onClick={() => handlePresetClick('2750')}
               className={`px-4 py-3 rounded-xl border transition ${
                 selectedPreset === '2750'
-                  ? 'border-cyan-400 bg-slate-900/80 text-slate-50'
-                  : 'border-slate-800 bg-slate-950/70 text-slate-300 hover:border-slate-700'
+                  ? 'border-brand-400 bg-surface-200 text-text-main'
+                  : 'border-surface-300 glass-panel text-text-secondary hover:border-surface-400'
               }`}
             >
               <div className="font-semibold">{formatPrice(presets.preset2750.amount, currency)}</div>
-              <div className="text-xs font-normal mt-1">2,750 Tokens (+10% Bonus)</div>
+              <div className="text-sm font-normal mt-1">2,750 Tokens (+10% Bonus)</div>
             </button>
             <button
               type="button"
               onClick={() => handlePresetClick('6000')}
               className={`px-4 py-3 rounded-xl border transition ${
                 selectedPreset === '6000'
-                  ? 'border-cyan-400 bg-slate-900/80 text-slate-50'
-                  : 'border-slate-800 bg-slate-950/70 text-slate-300 hover:border-slate-700'
+                  ? 'border-brand-400 bg-surface-200 text-text-main'
+                  : 'border-surface-300 glass-panel text-text-secondary hover:border-surface-400'
               }`}
             >
               <div className="font-semibold">{formatPrice(presets.preset6000.amount, currency)}</div>
-              <div className="text-xs font-normal mt-1">6,000 Tokens (+20% Bonus)</div>
+              <div className="text-sm font-normal mt-1">6,000 Tokens (+20% Bonus)</div>
             </button>
             <button
               type="button"
               onClick={() => handlePresetClick('custom')}
               className={`px-4 py-3 rounded-xl border transition ${
                 selectedPreset === 'custom'
-                  ? 'border-cyan-400 bg-slate-900/80 text-slate-50'
-                  : 'border-slate-800 bg-slate-950/70 text-slate-300 hover:border-slate-700'
+                  ? 'border-brand-400 bg-surface-200 text-text-main'
+                  : 'border-surface-300 glass-panel text-text-secondary hover:border-surface-400'
               }`}
             >
               <div className="font-semibold">Custom</div>
-              <div className="text-xs font-normal mt-1">Any amount</div>
+              <div className="text-sm font-normal mt-1">Any amount</div>
             </button>
           </div>
         </div>
 
         <div>
-          <label htmlFor="topup-amount" className="block text-sm font-medium text-slate-50">
+          <label htmlFor="topup-amount" className="block text-sm font-medium text-text-main">
             Or enter custom amount
           </label>
           <div className="mt-1 relative rounded-xl">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-slate-400 sm:text-sm">{currencyConfig.symbol}</span>
+              <span className="text-text-muted sm:text-sm">{currencyConfig.symbol}</span>
             </div>
             <input
               type="text"
@@ -209,11 +209,11 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
               onChange={handleAmountChange}
               inputMode="decimal"
               placeholder="0.01"
-              className="focus:ring-cyan-400 focus:border-cyan-400 block w-full pl-7 pr-12 sm:text-sm border border-slate-800 rounded-xl bg-slate-950 text-slate-50 placeholder:text-slate-500"
+              className="input-field block w-full pl-7 pr-12 sm:text-sm rounded-xl"
             />
           </div>
           {tokenEquivalent && (
-            <p className="mt-2 text-sm text-center text-slate-300 font-medium">
+            <p className="mt-2 text-sm text-center text-text-secondary font-medium">
               {tokenEquivalent}
             </p>
           )}
@@ -225,7 +225,7 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
             id="checkout-button"
             onClick={(e) => handleSubmit(e.currentTarget)}
             disabled={isLoading}
-            className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-full shadow-[0_14px_32px_rgba(8,145,178,0.65)] text-sm font-semibold text-slate-950 bg-cyan-400 hover:bg-cyan-300 disabled:opacity-50 disabled:cursor-not-allowed transition"
+            className="btn-primary w-full flex justify-center py-2.5 px-4 rounded-full text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition"
           >
             Add Tokens
           </button>
@@ -233,13 +233,11 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
       </form>
 
       {error && (
-        <div className="mt-4 bg-slate-900/90 border border-rose-500/40 rounded-xl p-3 text-center">
-          <p className="text-rose-400 font-medium">❌ Error</p>
+        <div className="mt-4 bg-surface-200 border border-rose-500/40 rounded-xl p-3 text-center">
+          <p className="text-rose-400 font-medium">Error</p>
           <p className="text-rose-300 text-sm">{error}</p>
         </div>
       )}
     </>
   )
 }
-
-

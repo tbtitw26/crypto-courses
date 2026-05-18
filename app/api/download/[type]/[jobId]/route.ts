@@ -5,7 +5,6 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
 import { resolveDownloadUrl } from '@/lib/storage'
-import { config } from '@/lib/config'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -71,8 +70,7 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 })
     }
 
-    // Check if job is ready
-    if (job.status !== 'ready') {
+    if (job.status !== 'ready' && job.status !== 'completed') {
       return NextResponse.redirect(
         new URL(`/dashboard${type === 'custom' ? '/custom-courses' : '/ai-strategies'}?error=not_ready`, request.url)
       )
@@ -82,8 +80,17 @@ export async function GET(
       return NextResponse.json({ error: 'PDF not available' }, { status: 404 })
     }
 
-    // Generate signed URL
-    const downloadUrl = await resolveDownloadUrl(job.pdf_url)
+    let downloadUrl: string | undefined
+    try {
+      downloadUrl = await resolveDownloadUrl(job.pdf_url)
+    } catch (err) {
+      console.error('[Download Route] resolveDownloadUrl threw:', {
+        jobId,
+        type,
+        pdf_url_prefix: job.pdf_url?.substring(0, 30),
+        error: err instanceof Error ? err.message : String(err),
+      })
+    }
     if (!downloadUrl) {
       return NextResponse.json({ error: 'Failed to generate download URL' }, { status: 500 })
     }

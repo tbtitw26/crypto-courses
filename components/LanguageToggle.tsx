@@ -11,14 +11,14 @@ function getLocaleFromCookie(): 'en' | 'ar' {
 
   const cookies = document.cookie.split(';')
   const localeCookie = cookies.find((c) => c.trim().startsWith(`${LOCALE_COOKIE_NAME}=`))
-  
+
   if (localeCookie) {
     const locale = localeCookie.split('=')[1]
     if (locale === 'en' || locale === 'ar') {
       return locale
     }
   }
-  
+
   return 'en'
 }
 
@@ -31,7 +31,7 @@ export function LanguageToggle() {
     // Update locale from cookie after mount
     const locale = getLocaleFromCookie()
     setCurrentLocale(locale)
-    
+
     // Listen for cookie changes
     const interval = setInterval(() => {
       const newLocale = getLocaleFromCookie()
@@ -39,7 +39,7 @@ export function LanguageToggle() {
         setCurrentLocale(newLocale)
       }
     }, 1000)
-    
+
     return () => clearInterval(interval)
   }, [currentLocale])
 
@@ -48,36 +48,36 @@ export function LanguageToggle() {
 
     // Set cookie
     document.cookie = `${LOCALE_COOKIE_NAME}=${newLocale}; path=/; max-age=31536000`
-    
+
     // Update state
     setCurrentLocale(newLocale)
-    
+
     // Update html attributes
     document.documentElement.lang = newLocale
     document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr'
-    
+
     // Reload to apply locale change
     window.location.reload()
   }
 
   return (
-    <div className="inline-flex items-center gap-1 rounded-lg bg-slate-900/60 border border-slate-800 p-1">
+    <div className="inline-flex items-center rounded-lg border border-surface-300 bg-surface-100 p-0.5">
       <button
         onClick={() => handleLocaleChange('en')}
-        className={`px-2 py-1 text-xs font-medium rounded transition ${
+        className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-colors ${
           currentLocale === 'en'
-            ? 'bg-cyan-400 text-slate-950'
-            : 'text-slate-300 hover:text-slate-50'
+            ? 'bg-white text-text-main shadow-sm'
+            : 'text-text-muted hover:text-text-main'
         }`}
       >
         EN
       </button>
       <button
         onClick={() => handleLocaleChange('ar')}
-        className={`px-2 py-1 text-xs font-medium rounded transition ${
+        className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-colors ${
           currentLocale === 'ar'
-            ? 'bg-cyan-400 text-slate-950'
-            : 'text-slate-300 hover:text-slate-50'
+            ? 'bg-white text-text-main shadow-sm'
+            : 'text-text-muted hover:text-text-main'
         }`}
       >
         AR
@@ -85,4 +85,3 @@ export function LanguageToggle() {
     </div>
   )
 }
-

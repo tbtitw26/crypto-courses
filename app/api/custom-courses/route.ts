@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
-import { resolveDownloadUrl, resolvePublicUrl } from '@/lib/storage'
+import { resolvePublicUrl } from '@/lib/storage'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -71,18 +71,7 @@ export async function GET(request: NextRequest) {
         uiStatus = 'Processing'
       }
 
-      let resolvedPdfUrl: string | undefined
       let resolvedCoverUrl: string | undefined
-      try {
-        resolvedPdfUrl = await resolveDownloadUrl(course.pdf_url)
-      } catch (err) {
-        console.warn('[api/custom-courses] resolveDownloadUrl failed', {
-          courseId: course.id,
-          pdf_url: course.pdf_url,
-          error: err instanceof Error ? err.message : String(err),
-        })
-        resolvedPdfUrl = undefined
-      }
       try {
         resolvedCoverUrl = resolvePublicUrl(course.cover_path || undefined)
       } catch (err) {
@@ -104,7 +93,7 @@ export async function GET(request: NextRequest) {
         created: course.created_at.toISOString(),
         updated: course.updated_at.toISOString(),
         estimatedReadyAt: course.estimated_ready_at?.toISOString(),
-        pdfUrl: resolvedPdfUrl,
+        pdfUrl: course.pdf_url ? `/api/download/custom/${course.id}` : undefined,
         coverUrl: resolvedCoverUrl,
         assetsStatus: course.assets_status ?? null,
         assetsError: course.assets_error ?? null,

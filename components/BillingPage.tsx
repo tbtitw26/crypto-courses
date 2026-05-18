@@ -1,19 +1,15 @@
-// components/BillingPage.tsx - Billing page component for dashboard
-
 'use client'
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
   CreditCard,
   Coins,
   ArrowRight,
   Download,
-  Filter,
   SlidersHorizontal,
   AlertTriangle,
   Info,
@@ -23,8 +19,8 @@ import {
   Clock,
   CheckCircle2,
   XCircle,
+  Loader2,
 } from 'lucide-react'
-import { HomeSection } from './HomeSection'
 import { DashboardNavigation } from './DashboardNavigation'
 import { calculatePriceForTokens, formatPrice, convertAmount, calculateTokens } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
@@ -41,33 +37,32 @@ interface Transaction {
   tokensDelta: string
   balanceAfter: string
   status: TransactionStatus
-  apiType?: string // Store original API type for filtering
-  tokens: number // Original tokens value for calculations
+  apiType?: string
+  tokens: number
   amountGBP: number
 }
 
 function StatusPill({ status, t }: { status: TransactionStatus; t: any }) {
-  let base =
-    'inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-[10px]'
+  const base = 'inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-medium'
   if (status === 'Completed') {
     return (
-      <span className={`${base} border-emerald-500/60 text-emerald-200`}>
-        <CheckCircle2 className="w-3 h-3" />
+      <span className={`${base} border-emerald-200 bg-emerald-50 text-emerald-700`}>
+        <CheckCircle2 className="h-3 w-3" />
         <span>{t(`status.${status.toLowerCase()}`)}</span>
       </span>
     )
   }
   if (status === 'Pending') {
     return (
-      <span className={`${base} border-amber-500/70 text-amber-200`}>
-        <Clock className="w-3 h-3" />
+      <span className={`${base} border-amber-200 bg-amber-50 text-amber-700`}>
+        <Clock className="h-3 w-3" />
         <span>{t(`status.${status.toLowerCase()}`)}</span>
       </span>
     )
   }
   return (
-    <span className={`${base} border-rose-500/70 text-rose-200`}>
-      <XCircle className="w-3 h-3" />
+    <span className={`${base} border-rose-200 bg-rose-50 text-rose-700`}>
+      <XCircle className="h-3 w-3" />
       <span>{t(`status.${status.toLowerCase()}`)}</span>
     </span>
   )
@@ -103,14 +98,12 @@ export function BillingPage() {
     setCurrency(getUserCurrency())
   }, [])
 
-  // Redirect if not authenticated
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/login?callbackUrl=/dashboard/transactions')
     }
   }, [status, router])
 
-  // Load transactions from API
   useEffect(() => {
     async function fetchTransactions() {
       if (!session?.user?.id || status !== 'authenticated') return
@@ -120,7 +113,6 @@ export function BillingPage() {
         const response = await fetch('/api/transactions?limit=100')
         if (response.ok) {
           const data = await response.json()
-          // Transform API response to Transaction format
           const formattedTransactions: Transaction[] = data.transactions.map((tx: ApiTransaction) => {
             const txDate = new Date(tx.date)
             const dateStr = txDate.toLocaleDateString('en-US', {
@@ -133,16 +125,13 @@ export function BillingPage() {
               minute: '2-digit',
             })
 
-            // Calculate currency amount
             const amountGBP = tx.amount || 0
 
             let currencyAmount = ''
             if (amountGBP > 0) {
-              // For top-ups: convert GBP amount to selected currency
               const priceAmount = convertAmount(amountGBP, 'GBP', currency)
               currencyAmount = formatPrice(priceAmount, currency)
             } else if (tx.tokens && tx.tokens < 0) {
-              // For token deductions: calculate price from tokens
               const tokensAbs = Math.abs(tx.tokens)
               const priceAmount = calculatePriceForTokens(tokensAbs, currency)
               currencyAmount = formatPrice(priceAmount, currency)
@@ -150,23 +139,19 @@ export function BillingPage() {
               currencyAmount = formatPrice(0, currency)
             }
 
-            // Format tokens delta
-            const tokensDelta = tx.tokens > 0 
-              ? `+${tx.tokens.toLocaleString('en-US')}` 
+            const tokensDelta = tx.tokens > 0
+              ? `+${tx.tokens.toLocaleString('en-US')}`
               : `${tx.tokens.toLocaleString('en-US')}`
 
-            // Map API type to component type
             let componentType: Transaction['type'] = 'Adjustment'
             if (tx.type === 'Top-up') {
               componentType = 'Token top-up'
             } else if (tx.type === 'Custom course') {
-              componentType = 'Custom course' // Keep as separate type
+              componentType = 'Custom course'
             } else if (tx.type === 'AI strategy') {
               componentType = 'AI strategy'
             }
 
-            // Calculate balance after (simplified - would need to track running balance)
-            // For now, we'll use a placeholder
             const balanceAfter = '—'
 
             return {
@@ -179,14 +164,13 @@ export function BillingPage() {
               tokensDelta,
               balanceAfter,
               status: (tx.status || 'Completed') as TransactionStatus,
-              apiType: tx.type, // Store original API type
-              tokens: tx.tokens, // Store original tokens value for calculations
+              apiType: tx.type,
+              tokens: tx.tokens,
               amountGBP,
             }
           })
           setTransactions(formattedTransactions)
-          
-          // Find last receipt (first transaction that has an invoice)
+
           if (formattedTransactions.length > 0) {
             const firstReceiptIndex = data.transactions.findIndex((tx: ApiTransaction) => tx.receiptAvailable !== false)
             if (firstReceiptIndex >= 0) {
@@ -214,16 +198,14 @@ export function BillingPage() {
     }
   }, [session?.user?.id, status, currency])
 
-  // Show loading state while checking auth
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-slate-950 text-slate-50 flex items-center justify-center">
-        <div className="text-slate-400">Loading...</div>
+      <div className="flex min-h-screen items-center justify-center bg-surface-50">
+        <Loader2 className="h-6 w-6 animate-spin text-brand-600" />
       </div>
     )
   }
 
-  // Don't render if not authenticated (redirect will happen)
   if (status === 'unauthenticated' || !session?.user) {
     return null
   }
@@ -252,10 +234,8 @@ export function BillingPage() {
     return false
   })
 
-  // Calculate stats from transactions
   const currentBalance = userBalance || 0
-  
-  // Calculate this month spent (sum of negative tokens)
+
   const now = new Date()
   const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1)
   const usageEntries = transactions.map((tx) => ({
@@ -269,10 +249,9 @@ export function BillingPage() {
   })
   const thisMonthSpent = thisMonthTransactions.reduce((sum, entry) => sum + entry.usageTokens, 0)
 
-  // Find last top-up amount
   const topUpTransactions = transactions.filter((tx) => tx.type === 'Token top-up')
-  const lastTopUpTx = topUpTransactions[0] // Already sorted by date desc
-  const lastTopUp = lastTopUpTx 
+  const lastTopUpTx = topUpTransactions[0]
+  const lastTopUp = lastTopUpTx
     ? parseFloat(lastTopUpTx.currencyAmount.replace(/[^0-9.]/g, '')) || 0
     : 0
 
@@ -294,133 +273,87 @@ export function BillingPage() {
   const remainingPercent = Math.max(0, 100 - coursesPercent - aiPercent - customPercent)
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-50 pb-12">
-      {/* Background */}
-      <div className="fixed inset-0 -z-20 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-      <div className="fixed inset-0 -z-10 opacity-25 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.26),_transparent_50%),_radial-gradient(circle_at_bottom,_rgba(129,140,248,0.18),_transparent_55%)]" />
+    <div className="min-h-screen bg-surface-50">
+      <DashboardNavigation />
 
-      <main className="pt-6">
-        {/* Dashboard Navigation */}
-        <DashboardNavigation />
-
-        {/* Top bar */}
-        <HomeSection className="pb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-1">
-            <div className="text-[11px] text-slate-500">
-              <Link href="/dashboard" className="hover:text-slate-300 transition">
+      <div className="mx-auto max-w-page px-4 py-6 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <div className="mb-1 text-xs text-text-muted">
+              <Link href="/dashboard" className="transition hover:text-text-secondary">
                 {tDashboard('breadcrumb.dashboard')}
               </Link>
-              <span className="text-slate-600"> / </span>
-              <span className="text-slate-300">{t('title')}</span>
+              <span className="text-text-muted/50"> / </span>
+              <span className="text-text-secondary">{t('title')}</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-semibold text-slate-50">
-              {t('heading')}
-            </h1>
-            <p className="text-xs sm:text-sm text-slate-300/90 max-w-xl">
-              {t('subtitle')}
-            </p>
+            <h1 className="text-xl font-semibold text-text-main sm:text-2xl">{t('heading')}</h1>
+            <p className="mt-1 max-w-lg text-sm text-text-secondary">{t('subtitle')}</p>
           </div>
-          <div className="flex flex-col items-start sm:items-end gap-2 text-[11px]">
-            <div className="inline-flex items-center gap-2 rounded-full bg-slate-950/90 border border-slate-800 px-3 py-1.5">
-              <div className="h-6 w-6 rounded-full bg-slate-900 flex items-center justify-center border border-slate-700">
-                <Coins className="w-3.5 h-3.5 text-cyan-300" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-slate-200 font-medium">
-                  {currentBalance.toLocaleString('en-US')} {t('tokensAvailable')}
-                </span>
-                <span className="text-slate-500">
-                  {t('tokensApprox', { price: formattedBalancePrice })}
-                </span>
-              </div>
-              <Link
-                href="/top-up"
-                className="ml-1 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-cyan-400 text-slate-950 text-[10px] font-semibold hover:bg-cyan-300 transition"
-              >
-                <span>{t('topUp')}</span>
-              </Link>
-            </div>
+          <div className="flex items-center gap-3">
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-1 text-[11px] text-slate-400 hover:text-cyan-300 transition"
+              className="inline-flex items-center gap-1 text-xs text-text-muted transition hover:text-brand-600"
             >
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="h-3.5 w-3.5" />
               <span>{t('viewPricing')}</span>
-              <ArrowRight className="w-3 h-3" />
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+            <Link
+              href="/top-up"
+              className="btn-primary inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold"
+            >
+              <Coins className="h-4 w-4" />
+              <span>{t('topUp')}</span>
             </Link>
           </div>
-        </HomeSection>
+        </div>
 
-        {/* Balance & payment info */}
-        <HomeSection className="pb-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Balance card */}
-          <motion.div
-            className="lg:col-span-7 bg-slate-950/80 border border-slate-900 rounded-2xl p-4 sm:p-5 space-y-4"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-          >
-            <div className="flex items-center justify-between gap-2">
-              <div>
-                <div className="text-sm font-semibold text-slate-50">
-                  {t('balance.title')}
-                </div>
-                <div className="text-[11px] text-slate-400">
-                  {t('balance.subtitle')}
-                </div>
+        {/* KPI strip */}
+        <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+            <p className="text-xs text-text-muted">{t('balance.currentBalance')}</p>
+            <p className="mt-1 text-2xl font-semibold text-text-main">
+              {currentBalance.toLocaleString('en-US')}
+              <span className="ml-1 text-sm font-normal text-text-muted">{t('tokens')}</span>
+            </p>
+            <p className="mt-1 text-xs text-text-muted">
+              {t('balance.currentBalanceHint', { price: formattedBalancePrice })}
+            </p>
+          </div>
+          <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+            <p className="text-xs text-text-muted">{t('balance.thisMonthSpent')}</p>
+            <p className="mt-1 text-2xl font-semibold text-text-main">
+              {thisMonthSpent.toLocaleString('en-US')}
+              <span className="ml-1 text-sm font-normal text-text-muted">{t('tokens')}</span>
+            </p>
+            <p className="mt-1 text-xs text-text-muted">{t('balance.thisMonthSpentHint')}</p>
+          </div>
+          <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+            <p className="text-xs text-text-muted">{t('balance.lastTopUp')}</p>
+            <p className="mt-1 text-2xl font-semibold text-text-main">{formatPrice(lastTopUp, currency)}</p>
+            <p className="mt-1 text-xs text-text-muted">{t('balance.lastTopUpHint')}</p>
+          </div>
+        </div>
+
+        {/* Usage distribution + info cards */}
+        <div className="mb-6 grid grid-cols-1 items-start gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2 rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+            <div className="mb-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Info className="h-4 w-4 text-brand-600" />
+                <h2 className="text-sm font-semibold text-text-main">{t('balance.title')}</h2>
               </div>
-              <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-900 border border-slate-700 text-[10px] text-slate-300">
-                <Info className="w-3 h-3" />
-                <span>{t('balance.tokensInfo')}</span>
-              </div>
+              <span className="rounded-full border border-surface-200 bg-surface-50 px-2.5 py-1 text-[10px] text-text-muted">
+                {t('balance.tokensInfo')}
+              </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="space-y-1">
-                <div className="text-[11px] text-slate-400">
-                  {t('balance.currentBalance')}
-                </div>
-                <div className="text-xl font-semibold text-slate-50">
-                  {currentBalance.toLocaleString('en-US')}
-                  <span className="text-base text-slate-400 ml-1">
-                    {t('tokens')}
-                  </span>
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  {t('balance.currentBalanceHint', {
-                    price: formattedBalancePrice,
-                  })}
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-[11px] text-slate-400">
-                  {t('balance.thisMonthSpent')}
-                </div>
-                <div className="text-lg font-semibold text-slate-50">
-                  {thisMonthSpent.toLocaleString('en-US')} {t('tokens')}
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  {t('balance.thisMonthSpentHint')}
-                </div>
-              </div>
-              <div className="space-y-1">
-                <div className="text-[11px] text-slate-400">
-                  {t('balance.lastTopUp')}
-                </div>
-                <div className="text-lg font-semibold text-slate-50">
-                  {formatPrice(lastTopUp, currency)}
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  {t('balance.lastTopUpHint')}
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-1">
-              <div className="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+            <div className="mb-3">
+              <div className="mb-1 flex items-center justify-between text-xs text-text-muted">
                 <span>{t('balance.usageDistribution')}</span>
                 {totalSpent > 0 ? (
-                  <span className="text-slate-300">
+                  <span className="text-text-secondary">
                     {t('balance.usageDistributionValue', {
                       courses: coursesPercent,
                       ai: aiPercent,
@@ -431,279 +364,263 @@ export function BillingPage() {
                   <span>{t('balance.noUsageYet')}</span>
                 )}
               </div>
-              <div className="h-1.5 w-full rounded-full bg-slate-900 overflow-hidden flex">
+              <div className="flex h-2 w-full overflow-hidden rounded-full bg-surface-100">
                 {totalSpent > 0 ? (
                   <>
                     {coursesPercent > 0 && (
-                      <div className="h-full bg-cyan-400" style={{ width: `${coursesPercent}%` }} />
+                      <div className="h-full bg-brand-500" style={{ width: `${coursesPercent}%` }} />
                     )}
                     {aiPercent > 0 && (
-                      <div className="h-full bg-emerald-400" style={{ width: `${aiPercent}%` }} />
+                      <div className="h-full bg-emerald-500" style={{ width: `${aiPercent}%` }} />
                     )}
                     {customPercent > 0 && (
                       <div className="h-full bg-indigo-500" style={{ width: `${customPercent}%` }} />
                     )}
                     {remainingPercent > 0 && (
-                      <div className="h-full bg-slate-800" style={{ width: `${remainingPercent}%` }} />
+                      <div className="h-full bg-surface-200" style={{ width: `${remainingPercent}%` }} />
                     )}
                   </>
                 ) : (
-                  <div className="h-full w-full bg-slate-800" />
+                  <div className="h-full w-full bg-surface-200" />
                 )}
               </div>
               {totalSpent > 0 && (
-                <div className="text-[10px] text-slate-500 flex flex-wrap items-center gap-2">
-                  {coursesPercent > 0 && <span>Courses {coursesPercent}%</span>}
-                  {aiPercent > 0 && <span>AI {aiPercent}%</span>}
-                  {customPercent > 0 && <span>Custom courses {customPercent}%</span>}
+                <div className="mt-1.5 flex flex-wrap items-center gap-3 text-xs text-text-muted">
+                  {coursesPercent > 0 && (
+                    <span className="flex items-center gap-1">
+                      <span className="h-2 w-2 rounded-full bg-brand-500" />
+                      Courses {coursesPercent}%
+                    </span>
+                  )}
+                  {aiPercent > 0 && (
+                    <span className="flex items-center gap-1">
+                      <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                      AI {aiPercent}%
+                    </span>
+                  )}
+                  {customPercent > 0 && (
+                    <span className="flex items-center gap-1">
+                      <span className="h-2 w-2 rounded-full bg-indigo-500" />
+                      Custom courses {customPercent}%
+                    </span>
+                  )}
                 </div>
               )}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px] text-slate-300">
-              <div className="flex items-start gap-2">
-                <AlertTriangle className="w-3.5 h-3.5 text-amber-300 mt-0.5" />
+            <div className="grid grid-cols-1 gap-3 border-t border-surface-100 pt-3 sm:grid-cols-2">
+              <div className="flex items-start gap-2 text-xs text-text-secondary">
+                <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-600" />
                 <span>{t('balance.refundWarning')}</span>
               </div>
-              <div className="flex items-start gap-2">
-                <Info className="w-3.5 h-3.5 text-cyan-300 mt-0.5" />
+              <div className="flex items-start gap-2 text-xs text-text-secondary">
+                <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600" />
                 <span>{t('balance.supportInfo')}</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Payment methods & invoices preview */}
-          <motion.div
-            className="lg:col-span-5 space-y-4"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, ease: 'easeOut', delay: 0.1 }}
-          >
-            <div className="bg-slate-950/80 border border-slate-900 rounded-2xl p-4 space-y-3 text-[11px] text-slate-300/90">
-              <div className="flex items-center gap-2 mb-1">
-                <CreditCard className="w-3.5 h-3.5 text-cyan-300" />
-                <div className="text-xs font-semibold text-slate-100">
-                  {t('paymentMethods.title')}
-                </div>
+          {/* Payment + invoices sidebar */}
+          <div className="space-y-4">
+            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+              <div className="mb-3 flex items-center gap-2">
+                <CreditCard className="h-4 w-4 text-brand-600" />
+                <h3 className="text-xs font-semibold text-text-main">{t('paymentMethods.title')}</h3>
               </div>
-              <p>{t('paymentMethods.description')}</p>
-              <ul className="space-y-1.5">
+              <p className="text-xs leading-relaxed text-text-secondary">{t('paymentMethods.description')}</p>
+              <ul className="mt-2 space-y-1 text-xs text-text-secondary">
                 <li>• {t('paymentMethods.supportedCards')}</li>
                 <li>• {t('paymentMethods.supportedCurrencies')}</li>
                 <li>• {t('paymentMethods.chargesDescriptor')}</li>
               </ul>
-              <p className="text-slate-400">{t('paymentMethods.note')}</p>
+              <p className="mt-2 text-xs text-text-muted">{t('paymentMethods.note')}</p>
             </div>
 
-            <div className="bg-slate-950/80 border border-slate-900 rounded-2xl p-4 space-y-3 text-[11px] text-slate-300/90">
-              <div className="flex items-center gap-2 mb-1">
-                <FileText className="w-3.5 h-3.5 text-cyan-300" />
-                <div className="text-xs font-semibold text-slate-100">
-                  {t('invoices.title')}
-                </div>
+            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+              <div className="mb-3 flex items-center gap-2">
+                <FileText className="h-4 w-4 text-brand-600" />
+                <h3 className="text-xs font-semibold text-text-main">{t('invoices.title')}</h3>
               </div>
-              <p>{t('invoices.description')}</p>
-              <div className="mt-1 rounded-xl bg-slate-950 border border-slate-900 p-3 flex items-center justify-between gap-2">
-                <div className="flex flex-col">
-                  <span className="text-xs text-slate-100">
-                    {lastReceiptId 
+              <p className="text-xs leading-relaxed text-text-secondary">{t('invoices.description')}</p>
+              <div className="mt-3 flex items-center justify-between gap-2 rounded-lg border border-surface-200 bg-surface-50 p-3">
+                <div>
+                  <p className="text-xs font-medium text-text-main">
+                    {lastReceiptId
                       ? (lastReceiptDate || t('invoices.lastReceipt.title'))
                       : t('invoices.lastReceipt.title')}
-                  </span>
-                  <span className="text-[10px] text-slate-500">
-                    {lastReceiptId 
+                  </p>
+                  <p className="text-xs text-text-muted">
+                    {lastReceiptId
                       ? t('invoices.lastReceipt.details')
                       : t('invoices.noReceipts')}
-                  </span>
+                  </p>
                 </div>
                 {lastReceiptId ? (
                   <a
                     href={`/api/receipts/${lastReceiptId}/pdf`}
                     download
-                    className="inline-flex items-center gap-1 px-2 py-1 rounded-full border border-slate-700 text-[11px] text-slate-100 hover:border-slate-500 transition"
+                    className="btn-secondary inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs"
                   >
-                    <Download className="w-3 h-3" />
+                    <Download className="h-3 w-3" />
                     <span>{t('invoices.downloadPDF')}</span>
                   </a>
                 ) : (
-                  <button 
+                  <button
                     disabled
-                    className="inline-flex items-center gap-1 px-2 py-1 rounded-full border border-slate-700 text-[11px] text-slate-500 cursor-not-allowed"
+                    className="inline-flex cursor-not-allowed items-center gap-1 rounded-lg border border-surface-200 px-2.5 py-1.5 text-xs text-text-muted"
                   >
-                    <Download className="w-3 h-3" />
+                    <Download className="h-3 w-3" />
                     <span>{t('invoices.downloadPDF')}</span>
                   </button>
                 )}
               </div>
               <Link
                 href="/dashboard/receipts"
-                className="inline-flex items-center gap-1 text-[11px] text-slate-400 hover:text-cyan-300 transition"
+                className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-brand-600 transition hover:text-brand-700"
               >
                 <span>{t('invoices.viewAllReceipts')}</span>
-                <ArrowRight className="w-3 h-3" />
+                <ArrowRight className="h-3 w-3" />
               </Link>
             </div>
-          </motion.div>
-        </HomeSection>
+          </div>
+        </div>
 
         {/* Transactions table */}
-        <HomeSection className="pb-10 space-y-4">
+        <div className="space-y-4">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
-              <div className="text-sm font-semibold text-slate-50">
-                {t('transactions.title')}
-              </div>
-              <div className="text-[11px] text-slate-400">
-                {t('transactions.subtitle')}
-              </div>
+              <h2 className="text-sm font-semibold text-text-main">{t('transactions.title')}</h2>
+              <p className="text-xs text-text-muted">{t('transactions.subtitle')}</p>
             </div>
-            <div className="flex flex-wrap gap-2 text-[11px] text-slate-300">
-              <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-slate-950/90 border border-slate-800">
-                <SlidersHorizontal className="w-3 h-3" />
+            <div className="flex flex-wrap items-center gap-1.5 text-xs">
+              <div className="flex items-center gap-1 text-text-muted">
+                <SlidersHorizontal className="h-3 w-3" />
                 <span>{t('filters.type')}</span>
               </div>
-              {(
-                [
-                  'All',
-                  'Token top-ups',
-                  'Courses',
-                  'AI strategies',
-                  'Adjustments',
-                ] as const
-              ).map((f, idx) => (
+              {(['All', 'Token top-ups', 'Courses', 'AI strategies', 'Adjustments'] as const).map((f) => (
                 <button
+                  type="button"
                   key={f}
                   onClick={() => setTypeFilter(f)}
-                  className={`px-2.5 py-1 rounded-full border transition ${
+                  className={`rounded-full border px-2.5 py-1 transition ${
                     typeFilter === f
-                      ? 'bg-slate-100 text-slate-950 border-slate-100'
-                      : 'bg-slate-950/90 border-slate-800 text-slate-300 hover:border-slate-600'
+                      ? 'border-brand-600 bg-brand-600 font-medium text-white'
+                      : 'border-surface-200 bg-white text-text-secondary hover:border-surface-300'
                   }`}
                 >
                   {t(`filters.types.${f.toLowerCase().replace(/\s+/g, '')}`)}
                 </button>
               ))}
-              <button className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-slate-800 bg-slate-950/90 text-slate-300 hover:border-slate-600 transition">
-                <Filter className="w-3 h-3" />
-                <span>{t('downloadCSV')}</span>
-              </button>
             </div>
           </div>
 
           {isLoadingTransactions ? (
-            <div className="bg-slate-950/80 border border-slate-900 rounded-2xl p-8 flex flex-col items-center justify-center text-center">
-              <div className="text-sm text-slate-400">Loading transactions...</div>
+            <div className="flex items-center justify-center rounded-xl border border-surface-200 bg-white py-16 shadow-card">
+              <Loader2 className="h-6 w-6 animate-spin text-brand-600" />
             </div>
           ) : filteredTransactions.length > 0 ? (
-            <div className="overflow-hidden rounded-2xl border border-slate-900 bg-slate-950/80">
-              <div className="grid grid-cols-12 px-4 py-2 text-[11px] text-slate-400 border-b border-slate-900">
-                <div className="col-span-2">{t('table.dateTime')}</div>
-                <div className="col-span-3">{t('table.description')}</div>
-                <div className="col-span-2">{t('table.type')}</div>
-                <div className="col-span-2 text-right">{t('table.currency')}</div>
-                <div className="col-span-1 text-right">{t('table.tokens')}</div>
-                <div className="col-span-1 text-right">{t('table.balance')}</div>
-                <div className="col-span-1 text-right">{t('table.status')}</div>
+            <>
+              {/* Desktop table */}
+              <div className="hidden overflow-hidden rounded-xl border border-surface-200 bg-white shadow-card md:block">
+                <div className="grid grid-cols-12 border-b border-surface-100 px-5 py-2.5 text-xs font-medium text-text-muted">
+                  <div className="col-span-2">{t('table.dateTime')}</div>
+                  <div className="col-span-3">{t('table.description')}</div>
+                  <div className="col-span-2">{t('table.type')}</div>
+                  <div className="col-span-2 text-right">{t('table.currency')}</div>
+                  <div className="col-span-1 text-right">{t('table.tokens')}</div>
+                  <div className="col-span-1 text-right">{t('table.balance')}</div>
+                  <div className="col-span-1 text-right">{t('table.status')}</div>
+                </div>
+                <div className="divide-y divide-surface-100">
+                  {filteredTransactions.map((tx) => (
+                    <div
+                      key={`${tx.date}-${tx.time}-${tx.description}`}
+                      className="grid grid-cols-12 px-5 py-3 text-xs text-text-main transition-colors hover:bg-surface-50"
+                    >
+                      <div className="col-span-2 flex flex-col gap-0.5 pr-2">
+                        <span>{tx.date}</span>
+                        <span className="text-text-muted">{tx.time}</span>
+                      </div>
+                      <div className="col-span-3 flex flex-col gap-0.5 pr-2">
+                        <span className="truncate font-medium">{tx.description}</span>
+                        <span className="flex items-center gap-1 text-text-muted">
+                          {tx.type === 'Course purchase' && <ShoppingCart className="h-3 w-3" />}
+                          {tx.type === 'Token top-up' && <Coins className="h-3 w-3" />}
+                          {tx.type === 'AI strategy' && <Sparkles className="h-3 w-3" />}
+                          {tx.type === 'Adjustment' && <AlertTriangle className="h-3 w-3 text-gold-600" />}
+                          <span>{t(`types.${tx.type.toLowerCase().replace(/\s+/g, '')}`)}</span>
+                        </span>
+                      </div>
+                      <div className="col-span-2 flex items-center text-text-secondary">
+                        {t(`types.${tx.type.toLowerCase().replace(/\s+/g, '')}`)}
+                      </div>
+                      <div className="col-span-2 flex items-center justify-end">{tx.currencyAmount}</div>
+                      <div className="col-span-1 flex items-center justify-end">{tx.tokensDelta}</div>
+                      <div className="col-span-1 flex items-center justify-end">{tx.balanceAfter}</div>
+                      <div className="col-span-1 flex items-center justify-end">
+                        <StatusPill status={tx.status} t={t} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="divide-y divide-slate-900">
+
+              {/* Mobile cards */}
+              <div className="space-y-2 md:hidden">
                 {filteredTransactions.map((tx) => (
-                  <motion.div
-                    key={`${tx.date}-${tx.time}-${tx.description}`}
-                    className="grid grid-cols-12 px-4 py-3 text-[11px] text-slate-200 hover:bg-slate-900/70 transition-colors"
-                    whileHover={{ y: -1 }}
-                    transition={{ duration: 0.18 }}
+                  <div
+                    key={`m-${tx.date}-${tx.time}-${tx.description}`}
+                    className="rounded-xl border border-surface-200 bg-white p-4 shadow-card"
                   >
-                    <div className="col-span-2 flex flex-col gap-0.5 pr-2">
-                      <span className="text-slate-100">{tx.date}</span>
-                      <span className="text-slate-500">{tx.time}</span>
-                    </div>
-                    <div className="col-span-3 flex flex-col gap-0.5 pr-2">
-                      <span className="font-medium text-slate-50 truncate">
-                        {tx.description}
-                      </span>
-                      <span className="text-slate-500 flex items-center gap-1">
-                        {tx.type === 'Course purchase' && (
-                          <ShoppingCart className="w-3 h-3" />
-                        )}
-                        {tx.type === 'Token top-up' && (
-                          <Coins className="w-3 h-3" />
-                        )}
-                        {tx.type === 'AI strategy' && (
-                          <Sparkles className="w-3 h-3" />
-                        )}
-                        {tx.type === 'Adjustment' && (
-                          <AlertTriangle className="w-3 h-3 text-amber-300" />
-                        )}
-                        <span>{t(`types.${tx.type.toLowerCase().replace(/\s+/g, '')}`)}</span>
-                      </span>
-                    </div>
-                    <div className="col-span-2 flex items-center text-slate-300">
-                      {t(`types.${tx.type.toLowerCase().replace(/\s+/g, '')}`)}
-                    </div>
-                    <div className="col-span-2 flex items-center justify-end text-slate-200">
-                      {tx.currencyAmount}
-                    </div>
-                    <div className="col-span-1 flex items-center justify-end text-slate-200">
-                      {tx.tokensDelta}
-                    </div>
-                    <div className="col-span-1 flex items-center justify-end text-slate-200">
-                      {tx.balanceAfter}
-                    </div>
-                    <div className="col-span-1 flex items-center justify-end">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <p className="text-sm font-medium text-text-main">{tx.description}</p>
+                        <p className="mt-0.5 text-xs text-text-muted">{tx.date} · {tx.time}</p>
+                      </div>
                       <StatusPill status={tx.status} t={t} />
                     </div>
-                  </motion.div>
+                    <div className="mt-2 flex items-center justify-between text-xs text-text-secondary">
+                      <span>{t(`types.${tx.type.toLowerCase().replace(/\s+/g, '')}`)}</span>
+                      <div className="text-right">
+                        <span className="font-medium text-text-main">{tx.currencyAmount}</span>
+                        <span className="ml-2 text-text-muted">{tx.tokensDelta}</span>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </div>
+            </>
           ) : (
-            <div className="bg-slate-950/80 border border-slate-900 rounded-2xl p-8 text-center">
-              <AlertTriangle className="w-8 h-8 text-slate-400 mx-auto mb-3" />
-              <div className="text-sm font-semibold text-slate-100 mb-1">
-                {t('emptyState.title')}
-              </div>
-              <div className="text-[11px] text-slate-400">
-                {t('emptyState.description')}
-              </div>
+            <div className="rounded-xl border border-surface-200 bg-white p-10 text-center shadow-card">
+              <AlertTriangle className="mx-auto mb-3 h-8 w-8 text-text-muted" />
+              <h3 className="text-sm font-semibold text-text-main">{t('emptyState.title')}</h3>
+              <p className="mt-1 text-xs text-text-muted">{t('emptyState.description')}</p>
             </div>
           )}
 
           {/* Empty state preview */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-3">
-            <motion.div
-              className="lg:col-span-7 bg-slate-950/80 border border-slate-900 rounded-2xl p-4 text-[11px] text-slate-300/90 space-y-2"
-              whileHover={{ y: -3 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <Info className="w-3.5 h-3.5 text-cyan-300" />
-                <div className="text-xs font-semibold text-slate-100">
-                  {t('emptyStatePreview.title')}
-                </div>
+          <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
+            <div className="mb-2 flex items-center gap-2">
+              <Info className="h-4 w-4 text-brand-600" />
+              <h3 className="text-xs font-semibold text-text-main">{t('emptyStatePreview.title')}</h3>
+            </div>
+            <p className="text-xs leading-relaxed text-text-secondary">{t('emptyStatePreview.description')}</p>
+            <div className="mt-3 flex flex-col items-start justify-between gap-3 rounded-lg border border-surface-200 bg-surface-50 p-3 sm:flex-row sm:items-center">
+              <div>
+                <p className="text-xs font-medium text-text-main">{t('emptyStatePreview.noActivity')}</p>
+                <p className="text-xs text-text-muted">{t('emptyStatePreview.hint')}</p>
               </div>
-              <p>{t('emptyStatePreview.description')}</p>
-              <div className="mt-2 rounded-xl bg-slate-950 border border-slate-900 p-3 flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between">
-                <div>
-                  <div className="text-xs font-semibold text-slate-100 mb-0.5">
-                    {t('emptyStatePreview.noActivity')}
-                  </div>
-                  <div className="text-[11px] text-slate-400">
-                    {t('emptyStatePreview.hint')}
-                  </div>
-                </div>
-                <Link
-                  href="/pricing"
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-cyan-400 text-slate-950 text-[11px] font-semibold hover:bg-cyan-300 transition"
-                >
-                  <Coins className="w-3 h-3" />
-                  <span>{t('emptyStatePreview.viewTokenPacks')}</span>
-                </Link>
-              </div>
-            </motion.div>
+              <Link
+                href="/pricing"
+                className="btn-primary inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold"
+              >
+                <Coins className="h-3 w-3" />
+                <span>{t('emptyStatePreview.viewTokenPacks')}</span>
+              </Link>
+            </div>
           </div>
-        </HomeSection>
-      </main>
+        </div>
+      </div>
     </div>
   )
 }
-
