@@ -9,7 +9,7 @@
     "sideCard": {
       "title": "How to use this glossary",
       "subtitle": "Support for your courses, not a standalone strategy guide.",
-      "paragraph1": "The glossary is designed to sit next to your Avenqor PDFs and AI strategies. If you meet a term you do not recognise, you can quickly look it up here, then return to the main material.",
+      "paragraph1": "The glossary is designed to sit next to your Cur Nova PDFs and AI strategies. If you meet a term you do not recognise, you can quickly look it up here, then return to the main material.",
       "paragraph2": "Definitions are intentionally conservative and do not attempt to predict markets or tell you what to trade. They simply give structure to the language used in courses."
     }
   },
@@ -28,7 +28,7 @@
     "psychology": "Psychology"
   },
   "terms": {
-    "title": "Selected terms from the Avenqor glossary.",
+    "title": "Selected terms from the Cur Nova glossary.",
     "subtitle": "In the full product you will be able to search, filter and open dedicated glossary views directly from course modules.",
     "disclaimer": "Definitions here are for preview. Full glossary will be extended per release.",
     "items": [
@@ -129,12 +129,12 @@
     "linkFromCourses": {
       "title": "Link from courses",
       "subtitle": "In the app, you can jump here from inside PDFs.",
-      "description": "In production, key terms in Avenqor courses will link to glossary entries. You can open them, read the explanation and then return to your place in the PDF or module."
+      "description": "In production, key terms in Cur Nova courses will link to glossary entries. You can open them, read the explanation and then return to your place in the PDF or module."
     },
     "updates": {
       "title": "Updates over time",
       "subtitle": "Glossary evolves with new modules and markets.",
-      "description": "As Avenqor adds new courses and AI templates, additional terms will be documented here. All updates will keep the same conservative, education-first tone."
+      "description": "As Cur Nova adds new courses and AI templates, additional terms will be documented here. All updates will keep the same conservative, education-first tone."
     }
   },
   "cta": {

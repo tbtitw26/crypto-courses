@@ -30,8 +30,8 @@ export const COURSE_JSON_SCHEMA = {
       required: ['course_id', 'brand', 'domain', 'language', 'created_at_iso', 'content_scope', 'education_only_notice'],
       properties: {
         course_id: { type: 'string' },
-        brand: { type: 'string', enum: ['Avenqor'] },
-        domain: { type: 'string', enum: ['avenqor.net'] },
+        brand: { type: 'string', enum: ['Cur Nova'] },
+        domain: { type: 'string', enum: ['cur-nova.com'] },
         language: { type: 'string', enum: ['EN'] },
         created_at_iso: { type: 'string' },
         content_scope: {
@@ -472,8 +472,8 @@ export const CUSTOM_COURSE_JSON_SCHEMA = {
       required: ['course_id', 'brand', 'domain', 'language', 'created_at_iso', 'content_scope', 'education_only_notice'],
       properties: {
         course_id: { type: 'string' },
-        brand: { type: 'string', enum: ['Avenqor'] },
-        domain: { type: 'string', enum: ['avenqor.net'] },
+        brand: { type: 'string', enum: ['Cur Nova'] },
+        domain: { type: 'string', enum: ['cur-nova.com'] },
         language: { type: 'string', enum: ['EN'] },
         created_at_iso: { type: 'string' },
         content_scope: {

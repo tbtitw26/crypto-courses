@@ -91,7 +91,7 @@
         "ar": "Arabic"
       },
       "consents": {
-        "education": "I understand this is educational material only. Avenqor does not provide financial advice or trading signals.",
+        "education": "I understand this is educational material only. Cur Nova does not provide financial advice or trading signals.",
         "terms": "I confirm that I have read and accept the Terms & Conditions and Risk & Disclaimer.",
         "termsBefore": "I confirm that I have read and accept the",
         "termsLink": "Terms & Conditions",
@@ -259,7 +259,7 @@
         "appliesTo": "Applies to Forex / Crypto / Binary"
       },
       "conceptCard": {
-        "title": "Core Avenqor concept",
+        "title": "Core Cur Nova concept",
         "subtitle": "Recommended before any strategy or setup."
       },
       "readingTime": "Approx. reading time: 8–12 minutes."
@@ -350,12 +350,12 @@
       },
       "turningConcepts": {
         "title": "Turning concepts into your own plan",
-        "description": "Avenqor cannot tell you what exact numbers to choose. What it can do is help you think through the components and document them in a simple, written plan.",
+        "description": "Cur Nova cannot tell you what exact numbers to choose. What it can do is help you think through the components and document them in a simple, written plan.",
         "steps": [
           "Write down a maximum drawdown where you would pause and review your approach.",
           "Decide a typical range for risk per trade or structured idea that feels sustainable for you.",
           "Define daily and weekly loss limits that would trigger a break.",
-          "Use a journal or the Avenqor AI tools to check whether you are actually following your plan over time."
+          "Use a journal or the Cur Nova AI tools to check whether you are actually following your plan over time."
         ],
         "note": "If you are unsure what is appropriate for your situation, consider speaking with an independent, qualified financial professional."
       }
@@ -381,7 +381,7 @@
       "riskWarning": {
         "title": "High-risk market warning",
         "description": "Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. Only you can decide whether such risk is suitable for you.",
-        "note": "Avenqor does not manage funds, does not execute trades and does not provide personalised financial advice."
+        "note": "Cur Nova does not manage funds, does not execute trades and does not provide personalised financial advice."
       },
       "continueLearning": {
         "title": "Continue learning",
@@ -670,7 +670,7 @@
       "expectations": {
         "title": "About expectations and uncertainty",
         "description": "Even with a thoughtful review process, trading Forex, Crypto and Binary options remains highly speculative. There is no guarantee that any approach will be profitable or that past patterns will repeat.",
-        "note": "Avenqor does not manage funds or provide personalised financial advice. Your decisions and outcomes in the market remain your own responsibility."
+        "note": "Cur Nova does not manage funds or provide personalised financial advice. Your decisions and outcomes in the market remain your own responsibility."
       },
       "continueLearning": {
         "title": "Continue learning",
@@ -1069,10 +1069,10 @@
       "riskNote": {
         "title": "About strategies, risk and uncertainty",
         "description": "Even a well-documented strategy cannot remove the uncertainty of Forex, Crypto or Binary options. Prices can move sharply and unpredictably, and losses can be larger than expected.",
-        "note": "Avenqor provides education only and does not operate as a broker or signal provider. Your trading decisions and results remain your own responsibility."
+        "note": "Cur Nova provides education only and does not operate as a broker or signal provider. Your trading decisions and results remain your own responsibility."
       },
       "continueLearning": {
-        "title": "Continue learning with Avenqor",
+        "title": "Continue learning with Cur Nova",
         "description": "These pages connect naturally to building and using your snapshot:",
         "topics": [
           "Risk Management Foundations",

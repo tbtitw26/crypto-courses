@@ -18,13 +18,13 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Avenqor',
-    template: '%s | Avenqor',
+    default: 'Cur Nova',
+    template: '%s | Cur Nova',
   },
-  description: 'Avenqor - Premium education for high-risk markets. Structured Forex, Crypto and Binary options courses.',
-  keywords: ['Avenqor', 'Forex', 'Crypto', 'Binary options', 'Trading education'],
-  authors: [{ name: 'Avenqor Team' }],
-  creator: 'Avenqor',
+  description: 'Cur Nova - Premium education for high-risk markets. Structured Forex, Crypto and Binary options courses.',
+  keywords: ['Cur Nova', 'Forex', 'Crypto', 'Binary options', 'Trading education'],
+  authors: [{ name: 'Cur Nova Team' }],
+  creator: 'Cur Nova',
   icons: {
     icon: [
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -42,14 +42,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://avenqor.net',
-    siteName: 'Avenqor',
-    title: 'Avenqor',
+    url: 'https://cur-nova.com',
+    siteName: 'Cur Nova',
+    title: 'Cur Nova',
     description: 'Premium education for high-risk markets. Structured Forex, Crypto and Binary options courses.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Avenqor',
+    title: 'Cur Nova',
     description: 'Premium education for high-risk markets. Structured Forex, Crypto and Binary options courses.',
   },
   robots: {

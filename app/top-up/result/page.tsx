@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import TopUpSuccessContent from '@/components/TopUpSuccessContent'
 
 export const metadata: Metadata = {
-  title: 'Top-up payment status | Avenqor',
+  title: 'Top-up payment status | Cur Nova',
   description: 'Track the status of your token top-up payment.',
 }
 

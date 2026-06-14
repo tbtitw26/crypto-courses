@@ -80,9 +80,9 @@ export function LoginPage() {
         {/* Brand mark */}
         <Link href="/" className="mb-10 inline-flex items-center gap-2.5">
           <span className="relative block h-9 w-9">
-            <Image src="/logo-mini.png" alt="Avenqor" fill sizes="36px" className="object-contain" />
+            <Image src="/logo-mini.png" alt="Cur Nova" fill sizes="36px" className="object-contain" />
           </span>
-          <span className="text-lg font-semibold text-text-main">Avenqor</span>
+          <span className="text-lg font-semibold text-text-main">Cur Nova</span>
         </Link>
 
         {/* Card */}

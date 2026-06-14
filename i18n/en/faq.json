@@ -4,7 +4,7 @@
     "faq": "FAQ"
   },
   "hero": {
-    "title": "Before you start, here is what Avenqor is – and what it is not.",
+    "title": "Before you start, here is what Cur Nova is – and what it is not.",
     "subtitle": "This page highlights key questions about our courses, custom PDFs, AI strategies, tokens and risk. It is intentionally direct and conservative. We prefer clarity over hype.",
     "bullets": {
       "courses": "Structured PDF courses for Forex, Crypto and Binary.",
@@ -14,29 +14,29 @@
     "sideCard": {
       "title": "High-level risk summary",
       "subtitle": "Frequent reminder, not fine print.",
-      "paragraph1": "Trading Forex, Crypto and Binary options is high risk and can lead to substantial or total loss of capital. Avenqor focuses on structured education. We do not provide financial advice, signals or trade management.",
+      "paragraph1": "Trading Forex, Crypto and Binary options is high risk and can lead to substantial or total loss of capital. Cur Nova focuses on structured education. We do not provide financial advice, signals or trade management.",
       "paragraph2": "Always evaluate whether such instruments are appropriate for your situation and never trade with money you cannot afford to lose.",
       "cta": "Read full risk & disclaimer"
     }
   },
   "faq": {
-    "title": "Common questions about learning with Avenqor.",
+    "title": "Common questions about learning with Cur Nova.",
     "subtitle": "Grouped by topic so you can quickly see how courses, custom PDFs, AI strategies and tokens behave inside the platform.",
     "disclaimer": "This FAQ is not a legal document. Always refer to Terms & Conditions.",
     "items": [
       {
-        "category": "About Avenqor",
-        "question": "Is Avenqor a broker, prop firm or signal provider?",
-        "answer": "No. Avenqor is an educational platform. We do not execute trades, manage client funds, provide trading signals, copy trading, PAMM/MAM services or any form of portfolio management."
+        "category": "About Cur Nova",
+        "question": "Is Cur Nova a broker, prop firm or signal provider?",
+        "answer": "No. Cur Nova is an educational platform. We do not execute trades, manage client funds, provide trading signals, copy trading, PAMM/MAM services or any form of portfolio management."
       },
       {
-        "category": "About Avenqor",
+        "category": "About Cur Nova",
         "question": "Do you guarantee any profit or performance?",
         "answer": "No. Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. We do not guarantee any outcome, return, win rate, payout, drawdown or similar metric. Our content is for education only."
       },
       {
         "category": "Courses & content",
-        "question": "What format are Avenqor courses delivered in?",
+        "question": "What format are Cur Nova courses delivered in?",
         "answer": "Courses are delivered as structured PDF documents. Each course is organised into modules, key concepts, examples and practical checklists so that you can study at your own pace."
       },
       {
@@ -56,7 +56,7 @@
       },
       {
         "category": "AI strategy",
-        "question": "What is an AI strategy inside Avenqor?",
+        "question": "What is an AI strategy inside Cur Nova?",
         "answer": "An AI strategy is an instantly generated plan that describes setup criteria, entry/exit logic, and a risk checklist based on your inputs. It is not a live signal or an auto-trading system. It is educational material intended to help you think in structured scenarios."
       },
       {
@@ -66,7 +66,7 @@
       },
       {
         "category": "Tokens & payments",
-        "question": "How do tokens work on Avenqor?",
+        "question": "How do tokens work on Cur Nova?",
         "answer": "Tokens are an internal balance that you can use to unlock courses, custom PDFs and AI strategies. You can load tokens by purchasing token packs or by setting a custom top-up. Tokens are not a separate financial product or investment."
       },
       {
@@ -81,7 +81,7 @@
       },
       {
         "category": "Access & account",
-        "question": "Do I need an account to access Avenqor courses?",
+        "question": "Do I need an account to access Cur Nova courses?",
         "answer": "You can browse course descriptions without an account. To purchase courses, request a custom course, generate AI strategies or manage your token balance, you will need to create an account and sign in."
       },
       {
@@ -91,18 +91,18 @@
       },
       {
         "category": "Risk & regulation",
-        "question": "Is Avenqor regulated as a financial services provider?",
-        "answer": "Avenqor is positioned as an education-only platform and does not provide execution, investment services, portfolio management or payment services for trading accounts. As such, it does not operate as a broker or investment firm. Always check our Terms & Conditions and Risk & Disclaimer for the most up-to-date legal classification."
+        "question": "Is Cur Nova regulated as a financial services provider?",
+        "answer": "Cur Nova is positioned as an education-only platform and does not provide execution, investment services, portfolio management or payment services for trading accounts. As such, it does not operate as a broker or investment firm. Always check our Terms & Conditions and Risk & Disclaimer for the most up-to-date legal classification."
       },
       {
         "category": "Risk & regulation",
         "question": "Who is responsible for the trades I decide to take?",
-        "answer": "You are. Any decision to trade in Forex, Crypto or Binary options is your own responsibility. Avenqor does not know your full financial situation, objectives or constraints, and nothing on the platform should be treated as personalised advice."
+        "answer": "You are. Any decision to trade in Forex, Crypto or Binary options is your own responsibility. Cur Nova does not know your full financial situation, objectives or constraints, and nothing on the platform should be treated as personalised advice."
       }
     ]
   },
   "tokensCard": {
-    "title": "Tokens inside Avenqor",
+    "title": "Tokens inside Cur Nova",
     "subtitle": "Internal balance, not a tradeable asset.",
     "description": "Tokens are used to unlock educational content (courses, custom PDFs, AI strategies). They cannot be traded on markets, used as margin or withdrawn as cash.",
     "cta": "Read pricing & tokens page"
@@ -120,7 +120,7 @@
   },
   "cta": {
     "title": "Still unsure about something?",
-    "subtitle": "If your question is not covered here, you can reach out to us. We will respond with clear, non-promotional information about how Avenqor works.",
+    "subtitle": "If your question is not covered here, you can reach out to us. We will respond with clear, non-promotional information about how Cur Nova works.",
     "contact": "Contact support",
     "backToHome": "Back to home"
   }

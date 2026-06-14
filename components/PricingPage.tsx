@@ -276,7 +276,7 @@ export function PricingPage() {
             </div>
             <h3 className="mt-4 font-heading text-xl font-semibold text-text-main">Top up token balance</h3>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary">
-              Load tokens once and use them across all Avenqor products — courses, custom PDFs, and AI-generated strategies. Tokens do not expire.
+              Load tokens once and use them across all Cur Nova products — courses, custom PDFs, and AI-generated strategies. Tokens do not expire.
             </p>
             <Link href="/top-up" className="btn-primary mt-6 w-full text-center">
               {t('cta.choosePack')}

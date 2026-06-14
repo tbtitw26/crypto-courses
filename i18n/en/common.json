@@ -1,6 +1,6 @@
 {
   "brand": {
-    "name": "Avenqor",
+    "name": "Cur Nova",
     "tagline": "Education only"
   },
   "nav": {
@@ -53,7 +53,7 @@
     "ar": "AR"
   },
   "footer": {
-    "educationOnlyLine": "Avenqor provides education only. We do not offer financial advice.",
+    "educationOnlyLine": "Cur Nova provides education only. We do not offer financial advice.",
     "companyTitle": "Company",
     "learnTitle": "Learn",
     "usefulLinksTitle": "Useful Links",

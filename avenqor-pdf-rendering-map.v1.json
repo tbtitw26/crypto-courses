@@ -2,8 +2,8 @@
   "render_map": {
     "id": "avenqor.pdf_render_map.v1",
     "brand": {
-      "name": "Avenqor",
-      "domain": "avenqor.net"
+      "name": "Cur Nova",
+      "domain": "cur-nova.com"
     },
     "created_at_iso": "2025-11-30T15:48:34.686325+00:00",
     "document": {
@@ -416,7 +416,7 @@
     },
     "footer": {
       "apply_from_section_id": "legal_notice",
-      "left": "Avenqor - Education-only",
+      "left": "Cur Nova - Education-only",
       "center": "Page {{page}}",
       "right": "v{{meta.version}} - {{meta.course_id}}"
     },

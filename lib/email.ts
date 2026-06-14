@@ -55,7 +55,7 @@ export async function sendContactEmail(data: ContactEmailData): Promise<void> {
     throw new Error('SMTP configuration is missing')
   }
 
-  const subject = `[Avenqor Contact] ${data.topic} - ${data.region}`
+  const subject = `[Cur Nova Contact] ${data.topic} - ${data.region}`
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -149,7 +149,7 @@ export async function sendPasswordResetEmail(data: PasswordResetEmailData): Prom
   }
 
   const resetUrl = `${config.nextauth.url}/reset-password?token=${data.resetToken}`
-  const subject = 'Reset your Avenqor password'
+  const subject = 'Reset your Cur Nova password'
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -170,11 +170,11 @@ export async function sendPasswordResetEmail(data: PasswordResetEmailData): Prom
       <body>
         <div class="container">
           <div class="header">
-            <h2 style="margin: 0;">Avenqor Password Reset</h2>
+            <h2 style="margin: 0;">Cur Nova Password Reset</h2>
           </div>
           <div class="content">
             <p>Hello${data.userName ? ` ${data.userName}` : ''},</p>
-            <p>You requested to reset your password for your Avenqor account. Click the button below to create a new password:</p>
+            <p>You requested to reset your password for your Cur Nova account. Click the button below to create a new password:</p>
             <div style="text-align: center;">
               <a href="${resetUrl}" class="button">Reset Password</a>
             </div>
@@ -194,11 +194,11 @@ export async function sendPasswordResetEmail(data: PasswordResetEmailData): Prom
   `
 
   const textContent = `
-Avenqor Password Reset
+Cur Nova Password Reset
 
 Hello${data.userName ? ` ${data.userName}` : ''},
 
-You requested to reset your password for your Avenqor account. Use the link below to create a new password:
+You requested to reset your password for your Cur Nova account. Use the link below to create a new password:
 
 ${resetUrl}
 
@@ -233,26 +233,26 @@ export async function sendRegistrationConfirmationEmail(
 
   const t = {
     en: {
-      subject: 'Welcome to Avenqor',
+      subject: 'Welcome to Cur Nova',
       greeting: `Hello ${data.userName},`,
       title: 'Thank you for registering.',
-      body: 'Your Avenqor account has been created successfully. You can now sign in and access your dashboard, courses, and AI tools.',
+      body: 'Your Cur Nova account has been created successfully. You can now sign in and access your dashboard, courses, and AI tools.',
       dashboard: 'Open Dashboard',
       login: 'Sign In',
       educationOnly:
-        'Education Only - Avenqor provides educational content only and does not offer financial advice, trading signals, or account management.',
+        'Education Only - Cur Nova provides educational content only and does not offer financial advice, trading signals, or account management.',
       support: 'If you did not create this account, please contact support immediately.',
       footer: 'This is an automated message. Please do not reply to this email.',
     },
     ar: {
-      subject: 'Welcome to Avenqor',
+      subject: 'Welcome to Cur Nova',
       greeting: `مرحبا ${data.userName}،`,
       title: 'شكرا لتسجيلك.',
-      body: 'تم إنشاء حسابك في Avenqor بنجاح. يمكنك الآن تسجيل الدخول والوصول إلى لوحة التحكم والدورات وأدوات الذكاء الاصطناعي.',
+      body: 'تم إنشاء حسابك في Cur Nova بنجاح. يمكنك الآن تسجيل الدخول والوصول إلى لوحة التحكم والدورات وأدوات الذكاء الاصطناعي.',
       dashboard: 'افتح لوحة التحكم',
       login: 'تسجيل الدخول',
       educationOnly:
-        'لأغراض تعليمية فقط - تقدم Avenqor محتوى تعليميا فقط ولا تقدم نصائح مالية أو إشارات تداول أو إدارة حسابات.',
+        'لأغراض تعليمية فقط - تقدم Cur Nova محتوى تعليميا فقط ولا تقدم نصائح مالية أو إشارات تداول أو إدارة حسابات.',
       support: 'إذا لم تقم بإنشاء هذا الحساب، يرجى التواصل مع الدعم فورا.',
       footer: 'هذه رسالة آلية. يرجى عدم الرد على هذا البريد الإلكتروني.',
     },
@@ -345,7 +345,7 @@ export async function sendRegistrationConfirmationEmail(
         <div class="container">
           <div class="wrapper">
             <div class="header">
-              <h1>Avenqor</h1>
+              <h1>Cur Nova</h1>
             </div>
             <div class="content">
               <p>${translations.greeting}</p>
@@ -422,7 +422,7 @@ function generatePurchaseEmailHtml(data: PurchaseEmailData): string {
   // Translations
   const t = {
     en: {
-      subject: 'Purchase Confirmation - Avenqor',
+      subject: 'Purchase Confirmation - Cur Nova',
       thankYou: 'Thank you for your purchase!',
       greeting: `Hello ${data.userName},`,
       confirmation: 'Your purchase has been confirmed. Details below:',
@@ -442,10 +442,10 @@ function generatePurchaseEmailHtml(data: PurchaseEmailData): string {
       viewCourse: 'View Course',
       footer: 'This is an automated message. Please do not reply to this email.',
       support: 'If you have any questions, please contact our support team.',
-      educationOnly: 'Education Only – This purchase is for educational content only. Avenqor does not provide trading signals or manage trading accounts.',
+      educationOnly: 'Education Only – This purchase is for educational content only. Cur Nova does not provide trading signals or manage trading accounts.',
     },
     ar: {
-      subject: 'تأكيد الشراء - Avenqor',
+      subject: 'تأكيد الشراء - Cur Nova',
       thankYou: 'شكراً لك على شرائك!',
       greeting: `مرحباً ${data.userName}،`,
       confirmation: 'تم تأكيد شرائك. التفاصيل أدناه:',
@@ -465,7 +465,7 @@ function generatePurchaseEmailHtml(data: PurchaseEmailData): string {
       viewCourse: 'عرض الدورة',
       footer: 'هذه رسالة آلية. يرجى عدم الرد على هذا البريد الإلكتروني.',
       support: 'إذا كان لديك أي أسئلة، يرجى الاتصال بفريق الدعم لدينا.',
-      educationOnly: 'لأغراض تعليمية فقط – هذا الشراء للمحتوى التعليمي فقط. Avenqor لا تقدم إشارات تداول أو تدير حسابات تداول.',
+      educationOnly: 'لأغراض تعليمية فقط – هذا الشراء للمحتوى التعليمي فقط. Cur Nova لا تقدم إشارات تداول أو تدير حسابات تداول.',
     },
   }
 
@@ -621,7 +621,7 @@ function generatePurchaseEmailHtml(data: PurchaseEmailData): string {
         <div class="container">
           <div class="email-wrapper">
             <div class="header">
-              <h1>Avenqor</h1>
+              <h1>Cur Nova</h1>
             </div>
             <div class="content">
               <div class="greeting">${translations.greeting}</div>
@@ -707,8 +707,8 @@ function generateCourseDeliveryEmailHtml(data: CourseDeliveryEmailData): string 
   // Translations
   const t = {
     en: {
-      subject: 'Your Custom Course is Ready - Avenqor',
-      subjectStrategy: 'Your AI Strategy is Ready - Avenqor',
+      subject: 'Your Custom Course is Ready - Cur Nova',
+      subjectStrategy: 'Your AI Strategy is Ready - Cur Nova',
       greeting: `Hello ${data.userName},`,
       thankYou: 'Your course is ready!',
       thankYouStrategy: 'Your strategy is ready!',
@@ -720,11 +720,11 @@ function generateCourseDeliveryEmailHtml(data: CourseDeliveryEmailData): string 
       dashboardUrl: `${config.nextauth.url}/dashboard`,
       footer: 'This is an automated message. Please do not reply to this email.',
       support: 'If you have any questions, please contact our support team.',
-      educationOnly: 'Education Only – This content is for educational purposes only. Avenqor does not provide trading signals or manage trading accounts.',
+      educationOnly: 'Education Only – This content is for educational purposes only. Cur Nova does not provide trading signals or manage trading accounts.',
     },
     ar: {
-      subject: 'دورتك المخصصة جاهزة - Avenqor',
-      subjectStrategy: 'استراتيجيتك جاهزة - Avenqor',
+      subject: 'دورتك المخصصة جاهزة - Cur Nova',
+      subjectStrategy: 'استراتيجيتك جاهزة - Cur Nova',
       greeting: `مرحباً ${data.userName}،`,
       thankYou: 'دورتك جاهزة!',
       thankYouStrategy: 'استراتيجيتك جاهزة!',
@@ -736,7 +736,7 @@ function generateCourseDeliveryEmailHtml(data: CourseDeliveryEmailData): string 
       dashboardUrl: `${config.nextauth.url}/dashboard`,
       footer: 'هذه رسالة آلية. يرجى عدم الرد على هذا البريد الإلكتروني.',
       support: 'إذا كان لديك أي أسئلة، يرجى الاتصال بفريق الدعم لدينا.',
-      educationOnly: 'لأغراض تعليمية فقط – هذا المحتوى لأغراض تعليمية فقط. Avenqor لا تقدم إشارات تداول أو تدير حسابات تداول.',
+      educationOnly: 'لأغراض تعليمية فقط – هذا المحتوى لأغراض تعليمية فقط. Cur Nova لا تقدم إشارات تداول أو تدير حسابات تداول.',
     },
   }
 
@@ -867,7 +867,7 @@ function generateCourseDeliveryEmailHtml(data: CourseDeliveryEmailData): string 
         <div class="container">
           <div class="email-wrapper">
             <div class="header">
-              <h1>Avenqor</h1>
+              <h1>Cur Nova</h1>
             </div>
             <div class="content">
               <div class="greeting">${translations.greeting}</div>
@@ -917,10 +917,10 @@ export async function sendCourseDeliveryEmail(data: CourseDeliveryEmailData): Pr
   const isStrategy = data.type === 'ai-strategy'
   const t = {
     en: {
-      subject: isStrategy ? 'Your AI Strategy is Ready - Avenqor' : 'Your Custom Course is Ready - Avenqor',
+      subject: isStrategy ? 'Your AI Strategy is Ready - Cur Nova' : 'Your Custom Course is Ready - Cur Nova',
     },
     ar: {
-      subject: isStrategy ? 'استراتيجيتك جاهزة - Avenqor' : 'دورتك المخصصة جاهزة - Avenqor',
+      subject: isStrategy ? 'استراتيجيتك جاهزة - Cur Nova' : 'دورتك المخصصة جاهزة - Cur Nova',
     },
   }
 
@@ -946,7 +946,7 @@ ${data.locale === 'ar' ? 'ستجد ملف (ملفات) PDF مرفقة بهذا �
 
 ${data.locale === 'ar' ? 'عرض لوحة التحكم:' : 'View Dashboard:'} ${config.nextauth.url}/dashboard
 
-${data.locale === 'ar' ? 'لأغراض تعليمية فقط – هذا المحتوى لأغراض تعليمية فقط. Avenqor لا تقدم إشارات تداول أو تدير حسابات تداول.' : 'Education Only – This content is for educational purposes only. Avenqor does not provide trading signals or manage trading accounts.'}
+${data.locale === 'ar' ? 'لأغراض تعليمية فقط – هذا المحتوى لأغراض تعليمية فقط. Cur Nova لا تقدم إشارات تداول أو تدير حسابات تداول.' : 'Education Only – This content is for educational purposes only. Cur Nova does not provide trading signals or manage trading accounts.'}
 
 ${data.locale === 'ar' ? 'إذا كان لديك أي أسئلة، يرجى الاتصال بفريق الدعم لدينا.' : 'If you have any questions, please contact our support team.'}
 
@@ -980,10 +980,10 @@ export async function sendPurchaseConfirmationEmail(data: PurchaseEmailData): Pr
 
   const t = {
     en: {
-      subject: 'Purchase Confirmation - Avenqor',
+      subject: 'Purchase Confirmation - Cur Nova',
     },
     ar: {
-      subject: 'تأكيد الشراء - Avenqor',
+      subject: 'تأكيد الشراء - Cur Nova',
     },
   }
 
@@ -1008,7 +1008,7 @@ ${data.customCourseDeliveryInfo ? '\nIn the coming days, our trader will send yo
 
 View your dashboard: ${config.nextauth.url}/dashboard
 
-Education Only – This purchase is for educational content only. Avenqor does not provide trading signals or manage trading accounts.
+Education Only – This purchase is for educational content only. Cur Nova does not provide trading signals or manage trading accounts.
 
 If you have any questions, please contact our support team.
 
@@ -1091,7 +1091,7 @@ export async function sendPdfReadyEmail(data: PdfReadyEmailData): Promise<{ mess
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
   <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px 20px;">
     <div style="text-align: center; margin-bottom: 30px;">
-      <h1 style="color: #0f172a; font-size: 24px; margin: 0;">Avenqor</h1>
+      <h1 style="color: #0f172a; font-size: 24px; margin: 0;">Cur Nova</h1>
     </div>
     
     <div style="color: #334155; font-size: 16px; line-height: 1.6;">

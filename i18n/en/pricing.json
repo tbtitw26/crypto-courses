@@ -13,7 +13,7 @@
   },
   "hero": {
     "title": "One balance for courses and AI strategies.",
-    "subtitle": "Load a token balance once and use it across Avenqor: structured PDF courses, custom courses and AI-generated strategies. Or pay directly for a single course if you prefer.",
+    "subtitle": "Load a token balance once and use it across Cur Nova: structured PDF courses, custom courses and AI-generated strategies. Or pay directly for a single course if you prefer.",
     "bullets": {
       "oneBalance": "One balance for Forex, Crypto and Binary content.",
       "payWithTokens": "Pay with tokens or direct in EUR, GBP, USD or SR.",
@@ -31,7 +31,7 @@
   },
   "tokenPacks": {
     "title": "Token packs.",
-    "subtitle": "Start small or commit for longer – each pack loads tokens into your Avenqor balance for use across courses and AI.",
+    "subtitle": "Start small or commit for longer – each pack loads tokens into your Cur Nova balance for use across courses and AI.",
     "note": "Currency shown here is illustrative. Final pricing may differ.",
     "info": "Exact token conversion will be defined in production.",
     "mostPopular": "Most popular",
@@ -58,7 +58,7 @@
     "cta": "See example checkout"
   },
   "howTokensWork": {
-    "title": "How tokens work inside Avenqor.",
+    "title": "How tokens work inside Cur Nova.",
     "subtitle": "A simple balance that powers both structured courses and AI-based tools.",
     "steps": {
       "step1": {
@@ -85,8 +85,8 @@
   },
   "riskNotice": {
     "title": "Important risk and token notice.",
-    "paragraph1": "Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. Tokens, courses and AI outputs on Avenqor are for educational purposes only. They do not contain financial advice or trading signals.",
-    "paragraph2": "Tokens themselves are a way to access digital educational content inside Avenqor. They are not a separate financial product or investment. Token pricing, refund rules and any region-specific limitations will be defined in the final Terms & Conditions and Risk & Disclaimer.",
+    "paragraph1": "Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. Tokens, courses and AI outputs on Cur Nova are for educational purposes only. They do not contain financial advice or trading signals.",
+    "paragraph2": "Tokens themselves are a way to access digital educational content inside Cur Nova. They are not a separate financial product or investment. Token pricing, refund rules and any region-specific limitations will be defined in the final Terms & Conditions and Risk & Disclaimer.",
     "cta": "Read full risk & disclaimer"
   },
   "cta": {

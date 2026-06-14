@@ -326,7 +326,7 @@ function getPdfStyles(isArabic: boolean): string {
 function renderCover(course: GeneratedCourse, coverImagePath: string, isArabic: boolean): string {
   return `
     <div class="cover-page">
-      <img src="/avenqor.webp" alt="Avenqor Logo" class="cover-logo" />
+      <img src="/avenqor.webp" alt="Cur Nova Logo" class="cover-logo" />
       <img src="${coverImagePath}" alt="${course.cover.image_generation.alt_text}" class="cover-image" />
       <h1 class="cover-title">${escapeHtml(course.cover.title)}</h1>
       <h2 class="cover-subtitle">${escapeHtml(course.cover.subtitle)}</h2>
@@ -341,7 +341,7 @@ function renderCover(course: GeneratedCourse, coverImagePath: string, isArabic: 
 function renderLegalNotice(course: GeneratedCourse, isArabic: boolean): string {
   return `
     <div class="section" id="legal-notice">
-      <img src="/avenqor.webp" alt="Avenqor Logo" class="section-header-logo" />
+      <img src="/avenqor.webp" alt="Cur Nova Logo" class="section-header-logo" />
       <h1>${escapeHtml(course.legal_notice.title)}</h1>
       <ul>
         ${course.legal_notice.bullets.map((bullet) => `<li>${escapeHtml(bullet)}</li>`).join('')}
@@ -357,7 +357,7 @@ function renderLegalNotice(course: GeneratedCourse, isArabic: boolean): string {
 function renderHowToUse(course: GeneratedCourse, isArabic: boolean): string {
   return `
     <div class="section" id="how-to-use">
-      <img src="/avenqor.webp" alt="Avenqor Logo" class="section-header-logo" />
+      <img src="/avenqor.webp" alt="Cur Nova Logo" class="section-header-logo" />
       <h1>${escapeHtml(course.how_to_use.title)}</h1>
       <h3>${isArabic ? 'الوتيرة الموصى بها' : 'Recommended Pace'}</h3>
       <ul>
@@ -380,7 +380,7 @@ function renderTOC(course: GeneratedCourse, isArabic: boolean): string {
   // TOC will be populated by two-pass rendering
   return `
     <div class="section" id="toc">
-      <img src="/avenqor.webp" alt="Avenqor Logo" class="section-header-logo" />
+      <img src="/avenqor.webp" alt="Cur Nova Logo" class="section-header-logo" />
       <h1>${escapeHtml(course.toc.title)}</h1>
       <p>${escapeHtml(course.toc.entries_note)}</p>
       <ul>
@@ -398,7 +398,7 @@ function renderTOC(course: GeneratedCourse, isArabic: boolean): string {
 function renderPreface(course: GeneratedCourse, isArabic: boolean): string {
   return `
     <div class="section" id="preface">
-      <img src="/avenqor.webp" alt="Avenqor Logo" class="section-header-logo" />
+      <img src="/avenqor.webp" alt="Cur Nova Logo" class="section-header-logo" />
       <h1>${escapeHtml(course.preface.title)}</h1>
       <h3>${isArabic ? 'لمن هذا الكورس' : 'Who This Is For'}</h3>
       <ul>
@@ -426,7 +426,7 @@ function renderModules(course: GeneratedCourse, diagramPaths: Record<string, str
   for (const courseModule of course.modules) {
     html += `
       <div class="section" id="${courseModule.anchor_id}">
-        <img src="/avenqor.webp" alt="Avenqor Logo" class="section-header-logo" />
+        <img src="/avenqor.webp" alt="Cur Nova Logo" class="section-header-logo" />
         <div class="module-header">
           <h1>${escapeHtml(courseModule.title)}</h1>
           <p><strong>${isArabic ? 'الهدف' : 'Goal'}:</strong> ${escapeHtml(courseModule.goal)}</p>
@@ -550,7 +550,7 @@ function renderContentBlock(block: { type: string; text: string }, isArabic: boo
 function renderOnePageSummary(course: GeneratedCourse, isArabic: boolean): string {
   return `
     <div class="section" id="one_page_summary">
-      <img src="/avenqor.webp" alt="Avenqor Logo" class="section-header-logo" />
+      <img src="/avenqor.webp" alt="Cur Nova Logo" class="section-header-logo" />
       <h1>${escapeHtml(course.one_page_summary.title)}</h1>
       ${course.one_page_summary.sections.map((section) => `
         <h3>${escapeHtml(section.heading)}</h3>
@@ -566,7 +566,7 @@ function renderOnePageSummary(course: GeneratedCourse, isArabic: boolean): strin
 function renderGlossary(course: GeneratedCourse, isArabic: boolean): string {
   return `
     <div class="section" id="glossary">
-      <img src="/avenqor.webp" alt="Avenqor Logo" class="section-header-logo" />
+      <img src="/avenqor.webp" alt="Cur Nova Logo" class="section-header-logo" />
       <h1>${isArabic ? 'المسرد' : 'Glossary'}</h1>
       ${course.glossary.map((item) => `
         <div class="definition-card">
@@ -582,7 +582,7 @@ function renderGlossary(course: GeneratedCourse, isArabic: boolean): string {
 function renderQuiz(course: GeneratedCourse, isArabic: boolean): string {
   return `
     <div class="section" id="quiz">
-      <img src="/avenqor.webp" alt="Avenqor Logo" class="section-header-logo" />
+      <img src="/avenqor.webp" alt="Cur Nova Logo" class="section-header-logo" />
       <h1>${escapeHtml(course.quiz.title)}</h1>
       ${course.quiz.questions.map((q, index) => `
         <div class="quiz-question">

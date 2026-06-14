@@ -4,8 +4,8 @@
     "privacy": "Privacy Policy"
   },
   "hero": {
-    "title": "Privacy Policy for Avenqor trading education platform.",
-    "subtitle": "This Privacy Policy explains what personal data we collect, why we use it, how long we keep it, and how you can exercise your rights when using avenqor.net and related services (the \"Service\"). It is based on UK GDPR and the Data Protection Act 2018.",
+    "title": "Privacy Policy for Cur Nova trading education platform.",
+    "subtitle": "This Privacy Policy explains what personal data we collect, why we use it, how long we keep it, and how you can exercise your rights when using cur-nova.com and related services (the \"Service\"). It is based on UK GDPR and the Data Protection Act 2018.",
     "meta": [
       {
         "label": "Effective date",
@@ -70,12 +70,12 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains what personal data we collect, why we use it, how long we keep it, and how you can exercise your rights when using avenqor.net and related services (the \"Service\")."
+          "text": "We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains what personal data we collect, why we use it, how long we keep it, and how you can exercise your rights when using cur-nova.com and related services (the \"Service\")."
         },
         {
           "type": "list",
           "items": [
-            "Controller: CUR NOVA LTD (Company No. 17240836), Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom (\"Avenqor\", \"we\", \"us\", \"our\").",
+            "Controller: CUR NOVA LTD (Company No. 17240836), Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom (\"Cur Nova\", \"we\", \"us\", \"our\").",
             "Contact: info@cur-nova.com",
             "Scope & age: This Policy applies to all users of the Service (including business customers and their authorised staff). The Service is intended for individuals aged 18 and over."
           ]

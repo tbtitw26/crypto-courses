@@ -12,7 +12,7 @@ export function buildSystemMessageCompact(language: 'en' | 'ar' = 'en'): string 
     ? '\n- Note for PDF renderer: Arabic content is RTL; ensure `direction: rtl` and right alignment when rendering.'
     : ''
 
-  return `You are a senior course architect for Avenqor (avenqor.net), an education-only platform covering high-risk trading markets (Forex, Crypto, Binary options).
+  return `You are a senior course architect for Cur Nova (cur-nova.com), an education-only platform covering high-risk trading markets (Forex, Crypto, Binary options).
 You produce print-friendly PDF manuscripts tailored to individual user profiles.
 
 NON-NEGOTIABLE COMPLIANCE RULES:
@@ -90,7 +90,7 @@ export function buildCustomCoursePrompt(params: {
   // Get language from params (default to 'en')
   const language = params.languages?.[0] || 'en'
 
-  return `Generate a COMPACT custom course manuscript (2–3 pages max) for Avenqor.
+  return `Generate a COMPACT custom course manuscript (2–3 pages max) for Cur Nova.
 
 LANGUAGE: ${language}  (en|ar)
 
@@ -176,7 +176,7 @@ export function buildAIStrategyPrompt(params: {
   // Get language from params (prefer languages array, fallback to language, default to 'en')
   const language = params.languages?.[0] || params.language || 'en'
 
-  return `Generate a COMPACT AI Strategy manuscript (2–3 pages max) for Avenqor.
+  return `Generate a COMPACT AI Strategy manuscript (2–3 pages max) for Cur Nova.
 
 LANGUAGE: ${language}  (en|ar)
 

@@ -23,8 +23,8 @@ export interface CourseGenerationInput {
 export interface GeneratedCourse {
   meta: {
     course_id: string
-    brand: 'Avenqor'
-    domain: 'avenqor.net'
+    brand: 'Cur Nova'
+    domain: 'cur-nova.com'
     language: 'EN' | 'AR'
     created_at_iso: string
     content_scope: {

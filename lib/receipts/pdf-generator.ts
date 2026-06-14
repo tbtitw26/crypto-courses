@@ -321,7 +321,7 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
   <div class="container">
     <div class="header">
       <div>
-        <div class="logo">Avenqor</div>
+        <div class="logo">Cur Nova</div>
         <div class="company-info">
           CUR NOVA LTD<br>
           Company Number: 17240836<br>
@@ -398,7 +398,7 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
     </div>
 
     <div class="footer">
-      <p><strong>Education Only</strong> – This receipt is for educational content only. Avenqor does not provide trading signals or manage trading accounts.</p>
+      <p><strong>Education Only</strong> – This receipt is for educational content only. Cur Nova does not provide trading signals or manage trading accounts.</p>
       <p style="margin-top: 10px;">For billing questions, contact support with your account email. Never share full card details.</p>
     </div>
   </div>

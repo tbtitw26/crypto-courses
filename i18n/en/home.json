@@ -1,6 +1,6 @@
 {
   "hero": {
-    "badgeLeft": "Avenqor Club",
+    "badgeLeft": "Cur Nova Club",
     "badgeRight": "Education only",
     "title": "Premium education for high-risk markets.",
     "subtitle": "Structured Forex, Crypto and Binary options courses with custom PDFs and AI-generated strategies. No signals, no promises – just clear learning paths.",
@@ -14,7 +14,7 @@
   },
   "heroSlideshow": {
     "labelTop": "Featured today",
-    "labelSub": "Selected Avenqor courses",
+    "labelSub": "Selected Cur Nova courses",
     "ctaViewCourse": "View course",
     "slideCounterPrefix": "Slide",
     "slideCounterOf": "of",
@@ -48,7 +48,7 @@
   },
   "marketSnapshot": {
     "title": "Market snapshot",
-    "subtitle": "Live prices from major markets to support your learning. Avenqor never provides trading signals or investment advice.",
+    "subtitle": "Live prices from major markets to support your learning. Cur Nova never provides trading signals or investment advice.",
     "disclaimer": "Data is shown for educational purposes only.",
     "widgetHint": "Data widget placeholder (TradingView).",
     "chartHint": "Real-time BTC / FX chart placeholder",
@@ -68,12 +68,12 @@
   },
   "testimonials": {
     "title": "What our students say",
-    "subtitle": "Real feedback from traders who use Avenqor courses and strategies.",
+    "subtitle": "Real feedback from traders who use Cur Nova courses and strategies.",
     "video1Label": "Student testimonial video 1",
     "video2Label": "Student testimonial video 2"
   },
   "paths": {
-    "title": "Three ways to learn with Avenqor.",
+    "title": "Three ways to learn with Cur Nova.",
     "subtitle": "Pick the format that fits your current stage and time.",
     "items": [
       {
@@ -96,7 +96,7 @@
     ]
   },
   "howItWorks": {
-    "title": "How Avenqor fits into your learning.",
+    "title": "How Cur Nova fits into your learning.",
     "subtitle": "A simple sequence that keeps education and risk awareness at the center.",
     "steps": [
       {
@@ -123,7 +123,7 @@
     "items": [
       {
         "title": "Token packs",
-        "text": "Buy predefined token packs and use them across all Avenqor products."
+        "text": "Buy predefined token packs and use them across all Cur Nova products."
       },
       {
         "title": "Custom top-up",
@@ -138,7 +138,7 @@
   },
   "tokenPacks": {
     "title": "Token packs & custom top-up.",
-    "subtitle": "Start small or load a balance – tokens work across Avenqor courses and AI strategies.",
+    "subtitle": "Start small or load a balance – tokens work across Cur Nova courses and AI strategies.",
     "tokens": "tokens",
     "mostPopular": "Most popular",
     "packs": [
@@ -150,7 +150,7 @@
         "description": "simple entry pack.",
         "benefits": [
           "Good for starting with one course or a few AI strategies.",
-          "Stay small while you test Avenqor workflows."
+          "Stay small while you test Cur Nova workflows."
         ],
         "cta": "Buy Starter pack"
       },
@@ -225,12 +225,12 @@
   },
   "riskNotice": {
     "title": "High-risk markets require high awareness.",
-    "body": "Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. Avenqor provides education only. We do not manage funds, execute trades or offer financial advice.",
+    "body": "Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. Cur Nova provides education only. We do not manage funds, execute trades or offer financial advice.",
     "cta": "Read full risk & disclaimer"
   },
   "faq": {
     "title": "Frequently asked questions",
-    "subtitle": "Key points about what Avenqor is – and what it is not.",
+    "subtitle": "Key points about what Cur Nova is – and what it is not.",
     "noQuestionsMatch": "No questions match your filters 🤔",
     "tryAdjusting": "Try adjusting the category or search term, or explore our",
     "pricing": "pricing",
@@ -238,14 +238,14 @@
     "guides": "guides.",
     "items": [
       {
-        "id": "what-is-avenqor",
-        "question": "What is Avenqor?",
-        "answer": "Avenqor is an education-only platform providing structured courses for Forex, Crypto, and Binary options markets. We deliver PDF courses, custom course requests, and AI-generated trading strategies. We do not provide financial advice, trading signals, or manage funds."
+        "id": "what-is-cur-nova",
+        "question": "What is Cur Nova?",
+        "answer": "Cur Nova is an education-only platform providing structured courses for Forex, Crypto, and Binary options markets. We deliver PDF courses, custom course requests, and AI-generated trading strategies. We do not provide financial advice, trading signals, or manage funds."
       },
       {
         "id": "how-tokens-work",
         "question": "How do tokens work?",
-        "answer": "Tokens are credits used to access Avenqor products. 1.00 GBP equals 100 tokens. You can buy token packs, make custom top-ups, or pay directly for courses. Tokens do not expire and can be used across all products."
+        "answer": "Tokens are credits used to access Cur Nova products. 1.00 GBP equals 100 tokens. You can buy token packs, make custom top-ups, or pay directly for courses. Tokens do not expire and can be used across all products."
       },
       {
         "id": "what-in-courses",
@@ -269,8 +269,8 @@
       },
       {
         "id": "financial-advice",
-        "question": "Does Avenqor provide financial advice?",
-        "answer": "No. Avenqor provides education only. We do not offer financial advice, trading signals, investment recommendations, or fund management services. All content is for educational purposes. Trading involves substantial risk of loss."
+        "question": "Does Cur Nova provide financial advice?",
+        "answer": "No. Cur Nova provides education only. We do not offer financial advice, trading signals, investment recommendations, or fund management services. All content is for educational purposes. Trading involves substantial risk of loss."
       },
       {
         "id": "access-course",

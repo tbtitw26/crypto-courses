@@ -22,7 +22,7 @@
   },
   "overview": {
     "title": "Welcome back. Here is your learning overview.",
-    "subtitle": "Track your token balance, custom course status and recent AI strategies in one view. Avenqor remains education only – no signals or managed accounts.",
+    "subtitle": "Track your token balance, custom course status and recent AI strategies in one view. Cur Nova remains education only – no signals or managed accounts.",
     "badges": {
       "learningOverview": "Learning overview",
       "recentActivity": "Recent activity"
@@ -284,7 +284,7 @@
   "billingPage": {
     "title": "Billing",
     "heading": "Billing & tokens",
-    "subtitle": "See your token balance, recent purchases and invoices. Payments are handled securely – Avenqor never touches your trading accounts.",
+    "subtitle": "See your token balance, recent purchases and invoices. Payments are handled securely – Cur Nova never touches your trading accounts.",
     "tokensAvailable": "tokens available",
     "tokensApprox": "Approx. {price} at the current token rate.",
     "topUp": "Top up",
@@ -295,7 +295,7 @@
       "subtitle": "Tokens can be used across courses, custom PDFs and AI strategies.",
       "tokensInfo": "Tokens are not a deposit and carry no interest.",
       "currentBalance": "Current balance",
-      "currentBalanceHint": "Approx. {price} worth of Avenqor services.",
+      "currentBalanceHint": "Approx. {price} worth of Cur Nova services.",
       "thisMonthSpent": "This month spent",
       "thisMonthSpentHint": "Courses, AI strategies and custom requests.",
       "lastTopUp": "Last top-up",
@@ -310,10 +310,10 @@
     },
     "paymentMethods": {
       "title": "Payments & methods",
-      "description": "Payments are processed by a secure payment provider. Avenqor does not store full card numbers or CVV codes.",
+      "description": "Payments are processed by a secure payment provider. Cur Nova does not store full card numbers or CVV codes.",
       "supportedCards": "Supported cards: Visa and Mastercard.",
       "supportedCurrencies": "Supported currencies: GBP, EUR, USD, SR.",
-      "chargesDescriptor": "Charges appear under the Avenqor or partner descriptor.",
+      "chargesDescriptor": "Charges appear under the Cur Nova or partner descriptor.",
       "note": "In the live product this card would link to a secure portal where users can update payment details."
     },
     "invoices": {
@@ -465,7 +465,7 @@
   "settingsPage": {
     "title": "Settings",
     "heading": "Account & preferences",
-    "subtitle": "Update your details, language and how Avenqor talks to you. Nothing here connects to your broker or exchange accounts – this is only for your learning profile.",
+    "subtitle": "Update your details, language and how Cur Nova talks to you. Nothing here connects to your broker or exchange accounts – this is only for your learning profile.",
     "educationAccountOnly": {
       "title": "Education account only",
       "subtitle": "No trading or payment credentials stored here."
@@ -473,7 +473,7 @@
     "viewDashboardOverview": "View dashboard overview",
     "profile": {
       "title": "Profile",
-      "subtitle": "Name, email and region for your Avenqor account.",
+      "subtitle": "Name, email and region for your Cur Nova account.",
       "editButton": "Edit profile",
       "fields": {
         "fullName": "Full name",
@@ -501,7 +501,7 @@
       },
       "educationalFocus": {
         "label": "Educational focus",
-        "description": "We keep reminders that Avenqor is not financial advice.",
+        "description": "We keep reminders that Cur Nova is not financial advice.",
         "note": "This setting cannot be disabled – high-risk markets always need clear disclaimers."
       }
     },
@@ -569,9 +569,9 @@
     },
     "dataPrivacy": {
       "title": "Data & privacy",
-      "description": "Manage how your data is used in Avenqor. This is separate from any data your broker or exchange holds about your trading.",
+      "description": "Manage how your data is used in Cur Nova. This is separate from any data your broker or exchange holds about your trading.",
       "export": {
-        "label": "Export my Avenqor data (preview)",
+        "label": "Export my Cur Nova data (preview)",
         "description": "Download a copy of your courses, AI plans and billing metadata."
       },
       "delete": {
@@ -582,8 +582,8 @@
     },
     "dangerNote": {
       "title": "Reminder: this account is not a trading profile",
-      "description": "Avenqor accounts control access to educational PDFs and AI strategies only. They do not hold or manage trading capital and cannot place trades on your behalf.",
-      "warning": "Always keep your broker and exchange credentials separate, and never share them with support. If any service claims to trade on behalf of \"Avenqor\", treat it as suspicious."
+      "description": "Cur Nova accounts control access to educational PDFs and AI strategies only. They do not hold or manage trading capital and cannot place trades on your behalf.",
+      "warning": "Always keep your broker and exchange credentials separate, and never share them with support. If any service claims to trade on behalf of \"Cur Nova\", treat it as suspicious."
     }
   },
   "receiptsPage": {

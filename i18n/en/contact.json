@@ -4,7 +4,7 @@
     "contact": "Contact"
   },
   "hero": {
-    "title": "Contact Avenqor with clear, practical questions.",
+    "title": "Contact Cur Nova with clear, practical questions.",
     "subtitle": "Use this form for questions about courses, billing, tokens or your account. We respond with straightforward information – never trade calls or promises.",
     "quickNotes": {
       "responseWindow": {
@@ -47,7 +47,7 @@
     }
   },
   "form": {
-    "title": "Send a message to Avenqor",
+    "title": "Send a message to Cur Nova",
     "subtitle": "All fields marked with * are required.",
     "fields": {
       "fullName": {
@@ -70,7 +70,7 @@
       },
       "accountId": {
         "label": "Account ID (optional)",
-        "placeholder": "If relevant, paste your Avenqor ID",
+        "placeholder": "If relevant, paste your Cur Nova ID",
         "hint": "Helps us locate your purchases faster."
       },
       "language": {
@@ -86,7 +86,7 @@
       "text": "We cannot: review your open trades, advise to open/close positions, or tell you which instruments to trade."
     },
     "consent": {
-      "text": "I understand that Avenqor provides education only and this message will not result in personalised investment or trading advice."
+      "text": "I understand that Cur Nova provides education only and this message will not result in personalised investment or trading advice."
     },
     "submit": {
       "button": "Send message",
@@ -106,7 +106,7 @@
           "suffix": "first."
         },
         {
-          "text": "For risk and positioning of Avenqor, see",
+          "text": "For risk and positioning of Cur Nova, see",
           "link": "Risk & Disclaimer",
           "suffix": "."
         },

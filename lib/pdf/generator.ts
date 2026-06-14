@@ -20,7 +20,7 @@ function generateCourseId(title: string): string {
  * Build system prompt for course generation
  */
 function buildCourseSystemPrompt(): string {
-  return `You are a senior course architect for Avenqor (avenqor.net), a premium education-only platform for high-risk trading markets (Forex, Crypto, Binary options). You create print-friendly PDF course manuscripts.
+  return `You are a senior course architect for Cur Nova (cur-nova.com), a premium education-only platform for high-risk trading markets (Forex, Crypto, Binary options). You create print-friendly PDF course manuscripts.
 
 NON-NEGOTIABLE COMPLIANCE RULES:
 - Education only. Not financial advice. Not investment advice.
@@ -68,7 +68,7 @@ function buildCourseUserPrompt(input: CourseGenerationInput, courseId: string): 
     level = 'Beginner',
   } = input
 
-  return `Create a complete, detailed ready-made PDF course for Avenqor.
+  return `Create a complete, detailed ready-made PDF course for Cur Nova.
 
 Course title:
 ${course_title}

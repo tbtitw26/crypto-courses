@@ -5,7 +5,7 @@
   },
   "hero": {
     "title": "Checklists and templates to support your routines.",
-    "subtitle": "Short, focused PDFs that live next to your Avenqor courses and AI strategies. Print them, pin them, or keep them open while you work – they are built for real trading desks, not slideshows.",
+    "subtitle": "Short, focused PDFs that live next to your Cur Nova courses and AI strategies. Print them, pin them, or keep them open while you work – they are built for real trading desks, not slideshows.",
     "features": {
       "checklists": "Risk and process checklists that fit on a single page.",
       "templates": "Templates for sizing, journaling and weekly reviews.",
@@ -14,12 +14,12 @@
     "sideCard": {
       "title": "How resources connect to your courses",
       "subtitle": "Think of them as tools that sit next to your PDFs.",
-      "paragraph1": "When you work through an Avenqor course, you will see references to supporting resources: checklists, templates and review sheets. This page is the hub where you can access them in one place.",
+      "paragraph1": "When you work through an Cur Nova course, you will see references to supporting resources: checklists, templates and review sheets. This page is the hub where you can access them in one place.",
       "paragraph2": "Some resources may unlock together with specific courses, while others will be available to all signed-in users as part of general education material."
     }
   },
   "resources": {
-    "title": "Core Avenqor resources.",
+    "title": "Core Cur Nova resources.",
     "subtitle": "This is a preview set. In production, the list will grow as new courses and AI templates are released.",
     "disclaimer": "Downloads here are placeholders – links will be wired to real PDFs in-app.",
     "downloadPreview": "Download preview",
@@ -84,7 +84,7 @@
     "useWithCourses": {
       "title": "Use with your courses",
       "subtitle": "Attach each resource to a specific module.",
-      "description": "Many Avenqor PDFs will include small icons or notes that link directly to a matching resource – for example, a risk checklist near the risk chapter or a journal sheet near a process module."
+      "description": "Many Cur Nova PDFs will include small icons or notes that link directly to a matching resource – for example, a risk checklist near the risk chapter or a journal sheet near a process module."
     },
     "buildRoutines": {
       "title": "Build steady routines",
@@ -99,7 +99,7 @@
   },
   "cta": {
     "title": "Resources support your decisions – they do not replace them.",
-    "subtitle": "Checklists and templates can help you stay organised and consistent. They do not remove market risk or guarantee any outcome. Avenqor remains education only.",
+    "subtitle": "Checklists and templates can help you stay organised and consistent. They do not remove market risk or guarantee any outcome. Cur Nova remains education only.",
     "browseCourses": "Browse courses",
     "generateAI": "Generate AI strategy"
   }

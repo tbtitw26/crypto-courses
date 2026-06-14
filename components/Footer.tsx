@@ -232,7 +232,7 @@ export default function Footer() {
 
               <div className="mt-5 flex items-center gap-3">
                 <a
-                  href="https://www.instagram.com/avenqorofficial"
+                  href="https://www.instagram.com/curnovaofficial"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-9 w-9 items-center justify-center rounded-lg border border-surface-700 text-surface-500 transition-colors hover:border-surface-500 hover:text-white"
@@ -241,7 +241,7 @@ export default function Footer() {
                   <Instagram className="h-4 w-4" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/company/avenqor/"
+                  href="https://www.linkedin.com/company/cur-nova/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex h-9 w-9 items-center justify-center rounded-lg border border-surface-700 text-surface-500 transition-colors hover:border-surface-500 hover:text-white"

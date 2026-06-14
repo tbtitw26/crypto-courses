@@ -4,15 +4,15 @@
     "about": "About"
   },
   "hero": {
-    "title": "Avenqor: focused education for high-risk markets.",
-    "subtitle": "Avenqor exists for traders who want structure, not hype. We work on Forex, Crypto and Binary options education for people in the EU, UK and UAE who take risk seriously and prefer clear language over promises.",
+    "title": "Cur Nova: focused education for high-risk markets.",
+    "subtitle": "Cur Nova exists for traders who want structure, not hype. We work on Forex, Crypto and Binary options education for people in the EU, UK and UAE who take risk seriously and prefer clear language over promises.",
     "badges": {
       "regions": "Primary regions: EU · UK · UAE",
       "markets": "Markets: Forex · Crypto · Binary",
       "format": "Format: PDF courses & AI outputs"
     },
     "sideCard": {
-      "title": "What Avenqor is – and what it is not",
+      "title": "What Cur Nova is – and what it is not",
       "subtitle": "Short overview before you go deeper.",
       "whatWeAre": {
         "label": "What we are",
@@ -35,7 +35,7 @@
     }
   },
   "whoIsFor": {
-    "title": "Who Avenqor is actually built for.",
+    "title": "Who Cur Nova is actually built for.",
     "subtitle": "Three main profiles – all with the same requirement: willingness to treat risk seriously and avoid get-rich-quick expectations.",
     "profiles": [
       {
@@ -53,7 +53,7 @@
     ]
   },
   "howWeBuild": {
-    "title": "How Avenqor courses and AI outputs are structured.",
+    "title": "How Cur Nova courses and AI outputs are structured.",
     "subtitle": "Whether you choose a ready-made course, a custom PDF or an AI strategy, the idea is the same: structured, modular content you can revisit.",
     "items": [
       {
@@ -72,7 +72,7 @@
   },
   "regions": {
     "title": "Regions, currencies and languages.",
-    "subtitle": "Avenqor is designed with specific regions and languages in mind. This helps keep examples and structures more realistic for your context.",
+    "subtitle": "Cur Nova is designed with specific regions and languages in mind. This helps keep examples and structures more realistic for your context.",
     "items": [
       {
         "title": "Primary regions",
@@ -89,7 +89,7 @@
     ]
   },
   "principles": {
-    "title": "Principles that shape Avenqor.",
+    "title": "Principles that shape Cur Nova.",
     "subtitle": "These principles are intentionally conservative. The goal is to keep education grounded and avoid the usual high-risk marketing patterns.",
     "items": [
       {
@@ -111,7 +111,7 @@
     ]
   },
   "neverDoes": {
-    "title": "What Avenqor never does.",
+    "title": "What Cur Nova never does.",
     "subtitle": "Important boundaries for how the platform operates.",
     "items": [
       "Does not provide trading signals or \"copy this now\" alerts.",

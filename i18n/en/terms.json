@@ -4,7 +4,7 @@
     "terms": "Terms & Conditions"
   },
   "hero": {
-    "title": "Full terms for using Avenqor courses, tokens and AI features.",
+    "title": "Full terms for using Cur Nova courses, tokens and AI features.",
     "subtitle": "Please read these Terms carefully before purchasing token packs, ready-made courses, custom courses or AI Strategy Builder outputs. They summarise the rules that keep our education-only platform safe, compliant and transparent for both English and Arabic audiences.",
     "meta": [
       {
@@ -29,7 +29,7 @@
       "title": "Snapshot (non-legal summary)",
       "subtitle": "Use the full sections below for binding wording — this box only highlights the spirit of our policy.",
       "items": [
-        "Avenqor is an education-only platform: no trading, no signals, no managed accounts.",
+        "Cur Nova is an education-only platform: no trading, no signals, no managed accounts.",
         "Tokens are advance credits for digital content; they are not money or securities.",
         "All courses, PDFs and AI outputs are examples. You stay responsible for every trade.",
         "We comply with UK/EU consumer law, but digital deliveries have limited refunds."
@@ -73,12 +73,12 @@
       "number": "1",
       "title": "Introduction",
       "content": [
-        { "type": "paragraph", "text": "1.1. These Terms and Conditions (\"Terms\") govern your access to and use of avenqor.net, its dashboards, applications and downloadable content (the \"Service\"), operated by CUR NOVA LTD (company number 17240836, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom) (“Avenqor”, “we”, “us”)." },
+        { "type": "paragraph", "text": "1.1. These Terms and Conditions (\"Terms\") govern your access to and use of cur-nova.com, its dashboards, applications and downloadable content (the \"Service\"), operated by CUR NOVA LTD (company number 17240836, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom) (“Cur Nova”, “we”, “us”)." },
         { "type": "paragraph", "text": "1.2. By creating an account, purchasing Tokens, ordering ready-made or custom courses, or using any AI-powered feature, you agree to these Terms. If you disagree, you must not use the Service." },
         {
           "type": "list",
           "items": [
-            "1.3. Avenqor is education-only. We do not execute trades, hold client funds, operate as a broker/exchange, deliver investment management or personalised financial advice.",
+            "1.3. Cur Nova is education-only. We do not execute trades, hold client funds, operate as a broker/exchange, deliver investment management or personalised financial advice.",
             "1.4. References to strategies, signals or systems are illustrative only. Nothing on the Service is a recommendation to trade or to use any broker or instrument.",
             "1.5. The Service is bilingual (English and Modern Standard Arabic). If a translation conflicts with the English version, the English text controls."
           ]
@@ -163,7 +163,7 @@
           "items": [
             "6.2. Client Data must not infringe third-party rights, include unnecessary sensitive data, or contain malware.",
             "6.3. Back up any notes or journals you want to keep; we do not guarantee long-term archiving.",
-            "6.4. You grant Avenqor a worldwide, royalty-free licence to use Client Data to deliver the Service, improve it (in aggregate) and comply with law, as detailed in the Privacy Policy."
+            "6.4. You grant Cur Nova a worldwide, royalty-free licence to use Client Data to deliver the Service, improve it (in aggregate) and comply with law, as detailed in the Privacy Policy."
           ]
         }
       ]
@@ -228,7 +228,7 @@
         {
           "type": "list",
           "items": [
-            "10.1. The Service (software, UI, branding, templates, videos) belongs to Avenqor or its licensors.",
+            "10.1. The Service (software, UI, branding, templates, videos) belongs to Cur Nova or its licensors.",
             "10.2. We grant you a personal, non-transferable licence to use delivered PDFs and AI outputs for your own learning or internal training.",
             "10.3. You must not resell, publicly distribute, claim authorship, or remove proprietary notices without written consent.",
             "10.4. Ownership of our IP stays with us. We do not claim ownership of your Client Data beyond the licence in clause 6.4."
@@ -298,7 +298,7 @@
       "number": "15",
       "title": "Indemnity",
       "content": [
-        { "type": "paragraph", "text": "You agree to indemnify and hold harmless Avenqor and its personnel against claims, damages, costs and legal fees arising from your unlawful use of the Service, breach of these Terms or infringement caused by your Client Data or misuse of our content." }
+        { "type": "paragraph", "text": "You agree to indemnify and hold harmless Cur Nova and its personnel against claims, damages, costs and legal fees arising from your unlawful use of the Service, breach of these Terms or infringement caused by your Client Data or misuse of our content." }
       ]
     },
     {
@@ -385,7 +385,7 @@
         {
           "type": "list",
           "items": [
-            "Avenqor — operated by CUR NOVA LTD",
+            "Cur Nova — operated by CUR NOVA LTD",
             "Registered office: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom",
             "Company number: 17240836",
             "Email: info@cur-nova.com",
@@ -396,7 +396,7 @@
     }
   ],
   "cta": {
-    "title": "Using Avenqor means accepting these principles.",
+    "title": "Using Cur Nova means accepting these principles.",
     "subtitle": "If you need a bespoke rider, regulated review or signed PDF, let us know before you buy. Otherwise this document governs every token top-up and download.",
     "backToHome": "Back to home",
     "viewCourses": "View courses"

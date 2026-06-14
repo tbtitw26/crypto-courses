@@ -21,7 +21,7 @@ const supabaseSignedUrlTtlPdf = parseInt(process.env.SUPABASE_SIGNED_URL_TTL_PDF
 export const config = {
   site: {
     baseUrl: process.env.SITE_BASE_URL || 'http://localhost:3000',
-    name: 'Avenqor',
+    name: 'Cur Nova',
   },
   supabase: {
     url: process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '',
@@ -105,7 +105,7 @@ export const config = {
     user: process.env.SMTP_USER || '',
     pass: process.env.SMTP_PASS || '',
     from: process.env.SMTP_FROM || '',
-    fromName: process.env.SMTP_FROM_NAME || 'Avenqor Support',
+    fromName: process.env.SMTP_FROM_NAME || 'Cur Nova Support',
   },
   // Feature flags
   features: {

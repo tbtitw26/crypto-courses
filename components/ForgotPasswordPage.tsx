@@ -85,7 +85,7 @@ export function ForgotPasswordPage() {
               <ShieldCheck className="h-4.5 w-4.5 text-brand-400" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-white">Avenqor</p>
+              <p className="text-sm font-semibold text-white">Cur Nova</p>
               <p className="text-[11px] uppercase tracking-widest text-surface-500">Account Recovery</p>
             </div>
           </Link>
@@ -129,7 +129,7 @@ export function ForgotPasswordPage() {
               <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-surface-200 bg-surface-50">
                 <ShieldCheck className="h-4 w-4 text-brand-600" />
               </div>
-              <span className="text-sm font-semibold text-text-main">Avenqor</span>
+              <span className="text-sm font-semibold text-text-main">Cur Nova</span>
             </div>
             <Link
               href="/login"
