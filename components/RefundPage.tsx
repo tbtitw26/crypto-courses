@@ -102,24 +102,25 @@ export function RefundPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Dark refund hero */}
-      <section className="bg-surface-900 pb-10 pt-8">
+      {/* Light refund hero with gradient band */}
+      <div className="h-1.5 bg-gradient-to-r from-brand-500 via-brand-400 to-brand-600" />
+      <section className="bg-white pb-10 pt-8">
         <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
-          <div className="mb-4 flex items-center gap-1 text-xs text-surface-500">
-            <Link href="/" className="transition hover:text-surface-300">
+          <div className="mb-4 flex items-center gap-1 text-xs text-text-muted">
+            <Link href="/" className="transition hover:text-text-secondary">
               {tBreadcrumb('home')}
             </Link>
             <span>/</span>
-            <span className="text-surface-400">{t('breadcrumb.refund')}</span>
+            <span className="text-text-secondary">{t('breadcrumb.refund')}</span>
           </div>
 
           <div className="mb-6 flex items-start gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
-              <CreditCard className="h-6 w-6 text-brand-400" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-200 bg-brand-50">
+              <CreditCard className="h-6 w-6 text-brand-600" />
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-white sm:text-3xl">{t('hero.title')}</h1>
-              <p className="mt-1 max-w-2xl text-sm text-surface-400">{t('hero.subtitle')}</p>
+              <h1 className="text-2xl font-semibold text-text-main sm:text-3xl">{t('hero.title')}</h1>
+              <p className="mt-1 max-w-2xl text-sm text-text-secondary">{t('hero.subtitle')}</p>
             </div>
           </div>
 
@@ -127,22 +128,22 @@ export function RefundPage() {
           <div className="mb-6 flex flex-wrap items-center gap-2 text-xs">
             {Array.isArray(heroMeta) && heroMeta.length > 0
               ? heroMeta.map((meta) => (
-                  <span key={meta.label} className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-                    <Shield className="h-3 w-3 text-brand-400" />
-                    <span className="text-surface-500">{meta.label}:</span>
+                  <span key={meta.label} className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+                    <Shield className="h-3 w-3 text-brand-600" />
+                    <span className="text-text-muted">{meta.label}:</span>
                     <span>{meta.value}</span>
                   </span>
                 ))
               : null}
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-              <CreditCard className="h-3 w-3 text-brand-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+              <CreditCard className="h-3 w-3 text-brand-600" />
               {t('hero.badges.payments')}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-              <LifeBuoy className="h-3 w-3 text-brand-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+              <LifeBuoy className="h-3 w-3 text-brand-600" />
               {t('hero.badges.support')}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-700/60 bg-amber-950/30 px-3 py-1.5 text-amber-300">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-amber-700">
               <AlertTriangle className="h-3 w-3" />
               {t('hero.badges.digitalOnly')}
             </span>
@@ -152,14 +153,14 @@ export function RefundPage() {
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {summaryCard?.items && Array.isArray(summaryCard.items)
               ? summaryCard.items.slice(0, 4).map((item: string, idx: number) => (
-                  <div key={idx} className="rounded-lg border border-surface-700 bg-surface-800/60 p-3">
-                    <p className="text-xs leading-relaxed text-surface-400">{item}</p>
+                  <div key={idx} className="rounded-lg border border-surface-200 bg-surface-50 p-3">
+                    <p className="text-xs leading-relaxed text-text-secondary">{item}</p>
                   </div>
                 ))
               : null}
           </div>
           {summaryCard?.note && (
-            <p className="mt-3 text-xs text-surface-500">{summaryCard.note}</p>
+            <p className="mt-3 text-xs text-text-muted">{summaryCard.note}</p>
           )}
         </div>
       </section>

@@ -105,45 +105,46 @@ export function PrivacyPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Dark privacy hero */}
-      <section className="bg-surface-900 pb-10 pt-8">
+      {/* Light privacy hero with gradient band */}
+      <div className="h-1.5 bg-gradient-to-r from-brand-500 via-brand-400 to-brand-600" />
+      <section className="bg-white pb-10 pt-8">
         <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
-          <div className="mb-4 flex items-center gap-1 text-xs text-surface-500">
-            <Link href="/" className="transition hover:text-surface-300">
+          <div className="mb-4 flex items-center gap-1 text-xs text-text-muted">
+            <Link href="/" className="transition hover:text-text-secondary">
               {tBreadcrumb('home')}
             </Link>
             <span>/</span>
-            <span className="text-surface-400">{t('breadcrumb.privacy')}</span>
+            <span className="text-text-secondary">{t('breadcrumb.privacy')}</span>
           </div>
 
           <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-5">
             <div className="space-y-5 lg:col-span-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
-                <Lock className="h-6 w-6 text-brand-400" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-200 bg-brand-50">
+                <Lock className="h-6 w-6 text-brand-600" />
               </div>
-              <h1 className="text-2xl font-semibold text-white sm:text-3xl">{t('hero.title')}</h1>
-              <p className="max-w-lg text-sm leading-relaxed text-surface-400">{t('hero.subtitle')}</p>
+              <h1 className="text-2xl font-semibold text-text-main sm:text-3xl">{t('hero.title')}</h1>
+              <p className="max-w-lg text-sm leading-relaxed text-text-secondary">{t('hero.subtitle')}</p>
 
               {/* Badges */}
               <div className="flex flex-wrap items-center gap-2 text-xs">
                 {Array.isArray(heroMeta) && heroMeta.length > 0
                   ? heroMeta.map((meta) => (
-                      <span key={meta.label} className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-                        <Shield className="h-3 w-3 text-brand-400" />
-                        <span className="text-surface-500">{meta.label}:</span>
+                      <span key={meta.label} className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+                        <Shield className="h-3 w-3 text-brand-600" />
+                        <span className="text-text-muted">{meta.label}:</span>
                         <span>{meta.value}</span>
                       </span>
                     ))
                   : null}
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-                  <Lock className="h-3 w-3 text-brand-400" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+                  <Lock className="h-3 w-3 text-brand-600" />
                   {t('hero.badges.dataProtection')}
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-                  <FileText className="h-3 w-3 text-brand-400" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+                  <FileText className="h-3 w-3 text-brand-600" />
                   {t('hero.badges.ukGdpr')}
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-700/60 bg-amber-950/30 px-3 py-1.5 text-amber-300">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-amber-700">
                   <AlertTriangle className="h-3 w-3" />
                   {t('hero.badges.ageRestriction')}
                 </span>
@@ -151,25 +152,25 @@ export function PrivacyPage() {
             </div>
 
             {/* Summary side panel */}
-            <div className="rounded-xl border border-surface-700 bg-surface-800/60 p-5 lg:col-span-2">
+            <div className="rounded-xl border border-surface-200 bg-surface-50 p-5 lg:col-span-2">
               <div className="mb-3 flex items-center gap-2">
-                <Info className="h-4 w-4 text-brand-400" />
+                <Info className="h-4 w-4 text-brand-600" />
                 <div>
-                  <p className="text-xs font-semibold text-white">{summaryCard?.title}</p>
-                  <p className="text-xs text-surface-500">{summaryCard?.subtitle}</p>
+                  <p className="text-xs font-semibold text-text-main">{summaryCard?.title}</p>
+                  <p className="text-xs text-text-muted">{summaryCard?.subtitle}</p>
                 </div>
               </div>
-              <ul className="mb-3 space-y-1.5 text-xs text-surface-400">
+              <ul className="mb-3 space-y-1.5 text-xs text-text-secondary">
                 {summaryCard?.items && Array.isArray(summaryCard.items)
                   ? summaryCard.items.map((item: string, idx: number) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" />
+                        <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
                         {item}
                       </li>
                     ))
                   : null}
               </ul>
-              {summaryCard?.note && <p className="text-xs text-surface-500">{summaryCard.note}</p>}
+              {summaryCard?.note && <p className="text-xs text-text-muted">{summaryCard.note}</p>}
             </div>
           </div>
         </div>

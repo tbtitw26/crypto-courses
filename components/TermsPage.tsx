@@ -111,66 +111,67 @@ export function TermsPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Dark document hero */}
-      <section className="bg-surface-900 pb-10 pt-8">
+      {/* Light document hero with gradient band */}
+      <div className="h-1.5 bg-gradient-to-r from-brand-500 via-brand-400 to-brand-600" />
+      <section className="bg-white pb-10 pt-8">
         <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
-          <div className="mb-4 flex items-center gap-1 text-xs text-surface-500">
-            <Link href="/" className="transition hover:text-surface-300">
+          <div className="mb-4 flex items-center gap-1 text-xs text-text-muted">
+            <Link href="/" className="transition hover:text-text-secondary">
               {tBreadcrumb('home')}
             </Link>
             <span>/</span>
-            <span className="text-surface-400">{t('breadcrumb.terms')}</span>
+            <span className="text-text-secondary">{t('breadcrumb.terms')}</span>
           </div>
 
           <div className="mb-6 flex items-start gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
-              <FileText className="h-6 w-6 text-brand-400" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-200 bg-brand-50">
+              <FileText className="h-6 w-6 text-brand-600" />
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-white sm:text-3xl">{t('hero.title')}</h1>
-              <p className="mt-1 max-w-2xl text-sm text-surface-400">{t('hero.subtitle')}</p>
+              <h1 className="text-2xl font-semibold text-text-main sm:text-3xl">{t('hero.title')}</h1>
+              <p className="mt-1 max-w-2xl text-sm text-text-secondary">{t('hero.subtitle')}</p>
             </div>
           </div>
 
           {/* Meta badges */}
           <div className="mb-6 flex flex-wrap items-center gap-2 text-xs">
             {heroMeta?.map((meta) => (
-              <span key={meta.label} className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-                <Shield className="h-3 w-3 text-brand-400" />
-                <span className="text-surface-500">{meta.label}:</span>
+              <span key={meta.label} className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+                <Shield className="h-3 w-3 text-brand-600" />
+                <span className="text-text-muted">{meta.label}:</span>
                 <span>{meta.value}</span>
               </span>
             ))}
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-              <Globe2 className="h-3 w-3 text-brand-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+              <Globe2 className="h-3 w-3 text-brand-600" />
               {t('hero.badges.regions')}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-              <CreditCard className="h-3 w-3 text-brand-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+              <CreditCard className="h-3 w-3 text-brand-600" />
               {t('hero.badges.payments')}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-700/60 bg-amber-950/30 px-3 py-1.5 text-amber-300">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-amber-700">
               <AlertTriangle className="h-3 w-3" />
               {t('hero.badges.highRisk')}
             </span>
           </div>
 
           {/* Summary panel */}
-          <div className="rounded-xl border border-surface-700 bg-surface-800/60 p-5">
+          <div className="rounded-xl border border-surface-200 bg-surface-50 p-5">
             <div className="mb-3 flex items-center gap-2">
-              <Info className="h-4 w-4 text-brand-400" />
-              <span className="text-xs font-semibold text-white">{summaryCard?.title}</span>
-              <span className="text-xs text-surface-500">— {summaryCard?.subtitle}</span>
+              <Info className="h-4 w-4 text-brand-600" />
+              <span className="text-xs font-semibold text-text-main">{summaryCard?.title}</span>
+              <span className="text-xs text-text-muted">— {summaryCard?.subtitle}</span>
             </div>
-            <ul className="mb-3 grid grid-cols-1 gap-1.5 text-xs text-surface-400 sm:grid-cols-2">
+            <ul className="mb-3 grid grid-cols-1 gap-1.5 text-xs text-text-secondary sm:grid-cols-2">
               {summaryCard?.items?.map((item: string, idx: number) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
                   {item}
                 </li>
               ))}
             </ul>
-            <p className="text-xs text-surface-500">{summaryCard?.note}</p>
+            <p className="text-xs text-text-muted">{summaryCard?.note}</p>
           </div>
         </div>
       </section>

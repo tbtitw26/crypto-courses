@@ -8,14 +8,15 @@ import { motion, useInView } from 'framer-motion'
 interface HomeSectionProps {
   children: React.ReactNode
   className?: string
+  id?: string
 }
 
-export function HomeSection({ children, className = '' }: HomeSectionProps) {
+export function HomeSection({ children, className = '', id }: HomeSectionProps) {
   const ref = useRef<HTMLDivElement | null>(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section className="w-full max-w-page mx-auto px-4 sm:px-6 lg:px-8">
+    <section id={id} className="w-full max-w-page mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
         ref={ref}
         className={className}

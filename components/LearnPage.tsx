@@ -143,83 +143,52 @@ export function LearnPage() {
   return (
     <div className="min-h-screen">
       {/* ─── Studio hero ─── */}
-      <section className="bg-surface-900">
+      <section className="bg-white border-b border-surface-200">
+        <div className="h-1 w-full bg-gradient-to-r from-brand-500 via-brand-400 to-brand-600" />
         <div className="mx-auto max-w-page px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
           <div className="flex items-center gap-3 mb-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
-              <Sparkles className="h-5 w-5 text-brand-400" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-brand-200 bg-brand-50">
+              <Sparkles className="h-5 w-5 text-brand-600" />
             </div>
             <div>
-              <h1 className="font-heading text-2xl font-semibold text-white sm:text-3xl">
+              <h1 className="font-heading text-2xl font-semibold text-text-main sm:text-3xl">
                 {t('title')}
               </h1>
             </div>
           </div>
-          <p className="max-w-lg text-sm sm:text-base text-surface-400">{t('subtitle')}</p>
-          <div className="mt-4 inline-flex items-center gap-1.5 rounded-md border border-surface-700 bg-surface-800 px-2.5 py-1 text-xs font-medium text-surface-300">
-            <Shield className="h-3 w-3 text-surface-400" />
+          <p className="max-w-lg text-sm sm:text-base text-text-secondary">{t('subtitle')}</p>
+          <div className="mt-4 inline-flex items-center gap-1.5 rounded-md border border-surface-300 bg-surface-50 px-2.5 py-1 text-xs font-medium text-text-muted">
+            <Shield className="h-3 w-3 text-text-muted" />
             {tInfo('educationOnly')}
           </div>
         </div>
       </section>
 
       {/* ─── Mode switcher ─── */}
-      <section className="mx-auto max-w-page px-4 -mt-5 sm:px-6 lg:px-8">
-        <div className="grid gap-3 sm:grid-cols-2">
+      <section className="mx-auto max-w-page px-4 mt-6 sm:px-6 lg:px-8">
+        <div className="inline-flex rounded-full bg-surface-100 p-1 gap-1">
           <button
             onClick={() => handleTabChange('custom')}
-            className={`group flex items-start gap-4 rounded-xl border-2 p-5 text-left transition-all ${
+            className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all ${
               activeTab === 'custom'
-                ? 'border-brand-600 bg-brand-50/50 shadow-card'
-                : 'border-surface-300 bg-white hover:border-surface-400'
+                ? 'bg-white text-brand-700 shadow-sm'
+                : 'text-text-secondary hover:text-text-main'
             }`}
           >
-            <div
-              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border ${
-                activeTab === 'custom' ? 'border-brand-200 bg-brand-100' : 'border-surface-200 bg-surface-100'
-              }`}
-            >
-              <UserCog className={`h-5 w-5 ${activeTab === 'custom' ? 'text-brand-700' : 'text-text-muted'}`} />
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-semibold text-text-main">Custom Course Builder</p>
-              <p className="mt-0.5 text-sm text-text-secondary">
-                Tailored PDF course based on your trading profile and goals
-              </p>
-            </div>
-            {activeTab === 'custom' && (
-              <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-600">
-                <CheckCircle2 className="h-3.5 w-3.5 text-white" />
-              </div>
-            )}
+            <UserCog className="h-4 w-4" />
+            Custom Course Builder
           </button>
 
           <button
             onClick={() => handleTabChange('ai')}
-            className={`group flex items-start gap-4 rounded-xl border-2 p-5 text-left transition-all ${
+            className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all ${
               activeTab === 'ai'
-                ? 'border-brand-600 bg-brand-50/50 shadow-card'
-                : 'border-surface-300 bg-white hover:border-surface-400'
+                ? 'bg-white text-brand-700 shadow-sm'
+                : 'text-text-secondary hover:text-text-main'
             }`}
           >
-            <div
-              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border ${
-                activeTab === 'ai' ? 'border-[#c7c9f5] bg-[#eef0ff]' : 'border-surface-200 bg-surface-100'
-              }`}
-            >
-              <Cpu className={`h-5 w-5 ${activeTab === 'ai' ? 'text-ai' : 'text-text-muted'}`} />
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-semibold text-text-main">AI Strategy Builder</p>
-              <p className="mt-0.5 text-sm text-text-secondary">
-                AI-generated strategy PDF with entry, exit, and risk rules
-              </p>
-            </div>
-            {activeTab === 'ai' && (
-              <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-600">
-                <CheckCircle2 className="h-3.5 w-3.5 text-white" />
-              </div>
-            )}
+            <Cpu className="h-4 w-4" />
+            AI Strategy Builder
           </button>
         </div>
       </section>

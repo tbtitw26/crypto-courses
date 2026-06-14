@@ -106,139 +106,97 @@ export function ContactPage() {
   ]
   const languages = ['English', 'Arabic']
 
+  const channelIcons = [MessageSquare, Mail, FileText]
+
   return (
-    <div className="min-h-screen lg:grid lg:grid-cols-5">
-      {/* Left — context panel */}
-      <div className="hidden bg-surface-900 px-8 py-10 lg:col-span-2 lg:flex lg:flex-col lg:justify-between xl:px-12">
-        <div>
-          <div className="mb-1 flex items-center gap-1 text-xs text-surface-500">
-            <Link href="/" className="transition hover:text-surface-300">
+    <div className="min-h-screen bg-surface-50">
+      {/* Hero section */}
+      <div className="border-b border-surface-200 bg-white">
+        <div className="mx-auto max-w-3xl px-6 pb-8 pt-8 sm:px-8">
+          {/* Breadcrumb */}
+          <div className="mb-6 flex items-center gap-1 text-xs text-text-muted">
+            <Link href="/" className="transition hover:text-text-secondary">
               {tBreadcrumb('home')}
             </Link>
-            <span>/</span>
-            <span className="text-surface-400">{t('breadcrumb.contact')}</span>
+            <span className="text-text-muted/50">/</span>
+            <span className="text-text-secondary">{t('breadcrumb.contact')}</span>
           </div>
 
-          <div className="mt-6 flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
-              <Mail className="h-5 w-5 text-brand-400" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-white">{sideCard?.title}</p>
-              <p className="text-xs text-surface-500">{sideCard?.subtitle}</p>
-            </div>
-          </div>
+          {/* Title + subtitle */}
+          <h1 className="text-2xl font-bold text-text-main sm:text-3xl">
+            {t('hero.title')}
+          </h1>
+          <p className="mt-2 text-sm text-text-secondary sm:text-base">
+            {t('hero.subtitle')}
+          </p>
 
-          <div className="mt-6 space-y-3">
-            {sideCard?.channels?.map((channel: any, idx: number) => {
-              const icons = [MessageSquare, Mail, FileText]
-              const Icon = icons[idx] || MessageSquare
-              return (
-                <div key={idx} className="flex items-start gap-2 text-xs">
-                  <Icon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-400" />
-                  <div>
-                    <p className="font-medium text-surface-200">{channel.title}</p>
-                    <p className="text-surface-500">{channel.description}</p>
+          {/* Channel info strip */}
+          {sideCard?.channels && (
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-8">
+              {sideCard.channels.map((channel: any, idx: number) => {
+                const Icon = channelIcons[idx] || MessageSquare
+                return (
+                  <div key={idx} className="flex items-start gap-2.5">
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-50">
+                      <Icon className="h-4 w-4 text-brand-600" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-text-main">{channel.title}</p>
+                      <p className="text-xs text-text-muted">{channel.description}</p>
+                    </div>
                   </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {sideCard?.urgentNote && (
-            <div className="mt-6 flex items-start gap-2 text-xs text-surface-500">
-              <Info className="mt-0.5 h-3 w-3 shrink-0" />
-              <span>
-                {sideCard.urgentNote.text}{' '}
-                <span className="font-medium text-surface-300">{sideCard.urgentNote.highlight}</span>
-                {sideCard.urgentNote.suffix}
-              </span>
-            </div>
-          )}
-
-          {/* Quick notes */}
-          <div className="mt-8 space-y-3 border-t border-surface-800 pt-6">
-            <div className="flex items-start gap-2 text-xs text-surface-400">
-              <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-400" />
-              <span>
-                {quickNotes?.responseWindow?.label}{' '}
-                <span className="font-medium text-surface-200">{quickNotes?.responseWindow?.value}</span>.
-              </span>
-            </div>
-            <div className="flex items-start gap-2 text-xs text-surface-400">
-              <BookOpenCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-400" />
-              <span>
-                {quickNotes?.faq?.text}{' '}
-                <Link href="/faq" className="text-brand-400 underline underline-offset-2 transition hover:text-brand-300">
-                  {quickNotes?.faq?.link}
-                </Link>{' '}
-                {quickNotes?.faq?.suffix}
-              </span>
-            </div>
-            <div className="flex items-start gap-2 text-xs text-surface-400">
-              <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" />
-              <span>
-                {quickNotes?.noTrades?.text}{' '}
-                <span className="font-medium text-surface-200">{quickNotes?.noTrades?.highlight}</span>
-                {quickNotes?.noTrades?.suffix}
-              </span>
-            </div>
-          </div>
-
-          {/* Region info */}
-          {sideInfo?.regions && (
-            <div className="mt-8 border-t border-surface-800 pt-6">
-              <div className="mb-3 flex items-center gap-2">
-                <MapPin className="h-3.5 w-3.5 text-brand-400" />
-                <p className="text-xs font-semibold text-surface-200">{sideInfo.regions.title}</p>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {sideInfo.regions.items?.map((item: any, idx: number) => (
-                  <div key={idx} className="rounded-lg border border-surface-700 bg-surface-800 p-2.5">
-                    <p className="text-xs font-medium text-surface-200">{item.name}</p>
-                    <p className="text-xs text-surface-500">{item.description}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-2 text-xs text-surface-600">{sideInfo.regions.note}</p>
+                )
+              })}
             </div>
           )}
         </div>
-
-        <p className="mt-8 text-xs leading-relaxed text-surface-600">
-          Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
-        </p>
       </div>
 
-      {/* Right — form */}
-      <div className="flex min-h-screen flex-col justify-start bg-white px-6 py-8 sm:px-10 lg:col-span-3 lg:min-h-0 lg:px-12 xl:px-16">
-        <div className="mx-auto w-full max-w-xl">
-          {/* Mobile header */}
-          <div className="mb-6 lg:hidden">
-            <div className="mb-2 flex items-center gap-1 text-xs text-text-muted">
-              <Link href="/" className="transition hover:text-text-secondary">{tBreadcrumb('home')}</Link>
-              <span className="text-text-muted/50">/</span>
-              <span className="text-text-secondary">{t('breadcrumb.contact')}</span>
+      {/* Main content */}
+      <div className="mx-auto max-w-2xl px-6 py-10 sm:px-8">
+        {/* Before you send callout */}
+        {sideInfo?.beforeYouSend && (
+          <div className="mb-8 rounded-xl border border-brand-100 bg-brand-50/50 p-5">
+            <div className="mb-3 flex items-center gap-2">
+              <HelpCircle className="h-4 w-4 text-brand-600" />
+              <p className="text-sm font-semibold text-text-main">{sideInfo.beforeYouSend.title}</p>
             </div>
-            <h1 className="text-xl font-semibold text-text-main sm:text-2xl">{t('hero.title')}</h1>
-            <p className="mt-1 text-sm sm:text-base text-text-secondary">{t('hero.subtitle')}</p>
+            <ul className="space-y-1.5 text-xs text-text-secondary">
+              {sideInfo.beforeYouSend.items?.map((item: any, idx: number) => (
+                <li key={idx} className="flex items-start gap-1.5">
+                  <span className="mt-0.5 text-brand-400">&#8226;</span>
+                  <span>
+                    {item.text}{' '}
+                    {item.link ? (
+                      <Link href="/faq" className="font-medium text-brand-600 underline underline-offset-2">{item.link}</Link>
+                    ) : (
+                      <>
+                        <Link href="/risk-and-disclaimer" className="font-medium text-brand-600 underline underline-offset-2">{item.link1}</Link>{' '}
+                        {item.and}{' '}
+                        <Link href="/privacy" className="font-medium text-brand-600 underline underline-offset-2">{item.link2}</Link>
+                      </>
+                    )}{' '}
+                    {item.suffix}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
+        )}
 
-          {/* Desktop title */}
-          <div className="mb-6 hidden lg:block">
-            <h1 className="text-2xl font-semibold text-text-main">{t('hero.title')}</h1>
-            <p className="mt-1 text-sm sm:text-base text-text-secondary">{t('hero.subtitle')}</p>
+        {/* Form card */}
+        <div className="rounded-2xl border border-surface-200 bg-white p-6 shadow-sm sm:p-8">
+          {/* Form header */}
+          <div className="mb-6 flex items-center gap-2 border-b border-surface-100 pb-5">
+            <MessageSquare className="h-4 w-4 text-brand-600" />
+            <div>
+              <p className="text-sm font-semibold text-text-main">{t('form.title')}</p>
+              <p className="text-xs text-text-muted">{t('form.subtitle')}</p>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-            <div className="mb-4 flex items-center gap-2 border-b border-surface-100 pb-4">
-              <MessageSquare className="h-4 w-4 text-brand-600" />
-              <div>
-                <p className="text-xs font-semibold text-text-main">{t('form.title')}</p>
-                <p className="text-xs text-text-muted">{t('form.subtitle')}</p>
-              </div>
-            </div>
-
+            {/* Name + Email */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-text-main">
@@ -274,6 +232,7 @@ export function ContactPage() {
               </div>
             </div>
 
+            {/* Region + Topic */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="contact-region" className="mb-1.5 block text-sm font-medium text-text-main">
@@ -318,6 +277,7 @@ export function ContactPage() {
               </div>
             </div>
 
+            {/* Account ID + Language */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="contact-account" className="mb-1.5 block text-sm font-medium text-text-main">
@@ -356,6 +316,7 @@ export function ContactPage() {
               </div>
             </div>
 
+            {/* Message */}
             <div>
               <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium text-text-main">
                 {t('form.fields.message.label')}
@@ -395,62 +356,75 @@ export function ContactPage() {
               {isSubmitting ? t('form.submit.sending') : t('form.submit.button')}
             </button>
           </form>
+        </div>
 
-          {/* Before you send — mobile only */}
-          <div className="mt-8 space-y-4 lg:hidden">
-            <div className="rounded-xl border border-surface-200 bg-surface-50 p-4">
-              <div className="mb-2 flex items-center gap-2">
-                <HelpCircle className="h-4 w-4 text-brand-600" />
-                <p className="text-xs font-semibold text-text-main">{sideInfo?.beforeYouSend?.title}</p>
-              </div>
-              <ul className="space-y-1.5 text-xs text-text-secondary">
-                {sideInfo?.beforeYouSend?.items?.map((item: any, idx: number) => (
-                  <li key={idx}>
-                    • {item.text}{' '}
-                    {item.link ? (
-                      <Link href="/faq" className="font-medium text-brand-600 underline underline-offset-2">{item.link}</Link>
-                    ) : (
-                      <>
-                        <Link href="/risk-and-disclaimer" className="font-medium text-brand-600 underline underline-offset-2">{item.link1}</Link>{' '}
-                        {item.and}{' '}
-                        <Link href="/privacy" className="font-medium text-brand-600 underline underline-offset-2">{item.link2}</Link>
-                      </>
-                    )}{' '}
-                    {item.suffix}
-                  </li>
-                ))}
-              </ul>
-            </div>
+        {/* Quick notes pills */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <div className="flex items-center gap-1.5 rounded-full border border-surface-200 bg-white px-3 py-1.5 text-xs text-text-secondary">
+            <Clock className="h-3 w-3 text-brand-500" />
+            <span>
+              {quickNotes?.responseWindow?.label}{' '}
+              <span className="font-medium text-text-main">{quickNotes?.responseWindow?.value}</span>
+            </span>
           </div>
-
-          {/* Desktop before-you-send sidebar content replicated in left panel */}
-          {/* Bottom CTA */}
-          <div className="mt-8 flex flex-col items-start justify-between gap-3 rounded-xl border border-surface-200 bg-surface-50 p-5 sm:flex-row sm:items-center">
-            <div>
-              <h2 className="text-sm font-semibold text-text-main">{t('cta.title')}</h2>
-              <p className="text-sm text-text-secondary">{t('cta.subtitle')}</p>
-            </div>
-            <div className="flex items-center gap-2">
-              <Link href="/faq" className="btn-primary rounded-lg px-4 py-2 text-xs font-semibold">
-                {t('cta.openFaq')}
-              </Link>
-              <Link href="/resources" className="btn-secondary rounded-lg px-4 py-2 text-xs">
-                {t('cta.viewResources')}
-              </Link>
-            </div>
+          <div className="flex items-center gap-1.5 rounded-full border border-surface-200 bg-white px-3 py-1.5 text-xs text-text-secondary">
+            <BookOpenCheck className="h-3 w-3 text-brand-500" />
+            <span>
+              {quickNotes?.faq?.text}{' '}
+              <Link href="/faq" className="font-medium text-brand-600 underline underline-offset-2 transition hover:text-brand-500">
+                {quickNotes?.faq?.link}
+              </Link>{' '}
+              {quickNotes?.faq?.suffix}
+            </span>
           </div>
-
-          {/* Mobile trust strip */}
-          <div className="mt-6 border-t border-surface-200 pt-4 lg:hidden">
-            <p className="text-center text-xs leading-relaxed text-text-muted">
-              Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
-            </p>
+          <div className="flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-xs text-text-secondary">
+            <AlertTriangle className="h-3 w-3 text-amber-500" />
+            <span>
+              {quickNotes?.noTrades?.text}{' '}
+              <span className="font-medium text-text-main">{quickNotes?.noTrades?.highlight}</span>
+              {quickNotes?.noTrades?.suffix}
+            </span>
           </div>
         </div>
-      </div>
 
-      {/* Desktop left panel — before you send info */}
-      {/* This content is embedded in the left dark panel above */}
+        {/* Region info line */}
+        {sideInfo?.regions && (
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-1.5 text-xs text-text-muted">
+            <MapPin className="h-3 w-3 text-brand-500" />
+            <span className="font-medium text-text-secondary">{sideInfo.regions.title}:</span>
+            {sideInfo.regions.items?.map((item: any, idx: number) => (
+              <span key={idx}>
+                {item.name}
+                {idx < sideInfo.regions.items.length - 1 && <span className="mx-0.5">·</span>}
+              </span>
+            ))}
+            {sideInfo.regions.note && (
+              <span className="ml-1 text-text-muted/70">— {sideInfo.regions.note}</span>
+            )}
+          </div>
+        )}
+
+        {/* Bottom CTA */}
+        <div className="mt-10 flex flex-col items-start justify-between gap-3 rounded-xl border border-surface-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center">
+          <div>
+            <h2 className="text-sm font-semibold text-text-main">{t('cta.title')}</h2>
+            <p className="text-sm text-text-secondary">{t('cta.subtitle')}</p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link href="/faq" className="btn-primary rounded-lg px-4 py-2 text-xs font-semibold">
+              {t('cta.openFaq')}
+            </Link>
+            <Link href="/resources" className="btn-secondary rounded-lg px-4 py-2 text-xs">
+              {t('cta.viewResources')}
+            </Link>
+          </div>
+        </div>
+
+        {/* Education disclaimer */}
+        <p className="mt-8 pb-8 text-center text-xs leading-relaxed text-text-muted">
+          Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+        </p>
+      </div>
     </div>
   )
 }

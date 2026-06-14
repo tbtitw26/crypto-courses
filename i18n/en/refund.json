@@ -7,12 +7,12 @@
     "subtitle": "Everything here explains how we review refund requests for Avenqor token top-ups, ready-made courses, custom PDFs and AI Strategy Builder outputs. It is based on UK consumer law and tailored to digital-only delivery.",
     "meta": [
       { "label": "Effective date", "value": "6 December 2025" },
-      { "label": "Operator", "value": "OVERSEAS SUPPORT LIMITED (15969862)" },
+      { "label": "Operator", "value": "CUR NOVA LTD (17240836)" },
       { "label": "Jurisdiction", "value": "England & Wales" }
     ],
     "badges": {
       "payments": "Payments: Visa · Mastercard · GBP/EUR/USD/SR",
-      "support": "Support: info@avenqor.net",
+      "support": "Support: info@cur-nova.com",
       "digitalOnly": "Digital delivery · No physical returns"
     },
     "summaryCard": {
@@ -25,7 +25,7 @@
         "Consumed Tokens are non-refundable; Wallet credit is non-transferable.",
         "Bonus/promo credits can be removed but are never refunded in cash.",
         "Avenqor delivers digital content only – nothing needs to be shipped back.",
-        "Email info@avenqor.net with your account email, order ID and context.",
+        "Email info@cur-nova.com with your account email, order ID and context.",
         "Currencies: GBP, EUR, USD, Saudi Riyal. Methods: Visa, Mastercard.",
         "Reference rate: 100 Tokens = £1.00 / €1.17 / $1.29 / 4.94 SR."
       ],
@@ -71,7 +71,7 @@
             "Wallet credit is bound to the account, non-transferable and not exchangeable for cash (see section 5).",
             "Promotional or bonus credits can expire and are never refundable.",
             "All Avenqor products are digital; there are no physical items to return.",
-            "Submit requests via info@avenqor.net, including your account email, order reference and supporting details.",
+            "Submit requests via info@cur-nova.com, including your account email, order reference and supporting details.",
             "Accepted currencies: GBP (£), EUR (€), USD ($), Saudi Riyal (SR). Payment methods: Visa, Mastercard.",
             "Reference rate for display purposes: 100 Tokens = £1.00 / €1.17 / $1.29 / 4.94 SR."
           ]
@@ -85,7 +85,7 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "This Policy governs cancellations and refunds for purchases made via avenqor.net, including Wallet top-ups (token purchases) and paid educational features (ready-made courses, custom PDFs, AI Strategy Builder outputs and calculators) operated by OVERSEAS SUPPORT LIMITED (“Avenqor”, “we”)."
+          "text": "This Policy governs cancellations and refunds for purchases made via avenqor.net, including Wallet top-ups (token purchases) and paid educational features (ready-made courses, custom PDFs, AI Strategy Builder outputs and calculators) operated by CUR NOVA LTD (“Avenqor”, “we”)."
         },
         {
           "type": "paragraph",
@@ -187,7 +187,7 @@
         {
           "type": "list",
           "items": [
-            "Email info@avenqor.net with your account email, order / transaction reference, whether you are querying a Wallet top-up or a specific feature, and any relevant evidence (screens, bank confirmations, links).",
+            "Email info@cur-nova.com with your account email, order / transaction reference, whether you are querying a Wallet top-up or a specific feature, and any relevant evidence (screens, bank confirmations, links).",
             "We acknowledge within 5 business days, may request more information, and aim to process approved refunds within 5–10 business days (posting times depend on your bank)."
           ]
         }
@@ -272,10 +272,10 @@
         {
           "type": "list",
           "items": [
-            "Avenqor — operated by OVERSEAS SUPPORT LIMITED",
-            "Registered office: Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF, United Kingdom",
-            "Company number: 15969862",
-            "Email: info@avenqor.net",
+            "Avenqor — operated by CUR NOVA LTD",
+            "Registered office: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom",
+            "Company number: 17240836",
+            "Email: info@cur-nova.com",
             "Tel: +44 7457 424685",
             "Accepted currencies: GBP, EUR, USD, SR",
             "Payment methods: Visa, Mastercard"

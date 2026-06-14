@@ -133,41 +133,42 @@ export function CookiesPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Dark cookie hero */}
-      <section className="bg-surface-900 pb-10 pt-8">
+      {/* Light cookie hero with gradient band */}
+      <div className="h-1.5 bg-gradient-to-r from-brand-500 via-brand-400 to-brand-600" />
+      <section className="bg-white pb-10 pt-8">
         <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
-          <div className="mb-4 flex items-center gap-1 text-xs text-surface-500">
-            <Link href="/" className="transition hover:text-surface-300">
+          <div className="mb-4 flex items-center gap-1 text-xs text-text-muted">
+            <Link href="/" className="transition hover:text-text-secondary">
               {t('breadcrumb.home')}
             </Link>
             <span>/</span>
-            <span className="text-surface-400">{t('breadcrumb.cookies')}</span>
+            <span className="text-text-secondary">{t('breadcrumb.cookies')}</span>
           </div>
 
           <div className="mb-6 flex items-start gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-surface-700 bg-surface-800">
-              <Settings2 className="h-6 w-6 text-brand-400" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-200 bg-brand-50">
+              <Settings2 className="h-6 w-6 text-brand-600" />
             </div>
             <div>
-              <span className="mb-1 inline-block rounded-full border border-surface-700 bg-surface-800 px-2.5 py-0.5 text-xs text-brand-300">
+              <span className="mb-1 inline-block rounded-full border border-brand-200 bg-brand-50 px-2.5 py-0.5 text-xs text-brand-600">
                 {hero.pill}
               </span>
-              <h1 className="text-2xl font-semibold text-white sm:text-3xl">{hero.title}</h1>
-              <p className="mt-1 max-w-2xl text-sm text-surface-400">{hero.subtitle}</p>
+              <h1 className="text-2xl font-semibold text-text-main sm:text-3xl">{hero.title}</h1>
+              <p className="mt-1 max-w-2xl text-sm text-text-secondary">{hero.subtitle}</p>
             </div>
           </div>
 
           {/* Badges */}
           <div className="mb-6 flex flex-wrap items-center gap-2 text-xs">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-              <Globe2 className="h-3 w-3 text-brand-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+              <Globe2 className="h-3 w-3 text-brand-600" />
               {hero.badges.regions}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-              <FileText className="h-3 w-3 text-brand-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+              <FileText className="h-3 w-3 text-brand-600" />
               {hero.badges.features}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-700/60 bg-amber-950/30 px-3 py-1.5 text-amber-300">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-amber-700">
               <AlertTriangle className="h-3 w-3" />
               {hero.badges.optional}
             </span>
@@ -176,12 +177,12 @@ export function CookiesPage() {
           {/* Highlights + Snapshot in grid */}
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
             {/* Highlights panel */}
-            <div className="rounded-xl border border-brand-800/40 bg-brand-950/20 p-4 lg:col-span-3">
-              <p className="mb-3 text-sm text-surface-400">{hero.note}</p>
+            <div className="rounded-xl border border-brand-200 bg-brand-50 p-4 lg:col-span-3">
+              <p className="mb-3 text-sm text-text-secondary">{hero.note}</p>
               <ul className="space-y-2">
                 {hero.highlights?.map((item: string, idx: number) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm text-white">
-                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-400" />
+                  <li key={idx} className="flex items-start gap-2 text-sm text-text-main">
+                    <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -189,23 +190,23 @@ export function CookiesPage() {
             </div>
 
             {/* Snapshot card */}
-            <div className="rounded-xl border border-surface-700 bg-surface-800/60 p-4 lg:col-span-2">
+            <div className="rounded-xl border border-surface-200 bg-surface-50 p-4 lg:col-span-2">
               <div className="mb-3 flex items-center gap-2">
-                <Info className="h-4 w-4 text-brand-400" />
+                <Info className="h-4 w-4 text-brand-600" />
                 <div>
-                  <p className="text-xs font-semibold text-white">{snapshotCard?.title}</p>
-                  <p className="text-xs text-surface-500">{snapshotCard?.subtitle}</p>
+                  <p className="text-xs font-semibold text-text-main">{snapshotCard?.title}</p>
+                  <p className="text-xs text-text-muted">{snapshotCard?.subtitle}</p>
                 </div>
               </div>
-              <ul className="mb-2 space-y-1.5 text-xs text-surface-400">
+              <ul className="mb-2 space-y-1.5 text-xs text-text-secondary">
                 {snapshotCard?.items?.map((item: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" />
+                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <p className="text-xs text-surface-500">{snapshotCard?.note}</p>
+              <p className="text-xs text-text-muted">{snapshotCard?.note}</p>
             </div>
           </div>
         </div>

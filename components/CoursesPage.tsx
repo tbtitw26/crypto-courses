@@ -96,21 +96,17 @@ export function CoursesPage() {
     fetchCourses()
   }, [])
 
-  const levelFilters: Array<Level | 'All levels'> = [
-    'All levels',
-    'General',
-    'Beginner',
-    'Intermediate',
-    'Advanced',
-  ]
+  const levelFilters = useMemo(() => {
+    const existing = new Set(courses.map(c => c.level))
+    const ordered: Level[] = ['Beginner', 'Intermediate', 'Advanced', 'General']
+    return ['All levels' as const, ...ordered.filter(l => existing.has(l))]
+  }, [courses])
 
-  const marketFilters: Array<Market | 'All markets'> = [
-    'All markets',
-    'General',
-    'Forex',
-    'Crypto',
-    'Binary',
-  ]
+  const marketFilters = useMemo(() => {
+    const existing = new Set(courses.map(c => c.market))
+    const ordered: Market[] = ['General', 'Forex', 'Crypto', 'Binary']
+    return ['All markets' as const, ...ordered.filter(m => existing.has(m))]
+  }, [courses])
 
   const filteredCourses = useMemo(() => {
     return courses.filter((course) => {

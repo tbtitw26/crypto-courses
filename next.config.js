@@ -16,6 +16,10 @@ const remotePatterns = [
     protocol: 'https',
     hostname: 'oaidalleapiprodscus.blob.core.windows.net', // OpenAI DALL-E images
   },
+  {
+    protocol: 'https',
+    hostname: 'images.unsplash.com',
+  },
 ]
 
 if (SUPABASE_HOSTNAME) {

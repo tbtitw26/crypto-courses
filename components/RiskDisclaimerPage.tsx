@@ -102,24 +102,25 @@ export function RiskDisclaimerPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Amber-tinted dark hero — most serious legal page */}
-      <section className="bg-surface-900 pb-10 pt-8">
+      {/* Light hero with gradient band — risk page */}
+      <div className="h-1.5 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600" />
+      <section className="bg-white pb-10 pt-8">
         <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
-          <div className="mb-4 flex items-center gap-1 text-xs text-surface-500">
-            <Link href="/" className="transition hover:text-surface-300">
+          <div className="mb-4 flex items-center gap-1 text-xs text-text-muted">
+            <Link href="/" className="transition hover:text-text-secondary">
               {tBreadcrumb('home')}
             </Link>
             <span>/</span>
-            <span className="text-surface-400">{t('breadcrumb.risk')}</span>
+            <span className="text-text-secondary">{t('breadcrumb.risk')}</span>
           </div>
 
           <div className="mb-6 flex items-start gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-amber-700/60 bg-amber-950/30">
-              <AlertTriangle className="h-6 w-6 text-amber-400" />
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-amber-200 bg-amber-50">
+              <AlertTriangle className="h-6 w-6 text-amber-600" />
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-white sm:text-3xl">{t('hero.title')}</h1>
-              <p className="mt-1 max-w-2xl text-sm text-surface-400">{t('hero.subtitle')}</p>
+              <h1 className="text-2xl font-semibold text-text-main sm:text-3xl">{t('hero.title')}</h1>
+              <p className="mt-1 max-w-2xl text-sm text-text-secondary">{t('hero.subtitle')}</p>
             </div>
           </div>
 
@@ -127,45 +128,45 @@ export function RiskDisclaimerPage() {
           <div className="mb-6 flex flex-wrap items-center gap-2 text-xs">
             {Array.isArray(heroMeta) && heroMeta.length > 0
               ? heroMeta.map((meta) => (
-                  <span key={meta.label} className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-                    <Shield className="h-3 w-3 text-brand-400" />
-                    <span className="text-surface-500">{meta.label}:</span>
+                  <span key={meta.label} className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+                    <Shield className="h-3 w-3 text-brand-600" />
+                    <span className="text-text-muted">{meta.label}:</span>
                     <span>{meta.value}</span>
                   </span>
                 ))
               : null}
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-700/60 bg-amber-950/30 px-3 py-1.5 font-medium text-amber-300">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 font-medium text-amber-700">
               <AlertTriangle className="h-3 w-3" />
               {t('hero.badges.highRisk')}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-              <Shield className="h-3 w-3 text-brand-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+              <Shield className="h-3 w-3 text-brand-600" />
               {t('hero.badges.educationOnly')}
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-700 bg-surface-800 px-3 py-1.5 text-surface-300">
-              <Ban className="h-3 w-3 text-brand-400" />
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
+              <Ban className="h-3 w-3 text-brand-600" />
               {t('hero.badges.noAdvice')}
             </span>
           </div>
 
           {/* Summary card — amber-tinted */}
-          <div className="rounded-xl border border-amber-700/50 bg-amber-950/20 p-5">
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-5">
             <div className="mb-3 flex items-center gap-2">
-              <AlertTriangle className="h-4 w-4 text-amber-400" />
-              <span className="text-xs font-semibold text-white">{summaryCard?.title}</span>
-              <span className="text-xs text-amber-300/60">— {summaryCard?.subtitle}</span>
+              <AlertTriangle className="h-4 w-4 text-amber-600" />
+              <span className="text-xs font-semibold text-text-main">{summaryCard?.title}</span>
+              <span className="text-xs text-amber-600">— {summaryCard?.subtitle}</span>
             </div>
-            <ul className="mb-3 grid grid-cols-1 gap-1.5 text-xs text-surface-400 sm:grid-cols-2">
+            <ul className="mb-3 grid grid-cols-1 gap-1.5 text-xs text-text-secondary sm:grid-cols-2">
               {summaryCard?.items && Array.isArray(summaryCard.items)
                 ? summaryCard.items.map((item: string, idx: number) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />
+                      <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
                       {item}
                     </li>
                   ))
                 : null}
             </ul>
-            {summaryCard?.note && <p className="text-xs text-amber-300/50">{summaryCard.note}</p>}
+            {summaryCard?.note && <p className="text-xs text-amber-600">{summaryCard.note}</p>}
           </div>
         </div>
       </section>

@@ -323,9 +323,9 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
       <div>
         <div class="logo">Avenqor</div>
         <div class="company-info">
-          OVERSEAS SUPPORT LIMITED<br>
-          Company Number: 15969862<br>
-          Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF
+          CUR NOVA LTD<br>
+          Company Number: 17240836<br>
+          Dept 6831, 196 High Road, Wood Green, London, N22 8HH
         </div>
       </div>
       <div class="invoice-info">

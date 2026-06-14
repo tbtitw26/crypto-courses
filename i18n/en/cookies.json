@@ -22,8 +22,8 @@
       "title": "At a glance",
       "subtitle": "Key facts before the full legal text",
       "items": [
-        "Controller: OVERSEAS SUPPORT LIMITED (Company No. 15969862).",
-        "Contact: info@avenqor.net · Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF, United Kingdom.",
+        "Controller: CUR NOVA LTD (Company No. 17240836).",
+        "Contact: info@cur-nova.com · Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom.",
         "Scope: trading-education tools, token purchases, AI course/strategy generation.",
         "Payments: Visa/Mastercard in GBP with display in EUR, USD, SAR.",
         "Technologies covered: cookies, localStorage, sessionStorage, pixels, SDKs.",
@@ -38,11 +38,11 @@
     "details": [
       {
         "label": "Controller",
-        "value": "OVERSEAS SUPPORT LIMITED (Company No. 15969862)"
+        "value": "CUR NOVA LTD (Company No. 17240836)"
       },
       {
         "label": "Contact",
-        "value": "info@avenqor.net"
+        "value": "info@cur-nova.com"
       },
       {
         "label": "Context",
@@ -83,8 +83,8 @@
         "By interacting with the cookie banner or the preferences centre, you manage consent for every non-essential category. Essential cookies remain active to keep the platform secure and functional."
       ],
       "list": [
-        "Controller: OVERSEAS SUPPORT LIMITED, Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF, United Kingdom.",
-        "Contact: info@avenqor.net",
+        "Controller: CUR NOVA LTD, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom.",
+        "Contact: info@cur-nova.com",
         "Scope: ready-made PDF library, AI-generated custom courses/strategies, token purchases and billing flows."
       ]
     },
@@ -261,8 +261,8 @@
         "Questions about cookies or this Policy can be directed to:"
       ],
       "contacts": [
-        "Email: info@avenqor.net",
-        "Postal: OVERSEAS SUPPORT LIMITED, Academy House, 11 Dunraven Place, Bridgend, Mid Glamorgan, CF31 1JF, United Kingdom"
+        "Email: info@cur-nova.com",
+        "Postal: CUR NOVA LTD, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom"
       ]
     }
   ],
