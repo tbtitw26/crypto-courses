@@ -200,7 +200,6 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
   const amountGbp = receiptData.amount
   const amountEur = convertAmount(amountGbp, 'GBP', 'EUR')
   const amountUsd = convertAmount(amountGbp, 'GBP', 'USD')
-  const amountSr = convertAmount(amountGbp, 'GBP', 'SR')
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -375,7 +374,6 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
             <th class="text-right">Amount (GBP)</th>
             <th class="text-right">Amount (EUR)</th>
             <th class="text-right">Amount (USD)</th>
-            <th class="text-right">Amount (SR)</th>
           </tr>
         </thead>
         <tbody>
@@ -385,11 +383,10 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
             <td class="text-right">${amountGbp > 0 ? formatPrice(amountGbp, 'GBP') : '—'}</td>
             <td class="text-right">${amountGbp > 0 ? formatPrice(amountEur, 'EUR') : '—'}</td>
             <td class="text-right">${amountGbp > 0 ? formatPrice(amountUsd, 'USD') : '—'}</td>
-            <td class="text-right">${amountGbp > 0 ? formatPrice(amountSr, 'SR') : '—'}</td>
           </tr>
           ${amountGbp > 0 ? `
           <tr class="total-row">
-            <td colspan="5" class="text-right">Total:</td>
+            <td colspan="4" class="text-right">Total:</td>
             <td class="text-right">${formatPrice(amountGbp, 'GBP')}</td>
           </tr>
           ` : ''}

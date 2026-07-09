@@ -5,7 +5,6 @@ import { ToastProvider } from '@/components/ToastProvider'
 import { CookieConsentBanner } from '@/components/CookieConsentBanner'
 import { NextIntlClientProvider } from 'next-intl'
 import { CartProvider } from '@/contexts/CartContext'
-import { useState, useEffect } from 'react'
 
 // Static import for default locale to avoid loading issues
 import enCommon from '@/i18n/en/common.json'
@@ -28,7 +27,6 @@ import enRisk from '@/i18n/en/risk.json'
 import enTopUp from '@/i18n/en/topUp.json'
 import enRefund from '@/i18n/en/refund.json'
 
-const LOCALE_COOKIE_NAME = 'user_locale'
 const defaultLocale = 'en'
 
 // Default messages available immediately
@@ -54,88 +52,9 @@ const defaultMessages = {
   refund: enRefund,
 }
 
-function getLocaleFromCookie(): string {
-  if (typeof window === 'undefined') return defaultLocale
-
-  const cookies = document.cookie.split(';')
-  const localeCookie = cookies.find((c) => c.trim().startsWith(`${LOCALE_COOKIE_NAME}=`))
-  
-  if (localeCookie) {
-    const locale = localeCookie.split('=')[1]?.trim()
-    if (locale === 'en' || locale === 'ar') {
-      return locale
-    }
-  }
-  
-  return defaultLocale
-}
-
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<string>(defaultLocale)
-  const [messages, setMessages] = useState<any>(defaultMessages)
-
-  useEffect(() => {
-    const currentLocale = getLocaleFromCookie()
-    
-    // If locale is already default, messages are already loaded
-    if (currentLocale === defaultLocale) {
-      setLocale(currentLocale)
-      return
-    }
-    
-    // Load messages for non-default locale
-    setLocale(currentLocale)
-    
-    Promise.all([
-      import(`@/i18n/${currentLocale}/common.json`),
-      import(`@/i18n/${currentLocale}/home.json`),
-      import(`@/i18n/${currentLocale}/courses.json`),
-      import(`@/i18n/${currentLocale}/cart.json`),
-      import(`@/i18n/${currentLocale}/learn.json`),
-      import(`@/i18n/${currentLocale}/pricing.json`),
-      import(`@/i18n/${currentLocale}/dashboard.json`),
-      import(`@/i18n/${currentLocale}/auth.json`),
-      import(`@/i18n/${currentLocale}/faq.json`),
-      import(`@/i18n/${currentLocale}/glossary.json`),
-      import(`@/i18n/${currentLocale}/resources.json`),
-      import(`@/i18n/${currentLocale}/about.json`),
-      import(`@/i18n/${currentLocale}/contact.json`),
-      import(`@/i18n/${currentLocale}/terms.json`),
-      import(`@/i18n/${currentLocale}/privacy.json`),
-      import(`@/i18n/${currentLocale}/cookies.json`),
-      import(`@/i18n/${currentLocale}/risk.json`),
-      import(`@/i18n/${currentLocale}/topUp.json`),
-      import(`@/i18n/${currentLocale}/refund.json`),
-    ])
-      .then(([common, home, courses, cart, learn, pricing, dashboard, auth, faq, glossary, resources, about, contact, terms, privacy, cookies, risk, topUp, refund]) => {
-        setMessages({
-          common: common.default,
-          home: home.default,
-          courses: courses.default,
-          cart: cart.default,
-          learn: learn.default,
-          pricing: pricing.default,
-          dashboard: dashboard.default,
-          auth: auth.default,
-          faq: faq.default,
-          glossary: glossary.default,
-          resources: resources.default,
-          about: about.default,
-          contact: contact.default,
-          terms: terms.default,
-          privacy: privacy.default,
-          cookies: cookies.default,
-          risk: risk.default,
-          topUp: topUp.default,
-          refund: refund.default,
-        })
-      })
-      .catch((error) => {
-        console.error('Failed to load i18n messages:', error)
-        // Keep default messages on error
-        setLocale(defaultLocale)
-      })
-  }, [])
+  const locale = defaultLocale
+  const messages = defaultMessages
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages} timeZone="UTC">

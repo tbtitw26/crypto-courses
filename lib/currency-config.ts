@@ -42,16 +42,6 @@ export const currencies: Record<string, CurrencyConfig> = {
     tokens_per_unit: 100, // 100 tokens still based on GBP equivalent
     is_default: false,
   },
-  SR: {
-    code: 'SR',
-    symbol: 'ر.س',
-    name: 'Saudi Riyal',
-    flag: '🇸🇦',
-    flag_icon: '/assets/images/flags/gb.svg', // TODO: Add SR flag icon
-    rate: 4.94, // 1.00 GBP = 4.94 SR
-    tokens_per_unit: 100, // 100 tokens still based on GBP equivalent
-    is_default: false,
-  },
 }
 
 export function getAvailableCurrencies(): Record<string, CurrencyConfig> {

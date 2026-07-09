@@ -18,7 +18,6 @@ import {
   ShieldCheck,
   Sparkles,
 } from 'lucide-react'
-import { LanguageToggle } from './LanguageToggle'
 
 const productLinks = [
   { href: '/courses', key: 'courses' },
@@ -249,9 +248,6 @@ export default function Footer() {
                 >
                   <Linkedin className="h-4 w-4" />
                 </a>
-                <div className="ml-2 border-l border-surface-700 pl-3">
-                  <LanguageToggle />
-                </div>
               </div>
             </div>
 

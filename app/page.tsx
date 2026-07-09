@@ -37,7 +37,6 @@ import {
 import { CourseCard } from '@/components/CourseCard'
 import FAQAccordion from '@/components/FAQAccordion'
 import { TokenPacks } from '@/components/TokenPacks'
-import { TestimonialsVideos } from '@/components/TestimonialsVideos'
 import { TradingViewWidget } from '@/components/TradingViewWidget'
 
 interface FeaturedCourse {
@@ -1304,12 +1303,14 @@ export default function HomePage() {
           </Inner>
         </Section>
 
-        {/* ═══════════════════ STUDENT STORIES ═══════════════════ */}
+        {/* ═══════════════════ STUDENT STORIES (temporarily hidden) ═══════════════════ */}
+        {/*
         <section className="border-y border-surface-200 bg-white py-20 lg:py-24">
           <Inner>
             <TestimonialsVideos />
           </Inner>
         </section>
+        */}
 
         {/* ═══════════════════ KNOWLEDGE HUB ═══════════════════ */}
         <Section className="py-20 lg:py-28">

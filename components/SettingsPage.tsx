@@ -30,24 +30,6 @@ import { ChangePasswordModal } from './ChangePasswordModal'
 import { currencies } from '@/lib/currency-config'
 import { useToast } from '@/hooks/use-toast'
 
-const LOCALE_COOKIE_NAME = 'user_locale'
-
-function getLocaleFromCookie(): 'en' | 'ar' {
-  if (typeof window === 'undefined') return 'en'
-
-  const cookies = document.cookie.split(';')
-  const localeCookie = cookies.find((c) => c.trim().startsWith(`${LOCALE_COOKIE_NAME}=`))
-
-  if (localeCookie) {
-    const locale = localeCookie.split('=')[1]?.trim()
-    if (locale === 'en' || locale === 'ar') {
-      return locale
-    }
-  }
-
-  return 'en'
-}
-
 function Toggle({
   label,
   description,
@@ -109,7 +91,6 @@ export function SettingsPage() {
   const { data: session, status, update: updateSession } = useSession()
   const router = useRouter()
   const { showToast } = useToast()
-  const [dashboardLanguage, setDashboardLanguage] = useState<'en' | 'ar'>('en')
   const [courseLanguage, setCourseLanguage] = useState('english')
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false)
 
@@ -125,10 +106,6 @@ export function SettingsPage() {
   const [editedFirstName, setEditedFirstName] = useState('')
   const [editedLastName, setEditedLastName] = useState('')
   const [editedRegion, setEditedRegion] = useState('')
-
-  useEffect(() => {
-    setDashboardLanguage(getLocaleFromCookie())
-  }, [])
 
   const loadProfileData = useCallback(async () => {
     if (!session?.user?.id) return
@@ -440,42 +417,6 @@ export function SettingsPage() {
               <div className="p-5 space-y-5">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div className="space-y-2 text-xs">
-                    <p className="font-medium text-text-main">{t('preferences.dashboardLanguage.label')}</p>
-                    <div className="flex gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (dashboardLanguage === 'en') return
-                          document.cookie = `${LOCALE_COOKIE_NAME}=en; path=/; max-age=31536000`
-                          window.location.reload()
-                        }}
-                        className={`rounded-lg border px-3 py-1.5 font-medium transition ${
-                          dashboardLanguage === 'en'
-                            ? 'border-brand-600 bg-brand-600 text-white'
-                            : 'border-surface-200 bg-surface-50 text-text-main hover:border-surface-300'
-                        }`}
-                      >
-                        EN
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (dashboardLanguage === 'ar') return
-                          document.cookie = `${LOCALE_COOKIE_NAME}=ar; path=/; max-age=31536000`
-                          window.location.reload()
-                        }}
-                        className={`rounded-lg border px-3 py-1.5 font-medium transition ${
-                          dashboardLanguage === 'ar'
-                            ? 'border-brand-600 bg-brand-600 text-white'
-                            : 'border-surface-200 bg-surface-50 text-text-main hover:border-surface-300'
-                        }`}
-                      >
-                        AR
-                      </button>
-                    </div>
-                    <p className="text-text-muted">{t('preferences.dashboardLanguage.note')}</p>
-                  </div>
-                  <div className="space-y-2 text-xs">
                     <p className="font-medium text-text-main">{t('preferences.courseLanguage.label')}</p>
                     <div className="flex gap-1.5">
                       <button
@@ -510,7 +451,7 @@ export function SettingsPage() {
                     <p className="font-medium text-text-main">{t('preferences.currency.label')}</p>
                     <p className="text-text-secondary">
                       {t('preferences.currency.description', {
-                        currencies: Object.keys(currencies).join(', ').replace('SR', 'SR (Saudi Riyal)')
+                        currencies: Object.keys(currencies).join(', ')
                       })}
                     </p>
                     <p className="text-text-muted">{t('preferences.currency.note')}</p>
