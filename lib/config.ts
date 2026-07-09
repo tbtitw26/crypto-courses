@@ -82,18 +82,6 @@ export const config = {
     apiKey: process.env.TM_API_KEY || '',
     signingKey: process.env.TM_SIGNING_KEY || '',
   },
-  armenotech: {
-    apiUrl: process.env.ARMENOTECH_API_URL || 'https://fpf-api.armenotech.net',
-    merchantGuid: process.env.ARMENOTECH_MERCHANT_GUID || '',
-    appToken: process.env.ARMENOTECH_APP_TOKEN || '',
-    appSecret: process.env.ARMENOTECH_APP_SECRET || '',
-    callbackSecret: process.env.ARMENOTECH_CALLBACK_SECRET || '',
-    initPathTemplate: process.env.ARMENOTECH_INIT_PATH_TEMPLATE || '',
-    methods: {
-      USD: process.env.ARMENOTECH_METHOD_GUID_USD || '',
-      EUR: process.env.ARMENOTECH_METHOD_GUID_EUR || '',
-    },
-  },
   nextauth: {
     secret: process.env.NEXTAUTH_SECRET || '',
     url: process.env.NEXTAUTH_URL || 'http://localhost:3000',

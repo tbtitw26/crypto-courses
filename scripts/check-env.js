@@ -16,14 +16,7 @@ const requiredEnvVars = {
   // OpenAI
   OPENAI_API_KEY: 'OpenAI API key for GPT-4o and DALL-E 3',
   
-  // Armenotech / APS Payment Gateway
-  ARMENOTECH_API_URL: 'Armenotech API URL (prod: https://fpf-api.proc-gw.com)',
-  ARMENOTECH_MERCHANT_GUID: 'Merchant GUID provided by Armenotech / APS',
-  ARMENOTECH_APP_TOKEN: 'Application token for Armenotech API authentication',
-  ARMENOTECH_APP_SECRET: 'Application secret for Armenotech API authentication',
-  ARMENOTECH_CALLBACK_SECRET: 'Secret used to validate Armenotech callbacks',
-  ARMENOTECH_METHOD_GUID_USD: 'Hosted payment method GUID for USD deposits',
-  ARMENOTECH_METHOD_GUID_EUR: 'Hosted payment method GUID for EUR deposits',
+  // Payments: no external gateway is wired up, top-ups settle in test mode
 
   // TransferMit Payment Gateway (legacy)
   TM_API_KEY: 'TransferMit API key',
@@ -40,7 +33,6 @@ const requiredEnvVars = {
   // Optional
   SITE_BASE_URL: 'Base URL for the site (optional, defaults to NEXTAUTH_URL)',
   TM_API_URL: 'TransferMit API URL (optional, has default)',
-  ARMENOTECH_INIT_PATH_TEMPLATE: 'Optional override for the Armenotech deposit init path',
   PUPPETEER_EXECUTABLE_PATH: 'Path to Chromium executable (optional, for local dev)',
 }
 
@@ -49,7 +41,6 @@ const optionalEnvVars = [
   'TM_API_URL',
   'TM_API_KEY',
   'TM_SIGNING_KEY',
-  'ARMENOTECH_INIT_PATH_TEMPLATE',
   'PUPPETEER_EXECUTABLE_PATH',
   'SMTP_FROM_NAME',
 ]
