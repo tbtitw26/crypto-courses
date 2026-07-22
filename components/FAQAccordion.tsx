@@ -24,7 +24,7 @@ export default function FAQAccordion({ searchQuery, selectedCategory }: FAQAccor
   // Get FAQ items from i18n
   const faqData: FAQItem[] = (t.raw('items') as any[]).map((item: any) => ({
     id: item.id,
-    category: item.id.includes('payments') ? 'payments' : item.id.includes('account') ? 'account' : item.id.includes('legal') ? 'legal' : 'general',
+    category: item.category || 'general',
     question: item.question,
     answer: item.answer,
   }))
@@ -62,8 +62,8 @@ export default function FAQAccordion({ searchQuery, selectedCategory }: FAQAccor
             {t('pricing')}
           </a>{' '}
           {t('and')}{' '}
-          <a href="/allergens" className="text-brand-400 hover:text-brand-400/80 hover:underline">
-            allergen
+          <a href="/faq" className="text-brand-400 hover:text-brand-400/80 hover:underline">
+            full FAQ
           </a>{' '}
           {t('guides')}
         </p>

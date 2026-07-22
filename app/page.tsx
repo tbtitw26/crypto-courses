@@ -207,7 +207,7 @@ const bentoCapabilities = [
   {
     key: 'resources',
     title: 'Educational Resources',
-    desc: 'Printable PDFs, checklists and templates for daily trading discipline.',
+    desc: 'Online checklists and guides for daily trading discipline.',
     icon: FileText,
     size: 'small' as const,
     accent: 'brand',
@@ -1389,26 +1389,34 @@ export default function HomePage() {
 
               {/* Resources */}
               <div>
-                <div className="mb-4 flex items-center gap-3">
+                <div className="mb-2 flex items-center gap-3">
                   <Layers className="h-5 w-5 text-brand-700" />
                   <h3 className="font-heading text-lg font-semibold text-text-main">
                     {t('glossaryResources.resources.title')}
                   </h3>
                 </div>
+                <p className="mb-4 text-sm leading-6 text-text-secondary">
+                  {t('glossaryResources.resources.subtitle')}
+                </p>
                 <div className="space-y-3">
                   {filteredResources.map((item) => (
-                    <div
+                    <Link
                       key={item.label}
-                      className="group flex items-start gap-3 rounded-xl border border-surface-200 bg-white p-4 transition hover:shadow-sm"
+                      href="/resources"
+                      className="group flex items-start gap-3 rounded-xl border border-surface-200 bg-white p-4 transition hover:border-brand-300 hover:shadow-sm"
                     >
-                      <Download className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
+                      <BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
                       <div>
                         <p className="text-sm font-semibold text-text-main">{item.label}</p>
                         <p className="mt-1 text-sm leading-6 text-text-secondary">
                           {item.definition}
                         </p>
+                        <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand-700">
+                          Read online
+                          <ArrowRight className="h-3 w-3 transition group-hover:translate-x-0.5" />
+                        </span>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
                 <Link

@@ -21,12 +21,6 @@ import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useState, useEffect } from 'react'
 
-function getCartItemType(slug: string): 'token-pack' | 'custom-top-up' | 'course' {
-  if (slug.startsWith('token-pack-')) return 'token-pack'
-  if (slug.startsWith('custom-top-up')) return 'custom-top-up'
-  return 'course'
-}
-
 export default function CartPage() {
   const { items, removeFromCart, getCartTotal } = useCart()
   const t = useTranslations('cart.page')
@@ -52,10 +46,9 @@ export default function CartPage() {
   const totalPrice = calculatePriceForTokens(total.tokens, currency)
   const formattedPrice = formatPrice(totalPrice, currency)
 
-  // Group items by type
-  const courseItems = items.filter((item) => getCartItemType(item.slug) === 'course')
-  const tokenPackItems = items.filter((item) => getCartItemType(item.slug) === 'token-pack')
-  const customTopUpItems = items.filter((item) => getCartItemType(item.slug) === 'custom-top-up')
+  // The cart only holds courses — token packs and top-ups are card-only and are
+  // paid for directly from /pricing and /top-up.
+  const courseItems = items
 
   // ─── EMPTY STATE ───
   if (items.length === 0) {
@@ -175,30 +168,6 @@ export default function CartPage() {
                 removeFromCart={removeFromCart}
               />
             )}
-            {tokenPackItems.length > 0 && (
-              <ItemGroup
-                label={`Token packs (${tokenPackItems.length})`}
-                items={tokenPackItems}
-                type="token-pack"
-                locale={locale}
-                currency={currency}
-                tCommon={tCommon}
-                t={t}
-                removeFromCart={removeFromCart}
-              />
-            )}
-            {customTopUpItems.length > 0 && (
-              <ItemGroup
-                label={`Custom top-ups (${customTopUpItems.length})`}
-                items={customTopUpItems}
-                type="custom-top-up"
-                locale={locale}
-                currency={currency}
-                tCommon={tCommon}
-                t={t}
-                removeFromCart={removeFromCart}
-              />
-            )}
           </div>
 
           {/* Order summary */}
@@ -216,28 +185,6 @@ export default function CartPage() {
                       <dd className="font-medium text-text-main">
                         {formatPrice(
                           calculatePriceForTokens(courseItems.reduce((s, i) => s + i.tokens, 0), currency),
-                          currency,
-                        )}
-                      </dd>
-                    </div>
-                  )}
-                  {tokenPackItems.length > 0 && (
-                    <div className="flex items-center justify-between">
-                      <dt className="text-text-secondary">Token packs ({tokenPackItems.length})</dt>
-                      <dd className="font-medium text-text-main">
-                        {formatPrice(
-                          calculatePriceForTokens(tokenPackItems.reduce((s, i) => s + i.tokens, 0), currency),
-                          currency,
-                        )}
-                      </dd>
-                    </div>
-                  )}
-                  {customTopUpItems.length > 0 && (
-                    <div className="flex items-center justify-between">
-                      <dt className="text-text-secondary">Top-ups ({customTopUpItems.length})</dt>
-                      <dd className="font-medium text-text-main">
-                        {formatPrice(
-                          calculatePriceForTokens(customTopUpItems.reduce((s, i) => s + i.tokens, 0), currency),
                           currency,
                         )}
                       </dd>

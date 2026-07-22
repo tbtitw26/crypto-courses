@@ -21,25 +21,35 @@ interface CartContextValue {
   clearCart: () => void
   getCartTotal: (currency?: string) => { tokens: number; price: number }
   itemCount: number
+  /** False until the cart has been restored from localStorage on the client. */
+  isHydrated: boolean
 }
 
 const CartContext = createContext<CartContextValue | undefined>(undefined)
 
 const CART_STORAGE_KEY = 'avenqor_cart'
 
+// Token packs and custom top-ups are card-only and are paid for directly via the
+// hosted payment session — they must never enter the cart. Only courses do.
+export function isCartableSlug(slug: string): boolean {
+  return !slug.startsWith('token-pack-') && !slug.startsWith('custom-top-up')
+}
+
 // Load cart from localStorage
 function loadCartFromStorage(): CartItem[] {
   if (typeof window === 'undefined') return []
-  
+
   try {
     const stored = localStorage.getItem(CART_STORAGE_KEY)
     if (stored) {
-      return JSON.parse(stored) as CartItem[]
+      const parsed = JSON.parse(stored) as CartItem[]
+      // Drop any legacy token-pack / top-up entries left over in storage
+      return Array.isArray(parsed) ? parsed.filter((item) => isCartableSlug(item?.slug ?? '')) : []
     }
   } catch (error) {
     console.error('Failed to load cart from storage:', error)
   }
-  
+
   return []
 }
 
@@ -58,11 +68,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [isMounted, setIsMounted] = useState(false)
 
-  // Load cart from storage on mount
+  // Load cart from storage on mount. Child effects run before this one, so items
+  // added during that first pass must be merged in rather than overwritten.
   useEffect(() => {
-    setIsMounted(true)
     const loadedItems = loadCartFromStorage()
-    setItems(loadedItems)
+    setItems((prevItems) => {
+      const merged = [...loadedItems]
+      prevItems.forEach((item) => {
+        if (!merged.some((existing) => existing.slug === item.slug)) merged.push(item)
+      })
+      return merged
+    })
+    setIsMounted(true)
   }, [])
 
   // Save cart to storage whenever items change
@@ -73,6 +90,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [items, isMounted])
 
   const addToCart = useCallback((item: CartItem) => {
+    if (!isCartableSlug(item.slug)) {
+      console.warn('[Cart] Token purchases are card-only and cannot be added to the cart:', item.slug)
+      return
+    }
+
     setItems((prevItems) => {
       // Check if item already exists in cart
       const existingIndex = prevItems.findIndex((i) => i.slug === item.slug)
@@ -116,6 +138,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     clearCart,
     getCartTotal,
     itemCount,
+    isHydrated: isMounted,
   }
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>

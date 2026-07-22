@@ -13,12 +13,14 @@ import {
   Coins,
   CreditCard,
   Download,
+  Loader2,
   Repeat,
   Sparkles,
   Wallet,
 } from 'lucide-react'
 import { calculatePriceForTokens, formatPrice, getCurrencySymbol } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
+import { useTopupCheckout } from '@/hooks/use-topup-checkout'
 
 export function PricingPage() {
   const t = useTranslations('pricing')
@@ -26,6 +28,7 @@ export function PricingPage() {
   const [currency, setCurrency] = useState('GBP')
   const [customAmount, setCustomAmount] = useState('0.01')
   const [selectedPack, setSelectedPack] = useState(1)
+  const { startTopup, pendingKey, isPending } = useTopupCheckout('/pricing')
 
   useEffect(() => {
     setCurrency(getUserCurrency())
@@ -147,11 +150,10 @@ export function PricingPage() {
 
           <div className="mt-8 grid gap-5 md:grid-cols-3">
             {packs.map((pack, index) => (
-              <motion.button
+              <motion.div
                 key={pack.id}
-                type="button"
                 onClick={() => setSelectedPack(index)}
-                className={`relative flex flex-col rounded-2xl border-2 p-6 text-left transition-all ${
+                className={`relative flex cursor-pointer flex-col rounded-2xl border-2 p-6 text-left transition-all ${
                   selectedPack === index
                     ? 'border-brand-600 bg-white shadow-lg ring-1 ring-brand-600/20'
                     : 'border-surface-200 bg-white hover:border-surface-300 hover:shadow-md'
@@ -192,18 +194,24 @@ export function PricingPage() {
                   ))}
                 </ul>
 
-                <Link
-                  href={`/checkout?pack=${pack.id}`}
-                  onClick={(e) => e.stopPropagation()}
-                  className={`mt-6 w-full text-center rounded-xl px-6 py-3 font-heading text-sm font-semibold transition-all duration-200 ${
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSelectedPack(index)
+                    startTopup({ tokens: pack.tokens, currency, slug: `token-pack-${pack.id}` }, pack.id)
+                  }}
+                  className={`mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 font-heading text-sm font-semibold transition-all duration-200 disabled:opacity-60 ${
                     selectedPack === index
                       ? 'bg-brand-700 text-white hover:bg-brand-800'
                       : 'border border-surface-300 bg-white text-text-main hover:border-surface-400 hover:bg-surface-50'
                   }`}
                 >
+                  {pendingKey === pack.id && <Loader2 className="h-4 w-4 animate-spin" />}
                   {t('tokenPacks.buyPack', { name: pack.name })}
-                </Link>
-              </motion.button>
+                </button>
+              </motion.div>
             ))}
           </div>
 
@@ -256,12 +264,17 @@ export function PricingPage() {
               </div>
             </div>
             <p className="mt-2 text-xs text-text-muted">{t('customTopUp.minAmount')}</p>
-            <Link
-              href={`/checkout?custom=${customAmount}&currency=${currency}`}
-              className="btn-primary mt-5 w-full text-center"
+            <button
+              type="button"
+              disabled={isPending || !(parseFloat(customAmount) > 0)}
+              onClick={() =>
+                startTopup({ amount: parseFloat(customAmount), currency }, 'custom')
+              }
+              className="btn-primary mt-5 inline-flex w-full items-center justify-center gap-2 text-center disabled:opacity-60"
             >
+              {pendingKey === 'custom' && <Loader2 className="h-4 w-4 animate-spin" />}
               {t('customTopUp.buyCta')}
-            </Link>
+            </button>
           </div>
         </div>
       </section>
@@ -290,7 +303,7 @@ export function PricingPage() {
             </div>
             <h3 className="mt-4 font-heading text-xl font-semibold text-text-main">{t('directPayment.title')}</h3>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary">{t('directPayment.subtitle')}</p>
-            <Link href="/checkout" className="btn-secondary mt-6 w-full text-center">
+            <Link href="/courses" className="btn-secondary mt-6 w-full text-center">
               {t('directPayment.cta')}
             </Link>
           </div>

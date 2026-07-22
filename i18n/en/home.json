@@ -209,14 +209,14 @@
     },
     "resources": {
       "title": "Resources",
-      "subtitle": "Printable PDFs and templates to support your daily routine.",
+      "subtitle": "Short practical guides you can read online — no downloads needed.",
       "items": [
         {
-          "label": "Risk Management Checklist (PDF)",
+          "label": "Risk Management Checklist",
           "definition": "A step-by-step list to review before any trade."
         },
         {
-          "label": "Position Sizing Template (PDF)",
+          "label": "Position Sizing Basics",
           "definition": "A simple structure to calculate lot size based on risk."
         }
       ],
@@ -239,41 +239,49 @@
     "items": [
       {
         "id": "what-is-cur-nova",
+        "category": "general",
         "question": "What is Cur Nova?",
         "answer": "Cur Nova is an education-only platform providing structured courses for Forex, Crypto, and Binary options markets. We deliver PDF courses, custom course requests, and AI-generated trading strategies. We do not provide financial advice, trading signals, or manage funds."
       },
       {
         "id": "how-tokens-work",
+        "category": "payments",
         "question": "How do tokens work?",
         "answer": "Tokens are credits used to access Cur Nova products. 1.00 GBP equals 100 tokens. You can buy token packs, make custom top-ups, or pay directly for courses. Tokens do not expire and can be used across all products."
       },
       {
         "id": "what-in-courses",
+        "category": "general",
         "question": "What is included in the courses?",
         "answer": "Each course is delivered as a structured PDF with clear modules covering key concepts, strategies, and risk management. Courses are organized by market (Forex, Crypto, Binary) and level (Beginner, Intermediate, Advanced)."
       },
       {
         "id": "can-cancel",
+        "category": "payments",
         "question": "Can I cancel an order?",
         "answer": "For ready-made courses, you can cancel before payment is processed. For custom course requests, cancellation is possible within 24 hours of submission. Once a course is generated or delivered, tokens are consumed and cannot be refunded unless there is a technical issue on our side."
       },
       {
         "id": "refund-policy",
+        "category": "payments",
         "question": "What is your refund policy?",
         "answer": "Refunds are available for duplicate purchases, technical failures, or unauthorized charges. We do not offer refunds for subjective dissatisfaction with course content. Contact support with your payment ID and details for review. We respond within 2 business days."
       },
       {
         "id": "need-account",
+        "category": "account",
         "question": "Do I need an account?",
         "answer": "Yes, an account is required to purchase courses, track your token balance, access purchased PDFs, and request custom courses. You can sign up with email or use Google OAuth for quick registration."
       },
       {
         "id": "financial-advice",
+        "category": "general",
         "question": "Does Cur Nova provide financial advice?",
         "answer": "No. Cur Nova provides education only. We do not offer financial advice, trading signals, investment recommendations, or fund management services. All content is for educational purposes. Trading involves substantial risk of loss."
       },
       {
         "id": "access-course",
+        "category": "account",
         "question": "How do I access my purchased course?",
         "answer": "After purchase, you will receive an email with a download link to your PDF course. You can also access all purchased courses from your account dashboard. PDFs are available for download at any time after purchase."
       }

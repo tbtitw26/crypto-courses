@@ -16,42 +16,36 @@ import {
   CreditCard,
   Loader2,
   Lock,
-  PlusCircle,
   Shield,
   ShoppingCart,
   Wallet,
 } from 'lucide-react'
-import { calculatePriceForTokens, formatPrice, calculateTokens } from '@/lib/currency-utils'
+import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSession } from 'next-auth/react'
 import { useToast } from '@/hooks/use-toast'
 
-function getCartItemType(slug: string): 'token-pack' | 'custom-top-up' | 'course' {
-  if (slug.startsWith('token-pack-')) return 'token-pack'
-  if (slug.startsWith('custom-top-up')) return 'custom-top-up'
-  return 'course'
-}
-
 const STEP_LABELS = ['Review order', 'Payment', 'Confirm']
 
 function CheckoutContent() {
-  const { items, getCartTotal, clearCart, addToCart } = useCart()
+  const { items, getCartTotal, clearCart, isHydrated } = useCart()
   const { data: session, status: sessionStatus, update: updateSession } = useSession()
   const router = useRouter()
   const searchParams = useSearchParams()
   const { showToast } = useToast()
   const t = useTranslations('cart.checkout')
   const tCommon = useTranslations('common.buttons')
-  const tNav = useTranslations('common.nav')
-  const tHome = useTranslations('home.tokenPacks')
   const [currency, setCurrency] = useState('GBP')
   const [locale, setLocale] = useState('en')
   const [paymentMethod, setPaymentMethod] = useState<'tokens' | 'card'>('tokens')
   const [isProcessingPayment, setIsProcessingPayment] = useState(false)
-  const [hasProcessedParams, setHasProcessedParams] = useState(false)
   const hasRedirected = useRef(false)
+
+  // Token packs and custom top-ups are card-only and never go through the cart.
+  // Legacy links (/checkout?pack=… or ?custom=…) are sent to the top-up flow.
+  const legacyTopupParam = searchParams.get('pack') || searchParams.get('custom')
 
   useEffect(() => {
     setCurrency(getUserCurrency())
@@ -72,71 +66,13 @@ function CheckoutContent() {
     }
   }, [sessionStatus, router])
 
-  // Process URL parameters (pack or custom top-up)
+  // Legacy top-up deep links land on the dedicated card-only top-up page
   useEffect(() => {
-    if (hasProcessedParams) return
-
-    const packId = searchParams.get('pack')
-    const customAmount = searchParams.get('custom')
-    const urlCurrency = searchParams.get('currency') || getUserCurrency()
-
-    if (packId) {
-      const packs = tHome.raw('packs') as any[]
-      const pack = packs.find((p: any) => p.id === packId)
-
-      if (pack) {
-        const packSlug = `token-pack-${packId}`
-        const alreadyInCart = items.some(item => item.slug === packSlug)
-
-        if (!alreadyInCart) {
-          addToCart({
-            id: Date.now(),
-            slug: packSlug,
-            title: pack.name,
-            title_ar: pack.name,
-            tokens: pack.tokens,
-            price_gbp: calculatePriceForTokens(pack.tokens, 'GBP'),
-            image: undefined,
-          })
-          router.replace('/checkout', { scroll: false })
-        }
-      }
-
-      setHasProcessedParams(true)
-    } else if (customAmount) {
-      const amount = parseFloat(customAmount)
-
-      if (!isNaN(amount) && amount > 0) {
-        const tokens = calculateTokens(amount, urlCurrency)
-        const customSlug = `custom-top-up-${Date.now()}`
-        const alreadyInCart = items.some(item => item.slug.startsWith('custom-top-up'))
-
-        if (!alreadyInCart) {
-          addToCart({
-            id: Date.now(),
-            slug: customSlug,
-            title: `Custom Top-Up (${formatPrice(amount, urlCurrency)})`,
-            title_ar: `شحن مخصص (${formatPrice(amount, urlCurrency)})`,
-            tokens: Math.floor(tokens),
-            price_gbp: calculatePriceForTokens(Math.floor(tokens), 'GBP'),
-            image: undefined,
-          })
-          router.replace('/checkout', { scroll: false })
-        }
-      }
-
-      setHasProcessedParams(true)
-    } else {
-      setHasProcessedParams(true)
+    if (legacyTopupParam) {
+      hasRedirected.current = true
+      router.replace('/top-up')
     }
-  }, [searchParams, addToCart, items, router, tHome, hasProcessedParams])
-
-  const isTokenPurchase = () => {
-    return items.some(
-      (item) =>
-        item.slug.startsWith('token-pack-') || item.slug.startsWith('custom-top-up')
-    )
-  }
+  }, [legacyTopupParam, router])
 
   const user = session?.user as { balance?: number } | undefined
   const userBalance = user?.balance || 0
@@ -144,21 +80,14 @@ function CheckoutContent() {
   const totalPrice = calculatePriceForTokens(total.tokens, currency)
   const formattedPrice = formatPrice(totalPrice, currency)
   const hasEnoughTokens = userBalance >= total.tokens
-  const isTokenPurchaseActive = isTokenPurchase()
 
-  // Automatically set payment method to card for token purchases
+  // Redirect if cart is empty (only once the cart has hydrated and not during payment)
   useEffect(() => {
-    if (isTokenPurchaseActive) {
-      setPaymentMethod('card')
-    }
-  }, [isTokenPurchaseActive])
-
-  // Redirect if cart is empty (but only after processing URL params and not during payment)
-  useEffect(() => {
-    if (hasProcessedParams && items.length === 0 && !isProcessingPayment && !hasRedirected.current) {
+    if (isHydrated && items.length === 0 && !isProcessingPayment && !hasRedirected.current) {
+      hasRedirected.current = true
       router.push('/cart')
     }
-  }, [items.length, router, isProcessingPayment, hasProcessedParams])
+  }, [items.length, router, isProcessingPayment, isHydrated])
 
   const handleHostedTopupCheckout = async () => {
     setIsProcessingPayment(true)
@@ -277,7 +206,12 @@ function CheckoutContent() {
   }
 
   // ─── LOADING / AUTH STATE ───
-  if (sessionStatus === 'loading' || sessionStatus === 'unauthenticated' || !hasProcessedParams) {
+  if (
+    sessionStatus === 'loading' ||
+    sessionStatus === 'unauthenticated' ||
+    !isHydrated ||
+    Boolean(legacyTopupParam)
+  ) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4">
         <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-surface-300 bg-white shadow-card">
@@ -295,23 +229,9 @@ function CheckoutContent() {
     return null
   }
 
-  // Categorize items
-  const courseItems = items.filter((item) => getCartItemType(item.slug) === 'course')
-  const tokenItems = items.filter(
-    (item) => getCartItemType(item.slug) === 'token-pack' || getCartItemType(item.slug) === 'custom-top-up'
-  )
-
-  const checkoutMode = isTokenPurchaseActive
-    ? courseItems.length > 0
-      ? 'mixed'
-      : 'top-up'
-    : 'courses'
-
-  const modeLabel = {
-    courses: 'Course purchase',
-    'top-up': 'Token top-up',
-    mixed: 'Mixed order',
-  }[checkoutMode]
+  // The cart only ever holds courses — token purchases are card-only and bypass it
+  const courseItems = items
+  const modeLabel = 'Course purchase'
 
   const activeStep = paymentMethod === 'card' ? 1 : 0
 
@@ -405,17 +325,7 @@ function CheckoutContent() {
 
               <div className="divide-y divide-surface-200">
                 {courseItems.map((item) => (
-                  <CheckoutItem key={item.slug} item={item} type="course" locale={locale} currency={currency} tCommon={tCommon} />
-                ))}
-                {tokenItems.map((item) => (
-                  <CheckoutItem
-                    key={item.slug}
-                    item={item}
-                    type={getCartItemType(item.slug)}
-                    locale={locale}
-                    currency={currency}
-                    tCommon={tCommon}
-                  />
+                  <CheckoutItem key={item.slug} item={item} locale={locale} currency={currency} tCommon={tCommon} />
                 ))}
               </div>
             </div>
@@ -430,32 +340,7 @@ function CheckoutContent() {
               </div>
 
               <div className="px-5 py-5">
-                {isTokenPurchaseActive ? (
-                  <>
-                    {/* Token purchases: forced card payment */}
-                    <div className="rounded-xl border-2 border-brand-600 bg-brand-50/50 p-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-brand-200 bg-brand-100">
-                          <CreditCard className="h-5 w-5 text-brand-700" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold text-text-main">{t('payment.withCard')}</p>
-                          <p className="text-sm text-text-secondary">Pay with {currency}</p>
-                        </div>
-                        <div className="ml-auto flex h-5 w-5 items-center justify-center rounded-full bg-brand-600">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-white" />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="mt-4 flex items-start gap-2.5 rounded-lg border border-surface-200 bg-surface-100 px-4 py-3">
-                      <Shield className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
-                      <p className="text-sm leading-relaxed text-text-secondary">
-                        {t('payment.tokenPurchaseOnlyCard')}
-                      </p>
-                    </div>
-                  </>
-                ) : (
+                {
                   <>
                     {/* Course purchases: both methods */}
                     <div className="grid gap-3 sm:grid-cols-2">
@@ -550,13 +435,12 @@ function CheckoutContent() {
                       </div>
                     )}
                   </>
-                )}
+                }
               </div>
             </div>
 
-            {/* ─── Wallet balance strip (courses only) ─── */}
-            {!isTokenPurchaseActive && (
-              <div className="flex items-center gap-4 rounded-xl border border-surface-300 bg-white px-5 py-4 shadow-card">
+            {/* ─── Wallet balance strip ─── */}
+            <div className="flex items-center gap-4 rounded-xl border border-surface-300 bg-white px-5 py-4 shadow-card">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-gold-200 bg-gold-50">
                   <Wallet className="h-5 w-5 text-gold-600" />
                 </div>
@@ -583,8 +467,7 @@ function CheckoutContent() {
                     </p>
                   </div>
                 )}
-              </div>
-            )}
+            </div>
 
             {/* ─── Hosted payment details (card selected) ─── */}
             {paymentMethod === 'card' && (
@@ -597,9 +480,8 @@ function CheckoutContent() {
                 </div>
                 <div className="px-5 py-5">
                   <p className="text-sm leading-relaxed text-text-secondary">
-                    {isTokenPurchaseActive
-                      ? 'You’ll be redirected to APS to complete this token purchase securely.'
-                      : 'You’ll be redirected to APS to top up the exact token balance needed for this order. After payment, return here to complete your course purchase with tokens.'}
+                    You’ll be redirected to APS to top up the exact token balance needed for this
+                    order. After payment, return here to complete your course purchase with tokens.
                   </p>
 
                   <div className="mt-4 space-y-2 rounded-lg bg-surface-100 px-4 py-3">
@@ -651,7 +533,6 @@ function CheckoutContent() {
                 {/* Compact item list */}
                 <div className="space-y-3">
                   {items.map((item) => {
-                    const itemType = getCartItemType(item.slug)
                     const displayTitle = locale === 'ar' && item.title_ar ? item.title_ar : item.title
                     const itemPrice = calculatePriceForTokens(item.tokens, currency)
                     const formattedItemPrice = formatPrice(itemPrice, currency)
@@ -659,18 +540,8 @@ function CheckoutContent() {
                     return (
                       <div key={item.slug} className="flex items-center justify-between gap-3">
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <div
-                            className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border ${
-                              itemType === 'course'
-                                ? 'border-brand-200 bg-brand-50'
-                                : itemType === 'token-pack'
-                                  ? 'border-gold-200 bg-gold-50'
-                                  : 'border-[#c7c9f5] bg-[#eef0ff]'
-                            }`}
-                          >
-                            {itemType === 'course' && <BookOpen className="h-3.5 w-3.5 text-brand-700" />}
-                            {itemType === 'token-pack' && <Coins className="h-3.5 w-3.5 text-gold-600" />}
-                            {itemType === 'custom-top-up' && <PlusCircle className="h-3.5 w-3.5 text-ai" />}
+                          <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-brand-200 bg-brand-50">
+                            <BookOpen className="h-3.5 w-3.5 text-brand-700" />
                           </div>
                           <p className="truncate text-sm font-medium text-text-main">{displayTitle}</p>
                         </div>
@@ -706,7 +577,7 @@ function CheckoutContent() {
 
               {/* CTA area */}
               <div className="border-t border-surface-200 px-5 py-4 space-y-3">
-                {!isTokenPurchaseActive && paymentMethod === 'tokens' && (
+                {paymentMethod === 'tokens' && (
                   <button
                     onClick={handleTokenPayment}
                     disabled={!hasEnoughTokens || isProcessingPayment}
@@ -721,13 +592,6 @@ function CheckoutContent() {
                       t('placeOrder')
                     )}
                   </button>
-                )}
-
-                {isTokenPurchaseActive && (
-                  <p className="text-sm leading-relaxed text-text-muted">
-                    After payment, you&apos;ll return to a status page where your token balance updates
-                    automatically.
-                  </p>
                 )}
 
                 {/* Trust signals */}
@@ -762,25 +626,16 @@ function CheckoutContent() {
 
 interface CheckoutItemProps {
   item: any
-  type: 'course' | 'token-pack' | 'custom-top-up'
   locale: string
   currency: string
   tCommon: any
 }
 
-function CheckoutItem({ item, type, locale, currency, tCommon }: CheckoutItemProps) {
-  const imagePath = type === 'course' ? item.image ?? getCourseImagePath(item.slug) : null
+function CheckoutItem({ item, locale, currency, tCommon }: CheckoutItemProps) {
+  const imagePath = item.image ?? getCourseImagePath(item.slug)
   const displayTitle = locale === 'ar' && item.title_ar ? item.title_ar : item.title
   const itemPrice = calculatePriceForTokens(item.tokens, currency)
   const formattedItemPrice = formatPrice(itemPrice, currency)
-
-  const iconConfig = {
-    course: { icon: BookOpen, bg: 'border-brand-200 bg-brand-50', color: 'text-brand-700' },
-    'token-pack': { icon: Coins, bg: 'border-gold-200 bg-gold-50', color: 'text-gold-600' },
-    'custom-top-up': { icon: PlusCircle, bg: 'border-[#c7c9f5] bg-[#eef0ff]', color: 'text-ai' },
-  }
-  const config = iconConfig[type]
-  const Icon = config.icon
 
   return (
     <div className="flex items-center gap-4 px-5 py-4">
@@ -795,10 +650,8 @@ function CheckoutItem({ item, type, locale, currency, tCommon }: CheckoutItemPro
           />
         </div>
       ) : (
-        <div
-          className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border sm:h-16 sm:w-16 ${config.bg}`}
-        >
-          <Icon className={`h-6 w-6 ${config.color}`} />
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border border-brand-200 bg-brand-50 sm:h-16 sm:w-16">
+          <BookOpen className="h-6 w-6 text-brand-700" />
         </div>
       )}
 
@@ -812,16 +665,8 @@ function CheckoutItem({ item, type, locale, currency, tCommon }: CheckoutItemPro
         </div>
       </div>
 
-      <span
-        className={`shrink-0 rounded-md px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider ${
-          type === 'course'
-            ? 'bg-brand-50 text-brand-700'
-            : type === 'token-pack'
-              ? 'bg-gold-50 text-gold-700'
-              : 'bg-[#eef0ff] text-ai'
-        }`}
-      >
-        {type === 'course' ? 'Course' : type === 'token-pack' ? 'Pack' : 'Top-up'}
+      <span className="shrink-0 rounded-md bg-brand-50 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-700">
+        Course
       </span>
     </div>
   )

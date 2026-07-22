@@ -4,18 +4,19 @@
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
-import Link from 'next/link'
 import {
   ArrowRight,
   CheckCircle2,
   Coins,
   CreditCard,
+  Loader2,
   PlusCircle,
   Shield,
   Wallet,
 } from 'lucide-react'
 import { calculatePriceForTokens, formatPrice, getCurrencySymbol } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
+import { useTopupCheckout } from '@/hooks/use-topup-checkout'
 
 const WORKFLOW_STEPS = [
   { label: 'Choose amount', icon: Coins },
@@ -29,6 +30,7 @@ export function TopUpPage() {
   const [currency, setCurrency] = useState('GBP')
   const [customAmount, setCustomAmount] = useState('0.01')
   const [selectedPack, setSelectedPack] = useState(1)
+  const { startTopup, pendingKey, isPending } = useTopupCheckout('/top-up')
 
   useEffect(() => {
     setCurrency(getUserCurrency())
@@ -214,12 +216,20 @@ export function TopUpPage() {
               </div>
 
               <div className="border-t border-surface-200 px-5 py-4">
-                <Link
-                  href={`/checkout?pack=${active.id}`}
-                  className="btn-primary w-full text-center"
+                <button
+                  type="button"
+                  disabled={isPending}
+                  onClick={() =>
+                    startTopup(
+                      { tokens: active.tokens, currency, slug: `token-pack-${active.id}` },
+                      active.id
+                    )
+                  }
+                  className="btn-primary inline-flex w-full items-center justify-center gap-2 text-center disabled:opacity-60"
                 >
+                  {pendingKey === active.id && <Loader2 className="h-4 w-4 animate-spin" />}
                   {t('buyPack', { name: active.name })}
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -268,13 +278,18 @@ export function TopUpPage() {
 
                 <p className="text-xs text-text-muted">{t('customTopUp.minAmount')}</p>
 
-                <Link
-                  href={`/checkout?custom=${customAmount}&currency=${currency}`}
-                  className="btn-primary mt-1 flex w-full items-center justify-center gap-2 text-center"
+                <button
+                  type="button"
+                  disabled={isPending || !(parseFloat(customAmount) > 0)}
+                  onClick={() => startTopup({ amount: parseFloat(customAmount), currency }, 'custom')}
+                  className="btn-primary mt-1 flex w-full items-center justify-center gap-2 text-center disabled:opacity-60"
                 >
+                  {pendingKey === 'custom' ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : null}
                   <span>{t('customTopUp.cta')}</span>
                   <ArrowRight className="h-4 w-4" />
-                </Link>
+                </button>
               </div>
             </div>
           </div>
