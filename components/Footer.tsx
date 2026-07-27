@@ -13,7 +13,6 @@ import {
   Linkedin,
   Lock,
   Mail,
-  Phone,
   Scale,
   ShieldCheck,
   Sparkles,
@@ -210,13 +209,6 @@ export default function Footer() {
                 >
                   <Mail className="h-4 w-4 shrink-0 text-surface-500" />
                   info@cur-nova.com
-                </a>
-                <a
-                  href="tel:+447457424685"
-                  className="flex items-center gap-2.5 text-sm text-surface-400 transition-colors hover:text-white"
-                >
-                  <Phone className="h-4 w-4 shrink-0 text-surface-500" />
-                  +44 7457 424685
                 </a>
               </address>
 
