@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
+import { withContactPhone } from '@/lib/contact'
 import {
   Info,
   FileText,
@@ -72,7 +73,7 @@ export function TermsPage() {
       case 'list':
         return (
           <ul key={`list-${idx}`} className="space-y-1.5 pl-5 text-sm text-text-secondary">
-            {block.items.map((item, itemIdx) => (
+            {withContactPhone(block.items).map((item, itemIdx) => (
               <li key={itemIdx} className="relative before:absolute before:-left-3 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-surface-400">
                 {item}
               </li>

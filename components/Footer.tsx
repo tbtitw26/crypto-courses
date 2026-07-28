@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { CONTACT_PHONE, CONTACT_PHONE_HREF } from '@/lib/contact'
 import {
   BookOpen,
   ChevronDown,
@@ -13,6 +14,7 @@ import {
   Linkedin,
   Lock,
   Mail,
+  Phone,
   Scale,
   ShieldCheck,
   Sparkles,
@@ -210,6 +212,15 @@ export default function Footer() {
                   <Mail className="h-4 w-4 shrink-0 text-surface-500" />
                   info@cur-nova.com
                 </a>
+                {CONTACT_PHONE && (
+                  <a
+                    href={CONTACT_PHONE_HREF}
+                    className="flex items-center gap-2.5 text-sm text-surface-400 transition-colors hover:text-white"
+                  >
+                    <Phone className="h-4 w-4 shrink-0 text-surface-500" />
+                    {CONTACT_PHONE}
+                  </a>
+                )}
               </address>
 
               <div className="mt-5 border-t border-surface-800 pt-5">
