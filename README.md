@@ -6,8 +6,8 @@ It combines curated PDF courses, trader-tailored custom PDFs, and AI-generated s
 ## 🚀 Highlights
 
 - **AI & Custom Generation** – Structured custom courses and AI strategies (PDF + diagrams) delivered via email and dashboard.
-- **Token Economy** – Users top up GBP-based packs (with automatic EUR/USD/SR conversion) and spend tokens on courses/AI/services.
-- **Multi-Currency & i18n** – GBP/EUR/USD/Saudi Riyal display + locale-aware PDFs (English or Arabic).
+- **Token Economy** – Users top up GBP-based packs (with automatic EUR/USD conversion) and spend tokens on courses/AI/services.
+- **Multi-Currency & i18n** – GBP/EUR/USD display + locale-aware PDFs (English or Arabic).
 - **Checkout & Billing** – Card-only payments (Visa/Mastercard), receipts & invoices (Puppeteer PDFs), dashboard analytics, transactions, receipts download.
 - **Authentication & Security** – NextAuth (credentials + Google), password reset via email, localized email templates, structured logging.
 - **Content Library** – Ready-made courses, `/learn` knowledge base pages, `/resources` hub, and dashboard library with downloads.

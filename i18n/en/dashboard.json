@@ -312,7 +312,7 @@
       "title": "Payments & methods",
       "description": "Payments are processed by a secure payment provider. Cur Nova does not store full card numbers or CVV codes.",
       "supportedCards": "Supported cards: Visa and Mastercard.",
-      "supportedCurrencies": "Supported currencies: GBP, EUR, USD, SR.",
+      "supportedCurrencies": "Supported currencies: GBP, EUR, USD.",
       "chargesDescriptor": "Charges appear under the Cur Nova or partner descriptor.",
       "note": "In the live product this card would link to a secure portal where users can update payment details."
     },

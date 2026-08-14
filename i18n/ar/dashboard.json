@@ -312,7 +312,7 @@
       "title": "المدفوعات والطرق",
       "description": "يتم معالجة المدفوعات من قبل مزود دفع آمن. Cur Nova لا تخزن أرقام البطاقات الكاملة أو رموز CVV.",
       "supportedCards": "البطاقات المدعومة: Visa و Mastercard.",
-      "supportedCurrencies": "العملات المدعومة: GBP و EUR و USD و SR.",
+      "supportedCurrencies": "العملات المدعومة: GBP و EUR و USD.",
       "chargesDescriptor": "تظهر الرسوم تحت واصف Cur Nova أو الشريك.",
       "note": "في المنتج المباشر، ستربط هذه البطاقة ببوابة آمنة حيث يمكن للمستخدمين تحديث تفاصيل الدفع."
     },

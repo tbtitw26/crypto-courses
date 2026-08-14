@@ -7,7 +7,7 @@
   },
   "meta": {
     "coursesAvailable": "courses available · more in preparation.",
-    "paymentInfo": "Pay with tokens or directly in EUR, GBP, USD or SR."
+    "paymentInfo": "Pay with tokens or directly in EUR, GBP or USD."
   },
   "filters": {
     "label": "Filters",
@@ -80,7 +80,7 @@
       "immediateDownload": "Immediate PDF download after payment.",
       "buyWithTokens": "Buy with tokens",
       "buyWithCard": "Buy with card",
-      "paymentNote": "You can use existing balance or add tokens at checkout. Card payments support EUR, GBP, USD and SR.",
+      "paymentNote": "You can use existing balance or add tokens at checkout. Card payments support EUR, GBP and USD.",
       "educationDisclaimer": "Education only. This course does not contain trading signals or promises of performance.",
       "beforeBuying": "Before buying, please note:",
       "riskNote1": "Trading Forex is high risk and may lead to total loss of capital.",

@@ -45,8 +45,7 @@
   "currency": {
     "gbp": "GBP",
     "eur": "EUR",
-    "usd": "USD",
-    "sr": "SR"
+    "usd": "USD"
   },
   "language": {
     "en": "EN",

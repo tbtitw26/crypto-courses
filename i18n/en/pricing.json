@@ -16,7 +16,7 @@
     "subtitle": "Load a token balance once and use it across Cur Nova: structured PDF courses, custom courses and AI-generated strategies. Or pay directly for a single course if you prefer.",
     "bullets": {
       "oneBalance": "One balance for Forex, Crypto and Binary content.",
-      "payWithTokens": "Pay with tokens or direct in EUR, GBP, USD or SR.",
+      "payWithTokens": "Pay with tokens or direct in EUR, GBP or USD.",
       "topUpAnytime": "Top up any time – tokens do not expire."
     },
     "exampleRate": {
@@ -42,7 +42,7 @@
     "title": "Custom top-up",
     "subtitle": "Set any amount in your preferred currency. In production, the system converts it to tokens automatically.",
     "amountLabel": "Amount",
-    "currencies": "GBP · EUR · USD · SR",
+    "currencies": "GBP · EUR · USD",
     "minAmount": "Minimum 0.01 in any supported currency. No formal maximum – larger top-ups are simply converted into more tokens.",
     "previewCta": "Preview in tokens",
     "buyCta": "Buy custom top-up"
@@ -51,7 +51,7 @@
     "title": "Pay directly for a single course",
     "subtitle": "If you prefer not to manage a balance, you can pay for individual courses or custom PDFs directly in your currency.",
     "bullets": {
-      "currencies": "Use EUR, GBP, USD or SR depending on your region.",
+      "currencies": "Use EUR, GBP or USD depending on your region.",
       "noTokens": "Tokens are not required – direct payment simply unlocks that specific product.",
       "convertLater": "In future, you can always convert to a token-based workflow if you prefer."
     },

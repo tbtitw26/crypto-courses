@@ -259,8 +259,6 @@ export function PricingPage() {
                 <span>EUR</span>
                 <span className="text-surface-400">&middot;</span>
                 <span>USD</span>
-                <span className="text-surface-400">&middot;</span>
-                <span>SR</span>
               </div>
             </div>
             <p className="mt-2 text-xs text-text-muted">{t('customTopUp.minAmount')}</p>

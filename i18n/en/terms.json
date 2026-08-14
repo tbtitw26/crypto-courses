@@ -21,8 +21,8 @@
       }
     ],
     "badges": {
-      "regions": "Primary regions: EU · UK · GCC",
-      "payments": "Payments: EUR · GBP · USD · SR",
+      "regions": "Primary regions: EU · UK",
+      "payments": "Payments: EUR · GBP · USD",
       "highRisk": "High risk · No guarantees"
     },
     "summaryCard": {
@@ -193,7 +193,7 @@
           "type": "list",
           "items": [
             "8.1. Token packs (e.g., Focused Start, Structured Growth, Discipline Pro) and custom top-ups clearly display price and included Tokens.",
-            "8.2. GBP is the base currency. Prices may be shown in EUR, USD, Saudi Riyal or other currencies; final charges and FX handling appear at checkout.",
+            "8.2. GBP is the base currency. Prices may be shown in EUR, USD or other currencies; final charges and FX handling appear at checkout.",
             "8.3. Wallet balances are advance payments for digital features and are not bank or e-money accounts.",
             "8.4. By submitting a card you confirm authority to use it; payments are processed by trusted PSPs and we do not store full PAN/CVV data.",
             "8.5. Tokens are deducted when you pay with Tokens, request custom courses, run AI strategies or use any Token-priced feature.",

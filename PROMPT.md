@@ -16,7 +16,7 @@ The existing website is a functional reference, not a visual constraint. The red
 - Preserve existing data flow from Prisma, static course fallback, cookies, localStorage, Supabase URL resolution, and i18n message files.
 - Preserve dynamic values. Do not replace live balances, course data, transactions, statuses, localized copy, prices, PDFs, or downloads with hardcoded content.
 - Preserve the existing i18n infrastructure, including locale cookies, `html.lang`, `html.dir`, and existing Arabic files, but do not actively translate, rewrite, or redesign Arabic content during this English-only redesign pass.
-- Preserve GBP/EUR/USD/SR display behavior and `user_currency` cookie reload behavior.
+- Preserve GBP/EUR/USD display behavior and `user_currency` cookie reload behavior.
 - Preserve legal, risk, education-only, cookie-consent, payment, and refund content.
 - Do not delete working features
 - Do not simplify the product into a static brochure.
@@ -66,8 +66,8 @@ Core product pillars from `README.md`:
 - Curated PDF courses for Forex, Crypto, Binary options, general trading foundations, risk, psychology, journaling, and trading process.
 - Custom course generation: users submit a trading profile and receive tailored PDFs and diagrams.
 - AI strategy generation: users generate strategy PDFs from their profile, markets, timeframe, risk, instruments, detail level, and language selection.
-- Token economy: users top up GBP-based packs, see automatic EUR/USD/SR conversion, and spend tokens on courses and generation services.
-- Multi-currency and i18n: GBP, EUR, USD, Saudi Riyal display plus English/Arabic locale-aware PDFs.
+- Token economy: users top up GBP-based packs, see automatic EUR/USD conversion, and spend tokens on courses and generation services.
+- Multi-currency and i18n: GBP, EUR, USD display plus English/Arabic locale-aware PDFs.
 - Checkout and billing: card-only payment posture in README, hosted checkout in code, PDF receipts/invoices, dashboard transactions, receipts download.
 - Authentication and security: NextAuth credentials + Google provider, password reset by email, localized email templates, bcrypt passwords, signed reset tokens.
 - Content library: ready-made courses, `/learn` knowledge pages, `/resources`, dashboard library downloads.
@@ -347,7 +347,7 @@ Never modify files outside the project workspace unless explicitly approved.
 - `/dashboard` billing snapshot stats (`tokensSpentLast30Days`, `aiStrategiesGenerated`, `coursesUnlocked`) are hardcoded zero; needs verification before presenting as live metrics.
 - `/dashboard/courses` has an AI Strategy type filter but currently fetches only purchased courses; needs verification.
 - Settings notification toggles, course-language preference, export data, and delete account controls appear local/UI-only or incomplete; needs verification.
-- `CurrencySelector` includes TODO flag icons for USD and SR using `gb.svg`; needs verification/assets.
+- `CurrencySelector` includes TODO flag icons for USD using `gb.svg`; needs verification/assets.
 - `HeroSlideshow` CTA currently links to `#`; needs verification.
 - `FAQAccordion` empty state links to `/allergens`, which appears legacy and not a valid route; needs verification.
 - `ContactPage` side-info links to `/privacy-policy`, but detected privacy route is `/privacy`; needs verification.
@@ -1289,7 +1289,7 @@ This is required to reduce the risk of breaking auth, checkout, token balance, d
 
 ### Currency and Language
 
-- [ ] Currency switcher updates GBP/EUR/USD/SR display.
+- [ ] Currency switcher updates GBP/EUR/USD display.
 - [ ] Token pack/custom top-up values convert correctly.
 - [ ] Course cards/details convert correctly.
 - [ ] Dashboard/transactions convert correctly.

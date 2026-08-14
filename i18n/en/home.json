@@ -105,7 +105,7 @@
       },
       {
         "title": "Add balance or pay directly",
-        "text": "Use tokens across products or pay in EUR, GBP, USD or SR at checkout."
+        "text": "Use tokens across products or pay in EUR, GBP or USD at checkout."
       },
       {
         "title": "Get your PDF",
@@ -131,7 +131,7 @@
       },
       {
         "title": "Direct course payments",
-        "text": "Pay for ready-made courses in EUR, GBP, USD or SR at checkout."
+        "text": "Pay for ready-made courses in EUR, GBP or USD at checkout."
       }
     ],
     "ctaPricing": "View full pricing & tokens"

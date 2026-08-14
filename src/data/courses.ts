@@ -26,7 +26,6 @@ export interface Course {
     EUR: number;
     GBP: number;
     USD: number;
-    SR: number;
     tokens: number;
   };
   isFeatured: boolean;
@@ -102,7 +101,6 @@ export const demoCourses: Course[] = [
       EUR: 167,
       GBP: 146,
       USD: 193,
-      SR: 724,
       tokens: 16700,
     },
     isFeatured: true,
@@ -134,7 +132,6 @@ export const demoCourses: Course[] = [
       EUR: 174,
       GBP: 153,
       USD: 201,
-      SR: 754,
       tokens: 17400,
     },
     isFeatured: true,
@@ -166,7 +163,6 @@ export const demoCourses: Course[] = [
       EUR: 172,
       GBP: 151,
       USD: 199,
-      SR: 745,
       tokens: 17200,
     },
     isFeatured: true,
@@ -198,7 +194,6 @@ export const demoCourses: Course[] = [
       EUR: 178,
       GBP: 156,
       USD: 206,
-      SR: 771,
       tokens: 17800,
     },
     isFeatured: true,
@@ -230,7 +225,6 @@ export const demoCourses: Course[] = [
       EUR: 179,
       GBP: 157,
       USD: 207,
-      SR: 776,
       tokens: 17900,
     },
     isFeatured: true,
@@ -262,7 +256,6 @@ export const demoCourses: Course[] = [
       EUR: 169,
       GBP: 148,
       USD: 196,
-      SR: 732,
       tokens: 16900,
     },
     isFeatured: true,

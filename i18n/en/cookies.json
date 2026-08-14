@@ -8,7 +8,7 @@
     "title": "How Cur Nova uses cookies and similar technologies.",
     "subtitle": "This policy explains how and why we place cookies, localStorage/sessionStorage keys, SDK identifiers and pixels across cur-nova.com and our dashboard/AI tools. It is aligned with UK GDPR and PECR requirements and mirrors EU GDPR expectations.",
     "badges": {
-      "regions": "UK · EU · GCC compliance",
+      "regions": "UK · EU compliance",
       "features": "Web, dashboard & AI tools",
       "optional": "Non-essential = opt-in"
     },
@@ -25,7 +25,7 @@
         "Controller: CUR NOVA LTD (Company No. 17240836).",
         "Contact: info@cur-nova.com · Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom.",
         "Scope: trading-education tools, token purchases, AI course/strategy generation.",
-        "Payments: Visa/Mastercard in GBP with display in EUR, USD, SAR.",
+        "Payments: Visa/Mastercard in GBP with display in EUR and USD.",
         "Technologies covered: cookies, localStorage, sessionStorage, pixels, SDKs.",
         "Consent: recorded for at least 24 months (up to 6 years where needed)."
       ],

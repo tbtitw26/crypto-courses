@@ -11,7 +11,7 @@
       { "label": "Jurisdiction", "value": "England & Wales" }
     ],
     "badges": {
-      "payments": "Payments: Visa · Mastercard · GBP/EUR/USD/SR",
+      "payments": "Payments: Visa · Mastercard · GBP/EUR/USD",
       "support": "Support: info@cur-nova.com",
       "digitalOnly": "Digital delivery · No physical returns"
     },
@@ -26,8 +26,8 @@
         "Bonus/promo credits can be removed but are never refunded in cash.",
         "Cur Nova delivers digital content only – nothing needs to be shipped back.",
         "Email info@cur-nova.com with your account email, order ID and context.",
-        "Currencies: GBP, EUR, USD, Saudi Riyal. Methods: Visa, Mastercard.",
-        "Reference rate: 100 Tokens = £1.00 / €1.17 / $1.29 / 4.94 SR."
+        "Currencies: GBP, EUR, USD. Methods: Visa, Mastercard.",
+        "Reference rate: 100 Tokens = £1.00 / €1.17 / $1.29."
       ],
       "note": "Always talk to our support team before you contact your bank; it results in faster, traceable resolutions."
     }
@@ -72,8 +72,8 @@
             "Promotional or bonus credits can expire and are never refundable.",
             "All Cur Nova products are digital; there are no physical items to return.",
             "Submit requests via info@cur-nova.com, including your account email, order reference and supporting details.",
-            "Accepted currencies: GBP (£), EUR (€), USD ($), Saudi Riyal (SR). Payment methods: Visa, Mastercard.",
-            "Reference rate for display purposes: 100 Tokens = £1.00 / €1.17 / $1.29 / 4.94 SR."
+            "Accepted currencies: GBP (£), EUR (€), USD ($). Payment methods: Visa, Mastercard.",
+            "Reference rate for display purposes: 100 Tokens = £1.00 / €1.17 / $1.29."
           ]
         }
       ]
@@ -277,7 +277,7 @@
             "Company number: 17240836",
             "Email: info@cur-nova.com",
             "Tel: {phone}",
-            "Accepted currencies: GBP, EUR, USD, SR",
+            "Accepted currencies: GBP, EUR, USD",
             "Payment methods: Visa, Mastercard"
           ]
         }

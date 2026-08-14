@@ -165,7 +165,6 @@ const allCountries: CountryOption[] = [
   { code: 'WS', name: 'Samoa' },
   { code: 'SM', name: 'San Marino' },
   { code: 'ST', name: 'Sao Tome and Principe' },
-  { code: 'SA', name: 'Saudi Arabia' },
   { code: 'SN', name: 'Senegal' },
   { code: 'RS', name: 'Serbia' },
   { code: 'SC', name: 'Seychelles' },

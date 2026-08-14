@@ -137,7 +137,7 @@
         "description": "A custom course uses more tokens than a single ready-made PDF. In production, pricing will be defined per market and depth. For now, treat it as a separate product with its own price in tokens and direct payment.",
         "points": {
           "tokens": "Pay with tokens from your balance.",
-          "currencies": "Or use EUR, GBP, USD or SR at checkout."
+          "currencies": "Or use EUR, GBP or USD at checkout."
         },
         "badge": "Example only – final pricing TBD"
       }
