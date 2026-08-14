@@ -1,13 +1,13 @@
 # Avenqor – Trading Education & AI Workbench
 
-Avenqor is a bilingual (English + Modern Standard Arabic) education platform for retail traders.  
+Avenqor is an English-language education platform for retail traders.  
 It combines curated PDF courses, trader-tailored custom PDFs, and AI-generated strategies powered by OpenAI (GPT-5/GPT-4o class models) with a secure token-based billing system.
 
 ## 🚀 Highlights
 
 - **AI & Custom Generation** – Structured custom courses and AI strategies (PDF + diagrams) delivered via email and dashboard.
 - **Token Economy** – Users top up GBP-based packs (with automatic EUR/USD conversion) and spend tokens on courses/AI/services.
-- **Multi-Currency & i18n** – GBP/EUR/USD display + locale-aware PDFs (English or Arabic).
+- **Multi-Currency** – GBP/EUR/USD display; all courses and PDFs are generated in English.
 - **Checkout & Billing** – Card-only payments (Visa/Mastercard), receipts & invoices (Puppeteer PDFs), dashboard analytics, transactions, receipts download.
 - **Authentication & Security** – NextAuth (credentials + Google), password reset via email, localized email templates, structured logging.
 - **Content Library** – Ready-made courses, `/learn` knowledge base pages, `/resources` hub, and dashboard library with downloads.

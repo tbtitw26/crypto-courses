@@ -24,9 +24,7 @@ function transformStaticCourse(course: typeof demoCourses[0]) {
     id: 1, // Temporary ID
     slug: course.slug,
     title: course.title,
-    title_ar: undefined,
     description: course.longDescription,
-    description_ar: undefined,
     level: capitalizeFirst(course.level),
     market: capitalizeFirst(course.market),
     tokens: course.price.tokens,
@@ -51,9 +49,7 @@ function normalizeCourse(course: {
   id: number
   slug: string
   title: string
-  title_ar?: string | null
   description: string
-  description_ar?: string | null
   level: string
   market: string
   tokens: number
@@ -73,8 +69,6 @@ function normalizeCourse(course: {
   return {
     ...course,
     price_gbp: priceGbpNumber,
-    title_ar: course.title_ar ?? undefined,
-    description_ar: course.description_ar ?? undefined,
     cover_image: course.cover_image ?? undefined,
     duration_hours_min: course.duration_hours_min ?? undefined,
     duration_hours_max: course.duration_hours_max ?? undefined,
@@ -89,9 +83,7 @@ async function getCourse(slug: string) {
         id: true,
         slug: true,
         title: true,
-        title_ar: true,
         description: true,
-        description_ar: true,
         level: true,
         market: true,
         tokens: true,

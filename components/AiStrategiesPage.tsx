@@ -30,8 +30,7 @@ interface AiStrategy {
   status: AiStrategyStatus
   created: string
   tokens: number
-  languages: string[]
-  pdfLinks: Array<{ language: 'en' | 'ar'; url: string }>
+  pdfLinks: Array<{ url: string }>
 }
 
 function StatusBadge({ status, t }: { status: AiStrategyStatus; t: any }) {
@@ -223,7 +222,6 @@ export function AiStrategiesPage() {
                         <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-text-muted">
                           <span>#{strategy.id}</span>
                           <span>{strategy.markets.length > 0 ? strategy.markets.join(', ') : t('table.noMarket')}</span>
-                          <span className="capitalize">{strategy.languages.join(', ')}</span>
                           <span>{new Date(strategy.created).toLocaleDateString()}</span>
                         </div>
                         <div className="mt-2 flex items-center gap-1 text-xs text-text-secondary">
@@ -237,14 +235,14 @@ export function AiStrategiesPage() {
                           <div className="flex flex-col gap-1.5">
                             {strategy.pdfLinks.map((link) => (
                               <a
-                                key={`${strategy.id}-${link.language}`}
+                                key={`${strategy.id}-${link.url}`}
                                 href={link.url}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="btn-primary inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-xs font-medium"
                               >
                                 <Download className="h-3.5 w-3.5" />
-                                <span>{t(`actions.downloadPDF_${link.language}`)}</span>
+                                <span>{t('actions.downloadPDF')}</span>
                               </a>
                             ))}
                           </div>
@@ -281,7 +279,6 @@ export function AiStrategiesPage() {
                 <li>• {t('sidebar.builder.points.objective')}</li>
                 <li>• {t('sidebar.builder.points.market')}</li>
                 <li>• {t('sidebar.builder.points.risk')}</li>
-                <li>• {t('sidebar.builder.points.languages')}</li>
               </ul>
               <p className="mt-2 text-xs text-text-muted">{t('sidebar.builder.note')}</p>
             </div>

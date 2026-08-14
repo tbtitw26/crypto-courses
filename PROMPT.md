@@ -15,7 +15,7 @@ The existing website is a functional reference, not a visual constraint. The red
 - Preserve custom course and AI strategy generation request logic, token checks, token deductions, Inngest enqueue flow, status endpoints, and dashboard download behavior.
 - Preserve existing data flow from Prisma, static course fallback, cookies, localStorage, Supabase URL resolution, and i18n message files.
 - Preserve dynamic values. Do not replace live balances, course data, transactions, statuses, localized copy, prices, PDFs, or downloads with hardcoded content.
-- Preserve the existing i18n infrastructure, including locale cookies, `html.lang`, `html.dir`, and existing Arabic files, but do not actively translate, rewrite, or redesign Arabic content during this English-only redesign pass.
+- Preserve the existing i18n infrastructure and message files. The platform is English-only.
 - Preserve GBP/EUR/USD display behavior and `user_currency` cookie reload behavior.
 - Preserve legal, risk, education-only, cookie-consent, payment, and refund content.
 - Do not delete working features
@@ -28,38 +28,15 @@ The existing website is a functional reference, not a visual constraint. The red
 - Do not edit API/backend logic unless the implementation phase explicitly identifies a blocking UI integration bug.
 - Do not regress accessibility, keyboard navigation, focus visibility, contrast, or readable mobile layouts.
 
-## English-Only Redesign Scope
+## English-Only Scope
 
-For this redesign implementation, work on the English UI only.
-
-Do not translate content into Arabic.
-Do not rewrite Arabic translation files.
-Do not improve Arabic copy.
-Do not spend time redesigning Arabic-specific content pages.
-Do not perform Arabic content QA unless required to avoid breaking the app.
-Do not create new Arabic translations for newly redesigned UI unless the code requires existing translation keys to remain valid.
-
-Important:
-- Preserve the existing Arabic/i18n infrastructure so the app does not break.
-- Do not delete Arabic translation files.
-- Do not delete RTL support.
-- Do not remove locale switching logic.
-- Do not remove `html.lang` or `html.dir` handling.
-- Do not break existing Arabic routes/copy if they already work.
-- If a component already uses translation keys, preserve the key structure or update English and Arabic only minimally to prevent runtime errors.
-
-The goal is:
-- redesign and polish the English version first
-- avoid spending unnecessary time/tokens on Arabic translation work
-- keep Arabic support technically intact but visually/content-wise out of scope for this redesign pass
-
-If Arabic-specific issues are discovered, document them as follow-up work instead of solving them now.
+The platform ships in English only. There is no Arabic locale, no locale switching and no translated content — do not reintroduce any of it.
 
 ## 3. Current Project Analysis
 
 ### Product Description From README
 
-Avenqor is a bilingual English + Modern Standard Arabic trading education platform for retail traders. It combines curated PDF courses, trader-tailored custom PDFs, AI-generated strategies powered by OpenAI, and secure token-based billing.
+Avenqor is an English-language trading education platform for retail traders. It combines curated PDF courses, trader-tailored custom PDFs, AI-generated strategies powered by OpenAI, and secure token-based billing.
 
 Core product pillars from `README.md`:
 
@@ -67,7 +44,7 @@ Core product pillars from `README.md`:
 - Custom course generation: users submit a trading profile and receive tailored PDFs and diagrams.
 - AI strategy generation: users generate strategy PDFs from their profile, markets, timeframe, risk, instruments, detail level, and language selection.
 - Token economy: users top up GBP-based packs, see automatic EUR/USD conversion, and spend tokens on courses and generation services.
-- Multi-currency and i18n: GBP, EUR, USD display plus English/Arabic locale-aware PDFs.
+- Multi-currency: GBP, EUR and USD display; PDFs are generated in English.
 - Checkout and billing: card-only payment posture in README, hosted checkout in code, PDF receipts/invoices, dashboard transactions, receipts download.
 - Authentication and security: NextAuth credentials + Google provider, password reset by email, localized email templates, bcrypt passwords, signed reset tokens.
 - Content library: ready-made courses, `/learn` knowledge pages, `/resources`, dashboard library downloads.
@@ -98,7 +75,7 @@ Nested README-like file found at `lib/pdf/README.md` documents the PDF course ge
 - Status file: `public/courses/.generation-status.json`
 - Logs: `logs/course-generation.log`
 - Temp files: `public/courses/temp/`
-- Generation stages: English course, cover, diagrams, Arabic translation, English PDF, Arabic PDF, completed.
+- Generation stages: English course, cover, diagrams, English PDF, completed.
 - Requires Chrome/Chromium or `CHROME_PATH` for local PDF issues.
 - Uses OpenAI text and image models configured in `lib/config.ts`.
 
@@ -148,7 +125,7 @@ Implementation warning: do not expose server-only Supabase service role keys, pa
 - Forms and validation: React Hook Form + Zod for forgot/reset/contact/change-password forms; local state validation in login/register/learn/checkout/top-up.
 - Auth: NextAuth v4 with Prisma Adapter, credentials provider, Google provider configured server-side, bcryptjs, JWT sessions.
 - State: React Context cart in `contexts/CartContext.tsx`; Zustand dependency exists but cart is not using Zustand.
-- i18n: next-intl with manual cookie-based locale loading in `app/providers.tsx`; English messages statically imported, Arabic messages dynamically imported.
+- i18n: next-intl with English messages statically imported in `app/providers.tsx`.
 - Locale direction: `app/locale-provider.tsx` sets `html.lang` and `html.dir`.
 - Database: PostgreSQL/Neon through Prisma with retry helper.
 - AI/background: OpenAI SDK, Inngest background events, generation logs.
@@ -291,7 +268,6 @@ Never modify files outside the project workspace unless explicitly approved.
 
 ### Core Features and Flows
 
-- Bilingual locale switcher writes `user_locale` cookie, reloads, and updates `html.lang`/`dir`.
 - Currency selector writes `user_currency` cookie and reloads; pricing uses GBP base conversion.
 - Course list fetches `/api/courses`, supports search, level filter, market filter, loading, error, and empty states.
 - Course API falls back to `src/data/courses.ts` static data on Prisma connection errors.
@@ -322,7 +298,6 @@ Never modify files outside the project workspace unless explicitly approved.
 - Hosted payment redirect and callback/status logic in `lib/topup-payment-flow.ts`.
 - Top-up status polling and cart clearing logic on `/top-up/result`.
 - Course fallback behavior when DB is unavailable.
-- Localized course titles/descriptions and Arabic direction.
 - Cart localStorage shape and slug conventions:
   - course slug
   - `token-pack-*`
@@ -356,7 +331,6 @@ Never modify files outside the project workspace unless explicitly approved.
 ## 4. Existing Functionality To Preserve
 
 - [ ] Root layout metadata, favicon/logo assets, header/footer mounting, provider wrapping.
-- [ ] `NextIntlClientProvider` locale loading for English and Arabic message bundles.
 - [ ] `LocaleProvider` updating `html.lang` and `html.dir`.
 - [ ] `LanguageToggle` cookie write/reload behavior.
 - [ ] `CurrencySelector` desktop/mobile cookie write/reload behavior.
@@ -1209,8 +1183,7 @@ This is required to reduce the risk of breaking auth, checkout, token balance, d
 - Do not change payment provider flow or callback signatures as part of visual redesign.
 - Do not change OpenAI/Inngest job logic as part of visual redesign.
 - Do not remove education-only or high-risk warnings.
-- Preserve i18n translation keys wherever possible. If English UI changes require new or changed keys, update English first. Only touch Arabic files minimally if required to prevent missing-key/runtime errors. Do not perform full Arabic translation work.
-- Preserve RTL readiness for Arabic pages.
+- Preserve i18n translation keys wherever possible. If UI changes require new or changed keys, update the English message files.
 - Use Lucide icons where icons are needed.
 - Use structured parsers/data where possible; avoid string matching unless it already exists and is carefully preserved.
 - Keep unrelated dirty worktree changes untouched.
@@ -1294,8 +1267,6 @@ This is required to reduce the risk of breaking auth, checkout, token balance, d
 - [ ] Course cards/details convert correctly.
 - [ ] Dashboard/transactions convert correctly.
 - [ ] Language switcher updates UI copy.
-- [ ] Arabic sets RTL direction and does not break layouts.
-- [ ] Course title/description Arabic fallback works.
 
 ### AI and Custom Generation
 
@@ -1348,7 +1319,7 @@ The redesign is complete when:
 - Shared UI primitives and global styles are redesigned coherently.
 - Existing functionality is preserved.
 - No dynamic behavior has been replaced with hardcoded content.
-- English layouts are fully redesigned and verified. Existing Arabic/i18n infrastructure remains intact, but full Arabic visual/content QA is out of scope for this pass.
+- English layouts are fully redesigned and verified.
 - Currency switching works.
 - Auth, token balance, checkout, top-up, generation, downloads, receipts, dashboard, and contact flows still work.
 - `npm run lint`, `npm run typecheck`, and `npm run build` pass or baseline pre-existing failures are clearly documented.

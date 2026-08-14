@@ -39,9 +39,7 @@ interface CourseDetailPageProps {
     id: number
     slug: string
     title: string
-    title_ar?: string
     description: string
-    description_ar?: string
     level: string
     market: string
     tokens: number
@@ -126,21 +124,12 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
   const tCart = useTranslations('cart.messages')
   const tBreadcrumb = useTranslations('courses.breadcrumb')
   const [currency, setCurrency] = useState('GBP')
-  const [locale, setLocale] = useState('en')
   const [showStickyBar, setShowStickyBar] = useState(false)
   const heroCTARef = useRef<HTMLDivElement>(null)
   const resolvedImagePath = course.cover_image ?? getCourseImagePath(course.slug)
 
   useEffect(() => {
     setCurrency(getUserCurrency())
-    const cookies = document.cookie.split(';')
-    const localeCookie = cookies.find((c) => c.trim().startsWith('user_locale='))
-    if (localeCookie) {
-      const loc = localeCookie.split('=')[1]?.trim()
-      if (loc === 'ar' || loc === 'en') {
-        setLocale(loc)
-      }
-    }
   }, [])
 
   // Sticky bottom bar: show when hero CTA scrolls out of view
@@ -159,7 +148,6 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
       id: course.id,
       slug: course.slug,
       title: course.title,
-      title_ar: course.title_ar,
       tokens: course.tokens,
       price_gbp: course.price_gbp,
       image: resolvedImagePath || undefined,
@@ -184,9 +172,9 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
   const price = formatPrice(priceAmount, currency)
   const tokensFormatted = course.tokens.toLocaleString('en-US')
 
-  const displayTitle = locale === 'ar' && course.title_ar ? course.title_ar : course.title
+  const displayTitle = course.title
   const displayDescription =
-    locale === 'ar' && course.description_ar ? course.description_ar : course.description
+    course.description
 
   const hasImage = resolvedImagePath !== null
 

@@ -17,7 +17,7 @@ export interface Course {
   title: string;
   shortDescription: string;
   longDescription: string;
-  language: "en" | "ar";
+  language: "en";
   durationHoursMin: number;
   durationHoursMax: number;
   modules: CourseModule[];

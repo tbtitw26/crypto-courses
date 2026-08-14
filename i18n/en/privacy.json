@@ -22,7 +22,7 @@
     ],
     "badges": {
       "dataProtection": "UK GDPR · Data Protection Act 2018",
-      "ukGdpr": "Bilingual: English & Arabic",
+      "ukGdpr": "English-language service",
       "ageRestriction": "Age 18+ only"
     },
     "summaryCard": {
@@ -59,7 +59,7 @@
     ],
     "reminder": {
       "label": "Reminder",
-      "text": "The English version prevails. Translations in Modern Standard Arabic are provided for convenience; in case of any conflict, the English version shall prevail."
+      "text": "This Policy is published in English. The English version is the only binding version."
     }
   },
   "sections": [
@@ -86,7 +86,7 @@
         },
         {
           "type": "paragraph",
-          "text": "The Service is a bilingual educational platform (English and Modern Standard Arabic) focused on trading education (forex, crypto and related markets). Translated versions of this Policy may be provided for convenience; in case of any conflict, the English version shall prevail."
+          "text": "The Service is an English-language educational platform focused on trading education (forex, crypto and related markets). The English version of this Policy is the only binding version."
         }
       ]
     },
@@ -110,7 +110,7 @@
         {
           "type": "list",
           "items": [
-            "Account & identity: name (or display name), company name, role, email address, password (hashed), telephone number, preferred language (e.g. English/Arabic), preferred currency and region.",
+            "Account & identity: name (or display name), company name, role, email address, password (hashed), telephone number, preferred currency and region.",
             "Authentication & social login: if you sign in via a third-party provider (for example, Google), we may receive your name, email address, profile image and a unique identifier from that provider, managed via our authentication layer (e.g. NextAuth).",
             "Learning profile & intake: trading experience level, approximate deposit range, risk tolerance, goals, markets of interest, and other information you choose to share in intake forms for Custom Courses or AI Strategy Builder.",
             "Orders & library: details of your purchases and redemptions, including selected Ready-Made Courses, Custom Courses and AI Strategy Outputs associated with your Account.",
@@ -233,7 +233,7 @@
             "keeping the Service secure (fraud detection, abuse prevention, logging, rate-limiting and incident response);",
             "ensuring reliable operation of authentication, session management and dashboard access;",
             "measuring and improving performance, usability and user experience (using aggregated or pseudonymised analytics where feasible);",
-            "tailoring educational content at a high level (for example, grouping users by experience level or language preference to prioritise future content), without making automated decisions with legal or similarly significant effects;",
+            "tailoring educational content at a high level (for example, grouping users by experience level to prioritise future content), without making automated decisions with legal or similarly significant effects;",
             "sending essential, non-marketing communications (for example, service announcements, security alerts or policy updates);",
             "B2B outreach to existing or potential business customers about products or services related to the Service, subject to your right to object at any time (see section 8)."
           ]
@@ -339,7 +339,7 @@
           "type": "list",
           "items": [
             "run essential functions of the Service (for example, login sessions, CSRF protection, security and preferences);",
-            "remember your settings (such as language, currency and interface preferences);",
+            "remember your settings (such as currency and interface preferences);",
             "measure performance and reliability;",
             "where you consent, enable analytics and, if applicable, marketing or attribution."
           ]

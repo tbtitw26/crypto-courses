@@ -8,7 +8,6 @@ export interface CartItem {
   id: number
   slug: string
   title: string
-  title_ar?: string
   tokens: number
   price_gbp: number
   image?: string

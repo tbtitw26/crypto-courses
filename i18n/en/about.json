@@ -71,8 +71,8 @@
     ]
   },
   "regions": {
-    "title": "Regions, currencies and languages.",
-    "subtitle": "Cur Nova is designed with specific regions and languages in mind. This helps keep examples and structures more realistic for your context.",
+    "title": "Regions and currencies.",
+    "subtitle": "Cur Nova is designed with specific regions in mind. This helps keep examples and structures more realistic for your context.",
     "items": [
       {
         "title": "Primary regions",
@@ -83,8 +83,8 @@
         "description": "Inside the interface you can work with EUR, GBP and USD. Some products can be unlocked via tokens, others via direct payments. Tokens are an internal balance, not an investment product."
       },
       {
-        "title": "Languages",
-        "description": "The initial focus is on English and Arabic, so that learners in EU, UK and UAE can work in a language that feels natural."
+        "title": "Language",
+        "description": "All courses, AI outputs and legal documents are provided in English, so every learner works from exactly the same source."
       }
     ]
   },

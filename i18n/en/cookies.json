@@ -14,7 +14,7 @@
     },
     "note": "You can review or update cookie choices at any time via the Cookie Settings link in the footer.",
     "highlights": [
-      "Essential cookies keep sessions secure, store localisation (language + currency) and power purchases.",
+      "Essential cookies keep sessions secure, store your currency preference and power purchases.",
       "Analytics/performance data is minimised, aggregated and never sold or shared for advertising.",
       "Marketing/attribution tags are off by default and only activate after explicit consent."
     ],
@@ -94,7 +94,7 @@
       "title": "What are cookies (and similar technologies)?",
       "content": [
         "Cookies are small files placed on your device to enable secure sessions, remember preferences and measure performance. Similar technologies include localStorage/sessionStorage keys (for UI state), SDK identifiers (for mobile-like flows) and pixels used for analytics or attribution.",
-        "On Cur Nova, they help with authentication, payment security, localisation (language + currency), dashboard filters, AI generation logs, fraud monitoring and—where you permit—analytics/marketing."
+        "On Cur Nova, they help with authentication, payment security, currency preference, dashboard filters, AI generation logs, fraud monitoring and—where you permit—analytics/marketing."
       ]
     },
     {
@@ -113,7 +113,7 @@
         {
           "icon": "settings",
           "title": "Functional / Preferences",
-          "description": "Language (EN/AR), currency, theme, dashboard filters, token pack reminders and saved AI form presets."
+          "description": "Currency, theme, dashboard filters, token pack reminders and saved AI form presets."
         },
         {
           "icon": "cpu",
@@ -167,7 +167,7 @@
           },
           {
             "name": "cur-nova_ui_prefs",
-            "purpose": "Language, theme, currency and layout",
+            "purpose": "Theme, currency and layout",
             "category": "Functional",
             "lifetime": "Up to 6 months"
           },
@@ -296,7 +296,7 @@
         },
         "functional": {
           "title": "Functional / Preferences",
-          "description": "Language, currency, theme and saved filters."
+          "description": "Currency, theme and saved filters."
         },
         "analytics": {
           "title": "Performance / Analytics",

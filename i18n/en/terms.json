@@ -5,7 +5,7 @@
   },
   "hero": {
     "title": "Full terms for using Cur Nova courses, tokens and AI features.",
-    "subtitle": "Please read these Terms carefully before purchasing token packs, ready-made courses, custom courses or AI Strategy Builder outputs. They summarise the rules that keep our education-only platform safe, compliant and transparent for both English and Arabic audiences.",
+    "subtitle": "Please read these Terms carefully before purchasing token packs, ready-made courses, custom courses or AI Strategy Builder outputs. They summarise the rules that keep our education-only platform safe, compliant and transparent for every customer.",
     "meta": [
       {
         "label": "Effective date",
@@ -64,7 +64,7 @@
     ],
     "reminder": {
       "label": "Reminder",
-      "text": "The English version prevails. Translations in Modern Standard Arabic are provided so customers can read the same obligations with identical weight."
+      "text": "These Terms are published in English. The English version is the only binding version."
     }
   },
   "sections": [
@@ -80,7 +80,7 @@
           "items": [
             "1.3. Cur Nova is education-only. We do not execute trades, hold client funds, operate as a broker/exchange, deliver investment management or personalised financial advice.",
             "1.4. References to strategies, signals or systems are illustrative only. Nothing on the Service is a recommendation to trade or to use any broker or instrument.",
-            "1.5. The Service is bilingual (English and Modern Standard Arabic). If a translation conflicts with the English version, the English text controls."
+            "1.5. The Service and all of its documents are provided in English."
           ]
         }
       ]
@@ -95,7 +95,7 @@
           "items": [
             { "term": "Account", "description": "Your profile on the Service, created via email/password or supported SSO (e.g., Google)." },
             { "term": "Tokens / Wallet", "description": "Pre-paid, non-transferable digital credits used to access paid features. Not cash, e-money or securities." },
-            { "term": "Ready-Made Courses", "description": "Deterministically priced PDF courses available in English or Arabic." },
+            { "term": "Ready-Made Courses", "description": "Deterministically priced PDF courses." },
             { "term": "Custom Courses", "description": "Trader-tailored PDFs prepared by senior mentors based on your intake forms, typically paid with Tokens." },
             { "term": "AI Strategy Outputs", "description": "Structured strategies, diagrams and cover art generated with AI and delivered digitally." },
             { "term": "Library / Dashboard", "description": "Authenticated area (e.g., /dashboard) showing balances, purchases, invoices and settings." },

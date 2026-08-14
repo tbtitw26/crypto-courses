@@ -38,7 +38,6 @@ function CheckoutContent() {
   const t = useTranslations('cart.checkout')
   const tCommon = useTranslations('common.buttons')
   const [currency, setCurrency] = useState('GBP')
-  const [locale, setLocale] = useState('en')
   const [paymentMethod, setPaymentMethod] = useState<'tokens' | 'card'>('tokens')
   const [isProcessingPayment, setIsProcessingPayment] = useState(false)
   const hasRedirected = useRef(false)
@@ -49,14 +48,6 @@ function CheckoutContent() {
 
   useEffect(() => {
     setCurrency(getUserCurrency())
-    const cookies = document.cookie.split(';')
-    const localeCookie = cookies.find((c) => c.trim().startsWith('user_locale='))
-    if (localeCookie) {
-      const loc = localeCookie.split('=')[1]?.trim()
-      if (loc === 'ar' || loc === 'en') {
-        setLocale(loc)
-      }
-    }
   }, [])
 
   // Redirect unauthenticated users to login with callback
@@ -143,19 +134,6 @@ function CheckoutContent() {
 
     setIsProcessingPayment(true)
     try {
-      const getLocaleFromCookie = () => {
-        if (typeof document === 'undefined') return 'en'
-        const cookies = document.cookie.split(';')
-        const localeCookie = cookies.find((c) => c.trim().startsWith('user_locale='))
-        if (localeCookie) {
-          const locale = localeCookie.split('=')[1]?.trim()
-          if (locale === 'en' || locale === 'ar') return locale
-        }
-        return 'en'
-      }
-
-      const locale = getLocaleFromCookie()
-
       for (const item of items) {
         if (item.slug.startsWith('token-pack-') || item.slug.startsWith('custom-top-up')) {
           continue
@@ -168,7 +146,7 @@ function CheckoutContent() {
           },
           body: JSON.stringify({
             courseSlug: item.slug,
-            language: locale,
+            language: 'en',
           }),
         })
 
@@ -325,7 +303,7 @@ function CheckoutContent() {
 
               <div className="divide-y divide-surface-200">
                 {courseItems.map((item) => (
-                  <CheckoutItem key={item.slug} item={item} locale={locale} currency={currency} tCommon={tCommon} />
+                  <CheckoutItem key={item.slug} item={item} currency={currency} tCommon={tCommon} />
                 ))}
               </div>
             </div>
@@ -533,7 +511,7 @@ function CheckoutContent() {
                 {/* Compact item list */}
                 <div className="space-y-3">
                   {items.map((item) => {
-                    const displayTitle = locale === 'ar' && item.title_ar ? item.title_ar : item.title
+                    const displayTitle = item.title
                     const itemPrice = calculatePriceForTokens(item.tokens, currency)
                     const formattedItemPrice = formatPrice(itemPrice, currency)
 
@@ -626,14 +604,13 @@ function CheckoutContent() {
 
 interface CheckoutItemProps {
   item: any
-  locale: string
   currency: string
   tCommon: any
 }
 
-function CheckoutItem({ item, locale, currency, tCommon }: CheckoutItemProps) {
+function CheckoutItem({ item, currency, tCommon }: CheckoutItemProps) {
   const imagePath = item.image ?? getCourseImagePath(item.slug)
-  const displayTitle = locale === 'ar' && item.title_ar ? item.title_ar : item.title
+  const displayTitle = item.title
   const itemPrice = calculatePriceForTokens(item.tokens, currency)
   const formattedItemPrice = formatPrice(itemPrice, currency)
 

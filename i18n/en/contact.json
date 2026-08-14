@@ -73,10 +73,6 @@
         "placeholder": "If relevant, paste your Cur Nova ID",
         "hint": "Helps us locate your purchases faster."
       },
-      "language": {
-        "label": "Preferred reply language",
-        "placeholder": "Select language"
-      },
       "message": {
         "label": "Your message *",
         "placeholder": "Describe your question in clear, practical terms. Please do not include sensitive account security data or full card numbers."

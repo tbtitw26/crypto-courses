@@ -27,36 +27,23 @@ import { getCourseImagePath } from '@/lib/course-image-utils'
 
 interface CourseItem {
   title: string
-  title_ar?: string | null
   level: string
   market: string
   type: 'Course PDF' | 'AI Strategy'
   slug?: string
   purchaseLanguage?: string
   description?: string
-  description_ar?: string | null
   cover_image?: string | null
   downloadUrl?: string | null
 }
 
 function LibraryRow({ item, t, index }: { item: CourseItem; t: any; index?: number }) {
-  const [locale, setLocale] = useState('en')
   const isAI = item.type === 'AI Strategy'
 
-  useEffect(() => {
-    const cookies = document.cookie.split(';')
-    const localeCookie = cookies.find((c) => c.trim().startsWith('user_locale='))
-    if (localeCookie) {
-      const loc = localeCookie.split('=')[1]?.trim()
-      if (loc === 'ar' || loc === 'en') {
-        setLocale(loc)
-      }
-    }
-  }, [])
 
-  const displayTitle = locale === 'ar' && item.title_ar ? item.title_ar : item.title
+  const displayTitle = item.title
   const displayDescription =
-    locale === 'ar' && item.description_ar ? item.description_ar : (item.description || '')
+    item.description || ''
   const imagePath = item.cover_image ?? (item.slug ? getCourseImagePath(item.slug) : null)
   const shouldPrioritize = index !== undefined && index < 4
   const estimatedModules = 7
@@ -159,14 +146,12 @@ export function LibraryPage() {
 
         const courseItems: CourseItem[] = purchasedCourses.map((course: any) => ({
           title: course.title,
-          title_ar: course.title_ar || undefined,
           level: course.level,
           market: course.market,
           type: 'Course PDF' as const,
           slug: course.slug,
           purchaseLanguage: course.purchaseLanguage || 'en',
           description: course.description,
-          description_ar: course.description_ar || undefined,
           cover_image: course.cover_image || null,
           downloadUrl: course.downloadUrl || null,
         }))

@@ -55,12 +55,12 @@
       { "label": "Suitability, independent advice and tax", "anchor": "suitability" },
       { "label": "No guarantees & limitation of liability", "anchor": "no-guarantees" },
       { "label": "Jurisdiction & regulatory status", "anchor": "jurisdiction" },
-      { "label": "Translations and language versions", "anchor": "translations" },
+      { "label": "Language", "anchor": "translations" },
       { "label": "Acknowledgement", "anchor": "acknowledgement" }
     ],
     "reminder": {
       "label": "Reminder",
-      "text": "The English version prevails. Translations in Modern Standard Arabic are provided for convenience; in case of any inconsistency or ambiguity, the English version shall prevail."
+      "text": "This document is published in English. The English version is the only binding version."
     }
   },
   "sections": [
@@ -399,11 +399,11 @@
     {
       "id": "translations",
       "number": "12",
-      "title": "Translations and language versions",
+      "title": "Language",
       "content": [
         {
           "type": "paragraph",
-          "text": "The Service, including some risk warnings and educational content, may be provided in English and Modern Standard Arabic. In case of any inconsistency or ambiguity between translated versions of this Policy, the English version shall prevail."
+          "text": "The Service, including all risk warnings and educational content, is provided in English. The English version of this document is the only binding version."
         }
       ]
     },

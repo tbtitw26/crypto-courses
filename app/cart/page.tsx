@@ -28,18 +28,9 @@ export default function CartPage() {
   const tCommon = useTranslations('common.buttons')
   const tNav = useTranslations('common.nav')
   const [currency, setCurrency] = useState('GBP')
-  const [locale, setLocale] = useState('en')
 
   useEffect(() => {
     setCurrency(getUserCurrency())
-    const cookies = document.cookie.split(';')
-    const localeCookie = cookies.find((c) => c.trim().startsWith('user_locale='))
-    if (localeCookie) {
-      const loc = localeCookie.split('=')[1]?.trim()
-      if (loc === 'ar' || loc === 'en') {
-        setLocale(loc)
-      }
-    }
   }, [])
 
   const total = getCartTotal(currency)
@@ -161,7 +152,6 @@ export default function CartPage() {
                 label={`Courses (${courseItems.length})`}
                 items={courseItems}
                 type="course"
-                locale={locale}
                 currency={currency}
                 tCommon={tCommon}
                 t={t}
@@ -240,14 +230,13 @@ interface ItemGroupProps {
   label: string
   items: any[]
   type: 'course' | 'token-pack' | 'custom-top-up'
-  locale: string
   currency: string
   tCommon: any
   t: any
   removeFromCart: (slug: string) => void
 }
 
-function ItemGroup({ label, items, type, locale, currency, tCommon, t, removeFromCart }: ItemGroupProps) {
+function ItemGroup({ label, items, type, currency, tCommon, t, removeFromCart }: ItemGroupProps) {
   const iconMap = {
     course: { icon: BookOpen, bg: 'border-brand-200 bg-brand-50', color: 'text-brand-700' },
     'token-pack': { icon: Coins, bg: 'border-gold-200 bg-gold-50', color: 'text-gold-600' },
@@ -268,7 +257,7 @@ function ItemGroup({ label, items, type, locale, currency, tCommon, t, removeFro
       <div className="divide-y divide-surface-200 rounded-xl border border-surface-300 bg-white">
         {items.map((item) => {
           const imagePath = type === 'course' ? item.image ?? getCourseImagePath(item.slug) : null
-          const displayTitle = locale === 'ar' && item.title_ar ? item.title_ar : item.title
+          const displayTitle = item.title
           const itemPrice = calculatePriceForTokens(item.tokens, currency)
           const formattedItemPrice = formatPrice(itemPrice, currency)
 

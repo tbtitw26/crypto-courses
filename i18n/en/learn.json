@@ -83,13 +83,6 @@
         "label": "Anything else we should know? (optional)",
         "placeholder": "For example: past issues, psychological challenges, or constraints we should consider."
       },
-      "language": {
-        "label": "Select language(s)",
-        "required": "Required · select at least one",
-        "hint": "+500 tokens for second language",
-        "en": "English",
-        "ar": "Arabic"
-      },
       "consents": {
         "education": "I understand this is educational material only. Cur Nova does not provide financial advice or trading signals.",
         "terms": "I confirm that I have read and accept the Terms & Conditions and Risk & Disclaimer.",
@@ -182,13 +175,6 @@
         "quick": "Quick summary",
         "standard": "Standard plan",
         "deep": "Deep-dive guide"
-      },
-      "language": {
-        "label": "Select language(s)",
-        "required": "Required · select at least one",
-        "hint": "+500 tokens for second language",
-        "en": "English",
-        "ar": "Arabic"
       },
       "consent": "I understand that the generated plan is for educational purposes only and does not contain trading signals or guaranteed results.",
       "consentTerms": "I confirm that I have read and accept the Terms & Conditions and Risk & Disclaimer.",

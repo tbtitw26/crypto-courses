@@ -91,7 +91,6 @@ export function SettingsPage() {
   const { data: session, status, update: updateSession } = useSession()
   const router = useRouter()
   const { showToast } = useToast()
-  const [courseLanguage, setCourseLanguage] = useState('english')
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] = useState(false)
 
   const [isEditingProfile, setIsEditingProfile] = useState(false)
@@ -415,38 +414,7 @@ export function SettingsPage() {
               </div>
 
               <div className="p-5 space-y-5">
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  <div className="space-y-2 text-xs">
-                    <p className="font-medium text-text-main">{t('preferences.courseLanguage.label')}</p>
-                    <div className="flex gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => setCourseLanguage('english')}
-                        className={`rounded-lg border px-3 py-1.5 font-medium transition ${
-                          courseLanguage === 'english'
-                            ? 'border-brand-600 bg-brand-600 text-white'
-                            : 'border-surface-200 bg-surface-50 text-text-main hover:border-surface-300'
-                        }`}
-                      >
-                        {t('preferences.courseLanguage.englishOnly')}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setCourseLanguage('both')}
-                        className={`rounded-lg border px-3 py-1.5 font-medium transition ${
-                          courseLanguage === 'both'
-                            ? 'border-brand-600 bg-brand-600 text-white'
-                            : 'border-surface-200 bg-surface-50 text-text-main hover:border-surface-300'
-                        }`}
-                      >
-                        {t('preferences.courseLanguage.both')}
-                      </button>
-                    </div>
-                    <p className="text-text-muted">{t('preferences.courseLanguage.note')}</p>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4 border-t border-surface-100 pt-4 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="space-y-1 text-xs">
                     <p className="font-medium text-text-main">{t('preferences.currency.label')}</p>
                     <p className="text-text-secondary">

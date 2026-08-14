@@ -23,19 +23,9 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
   const tEmpty = useTranslations('cart.empty')
   const tCommon = useTranslations('common.buttons')
   const [currency, setCurrency] = useState('GBP')
-  const [locale, setLocale] = useState('en')
 
   useEffect(() => {
     setCurrency(getUserCurrency())
-    // Get locale from cookie
-    const cookies = document.cookie.split(';')
-    const localeCookie = cookies.find((c) => c.trim().startsWith('user_locale='))
-    if (localeCookie) {
-      const loc = localeCookie.split('=')[1]?.trim()
-      if (loc === 'ar' || loc === 'en') {
-        setLocale(loc)
-      }
-    }
   }, [])
 
   const total = getCartTotal(currency)
@@ -79,8 +69,7 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
         {items.map((item) => {
           const itemType = getCartItemType(item.slug)
           const imagePath = itemType === 'course' ? item.image ?? getCourseImagePath(item.slug) : null
-          // Use localized title if available and locale is Arabic
-          const displayTitle = locale === 'ar' && item.title_ar ? item.title_ar : item.title
+          const displayTitle = item.title
 
           return (
             <div key={item.slug} className="flex items-start gap-3 p-2 rounded-lg bg-surface-200/50 border border-surface-300">

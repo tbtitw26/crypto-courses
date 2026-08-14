@@ -22,9 +22,7 @@ interface CoursesPageCardProps {
     level: string
     market: string
     title: string
-    title_ar?: string | null
     description: string
-    description_ar?: string | null
     tokens: number
     price_gbp: number
     modules?: number
@@ -35,7 +33,6 @@ interface CoursesPageCardProps {
 
 export function CoursesPageCard({ course, priority = false }: CoursesPageCardProps) {
   const [currency, setCurrency] = useState('GBP')
-  const [locale, setLocale] = useState('en')
   const { addToCart } = useCart()
   const { showToast } = useToast()
   const t = useTranslations('courses.course')
@@ -44,14 +41,6 @@ export function CoursesPageCard({ course, priority = false }: CoursesPageCardPro
 
   useEffect(() => {
     setCurrency(getUserCurrency())
-    const cookies = document.cookie.split(';')
-    const localeCookie = cookies.find((cookie) => cookie.trim().startsWith('user_locale='))
-    if (localeCookie) {
-      const loc = localeCookie.split('=')[1]?.trim()
-      if (loc === 'ar' || loc === 'en') {
-        setLocale(loc)
-      }
-    }
   }, [])
 
   const handleAddToCart = () => {
@@ -60,7 +49,6 @@ export function CoursesPageCard({ course, priority = false }: CoursesPageCardPro
       id: course.id,
       slug: course.slug,
       title: course.title,
-      title_ar: course.title_ar || undefined,
       tokens: course.tokens,
       price_gbp: course.price_gbp,
       image: imagePath || undefined,
@@ -75,9 +63,9 @@ export function CoursesPageCard({ course, priority = false }: CoursesPageCardPro
   const price = formatPrice(priceAmount, currency)
   const tokensFormatted = course.tokens.toLocaleString('en-US')
   const estimatedModules = course.modules ?? (Math.ceil(course.tokens / 1000) || 7)
-  const displayTitle = locale === 'ar' && course.title_ar ? course.title_ar : course.title
+  const displayTitle = course.title
   const displayDescription =
-    locale === 'ar' && course.description_ar ? course.description_ar : course.description
+    course.description
   const imagePath = course.cover_image ?? getCourseImagePath(course.slug)
   const hasImage = imagePath !== null
 

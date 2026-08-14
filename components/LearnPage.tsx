@@ -237,7 +237,7 @@ function CustomCourseForm() {
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([])
   const [goals, setGoals] = useState('')
   const [notes, setNotes] = useState('')
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>(['en'])
+  const selectedLanguages: string[] = ['en']
   const [consentEducation, setConsentEducation] = useState(false)
   const [consentTerms, setConsentTerms] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -285,18 +285,6 @@ function CustomCourseForm() {
     setMarkets((prev) =>
       prev.includes(market) ? prev.filter((m) => m !== market) : [...prev, market]
     )
-  }
-
-  const handleLanguageToggle = (lang: 'en' | 'ar') => {
-    setSelectedLanguages((prev) => {
-      if (prev.includes(lang)) {
-        if (prev.length === 1) return prev
-        return prev.filter((l) => l !== lang)
-      } else {
-        if (prev.length >= 2) return prev
-        return [...prev, lang]
-      }
-    })
   }
 
   const hasActiveJob = jobIdFromUrl && jobStatus && !isTerminal
@@ -618,26 +606,6 @@ function CustomCourseForm() {
             </div>
           </FormSection>
 
-          {/* Output settings */}
-          <FormSection title="Output settings">
-            <div>
-              <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
-                <span>{tForm('language.label')}</span>
-                <span className="text-xs text-text-muted">{tForm('language.required')}</span>
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {(['en', 'ar'] as const).map((lang) => (
-                  <Chip key={lang} active={selectedLanguages.includes(lang)} onClick={() => handleLanguageToggle(lang)}>
-                    {tForm(`language.${lang}`)}
-                  </Chip>
-                ))}
-              </div>
-              {selectedLanguages.length === 2 && (
-                <p className="mt-1.5 text-xs text-text-muted">{tForm('language.hint')}</p>
-              )}
-            </div>
-          </FormSection>
-
           {/* Consent */}
           <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
             <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
@@ -858,7 +826,7 @@ function AIStrategyForm() {
   const [instruments, setInstruments] = useState('')
   const [focus, setFocus] = useState('')
   const [detailLevel, setDetailLevel] = useState<'quick' | 'standard' | 'deep' | ''>('')
-  const [selectedLanguages, setSelectedLanguages] = useState<Array<'en' | 'ar'>>(['en'])
+  const selectedLanguages: Array<'en'> = ['en']
   const [consent, setConsent] = useState(false)
   const [consentTerms, setConsentTerms] = useState(false)
   const [experienceYears, setExperienceYears] = useState<'0' | '1-2' | '3+' | ''>('')
@@ -896,17 +864,6 @@ function AIStrategyForm() {
     setRiskTolerance(profile.riskTolerance)
     setTradingStyle(profile.tradingStyle)
   }, [preset])
-
-  const handleLanguageToggle = (lang: 'en' | 'ar') => {
-    setSelectedLanguages((prev) => {
-      if (prev.includes(lang)) {
-        if (prev.length === 1) return prev
-        return prev.filter((l) => l !== lang)
-      }
-      if (prev.length >= 2) return prev
-      return [...prev, lang]
-    })
-  }
 
   const experienceMap: Record<string, 'beginner' | 'intermediate' | 'advanced' | ''> = {
     '0': 'beginner',
@@ -1215,23 +1172,6 @@ function AIStrategyForm() {
                     </Chip>
                   ))}
                 </div>
-              </div>
-
-              <div>
-                <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
-                  <span>{tForm('language.label')}</span>
-                  <span className="text-xs text-text-muted">{tForm('language.required')}</span>
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {(['en', 'ar'] as const).map((lang) => (
-                    <Chip key={lang} active={selectedLanguages.includes(lang)} onClick={() => handleLanguageToggle(lang)}>
-                      {tForm(`language.${lang}`)}
-                    </Chip>
-                  ))}
-                </div>
-                {selectedLanguages.length === 2 && (
-                  <p className="mt-1.5 text-xs text-text-muted">{tForm('language.hint')}</p>
-                )}
               </div>
             </div>
           </FormSection>

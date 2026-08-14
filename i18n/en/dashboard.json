@@ -54,7 +54,7 @@
     },
     "table": {
       "title": "Objective",
-      "marketLevel": "Markets · Languages",
+      "marketLevel": "Markets",
       "tokens": "Tokens",
       "status": "Status",
       "created": "Created",
@@ -67,8 +67,7 @@
       "failed": "Failed"
     },
     "actions": {
-      "downloadPDF_en": "Download EN",
-      "downloadPDF_ar": "Download AR",
+      "downloadPDF": "Download PDF",
       "checkEmail": "Delivered via email",
       "processing": "In progress"
     },
@@ -82,8 +81,7 @@
         "points": {
           "objective": "Clear objective and constraints.",
           "market": "Preferred market and timeframe.",
-          "risk": "Risk tolerance, deposit and trade limits.",
-          "languages": "Language choice (EN / AR)."
+          "risk": "Risk tolerance, deposit and trade limits."
         },
         "note": "Structured prompts keep your strategy consistent every time."
       },
@@ -277,7 +275,7 @@
         "billing": "Billing",
         "billingDesc": "tracks token top-ups and direct purchases.",
         "settings": "Settings",
-        "settingsDesc": "holds preferences like language and risk reminders."
+        "settingsDesc": "holds preferences like currency and risk reminders."
       }
     }
   },
@@ -465,7 +463,7 @@
   "settingsPage": {
     "title": "Settings",
     "heading": "Account & preferences",
-    "subtitle": "Update your details, language and how Cur Nova talks to you. Nothing here connects to your broker or exchange accounts – this is only for your learning profile.",
+    "subtitle": "Update your details and how Cur Nova talks to you. Nothing here connects to your broker or exchange accounts – this is only for your learning profile.",
     "educationAccountOnly": {
       "title": "Education account only",
       "subtitle": "No trading or payment credentials stored here."
@@ -482,18 +480,8 @@
       }
     },
     "preferences": {
-      "title": "Interface & language",
+      "title": "Interface preferences",
       "subtitle": "How the dashboard and emails talk to you.",
-      "dashboardLanguage": {
-        "label": "Dashboard language",
-        "note": "Changes only the interface – not the markets you study."
-      },
-      "courseLanguage": {
-        "label": "Course & email language",
-        "englishOnly": "English only",
-        "both": "English + Arabic (where available)",
-        "note": "Some PDFs may ship in English first and add Arabic later."
-      },
       "currency": {
         "label": "Default currency display",
         "description": "Follows your choice in the main header ({currencies}).",

@@ -28,7 +28,6 @@ const contactFormSchema = z.object({
   region: z.string().min(1, 'Region is required'),
   topic: z.string().min(1, 'Topic is required'),
   accountId: z.string().max(100).optional(),
-  language: z.string().min(1, 'Language is required'),
   message: z.string().min(10, 'Message must be at least 10 characters').max(5000),
   consent: z.boolean().refine((val) => val === true, {
     message: 'You must agree to the terms',
@@ -64,7 +63,7 @@ export function ContactPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, language: 'English' }),
       })
 
       const result = await response.json()
@@ -104,7 +103,6 @@ export function ContactPage() {
     'Legal & compliance',
     'Other',
   ]
-  const languages = ['English', 'Arabic']
 
   const channelIcons = [MessageSquare, Mail, FileText]
 
@@ -295,25 +293,6 @@ export function ContactPage() {
                 <p className="mt-1 text-xs text-text-muted">{t('form.fields.accountId.hint')}</p>
               </div>
 
-              <div>
-                <label htmlFor="contact-language" className="mb-1.5 block text-sm font-medium text-text-main">
-                  {t('form.fields.language.label')}
-                </label>
-                <div className="relative">
-                  <Globe2 className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-surface-400" />
-                  <select
-                    id="contact-language"
-                    {...register('language')}
-                    className={`input-field w-full cursor-pointer rounded-lg py-2.5 pl-11 pr-4 text-sm ${errors.language ? 'border-rose-400 focus:ring-rose-400' : ''}`}
-                  >
-                    <option value="">{t('form.fields.language.placeholder')}</option>
-                    {languages.map((lang) => (
-                      <option key={lang} value={lang}>{lang}</option>
-                    ))}
-                  </select>
-                </div>
-                {errors.language && <p className="mt-1 text-xs text-rose-600">{errors.language.message}</p>}
-              </div>
             </div>
 
             {/* Message */}
