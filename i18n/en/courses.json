@@ -143,7 +143,96 @@
     },
     "whatYouWillLearn": {
       "title": "What you will learn"
+    },
+    "extra": {
+      "forexBeginnerModules": [
+        {
+          "title": "How the Forex market is structured",
+          "desc": "Sessions, major pairs, liquidity and where your orders actually travel in the system."
+        },
+        {
+          "title": "Core terms & order types",
+          "desc": "Market vs limit, stop orders, spreads, slippage and how this affects execution."
+        },
+        {
+          "title": "Risk per trade & position sizing",
+          "desc": "Calculating % risk, lot size and why a small, consistent risk model matters more than setups."
+        },
+        {
+          "title": "Basic price structure & candles",
+          "desc": "Trends, ranges, support/resistance and how to read candles without overcomplicating charts."
+        },
+        {
+          "title": "Building your first simple plan",
+          "desc": "Turning theory into a minimal trading plan you can actually follow and review."
+        },
+        {
+          "title": "Journaling and review",
+          "desc": "What to track, how to log trades and how to run weekly reviews to learn from data."
+        },
+        {
+          "title": "Common beginner traps",
+          "desc": "Overtrading, revenge trading, sizing up too fast and how to build guardrails against them."
+        }
+      ],
+      "genericModules": [
+        {
+          "title": "Introduction and fundamentals",
+          "desc": "Core concepts and market structure."
+        },
+        {
+          "title": "Risk management basics",
+          "desc": "Understanding risk and position sizing."
+        },
+        {
+          "title": "Practical application",
+          "desc": "Applying concepts in real scenarios."
+        }
+      ],
+      "hours": "{min}–{max} hours",
+      "selfPaced": "self-paced",
+      "tokens": "tokens",
+      "learn": [
+        "How the {market} market is structured and why that matters.",
+        "How to define and calculate risk per trade before pressing any button.",
+        "How to build a simple, minimal trading plan and journal framework."
+      ],
+      "whoFor": [
+        "Complete beginners who want a structured, non-hyped introduction to {market}.",
+        "Traders who opened a few random positions and realised they need a proper base.",
+        "People who care about risk and process more than short-term excitement."
+      ],
+      "notFor": [
+        "It will not give you trade calls or entry alerts.",
+        "It will not promise you any monthly percentage return.",
+        "It will not remove the need for your own discipline, time and practice."
+      ],
+      "materials": [
+        "Full PDF course (around 80-100 pages)",
+        "Simple printable risk checklist",
+        "Basic journaling template (50-100 trades)"
+      ]
     }
+  },
+  "catalog": {
+    "loadError": "Unable to load courses. Please try again later.",
+    "loading": "Loading catalog",
+    "resultCount": "{shown} of {total}",
+    "badge": "Course catalog",
+    "subtitleExtra": "Browse structured PDFs by market and level, then use tokens or checkout to access your course.",
+    "downloadable": "Downloadable course materials",
+    "differentPath": "Need a different path?",
+    "differentPathTitle": "Custom and AI options sit beside the catalog.",
+    "differentPathText": "If the ready-made library does not match your current level, request a tailored PDF or generate an education-only strategy document.",
+    "reset": "Reset",
+    "level": "Level",
+    "market": "Market",
+    "unavailable": "The courses list is temporarily unavailable. Please refresh the page or try again later.",
+    "emptyTitle": "No courses match this view.",
+    "emptyText": "Try a broader market, a different level, or clear the search query.",
+    "clearFilters": "Clear filters",
+    "showingAll": "Showing the full course library.",
+    "filteredBy": "Filtered by {filters}",
+    "searchLabel": "search: \"{query}\""
   }
 }
-

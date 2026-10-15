@@ -2,11 +2,14 @@
 
 import { Metadata } from 'next'
 import { CoursesPage } from '@/components/CoursesPage'
-import enCourses from '@/i18n/en/courses.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: enCourses.title,
-  description: enCourses.subtitle,
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('courses.title'),
+    description: t('courses.subtitle'),
+  }
 }
 
 export default function CoursesListingPage() {

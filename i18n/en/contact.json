@@ -140,6 +140,20 @@
     "subtitle": "Many questions about courses, tokens and account access are covered in our FAQ, glossary and resources. You can always come back here if you still need help.",
     "openFaq": "Open FAQ",
     "viewResources": "View resources"
+  },
+  "options": {
+    "regions": {
+      "EU": "EU",
+      "UK": "UK",
+      "UAE": "UAE",
+      "Other": "Other"
+    },
+    "topics": {
+      "Courses": "Courses",
+      "Tokens & billing": "Tokens & billing",
+      "Account access": "Account access",
+      "Legal & compliance": "Legal & compliance",
+      "Other": "Other"
+    }
   }
 }
-

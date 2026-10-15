@@ -5,11 +5,14 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth-config'
 import { BillingPage } from '@/components/BillingPage'
-import enDashboard from '@/i18n/en/dashboard.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: `${enDashboard.title} - Billing`,
-  description: enDashboard.billingPage?.subtitle || 'Your billing and transaction history',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: `${t('dashboard.title')} - ${t('common.meta.billing')}`,
+    description: t('dashboard.billingPage.subtitle'),
+  }
 }
 
 export default async function DashboardTransactionsPageRoute() {

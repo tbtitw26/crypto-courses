@@ -3,11 +3,14 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { PositionSizingPage } from '@/components/PositionSizingPage'
-import enLearn from '@/i18n/en/learn.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: (enLearn as any).positionSizing?.hero?.title || 'Position Sizing Made Simple',
-  description: (enLearn as any).positionSizing?.hero?.subtitle || 'Position sizing connects your risk plan to the actual size of each trade. This page walks through the core ideas behind translating account risk, stop distance and contract value into a position size for Forex, Crypto and Binary markets.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('learn.positionSizing.hero.title'),
+    description: t('learn.positionSizing.hero.subtitle'),
+  }
 }
 
 function PositionSizingPageFallback() {

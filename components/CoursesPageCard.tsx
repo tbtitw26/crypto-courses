@@ -7,6 +7,7 @@ import { BookOpen, Gauge, Layers, ShoppingCart } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { useValueLabel } from '@/hooks/use-value-label'
 import { motion } from 'framer-motion'
 import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
@@ -36,6 +37,7 @@ export function CoursesPageCard({ course, priority = false }: CoursesPageCardPro
   const { addToCart } = useCart()
   const { showToast } = useToast()
   const t = useTranslations('courses.course')
+  const valueLabel = useValueLabel()
   const tCart = useTranslations('cart.messages')
   const tCommon = useTranslations('common.buttons')
 
@@ -98,8 +100,8 @@ export function CoursesPageCard({ course, priority = false }: CoursesPageCardPro
 
       <div className="flex flex-1 flex-col p-5">
         <div className="mb-4 flex flex-wrap items-center gap-2">
-          <span className="badge-neutral">{course.market}</span>
-          <span className="badge-neutral">{course.level}</span>
+          <span className="badge-neutral">{valueLabel(course.market)}</span>
+          <span className="badge-neutral">{valueLabel(course.level)}</span>
           <span className="badge-brand">{t('format')}</span>
         </div>
 

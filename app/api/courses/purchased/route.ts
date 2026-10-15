@@ -6,6 +6,8 @@ import { authOptions } from '@/lib/auth-config'
 import { prisma } from '@/lib/prisma'
 import { resolvePublicUrl } from '@/lib/storage'
 import { resolveCoursePdfUrl } from '@/lib/course-pdf-utils'
+import { localizeCourse } from '@/lib/course-i18n'
+import { getServerLocale } from '@/i18n/server'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -51,13 +53,14 @@ export async function GET(request: NextRequest) {
         orderBy: { created_at: 'desc' },
       })
 
+      const locale = getServerLocale()
       const courses = await Promise.all(
         purchases.map(async (purchase) => {
           const coverImage = resolvePublicUrl(purchase.course.cover_image) ?? purchase.course.cover_image ?? null
           const downloadUrl = await resolveCoursePdfUrl(purchase.course.pdf_path, purchase.language || 'en')
 
           return {
-            ...purchase.course,
+            ...localizeCourse(purchase.course, locale),
             cover_image: coverImage,
             downloadUrl,
             purchaseId: purchase.id,

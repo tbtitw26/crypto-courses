@@ -3,11 +3,14 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { PreSessionPage } from '@/components/PreSessionPage'
-import enLearn from '@/i18n/en/learn.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: (enLearn as any).preSession?.hero?.title || 'Pre-Session Preparation Checklist',
-  description: (enLearn as any).preSession?.hero?.subtitle || 'A short, repeatable pre-session routine can reduce rushed decisions. This page offers a practical checklist for getting your environment, platform and risk plan ready before you place a single trade.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('learn.preSession.hero.title'),
+    description: t('learn.preSession.hero.subtitle'),
+  }
 }
 
 function PreSessionPageFallback() {

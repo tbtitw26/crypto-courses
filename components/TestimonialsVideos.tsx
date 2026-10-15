@@ -6,6 +6,7 @@ import { useRef, useEffect } from 'react'
 
 export function TestimonialsVideos() {
   const t = useTranslations('home.testimonials')
+  const tUi = useTranslations('common.ui')
   const video1Ref = useRef<HTMLVideoElement>(null)
   const video2Ref = useRef<HTMLVideoElement>(null)
 
@@ -134,7 +135,7 @@ export function TestimonialsVideos() {
                 playsInline
                 aria-label={t('video1Label')}
               >
-                Your browser does not support the video tag.
+                {tUi('videoUnsupported')}
               </video>
             </div>
           </div>
@@ -160,7 +161,7 @@ export function TestimonialsVideos() {
                 playsInline
                 aria-label={t('video2Label')}
               >
-                Your browser does not support the video tag.
+                {tUi('videoUnsupported')}
               </video>
             </div>
           </div>

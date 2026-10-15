@@ -5,11 +5,14 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth-config'
 import { LibraryPage } from '@/components/LibraryPage'
-import enDashboard from '@/i18n/en/dashboard.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: `${enDashboard.title} - Library`,
-  description: enDashboard.libraryPage?.subtitle || 'Your courses and AI strategies library',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: `${t('dashboard.title')} - ${t('common.meta.library')}`,
+    description: t('dashboard.libraryPage.subtitle'),
+  }
 }
 
 export default async function DashboardCoursesPageRoute() {

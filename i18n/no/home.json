@@ -1,0 +1,565 @@
+{
+  "hero": {
+    "badgeLeft": "Cur Nova Club",
+    "badgeRight": "Kun opplæring",
+    "title": "Førsteklasses opplæring for høyrisikomarkeder.",
+    "subtitle": "Strukturerte kurs i Forex, krypto og binære opsjoner med tilpassede PDF-er og AI-genererte strategier. Ingen signaler, ingen løfter – bare tydelige læringsløp.",
+    "ctaPrimaryLabel": "Utforsk kurs",
+    "ctaSecondaryLabel": "Bestill tilpasset kurs",
+    "bullets": [
+      "Ingen finansiell rådgivning – kun opplæring.",
+      "Kursene leveres som strukturerte PDF-er.",
+      "AI-strategier med tokenbasert tilgang."
+    ]
+  },
+  "heroSlideshow": {
+    "labelTop": "Utvalgt i dag",
+    "labelSub": "Utvalgte Cur Nova-kurs",
+    "ctaViewCourse": "Se kurs",
+    "slideCounterPrefix": "Lysbilde",
+    "slideCounterOf": "av",
+    "slideShow": "Lysbildefremvisning",
+    "slides": [
+      {
+        "level": "Nybegynner",
+        "market": "Forex",
+        "title": "Forex-grunnlag: fra null til første handel",
+        "summary": "Bygg et solid grunnlag i Forex – sentrale begreper, ordretyper, risiko per handel og journalvaner."
+      },
+      {
+        "level": "Middels",
+        "market": "Krypto",
+        "title": "Volatilitetsstrukturer i krypto",
+        "summary": "Lær hvordan volatilitetssykluser og likviditetssoner former de største kryptoparene – med en strukturert tilnærming der risiko kommer først."
+      },
+      {
+        "level": "Avansert",
+        "market": "Binære",
+        "title": "Risiko og utbetalingsgeometri i binære opsjoner",
+        "summary": "Gå i dybden på utbetalingskurver, akkumulert risiko og hvordan du strukturerer binær eksponering uten å jage signaler."
+      },
+      {
+        "level": "Alle nivåer",
+        "market": "På tvers av markeder",
+        "title": "Risikostyring og handelsdisiplin",
+        "summary": "Et praktisk rammeverk for å styre risiko, sette grenser og bruke en handelsjournal i Forex-, krypto- og binærmarkedene."
+      }
+    ]
+  },
+  "marketSnapshot": {
+    "title": "Markedsoversikt",
+    "subtitle": "Sanntidskurser fra store markeder som støtte for læringen din. Cur Nova gir aldri handelssignaler eller investeringsråd.",
+    "disclaimer": "Dataene vises kun i opplæringsøyemed.",
+    "widgetHint": "Plassholder for datawidget (TradingView).",
+    "chartHint": "Plassholder for sanntidsdiagram for BTC / FX",
+    "tabs": {
+      "chart": "Avansert sanntidsdiagram",
+      "overview": "Markedsoversikt",
+      "stock": "Aksjemarkedet"
+    },
+    "tabsExtra": {
+      "indices": "Indekser",
+      "futures": "Futures",
+      "bonds": "Obligasjoner",
+      "forex": "Forex"
+    }
+  },
+  "featuredCourses": {
+    "title": "Kurs laget for klarhet, ikke hype.",
+    "subtitle": "Velg etter marked og nivå. Hvert kurs er en strukturert PDF du kan studere i ditt eget tempo.",
+    "ctaViewAll": "Se alle kurs",
+    "filtersLabel": "Filtre",
+    "levelFilters": [
+      "Alle",
+      "Nybegynner",
+      "Middels",
+      "Avansert"
+    ],
+    "marketFilters": [
+      "Forex",
+      "Krypto",
+      "Binære"
+    ]
+  },
+  "testimonials": {
+    "title": "Hva studentene våre sier",
+    "subtitle": "Ekte tilbakemeldinger fra tradere som bruker Cur Novas kurs og strategier.",
+    "video1Label": "Videoattest fra student 1",
+    "video2Label": "Videoattest fra student 2"
+  },
+  "paths": {
+    "title": "Tre måter å lære med Cur Nova på.",
+    "subtitle": "Velg formatet som passer der du er nå og tiden du har.",
+    "items": [
+      {
+        "title": "Strukturerte PDF-kurs",
+        "text": "Ferdige læringsløp for Forex, krypto og binære opsjoner, organisert etter nivå.",
+        "cta": "Utforsk kurs"
+      },
+      {
+        "title": "Tilpasset kurs fra en profesjonell trader",
+        "text": "Del erfaringen din, innskuddsstørrelse, risikotoleranse og mål. Motta en skreddersydd PDF.",
+        "badge": "Leveres på e-post",
+        "cta": "Bestill tilpasset kurs"
+      },
+      {
+        "title": "AI-strategi på sekunder",
+        "text": "Generer en strukturert handelsplan med logikk for inn- og utgang og en risikosjekkliste, basert på dine opplysninger.",
+        "badge": "Umiddelbart",
+        "cta": "Åpne AI-strategibyggeren"
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "Slik passer Cur Nova inn i læringen din.",
+    "subtitle": "En enkel rekkefølge som holder opplæring og risikobevissthet i sentrum.",
+    "steps": [
+      {
+        "title": "Velg ditt løp",
+        "text": "Velg mellom ferdige kurs, en tilpasset PDF eller en AI-generert strategi."
+      },
+      {
+        "title": "Fyll på saldo eller betal direkte",
+        "text": "Bruk tokens på tvers av produktene eller betal i EUR, GBP eller USD i kassen."
+      },
+      {
+        "title": "Få PDF-en din",
+        "text": "Last ned og studer i ditt eget tempo med en tydelig modulstruktur."
+      },
+      {
+        "title": "Finpuss med AI-strategier",
+        "text": "Generer flere AI-planer etter hvert som forståelsen og behovene dine utvikler seg."
+      }
+    ]
+  },
+  "tokensTeaser": {
+    "title": "Tokens og direkte betaling.",
+    "subtitle": "Velg det som passer best: tokenpakker, valgfrie påfyllinger eller direkte betaling for kurs.",
+    "items": [
+      {
+        "title": "Tokenpakker",
+        "text": "Kjøp forhåndsdefinerte tokenpakker og bruk dem på alle Cur Nova-produkter."
+      },
+      {
+        "title": "Valgfri påfylling",
+        "text": "Legg til et hvilket som helst beløp på saldoen og bruk tokens etter behov."
+      },
+      {
+        "title": "Direkte betaling for kurs",
+        "text": "Betal for ferdige kurs i EUR, GBP eller USD i kassen."
+      }
+    ],
+    "ctaPricing": "Se alle priser og tokens"
+  },
+  "tokenPacks": {
+    "title": "Tokenpakker og valgfri påfylling.",
+    "subtitle": "Start i det små eller fyll på en saldo – tokens kan brukes på alle Cur Novas kurs og AI-strategier.",
+    "tokens": "tokens",
+    "mostPopular": "Mest populær",
+    "packs": [
+      {
+        "id": "focused-start",
+        "name": "Focused Start",
+        "subtitle": "De første kursene og AI-planene.",
+        "tokens": 4386,
+        "description": "enkel startpakke.",
+        "benefits": [
+          "Passer godt til å starte med ett kurs eller noen få AI-strategier.",
+          "Hold det lite mens du prøver ut Cur Novas arbeidsflyt."
+        ],
+        "cta": "Kjøp startpakke"
+      },
+      {
+        "id": "structured-growth",
+        "name": "Structured Growth",
+        "subtitle": "Den mest populære saldoen.",
+        "tokens": 17544,
+        "description": "bedre pris per token.",
+        "benefits": [
+          "God plass til flere kurs og AI-strategier.",
+          "Passer godt hvis du vil utforske mer enn ett marked."
+        ],
+        "cta": "Kjøp vekstpakke"
+      },
+      {
+        "id": "discipline-pro",
+        "name": "Discipline Pro",
+        "subtitle": "For langsiktige elever.",
+        "tokens": 30702,
+        "description": "best verdi per token.",
+        "benefits": [
+          "For systematiske studier på tvers av nivåer og markeder.",
+          "Gir rom for fremtidige AI-strategier og tilpasset innhold."
+        ],
+        "cta": "Kjøp Pro-pakke"
+      }
+    ],
+    "customTopUp": {
+      "title": "Valgfri påfylling",
+      "subtitle": "Velg et hvilket som helst beløp, så konverterer vi det til tokens.",
+      "amountLabel": "Beløp",
+      "minAmount": "Minimum 0,01 i valutaen som er valgt i toppmenyen. Ingen maksgrense – større påfyllinger konverteres ganske enkelt til tokens.",
+      "cta": "Forhåndsvis påfylling i tokens"
+    }
+  },
+  "glossaryResources": {
+    "glossary": {
+      "title": "Ordliste",
+      "subtitle": "Tydelige forklaringer av sentrale begreper innen Forex, krypto og binære opsjoner – uten sjargong.",
+      "items": [
+        {
+          "term": "Giring (leverage)",
+          "definition": "Hvor stor eksponering du kontrollerer per enhet kapital."
+        },
+        {
+          "term": "Drawdown",
+          "definition": "Fallet fra toppunkt til bunnpunkt for kontoen din."
+        },
+        {
+          "term": "Risiko per handel",
+          "definition": "Andelen av kapitalen du setter på spill i én idé."
+        }
+      ],
+      "cta": "Åpne hele ordlisten"
+    },
+    "resources": {
+      "title": "Ressurser",
+      "subtitle": "Korte praktiske guider du kan lese på nett – ingen nedlasting nødvendig.",
+      "items": [
+        {
+          "label": "Sjekkliste for risikostyring",
+          "definition": "En steg-for-steg-liste du går gjennom før hver handel."
+        },
+        {
+          "label": "Grunnleggende posisjonsstørrelse",
+          "definition": "En enkel struktur for å beregne lotstørrelse ut fra risiko."
+        }
+      ],
+      "cta": "Se alle ressurser"
+    }
+  },
+  "riskNotice": {
+    "title": "Høyrisikomarkeder krever høy bevissthet.",
+    "body": "Handel med Forex, krypto og binære opsjoner er svært spekulativt og kan føre til betydelig eller fullstendig tap av kapital. Cur Nova tilbyr kun opplæring. Vi forvalter ikke midler, utfører ikke handler og gir ikke finansiell rådgivning.",
+    "cta": "Les hele risiko- og ansvarsfraskrivelsen"
+  },
+  "faq": {
+    "title": "Ofte stilte spørsmål",
+    "subtitle": "Viktige punkter om hva Cur Nova er – og hva det ikke er.",
+    "noQuestionsMatch": "Ingen spørsmål samsvarer med filtrene dine 🤔",
+    "tryAdjusting": "Prøv å endre kategori eller søkeord, eller utforsk våre",
+    "pricing": "priser",
+    "and": "og",
+    "guides": "guider.",
+    "items": [
+      {
+        "id": "what-is-cur-nova",
+        "category": "general",
+        "question": "Hva er Cur Nova?",
+        "answer": "Cur Nova er en ren opplæringsplattform som tilbyr strukturerte kurs for markedene for Forex, krypto og binære opsjoner. Vi leverer PDF-kurs, bestillinger av tilpassede kurs og AI-genererte handelsstrategier. Vi gir ikke finansiell rådgivning eller handelssignaler, og vi forvalter ikke midler."
+      },
+      {
+        "id": "how-tokens-work",
+        "category": "payments",
+        "question": "Hvordan fungerer tokens?",
+        "answer": "Tokens er kreditter som brukes til å få tilgang til Cur Nova-produkter. 1,00 GBP tilsvarer 100 tokens. Du kan kjøpe tokenpakker, gjøre valgfrie påfyllinger eller betale direkte for kurs. Tokens utløper ikke og kan brukes på alle produkter."
+      },
+      {
+        "id": "what-in-courses",
+        "category": "general",
+        "question": "Hva er inkludert i kursene?",
+        "answer": "Hvert kurs leveres som en strukturert PDF med tydelige moduler som dekker sentrale begreper, strategier og risikostyring. Kursene er organisert etter marked (Forex, krypto, binære) og nivå (nybegynner, middels, avansert)."
+      },
+      {
+        "id": "can-cancel",
+        "category": "payments",
+        "question": "Kan jeg kansellere en bestilling?",
+        "answer": "For ferdige kurs kan du kansellere før betalingen er behandlet. For bestillinger av tilpassede kurs er kansellering mulig innen 24 timer etter innsending. Når et kurs er generert eller levert, er tokens brukt og kan ikke refunderes med mindre det har oppstått en teknisk feil hos oss."
+      },
+      {
+        "id": "refund-policy",
+        "category": "payments",
+        "question": "Hva er refusjonspolicyen deres?",
+        "answer": "Refusjon er tilgjengelig ved dobbeltkjøp, tekniske feil eller uautoriserte belastninger. Vi gir ikke refusjon på grunn av subjektiv misnøye med kursinnholdet. Kontakt support med betalings-ID og detaljer for vurdering. Vi svarer innen 2 virkedager."
+      },
+      {
+        "id": "need-account",
+        "category": "account",
+        "question": "Trenger jeg en konto?",
+        "answer": "Ja, du trenger en konto for å kjøpe kurs, følge med på token-saldoen, få tilgang til kjøpte PDF-er og bestille tilpassede kurs. Du kan registrere deg med e-post eller bruke Google for rask registrering."
+      },
+      {
+        "id": "financial-advice",
+        "category": "general",
+        "question": "Gir Cur Nova finansiell rådgivning?",
+        "answer": "Nei. Cur Nova tilbyr kun opplæring. Vi tilbyr ikke finansiell rådgivning, handelssignaler, investeringsanbefalinger eller fondsforvaltning. Alt innhold er ment for opplæring. Handel innebærer betydelig risiko for tap."
+      },
+      {
+        "id": "access-course",
+        "category": "account",
+        "question": "Hvordan får jeg tilgang til kurset jeg har kjøpt?",
+        "answer": "Etter kjøpet mottar du en e-post med en nedlastingslenke til PDF-kurset ditt. Du finner også alle kjøpte kurs i dashbordet på kontoen din. PDF-ene kan lastes ned når som helst etter kjøpet."
+      }
+    ]
+  },
+  "footerCta": {
+    "title": "Start med ett kurs eller én enkelt AI-plan.",
+    "subtitle": "Ingen signaler. Ingen løfter. Bare strukturert opplæring for Forex-, krypto- og binærmarkedene.",
+    "ctaPrimary": "Utforsk kurs",
+    "ctaSecondary": "Bestill tilpasset kurs"
+  },
+  "landing": {
+    "stats": {
+      "markets": "Markeder",
+      "courses": "Kurs",
+      "strategies": "Strategier",
+      "currencies": "Valutaer"
+    },
+    "mockup": {
+      "learningDashboard": "Læringsdashbord",
+      "courseProgress": "Kursfremdrift",
+      "forexFoundations": "Forex-grunnlag",
+      "forexMeta": "Nybegynner · 12 moduler",
+      "aiStrategy": "AI-strategi",
+      "aiMeta": "Generert · Klar",
+      "tokenBalance": "Token-saldo",
+      "aiPowered": "AI-drevet"
+    },
+    "proof": [
+      {
+        "value": "Forex · Krypto · Binære",
+        "label": "Markeder som dekkes"
+      },
+      {
+        "value": "PDF + tilpasset",
+        "label": "Kursformater"
+      },
+      {
+        "value": "AI-generert",
+        "label": "Strategidokumenter"
+      },
+      {
+        "value": "Tokenbasert",
+        "label": "Fleksibel tilgang"
+      }
+    ],
+    "goals": {
+      "badge": "Velg ditt løp",
+      "recommended": "Anbefalt løp",
+      "items": [
+        {
+          "label": "Jeg er helt ny",
+          "path": "Kursbibliotek for nybegynnere",
+          "desc": "Start med strukturerte PDF-kurs som dekker det grunnleggende i Forex, krypto eller binære opsjoner. Hver modul bygger på den forrige.",
+          "products": [
+            "PDF-kurs for nybegynnere",
+            "Grunnleggende risikostyring",
+            "Mal for handelsjournal"
+          ],
+          "cta": "Utforsk kurs for nybegynnere"
+        },
+        {
+          "label": "Jeg forstår det grunnleggende",
+          "path": "Bygger for tilpassede kurs",
+          "desc": "Bestill et skreddersydd PDF-kurs fra en profesjonell trader. Del erfaringsnivå, innskuddsstørrelse og mål for å få personlig tilpasset innhold.",
+          "products": [
+            "Tilpasset PDF-kurs",
+            "Strategier på middels nivå",
+            "Guide til posisjonsstørrelse"
+          ],
+          "cta": "Bestill tilpasset kurs"
+        },
+        {
+          "label": "Jeg trenger bedre risikostyring",
+          "path": "Verktøy for risiko og disiplin",
+          "desc": "Få tilgang til praktiske maler og opplæringsressurser som handler om å styre risiko, sette grenser og bygge handelsdisiplin.",
+          "products": [
+            "Sjekkliste for risikostyring",
+            "Handelsjournal",
+            "Mal for ukentlig gjennomgang"
+          ],
+          "cta": "Utforsk risikoverktøy"
+        },
+        {
+          "label": "Jeg vil ha en strukturert strategi",
+          "path": "AI-strategibygger",
+          "desc": "Generer en strukturert handelsplan med logikk for inn- og utgang og en risikosjekkliste. Velg marked, tidsramme og risikoparametere.",
+          "products": [
+            "AI-strategi-PDF",
+            "Logikk for inn- og utgang",
+            "Risikosjekkliste"
+          ],
+          "cta": "Åpne AI-strategibyggeren"
+        }
+      ]
+    },
+    "roadmap": {
+      "badge": "Læringsplan",
+      "steps": [
+        {
+          "title": "Velg marked og ferdighetsnivå",
+          "desc": "Velg mellom Forex, krypto eller binære opsjoner. Velg nybegynner, middels eller avansert etter hva du kan i dag."
+        },
+        {
+          "title": "Få et strukturert læringsløp",
+          "desc": "Få en tydelig rekkefølge av kurs og ressurser tilpasset markedet og nivået du har valgt. Ingen gjetting, ikke noe tilfeldig innhold."
+        },
+        {
+          "title": "Studer kurs og fullfør moduler",
+          "desc": "Jobb deg gjennom strukturerte PDF-kurs i ditt eget tempo. Hver modul dekker teori, eksempler og praktiske rammeverk."
+        },
+        {
+          "title": "Generer eller finpuss en strategi",
+          "desc": "Bruk AI-strategibyggeren til å lage strukturerte handelsplaner, eller bestill en tilpasset PDF fra en profesjonell trader."
+        },
+        {
+          "title": "Følg fremdriften i dashbordet",
+          "desc": "Få tilgang til kjøpte kurs, følg med på token-saldoen, last ned PDF-er og se alle transaksjoner i ditt personlige dashbord."
+        }
+      ]
+    },
+    "platform": {
+      "badge": "Plattformen",
+      "title": "Et sammenhengende opplæringssystem, ikke en innholdsdump.",
+      "subtitle": "Alle produkter samles i ett dashbord. Kurs, tilpassede PDF-er, AI-strategier, tokens og kvitteringer – alt på ett sted.",
+      "marketByLevel": "{market}-kurs etter nivå",
+      "browseLibrary": "Utforsk biblioteket",
+      "capabilities": [
+        {
+          "title": "Kursbibliotek",
+          "desc": "Strukturerte PDF-kurs om Forex, krypto og binære opsjoner – organisert etter marked og nivå."
+        },
+        {
+          "title": "Bygger for tilpassede kurs",
+          "desc": "Bestill et personlig PDF-kurs laget av en profesjonell trader basert på dine mål og din erfaring."
+        },
+        {
+          "title": "AI-strategigenerator",
+          "desc": "Generer strukturerte handelsplaner med logikk for inn- og utgang og risikoparametere på sekunder."
+        },
+        {
+          "title": "Token-lommebok",
+          "desc": "Én saldo for alle produkter. Kjøp pakker eller fyll på valgfrie beløp."
+        },
+        {
+          "title": "Personlig dashbord",
+          "desc": "Nedlastinger, kvitteringer, genereringsstatus – alt på ett sted."
+        },
+        {
+          "title": "Læringsfremdrift",
+          "desc": "Følg med på fullførte kurs og AI-strategier på tvers av alle markeder."
+        },
+        {
+          "title": "Opplæringsressurser",
+          "desc": "Sjekklister og guider på nett for daglig handelsdisiplin."
+        }
+      ]
+    },
+    "library": {
+      "badge": "Kursbibliotek",
+      "noMatch": "Ingen kurs samsvarer med valgt filter."
+    },
+    "configurator": {
+      "badge": "Produktkonfigurator",
+      "customCourse": "Tilpasset kurs",
+      "aiStrategy": "AI-strategi",
+      "market": "Marked",
+      "level": "Nivå",
+      "ctaCustom": "Bestill tilpasset kurs",
+      "ctaAi": "Bygg AI-strategi",
+      "aiDoc": "AI-strategidokument",
+      "customDoc": "Tilpasset kurs-PDF",
+      "aiDocSub": "Generert på sekunder",
+      "customDocSub": "Laget av en profesjonell trader",
+      "aiTags": [
+        "Strategi-PDF",
+        "Logikk for inn- og utgang",
+        "Risikosjekkliste"
+      ],
+      "customTags": [
+        "Strukturert PDF-kurs",
+        "Tilpassede moduler",
+        "Levering på e-post"
+      ]
+    },
+    "dashboardPreview": {
+      "badge": "Dashbord",
+      "title": "Alt på ett sted.",
+      "subtitle": "Få tilgang til kjøpte kurs, følg med på token-saldoen, last ned PDF-er, følg statusen for AI-strategier og se alle transaksjoner i ditt personlige dashbord.",
+      "features": [
+        "PDF-nedlastinger",
+        "Token-saldo",
+        "Transaksjonshistorikk",
+        "Status for AI-generering"
+      ],
+      "cta": "Gå til dashbordet",
+      "mockTitle": "Personlig dashbord",
+      "courses": "Kurs",
+      "strategies": "Strategier",
+      "tokens": "Tokens",
+      "mockCourses": [
+        "Forex-grunnlag",
+        "Kryptovolatilitet"
+      ],
+      "pdfReady": "PDF klar"
+    },
+    "tokens": {
+      "badge": "Tokenøkonomi",
+      "topUp": "Fyll på saldo"
+    },
+    "lab": {
+      "badge": "Markedslab for opplæring",
+      "contextTitle": "Opplæringskontekst",
+      "terms": [
+        {
+          "term": "Volatilitet",
+          "desc": "Hvor mye kursen beveger seg i en gitt periode"
+        },
+        {
+          "term": "Risiko",
+          "desc": "Muligheten for tap av kapital i en posisjon"
+        },
+        {
+          "term": "Trend",
+          "desc": "Den generelle retningen på kursbevegelsen"
+        }
+      ]
+    },
+    "knowledge": {
+      "badge": "Kunnskapssenter",
+      "title": "Ordliste, ressurser og læremateriell.",
+      "searchPlaceholder": "Søk etter begreper og ressurser...",
+      "searchLabel": "Søk i kunnskapssenteret",
+      "popularTerms": "Populære begreper",
+      "readOnline": "Les på nett"
+    },
+    "faq": {
+      "badge": "Kunnskapssenter",
+      "title": "Vanlige spørsmål om plattformen",
+      "subtitle": "Viktige punkter om hva plattformen er – og hva den ikke er.",
+      "categories": {
+        "all": "Alle spørsmål",
+        "general": "Generelt",
+        "payments": "Betaling",
+        "account": "Konto"
+      },
+      "viewAll": "Se alle spørsmål"
+    },
+    "risk": {
+      "badge": "Risikobevissthet",
+      "showLess": "Vis mindre",
+      "readFull": "Les hele advarselen",
+      "terms": "Vilkår for bruk"
+    },
+    "finalCta": {
+      "badge": "Start forsiktig",
+      "pathTitle": "Ditt læringsløp",
+      "steps": [
+        "Velg marked",
+        "Studer kurs",
+        "Bygg strategi",
+        "Følg fremdriften"
+      ]
+    }
+  }
+}

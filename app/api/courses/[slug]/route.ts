@@ -4,6 +4,8 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { demoCourses } from '@/src/data/courses'
 import { resolvePublicUrl } from '@/lib/storage'
+import { localizeCourse } from '@/lib/course-i18n'
+import { getServerLocale } from '@/i18n/server'
 
 // Helper function to capitalize first letter
 function capitalizeFirst(str: string): string {
@@ -73,7 +75,7 @@ export async function GET(
     }
 
     const courseWithAssets = {
-      ...course,
+      ...localizeCourse(course, getServerLocale()),
       cover_image: resolvePublicUrl(course.cover_image) ?? course.cover_image ?? null,
     }
 

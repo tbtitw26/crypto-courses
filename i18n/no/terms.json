@@ -1,0 +1,404 @@
+{
+  "breadcrumb": {
+    "home": "Hjem",
+    "terms": "Vilkår og betingelser"
+  },
+  "hero": {
+    "title": "Fullstendige vilkår for bruk av Cur Novas kurs, tokens og AI-funksjoner.",
+    "subtitle": "Les disse vilkårene nøye før du kjøper tokenpakker, ferdige kurs, tilpassede kurs eller resultater fra AI-strategibyggeren. De oppsummerer reglene som holder vår rene opplæringsplattform trygg, regelverksmessig og åpen for alle kunder.",
+    "meta": [
+      {
+        "label": "Gjelder fra",
+        "value": "6. desember 2025"
+      },
+      {
+        "label": "Operatør",
+        "value": "CUR NOVA LTD (17240836)"
+      },
+      {
+        "label": "Jurisdiksjon",
+        "value": "England og Wales"
+      }
+    ],
+    "badges": {
+      "regions": "Hovedregioner: EU · Storbritannia",
+      "payments": "Betaling: EUR · GBP · USD",
+      "highRisk": "Høy risiko · Ingen garantier"
+    },
+    "summaryCard": {
+      "title": "Kort oversikt (ikke juridisk sammendrag)",
+      "subtitle": "Bruk de fullstendige avsnittene nedenfor for bindende ordlyd – denne boksen fremhever bare intensjonen i retningslinjene våre.",
+      "items": [
+        "Cur Nova er en ren opplæringsplattform: ingen handel, ingen signaler, ingen forvaltede kontoer.",
+        "Tokens er forhåndsbetalte kreditter for digitalt innhold; de er ikke penger eller verdipapirer.",
+        "Alle kurs, PDF-er og AI-resultater er eksempler. Du er selv ansvarlig for hver handel.",
+        "Vi overholder britisk forbrukerlovgivning og EUs forbrukerregler, men digitale leveranser har begrenset refusjonsrett."
+      ],
+      "note": "Trenger du en signert kopi eller en tilpasset klausul? Kontakt info@cur-nova.com, så gir vi deg ordlyd tilpasset din jurisdiksjon."
+    }
+  },
+  "toc": {
+    "title": "På denne siden",
+    "items": [
+      { "label": "Innledning", "anchor": "introduction" },
+      { "label": "Definisjoner", "anchor": "definitions" },
+      { "label": "Krav og kontoregistrering", "anchor": "eligibility" },
+      { "label": "Tjenestenes art og avtalestruktur", "anchor": "nature" },
+      { "label": "Tjenestenes omfang og digitalt innhold", "anchor": "scope" },
+      { "label": "Kundedata og ansvar", "anchor": "client-data" },
+      { "label": "Akseptabel bruk", "anchor": "acceptable-use" },
+      { "label": "Tokens, priser og betaling", "anchor": "tokens" },
+      { "label": "Kansellering, refusjon og tilbakeføring", "anchor": "refunds" },
+      { "label": "Immaterielle rettigheter", "anchor": "ip" },
+      { "label": "Konfidensialitet", "anchor": "confidentiality" },
+      { "label": "Tredjepartsplattformer og lenker", "anchor": "third-parties" },
+      { "label": "Garantier og ansvarsfraskrivelser", "anchor": "warranties" },
+      { "label": "Ansvarsbegrensning", "anchor": "liability" },
+      { "label": "Skadesløsholdelse", "anchor": "indemnity" },
+      { "label": "Personvern", "anchor": "privacy" },
+      { "label": "Suspensjon og oppsigelse", "anchor": "termination" },
+      { "label": "Endringer i tjenesten eller vilkårene", "anchor": "changes" },
+      { "label": "Lovvalg og verneting", "anchor": "law" },
+      { "label": "Diverse", "anchor": "misc" },
+      { "label": "Kontaktopplysninger", "anchor": "contact" }
+    ],
+    "reminder": {
+      "label": "Påminnelse",
+      "text": "Denne norske oversettelsen er kun ment som hjelp. Den engelske versjonen av vilkårene er den eneste juridisk bindende versjonen."
+    }
+  },
+  "sections": [
+    {
+      "id": "introduction",
+      "number": "1",
+      "title": "Innledning",
+      "content": [
+        { "type": "paragraph", "text": "1.1. Disse vilkårene og betingelsene («vilkårene») regulerer din tilgang til og bruk av cur-nova.com, tilhørende dashbord, applikasjoner og nedlastbart innhold («tjenesten»), som drives av CUR NOVA LTD (organisasjonsnummer 17240836, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia) («Cur Nova», «vi», «oss»)." },
+        { "type": "paragraph", "text": "1.2. Ved å opprette en konto, kjøpe tokens, bestille ferdige eller tilpassede kurs eller bruke en AI-drevet funksjon, godtar du disse vilkårene. Hvis du ikke er enig, må du ikke bruke tjenesten." },
+        {
+          "type": "list",
+          "items": [
+            "1.3. Cur Nova tilbyr kun opplæring. Vi utfører ikke handler, oppbevarer ikke kundemidler, opererer ikke som megler/børs og tilbyr ikke kapitalforvaltning eller personlig finansiell rådgivning.",
+            "1.4. Henvisninger til strategier, signaler eller systemer er kun illustrasjoner. Ingenting i tjenesten er en anbefaling om å handle eller å bruke en bestemt megler eller et bestemt instrument.",
+            "1.5. Tjenesten og alle tilhørende dokumenter leveres på engelsk. Norske oversettelser av grensesnittet og retningslinjene er kun ment som hjelp."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "definitions",
+      "number": "2",
+      "title": "Definisjoner",
+      "content": [
+        {
+          "type": "definition",
+          "items": [
+            { "term": "Konto", "description": "Profilen din i tjenesten, opprettet med e-post/passord eller støttet enkel pålogging (f.eks. Google)." },
+            { "term": "Tokens / lommebok", "description": "Forhåndsbetalte, ikke-overførbare digitale kreditter som brukes til å få tilgang til betalte funksjoner. Ikke kontanter, e-penger eller verdipapirer." },
+            { "term": "Ferdige kurs", "description": "PDF-kurs med fast pris." },
+            { "term": "Tilpassede kurs", "description": "Skreddersydde PDF-er utarbeidet av erfarne mentorer basert på skjemaene du fyller ut, vanligvis betalt med tokens." },
+            { "term": "AI-strategiresultater", "description": "Strukturerte strategier, diagrammer og forsidebilder generert med AI og levert digitalt." },
+            { "term": "Bibliotek / dashbord", "description": "Innlogget område (f.eks. /dashboard) som viser saldo, kjøp, fakturaer og innstillinger." },
+            { "term": "Kundedata", "description": "Informasjon du sender inn (erfaring, risikovilje, mål, notater, opplastinger osv.)." },
+            { "term": "Ordre / transaksjon", "description": "Et bekreftet kjøp av tokens, kurs eller andre betalte funksjoner i tjenesten." },
+            { "term": "Tredjepartsplattformer", "description": "Eksterne systemer som betalingsleverandører, meglere, AI-leverandører eller hostingtjenester." },
+            { "term": "Juridiske retningslinjer", "description": "Personvernerklæring, retningslinjer for informasjonskapsler, refusjonspolicy, risiko- og ansvarsfraskrivelse og eventuelle lenkede retningslinjer." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eligibility",
+      "number": "3",
+      "title": "Krav og kontoregistrering",
+      "content": [
+        { "type": "paragraph", "text": "3.1. Du må være over 18 år eller ha gyldig fullmakt til å binde organisasjonen din." },
+        { "type": "paragraph", "text": "3.2. Oppgi korrekte og oppdaterte opplysninger ved registrering, og hold dem oppdatert. Vi kan bekrefte opplysninger som eierskap til e-postadressen." },
+        { "type": "paragraph", "text": "3.3. Du er ansvarlig for sikkerheten til påloggingsopplysningene dine og må varsle info@cur-nova.com ved mistanke om misbruk." },
+        { "type": "paragraph", "text": "3.4. Vi kan avslå, suspendere eller avslutte kontoer av hensyn til regelverk, svindel, sanksjoner eller drift." }
+      ]
+    },
+    {
+      "id": "nature",
+      "number": "4",
+      "title": "Tjenestenes art og avtalestruktur",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "4.1. Vi tilbyr selvbetjente opplæringsverktøy: ferdige kurs, tilpassede kurs, resultater fra AI-strategibyggeren, risikoressurser og ordlister.",
+            "4.2. En avtale inngås når du oppretter en konto, og hver gang du kjøper tokens eller kurs, eller løser inn tokens for tilpassede resultater/AI-resultater.",
+            "4.3. Ingenting vi publiserer er investeringsrådgivning, handelsanbefalinger eller garantier for avkastning.",
+            "4.4. Vi er ikke din agent, megler, kapitalforvalter eller depotmottaker og åpner eller overvåker ikke handelskontoer.",
+            "4.5. Du er selv ansvarlig for å overholde lover, meglerregler og retningslinjer for eventuelle tredjepartsplattformer."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "number": "5",
+      "title": "Tjenestenes omfang og digitalt innhold",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "5.1. Tjenestene kan omfatte tospråklige kurs, tokenpakker, tilpassede kurs, AI-resultater, maler for risiko/journal, dashbord, faktureringshistorikk og kalkulatorer.",
+            "5.2. Tilpassede resultater og AI-resultater bygger på kundedataene dine; ufullstendige opplysninger gir mindre relevant innhold. Ny generering krever normalt ekstra tokens.",
+            "5.3. Vi tilstreber sammenhengende, strukturert innhold, men kan ikke garantere feilfrihet eller markedsnøyaktighet i sanntid.",
+            "5.4. Levering skjer når filene er tilgjengelige i dashbordet ditt og/eller via lenker på e-post. Problemer med e-post gjør ikke leveringen ugyldig hvis kopien finnes i dashbordet.",
+            "5.5. Vi kan oppdatere eller fjerne produkter i katalogen for fremtidige kunder uten at det påvirker innhold du allerede eier."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "client-data",
+      "number": "6",
+      "title": "Kundedata og ansvar",
+      "content": [
+        { "type": "paragraph", "text": "6.1. Du garanterer at du har rett til å sende inn kundedataene, og at de er lovlige og korrekte." },
+        {
+          "type": "list",
+          "items": [
+            "6.2. Kundedata må ikke krenke tredjeparts rettigheter, inneholde unødvendige sensitive opplysninger eller inneholde skadevare.",
+            "6.3. Ta sikkerhetskopi av notater eller journaler du vil beholde; vi garanterer ikke langtidsarkivering.",
+            "6.4. Du gir Cur Nova en verdensomspennende, vederlagsfri lisens til å bruke kundedata for å levere tjenesten, forbedre den (i aggregert form) og overholde loven, som beskrevet i personvernerklæringen."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acceptable-use",
+      "number": "7",
+      "title": "Akseptabel bruk",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "7.1. Ikke forsøk å få tilgang til andres kontoer, omgå sikkerhetstiltak, hente ut store datamengder eller kjøre automatisering som belaster tjenesten.",
+            "7.2. Ikke fremme ulovlig aktivitet eller markedsmisbruk, og ikke videreselg innholdet vårt som om det var personlig finansiell rådgivning.",
+            "7.3. Vi kan begrense, suspendere eller avslutte kontoer når vi mistenker misbruk, juridisk risiko eller trusler mot systemets integritet."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tokens",
+      "number": "8",
+      "title": "Tokens, priser og betaling",
+      "content": [
+        { "type": "note", "text": "Godkjente betalingsmåter: Visa og Mastercard. Flere betalingsmåter kan legges til med varsel." },
+        {
+          "type": "list",
+          "items": [
+            "8.1. Tokenpakker (f.eks. Focused Start, Structured Growth, Discipline Pro) og valgfrie påfyllinger viser tydelig pris og antall inkluderte tokens.",
+            "8.2. GBP er basisvaluta. Priser kan vises i EUR, USD eller andre valutaer; endelig belastning og valutahåndtering vises i kassen.",
+            "8.3. Lommeboksaldo er forskuddsbetaling for digitale funksjoner og er ikke bank- eller e-pengekontoer.",
+            "8.4. Ved å oppgi et kort bekrefter du at du har rett til å bruke det; betalinger behandles av pålitelige betalingsleverandører, og vi lagrer ikke fullstendige kortnumre/CVV.",
+            "8.5. Tokens trekkes når du betaler med tokens, bestiller tilpassede kurs, kjører AI-strategier eller bruker en funksjon som er priset i tokens.",
+            "8.6. Noen ferdige kurs kan kjøpes direkte med kort; alternativet vises før kassen.",
+            "8.7. Tokens har for øyeblikket ingen utløpsdato, men vi kan innføre regler om rimelig bruk eller inaktivitet med varsel.",
+            "8.8. Vi utsteder elektroniske kvitteringer/fakturaer for tokenkjøp og kortbestillinger; du finner dem i dashbordet og på e-post."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "refunds",
+      "number": "9",
+      "title": "Kansellering, refusjon og tilbakeføring",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "9.1. Fordi produktene er digitale, kan leveringen starte umiddelbart; den lovfestede angreretten kan være begrenset når leveringen har startet.",
+            "9.2. Tokenpåfyllinger refunderes som hovedregel ikke, med unntak av tydelige tekniske feil eller dobbeltbetalinger som skyldes oss.",
+            "9.3. Hvis du ikke får tilgang til kjøpt innhold, kontakt oss raskt. Vi kan etter eget skjønn levere filen på nytt, kreditere tokens eller refundere.",
+            "9.4. Uberettigede tilbakeføringer (chargebacks) kan føre til suspensjon, fjerning av tokens og krav om dekning av undersøkelseskostnader der loven tillater det."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ip",
+      "number": "10",
+      "title": "Immaterielle rettigheter",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "10.1. Tjenesten (programvare, grensesnitt, merkevare, maler, videoer) tilhører Cur Nova eller våre lisensgivere.",
+            "10.2. Vi gir deg en personlig, ikke-overførbar lisens til å bruke leverte PDF-er og AI-resultater til egen læring eller intern opplæring.",
+            "10.3. Du må ikke videreselge, distribuere offentlig, hevde opphavsrett eller fjerne eiendomsmerknader uten skriftlig samtykke.",
+            "10.4. Eierskapet til våre immaterielle rettigheter forblir hos oss. Vi gjør ikke krav på eierskap til kundedataene dine utover lisensen i punkt 6.4."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "confidentiality",
+      "number": "11",
+      "title": "Konfidensialitet",
+      "content": [
+        { "type": "paragraph", "text": "11.1. Hver part kan motta konfidensiell informasjon. Den skal kun brukes til å levere/bruke tjenesten og beskyttes med rimelig aktsomhet." },
+        { "type": "paragraph", "text": "11.2. Konfidensialitet gjelder ikke der informasjonen er offentlig, allerede kjent, utviklet uavhengig eller må utleveres etter lov (med varsel der det er lovlig)." }
+      ]
+    },
+    {
+      "id": "third-parties",
+      "number": "12",
+      "title": "Tredjepartsplattformer og lenker",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "12.1. Tjenesten er avhengig av tredjeparter (betaling, hosting, AI, video, analyse). Deres egne vilkår gjelder.",
+            "12.2. Vi er ikke ansvarlige for tilgjengeligheten eller ytelsen til tredjepartsplattformer og går ikke god for dem.",
+            "12.3. Du er ansvarlig for at integrasjoner (f.eks. Google-pålogging, innebygde videoer) er lovlige for din bruk."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "warranties",
+      "number": "13",
+      "title": "Garantier og ansvarsfraskrivelser",
+      "content": [
+        { "type": "paragraph", "text": "13.1. Vi garanterer at vi har rett til å drive tjenesten og at vi vil utvise rimelig dyktighet og aktsomhet." },
+        {
+          "type": "list",
+          "items": [
+            "13.2. Utover dette leveres tjenesten og alt digitalt innhold «som det er», uten underforståtte garantier om salgbarhet, egnethet, at den ikke krenker rettigheter eller at driften er uavbrutt.",
+            "13.3. Vi garanterer ikke fullstendighet, nøyaktighet, lønnsomhet, tilgjengelighet, feilfri drift eller bedre handelsresultater.",
+            "13.4. Handel med Forex, krypto og binære opsjoner har høy risiko og kan føre til fullstendig tap. Tidligere eller hypotetiske resultater er ikke pålitelige.",
+            "13.5. Ytterligere opplysninger finnes i risiko- og ansvarsfraskrivelsen, som er en del av disse vilkårene."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "liability",
+      "number": "14",
+      "title": "Ansvarsbegrensning",
+      "accent": "warning",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "14.1. Ingenting begrenser ansvar for død/personskade forårsaket av uaktsomhet, svindel eller andre forpliktelser som ikke kan fraskrives.",
+            "14.2. Med forbehold om punkt 14.1 er vårt samlede ansvar i en løpende 12-månedersperiode begrenset til de samlede gebyrene/tokens du har betalt til oss i den perioden.",
+            "14.3. Vi er ikke ansvarlige for tapt fortjeneste, inntekt, goodwill eller data, indirekte tap eller følgetap, handelstap eller handlinger fra tredjepartsplattformer."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "indemnity",
+      "number": "15",
+      "title": "Skadesløsholdelse",
+      "content": [
+        { "type": "paragraph", "text": "Du samtykker i å holde Cur Nova og våre ansatte skadesløse for krav, skader, kostnader og advokatutgifter som følge av din ulovlige bruk av tjenesten, brudd på disse vilkårene eller krenkelser forårsaket av kundedataene dine eller misbruk av innholdet vårt." }
+      ]
+    },
+    {
+      "id": "privacy",
+      "number": "16",
+      "title": "Personvern",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "16.1. Vi er behandlingsansvarlig etter UK GDPR/Data Protection Act 2018. Se personvernerklæringen for detaljer.",
+            "16.2. Vi deler nødvendige personopplysninger med pålitelige databehandlere (betaling, hosting, analyse, AI-leverandører, e-post) utelukkende for å drive og sikre tjenesten.",
+            "16.3. Internasjonale overføringer bruker lovlige garantier som standard personvernbestemmelser.",
+            "16.4. Du kan utøve rettighetene dine til innsyn, retting, sletting, begrensning, dataportabilitet eller innsigelse via info@cur-nova.com."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "termination",
+      "number": "17",
+      "title": "Suspensjon og oppsigelse",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "17.1. Vi kan suspendere/avslutte tilgangen hvis du bryter disse vilkårene, begår svindel, utgjør en sikkerhetsrisiko, eller hvis det kreves av lov, myndigheter eller partnere.",
+            "17.2. Du kan når som helst avslutte kontoen din, men avslutning gir ikke automatisk refusjon av ubrukte tokens (se punkt 9).",
+            "17.3. Ved avslutning opphører retten din til å bruke tjenesten; vi oppbevarer opplysninger som kreves for skatt, svindelforebygging og regeletterlevelse."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "changes",
+      "number": "18",
+      "title": "Endringer i tjenesten eller vilkårene",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "18.1. Vi kan oppdatere, endre eller avvikle funksjoner, priser eller katalogprodukter for å gjenspeile driftsmessige eller juridiske endringer.",
+            "18.2. Vesentlige endringer i disse vilkårene eller retningslinjene varsles via e-post, varsler i dashbordet eller meldinger på nettstedet.",
+            "18.3. Fortsatt bruk etter at endringene har trådt i kraft, innebærer aksept. Hvis du ikke er enig, slutt å bruke tjenesten og be om at kontoen avsluttes."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "law",
+      "number": "19",
+      "title": "Lovvalg og verneting",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "19.1. Disse vilkårene er underlagt lovgivningen i England og Wales.",
+            "19.2. Domstolene i England og Wales har eksklusiv jurisdiksjon, men forbrukere bosatt i Skottland, Nord-Irland eller EU-land kan benytte lokale domstoler der det er tillatt."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "misc",
+      "number": "20",
+      "title": "Diverse",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "20.1. Hvis en bestemmelse ikke kan håndheves, skal den håndheves i størst mulig lovlig utstrekning; resten forblir gyldig.",
+            "20.2. Forsinkelse med å utøve rettigheter innebærer ikke at de frafalles.",
+            "20.3. Du kan ikke overdra forpliktelser uten vårt samtykke; vi kan overdra til tilknyttede selskaper eller som del av selskapstransaksjoner.",
+            "20.4. Disse vilkårene sammen med de refererte juridiske retningslinjene utgjør hele avtalen om tjenesten."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "number": "21",
+      "title": "Kontaktopplysninger",
+      "content": [
+        {
+          "type": "list",
+          "items": [
+            "Cur Nova — drevet av CUR NOVA LTD",
+            "Registrert kontor: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia",
+            "Organisasjonsnummer: 17240836",
+            "E-post: info@cur-nova.com",
+            "Tlf.: {phone}"
+          ]
+        }
+      ]
+    }
+  ],
+  "cta": {
+    "title": "Å bruke Cur Nova betyr å godta disse prinsippene.",
+    "subtitle": "Hvis du trenger et tilpasset tillegg, en regulatorisk gjennomgang eller en signert PDF, gi oss beskjed før du kjøper. Ellers gjelder dette dokumentet for hver tokenpåfylling og nedlasting.",
+    "backToHome": "Tilbake til forsiden",
+    "viewCourses": "Se kurs"
+  }
+}

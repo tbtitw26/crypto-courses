@@ -38,6 +38,7 @@ import { CourseCard } from '@/components/CourseCard'
 import FAQAccordion from '@/components/FAQAccordion'
 import { TokenPacks } from '@/components/TokenPacks'
 import { TradingViewWidget } from '@/components/TradingViewWidget'
+import { useValueLabel } from '@/hooks/use-value-label'
 
 interface FeaturedCourse {
   level: string
@@ -88,134 +89,38 @@ function StaggerItem({ children, index, className = '' }: { children: React.Reac
   )
 }
 
-const goalOptions = [
-  {
-    label: "I'm completely new",
-    icon: GraduationCap,
-    path: 'Beginner Course Library',
-    desc: 'Start with structured PDF courses that cover fundamentals of Forex, Crypto or Binary options. Each module builds on the previous one.',
-    products: ['Beginner PDF Courses', 'Risk Management Basics', 'Trading Journal Template'],
-    cta: 'Browse beginner courses',
-    href: '/courses',
-  },
-  {
-    label: 'I understand the basics',
-    icon: TrendingUp,
-    path: 'Custom Course Builder',
-    desc: 'Request a tailored PDF course from a professional trader. Share your experience level, deposit size and goals to receive personalised content.',
-    products: ['Custom PDF Course', 'Intermediate Strategies', 'Position Sizing Guide'],
-    cta: 'Request custom course',
-    href: '/learn?tab=custom',
-  },
-  {
-    label: 'I need better risk management',
-    icon: Shield,
-    path: 'Risk & Discipline Tools',
-    desc: 'Access practical templates and educational resources focused entirely on managing risk, setting limits and building trading discipline.',
-    products: ['Risk Management Checklist', 'Trade Journal', 'Weekly Review Template'],
-    cta: 'Explore risk tools',
-    href: '/learn/risk-management',
-  },
-  {
-    label: 'I want a structured strategy',
-    icon: BrainCircuit,
-    path: 'AI Strategy Builder',
-    desc: 'Generate a structured trading plan with entry/exit logic and a risk checklist. Choose your market, timeframe and risk parameters.',
-    products: ['AI Strategy PDF', 'Entry/Exit Logic', 'Risk Checklist'],
-    cta: 'Open AI Strategy Builder',
-    href: '/learn?tab=ai',
-  },
+const goalConfig = [
+  { icon: GraduationCap, href: '/courses' },
+  { icon: TrendingUp, href: '/learn?tab=custom' },
+  { icon: Shield, href: '/learn/risk-management' },
+  { icon: BrainCircuit, href: '/learn?tab=ai' },
 ]
 
-const roadmapSteps = [
-  {
-    title: 'Choose your market and skill level',
-    desc: 'Select from Forex, Crypto or Binary options. Pick beginner, intermediate or advanced to match your current knowledge.',
-    icon: Target,
-  },
-  {
-    title: 'Receive a structured learning path',
-    desc: 'Get a clear sequence of courses and resources tailored to your chosen market and level. No guesswork, no random content.',
-    icon: Layers,
-  },
-  {
-    title: 'Study courses and complete modules',
-    desc: 'Work through structured PDF courses at your own pace. Each module covers theory, examples and practical frameworks.',
-    icon: BookOpen,
-  },
-  {
-    title: 'Generate or refine a strategy',
-    desc: 'Use the AI Strategy Builder to create structured trading plans, or request a custom PDF from a professional trader.',
-    icon: BrainCircuit,
-  },
-  {
-    title: 'Track progress inside the dashboard',
-    desc: 'Access purchased courses, monitor token balance, download PDFs and review all transactions from your personal dashboard.',
-    icon: BarChart3,
-  },
-]
+const roadmapIcons = [Target, Layers, BookOpen, BrainCircuit, BarChart3]
 
 const bentoCapabilities = [
-  {
-    key: 'library',
-    title: 'Course Library',
-    desc: 'Structured PDF courses for Forex, Crypto and Binary options — organised by market and level.',
-    icon: Library,
-    size: 'large' as const,
-    accent: 'brand',
-  },
-  {
-    key: 'custom',
-    title: 'Custom Course Builder',
-    desc: 'Request a personalised PDF course built by a professional trader based on your goals and experience.',
-    icon: PenLine,
-    size: 'medium' as const,
-    accent: 'brand',
-  },
-  {
-    key: 'ai',
-    title: 'AI Strategy Generator',
-    desc: 'Generate structured trading plans with entry/exit logic and risk parameters in seconds.',
-    icon: Cpu,
-    size: 'medium' as const,
-    accent: 'ai',
-  },
-  {
-    key: 'wallet',
-    title: 'Token Wallet',
-    desc: 'One balance across all products. Buy packs or top up custom amounts.',
-    icon: WalletCards,
-    size: 'small' as const,
-    accent: 'gold',
-  },
-  {
-    key: 'dashboard',
-    title: 'Personal Dashboard',
-    desc: 'Downloads, receipts, generation status — everything in one place.',
-    icon: Download,
-    size: 'small' as const,
-    accent: 'brand',
-  },
-  {
-    key: 'progress',
-    title: 'Learning Progress',
-    desc: 'Track completed courses and AI strategies across all markets.',
-    icon: BarChart3,
-    size: 'small' as const,
-    accent: 'brand',
-  },
-  {
-    key: 'resources',
-    title: 'Educational Resources',
-    desc: 'Online checklists and guides for daily trading discipline.',
-    icon: FileText,
-    size: 'small' as const,
-    accent: 'brand',
-  },
+  { key: 'library', icon: Library, size: 'large' as const, accent: 'brand' },
+  { key: 'custom', icon: PenLine, size: 'medium' as const, accent: 'brand' },
+  { key: 'ai', icon: Cpu, size: 'medium' as const, accent: 'ai' },
+  { key: 'wallet', icon: WalletCards, size: 'small' as const, accent: 'gold' },
+  { key: 'dashboard', icon: Download, size: 'small' as const, accent: 'brand' },
+  { key: 'progress', icon: BarChart3, size: 'small' as const, accent: 'brand' },
+  { key: 'resources', icon: FileText, size: 'small' as const, accent: 'brand' },
 ]
 
 export default function HomePage() {
   const t = useTranslations('home')
+  const tl = useTranslations('home.landing')
+  const valueLabel = useValueLabel()
+  const goalOptions = (
+    tl.raw('goals.items') as Array<{ label: string; path: string; desc: string; products: string[]; cta: string }>
+  ).map((goal, i) => ({ ...goal, ...goalConfig[i] }))
+  const roadmapSteps = (tl.raw('roadmap.steps') as Array<{ title: string; desc: string }>).map((step, i) => ({
+    ...step,
+    icon: roadmapIcons[i],
+  }))
+  const capabilityTexts = tl.raw('platform.capabilities') as Array<{ title: string; desc: string }>
+  const capabilities = bentoCapabilities.map((cap, i) => ({ ...cap, ...capabilityTexts[i] }))
   const [featuredCourses, setFeaturedCourses] = useState<FeaturedCourse[]>([])
   const [isLoadingCourses, setIsLoadingCourses] = useState(true)
   const [selectedGoal, setSelectedGoal] = useState(0)
@@ -397,10 +302,10 @@ export default function HomePage() {
                   className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-surface-200 pt-6"
                 >
                   {[
-                    { value: '3', label: 'Markets', icon: Globe },
-                    { value: 'PDF', label: 'Courses', icon: FileText },
-                    { value: 'AI', label: 'Strategies', icon: Sparkles },
-                    { value: '4', label: 'Currencies', icon: Coins },
+                    { value: '3', label: tl('stats.markets'), icon: Globe },
+                    { value: 'PDF', label: tl('stats.courses'), icon: FileText },
+                    { value: 'AI', label: tl('stats.strategies'), icon: Sparkles },
+                    { value: '4', label: tl('stats.currencies'), icon: Coins },
                   ].map(({ value, label, icon: Icon }) => (
                     <div key={label} className="flex items-center gap-2">
                       <Icon className="h-4 w-4 text-brand-600" />
@@ -424,7 +329,7 @@ export default function HomePage() {
                       <div className="flex items-center gap-2">
                         <div className="h-2.5 w-2.5 rounded-full bg-brand-400" />
                         <span className="text-xs font-semibold text-surface-300">
-                          Learning Dashboard
+                          {tl('mockup.learningDashboard')}
                         </span>
                       </div>
                       <div className="flex gap-1">
@@ -437,7 +342,7 @@ export default function HomePage() {
                     <div className="space-y-3">
                       <div className="rounded-lg border border-white/8 bg-white/5 p-4">
                         <div className="mb-2 flex items-center justify-between">
-                          <span className="text-xs font-medium text-surface-400">Course Progress</span>
+                          <span className="text-xs font-medium text-surface-400">{tl('mockup.courseProgress')}</span>
                           <span className="text-xs font-bold text-brand-400">67%</span>
                         </div>
                         <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
@@ -453,13 +358,13 @@ export default function HomePage() {
                       <div className="grid grid-cols-2 gap-3">
                         <div className="rounded-lg border border-white/8 bg-white/5 p-3">
                           <FileText className="mb-2 h-4 w-4 text-brand-400" />
-                          <p className="text-xs font-medium text-white">Forex Foundations</p>
-                          <p className="mt-0.5 text-[10px] text-surface-500">Beginner · 12 modules</p>
+                          <p className="text-xs font-medium text-white">{tl('mockup.forexFoundations')}</p>
+                          <p className="mt-0.5 text-[10px] text-surface-500">{tl('mockup.forexMeta')}</p>
                         </div>
                         <div className="rounded-lg border border-white/8 bg-white/5 p-3">
                           <BrainCircuit className="mb-2 h-4 w-4 text-ai" />
-                          <p className="text-xs font-medium text-white">AI Strategy</p>
-                          <p className="mt-0.5 text-[10px] text-surface-500">Generated · Ready</p>
+                          <p className="text-xs font-medium text-white">{tl('mockup.aiStrategy')}</p>
+                          <p className="mt-0.5 text-[10px] text-surface-500">{tl('mockup.aiMeta')}</p>
                         </div>
                       </div>
 
@@ -467,7 +372,7 @@ export default function HomePage() {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <Coins className="h-4 w-4 text-gold-400" />
-                            <span className="text-xs font-medium text-white">Token Balance</span>
+                            <span className="text-xs font-medium text-white">{tl('mockup.tokenBalance')}</span>
                           </div>
                           <span className="text-sm font-bold text-gold-400">4,200</span>
                         </div>
@@ -495,7 +400,7 @@ export default function HomePage() {
                 >
                   <div className="flex items-center gap-2">
                     <Sparkles className="h-4 w-4 text-ai" />
-                    <span className="text-xs font-semibold text-text-main">AI-Powered</span>
+                    <span className="text-xs font-semibold text-text-main">{tl('mockup.aiPowered')}</span>
                   </div>
                 </motion.div>
               </motion.div>
@@ -507,12 +412,7 @@ export default function HomePage() {
         <div className="border-y border-surface-200 bg-white">
           <Inner className="py-8 lg:py-10">
             <div className="flex flex-wrap items-center justify-between gap-6 lg:gap-10">
-              {[
-                { value: 'Forex · Crypto · Binary', label: 'Markets covered' },
-                { value: 'PDF + Custom', label: 'Course formats' },
-                { value: 'AI-Generated', label: 'Strategy documents' },
-                { value: 'Token-Based', label: 'Flexible access' },
-              ].map(({ value, label }, i) => (
+              {(tl.raw('proof') as Array<{ value: string; label: string }>).map(({ value, label }, i) => (
                 <StaggerItem key={label} index={i} className="flex-1 min-w-[140px]">
                   <p className="font-heading text-lg font-semibold text-text-main sm:text-xl">
                     {value}
@@ -533,7 +433,7 @@ export default function HomePage() {
             <div className="mb-12 max-w-2xl">
               <div className="badge-brand mb-4">
                 <Target className="h-3.5 w-3.5" />
-                Choose your path
+                {tl('goals.badge')}
               </div>
               <h2 className="section-heading">{t('paths.title')}</h2>
               <p className="section-subheading mt-4">{t('paths.subtitle')}</p>
@@ -592,7 +492,7 @@ export default function HomePage() {
                   className="rounded-2xl border border-surface-200 bg-white p-8 shadow-card"
                 >
                   <p className="mb-2 text-xs font-bold uppercase tracking-widest text-brand-700">
-                    Recommended path
+                    {tl('goals.recommended')}
                   </p>
                   <h3 className="font-heading text-xl font-semibold text-text-main sm:text-2xl">
                     {currentGoal.path}
@@ -629,7 +529,7 @@ export default function HomePage() {
             <Inner>
               <div className="mb-16 max-w-2xl">
                 <p className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-400">
-                  Learning roadmap
+                  {tl('roadmap.badge')}
                 </p>
                 <h2 className="font-heading text-3xl font-semibold leading-tight text-white sm:text-4xl">
                   {t('howItWorks.title')}
@@ -695,13 +595,13 @@ export default function HomePage() {
           <Inner>
             <div className="mb-12 max-w-2xl">
               <p className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-700">
-                The platform
+                {tl('platform.badge')}
               </p>
               <h2 className="section-heading">
-                A connected education system, not a content dump.
+                {tl('platform.title')}
               </h2>
               <p className="section-subheading mt-4">
-                Every product feeds into a single dashboard. Courses, custom PDFs, AI strategies, tokens and receipts — all in one place.
+                {tl('platform.subtitle')}
               </p>
             </div>
 
@@ -717,10 +617,10 @@ export default function HomePage() {
                     <Library className="h-7 w-7" />
                   </div>
                   <h3 className="font-heading text-xl font-semibold text-text-main">
-                    {bentoCapabilities[0].title}
+                    {capabilities[0].title}
                   </h3>
                   <p className="mt-3 text-base leading-7 text-text-secondary">
-                    {bentoCapabilities[0].desc}
+                    {capabilities[0].desc}
                   </p>
                   <div className="mt-6 grid gap-2">
                     {['Forex', 'Crypto', 'Binary'].map((market) => (
@@ -729,7 +629,7 @@ export default function HomePage() {
                         className="flex items-center gap-2 rounded-lg bg-surface-0 px-3 py-2 text-sm text-text-secondary"
                       >
                         <div className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-                        {market} courses by level
+                        {tl('platform.marketByLevel', { market: valueLabel(market) })}
                       </div>
                     ))}
                   </div>
@@ -737,13 +637,13 @@ export default function HomePage() {
                     href="/courses"
                     className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 transition hover:text-brand-800"
                   >
-                    Browse library <ArrowRight className="h-4 w-4" />
+                    {tl('platform.browseLibrary')} <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </StaggerItem>
 
               {/* Medium cards */}
-              {bentoCapabilities.slice(1, 3).map((cap, i) => {
+              {capabilities.slice(1, 3).map((cap, i) => {
                 const Icon = cap.icon
                 return (
                   <StaggerItem
@@ -783,7 +683,7 @@ export default function HomePage() {
               })}
 
               {/* Small cards */}
-              {bentoCapabilities.slice(3).map((cap, i) => {
+              {capabilities.slice(3).map((cap, i) => {
                 const Icon = cap.icon
                 return (
                   <StaggerItem
@@ -819,7 +719,7 @@ export default function HomePage() {
                 <div className="max-w-2xl">
                   <div className="badge-brand mb-4">
                     <BookOpen className="h-3.5 w-3.5" />
-                    Course library
+                    {tl('library.badge')}
                   </div>
                   <h2 className="section-heading">{t('featuredCourses.title')}</h2>
                   <p className="section-subheading mt-4">{t('featuredCourses.subtitle')}</p>
@@ -843,7 +743,7 @@ export default function HomePage() {
                         : 'bg-surface-100 text-text-secondary hover:bg-surface-200 hover:text-text-main'
                     }`}
                   >
-                    {filter}
+                    {valueLabel(filter)}
                   </button>
                 ))}
               </div>
@@ -870,7 +770,7 @@ export default function HomePage() {
                 </div>
               ) : (
                 <div className="rounded-2xl border border-dashed border-surface-300 bg-white px-6 py-12 text-center text-sm text-text-muted">
-                  No courses match the selected filter.
+                  {tl('library.noMatch')}
                 </div>
               )}
             </Inner>
@@ -883,7 +783,7 @@ export default function HomePage() {
             <div className="mb-12 max-w-2xl">
               <div className="badge-brand mb-4">
                 <Sparkles className="h-3.5 w-3.5" />
-                Product configurator
+                {tl('configurator.badge')}
               </div>
               <h2 className="section-heading">{t('howItWorks.title')}</h2>
               <p className="section-subheading mt-3">{t('howItWorks.subtitle')}</p>
@@ -903,7 +803,7 @@ export default function HomePage() {
                         : 'text-text-muted hover:text-text-main'
                     }`}
                   >
-                    Custom Course
+                    {tl('configurator.customCourse')}
                   </button>
                   <button
                     type="button"
@@ -914,7 +814,7 @@ export default function HomePage() {
                         : 'text-text-muted hover:text-text-main'
                     }`}
                   >
-                    AI Strategy
+                    {tl('configurator.aiStrategy')}
                   </button>
                 </div>
 
@@ -922,7 +822,7 @@ export default function HomePage() {
                 <div className="space-y-4">
                   <div>
                     <label className="mb-2 block text-xs font-bold uppercase tracking-widest text-text-muted">
-                      Market
+                      {tl('configurator.market')}
                     </label>
                     <div className="flex gap-2">
                       {['Forex', 'Crypto', 'Binary'].map((m) => (
@@ -936,14 +836,14 @@ export default function HomePage() {
                               : 'border border-surface-200 bg-white text-text-secondary hover:border-surface-300'
                           }`}
                         >
-                          {m}
+                          {valueLabel(m)}
                         </button>
                       ))}
                     </div>
                   </div>
                   <div>
                     <label className="mb-2 block text-xs font-bold uppercase tracking-widest text-text-muted">
-                      Level
+                      {tl('configurator.level')}
                     </label>
                     <div className="flex gap-2">
                       {['Beginner', 'Intermediate', 'Advanced'].map((l) => (
@@ -957,7 +857,7 @@ export default function HomePage() {
                               : 'border border-surface-200 bg-white text-text-secondary hover:border-surface-300'
                           }`}
                         >
-                          {l}
+                          {valueLabel(l)}
                         </button>
                       ))}
                     </div>
@@ -968,7 +868,7 @@ export default function HomePage() {
                   href={configuratorTab === 'custom' ? '/learn?tab=custom' : '/learn?tab=ai'}
                   className="btn-primary w-full justify-center"
                 >
-                  {configuratorTab === 'custom' ? 'Request custom course' : 'Build AI strategy'}
+                  {configuratorTab === 'custom' ? tl('configurator.ctaCustom') : tl('configurator.ctaAi')}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -1008,14 +908,14 @@ export default function HomePage() {
                           configuratorTab === 'ai' ? 'text-white' : 'text-text-main'
                         }`}
                       >
-                        {configuratorTab === 'ai' ? 'AI Strategy Document' : 'Custom Course PDF'}
+                        {configuratorTab === 'ai' ? tl('configurator.aiDoc') : tl('configurator.customDoc')}
                       </h3>
                       <p
                         className={`text-sm ${
                           configuratorTab === 'ai' ? 'text-surface-400' : 'text-text-secondary'
                         }`}
                       >
-                        {configuratorTab === 'ai' ? 'Generated in seconds' : 'Built by a professional trader'}
+                        {configuratorTab === 'ai' ? tl('configurator.aiDocSub') : tl('configurator.customDocSub')}
                       </p>
                     </div>
                   </div>
@@ -1040,7 +940,7 @@ export default function HomePage() {
                             configuratorTab === 'ai' ? 'text-surface-300' : 'text-text-muted'
                           }`}
                         >
-                          {selectedMarket} · {selectedLevel}
+                          {valueLabel(selectedMarket)} · {valueLabel(selectedLevel)}
                         </span>
                       </div>
                       <div
@@ -1081,8 +981,8 @@ export default function HomePage() {
                   {/* Output tags */}
                   <div className="mt-5 flex flex-wrap gap-2">
                     {(configuratorTab === 'ai'
-                      ? ['Strategy PDF', 'Entry/exit logic', 'Risk checklist']
-                      : ['Structured PDF course', 'Custom modules', 'Email delivery']
+                      ? (tl.raw('configurator.aiTags') as string[])
+                      : (tl.raw('configurator.customTags') as string[])
                     ).map((tag) => (
                       <span
                         key={tag}
@@ -1110,21 +1010,19 @@ export default function HomePage() {
                 <div>
                   <div className="badge-neutral mb-4">
                     <BarChart3 className="h-3.5 w-3.5" />
-                    Dashboard
+                    {tl('dashboardPreview.badge')}
                   </div>
                   <h2 className="font-heading text-3xl font-semibold leading-tight text-text-main sm:text-4xl">
-                    Everything in one place.
+                    {tl('dashboardPreview.title')}
                   </h2>
                   <p className="mt-4 text-base leading-7 text-text-secondary">
-                    Access purchased courses, track token balance, download PDFs, monitor AI strategy generation status, and review all transactions from your personal dashboard.
+                    {tl('dashboardPreview.subtitle')}
                   </p>
                   <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                    {[
-                      { icon: Download, label: 'PDF Downloads' },
-                      { icon: Coins, label: 'Token Balance' },
-                      { icon: FileText, label: 'Transaction History' },
-                      { icon: BrainCircuit, label: 'AI Generation Status' },
-                    ].map(({ icon: Icon, label }) => (
+                    {(tl.raw('dashboardPreview.features') as string[]).map((label, i) => ({
+                      icon: [Download, Coins, FileText, BrainCircuit][i],
+                      label,
+                    })).map(({ icon: Icon, label }) => (
                       <div
                         key={label}
                         className="flex items-center gap-3 rounded-xl border border-surface-200 bg-white px-4 py-3"
@@ -1138,7 +1036,7 @@ export default function HomePage() {
                     href="/dashboard"
                     className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-700 transition hover:text-brand-800"
                   >
-                    Go to dashboard <ArrowRight className="h-4 w-4" />
+                    {tl('dashboardPreview.cta')} <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
 
@@ -1148,14 +1046,14 @@ export default function HomePage() {
                     <div className="mb-4 flex items-center gap-2">
                       <div className="h-2.5 w-2.5 rounded-full bg-brand-400" />
                       <span className="text-xs font-semibold text-surface-400">
-                        Personal Dashboard
+                        {tl('dashboardPreview.mockTitle')}
                       </span>
                     </div>
                     <div className="grid grid-cols-3 gap-3">
                       {[
-                        { label: 'Courses', value: '3', color: 'text-brand-400' },
-                        { label: 'Strategies', value: '2', color: 'text-ai' },
-                        { label: 'Tokens', value: '4.2k', color: 'text-gold-400' },
+                        { label: tl('dashboardPreview.courses'), value: '3', color: 'text-brand-400' },
+                        { label: tl('dashboardPreview.strategies'), value: '2', color: 'text-ai' },
+                        { label: tl('dashboardPreview.tokens'), value: '4.2k', color: 'text-gold-400' },
                       ].map(({ label, value, color }) => (
                         <div
                           key={label}
@@ -1167,14 +1065,14 @@ export default function HomePage() {
                       ))}
                     </div>
                     <div className="mt-3 space-y-2">
-                      {['Forex Foundations', 'Crypto Volatility'].map((name) => (
+                      {(tl.raw('dashboardPreview.mockCourses') as string[]).map((name) => (
                         <div
                           key={name}
                           className="flex items-center justify-between rounded-lg border border-white/8 bg-white/5 px-3 py-2"
                         >
                           <span className="text-xs text-surface-300">{name}</span>
                           <span className="rounded bg-brand-500/20 px-2 py-0.5 text-[10px] font-semibold text-brand-400">
-                            PDF Ready
+                            {tl('dashboardPreview.pdfReady')}
                           </span>
                         </div>
                       ))}
@@ -1194,7 +1092,7 @@ export default function HomePage() {
                 <div>
                   <div className="badge-gold mb-4">
                     <Coins className="h-3.5 w-3.5" />
-                    Token economy
+                    {tl('tokens.badge')}
                   </div>
                   <h2 className="font-heading text-3xl font-semibold leading-tight text-white sm:text-4xl">
                     {t('tokensTeaser.title')}
@@ -1214,7 +1112,7 @@ export default function HomePage() {
                       href="/top-up"
                       className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/8 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/15"
                     >
-                      Top up balance
+                      {tl('tokens.topUp')}
                       <ChevronRight className="h-4 w-4" />
                     </Link>
                   </div>
@@ -1260,7 +1158,7 @@ export default function HomePage() {
             <div className="mb-10 max-w-2xl">
               <div className="badge-neutral mb-4">
                 <LineChart className="h-3.5 w-3.5" />
-                Market education lab
+                {tl('lab.badge')}
               </div>
               <h2 className="font-heading text-2xl font-semibold text-text-main sm:text-3xl">
                 {t('marketSnapshot.title')}
@@ -1277,14 +1175,10 @@ export default function HomePage() {
               <div className="space-y-5 lg:sticky lg:top-24">
                 <div className="rounded-xl border border-surface-200 bg-white p-6">
                   <h3 className="mb-3 font-heading text-base font-semibold text-text-main">
-                    Educational context
+                    {tl('lab.contextTitle')}
                   </h3>
                   <div className="space-y-3">
-                    {[
-                      { term: 'Volatility', desc: 'How much price moves over a given period' },
-                      { term: 'Risk', desc: 'Potential for capital loss in any position' },
-                      { term: 'Trend', desc: 'The general direction of price movement' },
-                    ].map(({ term, desc }) => (
+                    {(tl.raw('lab.terms') as Array<{ term: string; desc: string }>).map(({ term, desc }) => (
                       <div key={term}>
                         <p className="text-sm font-semibold text-text-main">{term}</p>
                         <p className="text-sm text-text-secondary">{desc}</p>
@@ -1317,10 +1211,10 @@ export default function HomePage() {
           <Inner>
             <div className="mb-10 max-w-2xl">
               <p className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-700">
-                Knowledge hub
+                {tl('knowledge.badge')}
               </p>
               <h2 className="section-heading">
-                Glossary, resources and learning materials.
+                {tl('knowledge.title')}
               </h2>
             </div>
 
@@ -1331,16 +1225,16 @@ export default function HomePage() {
                 type="text"
                 value={knowledgeSearch}
                 onChange={(e) => setKnowledgeSearch(e.target.value)}
-                placeholder="Search terms and resources..."
+                placeholder={tl('knowledge.searchPlaceholder')}
                 className="input-field pl-11"
-                aria-label="Search knowledge hub"
+                aria-label={tl('knowledge.searchLabel')}
               />
             </div>
 
             {/* Popular terms */}
             <div className="mb-8">
               <p className="mb-3 text-xs font-bold uppercase tracking-widest text-text-muted">
-                Popular terms
+                {tl('knowledge.popularTerms')}
               </p>
               <div className="flex flex-wrap gap-2">
                 {glossaryItems.map((item) => (
@@ -1412,7 +1306,7 @@ export default function HomePage() {
                           {item.definition}
                         </p>
                         <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand-700">
-                          Read online
+                          {tl('knowledge.readOnline')}
                           <ArrowRight className="h-3 w-3 transition group-hover:translate-x-0.5" />
                         </span>
                       </div>
@@ -1439,21 +1333,21 @@ export default function HomePage() {
                 {/* Left — sticky header + categories */}
                 <div className="lg:sticky lg:top-24 lg:self-start">
                   <p className="mb-2 text-xs font-bold uppercase tracking-widest text-brand-700">
-                    Knowledge center
+                    {tl('faq.badge')}
                   </p>
                   <h2 className="text-2xl font-semibold text-text-main sm:text-3xl">
-                    Common questions about the platform
+                    {tl('faq.title')}
                   </h2>
                   <p className="mt-3 text-base text-text-secondary">
-                    Key points about what the platform is — and what it is not.
+                    {tl('faq.subtitle')}
                   </p>
 
                   <div className="mt-6 space-y-1.5">
                     {[
-                      { key: 'all', label: 'All questions' },
-                      { key: 'general', label: 'General' },
-                      { key: 'payments', label: 'Payments' },
-                      { key: 'account', label: 'Account' },
+                      { key: 'all', label: tl('faq.categories.all') },
+                      { key: 'general', label: tl('faq.categories.general') },
+                      { key: 'payments', label: tl('faq.categories.payments') },
+                      { key: 'account', label: tl('faq.categories.account') },
                     ].map((cat) => (
                       <button
                         key={cat.key}
@@ -1471,7 +1365,7 @@ export default function HomePage() {
                   </div>
 
                   <Link href="/faq" className="btn-secondary mt-6">
-                    View all FAQs
+                    {tl('faq.viewAll')}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
@@ -1494,7 +1388,7 @@ export default function HomePage() {
                   <AlertTriangle className="h-5 w-5 text-gold-400" />
                 </span>
                 <p className="text-xs font-bold uppercase tracking-widest text-gold-400">
-                  Risk awareness
+                  {tl('risk.badge')}
                 </p>
               </div>
 
@@ -1511,7 +1405,7 @@ export default function HomePage() {
                     onClick={() => setRiskExpanded((v) => !v)}
                     className="text-sm font-medium text-surface-300 transition hover:text-white"
                   >
-                    {riskExpanded ? 'Show less' : 'Read full warning'}
+                    {riskExpanded ? tl('risk.showLess') : tl('risk.readFull')}
                   </button>
                   <span className="text-surface-600">·</span>
                   <Link
@@ -1525,7 +1419,7 @@ export default function HomePage() {
                     href="/terms"
                     className="text-sm font-medium text-surface-400 transition hover:text-white"
                   >
-                    Terms of service
+                    {tl('risk.terms')}
                   </Link>
                 </div>
               </div>
@@ -1551,7 +1445,7 @@ export default function HomePage() {
                 {/* Left — Message */}
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-brand-400">
-                    Start carefully
+                    {tl('finalCta.badge')}
                   </p>
                   <h2 className="mt-3 font-heading text-2xl font-semibold text-white sm:text-3xl lg:text-4xl">
                     {t('footerCta.title')}
@@ -1578,16 +1472,16 @@ export default function HomePage() {
                   <div className="mb-3 flex items-center gap-2">
                     <div className="h-2 w-2 rounded-full bg-brand-400" />
                     <span className="text-xs font-semibold text-surface-400">
-                      Your learning path
+                      {tl('finalCta.pathTitle')}
                     </span>
                   </div>
                   <div className="space-y-2">
                     {[
-                      { step: '01', label: 'Choose market', done: true },
-                      { step: '02', label: 'Study courses', done: true },
-                      { step: '03', label: 'Build strategy', done: false },
-                      { step: '04', label: 'Track progress', done: false },
-                    ].map(({ step, label, done }) => (
+                      { step: '01', done: true },
+                      { step: '02', done: true },
+                      { step: '03', done: false },
+                      { step: '04', done: false },
+                    ].map((item, i) => ({ ...item, label: (tl.raw('finalCta.steps') as string[])[i] })).map(({ step, label, done }) => (
                       <div
                         key={step}
                         className="flex items-center gap-3 rounded-lg border border-white/8 bg-white/5 px-4 py-2.5"

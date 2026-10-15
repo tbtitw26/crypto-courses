@@ -56,6 +56,12 @@
       "chart": "Advanced Real-Time Chart",
       "overview": "Market Overview",
       "stock": "Stock Market"
+    },
+    "tabsExtra": {
+      "indices": "Indices",
+      "futures": "Futures",
+      "bonds": "Bonds",
+      "forex": "Forex"
     }
   },
   "featuredCourses": {
@@ -63,8 +69,17 @@
     "subtitle": "Choose by market and level. Each course is a structured PDF you can study at your own pace.",
     "ctaViewAll": "View all courses",
     "filtersLabel": "Filters",
-    "levelFilters": ["All", "Beginner", "Intermediate", "Advanced"],
-    "marketFilters": ["Forex", "Crypto", "Binary"]
+    "levelFilters": [
+      "All",
+      "Beginner",
+      "Intermediate",
+      "Advanced"
+    ],
+    "marketFilters": [
+      "Forex",
+      "Crypto",
+      "Binary"
+    ]
   },
   "testimonials": {
     "title": "What our students say",
@@ -292,6 +307,259 @@
     "subtitle": "No signals. No promises. Just structured education for Forex, Crypto and Binary markets.",
     "ctaPrimary": "Explore courses",
     "ctaSecondary": "Request custom course"
+  },
+  "landing": {
+    "stats": {
+      "markets": "Markets",
+      "courses": "Courses",
+      "strategies": "Strategies",
+      "currencies": "Currencies"
+    },
+    "mockup": {
+      "learningDashboard": "Learning Dashboard",
+      "courseProgress": "Course Progress",
+      "forexFoundations": "Forex Foundations",
+      "forexMeta": "Beginner · 12 modules",
+      "aiStrategy": "AI Strategy",
+      "aiMeta": "Generated · Ready",
+      "tokenBalance": "Token Balance",
+      "aiPowered": "AI-Powered"
+    },
+    "proof": [
+      {
+        "value": "Forex · Crypto · Binary",
+        "label": "Markets covered"
+      },
+      {
+        "value": "PDF + Custom",
+        "label": "Course formats"
+      },
+      {
+        "value": "AI-Generated",
+        "label": "Strategy documents"
+      },
+      {
+        "value": "Token-Based",
+        "label": "Flexible access"
+      }
+    ],
+    "goals": {
+      "badge": "Choose your path",
+      "recommended": "Recommended path",
+      "items": [
+        {
+          "label": "I'm completely new",
+          "path": "Beginner Course Library",
+          "desc": "Start with structured PDF courses that cover fundamentals of Forex, Crypto or Binary options. Each module builds on the previous one.",
+          "products": [
+            "Beginner PDF Courses",
+            "Risk Management Basics",
+            "Trading Journal Template"
+          ],
+          "cta": "Browse beginner courses"
+        },
+        {
+          "label": "I understand the basics",
+          "path": "Custom Course Builder",
+          "desc": "Request a tailored PDF course from a professional trader. Share your experience level, deposit size and goals to receive personalised content.",
+          "products": [
+            "Custom PDF Course",
+            "Intermediate Strategies",
+            "Position Sizing Guide"
+          ],
+          "cta": "Request custom course"
+        },
+        {
+          "label": "I need better risk management",
+          "path": "Risk & Discipline Tools",
+          "desc": "Access practical templates and educational resources focused entirely on managing risk, setting limits and building trading discipline.",
+          "products": [
+            "Risk Management Checklist",
+            "Trade Journal",
+            "Weekly Review Template"
+          ],
+          "cta": "Explore risk tools"
+        },
+        {
+          "label": "I want a structured strategy",
+          "path": "AI Strategy Builder",
+          "desc": "Generate a structured trading plan with entry/exit logic and a risk checklist. Choose your market, timeframe and risk parameters.",
+          "products": [
+            "AI Strategy PDF",
+            "Entry/Exit Logic",
+            "Risk Checklist"
+          ],
+          "cta": "Open AI Strategy Builder"
+        }
+      ]
+    },
+    "roadmap": {
+      "badge": "Learning roadmap",
+      "steps": [
+        {
+          "title": "Choose your market and skill level",
+          "desc": "Select from Forex, Crypto or Binary options. Pick beginner, intermediate or advanced to match your current knowledge."
+        },
+        {
+          "title": "Receive a structured learning path",
+          "desc": "Get a clear sequence of courses and resources tailored to your chosen market and level. No guesswork, no random content."
+        },
+        {
+          "title": "Study courses and complete modules",
+          "desc": "Work through structured PDF courses at your own pace. Each module covers theory, examples and practical frameworks."
+        },
+        {
+          "title": "Generate or refine a strategy",
+          "desc": "Use the AI Strategy Builder to create structured trading plans, or request a custom PDF from a professional trader."
+        },
+        {
+          "title": "Track progress inside the dashboard",
+          "desc": "Access purchased courses, monitor token balance, download PDFs and review all transactions from your personal dashboard."
+        }
+      ]
+    },
+    "platform": {
+      "badge": "The platform",
+      "title": "A connected education system, not a content dump.",
+      "subtitle": "Every product feeds into a single dashboard. Courses, custom PDFs, AI strategies, tokens and receipts — all in one place.",
+      "marketByLevel": "{market} courses by level",
+      "browseLibrary": "Browse library",
+      "capabilities": [
+        {
+          "title": "Course Library",
+          "desc": "Structured PDF courses for Forex, Crypto and Binary options — organised by market and level."
+        },
+        {
+          "title": "Custom Course Builder",
+          "desc": "Request a personalised PDF course built by a professional trader based on your goals and experience."
+        },
+        {
+          "title": "AI Strategy Generator",
+          "desc": "Generate structured trading plans with entry/exit logic and risk parameters in seconds."
+        },
+        {
+          "title": "Token Wallet",
+          "desc": "One balance across all products. Buy packs or top up custom amounts."
+        },
+        {
+          "title": "Personal Dashboard",
+          "desc": "Downloads, receipts, generation status — everything in one place."
+        },
+        {
+          "title": "Learning Progress",
+          "desc": "Track completed courses and AI strategies across all markets."
+        },
+        {
+          "title": "Educational Resources",
+          "desc": "Online checklists and guides for daily trading discipline."
+        }
+      ]
+    },
+    "library": {
+      "badge": "Course library",
+      "noMatch": "No courses match the selected filter."
+    },
+    "configurator": {
+      "badge": "Product configurator",
+      "customCourse": "Custom Course",
+      "aiStrategy": "AI Strategy",
+      "market": "Market",
+      "level": "Level",
+      "ctaCustom": "Request custom course",
+      "ctaAi": "Build AI strategy",
+      "aiDoc": "AI Strategy Document",
+      "customDoc": "Custom Course PDF",
+      "aiDocSub": "Generated in seconds",
+      "customDocSub": "Built by a professional trader",
+      "aiTags": [
+        "Strategy PDF",
+        "Entry/exit logic",
+        "Risk checklist"
+      ],
+      "customTags": [
+        "Structured PDF course",
+        "Custom modules",
+        "Email delivery"
+      ]
+    },
+    "dashboardPreview": {
+      "badge": "Dashboard",
+      "title": "Everything in one place.",
+      "subtitle": "Access purchased courses, track token balance, download PDFs, monitor AI strategy generation status, and review all transactions from your personal dashboard.",
+      "features": [
+        "PDF Downloads",
+        "Token Balance",
+        "Transaction History",
+        "AI Generation Status"
+      ],
+      "cta": "Go to dashboard",
+      "mockTitle": "Personal Dashboard",
+      "courses": "Courses",
+      "strategies": "Strategies",
+      "tokens": "Tokens",
+      "mockCourses": [
+        "Forex Foundations",
+        "Crypto Volatility"
+      ],
+      "pdfReady": "PDF Ready"
+    },
+    "tokens": {
+      "badge": "Token economy",
+      "topUp": "Top up balance"
+    },
+    "lab": {
+      "badge": "Market education lab",
+      "contextTitle": "Educational context",
+      "terms": [
+        {
+          "term": "Volatility",
+          "desc": "How much price moves over a given period"
+        },
+        {
+          "term": "Risk",
+          "desc": "Potential for capital loss in any position"
+        },
+        {
+          "term": "Trend",
+          "desc": "The general direction of price movement"
+        }
+      ]
+    },
+    "knowledge": {
+      "badge": "Knowledge hub",
+      "title": "Glossary, resources and learning materials.",
+      "searchPlaceholder": "Search terms and resources...",
+      "searchLabel": "Search knowledge hub",
+      "popularTerms": "Popular terms",
+      "readOnline": "Read online"
+    },
+    "faq": {
+      "badge": "Knowledge center",
+      "title": "Common questions about the platform",
+      "subtitle": "Key points about what the platform is — and what it is not.",
+      "categories": {
+        "all": "All questions",
+        "general": "General",
+        "payments": "Payments",
+        "account": "Account"
+      },
+      "viewAll": "View all FAQs"
+    },
+    "risk": {
+      "badge": "Risk awareness",
+      "showLess": "Show less",
+      "readFull": "Read full warning",
+      "terms": "Terms of service"
+    },
+    "finalCta": {
+      "badge": "Start carefully",
+      "pathTitle": "Your learning path",
+      "steps": [
+        "Choose market",
+        "Study courses",
+        "Build strategy",
+        "Track progress"
+      ]
+    }
   }
 }
-

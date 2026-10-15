@@ -57,7 +57,7 @@ export default function CartPage() {
 
         <section className="mx-auto max-w-page px-4 py-14 sm:px-6 lg:px-8">
           <p className="mb-6 text-center text-xs font-bold uppercase tracking-widest text-text-muted">
-            Start here
+            {t('extra.startHere')}
           </p>
           <div className="grid gap-5 sm:grid-cols-3">
             {[
@@ -65,8 +65,8 @@ export default function CartPage() {
                 icon: BookOpen,
                 color: 'border-brand-200 bg-brand-50',
                 iconColor: 'text-brand-700',
-                title: 'Browse courses',
-                desc: 'Ready-made structured PDFs for Forex, Crypto, and Binary options at every level.',
+                title: t('extra.browseTitle'),
+                desc: t('extra.browseDesc'),
                 href: '/courses',
                 cta: tEmpty('browseCourses'),
               },
@@ -74,19 +74,19 @@ export default function CartPage() {
                 icon: Coins,
                 color: 'border-gold-200 bg-gold-50',
                 iconColor: 'text-gold-600',
-                title: 'Load a token balance',
-                desc: 'Buy a token pack and use it across courses, custom PDFs, and AI strategies.',
+                title: t('extra.tokensTitle'),
+                desc: t('extra.tokensDesc'),
                 href: '/pricing',
-                cta: 'View token packs',
+                cta: t('extra.tokensCta'),
               },
               {
                 icon: Sparkles,
                 color: 'border-[#c7c9f5] bg-[#eef0ff]',
                 iconColor: 'text-ai',
-                title: 'Custom or AI content',
-                desc: 'Request a tailored course PDF or generate an AI trading strategy document.',
+                title: t('extra.customTitle'),
+                desc: t('extra.customDesc'),
                 href: '/learn?tab=custom',
-                cta: 'Get started',
+                cta: t('extra.customCta'),
               },
             ].map((path) => (
               <Link
@@ -127,12 +127,12 @@ export default function CartPage() {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h1 className="font-heading text-2xl font-semibold text-white sm:text-3xl">Order review</h1>
+              <h1 className="font-heading text-2xl font-semibold text-white sm:text-3xl">{t('extra.orderReview')}</h1>
               <p className="mt-1 text-sm text-surface-400">{t('subtitle')}</p>
             </div>
             <div className="flex items-center gap-2.5">
               <span className="rounded-lg border border-surface-700 bg-surface-800 px-3 py-1.5 text-xs font-semibold text-surface-200">
-                {items.length} {items.length === 1 ? 'item' : 'items'}
+                {items.length} {items.length === 1 ? t('extra.item') : t('extra.items')}
               </span>
               <span className="rounded-lg border border-brand-600/30 bg-brand-700/20 px-3 py-1.5 text-xs font-bold text-brand-300">
                 {formattedPrice}
@@ -212,8 +212,7 @@ export default function CartPage() {
 
               <div className="border-t border-surface-200 px-5 py-3">
                 <p className="text-xs leading-relaxed text-text-muted">
-                  All content is for educational purposes only. Tokens, courses and AI outputs do not
-                  constitute financial advice.
+                  {t('extra.disclaimer')}
                 </p>
               </div>
             </div>

@@ -3,11 +3,14 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { RiskManagementPage } from '@/components/RiskManagementPage'
-import enLearn from '@/i18n/en/learn.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: (enLearn as any).riskManagement?.hero?.title || 'Risk Management Foundations',
-  description: (enLearn as any).riskManagement?.hero?.subtitle || 'Learn the core concepts behind account-level risk, risk per trade and daily loss limits in high-risk markets.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('learn.riskManagement.hero.title'),
+    description: t('learn.riskManagement.hero.subtitle'),
+  }
 }
 
 function RiskManagementPageFallback() {

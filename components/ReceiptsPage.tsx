@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import { useValueLabel, useMetaLabel, useIntlLocale } from '@/hooks/use-value-label'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -35,6 +36,9 @@ interface ReceiptTransaction {
 
 export function ReceiptsPage() {
   const t = useTranslations('dashboard.receiptsPage')
+  const valueLabel = useValueLabel()
+  const metaLabel = useMetaLabel()
+  const intlLocale = useIntlLocale()
   const tDashboard = useTranslations('dashboard')
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -237,11 +241,11 @@ export function ReceiptsPage() {
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="rounded-full border border-surface-200 bg-surface-50 px-2 py-0.5 text-[10px] font-medium text-text-secondary">
-                            {tx.type}
+                            {valueLabel(tx.type)}
                           </span>
                           <span className="flex items-center gap-1 text-xs text-text-muted">
                             <Calendar className="h-3 w-3" />
-                            {new Date(tx.date).toLocaleDateString('en-US', {
+                            {new Date(tx.date).toLocaleDateString(intlLocale, {
                               month: 'short',
                               day: 'numeric',
                               year: 'numeric',
@@ -252,7 +256,7 @@ export function ReceiptsPage() {
                           )}
                         </div>
                         <p className="mt-0.5 truncate text-sm font-medium text-text-main">{tx.detail}</p>
-                        <p className="truncate text-xs text-text-muted">{tx.meta}</p>
+                        <p className="truncate text-xs text-text-muted">{metaLabel(tx.meta)}</p>
                         <div className="mt-1 flex items-center gap-4 text-xs text-text-secondary">
                           {tx.tokens !== 0 && (
                             <span>
@@ -282,7 +286,7 @@ export function ReceiptsPage() {
                         </button>
                       ) : (
                         <span className="block text-xs leading-relaxed text-text-muted sm:max-w-[160px] sm:text-right">
-                          Receipt becomes available after the provider confirms the payment.
+                          {t('extra.pendingReceipt')}
                         </span>
                       )}
                     </div>

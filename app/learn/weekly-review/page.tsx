@@ -3,11 +3,14 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { WeeklyReviewPage } from '@/components/WeeklyReviewPage'
-import enLearn from '@/i18n/en/learn.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: (enLearn as any).weeklyReview?.hero?.title || 'Weekly Review Playbook',
-  description: (enLearn as any).weeklyReview?.hero?.subtitle || 'A weekly review is where single trades become a learning curve. This page walks through a simple structure for looking at your decisions, risk and behaviour across several sessions.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('learn.weeklyReview.hero.title'),
+    description: t('learn.weeklyReview.hero.subtitle'),
+  }
 }
 
 function WeeklyReviewPageFallback() {

@@ -6,6 +6,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { formatPrice, calculateTokens } from '@/lib/currency-utils'
 import type { CurrencyConfig } from '@/lib/currency-config'
 import { useToast } from '@/hooks/use-toast'
+import { useTranslations } from 'next-intl'
 
 interface TopUpFormProps {
   currency: string
@@ -19,6 +20,7 @@ interface TopUpFormProps {
 
 export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFormProps) {
   const { showToast } = useToast()
+  const t = useTranslations('topUp.form')
   const [selectedPreset, setSelectedPreset] = useState<string | null>(null)
   const [amount, setAmount] = useState('')
   const [tokenEquivalent, setTokenEquivalent] = useState('')
@@ -32,9 +34,9 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
         return
       }
       const tokens = Math.floor(calculateTokens(value, currency))
-      setTokenEquivalent(`You'll get ${tokens.toLocaleString('en-US')} Tokens`)
+      setTokenEquivalent(t('youGet', { tokens: tokens.toLocaleString('en-US') }))
     },
-    [currency]
+    [currency, t]
   )
 
   useEffect(() => {
@@ -84,10 +86,10 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
     const numAmount = parseFloat(sanitize(amount))
 
     if (isNaN(numAmount) || numAmount < 0.01) {
-      const validationMessage = 'Please enter a valid amount (minimum 0.01)'
+      const validationMessage = t('invalidAmountMsg')
       setError(validationMessage)
       showToast({
-        title: 'Invalid amount',
+        title: t('invalidAmount'),
         description: validationMessage,
         variant: 'error',
       })
@@ -99,7 +101,7 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
     const originalText = button.textContent
 
     try {
-      button.textContent = 'Processing...'
+      button.textContent = t('processing')
       button.disabled = true
 
       const response = await fetch('/api/topup/init', {
@@ -118,16 +120,16 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
       }
 
       if (!data.redirectUrl) {
-        throw new Error('No redirect URL received')
+        throw new Error(t('noRedirect'))
       }
 
       // Redirect to payment gateway
       window.location.href = data.redirectUrl
     } catch (err: any) {
-      const message = err.message || 'An error occurred. Please try again.'
+      const message = err.message || t('genericError')
       setError(message)
       showToast({
-        title: 'Payment error',
+        title: t('paymentError'),
         description: message,
         variant: 'error',
       })
@@ -141,7 +143,7 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
     <>
       <form id="topup-form" className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-text-main">Choose a package</label>
+          <label className="block text-sm font-medium text-text-main">{t('choosePackage')}</label>
           <div className="mt-2 grid grid-cols-2 gap-4">
             <button
               type="button"
@@ -153,7 +155,7 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
               }`}
             >
               <div className="font-semibold">{formatPrice(presets.preset1000.amount, currency)}</div>
-              <div className="text-sm font-normal mt-1">1,000 Tokens</div>
+              <div className="text-sm font-normal mt-1">{t('tokensN', { tokens: '1,000' })}</div>
             </button>
             <button
               type="button"
@@ -165,7 +167,7 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
               }`}
             >
               <div className="font-semibold">{formatPrice(presets.preset2750.amount, currency)}</div>
-              <div className="text-sm font-normal mt-1">2,750 Tokens (+10% Bonus)</div>
+              <div className="text-sm font-normal mt-1">{t('bonus', { tokens: '2,750', percent: 10 })}</div>
             </button>
             <button
               type="button"
@@ -177,7 +179,7 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
               }`}
             >
               <div className="font-semibold">{formatPrice(presets.preset6000.amount, currency)}</div>
-              <div className="text-sm font-normal mt-1">6,000 Tokens (+20% Bonus)</div>
+              <div className="text-sm font-normal mt-1">{t('bonus', { tokens: '6,000', percent: 20 })}</div>
             </button>
             <button
               type="button"
@@ -188,15 +190,15 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
                   : 'border-surface-300 glass-panel text-text-secondary hover:border-surface-400'
               }`}
             >
-              <div className="font-semibold">Custom</div>
-              <div className="text-sm font-normal mt-1">Any amount</div>
+              <div className="font-semibold">{t('custom')}</div>
+              <div className="text-sm font-normal mt-1">{t('anyAmount')}</div>
             </button>
           </div>
         </div>
 
         <div>
           <label htmlFor="topup-amount" className="block text-sm font-medium text-text-main">
-            Or enter custom amount
+            {t('orCustom')}
           </label>
           <div className="mt-1 relative rounded-xl">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -227,14 +229,14 @@ export default function TopUpForm({ currency, currencyConfig, presets }: TopUpFo
             disabled={isLoading}
             className="btn-primary w-full flex justify-center py-2.5 px-4 rounded-full text-sm font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition"
           >
-            Add Tokens
+            {t('addTokens')}
           </button>
         </div>
       </form>
 
       {error && (
         <div className="mt-4 bg-surface-200 border border-rose-500/40 rounded-xl p-3 text-center">
-          <p className="text-rose-400 font-medium">Error</p>
+          <p className="text-rose-400 font-medium">{t('error')}</p>
           <p className="text-rose-300 text-sm">{error}</p>
         </div>
       )}

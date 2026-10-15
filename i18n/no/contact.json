@@ -1,0 +1,159 @@
+{
+  "breadcrumb": {
+    "home": "Hjem",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Kontakt Cur Nova med klare, praktiske spørsmål.",
+    "subtitle": "Bruk dette skjemaet for spørsmål om kurs, fakturering, tokens eller kontoen din. Vi svarer med tydelig informasjon – aldri handelsanbefalinger eller løfter.",
+    "quickNotes": {
+      "responseWindow": {
+        "label": "Vanlig svartid:",
+        "value": "innen 1–2 virkedager"
+      },
+      "faq": {
+        "text": "For detaljer om kurs, sjekk",
+        "link": "FAQ",
+        "suffix": "først."
+      },
+      "noTrades": {
+        "text": "Vi kan ikke kommentere",
+        "highlight": "spesifikke handler eller posisjoner",
+        "suffix": "."
+      }
+    },
+    "sideCard": {
+      "title": "Kontaktkanaler",
+      "subtitle": "Alle henvendelser havner i samme supportkø.",
+      "channels": [
+        {
+          "title": "Supportskjema i appen",
+          "description": "Raskest for spørsmål om konto, kurs og tokens."
+        },
+        {
+          "title": "Support-e-post",
+          "description": "Vises i bunnteksten og i juridiske dokumenter."
+        },
+        {
+          "title": "Juridisk og compliance",
+          "description": "Bruk «Juridisk og compliance» som emne for formelle henvendelser."
+        }
+      ],
+      "urgentNote": {
+        "text": "Ved hastesaker som gjelder",
+        "highlight": "tilgang eller betalinger",
+        "suffix": ", nevn det i emnefeltet slik at vi kan prioritere raskere."
+      }
+    }
+  },
+  "form": {
+    "title": "Send en melding til Cur Nova",
+    "subtitle": "Alle felt merket med * er påkrevd.",
+    "fields": {
+      "fullName": {
+        "label": "Fullt navn *",
+        "placeholder": "Ditt navn"
+      },
+      "email": {
+        "label": "E-postadresse *",
+        "placeholder": "navn@eksempel.no"
+      },
+      "region": {
+        "label": "Region *",
+        "placeholder": "Velg region",
+        "hint": "Vanlige regioner: EU, Storbritannia, UAE eller annet."
+      },
+      "topic": {
+        "label": "Emne *",
+        "placeholder": "Velg et emne",
+        "hint": "Eksempler: Kurs, Tokens og fakturering, Kontotilgang, Juridisk og compliance, Annet."
+      },
+      "accountId": {
+        "label": "Konto-ID (valgfritt)",
+        "placeholder": "Lim inn Cur Nova-ID-en din om relevant",
+        "hint": "Hjelper oss å finne kjøpene dine raskere."
+      },
+      "message": {
+        "label": "Din melding *",
+        "placeholder": "Beskriv spørsmålet ditt klart og konkret. Ikke oppgi sensitive sikkerhetsopplysninger for kontoen eller fullstendige kortnumre."
+      }
+    },
+    "warning": {
+      "text": "Vi kan ikke: gå gjennom dine åpne handler, råde deg til å åpne/lukke posisjoner eller fortelle deg hvilke instrumenter du skal handle."
+    },
+    "consent": {
+      "text": "Jeg forstår at Cur Nova kun tilbyr opplæring, og at denne meldingen ikke vil føre til personlig investerings- eller handelsrådgivning."
+    },
+    "submit": {
+      "button": "Send melding",
+      "sending": "Sender...",
+      "success": "Meldingen er sendt! Vi svarer innen 1–2 virkedager.",
+      "error": "Kunne ikke sende meldingen. Prøv igjen senere eller send oss en e-post direkte."
+    }
+  },
+  "sideInfo": {
+    "beforeYouSend": {
+      "title": "Før du sender en melding",
+      "subtitle": "En rask sjekkliste som sparer deg tid.",
+      "items": [
+        {
+          "text": "For generell bruk av plattformen, sjekk",
+          "link": "FAQ",
+          "suffix": "først."
+        },
+        {
+          "text": "For risiko og Cur Novas posisjonering, se",
+          "link": "Risiko og ansvarsfraskrivelse",
+          "suffix": "."
+        },
+        {
+          "text": "For juridiske enheter og databehandling, se",
+          "link1": "Vilkår og betingelser",
+          "and": "og",
+          "link2": "Personvernerklæring",
+          "suffix": "."
+        }
+      ]
+    },
+    "regions": {
+      "title": "Regioner vi fokuserer på",
+      "subtitle": "Kontekst for eksempler og innhold.",
+      "items": [
+        {
+          "name": "EU",
+          "description": "Opplæring strukturert med EU-kontekst i tankene."
+        },
+        {
+          "name": "Storbritannia",
+          "description": "Eksempler skrevet også for elever i Storbritannia."
+        },
+        {
+          "name": "UAE",
+          "description": "Fokus på elever som handler i globale markeder fra UAE."
+        }
+      ],
+      "note": "Vi svarer alltid i en nøytral, opplæringsfokusert tone – selv om spørsmålet ditt gjelder et veldig spesifikt produkt eller instrument."
+    }
+  },
+  "cta": {
+    "title": "Vil du heller starte med selvbetjening?",
+    "subtitle": "Mange spørsmål om kurs, tokens og kontotilgang er dekket i FAQ, ordlisten og ressursene våre. Du kan alltid komme tilbake hit hvis du fortsatt trenger hjelp.",
+    "openFaq": "Åpne FAQ",
+    "viewResources": "Se ressurser"
+  },
+  "options": {
+    "regions": {
+      "EU": "EU",
+      "UK": "Storbritannia",
+      "UAE": "UAE",
+      "Other": "Annet"
+    },
+    "topics": {
+      "Courses": "Kurs",
+      "Tokens & billing": "Tokens og fakturering",
+      "Account access": "Kontotilgang",
+      "Legal & compliance": "Juridisk og compliance",
+      "Other": "Annet"
+    }
+  }
+}

@@ -18,6 +18,7 @@ import {
 export function LoginPage() {
   const t = useTranslations('auth.login')
   const tCommon = useTranslations('common.auth')
+  const tUi = useTranslations('auth.ui')
   const router = useRouter()
   const searchParams = useSearchParams()
   const { data: session, status } = useSession()
@@ -117,7 +118,7 @@ export function LoginPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                   className="input-field w-full pl-11"
-                  placeholder="you@example.com"
+                  placeholder={tUi('emailPh')}
                 />
               </div>
             </div>
@@ -169,10 +170,10 @@ export function LoginPage() {
           {/* Trust strip */}
           <div className="mt-10 flex items-center justify-center gap-6 border-t border-surface-200 pt-6">
             {[
-              { icon: BookOpen, text: 'Courses' },
-              { icon: Wallet, text: 'Wallet' },
-              { icon: BrainCircuit, text: 'AI Strategies' },
-            ].map(({ icon: Icon, text }, i) => (
+              { icon: BookOpen },
+              { icon: Wallet },
+              { icon: BrainCircuit },
+            ].map((item, i) => ({ ...item, text: (tUi.raw('loginFeatures') as string[])[i] })).map(({ icon: Icon, text }, i) => (
               <div key={i} className="flex items-center gap-1.5 text-xs text-text-muted">
                 <Icon className="h-3.5 w-3.5 text-surface-400" />
                 <span>{text}</span>
@@ -185,7 +186,7 @@ export function LoginPage() {
       {/* Education disclaimer */}
       <div className="pb-6 text-center">
         <p className="text-[11px] leading-relaxed text-text-muted">
-          Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+          {tUi('educationLine')}
         </p>
       </div>
     </div>

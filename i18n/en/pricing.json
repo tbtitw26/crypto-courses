@@ -94,6 +94,24 @@
     "subtitle": "Start with a small pack or custom top-up. You can always switch to a different approach later – your focus stays on structured learning.",
     "choosePack": "Choose a token pack",
     "setTopUp": "Set custom top-up"
+  },
+  "extra": {
+    "workflow": "Wallet workflow",
+    "steps": [
+      {
+        "title": "Load tokens",
+        "desc": "Buy a pack or set a custom top-up using your preferred currency."
+      },
+      {
+        "title": "Use on content",
+        "desc": "Spend on courses, custom PDFs, and AI-generated strategies."
+      },
+      {
+        "title": "Download PDFs",
+        "desc": "Access your educational materials from the dashboard library."
+      }
+    ],
+    "topUpTitle": "Top up token balance",
+    "topUpText": "Load tokens once and use them across all Cur Nova products — courses, custom PDFs, and AI-generated strategies. Tokens do not expire."
   }
 }
-

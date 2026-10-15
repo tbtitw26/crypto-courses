@@ -25,7 +25,7 @@ const productLinks = [
   { href: '/learn?tab=custom', key: 'customCourses' },
   { href: '/learn?tab=ai', key: 'aiStrategyBuilder' },
   { href: '/pricing', key: 'pricing' },
-  { href: '/top-up', label: 'Token Wallet' },
+  { href: '/top-up', extraKey: 'tokenWallet' },
 ] as const
 
 const learningLinks = [
@@ -40,8 +40,8 @@ const companyLinks = [
   { href: '/about', key: 'about' },
   { href: '/contact', key: 'contactUs' },
   { href: '/dashboard', key: 'dashboard' },
-  { href: '/login', label: 'Login' },
-  { href: '/register', label: 'Register' },
+  { href: '/login', extraKey: 'login' },
+  { href: '/register', extraKey: 'register' },
 ] as const
 
 const policyLinks = [
@@ -54,7 +54,7 @@ const policyLinks = [
 
 interface LinkGroup {
   titleKey: string
-  links: ReadonlyArray<{ href: string; key?: string; label?: string }>
+  links: ReadonlyArray<{ href: string; key?: string; extraKey?: string }>
 }
 
 const linkGroups: LinkGroup[] = [
@@ -67,10 +67,12 @@ function FooterLinkGroup({
   title,
   links,
   tNav,
+  tExtra,
 }: {
   title: string
-  links: ReadonlyArray<{ href: string; key?: string; label?: string }>
+  links: ReadonlyArray<{ href: string; key?: string; extraKey?: string }>
   tNav: (key: string) => string
+  tExtra: (key: string) => string
 }) {
   const [open, setOpen] = useState(false)
 
@@ -101,7 +103,7 @@ function FooterLinkGroup({
             href={link.href}
             className="block text-sm text-surface-400 transition-colors hover:text-white focus-visible:text-white"
           >
-            {link.label ?? tNav(link.key!)}
+            {link.extraKey ? tExtra(link.extraKey) : tNav(link.key!)}
           </Link>
         ))}
       </nav>
@@ -114,6 +116,7 @@ export default function Footer() {
   const t = useTranslations('common')
   const tNav = useTranslations('common.nav')
   const tFooter = useTranslations('common.footer')
+  const tExtra = useTranslations('common.footer.extra')
   const [policiesOpen, setPoliciesOpen] = useState(false)
 
   return (
@@ -127,21 +130,21 @@ export default function Footer() {
                 {tFooter('educationOnlyLine')}
               </p>
               <h2 className="font-heading text-2xl font-semibold text-white sm:text-3xl lg:text-4xl">
-                Start building your trading education today
+                {tExtra('ctaTitle')}
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-surface-400 sm:text-base">
-                Browse structured courses by market and level, or create something tailored to your experience.
+                {tExtra('ctaSubtitle')}
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-4">
                 <Link href="/courses" className="btn-primary">
-                  Browse courses
+                  {tExtra('browseCourses')}
                 </Link>
                 <Link
                   href="/learn"
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-surface-300 transition-colors hover:text-white"
                 >
                   <Sparkles className="h-4 w-4 text-brand-400" />
-                  Build a custom course
+                  {tExtra('buildCustom')}
                 </Link>
               </div>
             </div>
@@ -152,13 +155,13 @@ export default function Footer() {
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600/20">
                     <GraduationCap className="h-4 w-4 text-brand-400" />
                   </div>
-                  <span className="text-xs font-semibold text-surface-200">Learning Path</span>
+                  <span className="text-xs font-semibold text-surface-200">{tExtra('learningPath')}</span>
                 </div>
                 <div className="space-y-2.5">
                   {[
-                    { icon: BookOpen, label: 'Structured Courses', done: true },
-                    { icon: Cpu, label: 'AI Strategy Docs', done: true },
-                    { icon: ShieldCheck, label: 'Risk Frameworks', done: false },
+                    { icon: BookOpen, label: tExtra('structuredCourses'), done: true },
+                    { icon: Cpu, label: tExtra('aiStrategyDocs'), done: true },
+                    { icon: ShieldCheck, label: tExtra('riskFrameworks'), done: false },
                   ].map((step, i) => (
                     <div key={i} className="flex items-center gap-2.5">
                       <div
@@ -188,7 +191,7 @@ export default function Footer() {
           <div className="grid gap-10 lg:grid-cols-[2fr_3fr] lg:gap-16">
             {/* Left — Brand zone (~40%) */}
             <div>
-              <Link href="/" className="inline-flex items-center rounded-lg" aria-label={`${t('brand.name')} home`}>
+              <Link href="/" className="inline-flex items-center rounded-lg" aria-label={`${t('brand.name')} ${tExtra('home')}`}>
                 <span className="relative block h-10 w-[140px]">
                   <Image
                     src="/logo-white.png"
@@ -201,7 +204,7 @@ export default function Footer() {
               </Link>
 
               <p className="mt-5 max-w-xs text-sm leading-relaxed text-surface-400">
-                {tFooter('educationOnlyLine')} Courses, token top-ups, custom PDFs, and AI strategy documents are provided for education and research workflows.
+                {tFooter('educationOnlyLine')} {tExtra('brandBlurb')}
               </p>
 
               <address className="mt-6 space-y-2.5 not-italic">
@@ -261,13 +264,14 @@ export default function Footer() {
                   key={group.titleKey}
                   title={
                     group.titleKey === 'products'
-                      ? 'Products'
+                      ? tExtra('products')
                       : group.titleKey === 'learning'
                         ? tFooter('learnTitle')
                         : tFooter('companyTitle')
                   }
                   links={group.links}
                   tNav={tNav}
+                  tExtra={tExtra}
                 />
               ))}
             </div>
@@ -296,7 +300,7 @@ export default function Footer() {
           </button>
 
           <nav
-            aria-label="Legal policies"
+            aria-label={tExtra('legalPolicies')}
             className={`mt-3 overflow-hidden transition-all duration-200 lg:max-h-none lg:opacity-100 ${
               policiesOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0 lg:max-h-none lg:opacity-100'
             }`}
@@ -336,23 +340,23 @@ export default function Footer() {
               <span className="h-3 w-px bg-surface-700" />
               <span className="flex items-center gap-1 text-[11px] text-surface-600">
                 <Lock className="h-3 w-3" />
-                Secure payment
+                {tExtra('securePayment')}
               </span>
               <span className="h-3 w-px bg-surface-700" />
               <span className="flex items-center gap-1 text-[11px] text-surface-600">
                 <ShieldCheck className="h-3 w-3" />
-                Education only
+                {tExtra('educationOnly')}
               </span>
             </div>
 
             {/* Right — risk one-liner */}
             <p className="max-w-xs text-[11px] leading-relaxed text-surface-600">
-              Trading involves risk.{' '}
+              {tExtra('tradingRisk')}{' '}
               <Link
                 href="/risk-and-disclaimer"
                 className="text-surface-500 underline underline-offset-2 transition-colors hover:text-surface-300"
               >
-                Read full disclaimer
+                {tExtra('readDisclaimer')}
               </Link>
             </p>
           </div>

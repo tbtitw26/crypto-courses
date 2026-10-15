@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useTranslations } from 'next-intl'
+import { useState, useEffect, useMemo } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -25,14 +25,23 @@ import {
 import { allowedCountries } from '@/lib/countries'
 
 const STEPS = [
-  { key: 'identity', icon: User, label: 'Identity' },
-  { key: 'contact', icon: Mail, label: 'Contact' },
-  { key: 'address', icon: MapPin, label: 'Address' },
-  { key: 'security', icon: Lock, label: 'Security' },
+  { key: 'identity', icon: User },
+  { key: 'contact', icon: Mail },
+  { key: 'address', icon: MapPin },
+  { key: 'security', icon: Lock },
 ] as const
 
 export function RegisterPage() {
   const t = useTranslations('auth.register')
+  const tUi = useTranslations('auth.ui')
+  const locale = useLocale()
+  const countryOptions = useMemo(() => {
+    if (locale === 'en') return allowedCountries
+    const names = new Intl.DisplayNames([locale === 'no' ? 'nb' : locale], { type: 'region' })
+    return allowedCountries
+      .map((c) => ({ ...c, name: names.of(c.code) ?? c.name }))
+      .sort((a, b) => a.name.localeCompare(b.name, locale === 'no' ? 'nb' : locale))
+  }, [locale])
   const router = useRouter()
   const { data: session, status } = useSession()
   const [firstName, setFirstName] = useState('')
@@ -226,7 +235,7 @@ export function RegisterPage() {
         </div>
 
         {/* Step progress indicator */}
-        <nav aria-label="Registration sections" className="mb-10">
+        <nav aria-label={tUi('registrationSections')} className="mb-10">
           <ol className="flex items-center justify-between gap-2">
             {STEPS.map((step, i) => {
               const Icon = step.icon
@@ -244,7 +253,7 @@ export function RegisterPage() {
                     )}
                   </div>
                   <span className="text-[11px] font-medium uppercase tracking-wide text-text-muted">
-                    {step.label}
+                    {tUi(`steps.${step.key}`)}
                   </span>
                 </li>
               )
@@ -274,7 +283,7 @@ export function RegisterPage() {
             <legend className="flex items-center gap-2 px-2 text-sm font-semibold text-text-main">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-[11px] font-bold text-white">1</span>
               <User className="h-4 w-4 text-brand-600" />
-              Account Identity
+              {tUi('accountIdentity')}
             </legend>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
               <div>
@@ -288,7 +297,7 @@ export function RegisterPage() {
                   onChange={(e) => setFirstName(e.target.value)}
                   required
                   className="input-field w-full"
-                  placeholder="John"
+                  placeholder={tUi('firstNamePh')}
                 />
               </div>
               <div>
@@ -301,7 +310,7 @@ export function RegisterPage() {
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   className="input-field w-full"
-                  placeholder="Doe"
+                  placeholder={tUi('lastNamePh')}
                 />
               </div>
             </div>
@@ -330,7 +339,7 @@ export function RegisterPage() {
             <legend className="flex items-center gap-2 px-2 text-sm font-semibold text-text-main">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-[11px] font-bold text-white">2</span>
               <Mail className="h-4 w-4 text-brand-600" />
-              Contact Details
+              {tUi('contactDetails')}
             </legend>
             <div className="mt-4 space-y-4">
               <div>
@@ -348,7 +357,7 @@ export function RegisterPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     className="input-field w-full pl-11"
-                    placeholder="you@example.com"
+                    placeholder={tUi('emailPh')}
                   />
                 </div>
               </div>
@@ -379,7 +388,7 @@ export function RegisterPage() {
             <legend className="flex items-center gap-2 px-2 text-sm font-semibold text-text-main">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-[11px] font-bold text-white">3</span>
               <MapPin className="h-4 w-4 text-brand-600" />
-              Billing Address
+              {tUi('billingAddress')}
             </legend>
             <div className="mt-4 space-y-4">
               <div>
@@ -393,7 +402,7 @@ export function RegisterPage() {
                   onChange={(e) => setStreet(e.target.value)}
                   required
                   className="input-field w-full"
-                  placeholder="221B Baker Street"
+                  placeholder={tUi('streetPh')}
                 />
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -408,7 +417,7 @@ export function RegisterPage() {
                     onChange={(e) => setCity(e.target.value)}
                     required
                     className="input-field w-full"
-                    placeholder="London"
+                    placeholder={tUi('cityPh')}
                   />
                 </div>
                 <div>
@@ -444,7 +453,7 @@ export function RegisterPage() {
                     <option value="" className="text-text-muted">
                       {t('selectCountry')}
                     </option>
-                    {allowedCountries.map((countryOption) => (
+                    {countryOptions.map((countryOption) => (
                       <option key={countryOption.code} value={countryOption.code}>
                         {countryOption.name}
                       </option>
@@ -482,7 +491,7 @@ export function RegisterPage() {
                     placeholder="••••••••"
                   />
                 </div>
-                <p className="mt-1 text-xs text-text-muted">At least 8 characters</p>
+                <p className="mt-1 text-xs text-text-muted">{tUi('minChars')}</p>
               </div>
               <div>
                 <label htmlFor="confirmPassword" className="mb-1.5 block text-sm font-medium text-text-main">
@@ -549,11 +558,11 @@ export function RegisterPage() {
         {/* Trust features - compact horizontal strip */}
         <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            { icon: BookOpen, text: 'Curated courses' },
-            { icon: Wallet, text: 'Multi-currency wallet' },
-            { icon: GraduationCap, text: 'AI strategies' },
-            { icon: ShieldCheck, text: 'Secure platform' },
-          ].map(({ icon: Icon, text }, i) => (
+            { icon: BookOpen },
+            { icon: Wallet },
+            { icon: GraduationCap },
+            { icon: ShieldCheck },
+          ].map((item, i) => ({ ...item, text: (tUi.raw('features') as string[])[i] })).map(({ icon: Icon, text }, i) => (
             <div key={i} className="flex items-center gap-2 rounded-lg border border-surface-100 bg-surface-50 px-3 py-2.5">
               <Icon className="h-4 w-4 shrink-0 text-brand-600" />
               <span className="text-xs font-medium text-text-secondary">{text}</span>
@@ -563,7 +572,7 @@ export function RegisterPage() {
 
         {/* Education disclaimer */}
         <p className="mt-8 text-center text-xs leading-relaxed text-text-muted">
-          Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+          {tUi('educationLine')}
         </p>
       </div>
     </div>

@@ -18,14 +18,11 @@ import { calculatePriceForTokens, formatPrice, getCurrencySymbol } from '@/lib/c
 import { getUserCurrency } from '@/lib/currency-client'
 import { useTopupCheckout } from '@/hooks/use-topup-checkout'
 
-const WORKFLOW_STEPS = [
-  { label: 'Choose amount', icon: Coins },
-  { label: 'Secure checkout', icon: CreditCard },
-  { label: 'Tokens credited', icon: Wallet },
-]
+const WORKFLOW_ICONS = [Coins, CreditCard, Wallet]
 
 export function TopUpPage() {
   const t = useTranslations('topUp')
+  const WORKFLOW_STEPS = (t.raw('page.steps') as string[]).map((label, i) => ({ label, icon: WORKFLOW_ICONS[i] }))
   const tHome = useTranslations('home.tokenPacks')
   const [currency, setCurrency] = useState('GBP')
   const [customAmount, setCustomAmount] = useState('0.01')
@@ -176,7 +173,7 @@ export function TopUpPage() {
             <div className="rounded-xl border border-surface-300 bg-white shadow-card">
               <div className="border-b border-surface-200 px-5 py-4">
                 <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
-                  Selected pack
+                  {t('page.selectedPack')}
                 </p>
               </div>
 
@@ -193,11 +190,11 @@ export function TopUpPage() {
 
                 <div className="mt-4 space-y-2 rounded-lg bg-surface-100 px-4 py-3">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-text-secondary">Price</span>
+                    <span className="text-text-secondary">{t('page.price')}</span>
                     <span className="font-semibold text-text-main">{active.formattedPrice}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-text-secondary">Tokens</span>
+                    <span className="text-text-secondary">{t('page.tokens')}</span>
                     <span className="font-semibold text-text-main">
                       {active.tokens.toLocaleString('en-US')}
                     </span>
@@ -301,8 +298,7 @@ export function TopUpPage() {
         <div className="flex items-start gap-3 rounded-lg border border-surface-200 bg-surface-50 px-4 py-3">
           <Shield className="mt-0.5 h-4 w-4 shrink-0 text-text-muted" />
           <p className="text-xs leading-relaxed text-text-muted">
-            Token purchases are processed securely via hosted payment. All content is for educational
-            purposes only. Tokens do not constitute financial advice or tradable instruments.
+            {t('page.trust')}
           </p>
         </div>
       </section>

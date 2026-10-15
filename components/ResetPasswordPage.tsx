@@ -18,20 +18,21 @@ import {
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
-const resetPasswordSchema = z
-  .object({
-    password: z.string().min(8, 'Password must be at least 8 characters'),
-    confirmPassword: z.string().min(1, 'Please confirm your password'),
-    consent: z.boolean().refine((val) => val === true, {
-      message: 'You must agree to the terms',
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
-  })
+const makeResetPasswordSchema = (t: (key: string) => string) =>
+  z
+    .object({
+      password: z.string().min(8, t('errors.passwordTooShort')),
+      confirmPassword: z.string().min(1, t('errors.confirmPasswordRequired')),
+      consent: z.boolean().refine((val) => val === true, {
+        message: t('errors.consentRequired'),
+      }),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: t('errors.passwordsDontMatch'),
+      path: ['confirmPassword'],
+    })
 
-type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>
+type ResetPasswordFormData = z.infer<ReturnType<typeof makeResetPasswordSchema>>
 
 function calculatePasswordStrength(password: string): 'weak' | 'medium' | 'strong' {
   if (password.length < 8) return 'weak'
@@ -57,6 +58,7 @@ const strengthConfig = {
 
 export function ResetPasswordPage() {
   const t = useTranslations('auth.resetPassword')
+  const tUi = useTranslations('auth.ui')
   const router = useRouter()
   const searchParams = useSearchParams()
   const { showToast } = useToast()
@@ -89,7 +91,7 @@ export function ResetPasswordPage() {
     formState: { errors },
     watch,
   } = useForm<ResetPasswordFormData>({
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(makeResetPasswordSchema(t)),
     defaultValues: {
       consent: false,
     },
@@ -217,7 +219,7 @@ export function ResetPasswordPage() {
                 href="/forgot-password"
                 className="btn-primary mt-6 block w-full text-center"
               >
-                Request new reset link
+                {tUi('requestNewLink')}
               </Link>
             </div>
           </div>
@@ -390,7 +392,7 @@ export function ResetPasswordPage() {
           {/* Mobile trust strip */}
           <div className="mt-8 border-t border-surface-200 pt-6 lg:hidden">
             <p className="text-center text-xs leading-relaxed text-text-muted">
-              Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+              {tUi('educationLine')}
             </p>
           </div>
         </div>
@@ -400,6 +402,7 @@ export function ResetPasswordPage() {
 }
 
 function SidePanel() {
+  const tUi = useTranslations('auth.ui')
   return (
     <div className="hidden lg:flex lg:flex-col lg:justify-between bg-surface-900 px-10 py-12 xl:px-16">
       <div>
@@ -409,7 +412,7 @@ function SidePanel() {
           </div>
           <div>
             <p className="text-sm font-semibold text-white">Cur Nova</p>
-            <p className="text-[11px] uppercase tracking-widest text-surface-500">Credential Reset</p>
+            <p className="text-[11px] uppercase tracking-widest text-surface-500">{tUi('credentialReset')}</p>
           </div>
         </Link>
 
@@ -418,16 +421,16 @@ function SidePanel() {
             <KeyRound className="h-7 w-7 text-brand-400" />
           </div>
           <h2 className="font-heading text-2xl font-semibold text-white">
-            Set your new password
+            {tUi('setNewPassword')}
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-surface-400">
-            Choose a strong password to keep your account secure. Your new credentials will take effect immediately.
+            {tUi('setNewPasswordText')}
           </p>
         </div>
       </div>
 
       <p className="text-xs leading-relaxed text-surface-600">
-        Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+        {tUi('educationLine')}
       </p>
     </div>
   )

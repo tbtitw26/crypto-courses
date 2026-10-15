@@ -88,7 +88,7 @@ export function CoursesPage() {
       } catch (error) {
         console.error('Error fetching courses:', error)
         setCourses([])
-        setError('Unable to load courses. Please try again later.')
+        setError(t('catalog.loadError'))
       } finally {
         setIsLoading(false)
       }
@@ -123,8 +123,8 @@ export function CoursesPage() {
 
   const hasActiveFilters = activeLevel !== 'All levels' || activeMarket !== 'All markets' || search.trim().length > 0
   const resultLabel = isLoading
-    ? 'Loading catalog'
-    : `${filteredCourses.length} of ${courses.length} ${t('meta.coursesAvailable')}`
+    ? t('catalog.loading')
+    : `${t('catalog.resultCount', { shown: filteredCourses.length, total: courses.length })} ${t('meta.coursesAvailable')}`
 
   const resetFilters = () => {
     setActiveLevel('All levels')
@@ -148,7 +148,7 @@ export function CoursesPage() {
             <div className="space-y-6">
               <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-3 py-2 text-sm">
                 <BookOpenCheck className="h-4 w-4 text-brand-800" />
-                <span className="font-semibold text-brand-900">Course catalog</span>
+                <span className="font-semibold text-brand-900">{t('catalog.badge')}</span>
                 <span className="h-1 w-1 rounded-full bg-gold-500" />
                 <span className="font-heading text-xs font-bold uppercase text-text-muted">
                   {t('detail.header.educationOnly')}
@@ -160,22 +160,22 @@ export function CoursesPage() {
                   {t('title')}
                 </h1>
                 <p className="text-base leading-7 text-text-secondary sm:text-lg">
-                  {t('subtitle')} Browse structured PDFs by market and level, then use tokens or checkout to access your course.
+                  {t('subtitle')} {t('catalog.subtitleExtra')}
                 </p>
               </div>
 
               <div className="grid gap-3 sm:grid-cols-3">
                 <CatalogStat icon={BookOpen} label={resultLabel} text={t('meta.paymentInfo')} />
                 <CatalogStat icon={ShieldCheck} label={t('detail.header.educationOnly')} text={t('course.educationOnly')} />
-                <CatalogStat icon={FileText} label={t('detail.header.pdfFormat')} text="Downloadable course materials" />
+                <CatalogStat icon={FileText} label={t('detail.header.pdfFormat')} text={t('catalog.downloadable')} />
               </div>
             </div>
 
             <div className="rounded-2xl border border-surface-300 bg-surface-950 p-5 text-white">
-              <p className="font-heading text-xs font-bold uppercase text-gold-300">Need a different path?</p>
-              <h2 className="mt-3 font-heading text-2xl font-semibold">Custom and AI options sit beside the catalog.</h2>
+              <p className="font-heading text-xs font-bold uppercase text-gold-300">{t('catalog.differentPath')}</p>
+              <h2 className="mt-3 font-heading text-2xl font-semibold">{t('catalog.differentPathTitle')}</h2>
               <p className="mt-3 text-sm leading-6 text-surface-300">
-                If the ready-made library does not match your current level, request a tailored PDF or generate an education-only strategy document.
+                {t('catalog.differentPathText')}
               </p>
               <div className="mt-5 grid gap-2">
                 <Link href="/learn?tab=custom" className="inline-flex items-center justify-between rounded-xl bg-white px-4 py-3 text-sm font-semibold text-surface-950 transition hover:bg-brand-50">
@@ -206,13 +206,13 @@ export function CoursesPage() {
                       onClick={resetFilters}
                       className="text-xs font-semibold text-brand-800 hover:text-brand-900"
                     >
-                      Reset
+                      {t('catalog.reset')}
                     </button>
                   )}
                 </div>
 
                 <div className="space-y-5">
-                  <FilterGroup title="Level">
+                  <FilterGroup title={t('catalog.level')}>
                     {levelFilters.map((lvl) => {
                       const label = lvl === 'All levels'
                         ? t('filters.level.all')
@@ -229,7 +229,7 @@ export function CoursesPage() {
                     })}
                   </FilterGroup>
 
-                  <FilterGroup title="Market">
+                  <FilterGroup title={t('catalog.market')}>
                     {marketFilters.map((mkt) => {
                       const label = mkt === 'All markets'
                         ? t('filters.market.all')
@@ -266,8 +266,14 @@ export function CoursesPage() {
                     </div>
                     <p className="mt-1 text-sm text-text-muted">
                       {hasActiveFilters
-                        ? `Filtered by ${activeLevel}, ${activeMarket}${search.trim() ? `, search: "${search.trim()}"` : ''}`
-                        : 'Showing the full course library.'}
+                        ? t('catalog.filteredBy', {
+                            filters: [
+                              activeLevel === 'All levels' ? t('filters.level.all') : t(`filters.level.${activeLevel.toLowerCase()}`),
+                              activeMarket === 'All markets' ? t('filters.market.all') : t(`filters.market.${activeMarket.toLowerCase()}`),
+                              ...(search.trim() ? [t('catalog.searchLabel', { query: search.trim() })] : []),
+                            ].join(', '),
+                          })
+                        : t('catalog.showingAll')}
                     </p>
                   </div>
 
@@ -372,6 +378,7 @@ function LoadingCatalog() {
 }
 
 function ErrorCatalog({ message }: { message: string }) {
+  const t = useTranslations('courses.catalog')
   return (
     <div className="rounded-2xl border border-gold-200 bg-gold-50 p-6">
       <div className="flex items-start gap-3">
@@ -379,7 +386,7 @@ function ErrorCatalog({ message }: { message: string }) {
         <div>
           <h2 className="font-heading text-base font-semibold text-text-main">{message}</h2>
           <p className="mt-2 text-sm leading-6 text-text-secondary">
-            The courses list is temporarily unavailable. Please refresh the page or try again later.
+            {t('unavailable')}
           </p>
         </div>
       </div>
@@ -388,17 +395,18 @@ function ErrorCatalog({ message }: { message: string }) {
 }
 
 function EmptyCatalog({ onReset }: { onReset: () => void }) {
+  const t = useTranslations('courses.catalog')
   return (
     <div className="rounded-2xl border border-dashed border-surface-300 bg-white p-8 text-center shadow-sm">
       <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-800">
         <Search className="h-5 w-5" />
       </div>
-      <h2 className="mt-4 font-heading text-lg font-semibold text-text-main">No courses match this view.</h2>
+      <h2 className="mt-4 font-heading text-lg font-semibold text-text-main">{t('emptyTitle')}</h2>
       <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-text-secondary">
-        Try a broader market, a different level, or clear the search query.
+        {t('emptyText')}
       </p>
       <button type="button" onClick={onReset} className="btn-secondary mt-5">
-        Clear filters
+        {t('clearFilters')}
       </button>
     </div>
   )

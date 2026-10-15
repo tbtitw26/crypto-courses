@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useValueLabel, useIntlLocale } from '@/hooks/use-value-label'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -62,6 +63,8 @@ function StatusBadge({ status, t }: { status: AiStrategyStatus; t: any }) {
 
 export function AiStrategiesPage() {
   const t = useTranslations('dashboard.aiStrategiesPage')
+  const valueLabel = useValueLabel()
+  const intlLocale = useIntlLocale()
   const tDashboard = useTranslations('dashboard')
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -221,8 +224,8 @@ export function AiStrategiesPage() {
                         </div>
                         <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-text-muted">
                           <span>#{strategy.id}</span>
-                          <span>{strategy.markets.length > 0 ? strategy.markets.join(', ') : t('table.noMarket')}</span>
-                          <span>{new Date(strategy.created).toLocaleDateString()}</span>
+                          <span>{strategy.markets.length > 0 ? strategy.markets.map(valueLabel).join(', ') : t('table.noMarket')}</span>
+                          <span>{new Date(strategy.created).toLocaleDateString(intlLocale)}</span>
                         </div>
                         <div className="mt-2 flex items-center gap-1 text-xs text-text-secondary">
                           <Coins className="h-3.5 w-3.5 text-brand-600" />

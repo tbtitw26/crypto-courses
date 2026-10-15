@@ -33,6 +33,7 @@ export function GlossaryPage() {
   const t = useTranslations('glossary')
   const tBreadcrumb = useTranslations('courses.breadcrumb')
   const tNav = useTranslations('common.nav')
+  const tUi = useTranslations('common.ui')
 
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState(t('categories.all'))
@@ -212,7 +213,7 @@ export function GlossaryPage() {
                 }}
                 className="mt-3 text-xs font-medium text-brand-600 transition hover:text-brand-700"
               >
-                Clear filters
+                {tUi('clearFilters')}
               </button>
             </div>
           ) : (

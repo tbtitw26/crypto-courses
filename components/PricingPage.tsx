@@ -91,12 +91,12 @@ export function PricingPage() {
 
           {/* Wallet workflow strip */}
           <div className="mt-10 rounded-xl border border-surface-200 bg-surface-50 p-5 sm:p-6">
-            <p className="mb-4 text-xs font-bold uppercase tracking-widest text-text-muted">Wallet workflow</p>
+            <p className="mb-4 text-xs font-bold uppercase tracking-widest text-text-muted">{t('extra.workflow')}</p>
             <div className="grid gap-5 sm:grid-cols-3">
               {[
-                { icon: Wallet, color: 'bg-brand-50 border-brand-200', iconColor: 'text-brand-600', title: 'Load tokens', desc: 'Buy a pack or set a custom top-up using your preferred currency.' },
-                { icon: Sparkles, color: 'bg-purple-50 border-purple-200', iconColor: 'text-purple-600', title: 'Use on content', desc: 'Spend on courses, custom PDFs, and AI-generated strategies.' },
-                { icon: Download, color: 'bg-amber-50 border-amber-200', iconColor: 'text-amber-600', title: 'Download PDFs', desc: 'Access your educational materials from the dashboard library.' },
+                { icon: Wallet, color: 'bg-brand-50 border-brand-200', iconColor: 'text-brand-600', title: (t.raw('extra.steps') as Array<{ title: string; desc: string }>)[0].title, desc: (t.raw('extra.steps') as Array<{ title: string; desc: string }>)[0].desc },
+                { icon: Sparkles, color: 'bg-purple-50 border-purple-200', iconColor: 'text-purple-600', title: (t.raw('extra.steps') as Array<{ title: string; desc: string }>)[1].title, desc: (t.raw('extra.steps') as Array<{ title: string; desc: string }>)[1].desc },
+                { icon: Download, color: 'bg-amber-50 border-amber-200', iconColor: 'text-amber-600', title: (t.raw('extra.steps') as Array<{ title: string; desc: string }>)[2].title, desc: (t.raw('extra.steps') as Array<{ title: string; desc: string }>)[2].desc },
               ].map((item, i) => (
                 <div key={i} className="flex items-start gap-3">
                   <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border ${item.color}`}>
@@ -285,9 +285,9 @@ export function PricingPage() {
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-600">
               <Coins className="h-6 w-6 text-white" />
             </div>
-            <h3 className="mt-4 font-heading text-xl font-semibold text-text-main">Top up token balance</h3>
+            <h3 className="mt-4 font-heading text-xl font-semibold text-text-main">{t('extra.topUpTitle')}</h3>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary">
-              Load tokens once and use them across all Cur Nova products — courses, custom PDFs, and AI-generated strategies. Tokens do not expire.
+              {t('extra.topUpText')}
             </p>
             <Link href="/top-up" className="btn-primary mt-6 w-full text-center">
               {t('cta.choosePack')}

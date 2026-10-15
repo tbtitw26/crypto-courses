@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import { useValueLabel, useIntlLocale } from '@/hooks/use-value-label'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -82,6 +83,8 @@ function StatusBadge({ status, t }: { status: CustomCourseStatus; t: any }) {
 
 export function CustomCoursesPage() {
   const t = useTranslations('dashboard.customCoursesPage')
+  const valueLabel = useValueLabel()
+  const intlLocale = useIntlLocale()
   const tDashboard = useTranslations('dashboard')
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -128,8 +131,8 @@ export function CustomCoursesPage() {
               market: course.market,
               level: course.level,
               status: uiStatus,
-              created: new Date(course.created).toLocaleDateString(),
-              eta: course.estimatedReadyAt ? new Date(course.estimatedReadyAt).toLocaleDateString() : undefined,
+              created: new Date(course.created).toLocaleDateString(intlLocale),
+              eta: course.estimatedReadyAt ? new Date(course.estimatedReadyAt).toLocaleDateString(intlLocale) : undefined,
               pdfUrl: course.pdfUrl,
               coverUrl: course.coverUrl,
               assetsStatus: course.assetsStatus,
@@ -303,7 +306,7 @@ export function CustomCoursesPage() {
                           <StatusBadge status={course.status} t={t} />
                         </div>
                         <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-text-muted">
-                          <span>{course.market} · {course.level}</span>
+                          <span>{valueLabel(course.market)} · {valueLabel(course.level)}</span>
                           <span>ID: {course.id}</span>
                           <span>Created {course.created}</span>
                           {course.eta && <span>ETA {course.eta}</span>}

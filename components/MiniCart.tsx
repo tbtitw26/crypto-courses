@@ -22,6 +22,7 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
   const t = useTranslations('cart.miniCart')
   const tEmpty = useTranslations('cart.empty')
   const tCommon = useTranslations('common.buttons')
+  const tUi = useTranslations('common.ui')
   const [currency, setCurrency] = useState('GBP')
 
   useEffect(() => {
@@ -124,7 +125,7 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
           <span className="font-semibold text-text-main">{total.tokens.toLocaleString('en-US')}</span>
         </div>
         <div className="flex items-center justify-between text-sm">
-          <span className="text-text-muted">Total:</span>
+          <span className="text-text-muted">{tUi('total')}</span>
           <span className="font-semibold text-text-main">{formattedPrice}</span>
         </div>
 

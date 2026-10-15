@@ -1,0 +1,1117 @@
+{
+  "title": "Bygg ditt løp: tilpasset kurs eller AI-strategi.",
+  "subtitle": "Bruk én side til å bestille en skreddersydd PDF eller generere en umiddelbar AI-basert opplæringsplan. Begge setter risiko og prosess i sentrum – aldri signaler eller garantier.",
+  "breadcrumb": {
+    "home": "Hjem",
+    "learn": "Lær"
+  },
+  "tabs": {
+    "custom": "Tilpasset kurs",
+    "ai": "AI-strategi"
+  },
+  "info": {
+    "educationOnly": "Kun opplæring · ingen signaler"
+  },
+  "custom": {
+    "title": "Bestilling av tilpasset kurs",
+    "description": "Fortell oss hvor du står nå og hva du vil forstå. En erfaren trader utarbeider og leverer en strukturert PDF.",
+    "form": {
+      "experience": {
+        "label": "Din handelserfaring",
+        "required": "Påkrevd · velg én",
+        "options": {
+          "beginner": "0 år / helt nybegynner",
+          "intermediate": "1–2 år",
+          "advanced": "3+ år"
+        }
+      },
+      "markets": {
+        "label": "Markeder du vil at kurset skal dekke",
+        "hint": "Du kan velge flere",
+        "forex": "Forex",
+        "crypto": "Krypto",
+        "binary": "Binære opsjoner"
+      },
+      "deposit": {
+        "label": "Typisk innskuddsstørrelse",
+        "hint": "Omtrentlig er nok",
+        "options": {
+          "low": "< 1 000",
+          "medium": "1 000 – 5 000",
+          "high": "5 000 – 20 000",
+          "veryHigh": "20 000+"
+        }
+      },
+      "risk": {
+        "label": "Risikotoleranse",
+        "hint": "For eksempler på posisjonsstørrelse",
+        "low": "Lav",
+        "medium": "Middels",
+        "high": "Høy"
+      },
+      "style": {
+        "label": "Handelsstil",
+        "hint": "Hovedmåten du vil handle på",
+        "scalping": "Scalping",
+        "day": "Daghandel",
+        "swing": "Swing",
+        "position": "Posisjon"
+      },
+      "time": {
+        "label": "Tilgjengelig tid per uke",
+        "placeholder": "For eksempel: 3 kvelder + 1 økt i helgen",
+        "days": {
+          "monday": "Man",
+          "tuesday": "Tir",
+          "wednesday": "Ons",
+          "thursday": "Tor",
+          "friday": "Fre",
+          "saturday": "Lør",
+          "sunday": "Søn"
+        }
+      },
+      "platforms": {
+        "label": "Plattformer / meglere du bruker (valgfritt)",
+        "placeholder": "For eksempel: MT4, MT5, TradingView, Binance..."
+      },
+      "goals": {
+        "label": "Hva vil du få ut av dette kurset?",
+        "hint": "Vær så konkret som mulig",
+        "placeholder": "For eksempel: Jeg vil forstå risiko per handel, grunnleggende kursstruktur og ha en enkel skriftlig plan jeg kan følge de neste 3–6 månedene."
+      },
+      "notes": {
+        "label": "Er det noe annet vi bør vite? (valgfritt)",
+        "placeholder": "For eksempel: tidligere problemer, psykologiske utfordringer eller begrensninger vi bør ta hensyn til."
+      },
+      "consents": {
+        "education": "Jeg forstår at dette kun er opplæringsmateriell. Cur Nova gir ikke finansiell rådgivning eller handelssignaler.",
+        "terms": "Jeg bekrefter at jeg har lest og godtar vilkårene og betingelsene samt risiko- og ansvarsfraskrivelsen.",
+        "termsBefore": "Jeg bekrefter at jeg har lest og godtar",
+        "termsLink": "vilkårene og betingelsene",
+        "termsAnd": "og",
+        "riskLink": "risiko- og ansvarsfraskrivelsen"
+      },
+      "submit": "Kjøp tilpasset kurs",
+      "delivery": "Du vil motta en bekreftelse på e-post og PDF-en.",
+      "submitSuccess": {
+        "title": "Bestillingen er mottatt",
+        "description": "Traderen vår har mottatt bestillingen din. Du vil motta PDF-en med det tilpassede kurset på e-post."
+      },
+      "calculator": {
+        "title": "Priskalkulator",
+        "total": "Total kostnad",
+        "tokens": "tokens",
+        "balance": "Din saldo",
+        "insufficientBalance": {
+          "title": "Ikke nok saldo",
+          "description": "Du har ikke nok tokens til å kjøpe dette tilpassede kurset.",
+          "message": "Du trenger flere tokens for å kjøpe dette kurset.",
+          "topUp": "Fyll på saldo"
+        }
+      }
+    },
+    "sidebar": {
+      "delivery": {
+        "badge": "Leveres",
+        "description": "En erfaren trader bruker profilen din til å strukturere en PDF bygget rundt din erfaring, innskuddsstørrelse og risikotoleranse. Ventetiden er bevisst – dette er ikke en umiddelbar mal.",
+        "points": {
+          "modules": "Moduler i en rekkefølge tilpasset din situasjon.",
+          "examples": "Eksempler og scenarier tilpasset markedene dine.",
+          "checklist": "Sjekkliste og enkle tiltak for de neste 4–8 ukene."
+        }
+      },
+      "risk": {
+        "title": "Viktig påminnelse om risiko",
+        "description": "Tilpassede kurs er fortsatt kun opplæring. De fjerner ikke risikoen ved handel og garanterer ingen avkastning. Du er fortsatt fullt ansvarlig for alle beslutninger og utfall.",
+        "link": "Les hele risiko- og ansvarsfraskrivelsen"
+      },
+      "pricing": {
+        "title": "Slik fungerer prisingen",
+        "description": "Et tilpasset kurs bruker flere tokens enn én ferdig PDF. I produksjon vil prisen fastsettes per marked og dybde. Inntil videre kan du se på det som et eget produkt med egen pris i tokens og ved direkte betaling.",
+        "points": {
+          "tokens": "Betal med tokens fra saldoen din.",
+          "currencies": "Eller bruk EUR, GBP eller USD i kassen."
+        },
+        "badge": "Kun eksempel – endelig pris ikke fastsatt"
+      }
+    }
+  },
+  "ai": {
+    "title": "AI-strategibygger",
+    "description": "Få en strukturert opplæringsplan med beskrivelse av oppsett, logikk for inn- og utgang, risikorammeverk og en sjekkliste – generert på sekunder ut fra profilen din.",
+    "form": {
+      "presets": {
+        "label": "Hurtigvalg",
+        "hint": "Du kan fortsatt justere alt nedenfor",
+        "conservative": "Forsiktig intradag (1–2 handler/dag)",
+        "balanced": "Balansert swing (posisjoner over flere dager)",
+        "scalping": "Utforskende scalping (høy frekvens, liten størrelse)"
+      },
+      "market": {
+        "label": "Hovedmarked"
+      },
+      "timeframe": {
+        "label": "Primær tidsramme"
+      },
+      "risk": {
+        "label": "Risiko per handel (%)",
+        "placeholder": "For eksempel: 0,5 – 1,0"
+      },
+      "maxTrades": {
+        "label": "Maks antall handler per dag",
+        "placeholder": "For eksempel: 3"
+      },
+      "instruments": {
+        "label": "Instrumenter du vil ha med i planen",
+        "placeholder": "For eksempel: EURUSD, GBPUSD, BTCUSDT..."
+      },
+      "focus": {
+        "label": "Viktige ting å fokusere på",
+        "placeholder": "For eksempel: færre handler, tydelige regler, unngå nyheter..."
+      },
+      "detail": {
+        "label": "Detaljnivå",
+        "hint": "Høyere detaljnivå bruker flere tokens",
+        "quick": "Kort sammendrag",
+        "standard": "Standardplan",
+        "deep": "Grundig guide"
+      },
+      "consent": "Jeg forstår at den genererte planen kun er ment for opplæring og ikke inneholder handelssignaler eller garanterte resultater.",
+      "consentTerms": "Jeg bekrefter at jeg har lest og godtar vilkårene og betingelsene samt risiko- og ansvarsfraskrivelsen.",
+      "consentTermsBefore": "Jeg bekrefter at jeg har lest og godtar",
+      "consentTermsLink": "vilkårene og betingelsene",
+      "consentTermsAnd": "og",
+      "consentRiskLink": "risiko- og ansvarsfraskrivelsen",
+      "submit": "Generer AI-strategi",
+      "output": "Planen vises nedenfor i et strukturert format og lagres i biblioteket ditt.",
+      "calculator": {
+        "title": "Priskalkulator",
+        "total": "Total kostnad",
+        "tokens": "tokens",
+        "balance": "Din saldo",
+        "insufficientBalance": {
+          "title": "Ikke nok saldo",
+          "description": "Du har ikke nok tokens til å generere denne AI-strategien.",
+          "message": "Du trenger flere tokens for å generere denne strategien.",
+          "topUp": "Fyll på saldo"
+        }
+      }
+    },
+    "output": {
+      "title": "Resultat fra AI-strategi",
+      "description": "Eksempel på oppsett av den genererte planen",
+      "placeholder": "Plassholder · ingen ekte AI her",
+      "sections": {
+        "setup": "1. Beskrivelse av oppsett:",
+        "entry": "2. Logikk for inn- og utgang:",
+        "risk": "3. Risikorammeverk:",
+        "checklist": "4. Sjekkliste:"
+      },
+      "setupDesc": "Tydelig forklaring av mønsteret eller betingelsen du ba om, inkludert tidsrammer og instrumenter.",
+      "entryDesc": "Regler for når du kan vurdere å gå inn og ut, knyttet til risikoen din per handel og maks antall handler per dag.",
+      "riskDesc": "Veiledning om plassering av stopp, delvise gevinstsikringer og når du ikke bør handle (for eksempel rundt nyheter eller lav likviditet).",
+      "checklistDesc": "En enkel liste du kan lese før hver mulig handel for å unngå følelsesstyrte beslutninger."
+    },
+    "sidebar": {
+      "depth": {
+        "badge": "Justerbar dybde",
+        "description": "Du kan be om en rask oversikt eller en dypere, mer detaljert plan. I produksjon vil tokenkostnaden avhenge av dybden og kompleksiteten du velger."
+      },
+      "courses": {
+        "title": "Hvordan AI-strategier henger sammen med kursene",
+        "description": "Strategier fungerer best oppå en solid forståelse. Vi anbefaler å ta minst ett strukturert kurs før du lener deg tungt på genererte planer."
+      },
+      "risk": {
+        "title": "Ingen signaler. Ingen garantier.",
+        "description": "Selv om AI bygger en strukturert plan, er markedene fortsatt usikre og har høy risiko. Du er fortsatt fullt ansvarlig for om, når og hvordan du handler.",
+        "link": "Les hele risiko- og ansvarsfraskrivelsen"
+      }
+    }
+  },
+  "auth": {
+    "required": "Logg inn for å sende inn bestillingen din",
+    "signIn": "Logg inn",
+    "signUp": "Registrer deg"
+  },
+  "riskManagement": {
+    "breadcrumb": {
+      "riskManagement": "Risikostyring"
+    },
+    "hero": {
+      "title": "Grunnleggende risikostyring",
+      "subtitle": "Før inngangspunkter, indikatorer eller «oppsett» kommer én ting: å bestemme hvor mye du er forberedt på å tape. Denne siden går gjennom kjernebegrepene bak risiko på kontonivå, risiko per handel og daglige tapsgrenser i høyrisikomarkeder.",
+      "badges": {
+        "educationOnly": "Kun opplæring · Ikke handelsrådgivning",
+        "appliesTo": "Gjelder Forex / krypto / binære"
+      },
+      "conceptCard": {
+        "title": "Sentralt Cur Nova-begrep",
+        "subtitle": "Anbefales før enhver strategi eller ethvert oppsett."
+      },
+      "readingTime": "Omtrentlig lesetid: 8–12 minutter."
+    },
+    "sections": {
+      "whyRiskFirst": {
+        "title": "Hvorfor risiko kommer først",
+        "description": "I høyrisikomarkeder fokuserer de fleste tradere på inngangspunkter og overser hvor mye kapital som står på spill. Risikostyring handler om å bestemme på forhånd:",
+        "points": [
+          "Hvor mye av den totale kontoen som kan tapes uten å «knekke» den.",
+          "Hvor mye som står på spill i én handel eller strukturert idé, i forhold til kontoen.",
+          "Når du skal stoppe for dagen eller uken hvis ting ikke fungerer."
+        ],
+        "note": "Eksemplene på denne siden er generelle og forenklede. De er her for å illustrere ideer, ikke for å foreslå hva du personlig «bør» risikere."
+      },
+      "threePillars": {
+        "title": "Tre pilarer i praktisk risikostyring",
+        "items": [
+          {
+            "title": "1. Risiko på kontonivå",
+            "description": "Hvor mye av kontoen som totalt kan tapes før handelen settes på pause eller tilnærmingen vurderes på nytt.",
+            "note": "Dette hindrer «alt eller ingenting»-tenkning."
+          },
+          {
+            "title": "2. Risiko per handel / idé",
+            "description": "Det planlagte tapet hvis en posisjon treffer stoppen eller utløper verdiløs, uttrykt som en andel av kontoverdien."
+          },
+          {
+            "title": "3. Daglige og ukentlige grenser",
+            "description": "Forhåndsdefinerte punkter der en trader stopper for dagen eller uken hvis ting ikke fungerer, for å hindre følelsesmessig opptrapping."
+          }
+        ]
+      },
+      "accountRisk": {
+        "title": "Risiko på kontonivå og drawdown",
+        "description": "Hver konto har et punkt der tap blir vanskelige å hente inn igjen – enten økonomisk eller psykologisk. Et enkelt utgangspunkt er å definere en maksimal drawdown der handelen settes på pause og planen gjennomgås.",
+        "example": {
+          "title": "Eksempel på en idé",
+          "text": "Noen tradere foretrekker å holde total drawdown innenfor en begrenset del av kontoen, og trekker seg tilbake i stedet for å «doble innsatsen». Andre er komfortable med et bredere spenn. Det viktigste er å bestemme dette på forhånd, ikke under stress."
+        },
+        "whyMatters": {
+          "title": "Hvorfor det er viktig",
+          "points": [
+            "Bidrar til å unngå følelsesstyrt hevnhandel.",
+            "Holder resultatene innenfor et spenn det er realistisk å hente seg inn fra.",
+            "Gjør det lettere å stoppe og evaluere når tilnærmingen ikke fungerer."
+          ]
+        }
+      },
+      "riskPerTrade": {
+        "title": "Risiko per handel eller strukturert idé",
+        "description": "Risiko per handel er beløpet som ville gått tapt hvis ideen feiler i henhold til planen. Dette defineres vanligvis som en andel av kontoverdien og oversettes deretter til lotstørrelse, kontraktstørrelse eller posisjonsstørrelse.",
+        "conceptualSteps": {
+          "title": "Konseptuelle steg",
+          "steps": [
+            "Bestem hvor stor andel av kontoen du vil risikere på denne ideen.",
+            "Definer hvor handelen anses som «feil» (stoppnivå eller utløp).",
+            "Koble avstanden til stoppen med posisjonsstørrelsen ved hjelp av plattformens kontrakts- eller pipverdi."
+          ],
+          "note": "Plattformer tilbyr vanligvis verktøy eller kalkulatorer som hjelper med dette."
+        },
+        "multiplePositions": {
+          "title": "Flere posisjoner",
+          "text": "Når flere handler er åpne i samme retning eller i lignende instrumenter, kan de oppføre seg som én større idé. Mange tradere behandler dette som samlet risiko, ikke som separate, uavhengige veddemål."
+        }
+      },
+      "dailyWeeklyLimits": {
+        "title": "Daglige og ukentlige tapsgrenser",
+        "description": "Tapsgrenser fungerer som bremser. De definerer hvor mye som kan tapes på en dag eller uke før handelen settes på pause. Uten dem er det lett for én følelsesladet økt å viske ut uker med nøye arbeid.",
+        "examples": {
+          "title": "Eksempler på hvordan tradere bruker grenser",
+          "items": [
+            "Stoppe for dagen etter et fast antall tapshandler.",
+            "Stoppe etter at en forhåndsdefinert del av kontoen er tapt i løpet av en dag eller uke.",
+            "Redusere størrelsen etter tap i stedet for å øke den."
+          ],
+          "note": "Dette er atferdsverktøy, ikke «markedets regler»."
+        },
+        "traps": {
+          "title": "Vanlige feller å se opp for",
+          "items": [
+            "Fjerne stopper fordi et tap føles ubehagelig.",
+            "Legge til i tapende posisjoner uten en tydelig plan.",
+            "Øke størrelsen etter tap for å «vinne det tilbake i én handel».",
+            "Overse søvn, mat og skjermtretthet når du tar beslutninger."
+          ]
+        }
+      },
+      "turningConcepts": {
+        "title": "Fra begreper til din egen plan",
+        "description": "Cur Nova kan ikke fortelle deg nøyaktig hvilke tall du skal velge. Det vi kan gjøre, er å hjelpe deg å tenke gjennom komponentene og dokumentere dem i en enkel, skriftlig plan.",
+        "steps": [
+          "Skriv ned en maksimal drawdown der du vil ta en pause og gjennomgå tilnærmingen din.",
+          "Bestem et typisk spenn for risiko per handel eller strukturert idé som føles bærekraftig for deg.",
+          "Definer daglige og ukentlige tapsgrenser som utløser en pause.",
+          "Bruk en journal eller Cur Novas AI-verktøy for å sjekke om du faktisk følger planen din over tid."
+        ],
+        "note": "Hvis du er usikker på hva som passer for din situasjon, bør du vurdere å snakke med en uavhengig, kvalifisert finansrådgiver."
+      }
+    },
+    "sidebar": {
+      "checklist": {
+        "title": "Rask sjekkliste før økten",
+        "subtitle": "Til opplæringsbruk, ikke et rigid regelsett.",
+        "items": [
+          "☐ Kontosaldo og åpen risiko gjennomgått.",
+          "☐ Maksimalt tap for i dag notert.",
+          "☐ Ingen enkeltidé risikerer mer enn den planlagte andelen.",
+          "☐ Skjermer, nyheter og forhold sjekket – ingen store overraskelser.",
+          "☐ Tydelig stopp- og utgangsbetingelse definert før inngang.",
+          "☐ Du handler ikke for å «vinne tilbake» tidligere tap."
+        ]
+      },
+      "examplesNote": {
+        "title": "Om eksemplene på denne siden",
+        "description": "Tall og scenarier her er nøytrale, forenklede og kun til illustrasjon. De tar ikke hensyn til din personlige situasjon, dine mål, skatteforhold eller toleranse for tap.",
+        "warning": "Ingenting her skal betraktes som en anbefaling om å åpne, lukke eller beholde en posisjon, eller om å handle på en bestemt måte."
+      },
+      "riskWarning": {
+        "title": "Advarsel om høyrisikomarked",
+        "description": "Handel med Forex, krypto og binære opsjoner er svært spekulativt og kan føre til betydelig eller fullstendig tap av kapital. Bare du kan avgjøre om slik risiko passer for deg.",
+        "note": "Cur Nova forvalter ikke midler, utfører ikke handler og gir ikke personlig finansiell rådgivning."
+      },
+      "continueLearning": {
+        "title": "Fortsett å lære",
+        "description": "Når du er komfortabel med ideene på denne siden, er de naturlige neste stegene:",
+        "topics": [
+          "Posisjonsstørrelse gjort enkelt",
+          "Prinsipper for daglig handelsjournal",
+          "Håndbok for ukentlig gjennomgang"
+        ],
+        "note": "Disse temaene bygger på den samme risiko-først-tankegangen og gir flere verktøy for struktur og gjennomgang."
+      }
+    }
+  },
+  "tradeJournal": {
+    "breadcrumb": {
+      "tradeJournal": "Daglig handelsjournal"
+    },
+    "hero": {
+      "title": "Prinsipper for daglig handelsjournal",
+      "subtitle": "En journal handler ikke om å skrive en roman etter hver handel. Den er en kompakt måte å registrere hva du planla, hva som faktisk skjedde og hvordan du oppførte deg – slik at du kan forbedre beslutningene dine over tid.",
+      "badges": {
+        "educationOnly": "Kun opplæring · Ikke handelsrådgivning",
+        "appliesTo": "Gjelder Forex / krypto / binære"
+      },
+      "conceptCard": {
+        "title": "Prosess, ikke perfeksjon",
+        "subtitle": "Bruk en enkel struktur som du faktisk klarer å holde ved like."
+      },
+      "readingTime": "Omtrentlig lesetid: 7–10 minutter."
+    },
+    "sections": {
+      "whyJournalMatters": {
+        "title": "Hvorfor en journal betyr mer enn enda en indikator",
+        "description": "Indikatorer og verktøy viser deg markedet. En journal viser deg din egen atferd. Uten den er det vanskelig å si om et resultat kom fra ferdigheter, flaks eller rett og slett for høy risiko.",
+        "points": [
+          "Den registrerer hva du planla, sammenlignet med hva du faktisk gjorde.",
+          "Den fremhever gjentakende mønstre i gevinster og tap.",
+          "Den gir deg noe konkret å gå gjennom ukentlig eller månedlig."
+        ],
+        "note": "Målet er en enkel, gjentakbar vane – ikke en ekstra fulltidsjobb med rapportskriving."
+      },
+      "entryStructure": {
+        "title": "En enkel struktur for journalføring",
+        "description": "Du trenger ikke dusinvis av kolonner. Mange tradere opplever at et lite sett med felt er nok til å se mønstre over tid.",
+        "beforeTrade": {
+          "title": "Før handelen",
+          "items": [
+            "Dato og økt (London, New York osv.).",
+            "Instrument og retning (for eksempel EUR/USD long).",
+            "Planlagt oppsett og grunn til inngang.",
+            "Planlagt risikobeløp og plassering av stopp."
+          ]
+        },
+        "afterTrade": {
+          "title": "Etter handelen",
+          "items": [
+            "Resultat i risikoenheter (for eksempel +0,8R, -1R).",
+            "Om du fulgte dine egne regler.",
+            "Én setning om hva du ville gjentatt eller unngått.",
+            "Valgfritt skjermbilde av diagrammet."
+          ]
+        }
+      },
+      "keepingEntriesShort": {
+        "title": "Hold notatene korte og nyttige",
+        "description": "Et godt notat er et du raskt kan gå gjennom senere. Lange avsnitt gjør det vanskelig å se mønstre. Korte, fokuserte linjer er lettere å skumme.",
+        "usefulNotes": {
+          "title": "Eksempler på nyttige notater",
+          "items": [
+            "«Gikk inn sent, jaget lyset, størrelsen var for stor.»",
+            "«Fulgte planen, gikk ut litt tidlig på grunn av nyheter.»",
+            "«Hoppet over oppsettet – forholdene samsvarte ikke med reglene.»"
+          ]
+        },
+        "lessUsefulNotes": {
+          "title": "Mindre nyttige notater",
+          "items": [
+            "«Markedet var helt sprøtt i dag» uten detaljer.",
+            "Svært følelsesladet språk uten en tydelig observasjon.",
+            "Ingen kobling til de skriftlige reglene eller planen din."
+          ]
+        },
+        "note": "Målet er å lage en logg som ditt fremtidige jeg kan forstå på noen få sekunder."
+      },
+      "dailyRhythm": {
+        "title": "Bygg en daglig rytme for journalføring",
+        "description": "Journalføring fungerer best når det blir en del av den vanlige handelsrytmen din, ikke noe du bare gjør på gode dager.",
+        "beforeSession": {
+          "title": "Før økten",
+          "items": [
+            "Noter nøkkelnivåer, nyheter og planlagt risiko for økten.",
+            "Skriv ned hva du vil unngå (for eksempel hevnhandler).",
+            "Sett en enkel intensjon for dagen: «Følg reglene fremfor resultatet»."
+          ]
+        },
+        "afterSession": {
+          "title": "Etter økten",
+          "items": [
+            "Oppsummer dagen i 3–4 punkter.",
+            "Fremhev én ting du gjorde bra og én ting du kan forbedre.",
+            "Sjekk om du respekterte de daglige tapsgrensene dine."
+          ]
+        }
+      },
+      "weeklyReview": {
+        "title": "Hvordan de daglige notatene mater ukentlige og månedlige gjennomganger",
+        "description": "En daglig journal er råmateriale. Når du har notater fra flere dager eller uker, kan du ta et steg tilbake og se etter mønstre som er vanskelige å se i én enkelt økt.",
+        "steps": [
+          "Grupper handler etter oppsett, marked eller tid på døgnet.",
+          "Se hvordan resultatene henger sammen med regelfølge eller regelbrudd.",
+          "Noter hvilke forhold som pleier å føre til din beste og dårligste atferd.",
+          "Oppdater den skriftlige planen din basert på gjennomgående funn."
+        ],
+        "note": "Siden Håndbok for ukentlig gjennomgang går dypere inn på hvordan du gjennomfører slike gjennomganger på en strukturert måte."
+      }
+    },
+    "sidebar": {
+      "template": {
+        "title": "Minimal journalmal",
+        "description": "Du kan tilpasse denne til en notatbok, et regneark eller en digital notatapp:",
+        "fields": [
+          "Dato / økt",
+          "Instrument / retning",
+          "Oppsett og begrunnelse",
+          "Risiko (planlagt) og plassering av stopp",
+          "Resultat i R",
+          "Regler fulgt / brutt",
+          "Viktigste lærdom (1–2 korte linjer)"
+        ],
+        "note": "Hold den så liten at du klarer å fylle den ut selv på travle eller vanskelige dager."
+      },
+      "tips": {
+        "title": "Praktiske tips for journalføring",
+        "items": [
+          "Skriv mens økten fortsatt er fersk, ikke flere dager senere.",
+          "Vær ærlig – journalen er for deg, ikke for et publikum.",
+          "Noter følelser kort, men fokuser på beslutninger og regler.",
+          "Hvis du hopper over journalføringen én dag, er det bare å starte igjen – unngå «alt eller ingenting»-tenkning."
+        ]
+      },
+      "emotionalDecisions": {
+        "title": "Følelsesstyrte beslutninger og høyrisikomarkeder",
+        "description": "Handel kan utløse sterke reaksjoner – spenning, frykt, frustrasjon. En journal kan ikke fjerne dette, men den kan gjøre mønstrene synlige slik at du kan jobbe med dem.",
+        "note": "Hvis handelen gir vedvarende stress, angst eller påvirker andre deler av livet ditt, bør du vurdere å ta et steg tilbake og søke profesjonell hjelp utenfor markedene."
+      },
+      "continueLearning": {
+        "title": "Fortsett å lære",
+        "description": "Disse temaene henger naturlig sammen med journalføring:",
+        "topics": [
+          "Grunnleggende risikostyring",
+          "Posisjonsstørrelse gjort enkelt",
+          "Håndbok for ukentlig gjennomgang"
+        ],
+        "note": "Sammen hjelper de deg å bygge en prosess som går utover enkelthandler."
+      }
+    }
+  },
+  "weeklyReview": {
+    "breadcrumb": {
+      "weeklyReview": "Ukentlig gjennomgang"
+    },
+    "hero": {
+      "title": "Håndbok for ukentlig gjennomgang",
+      "subtitle": "En ukentlig gjennomgang er der enkelthandler blir til en læringskurve. Denne siden viser en enkel struktur for å se på beslutningene, risikoen og atferden din over flere økter i Forex-, krypto- og binærmarkedene.",
+      "badges": {
+        "educationOnly": "Kun opplæring · Ikke handelsrådgivning",
+        "worksWith": "Fungerer med dine egne meglerutskrifter og din journal"
+      },
+      "conceptCard": {
+        "title": "Gjennomgang av prosess, ikke jakt på resultater",
+        "subtitle": "Fokuser først på beslutninger og risiko, deretter på resultater."
+      },
+      "readingTime": "Omtrentlig lesetid: 8–11 minutter."
+    },
+    "sections": {
+      "whyWeeklyReview": {
+        "title": "Hvorfor ukentlig gjennomgang i stedet for bare å se på resultatet",
+        "description": "Enkelthandler er preget av støy. En uke med handler begynner å vise mønstre i prosessen din – hvor du følger dine egne regler, hvor du glir ut, og hvordan risikoatferden din endrer seg etter gevinster eller tap.",
+        "points": [
+          "Den zoomer ut fra enkeltinnganger til gjentakende vaner.",
+          "Den kobler journalnotatene dine med faktiske utfall.",
+          "Den gir deg et naturlig tidspunkt for å justere den skriftlige planen – ikke midt i en økt, i kampens hete."
+        ],
+        "note": "Målet er en gjennomgang på 20–30 minutter, ikke en komplisert rapport. Enkle, jevnlige gjennomganger slår sjeldne, kompliserte."
+      },
+      "reviewStructure": {
+        "title": "En enkel struktur for ukentlig gjennomgang",
+        "description": "Du kan gjøre gjennomgangen i en notatbok, et regneark eller en notatapp. Kjernen er å stille de samme spørsmålene hver uke.",
+        "snapshot": {
+          "title": "1. Rask oversikt",
+          "items": [
+            "Antall handelsdager og handler.",
+            "Samlet resultat i risikoenheter (for eksempel +2R, -1,5R).",
+            "Eventuelle dager med regelbrudd verdt å notere."
+          ]
+        },
+        "process": {
+          "title": "2. Prosess og atferd",
+          "items": [
+            "Hvor du fulgte planen din godt.",
+            "Hvor følelser eller distraksjoner tok over.",
+            "Hvilke situasjoner som førte til dine beste og dårligste beslutninger."
+          ]
+        },
+        "setups": {
+          "title": "3. Oppsett og forhold",
+          "items": [
+            "Hvilke oppsett du handlet mest, og hvorfor.",
+            "Hvilke forhold (trend, sidelengs, nyheter) som passet deg best.",
+            "Markeder eller tidspunkter som konsekvent føltes vanskelige."
+          ]
+        },
+        "risk": {
+          "title": "4. Risiko og størrelse",
+          "items": [
+            "Om du holdt deg innenfor planlagt risiko per handel.",
+            "Hvordan du reagerte etter gevinster eller tap.",
+            "Eventuelle «hopp» i størrelse eller risiko som bør ses nærmere på."
+          ]
+        }
+      },
+      "metrics": {
+        "title": "Bruk enkle måltall uten å gjøre handelen til et regnearkprosjekt",
+        "description": "Måltall kan hjelpe, men bare hvis de er enkle nok til å vedlikeholde. Noen få grunnleggende tall er som regel nok til å se om prosessen din er stabil eller glir ut.",
+        "lightMetrics": {
+          "title": "Eksempler på enkle måltall",
+          "items": [
+            "Antall gevinster / tap i risikoenheter.",
+            "Gjennomsnittlig risiko per handel gjennom uken.",
+            "Antall handler utenfor den skriftlige planen din (hvis noen)."
+          ]
+        },
+        "carefulWith": {
+          "title": "Ting å være forsiktig med",
+          "items": [
+            "Å endre regler hele tiden basert på svært små utvalg av handler.",
+            "Å overse risiko og atferd bare fordi uken endte positivt.",
+            "Å jage et «perfekt» måltall i stedet for å lære."
+          ]
+        }
+      },
+      "adjustments": {
+        "title": "Fra notater til neste uke: små, bevisste endringer",
+        "description": "Poenget med en gjennomgang er å justere hvordan du opererer, ikke å dømme deg selv. Små, konkrete endringer gir effekt over tid.",
+        "steps": [
+          "Velg én styrke å beholde: noe du gjorde bra den uken.",
+          "Velg én atferd å justere: for eksempel å ikke handle etter et visst klokkeslett eller å redusere størrelsen etter to tap.",
+          "Oppdater den skriftlige planen eller sjekklisten med denne endringen i et enkelt språk.",
+          "Se på endringen igjen i neste ukentlige gjennomgang. Hjalp den? Hvis ikke, finjuster den i stedet for å forkaste hele ideen."
+        ],
+        "note": "Du trenger ikke endre alt på én gang. Én eller to fokuserte justeringer per uke er som regel nok."
+      },
+      "timing": {
+        "title": "Når du bør gjøre gjennomgangen – og hvordan du holder den realistisk",
+        "description": "Gjennomganger fungerer gjerne best når de skjer til et fast tidspunkt, atskilt fra de følelsesmessige toppene og bunnene i aktiv handel.",
+        "points": [
+          "Mange tradere foretrekker helgen eller en rolig stund etter ukens siste økt.",
+          "Sett av 20–30 minutter – nok til å tenke, men ikke så lenge at du unngår det.",
+          "Hold malen kort slik at du klarer å holde fast ved den selv etter krevende uker."
+        ],
+        "note": "Hvis du går glipp av en uke, er det bare å fortsette med den neste. Jevnhet over måneder er viktigere enn å aldri hoppe over en eneste gjennomgang."
+      }
+    },
+    "sidebar": {
+      "checklist": {
+        "title": "Sjekkliste for ukentlig gjennomgang",
+        "description": "En rask liste du kan ha ved siden av journalen eller plattformen:",
+        "items": [
+          "☐ Fulgte jeg de skriftlige risikogrensene mine totalt sett?",
+          "☐ Var det noen tydelige regelbrudd? Hvorfor?",
+          "☐ Hvilke oppsett føltes mest «i takt» denne uken?",
+          "☐ Endret størrelsen min seg etter gevinster eller tap?",
+          "☐ Hva er én ting jeg vil ta med meg inn i neste uke?"
+        ]
+      },
+      "prompts": {
+        "title": "Refleksjonsspørsmål du kan gjenbruke",
+        "description": "Korte spørsmål du kan kopiere inn i din egen mal:",
+        "items": [
+          "«Hvor fulgte jeg reglene mine under press?»",
+          "«Hvilken gjentatt feil så jeg denne uken?»",
+          "«Hvilket marked eller tidspunkt passer meg minst?»",
+          "«Hva ville en mer tålmodig versjon av meg ha gjort?»"
+        ]
+      },
+      "expectations": {
+        "title": "Om forventninger og usikkerhet",
+        "description": "Selv med en gjennomtenkt gjennomgangsprosess er handel med Forex, krypto og binære opsjoner svært spekulativt. Det er ingen garanti for at noen tilnærming vil være lønnsom eller at tidligere mønstre vil gjenta seg.",
+        "note": "Cur Nova forvalter ikke midler og gir ikke personlig finansiell rådgivning. Beslutningene og utfallene dine i markedet er fortsatt ditt eget ansvar."
+      },
+      "continueLearning": {
+        "title": "Fortsett å lære",
+        "description": "Disse sidene henger direkte sammen med ukentlig gjennomgang:",
+        "topics": [
+          "Prinsipper for daglig handelsjournal",
+          "Grunnleggende risikostyring",
+          "Posisjonsstørrelse gjort enkelt"
+        ],
+        "note": "Sammen utgjør de et grunnleggende rammeverk for å observere din egen prosess over tid."
+      }
+    }
+  },
+  "preSession": {
+    "breadcrumb": {
+      "preSession": "Forberedelser før økten"
+    },
+    "hero": {
+      "title": "Sjekkliste for forberedelser før økten",
+      "subtitle": "En kort, gjentakbar rutine før økten kan redusere forhastede beslutninger. Denne siden gir deg en praktisk sjekkliste for å gjøre omgivelsene, plattformen og risikoplanen klar før du legger inn en eneste handel.",
+      "badges": {
+        "educationOnly": "Kun opplæring · Ikke handelsrådgivning",
+        "appliesTo": "Gjelder Forex / krypto / binære"
+      },
+      "conceptCard": {
+        "title": "Rutine på 5–10 minutter",
+        "subtitle": "Enkel nok til å bruke før hver planlagte økt."
+      },
+      "readingTime": "Omtrentlig lesetid: 7–9 minutter."
+    },
+    "sections": {
+      "whyRoutineMatters": {
+        "title": "Hvorfor en rutine før økten er viktig",
+        "description": "Høyrisikomarkeder kan bevege seg raskt. Uten en grunnleggende rutine er det lett å hoppe inn i handler basert på følelser, overskrifter eller frykt for å gå glipp av noe, i stedet for en skriftlig plan.",
+        "points": [
+          "Den gir hver handelsøkt en tydelig start.",
+          "Den minner deg om risikogrensene dine før enhver ordre.",
+          "Den reduserer «impulshandler» og endringer i siste liten."
+        ],
+        "note": "Målet er ikke perfeksjon. Målet er noen få steg som holder deg i tråd med dine egne regler."
+      },
+      "step1": {
+        "title": "Steg 1 – Omgivelser og fokus",
+        "description": "Før du tenker på diagrammer, sørg for at omgivelsene dine legger til rette for fokuserte beslutninger.",
+        "physicalSetup": {
+          "title": "Fysisk oppsett",
+          "items": [
+            "Lukk irrelevante apper, chatter og varsler.",
+            "Ha bare de plattformene og verktøyene du trenger åpne.",
+            "Sjekk at nettforbindelse og strøm er stabile."
+          ]
+        },
+        "personalFocus": {
+          "title": "Personlig fokus",
+          "items": [
+            "Legg ærlig merke til energinivået og humøret ditt.",
+            "Avgjør om du er i stand til å følge reglene dine i dag.",
+            "Hvis ikke, vurder å redusere risikoen eller hoppe over økten."
+          ]
+        }
+      },
+      "step2": {
+        "title": "Steg 2 – Plattformsjekk og risikogrenser",
+        "description": "Noen minutter med sjekk av plattformen og risikogrensene kan hjelpe deg å unngå unødvendige feil.",
+        "platformCheck": {
+          "title": "Kontroll av plattformen",
+          "items": [
+            "Bekreft at du er logget inn på riktig konto.",
+            "Sjekk posisjonsstørrelser og margininnstillinger fra forrige gang.",
+            "Kontroller at eventuelle åpne ordrer samsvarer med planen din."
+          ]
+        },
+        "riskLimits": {
+          "title": "Risikogrenser for denne økten",
+          "items": [
+            "Noter maksimal risiko per handel i enkle tall.",
+            "Noter tapsgrensen for dagen eller økten.",
+            "Bestem hvor mange handler eller ideer du er villig til å ta i dag."
+          ]
+        }
+      },
+      "step3": {
+        "title": "Steg 3 – Markeder, nyheter og «ikke handle»-forhold",
+        "description": "Du trenger ikke å forutsi fremtiden. Men du må vite hva du går inn i.",
+        "marketOverview": {
+          "title": "Markedsoversikt",
+          "items": [
+            "Skann instrumentene du faktisk handler.",
+            "Noter om forholdene ser trendende, sidelengs eller blandede ut.",
+            "Vær oppmerksom på den generelle volatiliteten – rolig, forhøyet eller ekstrem."
+          ]
+        },
+        "newsRules": {
+          "title": "Nyheter og «ikke handle»-regler",
+          "items": [
+            "Sjekk viktige økonomiske hendelser og planlagte kunngjøringer.",
+            "Avgjør om reglene dine sier at du skal unngå å handle rundt dem.",
+            "Er du i tvil, vurder å redusere størrelsen eller hoppe over hendelsen helt."
+          ]
+        }
+      },
+      "step4": {
+        "title": "Steg 4 – Sett en enkel intensjon for økten",
+        "description": "En kort, skriftlig intensjon kan hjelpe deg å huske hva som er viktig når det blir hektisk.",
+        "examples": [
+          "«I dag måler jeg suksess etter om jeg følger reglene mine.»",
+          "«Jeg slutter å handle hvis jeg når den daglige tapsgrensen.»",
+          "«Jeg unngår å endre størrelse midt i en økt uten en skriftlig begrunnelse.»"
+        ],
+        "note": "Du kan tilpasse disse til din egen situasjon. Det viktigste er at du ser dem før du legger inn din første ordre."
+      }
+    },
+    "sidebar": {
+      "checklist": {
+        "title": "Rask sjekkliste før økten",
+        "description": "En versjon du kan ha ved siden av plattformen:",
+        "items": [
+          "☐ Omgivelsene er ryddige og fokuserte.",
+          "☐ Logget inn på riktig konto.",
+          "☐ Åpne posisjoner og ordrer sjekket.",
+          "☐ Risiko per handel og daglig grense skrevet ned.",
+          "☐ Viktige nyhetshendelser gjennomgått.",
+          "☐ Enkel intensjon for økten skrevet ned."
+        ]
+      },
+      "adaptation": {
+        "title": "Tilpass dette til din egen rutine",
+        "description": "Du kan bruke denne sjekklisten som en utskrevet side, et notat i handelsjournalen eller et raskt digitalt skjema.",
+        "items": [
+          "Start med de minste stegene du klarer å følge jevnlig.",
+          "Legg bare til detaljer hvis de tydelig hjelper deg.",
+          "Gå gjennom rutinen med noen ukers mellomrom ved hjelp av journalen og de ukentlige gjennomgangene."
+        ]
+      },
+      "notToday": {
+        "title": "Når sjekken før økten sier «ikke i dag»",
+        "description": "Noen dager kan rutinen vise at du er distrahert, trett eller for opptatt av nylige resultater. I høyrisikomarkeder kan det å ikke handle være en gyldig beslutning.",
+        "note": "Denne siden anbefaler ikke om du personlig bør eller ikke bør handle. Den gir en struktur som hjelper deg å legge merke til dine egne forutsetninger før du bestemmer deg."
+      },
+      "continueLearning": {
+        "title": "Fortsett å lære",
+        "description": "Disse sidene henger direkte sammen med rutinen din før økten:",
+        "topics": [
+          "Grunnleggende risikostyring",
+          "Posisjonsstørrelse gjort enkelt",
+          "Prinsipper for daglig handelsjournal",
+          "Håndbok for ukentlig gjennomgang"
+        ],
+        "note": "Sammen støtter de en hel syklus: forbered, handle, registrer og evaluer."
+      }
+    }
+  },
+  "positionSizing": {
+    "breadcrumb": {
+      "positionSizing": "Posisjonsstørrelse"
+    },
+    "hero": {
+      "title": "Posisjonsstørrelse gjort enkelt",
+      "subtitle": "Posisjonsstørrelse kobler risikoplanen din til den faktiske størrelsen på hver handel. Denne siden går gjennom kjerneideene bak å oversette kontorisiko, stoppavstand og kontraktsverdi til en posisjonsstørrelse i Forex-, krypto- og binærmarkedene.",
+      "badges": {
+        "educationOnly": "Kun opplæring · Ikke handelsrådgivning",
+        "worksTogether": "Fungerer sammen med Grunnleggende risikostyring"
+      },
+      "conceptCard": {
+        "title": "Oversikt over størrelsesbegrepet",
+        "subtitle": "Bruk sammen med plattformens egne verktøy og kalkulatorer."
+      },
+      "readingTime": "Omtrentlig lesetid: 8–10 minutter."
+    },
+    "sections": {
+      "whySizeMatters": {
+        "title": "Hvorfor posisjonsstørrelse er like viktig som retning",
+        "description1": "Å velge retning er én beslutning. Å velge størrelse er en annen. To tradere kan ta samme inngang, men oppleve helt forskjellige utfall fordi posisjonsstørrelsene deres er forskjellige.",
+        "question": "Posisjonsstørrelse besvarer spørsmålet:",
+        "questionHighlight": "«Hvor stor bør denne handelen være, gitt den planlagte risikoen min?»",
+        "points": [
+          "Den kobler beløpet du er forberedt på å tape med avstanden til stoppen eller utløpet.",
+          "Den stopper «tilfeldige» handelsstørrelser, der én handel i det stille dominerer risikoen din.",
+          "Den hjelper deg å sammenligne ideer på et felles grunnlag: risiko, ikke bare mulig fortjeneste."
+        ],
+        "note": "Denne siden fokuserer på begreper. I praksis bruker du som regel meglerens plattform, ordrevindu eller en egen kalkulator for å anvende dem med ekte tall."
+      },
+      "coreFormula": {
+        "title": "Størrelsestrekanten: risiko, avstand og verdi per enhet",
+        "description": "De fleste metoder for posisjonsstørrelse i girede markeder bruker den samme grunnleggende trekanten:",
+        "riskAmount": {
+          "title": "1. Risikobeløp",
+          "description": "Hvor mye du er forberedt på å tape på denne ideen, vanligvis en liten andel av kontoverdien."
+        },
+        "distanceToStop": {
+          "title": "2. Avstand til stopp / utløp",
+          "description": "Kursavstanden mellom inngangen din og punktet der handelen anses som feil eller fullført."
+        },
+        "valuePerUnit": {
+          "title": "3. Verdi per enhet",
+          "description": "Hvor mye du tjener eller taper per pip, punkt, enhet eller kontrakt – definert av megleren og instrumentet."
+        },
+        "conclusion": "Når disse tre delene er kjent, kan posisjonsstørrelsen beregnes ved å kombinere dem. Plattformer gjør ofte dette i bakgrunnen, men å forstå logikken hjelper deg å unngå overraskelser."
+      },
+      "forexExample": {
+        "title": "Konseptuelt eksempel: logikk for posisjonsstørrelse i Forex",
+        "description": "I Forex uttrykkes posisjonsstørrelse ofte som et antall lot. I bakgrunnen kobler logikken risikobeløpet ditt, pipavstanden til stoppen og pipverdien per lot.",
+        "conceptFlow": {
+          "title": "Konseptflyt",
+          "steps": [
+            "Definer risikobeløpet ditt for denne handelen.",
+            "Mål avstanden fra inngang til stopp i pips.",
+            "Bruk meglerens pipverdi per lot for å koble pipavstand med risikert beløp.",
+            "Velg lotstørrelse slik at en full stop-out omtrent tilsvarer den planlagte risikoen."
+          ],
+          "note": "Den nøyaktige pipverdien avhenger av valutaparet og kontovalutaen."
+        },
+        "whyExamples": {
+          "title": "Hvorfor tallene bare er eksempler",
+          "description": "Faktiske beregninger varierer mellom meglere og plattformer. Swap-renter, tick-størrelser og kontraktsspesifikasjoner spiller også inn. Poenget er ikke å pugge eksempeltall, men å forstå strukturen i beslutningen."
+        }
+      },
+      "cryptoBinaryNotes": {
+        "title": "Merknader om krypto- og binærstrukturer",
+        "cryptoMargin": {
+          "title": "Marginprodukter i krypto",
+          "description": "Mange kryptoprodukter bruker kontrakter eller enheter med egne tick-verdier og minstestørrelser. Volatiliteten kan være ekstrem, noe som gjør avstand til stopp og risikobeløp spesielt viktig.",
+          "note": "Sjekk alltid nominell eksponering (hvor mye underliggende du i praksis kontrollerer), ikke bare påkrevd margin."
+        },
+        "binaryPayoffs": {
+          "title": "Binære utbetalinger",
+          "description": "Binære opsjoner har ofte en fast utbetaling og et fast mulig tap. I mange tilfeller handler beslutningen om «posisjonsstørrelse» ganske enkelt om hvor mye du er villig til å satse på strukturen.",
+          "note": "Her blir risiko per handel og antall handler i en serie viktigere enn pip- eller tick-avstand."
+        }
+      },
+      "behaviourConsistency": {
+        "title": "Konsekvent størrelse som atferd, ikke en perfekt formel",
+        "description": "Posisjonsstørrelse handler ikke om å finne en magisk prosent. Det handler om å bruke et konsekvent rammeverk, slik at en serie handler oppfører seg i tråd med risikotoleransen din.",
+        "steps": [
+          "Bestem et typisk spenn for risiko per handel som føles bærekraftig.",
+          "Bruk det som et tak – du kan alltid velge mindre, men unngå «hopp» i risiko uten en tydelig grunn.",
+          "Følg med på om du faktisk følger dine egne regler for størrelse.",
+          "Juster gradvis, basert på erfaring og data, ikke på følelser etter én enkelt gevinst eller ett tap."
+        ],
+        "note": "Mange tradere synes det er nyttig å skrive ned logikken for posisjonsstørrelse som en kort sjekkliste eller et beslutningstre de raskt kan se på før de legger inn ordrer."
+      }
+    },
+    "sidebar": {
+      "simplifiedFormula": {
+        "title": "Forenklet logikk for posisjonsstørrelse",
+        "description": "I mange girede produkter ligner kjerneideen på:",
+        "formula": "Posisjonsstørrelse ≈ Risikobeløp ÷ (Avstand × Verdi per enhet)",
+        "note": "Dette er ikke en universell formel – kontraktsspesifikasjoner, gebyrer og andre faktorer varierer. Bruk den som en tankemodell, ikke som en kalkulator."
+      },
+      "pitfalls": {
+        "title": "Vanlige feil ved posisjonsstørrelse",
+        "items": [
+          "Å bruke samme lotstørrelse på hver handel uavhengig av stopp.",
+          "Å overse korrelasjoner – behandle like handler som separate.",
+          "Å øke størrelsen etter et tap for å «vinne det tilbake» raskere.",
+          "Å la slippage og gebyrer i det stille endre den faktiske risikoen."
+        ],
+        "note": "Mange av disse er atferdsproblemer, ikke matteproblemer."
+      },
+      "platformNote": {
+        "title": "Jobb med den faktiske plattformen din",
+        "description": "Hver megler definerer kontraktsstørrelser, tick-verdier og minste lotstørrelser forskjellig. Sjekk alltid hvordan din egen plattform beregner gevinst og tap før du stoler på en regel for posisjonsstørrelse.",
+        "note": "Hvis du er usikker på om en metode for posisjonsstørrelse passer din situasjon, bør du vurdere å snakke med en uavhengig finansrådgiver som forstår høyrisikomarkeder."
+      },
+      "continueLearning": {
+        "title": "Fortsett å lære",
+        "description": "For et mer helhetlig bilde av risiko og prosess henger disse temaene direkte sammen med posisjonsstørrelse:",
+        "topics": [
+          "Grunnleggende risikostyring",
+          "Prinsipper for daglig handelsjournal",
+          "Håndbok for ukentlig gjennomgang"
+        ],
+        "note": "Sammen utgjør de en grunnleggende verktøykasse for å strukturere og gjennomgå beslutningene dine over tid."
+      }
+    }
+  },
+  "strategySnapshot": {
+    "breadcrumb": {
+      "strategySnapshot": "Strategioversikt"
+    },
+    "hero": {
+      "title": "Strategioversikt på én side",
+      "subtitle": "En strategioversikt er én enkelt side som fanger kjernen i én tilnærming – markeder, tidsrammer, oppsett, risiko og utførelsesregler – slik at du ser den tydelig mens du handler.",
+      "badges": {
+        "educationOnly": "Kun opplæring · Ikke handelsrådgivning",
+        "worksWith": "Fungerer med Forex / krypto / binære"
+      },
+      "conceptCard": {
+        "title": "Beslutninger først, indikatorer etterpå",
+        "subtitle": "Én side som minner deg om hva denne strategien er – og ikke er."
+      },
+      "readingTime": "Omtrentlig lesetid: 7–10 minutter."
+    },
+    "sections": {
+      "whySinglePage": {
+        "title": "Hvorfor holde strategien på én side",
+        "description": "Mange tradere samler skjermbilder og lange notater, men klarer ikke å beskrive strategien sin kort og tydelig. En oversikt på én side tvinger deg til å bestemme hva som egentlig definerer tilnærmingen.",
+        "points": [
+          "Den gir deg en referanse du kan kaste et blikk på under en økt.",
+          "Den skiller strategien fra alle andre ideer og all støy.",
+          "Den gjør det lettere å se når du glir bort fra din egen plan."
+        ],
+        "note": "Du kan ha oversikter for ulike strategier – for eksempel én for et intradag-trendoppsett i Forex og en annen for en swing-tilnærming i krypto – men hver oversikt holdes fokusert."
+      },
+      "coreBlocks": {
+        "title": "Byggesteinene i en strategioversikt",
+        "description": "Uansett hvordan du formaterer siden – PDF, notat eller tavle – kan de fleste strategier beskrives med et lite sett seksjoner.",
+        "block1": {
+          "title": "1. Marked, tidsramme og instrumenter",
+          "items": [
+            "Hvilke markeder strategien er laget for.",
+            "Hovedtidsramme(r) du faktisk tar innganger på.",
+            "Instrumenter du spesifikt unngår eller behandler med ekstra forsiktighet."
+          ]
+        },
+        "block2": {
+          "title": "2. Definisjon av oppsett",
+          "items": [
+            "Hva som må være til stede for et gyldig oppsett.",
+            "Hvordan trend / sidelengs bevegelse / struktur bør se ut.",
+            "Hva som tydelig gjør et oppsett ugyldig."
+          ]
+        },
+        "block3": {
+          "title": "3. Risiko og posisjonsstørrelse",
+          "items": [
+            "Planlagt risiko per handel i enkle tall.",
+            "Maksimal samlet risiko for denne strategien i løpet av en dag eller uke.",
+            "Eventuelle regler for å redusere størrelsen ved høy volatilitet."
+          ]
+        },
+        "block4": {
+          "title": "4. Utførelsesregler og utganger",
+          "items": [
+            "Hvor du vanligvis plasserer stopp og mål.",
+            "Hva som utløser en utgang hvis planen endres.",
+            "Situasjoner der du bevisst velger å ikke gå inn, selv om mønsteret dukker opp."
+          ]
+        }
+      },
+      "examplesAndAvoiding": {
+        "title": "Bruk eksempler uten å gjøre oversikten til en hel bok",
+        "description": "Eksempler kan gjøre strategien lettere å forstå, men oversikten holdes fokusert når du er selektiv.",
+        "helpfulToInclude": {
+          "title": "Nyttig å ta med",
+          "items": [
+            "Ett eller to kommenterte eksempler på rene oppsett.",
+            "Et kort notat om konteksten rundt hvert eksempel.",
+            "En påminnelse om at skjermbilder er til illustrasjon, ikke til å forutsi."
+          ]
+        },
+        "betterToAvoid": {
+          "title": "Bedre å unngå",
+          "items": [
+            "Dusinvis av litt forskjellige skjermbilder som gjør ideen uklar.",
+            "Regler som endres hver gang markedet oppfører seg annerledes.",
+            "Løfter eller mål formulert som forventede resultater i stedet for scenarier."
+          ]
+        }
+      },
+      "keepingCurrent": {
+        "title": "Hold oversikten realistisk og oppdatert",
+        "description": "Markedene endrer seg, og det gjør forståelsen din også. Oversikten skal utvikle seg – men på en kontrollert måte.",
+        "steps": [
+          "Gå gjennom oversikten under ukentlige eller månedlige gjennomganger, ikke midt i en stressende økt.",
+          "Når du endrer en regel, skriv et kort notat om hvorfor du endret den og hva du forventer å se.",
+          "Bruk enkle versjonsmerker (for eksempel v1.1, v1.2) slik at du vet hva du brukte til ulike tider.",
+          "Hvis en strategi ikke lenger passer deg eller markedet, arkiver oversikten i stedet for å tvinge den gjennom."
+        ],
+        "note": "En litt ufullkommen, men oppdatert oversikt er mer nyttig enn et «perfekt» dokument du aldri faktisk følger."
+      }
+    },
+    "sidebar": {
+      "skeletonTemplate": {
+        "title": "Enkelt skjelett for strategioversikt",
+        "description": "Et rent tekstskjelett du kan kopiere inn i din egen PDF eller dine notater:",
+        "items": [
+          {
+            "label": "Strateginavn"
+          },
+          {
+            "label": "Markeder og tidsrammer"
+          },
+          {
+            "label": "Et gyldig oppsett ser slik ut"
+          },
+          {
+            "label": "Ugyldig / unngå når"
+          },
+          {
+            "label": "Risiko per handel"
+          },
+          {
+            "label": "Regler for utførelse og utgang"
+          }
+        ]
+      },
+      "questionsToAnswer": {
+        "title": "Spørsmål oversikten bør besvare raskt",
+        "description": "Når du ser på siden, bør du kunne svare på:",
+        "questions": [
+          "«Hvilke typer markeder er denne strategien for?»",
+          "«Hva gjør tydelig dette oppsettet ugyldig i dag?»",
+          "«Hvor mye kan jeg tape hvis denne ideen slår feil?»",
+          "«Når og hvorfor ville jeg bevisst latt være å handle den?»"
+        ]
+      },
+      "riskNote": {
+        "title": "Om strategier, risiko og usikkerhet",
+        "description": "Selv en godt dokumentert strategi kan ikke fjerne usikkerheten i Forex, krypto eller binære opsjoner. Kursene kan bevege seg kraftig og uforutsigbart, og tapene kan bli større enn forventet.",
+        "note": "Cur Nova tilbyr kun opplæring og opererer ikke som megler eller signalleverandør. Handelsbeslutningene og resultatene dine er fortsatt ditt eget ansvar."
+      },
+      "continueLearning": {
+        "title": "Fortsett å lære med Cur Nova",
+        "description": "Disse sidene henger naturlig sammen med å bygge og bruke strategioversikten din:",
+        "topics": [
+          "Grunnleggende risikostyring",
+          "Posisjonsstørrelse gjort enkelt",
+          "Sjekkliste for forberedelser før økten",
+          "Prinsipper for daglig handelsjournal",
+          "Håndbok for ukentlig gjennomgang"
+        ],
+        "note": "Sammen hjelper de deg å definere, anvende og forbedre dine egne tilnærminger over tid."
+      }
+    }
+  },
+  "ui": {
+    "customBuilder": "Bygger for tilpassede kurs",
+    "aiBuilder": "AI-strategibygger",
+    "fillRequired": "Fyll ut alle obligatoriske felt",
+    "goalsShort": "Målene er for korte",
+    "goalsShortDesc": "Beskriv målene dine med minst 10 tegn.",
+    "error": "Feil",
+    "submitFailed": "Kunne ikke sende bestillingen. Prøv igjen.",
+    "traderProfile": "Traderprofil",
+    "marketRisk": "Marked og risiko",
+    "scheduleTools": "Tidsplan og verktøy",
+    "goalsNotes": "Mål og notater",
+    "consent": "Samtykke og bekreftelse",
+    "startNew": "Start ny generering",
+    "replaceWarning": "Dette starter en ny oppgave og erstatter den nåværende.",
+    "confirm": "Bekreft",
+    "cancel": "Avbryt",
+    "noJobId": "Mottok ingen oppgave-ID fra serveren",
+    "requestSubmitted": "Forespørselen er sendt",
+    "generationStarted": "Genereringen av strategien har startet for {count} språk. Du kan lukke dette vinduet.",
+    "generateFailed": "Kunne ikke generere strategien. Prøv igjen.",
+    "strategyPreset": "Forhåndsvalg for strategi",
+    "coreParameters": "Kjerneparametere",
+    "outputSettings": "Innstillinger for resultat",
+    "forex": "Forex",
+    "crypto": "Krypto",
+    "binaryOptions": "Binære opsjoner",
+    "startFailed": "Kunne ikke starte genereringen",
+    "processing": "Behandler…",
+    "generating": "Genererer…"
+  }
+}

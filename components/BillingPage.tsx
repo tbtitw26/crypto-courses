@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import { useValueLabel, useIntlLocale } from '@/hooks/use-value-label'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -82,6 +83,8 @@ interface ApiTransaction {
 
 export function BillingPage() {
   const t = useTranslations('dashboard.billingPage')
+  const valueLabel = useValueLabel()
+  const intlLocale = useIntlLocale()
   const tDashboard = useTranslations('dashboard')
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -115,12 +118,12 @@ export function BillingPage() {
           const data = await response.json()
           const formattedTransactions: Transaction[] = data.transactions.map((tx: ApiTransaction) => {
             const txDate = new Date(tx.date)
-            const dateStr = txDate.toLocaleDateString('en-US', {
+            const dateStr = txDate.toLocaleDateString(intlLocale, {
               month: 'short',
               day: 'numeric',
               year: 'numeric',
             })
-            const timeStr = txDate.toLocaleTimeString('en-US', {
+            const timeStr = txDate.toLocaleTimeString(intlLocale, {
               hour: '2-digit',
               minute: '2-digit',
             })
@@ -158,7 +161,7 @@ export function BillingPage() {
               date: dateStr,
               time: timeStr,
               isoDate: txDate.toISOString(),
-              description: tx.detail,
+              description: valueLabel(tx.detail),
               type: componentType,
               currencyAmount,
               tokensDelta,

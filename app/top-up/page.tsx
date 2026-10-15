@@ -5,11 +5,14 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { redirect } from 'next/navigation'
 import { TopUpPage } from '@/components/TopUpPage'
-import enTopUp from '@/i18n/en/topUp.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: enTopUp.title,
-  description: enTopUp.subtitle,
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('topUp.title'),
+    description: t('topUp.subtitle'),
+  }
 }
 
 export default async function TopUpPageRoute() {

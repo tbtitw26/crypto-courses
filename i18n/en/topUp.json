@@ -14,6 +14,71 @@
     "cta": "Continue to payment"
   },
   "buyPack": "Buy {name}",
-  "tokens": "tokens"
+  "tokens": "tokens",
+  "status": {
+    "successTitle": "Payment Successful!",
+    "successDesc": "Your payment has been confirmed and the tokens were added to your account.",
+    "failedTitle": "Payment Not Completed",
+    "failedDesc": "The payment was not completed. You can try again whenever you are ready.",
+    "pendingTitle": "Payment Pending",
+    "pendingDesc": "Your payment is still processing. This page will update automatically.",
+    "missingRef": "Missing payment reference. Please check your dashboard for updates.",
+    "fetchFailed": "Unable to fetch payment status",
+    "checking": "Checking payment status",
+    "checkingDesc": "Confirming your transaction with the payment provider. This usually takes a few seconds.",
+    "reference": "Reference",
+    "details": "Payment details",
+    "status": "Status",
+    "tokens": "Tokens",
+    "charged": "Charged",
+    "autoRefresh": "Auto-refreshing until the provider confirms your payment",
+    "balanceUpdated": "Your balance has been updated. Return to checkout to finish the course purchase with tokens.",
+    "returnCheckout": "Return to checkout",
+    "viewAccount": "View my account",
+    "viewReceipt": "View receipt",
+    "tryAgain": "Try again",
+    "states": {
+      "INITIATED": "Initiated",
+      "PENDING": "Pending",
+      "COMPLETED": "Completed",
+      "FAILED": "Failed",
+      "CANCELLED": "Cancelled",
+      "EXPIRED": "Expired",
+      "REFUNDED": "Refunded"
+    }
+  },
+  "form": {
+    "youGet": "You'll get {tokens} Tokens",
+    "invalidAmountMsg": "Please enter a valid amount (minimum 0.01)",
+    "invalidAmount": "Invalid amount",
+    "processing": "Processing...",
+    "noRedirect": "No redirect URL received",
+    "genericError": "An error occurred. Please try again.",
+    "paymentError": "Payment error",
+    "choosePackage": "Choose a package",
+    "tokensN": "{tokens} Tokens",
+    "bonus": "{tokens} Tokens (+{percent}% Bonus)",
+    "custom": "Custom",
+    "anyAmount": "Any amount",
+    "orCustom": "Or enter custom amount",
+    "addTokens": "Add Tokens",
+    "error": "Error"
+  },
+  "page": {
+    "steps": [
+      "Choose amount",
+      "Secure checkout",
+      "Tokens credited"
+    ],
+    "selectedPack": "Selected pack",
+    "price": "Price",
+    "tokens": "Tokens",
+    "trust": "Token purchases are processed securely via hosted payment. All content is for educational purposes only. Tokens do not constitute financial advice or tradable instruments."
+  },
+  "checkout": {
+    "sessionFailed": "Failed to create payment session",
+    "noRedirect": "No redirect URL received from payment gateway",
+    "failed": "Payment failed",
+    "tryLater": "Please try again in a moment."
+  }
 }
-

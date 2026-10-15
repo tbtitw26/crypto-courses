@@ -1,0 +1,316 @@
+{
+  "breadcrumb": {
+    "home": "Hjem",
+    "cookies": "Retningslinjer for informasjonskapsler"
+  },
+  "hero": {
+    "pill": "Oppdatert 6. desember 2025",
+    "title": "Slik bruker Cur Nova informasjonskapsler og lignende teknologier.",
+    "subtitle": "Disse retningslinjene forklarer hvordan og hvorfor vi bruker informasjonskapsler, localStorage/sessionStorage-nøkler, SDK-identifikatorer og piksler på cur-nova.com og i dashbordet/AI-verktøyene våre. De er i tråd med kravene i UK GDPR og PECR og speiler forventningene i EUs personvernforordning (GDPR).",
+    "badges": {
+      "regions": "Samsvar med Storbritannia · EU",
+      "features": "Nettsted, dashbord og AI-verktøy",
+      "optional": "Ikke-nødvendige = samtykke kreves"
+    },
+    "note": "Du kan når som helst se gjennom eller endre valgene for informasjonskapsler via lenken Innstillinger for informasjonskapsler i bunnteksten.",
+    "highlights": [
+      "Nødvendige informasjonskapsler holder øktene sikre, lagrer valutavalget ditt og muliggjør kjøp.",
+      "Analyse-/ytelsesdata minimeres, aggregeres og blir aldri solgt eller delt for annonsering.",
+      "Markedsførings-/attribusjonstagger er av som standard og aktiveres kun etter uttrykkelig samtykke."
+    ],
+    "snapshotCard": {
+      "title": "Kort oppsummert",
+      "subtitle": "Nøkkelfakta før den fullstendige juridiske teksten",
+      "items": [
+        "Behandlingsansvarlig: CUR NOVA LTD (org.nr. 17240836).",
+        "Kontakt: info@cur-nova.com · Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia.",
+        "Omfang: verktøy for handelsopplæring, tokenkjøp, generering av AI-kurs/-strategier.",
+        "Betaling: Visa/Mastercard i GBP med visning i EUR og USD.",
+        "Teknologier som omfattes: informasjonskapsler, localStorage, sessionStorage, piksler, SDK-er.",
+        "Samtykke: lagres i minst 24 måneder (opptil 6 år ved behov)."
+      ],
+      "note": "Dette sammendraget hjelper deg å få oversikt over det viktigste. De øvrige avsnittene inneholder de bindende forpliktelsene og prosessene."
+    }
+  },
+  "metaPanel": {
+    "effectiveDate": "Gjelder fra: 6. desember 2025",
+    "compliance": "Vi overholder UK GDPR og PECR og speiler standardene i EUs GDPR/ePrivacy. Der vi bygger på berettiget interesse (for personvernvennlig analyse eller sikkerhet), bruker vi streng dataminimering, avkorting av IP-adresser og kort lagringstid.",
+    "details": [
+      {
+        "label": "Behandlingsansvarlig",
+        "value": "CUR NOVA LTD (org.nr. 17240836)"
+      },
+      {
+        "label": "Kontakt",
+        "value": "info@cur-nova.com"
+      },
+      {
+        "label": "Kontekst",
+        "value": "Plattform for handelsopplæring med ferdige PDF-er, AI-genererte tilpassede kurs/strategier, tokenpakker og betaling med Visa/Mastercard"
+      }
+    ]
+  },
+  "toc": {
+    "title": "Innhold",
+    "items": [
+      "Oversikt",
+      "Hva er informasjonskapsler?",
+      "Kategorier vi bruker",
+      "Typiske informasjonskapsler og lagringsnøkler",
+      "Samtykke og rettslig grunnlag",
+      "Slik registrerer vi samtykke",
+      "Tredjeparter og overføringer",
+      "Administrere/trekke tilbake samtykke",
+      "Global Privacy Controls (GPC)",
+      "Endringer i disse retningslinjene",
+      "Kontakt"
+    ],
+    "relatedPages": {
+      "label": "Relaterte retningslinjer",
+      "text": "Se også",
+      "privacyLink": "Personvernerklæring",
+      "termsLink": "Vilkår for bruk",
+      "suffix": "for mer om behandling av personopplysninger."
+    }
+  },
+  "sections": [
+    {
+      "id": "overview",
+      "number": "1",
+      "title": "Oversikt",
+      "content": [
+        "Disse retningslinjene for informasjonskapsler forklarer hvordan Cur Nova bruker informasjonskapsler og lignende teknologier (localStorage, sessionStorage, SDK-identifikatorer og piksler) på cur-nova.com og tilknyttede tjenester. De utfyller personvernerklæringen vår og gjelder ved siden av tokenkjøp, dashbord og AI-drevet levering av kurs/strategier.",
+        "Ved å bruke banneret for informasjonskapsler eller innstillingssenteret styrer du samtykket for hver ikke-nødvendige kategori. Nødvendige informasjonskapsler forblir aktive for å holde plattformen sikker og funksjonell."
+      ],
+      "list": [
+        "Behandlingsansvarlig: CUR NOVA LTD, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia.",
+        "Kontakt: info@cur-nova.com",
+        "Omfang: bibliotek med ferdige PDF-er, AI-genererte tilpassede kurs/strategier, tokenkjøp og betalingsflyter."
+      ]
+    },
+    {
+      "id": "definition",
+      "number": "2",
+      "title": "Hva er informasjonskapsler (og lignende teknologier)?",
+      "content": [
+        "Informasjonskapsler er små filer som lagres på enheten din for å muliggjøre sikre økter, huske preferanser og måle ytelse. Lignende teknologier omfatter localStorage/sessionStorage-nøkler (for grensesnittets tilstand), SDK-identifikatorer (for app-lignende flyter) og piksler som brukes til analyse eller attribusjon.",
+        "På Cur Nova bidrar de til autentisering, betalingssikkerhet, valutavalg, dashbordfiltre, logger for AI-generering, svindelovervåking og – der du tillater det – analyse/markedsføring."
+      ]
+    },
+    {
+      "id": "categories",
+      "number": "3",
+      "title": "Kategorier vi bruker",
+      "content": [
+        "Vi grupperer informasjonskapsler og lignende teknologier i følgende kategorier. Bare «nødvendige» informasjonskapsler brukes uten samtykke; alle andre venter på ditt uttrykkelige valg."
+      ],
+      "cards": [
+        {
+          "icon": "shield",
+          "title": "Nødvendige / essensielle",
+          "description": "Autentisering, økthåndtering, CSRF-beskyttelse, sikkerhet i kassen, svindelforebygging og logging av samtykke."
+        },
+        {
+          "icon": "settings",
+          "title": "Funksjonelle / preferanser",
+          "description": "Valuta, tema, dashbordfiltre, påminnelser om tokenpakker og lagrede forhåndsvalg i AI-skjemaer."
+        },
+        {
+          "icon": "cpu",
+          "title": "Ytelse / analyse",
+          "description": "Aggregerte måltall om sidelasting, pålitelighet i AI-genereringen, feildiagnostikk og bruk av ulike deler av produktet."
+        },
+        {
+          "icon": "alert",
+          "title": "Markedsføring / attribusjon",
+          "description": "Valgfrie tagger for kampanjemåling, remarketing eller partnerattribusjon. Deaktivert med mindre du samtykker."
+        },
+        {
+          "icon": "lock",
+          "title": "Sikkerhet / mot misbruk",
+          "description": "Hastighetsbegrensning, avviksdeteksjon, bot-beskyttelse og enhetsgjenkjenning som utelukkende brukes til å beskytte kontoer."
+        }
+      ]
+    },
+    {
+      "id": "examples",
+      "number": "4",
+      "title": "Typiske informasjonskapsler og lagringsnøkler",
+      "content": [
+        "Konkrete navn, leverandører og levetider kan endres når vi oppdaterer tjenesten. Den gjeldende listen er alltid tilgjengelig i panelet Innstillinger for informasjonskapsler."
+      ],
+      "table": {
+        "headers": [
+          "Navn (eksempel)",
+          "Formål",
+          "Kategori",
+          "Typisk levetid"
+        ],
+        "rows": [
+          {
+            "name": "cur-nova_session_id",
+            "purpose": "Opprettholder den autentiserte økten og knytter enheten til aktiv innlogging i dashbordet",
+            "category": "Nødvendig",
+            "lifetime": "Økt"
+          },
+          {
+            "name": "cur-nova_csrf_token",
+            "purpose": "Beskytter skjemaer og API-kall mot forfalskning",
+            "category": "Nødvendig",
+            "lifetime": "Økt"
+          },
+          {
+            "name": "cur-nova_consent_state",
+            "purpose": "Lagrer preferansene dine for informasjonskapsler (per kategori og tidspunkt)",
+            "category": "Nødvendig / funksjonell",
+            "lifetime": "6–12 måneder"
+          },
+          {
+            "name": "cur-nova_ui_prefs",
+            "purpose": "Tema, valuta og oppsett",
+            "category": "Funksjonell",
+            "lifetime": "Opptil 6 måneder"
+          },
+          {
+            "name": "cur-nova_perf_metrics",
+            "purpose": "Ytelses-/feildiagnostikk (aggregert)",
+            "category": "Analyse",
+            "lifetime": "1–3 måneder"
+          },
+          {
+            "name": "cur-nova_campaign_src",
+            "purpose": "Kampanjeattribusjon der du har samtykket til markedsføring",
+            "category": "Markedsføring",
+            "lifetime": "1–3 måneder"
+          },
+          {
+            "name": "cur-nova_wallet_hint (localStorage)",
+            "purpose": "Husker sist viste lommebok-/påfyllingsvisning eller foretrukket tokenpakke",
+            "category": "Funksjonell",
+            "lifetime": "Til den slettes"
+          },
+          {
+            "name": "cur-nova_course_filters (localStorage)",
+            "purpose": "Lagrer dashbord-/kursfiltre som vanskelighetsgrad eller marked",
+            "category": "Funksjonell",
+            "lifetime": "Til den slettes"
+          }
+        ]
+      }
+    },
+    {
+      "id": "lawfulBasis",
+      "number": "5",
+      "title": "Samtykke og rettslig grunnlag",
+      "content": [
+        "Nødvendige informasjonskapsler bygger på rettslig grunnlag om «oppfyllelse av en avtale», fordi de er nødvendige for å drive kontoen din, sikre transaksjoner og levere innholdet du ber om.",
+        "Funksjonelle informasjonskapsler, analyse- og markedsføringskapsler bygger på samtykke, med mindre vi uttrykkelig oppgir at et bestemt analyseverktøy brukes på grunnlag av berettiget interesse (for eksempel avkortet IP, ingen sporing på tvers av nettsteder, kort lagringstid, aggregert rapportering).",
+        "Sikkerhetsteknologier og teknologier mot misbruk bygger på berettiget interesse for å holde tjenesten trygg for deg og andre brukere."
+      ]
+    },
+    {
+      "id": "recording",
+      "number": "6",
+      "title": "Slik registrerer og oppbevarer vi samtykke",
+      "content": [
+        "Når du lagrer valgene dine for informasjonskapsler, logger vi valgte kategorier, versjon av retningslinjene, tidspunkt og tekniske metadata (IP-adresse, brukeragent) av dokumentasjons- og sikkerhetshensyn.",
+        "Samtykkeregistreringer oppbevares i minst 24 måneder og opptil 6 år der det er nødvendig for henvendelser fra myndigheter eller tvisteløsning, i tråd med lagringsplanen i personvernerklæringen vår."
+      ]
+    },
+    {
+      "id": "thirdParties",
+      "number": "7",
+      "title": "Tredjeparter og internasjonale overføringer",
+      "content": [
+        "Vi kan bruke tredjepartsleverandører for betaling, autentisering, analyse, hosting/CDN, e-postlevering, videohosting eller attribusjon. Noen leverandører behandler personopplysninger utenfor Storbritannia/EØS.",
+        "Ved overføringer bruker vi britiske adekvansbeslutninger, britiske/EUs standard personvernbestemmelser (SCC) og supplerende tekniske/organisatoriske tiltak (kryptering, tilgangskontroll, dataminimering). Panelet Innstillinger for informasjonskapsler viser gjeldende leverandører."
+      ]
+    },
+    {
+      "id": "managing",
+      "number": "8",
+      "title": "Administrere eller trekke tilbake samtykke",
+      "content": [
+        "Bruk banneret ved første besøk eller den faste lenken «Innstillinger for informasjonskapsler» i bunnteksten for å godta, avvise eller tilpasse kategorier. Det siste valget ditt gjelder fremover og påvirker ikke behandling som er utført før samtykket ble trukket tilbake.",
+        "Du kan slette informasjonskapsler via nettleseren eller bruke privat modus. Blokkering av nødvendige informasjonskapsler kan føre til at innlogging, dashbord eller betalinger slutter å fungere."
+      ]
+    },
+    {
+      "id": "gpc",
+      "number": "9",
+      "title": "Do Not Track / Global Privacy Controls",
+      "content": [
+        "Hvis nettleseren din sender Global Privacy Control (GPC) eller lignende signaler, behandler vi dem som en reservasjon mot ikke-nødvendige informasjonskapsler der det er teknisk mulig etter gjeldende lov.",
+        "Standardene varierer, og ikke alle miljøer sender pålitelige signaler, så vi kan ikke garantere at signalene alltid respekteres i eldre nettlesere."
+      ]
+    },
+    {
+      "id": "changes",
+      "number": "10",
+      "title": "Endringer i disse retningslinjene",
+      "content": [
+        "Vi kan oppdatere disse retningslinjene for informasjonskapsler når vi legger til nye integrasjoner, analyseverktøy eller betalingspartnere, eller når lovkravene endres. Vesentlige oppdateringer varsles via melding i appen, banner og/eller e-post til registrerte brukere.",
+        "Datoen for ikrafttredelse ovenfor viser alltid den nyeste versjonen. Endringer gjelder fremover."
+      ]
+    },
+    {
+      "id": "contact",
+      "number": "11",
+      "title": "Kontakt",
+      "content": [
+        "Spørsmål om informasjonskapsler eller disse retningslinjene kan rettes til:"
+      ],
+      "contacts": [
+        "E-post: info@cur-nova.com",
+        "Postadresse: CUR NOVA LTD, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia"
+      ]
+    }
+  ],
+  "cta": {
+    "title": "Du styrer ikke-nødvendige informasjonskapsler når som helst.",
+    "subtitle": "Cur Novas sentrale opplæringsfunksjoner er tilgjengelige selv om du avslår alt unntatt de nødvendige teknologiene.",
+    "backToHome": "Tilbake til forsiden",
+    "openCookieSettings": "Åpne innstillinger for informasjonskapsler"
+  },
+  "entryToast": {
+    "title": "Vi bruker informasjonskapsler for sikkerhet og tilpasning",
+    "description": "Se gjennom kategoriene eller endre valgene via lenken Innstillinger for informasjonskapsler i bunnteksten."
+  },
+  "banner": {
+    "title": "Vi bruker informasjonskapsler for å levere, sikre og forbedre Cur Nova.",
+    "description": "Velg hvilke kategorier du vil tillate. Nødvendige informasjonskapsler er alltid på, slik at innlogging, betalinger og PDF-levering fortsetter å fungere.",
+    "actions": {
+      "acceptAll": "Godta alle",
+      "rejectNonEssential": "Avvis ikke-nødvendige",
+      "manage": "Administrer preferanser",
+      "save": "Lagre preferanser"
+    },
+    "preferences": {
+      "title": "Preferanser for informasjonskapsler",
+      "description": "Slå kategoriene nedenfor av eller på og lagre. Du kan når som helst komme tilbake til dette panelet via lenken i bunnteksten.",
+      "lastUpdated": "Sist oppdatert",
+      "categories": {
+        "necessary": {
+          "title": "Nødvendige / essensielle",
+          "description": "Alltid på for autentisering, sikkerhet, kasse og logging av samtykke."
+        },
+        "functional": {
+          "title": "Funksjonelle / preferanser",
+          "description": "Valuta, tema og lagrede filtre."
+        },
+        "analytics": {
+          "title": "Ytelse / analyse",
+          "description": "Aggregerte måltall som hjelper oss å forbedre stabiliteten."
+        },
+        "marketing": {
+          "title": "Markedsføring / attribusjon",
+          "description": "Valgfrie tagger for kampanjemåling."
+        }
+      }
+    },
+    "footer": {
+      "text": "Les de fullstendige retningslinjene",
+      "linkLabel": "Retningslinjer for informasjonskapsler"
+    }
+  }
+}

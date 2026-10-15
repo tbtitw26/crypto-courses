@@ -126,6 +126,7 @@ export function LearnPage() {
   const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState<TabKey>('custom')
   const t = useTranslations('learn')
+  const tUi = useTranslations('learn.ui')
   const tInfo = useTranslations('learn.info')
 
   useEffect(() => {
@@ -176,7 +177,7 @@ export function LearnPage() {
             }`}
           >
             <UserCog className="h-4 w-4" />
-            Custom Course Builder
+            {tUi('customBuilder')}
           </button>
 
           <button
@@ -188,7 +189,7 @@ export function LearnPage() {
             }`}
           >
             <Cpu className="h-4 w-4" />
-            AI Strategy Builder
+            {tUi('aiBuilder')}
           </button>
         </div>
       </section>
@@ -215,6 +216,7 @@ function CustomCourseForm() {
   const tSidebar = useTranslations('learn.custom.sidebar')
   const tAuth = useTranslations('learn.auth')
   const tCommon = useTranslations('common.auth')
+  const tUi = useTranslations('learn.ui')
 
   const jobIdFromUrl = searchParams.get('jobId') || undefined
   const [activeJobs, setActiveJobs] = useState<Array<{ jobId: string; language: string }>>([])
@@ -325,7 +327,7 @@ function CustomCourseForm() {
 
     if (!experience || markets.length === 0 || !deposit || !riskTolerance || !tradingStyle || !goals || selectedLanguages.length === 0 || !consentEducation || !consentTerms) {
       showToast({
-        title: 'Please fill all required fields',
+        title: tUi('fillRequired'),
         variant: 'error',
       })
       return
@@ -333,8 +335,8 @@ function CustomCourseForm() {
 
     if (goals.trim().length < 10) {
       showToast({
-        title: 'Goals too short',
-        description: 'Please describe your goals in at least 10 characters.',
+        title: tUi('goalsShort'),
+        description: tUi('goalsShortDesc'),
         variant: 'error',
       })
       return
@@ -422,7 +424,7 @@ function CustomCourseForm() {
       const parsed = parseStartResponse(data)
 
       if (!parsed.ok) {
-        throw new Error(parsed.message || 'Failed to start generation')
+        throw new Error(parsed.message || tUi('startFailed'))
       }
 
       if (parsed.jobs && parsed.jobs.length > 0) {
@@ -434,7 +436,7 @@ function CustomCourseForm() {
         const tab = searchParams.get('tab') || 'custom'
         router.replace(`/learn?tab=${tab}&jobId=${parsed.jobId}`)
       } else {
-        throw new Error(parsed.message || 'No job ID received from server')
+        throw new Error(parsed.message || tUi('noJobId'))
       }
 
       showToast({
@@ -445,8 +447,8 @@ function CustomCourseForm() {
     } catch (error) {
       console.error('Custom course submission error:', error)
       showToast({
-        title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to submit request. Please try again.',
+        title: tUi('error'),
+        description: error instanceof Error ? error.message : tUi('submitFailed'),
         variant: 'error',
       })
     } finally {
@@ -465,7 +467,7 @@ function CustomCourseForm() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Profile */}
-          <FormSection title="Trader profile" hint={tForm('experience.required')}>
+          <FormSection title={tUi('traderProfile')} hint={tForm('experience.required')}>
             <div className="space-y-4">
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-text-secondary">
@@ -497,7 +499,7 @@ function CustomCourseForm() {
           </FormSection>
 
           {/* Market & Risk */}
-          <FormSection title="Market & Risk">
+          <FormSection title={tUi('marketRisk')}>
             <div className="space-y-4">
               <div>
                 <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
@@ -545,7 +547,7 @@ function CustomCourseForm() {
           </FormSection>
 
           {/* Schedule & Tools */}
-          <FormSection title="Schedule & tools">
+          <FormSection title={tUi('scheduleTools')}>
             <div className="space-y-4">
               <div>
                 <label className="mb-1.5 block text-sm font-medium text-text-secondary">
@@ -576,7 +578,7 @@ function CustomCourseForm() {
           </FormSection>
 
           {/* Goals */}
-          <FormSection title="Goals & notes">
+          <FormSection title={tUi('goalsNotes')}>
             <div className="space-y-4">
               <div>
                 <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
@@ -609,7 +611,7 @@ function CustomCourseForm() {
           {/* Consent */}
           <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
             <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
-              Consent & acknowledgement
+              {tUi('consent')}
             </p>
             <div className="space-y-3">
               <label className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary">
@@ -649,7 +651,7 @@ function CustomCourseForm() {
               {isLoading ? (
                 <span className="inline-flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Processing…
+                  {tUi('processing')}
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-2">
@@ -660,25 +662,25 @@ function CustomCourseForm() {
             </button>
             {hasActiveJob && !showNewGenerationConfirm && (
               <button type="button" onClick={handleStartNewGeneration} className="btn-secondary">
-                Start new generation
+                {tUi('startNew')}
               </button>
             )}
             {showNewGenerationConfirm && (
               <div className="flex items-center gap-2 rounded-lg border border-gold-200 bg-gold-50 px-3 py-2 text-xs text-gold-800">
-                <span>This will start a new task and replace the current one.</span>
+                <span>{tUi('replaceWarning')}</span>
                 <button
                   type="button"
                   onClick={handleConfirmNewGeneration}
                   className="rounded-md bg-gold-200 px-2 py-1 font-medium transition-colors hover:bg-gold-300"
                 >
-                  Confirm
+                  {tUi('confirm')}
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowNewGenerationConfirm(false)}
                   className="font-medium text-text-secondary hover:text-text-main"
                 >
-                  Cancel
+                  {tUi('cancel')}
                 </button>
               </div>
             )}
@@ -805,6 +807,7 @@ function AIStrategyForm() {
   const tSidebar = useTranslations('learn.ai.sidebar')
   const tAuth = useTranslations('learn.auth')
   const tCommon = useTranslations('common.auth')
+  const tUi = useTranslations('learn.ui')
 
   const jobIdFromUrl = searchParams.get('jobId') || undefined
   const [activeJobs, setActiveJobs] = useState<Array<{ jobId: string; language: string }>>([])
@@ -954,7 +957,7 @@ function AIStrategyForm() {
       !focus
     ) {
       showToast({
-        title: 'Please fill all required fields',
+        title: tUi('fillRequired'),
         variant: 'error',
       })
       return
@@ -1006,7 +1009,7 @@ function AIStrategyForm() {
       const parsed = parseStartResponse(data)
 
       if (!parsed.ok) {
-        throw new Error(parsed.message || 'Failed to start generation')
+        throw new Error(parsed.message || tUi('startFailed'))
       }
 
       if (parsed.jobs && parsed.jobs.length > 0) {
@@ -1018,19 +1021,19 @@ function AIStrategyForm() {
         const tab = searchParams.get('tab') || 'ai'
         router.replace(`/learn?tab=${tab}&jobId=${parsed.jobId}`)
       } else {
-        throw new Error('No job ID received from server')
+        throw new Error(tUi('noJobId'))
       }
 
       showToast({
-        title: 'Request submitted',
-        description: parsed.message || `Strategy generation started for ${parsed.jobs?.length || 1} language(s). You can close this window.`,
+        title: tUi('requestSubmitted'),
+        description: tUi('generationStarted', { count: parsed.jobs?.length || 1 }),
         variant: 'success',
       })
     } catch (error) {
       console.error('[AI Strategy] submission error:', error)
       showToast({
-        title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to generate strategy. Please try again.',
+        title: tUi('error'),
+        description: error instanceof Error ? error.message : tUi('generateFailed'),
         variant: 'error',
       })
     } finally {
@@ -1049,7 +1052,7 @@ function AIStrategyForm() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Strategy preset */}
-          <FormSection title="Strategy preset" hint={tForm('presets.hint')}>
+          <FormSection title={tUi('strategyPreset')} hint={tForm('presets.hint')}>
             <div>
               <label className="mb-1.5 block text-sm font-medium text-text-secondary">
                 {tForm('presets.label')}
@@ -1065,7 +1068,7 @@ function AIStrategyForm() {
           </FormSection>
 
           {/* Core parameters */}
-          <FormSection title="Core parameters">
+          <FormSection title={tUi('coreParameters')}>
             <div className="space-y-4">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div>
@@ -1077,9 +1080,9 @@ function AIStrategyForm() {
                     onChange={(e) => setMarket(e.target.value as 'forex' | 'crypto' | 'binary')}
                     className="input-field w-full text-sm"
                   >
-                    <option value="forex">Forex</option>
-                    <option value="crypto">Crypto</option>
-                    <option value="binary">Binary options</option>
+                    <option value="forex">{tUi('forex')}</option>
+                    <option value="crypto">{tUi('crypto')}</option>
+                    <option value="binary">{tUi('binaryOptions')}</option>
                   </select>
                 </div>
                 <div>
@@ -1158,7 +1161,7 @@ function AIStrategyForm() {
           </FormSection>
 
           {/* Output options */}
-          <FormSection title="Output settings">
+          <FormSection title={tUi('outputSettings')}>
             <div className="space-y-4">
               <div>
                 <label className="mb-1.5 flex items-center justify-between gap-2 text-sm font-medium text-text-secondary">
@@ -1179,7 +1182,7 @@ function AIStrategyForm() {
           {/* Consent */}
           <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
             <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
-              Consent & acknowledgement
+              {tUi('consent')}
             </p>
             <div className="space-y-3">
               <label className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary">
@@ -1223,7 +1226,7 @@ function AIStrategyForm() {
               {isLoading ? (
                 <span className="inline-flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Generating…
+                  {tUi('generating')}
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-2">
@@ -1234,25 +1237,25 @@ function AIStrategyForm() {
             </button>
             {hasActiveJob && !showNewGenerationConfirm && (
               <button type="button" onClick={handleStartNewGeneration} className="btn-secondary">
-                Start new generation
+                {tUi('startNew')}
               </button>
             )}
             {showNewGenerationConfirm && (
               <div className="flex items-center gap-2 rounded-lg border border-gold-200 bg-gold-50 px-3 py-2 text-xs text-gold-800">
-                <span>This will start a new task and replace the current one.</span>
+                <span>{tUi('replaceWarning')}</span>
                 <button
                   type="button"
                   onClick={handleConfirmNewGeneration}
                   className="rounded-md bg-gold-200 px-2 py-1 font-medium transition-colors hover:bg-gold-300"
                 >
-                  Confirm
+                  {tUi('confirm')}
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowNewGenerationConfirm(false)}
                   className="font-medium text-text-secondary hover:text-text-main"
                 >
-                  Cancel
+                  {tUi('cancel')}
                 </button>
               </div>
             )}

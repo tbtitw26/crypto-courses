@@ -5,11 +5,14 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth-config'
 import { CustomCoursesPage } from '@/components/CustomCoursesPage'
-import enDashboard from '@/i18n/en/dashboard.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: `${enDashboard.title} - Custom Courses`,
-  description: enDashboard.customCoursesPage?.subtitle || 'Track your custom course requests',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: `${t('dashboard.title')} - ${t('common.meta.customCourses')}`,
+    description: t('dashboard.customCoursesPage.subtitle'),
+  }
 }
 
 export default async function DashboardCustomCoursesPageRoute() {

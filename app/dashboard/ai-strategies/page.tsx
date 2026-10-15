@@ -6,11 +6,14 @@ import { redirect } from 'next/navigation'
 
 import { authOptions } from '@/lib/auth-config'
 import { AiStrategiesPage } from '@/components/AiStrategiesPage'
-import enDashboard from '@/i18n/en/dashboard.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: `${enDashboard.title} - AI Strategies`,
-  description: enDashboard.aiStrategiesPage?.subtitle || 'Track your AI strategy generations',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: `${t('dashboard.title')} - ${t('common.meta.aiStrategies')}`,
+    description: t('dashboard.aiStrategiesPage.subtitle'),
+  }
 }
 
 export default async function DashboardAiStrategiesPage() {

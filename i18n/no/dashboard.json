@@ -1,0 +1,620 @@
+{
+  "title": "Dashbord",
+  "breadcrumb": {
+    "home": "Hjem",
+    "dashboard": "Dashbord"
+  },
+  "header": {
+    "badges": {
+      "educationOnly": "Kun opplæring",
+      "pdfAndAI": "PDF-kurs og AI-resultater"
+    },
+    "accountButton": "Konto"
+  },
+  "navigation": {
+    "dashboard": "Dashbord",
+    "myCourses": "Mine kurs",
+    "customCourses": "Tilpassede kurs",
+    "aiStrategies": "AI-strategier",
+    "transactions": "Transaksjoner",
+    "receipts": "Kvitteringer",
+    "settings": "Innstillinger"
+  },
+  "overview": {
+    "title": "Velkommen tilbake. Her er læringsoversikten din.",
+    "subtitle": "Følg med på token-saldoen, statusen for tilpassede kurs og de siste AI-strategiene i én visning. Cur Nova er fortsatt kun opplæring – ingen signaler eller forvaltede kontoer.",
+    "badges": {
+      "learningOverview": "Læringsoversikt",
+      "recentActivity": "Nylig aktivitet"
+    }
+  },
+  "aiStrategiesPage": {
+    "title": "AI-strategier",
+    "heading": "AI-strategier generert for deg",
+    "subtitle": "Alle forespørsler fra AI-strategibyggeren samles her. Følg med på status, tokenforbruk og nedlastingslenker når en PDF er klar.",
+    "deliveryInfo": {
+      "title": "Vanlig levering",
+      "subtitle": "Minutter for AI-generering, levering til innboksen kort tid etter."
+    },
+    "switchToCustom": "Bytt til bestillinger av tilpassede kurs",
+    "generateNewStrategy": "Generer ny AI-strategi",
+    "searchPlaceholder": "Søk etter mål eller ID…",
+    "filters": {
+      "status": "Status",
+      "statusOptions": {
+        "all": "Alle",
+        "processing": "Behandles",
+        "ready": "Klar",
+        "failed": "Mislyktes"
+      }
+    },
+    "strategies": {
+      "title": "Dine AI-strategier",
+      "subtitle": "Hver rad representerer én kjøring av AI-strategibyggeren."
+    },
+    "table": {
+      "title": "Mål",
+      "marketLevel": "Markeder",
+      "tokens": "Tokens",
+      "status": "Status",
+      "created": "Opprettet",
+      "actions": "Handlinger",
+      "noMarket": "–"
+    },
+    "status": {
+      "processing": "Behandles",
+      "ready": "Klar",
+      "failed": "Mislyktes"
+    },
+    "actions": {
+      "downloadPDF": "Last ned PDF",
+      "checkEmail": "Levert på e-post",
+      "processing": "Pågår"
+    },
+    "emptyState": {
+      "title": "Ingen AI-strategier ennå",
+      "description": "Generer din første strategi via AI-fanen på Lær-siden."
+    },
+    "sidebar": {
+      "builder": {
+        "title": "Hva byggeren registrerer",
+        "points": {
+          "objective": "Tydelig mål og begrensninger.",
+          "market": "Foretrukket marked og tidsramme.",
+          "risk": "Risikotoleranse, innskudd og handelsgrenser."
+        },
+        "note": "Strukturerte forespørsler holder strategien din konsekvent hver gang."
+      },
+      "delivery": {
+        "title": "Leveringssjekkliste",
+        "description": "Ferdige strategier leveres som signerte PDF-er med forsidebilde og diagrammer.",
+        "points": {
+          "pdf": "PDF lagres i /courses for rask nedlasting.",
+          "email": "Faktura og filer sendes til innboksen din.",
+          "library": "Ferdige elementer vises i dashbordbiblioteket."
+        }
+      },
+      "tips": {
+        "title": "Påminnelse: kun opplæring",
+        "description": "AI-resultater er studiemateriell, ikke sanntids handelssignaler. Fortsett å øve på risikokontroll.",
+        "cta": "Les hele risiko- og ansvarsfraskrivelsen"
+      }
+    }
+  },
+  "kpi": {
+    "balance": {
+      "title": "Token-saldo",
+      "subtitle": "Tilsvarer ca. {price} – nøyaktig verdi avhenger av gjeldende priser.",
+      "topUp": "Fyll på saldo",
+      "viewPricing": "Se priser"
+    },
+    "customCourse": {
+      "title": "Status for tilpasset kurs",
+      "noActive": "Ingen aktive tilpassede kurs. Du kan bestille et når du er klar.",
+      "status": {
+        "pending": "Venter",
+        "inProgress": "Pågår",
+        "ready": "Klar"
+      },
+      "explanation": "Når PDF-en er klar, sendes den til deg på e-post og vises i biblioteket ditt."
+    },
+    "recentActivity": {
+      "title": "Nylig aktivitet",
+      "subtitle": "{count} læringselementer denne uken",
+      "noActivity": "Ingen nylig aktivitet ennå.",
+      "completedCourse": "Fullførte «{title}».",
+      "generatedAI": "Genererte AI-strategi for {title}.",
+      "requestedCustom": "Bestilte et tilpasset {market}-kurs."
+    }
+  },
+  "library": {
+    "title": "Dine kurs og strategier",
+    "subtitle": "De nyeste elementene vises først. Alle er opplærings-PDF-er eller AI-resultater.",
+    "browseCourses": "Utforsk kurs",
+    "newAIStrategy": "Ny AI-strategi",
+    "empty": {
+      "title": "Biblioteket ditt er tomt",
+      "description": "Begynn å lære ved å utforske kurs eller generere din første AI-strategi.",
+      "browseCourses": "Utforsk kurs",
+      "generateAI": "Generer AI-strategi"
+    },
+    "item": {
+      "labels": {
+        "pdfCourse": "PDF-kurs",
+        "aiStrategy": "AI-strategi",
+        "customCourse": "Tilpasset kurs"
+      },
+      "status": {
+        "completed": "Fullført",
+        "inprogress": "Pågår",
+        "ready": "Klar"
+      },
+      "educationOnly": "Kun opplæring – ikke et signal.",
+      "openPDF": "Åpne PDF",
+      "openOutput": "Åpne resultat",
+      "downloadPDF": "Last ned PDF",
+      "details": "Detaljer"
+    }
+  },
+  "sidebar": {
+    "riskReminder": {
+      "title": "Kun opplæring – ingen garantier.",
+      "description": "Alle PDF-er og AI-strategier i biblioteket ditt er opplæringsmateriell. De er ikke handelssignaler, og det er ingen garanti for fortjeneste eller avkastning.",
+      "cta": "Les hele risiko- og ansvarsfraskrivelsen"
+    },
+    "billing": {
+      "title": "Fakturering og tokens",
+      "subtitle": "Et øyeblikksbilde av nylige betalinger og tokenforbruk.",
+      "tokensSpent": "Tokens brukt siste 30 dager",
+      "aiGenerated": "AI-strategier generert",
+      "coursesUnlocked": "Kurs låst opp",
+      "viewHistory": "Åpne full faktureringshistorikk"
+    },
+    "quickActions": {
+      "title": "Hurtighandlinger",
+      "browseAll": "Utforsk alle kurs",
+      "requestCustom": "Bestill et nytt tilpasset kurs",
+      "generateAI": "Generer AI-strategi"
+    }
+  },
+  "transactions": {
+    "title": "Nylig token- og betalingsaktivitet",
+    "subtitle": "En enkel logg over hvordan tokens og betalinger beveger seg på kontoen din.",
+    "viewAll": "Se all aktivitet",
+    "table": {
+      "type": "Type",
+      "detail": "Detalj",
+      "date": "Dato",
+      "amount": "Beløp"
+    },
+    "types": {
+      "topUp": "Påfylling",
+      "course": "Kurs",
+      "aiStrategy": "AI-strategi",
+      "customCourse": "Tilpasset kurs"
+    },
+    "empty": {
+      "title": "Ingen transaksjoner ennå",
+      "description": "Transaksjonshistorikken din vises her når du har gjort ditt første kjøp eller din første påfylling."
+    }
+  },
+  "libraryPage": {
+    "title": "Bibliotek",
+    "heading": "Biblioteket ditt",
+    "subtitle": "Alle kjøpte kurs og AI-strategier samlet på ett sted. Fortsett der du slapp, eller last ned PDF-er for studier uten nett.",
+    "tokensAvailable": "tokens tilgjengelig",
+    "tokensHint": "Nok til 1–2 kurs eller flere AI-strategier.",
+    "topUp": "Fyll på",
+    "viewBilling": "Se fakturering",
+    "searchPlaceholder": "Søk i biblioteket (tittel, marked, nivå)…",
+    "quickFilter": "Hurtigfilter",
+    "type": "Type",
+    "filters": {
+      "type": {
+        "all": "Alle",
+        "courses": "Kurs",
+        "aistrategies": "AI-strategier"
+      },
+      "level": {
+        "alllevels": "Alle nivåer",
+        "beginner": "Nybegynner",
+        "intermediate": "Middels",
+        "advanced": "Avansert"
+      }
+    },
+    "recentlyOpened": {
+      "title": "Nylig åpnet",
+      "subtitle": "Hopp tilbake til det du studerte sist."
+    },
+    "viewAllActivity": "Se all aktivitet",
+    "lastOpened": "Sist åpnet",
+    "progress": "Fremdrift",
+    "modules": "moduler",
+    "format": "PDF",
+    "download": "nedlasting",
+    "downloadPDF": "Last ned PDF",
+    "open": "Åpne",
+    "aiStrategy": "AI-strategi",
+    "educationOnly": "Kun opplæring",
+    "continue": "Fortsett",
+    "continueWhereStopped": "Fortsett der du slapp",
+    "allItems": {
+      "title": "Alle elementer i biblioteket ditt",
+      "subtitle": "Samlet visning av kurs-PDF-er og AI-strategier."
+    },
+    "splitByType": "Del opp etter type",
+    "noResults": "Fant ingen elementer",
+    "noResultsDescription": "Prøv å justere søket eller filtrene.",
+    "status": {
+      "inprogress": "Pågår",
+      "notstarted": "Ikke startet",
+      "completed": "Fullført"
+    },
+    "timeAgo": {
+      "dayAgo": "1 dag siden",
+      "daysAgo": "{count} dager siden",
+      "hoursAgo": "{count} timer siden",
+      "weekAgo": "1 uke siden"
+    },
+    "new": "Ny",
+    "emptyState": {
+      "title": "Eksempel: tomt bibliotek",
+      "description": "Hvis en ny bruker ikke har kjøpt noen kurs eller generert noen AI-strategier, vis en rolig tom tilstand i stedet for en blank side.",
+      "noItems": "Ingen elementer i biblioteket ennå",
+      "hint": "Når du kjøper et kurs eller genererer en AI-strategi, vises det her.",
+      "browseCourses": "Utforsk kurs",
+      "openAIStrategy": "Åpne AI-strategibyggeren"
+    },
+    "sidebar": {
+      "howLibraryFits": {
+        "title": "Hvordan biblioteket henger sammen med andre dashbordsider",
+        "library": "Bibliotek",
+        "libraryDesc": "viser elementer du kan åpne igjen: kurs-PDF-er og AI-planer.",
+        "customCourses": "Tilpassede kurs",
+        "customCoursesDesc": "fokuserer på bestillinger som pågår.",
+        "billing": "Fakturering",
+        "billingDesc": "følger med på tokenpåfyllinger og direkte kjøp.",
+        "settings": "Innstillinger",
+        "settingsDesc": "inneholder preferanser som valuta og risikopåminnelser."
+      }
+    }
+  },
+  "billingPage": {
+    "title": "Fakturering",
+    "heading": "Fakturering og tokens",
+    "subtitle": "Se token-saldoen, nylige kjøp og fakturaer. Betalinger håndteres sikkert – Cur Nova rører aldri handelskontoene dine.",
+    "tokensAvailable": "tokens tilgjengelig",
+    "tokensApprox": "Ca. {price} etter gjeldende tokenkurs.",
+    "topUp": "Fyll på",
+    "viewPricing": "Se priser og tokenpakker",
+    "tokens": "tokens",
+    "balance": {
+      "title": "Oversikt over token-saldo",
+      "subtitle": "Tokens kan brukes på kurs, tilpassede PDF-er og AI-strategier.",
+      "tokensInfo": "Tokens er ikke et innskudd og gir ingen rente.",
+      "currentBalance": "Nåværende saldo",
+      "currentBalanceHint": "Tilsvarer ca. {price} i Cur Nova-tjenester.",
+      "thisMonthSpent": "Brukt denne måneden",
+      "thisMonthSpentHint": "Kurs, AI-strategier og tilpassede bestillinger.",
+      "lastTopUp": "Siste påfylling",
+      "lastTopUpHint": "Structured Growth-pakke.",
+      "noTopUpYet": "Ingen påfyllinger ennå",
+      "usageDistribution": "Omtrentlig fordeling av forbruk",
+      "usageDistributionHint": "Kurs 65 % · AI 25 % · Tilpassede PDF-er 10 %",
+      "usageDistributionValue": "Kurs {courses} % · AI {ai} % · Tilpassede kurs {custom} %",
+      "noUsageYet": "Ingen forbruksdata ennå",
+      "refundWarning": "Tokenkjøp kan vanligvis ikke refunderes når de er brukt til å låse opp digitalt innhold. Lokal forbrukerlovgivning kan likevel gjelde.",
+      "supportInfo": "Ved spørsmål om fakturering, kontakt support med kontoens e-postadresse og kun de siste 4 sifrene i kortnummeret – del aldri fullstendige kortopplysninger."
+    },
+    "paymentMethods": {
+      "title": "Betalinger og betalingsmåter",
+      "description": "Betalinger behandles av en sikker betalingsleverandør. Cur Nova lagrer ikke fullstendige kortnumre eller CVV-koder.",
+      "supportedCards": "Kort som støttes: Visa og Mastercard.",
+      "supportedCurrencies": "Valutaer som støttes: GBP, EUR, USD.",
+      "chargesDescriptor": "Belastninger vises under Cur Nova eller en partners betegnelse.",
+      "note": "I det ferdige produktet vil dette kortet lenke til en sikker portal der brukere kan oppdatere betalingsopplysninger."
+    },
+    "invoices": {
+      "title": "Fakturaer og kvitteringer",
+      "description": "Hvert vellykket tokenkjøp eller hver direkte betaling genererer en kvittering. Enkelte regioner kan også kreve fullstendige skattefakturaer.",
+      "lastReceipt": {
+        "title": "Siste kvittering – Structured Growth-pakke",
+        "details": "28. nov. 2025 · £69.99 · Kort som slutter på ••42"
+      },
+      "noReceipts": "Ingen kvitteringer ennå",
+      "downloadPDF": "Last ned PDF",
+      "viewAllReceipts": "Se alle kvitteringer"
+    },
+    "transactions": {
+      "title": "Transaksjonshistorikk",
+      "subtitle": "Tokenpåfyllinger, kurskjøp og bruk av AI-strategier.",
+      "structuredGrowthPack": "Structured Growth-tokenpakke",
+      "cryptoVolatilityCourse": "Kurs: Volatilitetsstrukturer i krypto",
+      "btcIntradayPlan": "AI-plan: BTC intradagstruktur",
+      "forexStructuredPlan": "Bestilling av tilpasset kurs: strukturert Forex-plan",
+      "tokenAdjustment": "Tokenjustering (support)"
+    },
+    "filters": {
+      "type": "Type",
+      "types": {
+        "all": "Alle",
+        "tokentop-ups": "Tokenpåfyllinger",
+        "courses": "Kurs",
+        "aistrategies": "AI-strategier",
+        "adjustments": "Justeringer"
+      }
+    },
+    "downloadCSV": "Last ned CSV",
+    "table": {
+      "dateTime": "Dato · Tid",
+      "description": "Beskrivelse",
+      "type": "Type",
+      "currency": "Valuta",
+      "tokens": "Tokens",
+      "balance": "Saldo",
+      "status": "Status"
+    },
+    "types": {
+      "tokentop-up": "Tokenpåfylling",
+      "coursepurchase": "Kurskjøp",
+      "aistrategy": "AI-strategi",
+      "adjustment": "Justering",
+      "customcourse": "Tilpasset kurs"
+    },
+    "status": {
+      "completed": "Fullført",
+      "pending": "Venter",
+      "failed": "Mislyktes"
+    },
+    "emptyState": {
+      "title": "Fant ingen transaksjoner",
+      "description": "Prøv å justere filtrene."
+    },
+    "emptyStatePreview": {
+      "title": "Eksempel: ny konto uten transaksjoner",
+      "description": "Hvis en bruker ikke har kjøpt tokens ennå, vis en rolig tom tilstand og en tydelig vei til prissiden.",
+      "noActivity": "Ingen faktureringsaktivitet ennå",
+      "hint": "Når du kjøper din første tokenpakke, vises kvitteringene og historikken din her.",
+      "viewTokenPacks": "Se tokenpakker"
+    }
+  },
+  "customCoursesPage": {
+    "title": "Tilpassede kurs",
+    "heading": "Tilpassede kurs fra en profesjonell trader",
+    "subtitle": "Følg med på bestillingene dine av skreddersydde PDF-er. Hvert kurs utarbeides basert på din erfaring, ditt innskudd, din risikotoleranse og dine mål.",
+    "deliveryInfo": {
+      "title": "Vanlig leveringstid",
+      "subtitle": "Tidene er omtrentlige og kan variere med køen."
+    },
+    "switchToAIStrategy": "Bytt til AI-strategibyggeren",
+    "requestNewCourse": "Bestill nytt tilpasset kurs",
+    "viewIntakeFormPreview": "Se forhåndsvisning av skjemaet",
+    "searchPlaceholder": "Søk etter tittel eller ID…",
+    "filtersLabel": "Filtre",
+    "filters": {
+      "status": "Status",
+      "statusOptions": {
+        "all": "Alle",
+        "intakedraft": "Utkast",
+        "awaitingreview": "Venter på gjennomgang",
+        "inprogress": "Pågår",
+        "delivered": "Levert",
+        "failed": "Mislyktes"
+      }
+    },
+    "requests": {
+      "title": "Dine bestillinger av tilpassede kurs",
+      "subtitle": "Én rad per bestilling. Status og forventet levering oppdateres underveis."
+    },
+    "viewAllHistory": "Se all historikk",
+    "table": {
+      "title": "Tittel",
+      "marketLevel": "Marked · Nivå",
+      "statusEta": "Status · Levering",
+      "created": "Opprettet",
+      "actions": "Handlinger"
+    },
+    "status": {
+      "intakedraft": "Utkast",
+      "awaitingreview": "Venter på gjennomgang",
+      "inprogress": "Pågår",
+      "processing": "Behandles",
+      "delivered": "Levert",
+      "completed": "Fullført",
+      "failed": "Mislyktes"
+    },
+    "eta": {
+      "estimatedHours": "Ca. {min}–{max} timer",
+      "pendingIntakeDetails": "Venter på opplysninger"
+    },
+    "actions": {
+      "viewBrief": "Se bestilling",
+      "downloadPDF": "Last ned PDF",
+      "pdfPending": "PDF kommer"
+    },
+    "emptyState": {
+      "title": "Fant ingen kurs",
+      "description": "Prøv å justere søket eller filtrene."
+    },
+    "courses": {
+      "forexScatteredNotes": "Forex: fra spredte notater til én strukturert plan",
+      "cryptoSwingFramework": "Swing-rammeverk for krypto ved deltidshandel",
+      "binaryRiskRefresher": "Binære: risikofokusert oppfriskning etter en pause"
+    },
+    "sidebar": {
+      "intakeForm": {
+        "title": "Hva skjemaet spør om",
+        "experience": "Erfaringen din (0 / 1–2 / 3+ år).",
+        "deposit": "Innskuddsstørrelse og typisk risiko per handel.",
+        "market": "Foretrukket marked (Forex, krypto, binære).",
+        "style": "Stil (scalping, dag, swing) og tilgjengelig tid.",
+        "goals": "Hva du vil oppnå, med dine egne ord.",
+        "note": "Forhåndsvisningen gjør dette åpent, slik at brukerne vet hva som skjer før de bruker tokens."
+      },
+      "emptyState": {
+        "title": "Eksempel: tom tilstand",
+        "description": "Hvis det ikke er bestilt noen tilpassede kurs ennå, vis en enkel melding i stedet for en tom tabell.",
+        "noCourses": "Ingen tilpassede kurs ennå",
+        "hint": "Når du bestiller en skreddersydd PDF, ser du status og forventet levering her.",
+        "requestFirstCourse": "Bestill ditt første kurs"
+      }
+    }
+  },
+  "settingsPage": {
+    "title": "Innstillinger",
+    "heading": "Konto og preferanser",
+    "subtitle": "Oppdater opplysningene dine og hvordan Cur Nova kommuniserer med deg. Ingenting her kobles til megler- eller børskontoene dine – dette gjelder kun læringsprofilen din.",
+    "educationAccountOnly": {
+      "title": "Kun opplæringskonto",
+      "subtitle": "Ingen handels- eller betalingsopplysninger lagres her."
+    },
+    "viewDashboardOverview": "Se dashbordoversikten",
+    "profile": {
+      "title": "Profil",
+      "subtitle": "Navn, e-post og region for Cur Nova-kontoen din.",
+      "editButton": "Rediger profil",
+      "fields": {
+        "fullName": "Fullt navn",
+        "email": "E-post",
+        "region": "Region"
+      }
+    },
+    "preferences": {
+      "title": "Grensesnittpreferanser",
+      "subtitle": "Hvordan dashbordet og e-postene kommuniserer med deg.",
+      "currency": {
+        "label": "Standard valutavisning",
+        "description": "Følger valget ditt i toppmenyen ({currencies}).",
+        "note": "Tokenpriser konverteres automatisk og vises til referanse."
+      },
+      "educationalFocus": {
+        "label": "Opplæringsfokus",
+        "description": "Vi beholder påminnelser om at Cur Nova ikke er finansiell rådgivning.",
+        "note": "Denne innstillingen kan ikke slås av – høyrisikomarkeder trenger alltid tydelige ansvarsfraskrivelser."
+      }
+    },
+    "notifications": {
+      "title": "E-postvarsler",
+      "subtitle": "Hva du vil motta i innboksen din.",
+      "productUpdates": {
+        "label": "Produktoppdateringer og nye kurs",
+        "description": "Sporadiske e-poster når vi legger til nye PDF-er, markeder eller funksjoner."
+      },
+      "aiStrategyIdeas": {
+        "label": "Ideer og tips til AI-strategier",
+        "description": "Eksempler på hvordan du bruker AI-byggeren mer effektivt."
+      },
+      "billingReceipts": {
+        "label": "Fakturerings- og tokenkvitteringer",
+        "description": "Bekreftelser på påfyllinger og kjøp. Anbefales."
+      },
+      "accountAlerts": {
+        "label": "Viktige kontovarsler",
+        "description": "Sikkerhets- og juridiske meldinger knyttet til kontoen din."
+      }
+    },
+    "security": {
+      "title": "Sikkerhet",
+      "password": {
+        "label": "Passord",
+        "lastUpdated": "Sist oppdatert: for 3 måneder siden (eksempel).",
+        "resetButton": "Tilbakestill passord"
+      },
+      "changePassword": {
+        "title": "Endre passord",
+        "subtitle": "Oppdater passordet for kontoen din",
+        "currentPassword": {
+          "label": "Nåværende passord",
+          "placeholder": "Skriv inn nåværende passord"
+        },
+        "newPassword": {
+          "label": "Nytt passord",
+          "placeholder": "Skriv inn nytt passord",
+          "hint": "Passordet må være minst 8 tegn langt"
+        },
+        "confirmPassword": {
+          "label": "Bekreft nytt passord",
+          "placeholder": "Bekreft det nye passordet"
+        },
+        "submit": "Endre passord",
+        "submitting": "Endrer...",
+        "cancel": "Avbryt",
+        "success": {
+          "title": "Passordet er endret",
+          "message": "Passordet ditt er endret"
+        },
+        "error": {
+          "title": "Feil",
+          "message": "Kunne ikke endre passordet. Prøv igjen"
+        }
+      },
+      "twoFactor": {
+        "label": "Tofaktorautentisering",
+        "status": "Ikke aktivert ennå. Planlagt i en senere versjon.",
+        "comingSoon": "Kommer snart",
+        "note": "Selv uten 2FA kobler vi oss aldri til meglere eller børser. Denne kontoen gjelder kun opplæringsinnhold."
+      }
+    },
+    "dataPrivacy": {
+      "title": "Data og personvern",
+      "description": "Styr hvordan dataene dine brukes i Cur Nova. Dette er atskilt fra data megleren eller børsen din har om handelen din.",
+      "export": {
+        "label": "Eksporter mine Cur Nova-data (forhåndsvisning)",
+        "description": "Last ned en kopi av kursene, AI-planene og faktureringsmetadataene dine."
+      },
+      "delete": {
+        "label": "Be om sletting av kontoen (forhåndsvisning)",
+        "description": "I det ferdige produktet vil dette starte en verifisert sletteprosess."
+      },
+      "note": "For detaljer, se den fullstendige personvernerklæringen og vilkårene og betingelsene som er lenket i bunnteksten."
+    },
+    "dangerNote": {
+      "title": "Påminnelse: denne kontoen er ikke en handelsprofil",
+      "description": "Cur Nova-kontoer styrer kun tilgang til opplærings-PDF-er og AI-strategier. De holder eller forvalter ikke handelskapital og kan ikke legge inn handler på dine vegne.",
+      "warning": "Hold alltid innloggingsopplysningene til megler og børs atskilt, og del dem aldri med support. Hvis en tjeneste hevder å handle på vegne av «Cur Nova», bør du behandle den som mistenkelig."
+    },
+    "extra": {
+      "loadFailed": "Kunne ikke laste inn profilopplysninger",
+      "error": "Feil",
+      "validationError": "Valideringsfeil",
+      "firstNameRequired": "Fornavn er påkrevd",
+      "updateFailed": "Kunne ikke oppdatere profilen",
+      "success": "Fullført",
+      "updated": "Profilen er oppdatert",
+      "cancel": "Avbryt",
+      "saving": "Lagrer...",
+      "save": "Lagre",
+      "firstName": "Fornavn",
+      "lastName": "Etternavn (valgfritt)",
+      "region": "Region (valgfritt)",
+      "notSet": "Ikke angitt"
+    }
+  },
+  "receiptsPage": {
+    "title": "Kvitteringer",
+    "heading": "Fakturaer og kvitteringer",
+    "subtitle": "Last ned PDF-kvitteringer for alle kjøp og tokenpåfyllinger.",
+    "searchPlaceholder": "Søk i kvitteringer…",
+    "filters": {
+      "type": "Type",
+      "types": {
+        "all": "Alle",
+        "tokentop-ups": "Tokenpåfyllinger",
+        "courses": "Kurs",
+        "aistrategies": "AI-strategier",
+        "customcourses": "Tilpassede kurs"
+      }
+    },
+    "downloadPDF": "Last ned PDF",
+    "emptyState": {
+      "title": "Fant ingen kvitteringer",
+      "description": "Kvitteringene dine vises her når du har gjort ditt første kjøp eller din første påfylling."
+    },
+    "extra": {
+      "pendingReceipt": "Kvitteringen blir tilgjengelig når leverandøren har bekreftet betalingen."
+    }
+  },
+  "extra": {
+    "accountSettings": "Kontoinnstillinger"
+  }
+}

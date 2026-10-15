@@ -1034,12 +1034,24 @@
         "title": "Simple strategy snapshot skeleton",
         "description": "A text-only skeleton you can copy into your own PDF or notes:",
         "items": [
-          { "label": "Strategy name" },
-          { "label": "Markets & timeframes" },
-          { "label": "Valid setup looks like" },
-          { "label": "Invalid / avoid when" },
-          { "label": "Risk per trade" },
-          { "label": "Execution & exit rules" }
+          {
+            "label": "Strategy name"
+          },
+          {
+            "label": "Markets & timeframes"
+          },
+          {
+            "label": "Valid setup looks like"
+          },
+          {
+            "label": "Invalid / avoid when"
+          },
+          {
+            "label": "Risk per trade"
+          },
+          {
+            "label": "Execution & exit rules"
+          }
         ]
       },
       "questionsToAnswer": {
@@ -1070,6 +1082,36 @@
         "note": "Together they help you define, apply and refine your own approaches over time."
       }
     }
+  },
+  "ui": {
+    "customBuilder": "Custom Course Builder",
+    "aiBuilder": "AI Strategy Builder",
+    "fillRequired": "Please fill all required fields",
+    "goalsShort": "Goals too short",
+    "goalsShortDesc": "Please describe your goals in at least 10 characters.",
+    "error": "Error",
+    "submitFailed": "Failed to submit request. Please try again.",
+    "traderProfile": "Trader profile",
+    "marketRisk": "Market & Risk",
+    "scheduleTools": "Schedule & tools",
+    "goalsNotes": "Goals & notes",
+    "consent": "Consent & acknowledgement",
+    "startNew": "Start new generation",
+    "replaceWarning": "This will start a new task and replace the current one.",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "noJobId": "No job ID received from server",
+    "requestSubmitted": "Request submitted",
+    "generationStarted": "Strategy generation started for {count} language(s). You can close this window.",
+    "generateFailed": "Failed to generate strategy. Please try again.",
+    "strategyPreset": "Strategy preset",
+    "coreParameters": "Core parameters",
+    "outputSettings": "Output settings",
+    "forex": "Forex",
+    "crypto": "Crypto",
+    "binaryOptions": "Binary options",
+    "startFailed": "Failed to start generation",
+    "processing": "Processing…",
+    "generating": "Generating…"
   }
 }
-

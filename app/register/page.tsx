@@ -5,11 +5,14 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth-config'
 import { RegisterPage } from '@/components/RegisterPage'
-import enAuth from '@/i18n/en/auth.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: enAuth.register.title,
-  description: enAuth.register.subtitle,
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('auth.register.title'),
+    description: t('auth.register.subtitle'),
+  }
 }
 
 export default async function RegisterPageRoute() {

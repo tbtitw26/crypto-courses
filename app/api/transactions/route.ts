@@ -5,6 +5,8 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
+import { getCourseTranslation } from '@/lib/course-i18n'
+import { getServerLocale } from '@/i18n/server'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -273,7 +275,7 @@ export async function GET(request: NextRequest) {
         ...coursePurchases.map((purchase) => ({
           id: `course-${purchase.id}`,
           type: 'Course purchase',
-          detail: purchase.course.title,
+          detail: getCourseTranslation(purchase.course.slug, getServerLocale())?.title ?? purchase.course.title,
           date: purchase.created_at.toISOString(),
           tokens: -purchase.tokens_cost,
           amount: Number(purchase.amount_gbp), // Usually 0, but stored for consistency

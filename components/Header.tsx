@@ -27,6 +27,7 @@ import {
   X,
 } from 'lucide-react'
 import { CurrencySelector, CurrencySelectorMobile } from './CurrencySelector'
+import { LanguageSelector, LanguageSelectorMobile } from './LanguageSelector'
 import { MiniCart } from './MiniCart'
 import { useCart } from '@/contexts/CartContext'
 
@@ -50,6 +51,7 @@ export default function Header() {
   const tAuth = useTranslations('common.auth')
   const tHeader = useTranslations('common.header')
   const tBrand = useTranslations('common.brand')
+  const tMenu = useTranslations('common.menu')
 
   const user = session?.user as { id?: number; name?: string; email?: string; balance?: number } | undefined
   const isLoggedIn = !!session
@@ -128,17 +130,17 @@ export default function Header() {
           <div className="flex items-center gap-2 text-[11px]">
             <AlertTriangle className="h-3 w-3 text-gold-400" />
             <span className="font-semibold uppercase tracking-wider text-gold-400">
-              Education only
+              {tMenu('educationOnly')}
             </span>
             <span className="hidden text-surface-400 sm:inline">
-              — No signals, no promises, no financial advice
+              {tMenu('noSignals')}
             </span>
           </div>
           <Link
             href="/risk-and-disclaimer"
             className="text-[11px] font-medium text-surface-400 transition hover:text-white"
           >
-            Risk info &rarr;
+            {tMenu('riskInfo')} &rarr;
           </Link>
         </div>
       </div>
@@ -157,7 +159,7 @@ export default function Header() {
           <Link
             href="/"
             className="flex shrink-0 items-center gap-2.5 rounded-lg py-1 focus-visible:outline-brand-500"
-            aria-label={`${tBrand('name')} home`}
+            aria-label={`${tBrand('name')} ${tMenu('home')}`}
           >
             <span className="relative block h-8 w-[120px] sm:h-9 sm:w-[140px]">
               <Image
@@ -174,7 +176,7 @@ export default function Header() {
           <div className="hidden h-6 w-px bg-surface-200 lg:block" />
 
           {/* ── Desktop navigation ── */}
-          <nav className="hidden flex-1 items-center gap-0.5 lg:flex" aria-label="Primary navigation">
+          <nav className="hidden flex-1 items-center gap-0.5 lg:flex" aria-label={tMenu('primaryNav')}>
             <Link href="/courses" className={navLinkClass('/courses')}>
               {tNav('courses')}
             </Link>
@@ -198,7 +200,7 @@ export default function Header() {
                 aria-expanded={isBuilderOpen}
                 aria-haspopup="menu"
               >
-                Builder
+                {tMenu('builder')}
                 <ChevronDown className={`h-3 w-3 text-text-muted transition-transform duration-200 ${isBuilderOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -219,8 +221,8 @@ export default function Header() {
                         <PenLine className="h-4 w-4" />
                       </span>
                       <div className="min-w-0">
-                        <p className="text-sm font-semibold text-text-main">Custom Course</p>
-                        <p className="mt-0.5 text-xs leading-snug text-text-muted">Tailored PDF by a pro trader</p>
+                        <p className="text-sm font-semibold text-text-main">{tMenu('customCourse')}</p>
+                        <p className="mt-0.5 text-xs leading-snug text-text-muted">{tMenu('customCourseDesc')}</p>
                       </div>
                     </Link>
                     <Link
@@ -233,8 +235,8 @@ export default function Header() {
                         <BrainCircuit className="h-4 w-4" />
                       </span>
                       <div className="min-w-0">
-                        <p className="text-sm font-semibold text-text-main">AI Strategy</p>
-                        <p className="mt-0.5 text-xs leading-snug text-text-muted">Generated trading plan with risk logic</p>
+                        <p className="text-sm font-semibold text-text-main">{tMenu('aiStrategy')}</p>
+                        <p className="mt-0.5 text-xs leading-snug text-text-muted">{tMenu('aiStrategyDesc')}</p>
                       </div>
                     </Link>
                     <div className="my-1 border-t border-surface-100" />
@@ -244,7 +246,7 @@ export default function Header() {
                       role="menuitem"
                       onClick={() => setIsBuilderOpen(false)}
                     >
-                      <span>All learning tools</span>
+                      <span>{tMenu('allLearningTools')}</span>
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>
@@ -271,7 +273,7 @@ export default function Header() {
                 aria-expanded={isResourcesOpen}
                 aria-haspopup="menu"
               >
-                Resources
+                {tMenu('resources')}
                 <ChevronDown className={`h-3 w-3 text-text-muted transition-transform duration-200 ${isResourcesOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -284,11 +286,11 @@ export default function Header() {
                   <div className="rounded-xl border border-surface-200 bg-white p-1.5 shadow-card" role="menu">
                     {[
                       { href: '/pricing', label: tNav('pricing') },
-                      { href: '/resources', label: 'Resources' },
-                      { href: '/glossary', label: 'Glossary' },
-                      { href: '/about', label: 'About' },
-                      { href: '/contact', label: 'Contact' },
-                      { href: '/faq', label: 'FAQ' },
+                      { href: '/resources', label: tNav('resources') },
+                      { href: '/glossary', label: tNav('glossary') },
+                      { href: '/about', label: tNav('about') },
+                      { href: '/contact', label: tNav('contact') },
+                      { href: '/faq', label: tNav('faq') },
                     ].map((item) => (
                       <Link
                         key={item.href}
@@ -318,6 +320,7 @@ export default function Header() {
 
           {/* ── Desktop right ── */}
           <div className="ml-auto hidden shrink-0 items-center gap-1 lg:flex">
+            <LanguageSelector />
             <CurrencySelector />
 
             <div className="mx-1 h-5 w-px bg-surface-200" />
@@ -337,7 +340,7 @@ export default function Header() {
               <Link
                 href="/cart"
                 className="relative inline-flex h-8 w-8 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-surface-50 hover:text-text-main"
-                aria-label="Shopping cart"
+                aria-label={tMenu('shoppingCart')}
               >
                 <ShoppingCart className="h-4 w-4" />
                 {itemCount > 0 && (
@@ -373,7 +376,7 @@ export default function Header() {
                 type="button"
                 onClick={() => setIsAccountOpen((v) => !v)}
                 className="flex h-8 w-8 items-center justify-center rounded-lg text-text-secondary transition-colors hover:bg-surface-50 hover:text-text-main"
-                aria-label="Account menu"
+                aria-label={tMenu('accountMenu')}
                 aria-expanded={isAccountOpen}
                 aria-haspopup="menu"
               >
@@ -410,12 +413,12 @@ export default function Header() {
                       <div className="p-1.5">
                         {[
                           { href: '/dashboard', icon: LayoutDashboard, label: tNav('dashboard') },
-                          { href: '/dashboard/courses', icon: BookOpen, label: 'My Courses' },
-                          { href: '/dashboard/custom-courses', icon: FileText, label: 'Custom Courses' },
-                          { href: '/dashboard/ai-strategies', icon: Sparkles, label: 'AI Strategies' },
-                          { href: '/dashboard/transactions', icon: Receipt, label: 'Transactions' },
-                          { href: '/dashboard/receipts', icon: Wallet, label: 'Receipts' },
-                          { href: '/dashboard/settings', icon: Settings, label: 'Settings' },
+                          { href: '/dashboard/courses', icon: BookOpen, label: tMenu('myCourses') },
+                          { href: '/dashboard/custom-courses', icon: FileText, label: tNav('customCourses') },
+                          { href: '/dashboard/ai-strategies', icon: Sparkles, label: tMenu('aiStrategies') },
+                          { href: '/dashboard/transactions', icon: Receipt, label: tMenu('transactions') },
+                          { href: '/dashboard/receipts', icon: Wallet, label: tMenu('receipts') },
+                          { href: '/dashboard/settings', icon: Settings, label: tMenu('settings') },
                         ].map(({ href, icon: Icon, label }) => (
                           <Link
                             key={href}
@@ -488,7 +491,7 @@ export default function Header() {
             <Link
               href="/cart"
               className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary"
-              aria-label="Shopping cart"
+              aria-label={tMenu('shoppingCart')}
             >
               <ShoppingCart className="h-4 w-4" />
               {itemCount > 0 && (
@@ -502,7 +505,7 @@ export default function Header() {
               <Link
                 href="/dashboard"
                 className="flex h-9 w-9 items-center justify-center rounded-lg"
-                aria-label="Dashboard"
+                aria-label={tNav('dashboard')}
               >
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-surface-900 text-[10px] font-bold text-white">
                   {userInitial}
@@ -538,16 +541,16 @@ export default function Header() {
                   className="flex w-full items-center justify-between py-1 text-[11px] font-bold uppercase tracking-widest text-text-muted"
                   aria-expanded={isMobileLearnOpen}
                 >
-                  <span>Learn &amp; Build</span>
+                  <span>{tMenu('learnAndBuild')}</span>
                   <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isMobileLearnOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isMobileLearnOpen && (
                   <div className="mt-2 space-y-0.5">
                     {[
-                      { href: '/courses', icon: BookOpen, label: tNav('courses'), desc: 'Library' },
-                      { href: '/learn?tab=custom', icon: PenLine, label: 'Custom Course', desc: 'Tailored PDF' },
-                      { href: '/learn?tab=ai', icon: BrainCircuit, label: 'AI Strategy', desc: 'Strategy PDF' },
-                      { href: '/pricing', icon: Coins, label: tNav('pricing'), desc: 'Tokens & packs' },
+                      { href: '/courses', icon: BookOpen, label: tNav('courses'), desc: tMenu('libraryDesc') },
+                      { href: '/learn?tab=custom', icon: PenLine, label: tMenu('customCourse'), desc: tMenu('customCourseShort') },
+                      { href: '/learn?tab=ai', icon: BrainCircuit, label: tMenu('aiStrategy'), desc: tMenu('aiStrategyShort') },
+                      { href: '/pricing', icon: Coins, label: tNav('pricing'), desc: tMenu('pricingDesc') },
                     ].map(({ href, icon: Icon, label, desc }) => (
                       <Link
                         key={href}
@@ -580,17 +583,17 @@ export default function Header() {
                   className="flex w-full items-center justify-between py-1 text-[11px] font-bold uppercase tracking-widest text-text-muted"
                   aria-expanded={isMobileResourcesOpen}
                 >
-                  <span>Resources</span>
+                  <span>{tMenu('resources')}</span>
                   <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isMobileResourcesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isMobileResourcesOpen && (
                   <div className="mt-2 space-y-0.5">
                     {[
-                      { href: '/resources', label: 'Resources' },
-                      { href: '/glossary', label: 'Glossary' },
-                      { href: '/faq', label: 'FAQ' },
-                      { href: '/about', label: 'About' },
-                      { href: '/contact', label: 'Contact' },
+                      { href: '/resources', label: tNav('resources') },
+                      { href: '/glossary', label: tNav('glossary') },
+                      { href: '/faq', label: tNav('faq') },
+                      { href: '/about', label: tNav('about') },
+                      { href: '/contact', label: tNav('contact') },
                     ].map((item) => (
                       <Link
                         key={item.href}
@@ -611,7 +614,7 @@ export default function Header() {
 
               {/* Wallet */}
               <div className="border-b border-surface-100 py-4">
-                <p className="py-1 text-[11px] font-bold uppercase tracking-widest text-text-muted">Wallet</p>
+                <p className="py-1 text-[11px] font-bold uppercase tracking-widest text-text-muted">{tMenu('wallet')}</p>
                 <div className="mt-2 space-y-0.5">
                   {isLoggedIn && user && (
                     <div className="flex items-center gap-2 rounded-lg bg-surface-0 px-3 py-2.5 text-sm">
@@ -639,7 +642,7 @@ export default function Header() {
                   >
                     <span className="flex items-center gap-2">
                       <ShoppingCart className="h-4 w-4" />
-                      Cart
+                      {tMenu('cart')}
                     </span>
                     {itemCount > 0 && (
                       <span className="rounded-full bg-brand-700 px-2 py-0.5 text-[10px] font-bold text-white">{itemCount}</span>
@@ -650,7 +653,8 @@ export default function Header() {
 
               {/* Preferences */}
               <div className="border-b border-surface-100 py-4 space-y-4">
-                <p className="py-1 text-[11px] font-bold uppercase tracking-widest text-text-muted">Preferences</p>
+                <p className="py-1 text-[11px] font-bold uppercase tracking-widest text-text-muted">{tMenu('preferences')}</p>
+                <LanguageSelectorMobile />
                 <CurrencySelectorMobile />
               </div>
 
@@ -658,7 +662,7 @@ export default function Header() {
               <div className="py-4">
                 {isLoggedIn && user ? (
                   <>
-                    <p className="py-1 text-[11px] font-bold uppercase tracking-widest text-text-muted">Account</p>
+                    <p className="py-1 text-[11px] font-bold uppercase tracking-widest text-text-muted">{tMenu('account')}</p>
                     <div className="mt-2 space-y-0.5">
                       <div className="flex items-center gap-3 rounded-lg px-3 py-2">
                         <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface-900 text-xs font-bold text-white">
@@ -668,7 +672,7 @@ export default function Header() {
                       </div>
                       {[
                         { href: '/dashboard', icon: LayoutDashboard, label: tNav('dashboard') },
-                        { href: '/dashboard/settings', icon: Settings, label: 'Settings' },
+                        { href: '/dashboard/settings', icon: Settings, label: tMenu('settings') },
                       ].map(({ href, icon: Icon, label }) => (
                         <Link
                           key={href}

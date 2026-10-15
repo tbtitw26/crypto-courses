@@ -5,11 +5,14 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth-config'
 import { DashboardPage } from '@/components/DashboardPage'
-import enDashboard from '@/i18n/en/dashboard.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: enDashboard.title,
-  description: enDashboard.overview.subtitle,
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('dashboard.title'),
+    description: t('dashboard.overview.subtitle'),
+  }
 }
 
 export default async function DashboardPageRoute() {

@@ -1,0 +1,438 @@
+{
+  "breadcrumb": {
+    "home": "Hjem",
+    "risk": "Risiko og ansvarsfraskrivelse"
+  },
+  "hero": {
+    "title": "Risiko- og ansvarsfraskrivelse for Cur Novas plattform for handelsopplæring.",
+    "subtitle": "Denne risiko- og ansvarsfraskrivelsen forklarer de viktigste risikoene ved å bruke Cur Nova og ved å anvende begreper, strategier eller eksempler som beskrives i opplæringsmateriellet vårt. Den skal hjelpe deg å forstå den høye risikoen ved handel og tydeliggjøre hva Cur Nova tilbyr og ikke tilbyr.",
+    "meta": [
+      {
+        "label": "Gjelder fra",
+        "value": "6. desember 2025"
+      },
+      {
+        "label": "Operatør",
+        "value": "CUR NOVA LTD (17240836)"
+      },
+      {
+        "label": "Jurisdiksjon",
+        "value": "England og Wales"
+      }
+    ],
+    "badges": {
+      "highRisk": "Høy risiko · Mulig fullstendig tap",
+      "educationOnly": "Kun opplæring · Ingen handel",
+      "noAdvice": "Ingen finansiell rådgivning"
+    },
+    "summaryCard": {
+      "title": "Kortversjon (for kunder)",
+      "subtitle": "Bruk denne listen for en rask oppsummering; de nummererte avsnittene inneholder alle juridiske detaljer.",
+      "items": [
+        "Handel og investering innebærer høy risiko. Du kan tape deler av eller hele kapitalen din.",
+        "Cur Nova er en ren opplæringsplattform. Vi gir ikke investerings-, handels- eller finansiell rådgivning.",
+        "Vi opptrer ikke som megler, utfører ikke handler, gir ikke signaler og forvalter ikke kontoer.",
+        "Tidligere resultater og hypotetiske eksempler garanterer ikke fremtidige resultater.",
+        "Kryptoeiendeler er svært spekulative og har ekstrem volatilitetsrisiko.",
+        "AI-generert innhold er kun ment for opplæring og må ikke betraktes som handelsrådgivning.",
+        "Du er alene ansvarlig for handelsbeslutningene dine, risikostyringen og valg av leverandører.",
+        "Cur Nova gir ingen garantier om lønnsomhet, avkastning eller utfall."
+      ],
+      "note": "Denne policyen utfyller vilkårene og betingelsene, personvernerklæringen, retningslinjene for informasjonskapsler og refusjons- og returpolicyen vår. Ved motstrid gjelder vilkårene og betingelsene."
+    }
+  },
+  "toc": {
+    "title": "På denne siden",
+    "items": [
+      { "label": "Formålet med denne policyen", "anchor": "purpose" },
+      { "label": "Ren opplæringsplattform (ingen finansiell rådgivning)", "anchor": "education-only" },
+      { "label": "Høy risiko ved handel og investering", "anchor": "high-risk" },
+      { "label": "Tidligere resultater og hypotetiske eksempler", "anchor": "past-performance" },
+      { "label": "Særlige risikoer ved kryptoeiendeler", "anchor": "crypto-risks" },
+      { "label": "Bruk av AI og automatiserte verktøy", "anchor": "ai-tools" },
+      { "label": "Tredjeparts meglere, børser og plattformer", "anchor": "third-parties" },
+      { "label": "Tokens, priser og at de ikke er investeringer", "anchor": "tokens" },
+      { "label": "Egnethet, uavhengig rådgivning og skatt", "anchor": "suitability" },
+      { "label": "Ingen garantier og ansvarsbegrensning", "anchor": "no-guarantees" },
+      { "label": "Jurisdiksjon og regulatorisk status", "anchor": "jurisdiction" },
+      { "label": "Språk", "anchor": "translations" },
+      { "label": "Bekreftelse", "anchor": "acknowledgement" }
+    ],
+    "reminder": {
+      "label": "Påminnelse",
+      "text": "Denne norske oversettelsen er kun ment som hjelp. Den engelske versjonen av dokumentet er den eneste juridisk bindende versjonen."
+    }
+  },
+  "sections": [
+    {
+      "id": "purpose",
+      "number": "1",
+      "title": "Formålet med denne policyen",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Denne risiko- og ansvarsfraskrivelsen («policyen») forklarer de viktigste risikoene ved å bruke Cur Nova og ved å anvende begreper, strategier eller eksempler som beskrives i opplæringsmateriellet vårt. Den skal hjelpe deg å forstå den høye risikoen ved handel og tydeliggjøre hva Cur Nova tilbyr og ikke tilbyr."
+        },
+        {
+          "type": "paragraph",
+          "text": "Denne policyen utfyller vilkårene og betingelsene, personvernerklæringen, retningslinjene for informasjonskapsler og refusjons- og returpolicyen vår. Ved motstrid gjelder vilkårene og betingelsene."
+        },
+        {
+          "type": "paragraph",
+          "text": "Ved å bruke cur-nova.com eller tilknyttede tjenester («tjenesten») bekrefter du at du har lest, forstått og godtar denne policyen."
+        }
+      ]
+    },
+    {
+      "id": "education-only",
+      "number": "2",
+      "title": "Ren opplæringsplattform (ingen finansiell rådgivning)",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "2.1 Kun opplæring. Cur Nova er en opplæringsplattform. Vi tilbyr digitalt læremateriell og verktøy som skal hjelpe privatpersoner som handler å forstå hvordan markedene fungerer, hvordan risiko i teorien kan styres, og hvordan ulike handelstilnærminger er bygget opp."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.2 Ingen investeringsrådgivning. Ingenting i tjenesten (inkludert ferdige kurs, tilpassede kurs, AI-strategiresultater, videoer, kalkulatorer, dashbord, e-poster eller annet innhold) utgjør:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "investerings-, handels- eller finansiell rådgivning;",
+            "en anbefaling om å kjøpe, selge eller beholde et finansielt instrument eller en kryptoeiendel;",
+            "en personlig anbefaling basert på din situasjon;",
+            "skatte-, regnskaps- eller juridisk rådgivning."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "2.3 Ingen meglertjenester, signaler eller forvaltede kontoer. Cur Nova:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "opptrer ikke som megler, børs, depotmottaker eller lommebokleverandør;",
+            "utfører ikke handler for deg eller på dine vegne;",
+            "tilbyr ikke sanntids handelssignaler, kopihandel, automatisk handel eller forvaltede kontoer;",
+            "overvåker ikke handelskontoene eller posisjonene dine."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Du er alene ansvarlig for å velge meglere/børser, legge inn ordrer, styre posisjoner og overvåke risikoen din."
+        }
+      ]
+    },
+    {
+      "id": "high-risk",
+      "number": "3",
+      "title": "Høy risiko ved handel og investering",
+      "accent": "warning",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "3.1 Betydelig risiko for tap. Handel og investering i finansielle instrumenter (inkludert, men ikke begrenset til, valuta, differansekontrakter (CFD-er), opsjoner, futures, indekser og kryptoeiendeler) innebærer høy risiko. Du kan tape deler av eller hele kapitalen din, og i noen tilfeller mer enn det opprinnelige innskuddet."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.2 Passer ikke for alle. Handel med girede produkter, derivater og volatile eiendeler passer ikke for alle investorer. Du bør nøye vurdere din økonomiske situasjon, erfaring, risikotoleranse og investeringsmål før du tar en handelsbeslutning."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.3 Giring og margin. Bruk av giring eller margin kan forsterke både gevinster og tap. Små markedsbevegelser kan gi store svingninger i verdien av posisjonene dine, inkludert raske tap som overstiger den opprinnelige marginen."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.4 Markedsrisiko. Markedene kan påvirkes av en lang rekke faktorer, inkludert, men ikke begrenset til:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "makroøkonomiske data og pengepolitikk;",
+            "geopolitiske hendelser, kriger og sanksjoner;",
+            "regulatoriske endringer;",
+            "likviditetssjokk, kurshopp og slippage;",
+            "teknologisvikt og driftsavbrudd hos meglere, børser eller dataleverandører."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Disse risikoene kan ikke fjernes med noen strategi, indikator, risikostyringsmetode eller noe opplæringsrammeverk."
+        }
+      ]
+    },
+    {
+      "id": "past-performance",
+      "number": "4",
+      "title": "Tidligere resultater og hypotetiske eksempler",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "4.1 Ingen garanti for fremtidige resultater. Alt resultatrelatert innhold (inkludert historiske diagrammer, casestudier, tilbaketester, hypotetiske scenarier eller «hva om»-eksempler) gis kun som illustrasjon og opplæring."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.2 Tidligere resultater er ingen indikasjon. Tidligere resultater, enten faktiske eller hypotetiske, er ikke en pålitelig indikator på fremtidige resultater. Markedene endrer seg over tid, og strategier som så ut til å fungere i tidligere perioder, kan gi dårlige resultater eller slå helt feil i fremtiden."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.3 Hypotetiske og simulerte resultater. Alle hypotetiske, simulerte eller tilbaketestede resultater har iboende begrensninger, blant annet:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "de kan bygge på idealisert utførelse (ingen slippage, ingen kurshopp, ingen likviditetsbegrensninger);",
+            "de er utformet i etterpåklokskapens lys;",
+            "de kan ikke fullt ut gjenspeile psykologiske faktorer, beslutninger i sanntid eller driftsmessige begrensninger."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Det er ingen garanti for at hypotetiske eller simulerte resultater vil oppnås i faktisk handel."
+        }
+      ]
+    },
+    {
+      "id": "crypto-risks",
+      "number": "5",
+      "title": "Særlige risikoer ved kryptoeiendeler",
+      "accent": "warning",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Der opplæringsinnholdet vårt berører kryptoeiendeler, kan ytterligere risikoer gjelde, blant annet:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "ekstrem kursvolatilitet, noen ganger i løpet av minutter;",
+            "plutselige endringer i markedsstemning, regulering eller juridisk status;",
+            "sikkerhetsbrudd, hacking, protokollfeil eller utnyttelse av sårbarheter;",
+            "børskollaps, uttak som settes på pause eller stanses, eller tap av tilgang til lommebøker;",
+            "begrensede historiske data og uprøvde markedsforhold."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Du bør betrakte kryptoeiendeler som svært spekulative og være forberedt på å tape hele beløpet du setter av."
+        }
+      ]
+    },
+    {
+      "id": "ai-tools",
+      "number": "6",
+      "title": "Bruk av AI og automatiserte verktøy",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "6.1 AI-generert innhold. Noen Cur Nova-funksjoner (for eksempel AI-strategibyggeren, AI-assisterte tilpassede kurs, diagrammer og forsidebilder) genereres helt eller delvis ved hjelp av AI-modeller. AI-systemer kan:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "produsere innhold som er ufullstendig, utdatert eller unøyaktig;",
+            "forenkle komplekse markedssituasjoner for mye;",
+            "unnlate å gjenspeile gjeldende markedsforhold eller regulatoriske endringer."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Alt AI-generert innhold gis kun som opplæringsmateriell og må ikke betraktes som handelsrådgivning i sanntid eller en garanti for noe utfall."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.2 Ingen automatiserte beslutninger med rettsvirkning. Tjenesten tar ikke beslutninger med rettslige eller tilsvarende betydelige virkninger for deg utelukkende basert på automatisert behandling. Du har full kontroll over om du bruker eller ser bort fra et AI-generert forslag."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.3 Brukerens ansvar. Du må selvstendig kontrollere all informasjon som genereres av AI eller inngår i kursene våre, før du bruker den som grunnlag for handels- eller investeringsbeslutninger."
+        }
+      ]
+    },
+    {
+      "id": "third-parties",
+      "number": "7",
+      "title": "Tredjeparts meglere, børser og plattformer",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "7.1 Uavhengige tredjeparter. Meglere, børser, lommebokleverandører, analyseplattformer eller andre eksterne verktøy du bruker, er uavhengige tredjeparter. Vi har ingen kontroll over deres vilkår, priser, utførelseskvalitet, marginregler, sikkerhetspraksis eller regulatoriske status."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.2 Ingen anbefaling. Selv om innholdet vårt viser til bestemte typer meglere, ordretyper, likviditetsleverandører eller børsstrukturer, er dette kun som illustrasjon. Det utgjør ikke en anbefaling eller garanti for noen bestemt leverandør."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.3 Du velger og følger opp leverandørene dine. Du er ansvarlig for å:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "velge og registrere deg hos meglere eller børser;",
+            "forstå deres vilkår, gebyrer, marginregler, risikoadvarsler og regulatoriske opplysninger;",
+            "overvåke kontosaldo, åpne posisjoner, marginkrav og risiko for tvangslikvidering."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tokens",
+      "number": "8",
+      "title": "Tokens, priser og at de ikke er investeringer",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "8.1 Tokens er ikke investeringer. Cur Novas tokens og lommeboksaldo er brukskreditter som gir deg tilgang til digitalt læremateriell og funksjoner i tjenesten. De er ikke:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "investeringer, verdipapirer, finansielle instrumenter eller innskudd;",
+            "e-penger eller et forhåndsbetalt verdiprodukt;",
+            "et krav på noen underliggende eiendel, portefølje eller handelsresultat."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "8.2 Ingen forventning om fortjeneste. Kjøp av tokens skal ikke betraktes som en investering eller en måte å ta del i fortjeneste eller inntekter fra Cur Nova eller noen handelsaktivitet. Tokens har ingen egenverdi utenfor tjenesten og kan ikke omsettes i eksterne markeder."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.3 Ingen garanti for utfall. Å betale for kurs, AI-verktøy eller tilpasset innhold med tokens eller kort garanterer ikke at du vil:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "bli lønnsom i handel;",
+            "redusere tapene dine;",
+            "bestå en tredjeparts evaluering eller et finansieringsprogram;",
+            "nå et bestemt økonomisk eller personlig mål."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "suitability",
+      "number": "9",
+      "title": "Egnethet, uavhengig rådgivning og skatt",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "9.1 Ditt ansvar for å vurdere egnethet. Du er alene ansvarlig for å avgjøre om:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "handel eller investering i det hele tatt passer for deg;",
+            "bestemte strategier, tidsrammer eller instrumenter samsvarer med risikotoleransen og målene dine;",
+            "du har tilstrekkelig kunnskap, tid og økonomiske ressurser til å delta i høyrisikomarkeder."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "9.2 Søk profesjonell rådgivning. Du bør søke uavhengig rådgivning fra:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "en regulert finansrådgiver hvis du er usikker på om en investering passer for deg;",
+            "en kvalifisert skatterådgiver om skattemessige konsekvenser;",
+            "en jurist ved juridiske spørsmål (for eksempel om regulatorisk status eller grenseoverskridende aktivitet)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "9.3 Skatteforpliktelser. Gevinster eller tap fra handel eller investering kan ha skattemessige konsekvenser i din jurisdiksjon. Cur Nova gir ikke skatterådgivning, og du er selv ansvarlig for å rapportere og betale alle gjeldende skatter."
+        }
+      ]
+    },
+    {
+      "id": "no-guarantees",
+      "number": "10",
+      "title": "Ingen garantier og ansvarsbegrensning",
+      "accent": "warning",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "10.1 Ingen resultatgarantier. Cur Nova garanterer ikke:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "lønnsomhet eller positiv avkastning;",
+            "noe minste eller fast resultatnivå;",
+            "at en bestemt strategi eller metode vil fungere i dagens eller fremtidige markeder;",
+            "uavbrutt tilgang til tjenesten eller det digitale innholdet."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "10.2 Brukerens egen risiko. Du bruker tjenesten og anvender opplæringsinnholdet på egen risiko. Cur Nova er ikke ansvarlig for handelsbeslutningene du tar eller eventuelle gevinster eller tap som følger av dem."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.3 Henvisning til vilkårene. Ansvarsbegrensningene og ansvarsfraskrivelsene i vilkårene og betingelsene våre gjelder fullt ut for alle tap eller krav som følger av din bruk av tjenesten, inkludert når du stoler på opplæringsmateriell, AI-resultater eller eksempler."
+        }
+      ]
+    },
+    {
+      "id": "jurisdiction",
+      "number": "11",
+      "title": "Jurisdiksjon og regulatorisk status",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "11.1 Jurisdiksjon. Som angitt i vilkårene og betingelsene er denne policyen underlagt lovgivningen i England og Wales, og tvister reguleres av jurisdiksjonsbestemmelsene i vilkårene."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.2 Regulatorisk status. Cur Nova er en opplæringsplattform som drives av CUR NOVA LTD. Den opererer ikke som megler, verdipapirforetak, kryptobørs, bank eller betalingsinstitusjon. Tjenesten er ikke laget for å yte regulerte investeringstjenester eller for å innhente eller motta kundeordrer for utførelse."
+        },
+        {
+          "type": "paragraph",
+          "text": "Hvis vår regulatoriske status endres i fremtiden, vil vi oppdatere opplysningene våre og denne policyen tilsvarende."
+        }
+      ]
+    },
+    {
+      "id": "translations",
+      "number": "12",
+      "title": "Språk",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Tjenesten, inkludert alle risikoadvarsler og alt opplæringsinnhold, leveres på engelsk. Norske oversettelser er kun ment som hjelp, og den engelske versjonen av dette dokumentet er den eneste bindende versjonen."
+        }
+      ]
+    },
+    {
+      "id": "acknowledgement",
+      "number": "13",
+      "title": "Bekreftelse",
+      "accent": "warning",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Ved å opprette en konto, kjøpe tokens eller bruke noen del av tjenesten bekrefter du uttrykkelig at:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "du forstår den høye risikoen ved handel og investering;",
+            "du forstår at Cur Nova kun tilbyr opplæring og ikke finansiell rådgivning, investerings-, skatte- eller juridisk rådgivning;",
+            "du er alene ansvarlig for handelsbeslutningene dine, risikostyringen og valg av tredjepartsleverandører;",
+            "du har lest, forstått og godtar å være bundet av denne risiko- og ansvarsfraskrivelsen sammen med vilkårene og betingelsene og våre øvrige retningslinjer."
+          ]
+        }
+      ]
+    }
+  ],
+  "cta": {
+    "title": "Det er avgjørende å forstå disse risikoene før du bruker Cur Nova.",
+    "subtitle": "Hvis du ikke er komfortabel med høyrisikomarkeder, muligheten for fullstendig tap og fraværet av garantier, bør du ikke bruke Cur Nova eller drive med handel.",
+    "backToHome": "Tilbake til forsiden",
+    "viewCourses": "Se kurs"
+  }
+}

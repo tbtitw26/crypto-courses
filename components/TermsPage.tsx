@@ -61,6 +61,7 @@ type TermsSection = {
 
 export function TermsPage() {
   const t = useTranslations('terms')
+  const tUi = useTranslations('common.ui')
   const tBreadcrumb = useTranslations('courses.breadcrumb')
 
   const summaryCard = t.raw('hero.summaryCard') as SummaryCard
@@ -248,21 +249,21 @@ export function TermsPage() {
       {/* Related legal links */}
       <section className="border-t border-surface-200 bg-white py-8">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-text-muted">Related policies</h3>
+          <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-text-muted">{tUi('relatedPolicies')}</h3>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
             <Link href="/privacy" className="group flex items-center gap-2 rounded-lg border border-surface-200 bg-surface-50 px-4 py-3 transition hover:border-brand-200">
               <Shield className="h-4 w-4 text-brand-600" />
-              <span className="flex-1 text-xs font-medium text-text-main">Privacy Policy</span>
+              <span className="flex-1 text-xs font-medium text-text-main">{tUi('privacy')}</span>
               <ChevronRight className="h-3.5 w-3.5 text-text-muted transition group-hover:text-brand-600" />
             </Link>
             <Link href="/cookies" className="group flex items-center gap-2 rounded-lg border border-surface-200 bg-surface-50 px-4 py-3 transition hover:border-brand-200">
               <Shield className="h-4 w-4 text-brand-600" />
-              <span className="flex-1 text-xs font-medium text-text-main">Cookie Policy</span>
+              <span className="flex-1 text-xs font-medium text-text-main">{tUi('cookiePolicy')}</span>
               <ChevronRight className="h-3.5 w-3.5 text-text-muted transition group-hover:text-brand-600" />
             </Link>
             <Link href="/risk-and-disclaimer" className="group flex items-center gap-2 rounded-lg border border-surface-200 bg-surface-50 px-4 py-3 transition hover:border-brand-200">
               <AlertTriangle className="h-4 w-4 text-amber-600" />
-              <span className="flex-1 text-xs font-medium text-text-main">Risk Disclosure</span>
+              <span className="flex-1 text-xs font-medium text-text-main">{tUi('riskDisclosure')}</span>
               <ChevronRight className="h-3.5 w-3.5 text-text-muted transition group-hover:text-brand-600" />
             </Link>
           </div>

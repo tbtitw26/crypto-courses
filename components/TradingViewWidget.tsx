@@ -3,12 +3,13 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 type WidgetType = 'chart' | 'overview' | 'stock'
 
 export function TradingViewWidget() {
   const t = useTranslations('home.marketSnapshot')
+  const widgetLocale = useLocale() === 'no' ? 'no' : 'en'
   const [activeTab, setActiveTab] = useState<WidgetType>('chart')
   const containerRef = useRef<HTMLDivElement>(null)
   const scriptRef = useRef<HTMLScriptElement | null>(null)
@@ -135,7 +136,7 @@ export function TradingViewWidget() {
           hide_volume: false,
           hotlist: false,
           interval: 'D',
-          locale: 'en',
+          locale: widgetLocale,
           save_image: true,
           style: '1',
           symbol: 'NASDAQ:AAPL',
@@ -156,7 +157,7 @@ export function TradingViewWidget() {
         script.innerHTML = JSON.stringify({
           colorTheme: 'dark',
           dateRange: '12M',
-          locale: 'en',
+          locale: widgetLocale,
           largeChartUrl: '',
           isTransparent: false,
           showFloatingTooltip: false,
@@ -171,7 +172,7 @@ export function TradingViewWidget() {
           symbolActiveColor: 'rgba(6, 182, 212, 0.12)',
           tabs: [
             {
-              title: 'Indices',
+              title: t('tabsExtra.indices'),
               symbols: [
                 { s: 'FOREXCOM:SPXUSD', d: 'S&P 500 Index' },
                 { s: 'FOREXCOM:NSXUSD', d: 'US 100 Cash CFD' },
@@ -183,7 +184,7 @@ export function TradingViewWidget() {
               originalTitle: 'Indices',
             },
             {
-              title: 'Futures',
+              title: t('tabsExtra.futures'),
               symbols: [
                 { s: 'BMFBOVESPA:ISP1!', d: 'S&P 500' },
                 { s: 'BMFBOVESPA:EUR1!', d: 'Euro' },
@@ -194,7 +195,7 @@ export function TradingViewWidget() {
               originalTitle: 'Futures',
             },
             {
-              title: 'Bonds',
+              title: t('tabsExtra.bonds'),
               symbols: [
                 { s: 'EUREX:FGBL1!', d: 'Euro Bund' },
                 { s: 'EUREX:FBTP1!', d: 'Euro BTP' },
@@ -203,7 +204,7 @@ export function TradingViewWidget() {
               originalTitle: 'Bonds',
             },
             {
-              title: 'Forex',
+              title: t('tabsExtra.forex'),
               symbols: [
                 { s: 'FX:EURUSD', d: 'EUR to USD' },
                 { s: 'FX:GBPUSD', d: 'GBP to USD' },
@@ -231,7 +232,7 @@ export function TradingViewWidget() {
           colorTheme: 'dark',
           dateRange: '12M',
           showChart: true,
-          locale: 'en',
+          locale: widgetLocale,
           largeChartUrl: '',
           isTransparent: false,
           showSymbolLogo: false,
@@ -283,7 +284,7 @@ export function TradingViewWidget() {
         })
       }
     }
-  }, [activeTab])
+  }, [activeTab, widgetLocale, t])
 
   return (
     <div className="w-full">

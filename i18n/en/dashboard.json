@@ -572,6 +572,22 @@
       "title": "Reminder: this account is not a trading profile",
       "description": "Cur Nova accounts control access to educational PDFs and AI strategies only. They do not hold or manage trading capital and cannot place trades on your behalf.",
       "warning": "Always keep your broker and exchange credentials separate, and never share them with support. If any service claims to trade on behalf of \"Cur Nova\", treat it as suspicious."
+    },
+    "extra": {
+      "loadFailed": "Failed to load profile data",
+      "error": "Error",
+      "validationError": "Validation Error",
+      "firstNameRequired": "First name is required",
+      "updateFailed": "Failed to update profile",
+      "success": "Success",
+      "updated": "Profile updated successfully",
+      "cancel": "Cancel",
+      "saving": "Saving...",
+      "save": "Save",
+      "firstName": "First name",
+      "lastName": "Last name (optional)",
+      "region": "Region (optional)",
+      "notSet": "Not set"
     }
   },
   "receiptsPage": {
@@ -593,7 +609,12 @@
     "emptyState": {
       "title": "No receipts found",
       "description": "Your receipts will appear here once you make your first purchase or top-up."
+    },
+    "extra": {
+      "pendingReceipt": "Receipt becomes available after the provider confirms the payment."
     }
+  },
+  "extra": {
+    "accountSettings": "Account settings"
   }
 }
-

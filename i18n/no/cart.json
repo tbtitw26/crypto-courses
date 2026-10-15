@@ -1,0 +1,144 @@
+{
+  "empty": {
+    "title": "Handlekurven din er tom",
+    "description": "Legg til kurs i handlekurven for å komme i gang."
+  },
+  "miniCart": {
+    "title": "Handlekurv",
+    "goToCart": "Gå til handlekurven",
+    "goToCheckout": "Gå til kassen",
+    "remove": "Fjern"
+  },
+  "page": {
+    "title": "Handlekurv",
+    "subtitle": "Se gjennom kursene du har valgt",
+    "empty": {
+      "title": "Handlekurven din er tom",
+      "description": "Legg til kurs i handlekurven for å fortsette.",
+      "browseCourses": "Utforsk kurs"
+    },
+    "summary": {
+      "title": "Ordresammendrag",
+      "subtotal": "Delsum",
+      "total": "Totalt",
+      "tokens": "tokens",
+      "goToCheckout": "Gå til kassen",
+      "continueShopping": "Fortsett å handle"
+    },
+    "item": {
+      "remove": "Fjern",
+      "viewCourse": "Se kurs"
+    },
+    "extra": {
+      "startHere": "Start her",
+      "browseTitle": "Utforsk kurs",
+      "browseDesc": "Ferdige strukturerte PDF-er om Forex, krypto og binære opsjoner på alle nivåer.",
+      "tokensTitle": "Fyll på en token-saldo",
+      "tokensDesc": "Kjøp en tokenpakke og bruk den på kurs, tilpassede PDF-er og AI-strategier.",
+      "tokensCta": "Se tokenpakker",
+      "customTitle": "Tilpasset innhold eller AI-innhold",
+      "customDesc": "Bestill en skreddersydd kurs-PDF eller generer et AI-strategidokument.",
+      "customCta": "Kom i gang",
+      "orderReview": "Gjennomgang av bestillingen",
+      "item": "element",
+      "items": "elementer",
+      "disclaimer": "Alt innhold er kun ment for opplæring. Tokens, kurs og AI-resultater utgjør ikke finansiell rådgivning."
+    }
+  },
+  "checkout": {
+    "title": "Kasse",
+    "subtitle": "Fullfør kjøpet ditt",
+    "orderSummary": {
+      "title": "Ordresammendrag",
+      "subtotal": "Delsum",
+      "total": "Totalt",
+      "tokens": "tokens"
+    },
+    "payment": {
+      "title": "Betalingsmåte",
+      "withTokens": "Betal med tokens",
+      "withCard": "Betal med kort",
+      "insufficientTokens": "Ikke nok tokens",
+      "buyTokens": "Kjøp tokens",
+      "success": "Betalingen var vellykket",
+      "successDescription": "Bestillingen din er registrert.",
+      "failed": "Betalingen mislyktes",
+      "failedDescription": "Kunne ikke behandle betalingen. Prøv igjen.",
+      "processing": "Behandler...",
+      "tokenPurchaseOnlyCard": "Tokenpakker og valgfrie påfyllinger kan kun kjøpes med kort."
+    },
+    "placeOrder": "Bestill",
+    "backToCart": "Tilbake til handlekurven",
+    "cardForm": {
+      "title": "Betalingsopplysninger",
+      "subtitle": "Skriv inn kortopplysningene dine",
+      "fields": {
+        "email": "E-post",
+        "cardNumber": "Kortnummer",
+        "expiry": "Utløpsdato",
+        "cvv": "CVV",
+        "name": "Kortinnehaverens navn",
+        "address": "Fakturaadresse",
+        "city": "By",
+        "postalCode": "Postnummer"
+      },
+      "placeholders": {
+        "email": "deg@eksempel.no",
+        "cardNumber": "1234 5678 9012 3456",
+        "expiry": "MM/ÅÅ",
+        "cvv": "123",
+        "name": "Ola Nordmann",
+        "address": "Storgata 1",
+        "city": "Oslo",
+        "postalCode": "0150"
+      },
+      "consent": {
+        "before": "Jeg har lest og godtatt",
+        "termsLink": "vilkårene og betingelsene"
+      },
+      "payButton": "Betal",
+      "processing": "Behandler...",
+      "errors": {
+        "validationFailed": "Rett opp feilene i skjemaet",
+        "submitFailed": "Betalingen mislyktes",
+        "generic": "Det oppstod en feil. Prøv igjen.",
+        "cardNumberRequired": "Kortnummer er påkrevd",
+        "cardNumberInvalid": "Kortnummeret må ha 16 sifre",
+        "expiryRequired": "Utløpsdato er påkrevd",
+        "expiryInvalid": "Formatet må være MM/ÅÅ",
+        "cvvRequired": "CVV er påkrevd",
+        "cvvInvalid": "CVV må ha 3 sifre",
+        "nameRequired": "Kortinnehaverens navn er påkrevd",
+        "addressRequired": "Fakturaadresse er påkrevd",
+        "cityRequired": "By er påkrevd",
+        "postalCodeRequired": "Postnummer er påkrevd",
+        "emailRequired": "E-post er påkrevd",
+        "emailInvalid": "Skriv inn en gyldig e-postadresse",
+        "consentRequired": "Du må godta vilkårene og betingelsene for å fortsette"
+      }
+    },
+    "extra": {
+      "sessionFailed": "Kunne ikke opprette betalingsøkt",
+      "noRedirect": "Mottok ingen videresendingsadresse fra betalingsløsningen",
+      "preparing": "Forbereder kassen",
+      "verifying": "Kontrollerer økt og ordredetaljer…",
+      "needTokens": "Du trenger {need} tokens, men har {have}.",
+      "tokenBalance": "Token-saldo",
+      "afterPurchase": "Etter kjøp",
+      "deficit": "−{amount} underskudd",
+      "hostedTitle": "Sikker ekstern betaling",
+      "hostedText": "Du sendes videre til APS for å fylle på nøyaktig den token-saldoen som trengs for denne bestillingen. Etter betaling kommer du tilbake hit for å fullføre kurskjøpet med tokens.",
+      "amount": "Beløp",
+      "continueAps": "Fortsett til sikker betaling hos APS",
+      "ssl": "SSL-sikret",
+      "pci": "PCI-kompatibel",
+      "disclaimer": "Alt innhold er kun ment for opplæring. Tokens, kurs og AI-resultater utgjør ikke finansiell rådgivning.",
+      "loading": "Laster inn kassen…"
+    }
+  },
+  "messages": {
+    "addedToCart": "Kurset er lagt i handlekurven",
+    "removedFromCart": "Kurset er fjernet fra handlekurven",
+    "cartCleared": "Handlekurven er tømt"
+  }
+}

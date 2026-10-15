@@ -11,22 +11,23 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
-const changePasswordSchema = z
-  .object({
-    currentPassword: z.string().min(1, 'Current password is required'),
-    newPassword: z.string().min(8, 'Password must be at least 8 characters'),
-    confirmPassword: z.string().min(1, 'Please confirm your password'),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
-  })
-  .refine((data) => data.currentPassword !== data.newPassword, {
-    message: 'New password must be different from current password',
-    path: ['newPassword'],
-  })
+const makeChangePasswordSchema = (tv: (key: string) => string) =>
+  z
+    .object({
+      currentPassword: z.string().min(1, tv('currentPasswordRequired')),
+      newPassword: z.string().min(8, tv('passwordMin')),
+      confirmPassword: z.string().min(1, tv('confirmPassword')),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: tv('passwordsDontMatch'),
+      path: ['confirmPassword'],
+    })
+    .refine((data) => data.currentPassword !== data.newPassword, {
+      message: tv('passwordMustDiffer'),
+      path: ['newPassword'],
+    })
 
-type ChangePasswordFormData = z.infer<typeof changePasswordSchema>
+type ChangePasswordFormData = z.infer<ReturnType<typeof makeChangePasswordSchema>>
 
 interface ChangePasswordModalProps {
   isOpen: boolean
@@ -35,6 +36,8 @@ interface ChangePasswordModalProps {
 
 export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProps) {
   const t = useTranslations('dashboard.settingsPage.security.changePassword')
+  const tv = useTranslations('common.validation')
+  const tUi = useTranslations('common.ui')
   const { showToast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showCurrentPassword, setShowCurrentPassword] = useState(false)
@@ -47,7 +50,7 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
     formState: { errors },
     reset,
   } = useForm<ChangePasswordFormData>({
-    resolver: zodResolver(changePasswordSchema),
+    resolver: zodResolver(makeChangePasswordSchema(tv)),
   })
 
   // Reset form when modal closes
@@ -143,7 +146,7 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
                 <button
                   onClick={onClose}
                   className="p-2 text-text-muted hover:text-text-main hover:bg-surface-200/50 rounded-lg transition"
-                  aria-label="Close"
+                  aria-label={tUi('close')}
                 >
                   <X className="w-5 h-5" />
                 </button>

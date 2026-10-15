@@ -6,6 +6,7 @@ import { BookOpen } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { useValueLabel } from '@/hooks/use-value-label'
 import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
@@ -34,6 +35,7 @@ const levelColors: Record<string, string> = {
 export function CourseCard({ course }: CourseCardProps) {
   const [currency, setCurrency] = useState('GBP')
   const t = useTranslations('common.buttons')
+  const valueLabel = useValueLabel()
 
   useEffect(() => {
     setCurrency(getUserCurrency())
@@ -73,10 +75,10 @@ export function CourseCard({ course }: CourseCardProps) {
             {course.title}
           </h3>
           <span className="shrink-0 rounded-full bg-surface-100 px-2 py-0.5 text-[11px] font-medium text-text-muted">
-            {course.level}
+            {valueLabel(course.level)}
           </span>
           <span className="shrink-0 rounded-full bg-surface-100 px-2 py-0.5 text-[11px] font-medium text-text-muted">
-            {course.market}
+            {valueLabel(course.market)}
           </span>
         </div>
         <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-text-secondary">{course.desc}</p>

@@ -21,6 +21,7 @@ import {
 
 export function FAQPage() {
   const t = useTranslations('faq')
+  const tUi = useTranslations('common.ui')
 
   const faqItems = (t.raw('faq') as any)?.items as Array<{
     category: string
@@ -115,7 +116,7 @@ export function FAQPage() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search questions..."
+                placeholder={t('extra.searchPlaceholder')}
                 className="w-full rounded-lg border border-surface-200 bg-surface-50 py-2.5 pl-10 pr-4 text-sm text-text-main placeholder:text-surface-400 focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500"
               />
             </div>
@@ -167,7 +168,7 @@ export function FAQPage() {
           {filteredItems.length === 0 ? (
             <div className="rounded-xl border border-surface-200 bg-white p-12 text-center shadow-card">
               <HelpCircle className="mx-auto mb-3 h-8 w-8 text-surface-300" />
-              <p className="text-sm text-text-muted">No questions match your search.</p>
+              <p className="text-sm text-text-muted">{t('extra.noMatch')}</p>
               <button
                 type="button"
                 onClick={() => {
@@ -176,7 +177,7 @@ export function FAQPage() {
                 }}
                 className="mt-3 text-xs font-medium text-brand-600 transition hover:text-brand-700"
               >
-                Clear filters
+                {tUi('clearFilters')}
               </button>
             </div>
           ) : (

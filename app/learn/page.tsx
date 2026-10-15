@@ -3,11 +3,14 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { LearnPage } from '@/components/LearnPage'
-import enLearn from '@/i18n/en/learn.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: enLearn.title,
-  description: enLearn.subtitle,
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('learn.title'),
+    description: t('learn.subtitle'),
+  }
 }
 
 function LearnPageFallback() {

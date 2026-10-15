@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useCart } from '@/contexts/CartContext'
 import {
   ArrowRight,
@@ -39,6 +40,7 @@ function isHostedTopupCartItem(slug: string): boolean {
 }
 
 export default function TopUpSuccessContent() {
+  const t = useTranslations('topUp.status')
   const searchParams = useSearchParams()
   const { update } = useSession()
   const { items, clearCart } = useCart()
@@ -61,9 +63,8 @@ export default function TopUpSuccessContent() {
     switch (status?.state) {
       case 'COMPLETED':
         return {
-          title: 'Payment Successful!',
-          description:
-            status.message || 'Your payment has been confirmed and the tokens were added to your account.',
+          title: t('successTitle'),
+          description: t('successDesc'),
           icon: CheckCircle2,
           iconBg: 'border-emerald-200 bg-emerald-50',
           iconColor: 'text-emerald-600',
@@ -75,8 +76,8 @@ export default function TopUpSuccessContent() {
       case 'EXPIRED':
       case 'REFUNDED':
         return {
-          title: 'Payment Not Completed',
-          description: status?.message || 'The payment was not completed. You can try again whenever you are ready.',
+          title: t('failedTitle'),
+          description: t('failedDesc'),
           icon: XCircle,
           iconBg: 'border-rose-200 bg-rose-50',
           iconColor: 'text-rose-600',
@@ -85,9 +86,8 @@ export default function TopUpSuccessContent() {
         }
       default:
         return {
-          title: 'Payment Pending',
-          description:
-            status?.message || 'Your payment is still processing. This page will update automatically.',
+          title: t('pendingTitle'),
+          description: t('pendingDesc'),
           icon: Clock,
           iconBg: 'border-gold-200 bg-gold-50',
           iconColor: 'text-gold-600',
@@ -95,11 +95,11 @@ export default function TopUpSuccessContent() {
           tone: 'pending' as const,
         }
     }
-  }, [status])
+  }, [status, t])
 
   useEffect(() => {
     if (!referenceId) {
-      setError('Missing payment reference. Please check your dashboard for updates.')
+      setError(t('missingRef'))
       setIsLoading(false)
       return
     }
@@ -117,7 +117,7 @@ export default function TopUpSuccessContent() {
         if (isCancelled) return
 
         if (!response.ok || !data) {
-          throw new Error(data?.message || 'Unable to fetch payment status')
+          throw new Error(t('fetchFailed'))
         }
 
         setStatus(data)
@@ -138,7 +138,7 @@ export default function TopUpSuccessContent() {
         }
       } catch (err: any) {
         if (isCancelled) return
-        setError(err.message || 'Unable to fetch payment status')
+        setError(err.message || t('fetchFailed'))
         setIsLoading(false)
         timer = setTimeout(poll, 5000)
       }
@@ -152,7 +152,7 @@ export default function TopUpSuccessContent() {
         clearTimeout(timer)
       }
     }
-  }, [clearCart, hasOnlyHostedTopupItems, referenceId, update])
+  }, [clearCart, hasOnlyHostedTopupItems, referenceId, update, t])
 
   const StatusIcon = statusConfig.icon
 
@@ -165,14 +165,14 @@ export default function TopUpSuccessContent() {
             <Loader2 className="h-6 w-6 animate-spin text-brand-700" />
           </div>
           <h2 className="mt-5 font-heading text-xl font-semibold text-text-main">
-            Checking payment status
+            {t('checking')}
           </h2>
           <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-text-secondary">
-            Confirming your transaction with the payment provider. This usually takes a few seconds.
+            {t('checkingDesc')}
           </p>
           {referenceId && (
             <div className="mt-5 inline-flex items-center gap-2 rounded-lg border border-surface-200 bg-surface-100 px-3 py-1.5 text-sm">
-              <span className="text-text-muted">Reference</span>
+              <span className="text-text-muted">{t('reference')}</span>
               <span className="truncate font-mono text-text-main">{referenceId}</span>
             </div>
           )}
@@ -197,7 +197,7 @@ export default function TopUpSuccessContent() {
             <span
               className={`inline-flex items-center rounded-md border px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider ${statusConfig.badgeBg}`}
             >
-              {status?.state || 'PENDING'}
+              {t(`states.${status?.state || 'PENDING'}`)}
             </span>
           </div>
 
@@ -212,28 +212,28 @@ export default function TopUpSuccessContent() {
         {/* Payment details */}
         <div className="border-t border-surface-200 px-6 py-5 sm:px-8">
           <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
-            Payment details
+            {t('details')}
           </p>
 
           <dl className="space-y-2.5 text-sm">
             <div className="flex items-center justify-between gap-4">
-              <dt className="text-text-secondary">Reference</dt>
+              <dt className="text-text-secondary">{t('reference')}</dt>
               <dd className="max-w-[60%] truncate text-right font-mono text-sm font-medium text-text-main">
                 {status?.referenceId || referenceId || '—'}
               </dd>
             </div>
             <div className="flex items-center justify-between gap-4">
-              <dt className="text-text-secondary">Status</dt>
-              <dd className="font-medium text-text-main">{status?.state || 'PENDING'}</dd>
+              <dt className="text-text-secondary">{t('status')}</dt>
+              <dd className="font-medium text-text-main">{t(`states.${status?.state || 'PENDING'}`)}</dd>
             </div>
             <div className="flex items-center justify-between gap-4">
-              <dt className="text-text-secondary">Tokens</dt>
+              <dt className="text-text-secondary">{t('tokens')}</dt>
               <dd className="font-medium text-text-main">
                 {typeof status?.tokens === 'number' ? status.tokens.toLocaleString('en-US') : '—'}
               </dd>
             </div>
             <div className="flex items-center justify-between gap-4">
-              <dt className="text-text-secondary">Charged</dt>
+              <dt className="text-text-secondary">{t('charged')}</dt>
               <dd className="font-medium text-text-main">
                 {typeof status?.amount === 'number' && status?.currency
                   ? `${status.amount.toFixed(2)} ${status.currency}`
@@ -248,7 +248,7 @@ export default function TopUpSuccessContent() {
       {status?.state && !terminalStates.has(status.state) && (
         <div className="flex items-center justify-center gap-2 rounded-lg border border-gold-200 bg-gold-50 px-4 py-3 text-sm font-medium text-gold-800">
           <span className="h-2 w-2 animate-pulse rounded-full bg-gold-500" />
-          Auto-refreshing until the provider confirms your payment
+          {t('autoRefresh')}
         </div>
       )}
 
@@ -265,7 +265,7 @@ export default function TopUpSuccessContent() {
           <ShoppingCart className="mt-0.5 h-4 w-4 shrink-0 text-brand-700" />
           <div>
             <p className="text-sm font-medium text-brand-800">
-              Your balance has been updated. Return to checkout to finish the course purchase with tokens.
+              {t('balanceUpdated')}
             </p>
           </div>
         </div>
@@ -276,13 +276,13 @@ export default function TopUpSuccessContent() {
         <div className="flex flex-col gap-2.5">
           {status?.state === 'COMPLETED' && hasCourseItemsInCart ? (
             <Link href="/checkout" className="btn-primary flex w-full items-center justify-center gap-2 text-center">
-              Return to checkout
+              {t('returnCheckout')}
               <ArrowRight className="h-4 w-4" />
             </Link>
           ) : (
             <Link href="/dashboard" className="btn-primary flex w-full items-center justify-center gap-2 text-center">
               <FileText className="h-4 w-4" />
-              View my account
+              {t('viewAccount')}
             </Link>
           )}
 
@@ -292,7 +292,7 @@ export default function TopUpSuccessContent() {
               className="flex w-full items-center justify-center gap-2 rounded-xl border border-surface-300 bg-white py-2.5 text-sm font-medium text-text-secondary transition-colors hover:border-surface-400 hover:text-text-main"
             >
               <ReceiptText className="h-4 w-4" />
-              View receipt
+              {t('viewReceipt')}
             </Link>
           )}
 
@@ -301,7 +301,7 @@ export default function TopUpSuccessContent() {
               href="/top-up"
               className="flex w-full items-center justify-center gap-2 rounded-xl border border-surface-300 bg-white py-2.5 text-sm font-medium text-text-secondary transition-colors hover:border-surface-400 hover:text-text-main"
             >
-              Try again
+              {t('tryAgain')}
             </Link>
           )}
         </div>

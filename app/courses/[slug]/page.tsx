@@ -6,6 +6,8 @@ import { prisma } from '@/lib/prisma'
 import { CourseDetailPage } from '@/components/CourseDetailPage'
 import { demoCourses } from '@/src/data/courses'
 import { resolvePublicUrl } from '@/lib/storage'
+import { getServerLocale, getServerTranslator } from '@/i18n/server'
+import { localizeCourse } from '@/lib/course-i18n'
 
 interface CourseDetailPageProps {
   params: {
@@ -150,14 +152,16 @@ export async function generateMetadata({
   const course = await getCourse(params.slug)
 
   if (!course) {
+    const t = await getServerTranslator()
     return {
-      title: 'Course not found',
+      title: t('common.ui.courseNotFound'),
     }
   }
 
+  const localized = localizeCourse(course, getServerLocale())
   return {
-    title: course.title,
-    description: course.description,
+    title: localized.title,
+    description: localized.description,
   }
 }
 
@@ -171,7 +175,7 @@ export default async function CourseDetailPageRoute({
   }
 
   // Normalize course data: convert null to undefined for optional fields
-  const normalizedCourse = normalizeCourse(course)
+  const normalizedCourse = normalizeCourse(localizeCourse(course, getServerLocale()))
 
   return <CourseDetailPage course={normalizedCourse} />
 }

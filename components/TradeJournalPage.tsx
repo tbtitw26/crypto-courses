@@ -18,6 +18,7 @@ import {
 
 export function TradeJournalPage() {
   const t = useTranslations('learn.tradeJournal')
+  const tNavLinks = useTranslations('common.nav')
   const tBreadcrumb = useTranslations('learn.breadcrumb')
 
   const hero = t.raw('hero') as any
@@ -236,13 +237,13 @@ export function TradeJournalPage() {
           <p className="mt-3 text-xs text-text-muted">{sidebar?.continueLearning?.note}</p>
           <div className="mt-5 flex flex-wrap gap-3 border-t border-surface-200 pt-5">
             <Link href="/learn/weekly-review" className="inline-flex items-center gap-2 rounded-xl border border-surface-200 px-4 py-2.5 text-sm font-medium text-text-main transition-colors hover:bg-surface-0">
-              <Calendar className="h-4 w-4 text-brand-600" /> Weekly Review
+              <Calendar className="h-4 w-4 text-brand-600" /> {tNavLinks('weeklyReview')}
             </Link>
             <Link href="/learn/pre-session" className="inline-flex items-center gap-2 rounded-xl border border-surface-200 px-4 py-2.5 text-sm font-medium text-text-main transition-colors hover:bg-surface-0">
-              <BookOpen className="h-4 w-4 text-brand-600" /> Pre-Session
+              <BookOpen className="h-4 w-4 text-brand-600" /> {tNavLinks('preSession')}
             </Link>
             <Link href="/courses" className="inline-flex items-center gap-2 rounded-xl border border-brand-200 bg-brand-50 px-4 py-2.5 text-sm font-medium text-brand-700 transition-colors hover:bg-brand-100">
-              Explore Courses <ArrowRight className="h-4 w-4" />
+              {tNavLinks('exploreCourses')} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

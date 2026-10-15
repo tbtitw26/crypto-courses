@@ -113,7 +113,7 @@ export function SettingsPage() {
     try {
       const response = await fetch('/api/user/profile')
       if (!response.ok) {
-        throw new Error('Failed to load profile data')
+        throw new Error(t('extra.loadFailed'))
       }
       const data = await response.json()
       if (data.success && data.user) {
@@ -130,8 +130,8 @@ export function SettingsPage() {
     } catch (error) {
       console.error('Failed to load profile:', error)
       showToast({
-        title: 'Error',
-        description: 'Failed to load profile data',
+        title: t('extra.error'),
+        description: t('extra.loadFailed'),
         variant: 'error',
       })
     } finally {
@@ -166,8 +166,8 @@ export function SettingsPage() {
 
     if (!editedFirstName.trim()) {
       showToast({
-        title: 'Validation Error',
-        description: 'First name is required',
+        title: t('extra.validationError'),
+        description: t('extra.firstNameRequired'),
         variant: 'error',
       })
       return
@@ -189,7 +189,7 @@ export function SettingsPage() {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
-        throw new Error(errorData.error || 'Failed to update profile')
+        throw new Error(errorData.error || t('extra.updateFailed'))
       }
 
       const data = await response.json()
@@ -205,16 +205,16 @@ export function SettingsPage() {
         await updateSession()
 
         showToast({
-          title: 'Success',
-          description: 'Profile updated successfully',
+          title: t('extra.success'),
+          description: t('extra.updated'),
           variant: 'success',
         })
       }
     } catch (error: any) {
       console.error('Failed to save profile:', error)
       showToast({
-        title: 'Error',
-        description: error.message || 'Failed to update profile',
+        title: t('extra.error'),
+        description: error.message || t('extra.updateFailed'),
         variant: 'error',
       })
     } finally {
@@ -319,7 +319,7 @@ export function SettingsPage() {
                       className="btn-secondary inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs"
                     >
                       <X className="h-3 w-3" />
-                      <span>Cancel</span>
+                      <span>{t('extra.cancel')}</span>
                     </button>
                     <button
                       type="button"
@@ -328,7 +328,7 @@ export function SettingsPage() {
                       className="btn-primary inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs"
                     >
                       <Save className="h-3 w-3" />
-                      <span>{isSavingProfile ? 'Saving...' : 'Save'}</span>
+                      <span>{isSavingProfile ? t('extra.saving') : t('extra.save')}</span>
                     </button>
                   </div>
                 )}
@@ -350,7 +350,7 @@ export function SettingsPage() {
                             value={editedFirstName}
                             onChange={(e) => setEditedFirstName(e.target.value)}
                             className="input-field w-full rounded-lg px-3 py-2 text-sm"
-                            placeholder="First name"
+                            placeholder={t('extra.firstName')}
                           />
                         </div>
                         <div className="space-y-1.5">
@@ -360,7 +360,7 @@ export function SettingsPage() {
                             value={editedLastName}
                             onChange={(e) => setEditedLastName(e.target.value)}
                             className="input-field w-full rounded-lg px-3 py-2 text-sm"
-                            placeholder="Last name (optional)"
+                            placeholder={t('extra.lastName')}
                           />
                         </div>
                         <div className="space-y-1.5">
@@ -370,7 +370,7 @@ export function SettingsPage() {
                             value={editedRegion}
                             onChange={(e) => setEditedRegion(e.target.value)}
                             className="input-field w-full rounded-lg px-3 py-2 text-sm"
-                            placeholder="Region (optional)"
+                            placeholder={t('extra.region')}
                           />
                         </div>
                       </>
@@ -391,7 +391,7 @@ export function SettingsPage() {
                           <p className="text-text-muted">{t('profile.fields.region')}</p>
                           <p className="flex items-center gap-1 text-sm text-text-main">
                             <Globe2 className="h-3.5 w-3.5 text-text-muted" />
-                            {region || 'Not set'}
+                            {region || t('extra.notSet')}
                           </p>
                         </div>
                       </>

@@ -4,6 +4,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { useTranslations } from 'next-intl'
+import { useValueLabel } from '@/hooks/use-value-label'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import {
@@ -53,65 +54,11 @@ interface CourseDetailPageProps {
   }
 }
 
-// Static modules data - can be moved to DB later
-const getDefaultModules = (market: string, level: string) => {
-  if (market === 'Forex' && level === 'Beginner') {
-    return [
-      {
-        no: '01',
-        title: 'How the Forex market is structured',
-        desc: 'Sessions, major pairs, liquidity and where your orders actually travel in the system.',
-      },
-      {
-        no: '02',
-        title: 'Core terms & order types',
-        desc: 'Market vs limit, stop orders, spreads, slippage and how this affects execution.',
-      },
-      {
-        no: '03',
-        title: 'Risk per trade & position sizing',
-        desc: 'Calculating % risk, lot size and why a small, consistent risk model matters more than setups.',
-      },
-      {
-        no: '04',
-        title: 'Basic price structure & candles',
-        desc: 'Trends, ranges, support/resistance and how to read candles without overcomplicating charts.',
-      },
-      {
-        no: '05',
-        title: 'Building your first simple plan',
-        desc: 'Turning theory into a minimal trading plan you can actually follow and review.',
-      },
-      {
-        no: '06',
-        title: 'Journaling and review',
-        desc: 'What to track, how to log trades and how to run weekly reviews to learn from data.',
-      },
-      {
-        no: '07',
-        title: 'Common beginner traps',
-        desc: 'Overtrading, revenge trading, sizing up too fast and how to build guardrails against them.',
-      },
-    ]
-  }
-  // Default modules for other courses
-  return [
-    {
-      no: '01',
-      title: 'Introduction and fundamentals',
-      desc: 'Core concepts and market structure.',
-    },
-    {
-      no: '02',
-      title: 'Risk management basics',
-      desc: 'Understanding risk and position sizing.',
-    },
-    {
-      no: '03',
-      title: 'Practical application',
-      desc: 'Applying concepts in real scenarios.',
-    },
-  ]
+// Static fallback modules - can be moved to DB later
+type FallbackModule = { title: string; desc: string }
+const getDefaultModules = (market: string, level: string, tExtra: { raw: (key: string) => unknown }) => {
+  const key = market === 'Forex' && level === 'Beginner' ? 'forexBeginnerModules' : 'genericModules'
+  return (tExtra.raw(key) as FallbackModule[]).map((m, i) => ({ no: String(i + 1).padStart(2, '0'), ...m }))
 }
 
 const TAB_IDS = ['overview', 'curriculum', 'requirements', 'faq'] as const
@@ -121,6 +68,9 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
   const { addToCart } = useCart()
   const { showToast } = useToast()
   const t = useTranslations('courses.detail')
+  const tExtra = useTranslations('courses.detail.extra')
+  const valueLabel = useValueLabel()
+  const marketLabel = valueLabel(course.market)
   const tCart = useTranslations('cart.messages')
   const tBreadcrumb = useTranslations('courses.breadcrumb')
   const [currency, setCurrency] = useState('GBP')
@@ -179,7 +129,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
   const hasImage = resolvedImagePath !== null
 
   const dbModules = course.modules && Array.isArray(course.modules) ? course.modules : null
-  const fallbackModules = getDefaultModules(course.market, course.level)
+  const fallbackModules = getDefaultModules(course.market, course.level, tExtra)
 
   const displayModules = dbModules
     ? dbModules
@@ -193,8 +143,8 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
 
   const estimatedDuration =
     course.duration_hours_min && course.duration_hours_max
-      ? `${course.duration_hours_min}–${course.duration_hours_max} hours`
-      : `${displayModules.length * 1}–${displayModules.length * 1.5} hours`
+      ? tExtra('hours', { min: course.duration_hours_min, max: course.duration_hours_max })
+      : tExtra('hours', { min: displayModules.length * 1, max: displayModules.length * 1.5 })
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -255,9 +205,9 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
           {/* Badges inline below title */}
           <div className="flex flex-wrap items-center gap-2 text-[11px] text-text-main">
             <span className="btn-primary px-2.5 py-1 rounded-full font-medium text-[11px]">
-              {course.level}
+              {valueLabel(course.level)}
             </span>
-            <span className="badge-neutral px-2.5 py-1 rounded-full">{course.market}</span>
+            <span className="badge-neutral px-2.5 py-1 rounded-full">{marketLabel}</span>
             <span className="badge-neutral px-2.5 py-1 rounded-full">{t('meta.pdfCourse')}</span>
             <span className="badge-neutral px-2.5 py-1 rounded-full flex items-center gap-1">
               <Globe2 className="w-3 h-3" />
@@ -294,7 +244,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
             <div className="flex items-center gap-1.5">
               <Gauge className="w-3.5 h-3.5 text-text-muted" />
               <span className="text-text-muted">{t('meta.duration')}:</span>
-              <span className="text-text-main">{estimatedDuration} &middot; self-paced</span>
+              <span className="text-text-main">{estimatedDuration} &middot; {tExtra('selfPaced')}</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5 text-text-muted" />
@@ -326,7 +276,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
               <div className="space-y-0.5">
                 <div className="text-lg font-semibold text-text-main">{price}</div>
                 <div className="text-xs text-text-muted">
-                  ≈ {tokensFormatted} tokens &middot; {t('pricing.immediateDownload')}
+                  ≈ {tokensFormatted} {tExtra('tokens')} &middot; {t('pricing.immediateDownload')}
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-2">
@@ -382,15 +332,15 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
               {[
                 {
                   icon: <Layers className="w-4 h-4 text-brand-400" />,
-                  text: `How the ${course.market} market is structured and why that matters.`,
+                  text: (tExtra.raw('learn') as string[])[0].replace('{market}', marketLabel),
                 },
                 {
                   icon: <ShieldCheck className="w-4 h-4 text-brand-400" />,
-                  text: 'How to define and calculate risk per trade before pressing any button.',
+                  text: (tExtra.raw('learn') as string[])[1],
                 },
                 {
                   icon: <FileText className="w-4 h-4 text-brand-400" />,
-                  text: 'How to build a simple, minimal trading plan and journal framework.',
+                  text: (tExtra.raw('learn') as string[])[2],
                 },
               ].map((item, i) => (
                 <div
@@ -466,11 +416,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
                   {t('sidebar.whoIsFor.title')}
                 </h2>
                 <ul className="space-y-2.5">
-                  {[
-                    `Complete beginners who want a structured, non-hyped introduction to ${course.market}.`,
-                    'Traders who opened a few random positions and realised they need a proper base.',
-                    'People who care about risk and process more than short-term excitement.',
-                  ].map((item, i) => (
+                  {(tExtra.raw('whoFor') as string[]).map((item) => item.replace('{market}', marketLabel)).map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
                       <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
                       <span>{item}</span>
@@ -485,11 +431,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
                   {t('sidebar.notFor.title')}
                 </h2>
                 <ul className="space-y-2.5">
-                  {[
-                    'It will not give you trade calls or entry alerts.',
-                    'It will not promise you any monthly percentage return.',
-                    'It will not remove the need for your own discipline, time and practice.',
-                  ].map((item, i) => (
+                  {(tExtra.raw('notFor') as string[]).map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm text-text-secondary">
                       <XCircle className="w-4 h-4 text-amber-400 mt-0.5 shrink-0" />
                       <span>{item}</span>
@@ -515,15 +457,15 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
             <div className="flex flex-wrap items-center gap-4 text-sm text-text-secondary">
               <span className="inline-flex items-center gap-2 border border-surface-300 rounded-lg px-3 py-2 bg-surface-100/30">
                 <FileText className="w-4 h-4 text-brand-400" />
-                Full PDF course (around 80-100 pages)
+                {(tExtra.raw('materials') as string[])[0]}
               </span>
               <span className="inline-flex items-center gap-2 border border-surface-300 rounded-lg px-3 py-2 bg-surface-100/30">
                 <ShieldCheck className="w-4 h-4 text-brand-400" />
-                Simple printable risk checklist
+                {(tExtra.raw('materials') as string[])[1]}
               </span>
               <span className="inline-flex items-center gap-2 border border-surface-300 rounded-lg px-3 py-2 bg-surface-100/30">
                 <BookOpen className="w-4 h-4 text-brand-400" />
-                Basic journaling template (50-100 trades)
+                {(tExtra.raw('materials') as string[])[2]}
               </span>
             </div>
           </motion.div>

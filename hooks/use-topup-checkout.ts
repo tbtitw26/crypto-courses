@@ -10,6 +10,7 @@ import { useCallback, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useToast } from '@/hooks/use-toast'
+import { useTranslations } from 'next-intl'
 
 interface TopupRequest {
   /** Exact token amount to credit (token packs). */
@@ -25,6 +26,7 @@ export function useTopupCheckout(callbackUrl: string) {
   const { status } = useSession()
   const router = useRouter()
   const { showToast } = useToast()
+  const t = useTranslations('topUp.checkout')
   const [pendingKey, setPendingKey] = useState<string | null>(null)
 
   const startTopup = useCallback(
@@ -65,23 +67,23 @@ export function useTopupCheckout(callbackUrl: string) {
           return
         }
         if (!response.ok) {
-          throw new Error(result.error || result.message || 'Failed to create payment session')
+          throw new Error(result.error || result.message || t('sessionFailed'))
         }
         if (!result.redirectUrl) {
-          throw new Error('No redirect URL received from payment gateway')
+          throw new Error(t('noRedirect'))
         }
 
         window.location.href = result.redirectUrl
       } catch (error: any) {
         showToast({
-          title: 'Payment failed',
-          description: error?.message || 'Please try again in a moment.',
+          title: t('failed'),
+          description: error?.message || t('tryLater'),
           variant: 'error',
         })
         setPendingKey(null)
       }
     },
-    [status, router, callbackUrl, pendingKey, showToast]
+    [status, router, callbackUrl, pendingKey, showToast, t]
   )
 
   return { startTopup, pendingKey, isPending: pendingKey !== null }

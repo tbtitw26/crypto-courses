@@ -17,14 +17,17 @@ import {
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
-const forgotPasswordSchema = z.object({
-  email: z.string().email('Invalid email address').min(1, 'Email is required'),
-})
+const makeForgotPasswordSchema = (tv: (key: string) => string) =>
+  z.object({
+    email: z.string().email(tv('invalidEmail')).min(1, tv('emailRequired')),
+  })
 
-type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>
+type ForgotPasswordFormData = z.infer<ReturnType<typeof makeForgotPasswordSchema>>
 
 export function ForgotPasswordPage() {
   const t = useTranslations('auth.forgotPassword')
+  const tUi = useTranslations('auth.ui')
+  const tv = useTranslations('common.validation')
   const { showToast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -34,7 +37,7 @@ export function ForgotPasswordPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<ForgotPasswordFormData>({
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(makeForgotPasswordSchema(tv)),
   })
 
   const onSubmit = async (data: ForgotPasswordFormData) => {
@@ -86,7 +89,7 @@ export function ForgotPasswordPage() {
             </div>
             <div>
               <p className="text-sm font-semibold text-white">Cur Nova</p>
-              <p className="text-[11px] uppercase tracking-widest text-surface-500">Account Recovery</p>
+              <p className="text-[11px] uppercase tracking-widest text-surface-500">{tUi('accountRecovery')}</p>
             </div>
           </Link>
 
@@ -95,10 +98,10 @@ export function ForgotPasswordPage() {
               <KeyRound className="h-7 w-7 text-brand-400" />
             </div>
             <h2 className="font-heading text-2xl font-semibold text-white">
-              Secure account recovery
+              {tUi('secureRecovery')}
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-surface-400">
-              We take your account security seriously. If an account exists with the email you provide, we will send password reset instructions.
+              {tUi('recoveryText')}
             </p>
           </div>
 
@@ -106,9 +109,9 @@ export function ForgotPasswordPage() {
             <div className="flex items-start gap-3">
               <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-gold-400" />
               <div>
-                <p className="text-xs font-semibold text-surface-200">Security notice</p>
+                <p className="text-xs font-semibold text-surface-200">{tUi('securityNotice')}</p>
                 <p className="mt-1 text-xs leading-relaxed text-surface-400">
-                  For your protection, we do not confirm whether an email address is registered. You will receive instructions only if a matching account exists.
+                  {tUi('securityNoticeText')}
                 </p>
               </div>
             </div>
@@ -116,7 +119,7 @@ export function ForgotPasswordPage() {
         </div>
 
         <p className="text-xs leading-relaxed text-surface-600">
-          Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+          {tUi('educationLine')}
         </p>
       </div>
 
@@ -161,7 +164,7 @@ export function ForgotPasswordPage() {
               <div className="flex items-start gap-3 rounded-lg border border-emerald-200 bg-emerald-50 p-4">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-600" />
                 <div>
-                  <p className="text-sm font-medium text-emerald-800">Instructions sent</p>
+                  <p className="text-sm font-medium text-emerald-800">{tUi('instructionsSent')}</p>
                   <p className="mt-1 text-xs leading-relaxed text-emerald-700">{t('success')}</p>
                 </div>
               </div>
@@ -216,7 +219,7 @@ export function ForgotPasswordPage() {
           {/* Mobile trust strip */}
           <div className="mt-8 border-t border-surface-200 pt-6 lg:hidden">
             <p className="text-center text-xs leading-relaxed text-text-muted">
-              Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+              {tUi('educationLine')}
             </p>
           </div>
         </div>

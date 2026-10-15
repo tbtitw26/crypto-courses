@@ -1,0 +1,1826 @@
+{
+  "want-to-imporve-my-skills-but-learning-unusual-ta": {
+    "title": "Forbedre ferdighetene med uvanlig teknisk analyse",
+    "description": "En kritisk gjennomgang av ukonvensjonelle metoder for teknisk analyse. Dekker hva som fungerer, hva som ikke gjør det, hvordan du vurderer påstander om TA, og hvordan du bygger en evidensbasert tilnærming.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Vurdering av TA-påstander",
+        "summary": "Hvordan du vurderer om en TA-metode har verdi."
+      },
+      {
+        "order": 2,
+        "title": "Evidensbasert TA",
+        "summary": "Hva dataene faktisk sier om vanlige metoder."
+      },
+      {
+        "order": 3,
+        "title": "Uvanlige metoder: en kritisk gjennomgang",
+        "summary": "En vurdering av ukonvensjonelle TA-tilnærminger."
+      },
+      {
+        "order": 4,
+        "title": "Bygg ditt eget syn",
+        "summary": "Utvikle en personlig, evidensbasert tilnærming."
+      },
+      {
+        "order": 5,
+        "title": "Unngå bekreftelsesfeil",
+        "summary": "Ikke se det du vil se i diagrammene."
+      }
+    ]
+  },
+  "volatility-framework-for-crypto": {
+    "title": "Volatilitetsrammeverk for krypto",
+    "description": "Bygg et strukturert rammeverk for å forstå og håndtere volatilitet i krypto. Dekker måling av volatilitet, identifisering av markedsregimer og hvordan du tilpasser tilnærmingen din.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Måling av kryptovolatilitet",
+        "summary": "Verktøy og metoder for å tallfeste volatilitet."
+      },
+      {
+        "order": 2,
+        "title": "Volatilitetsregimer",
+        "summary": "Identifisere perioder med lav, middels og høy volatilitet."
+      },
+      {
+        "order": 3,
+        "title": "Innvirkning på posisjonsstørrelse",
+        "summary": "Justere størrelsen etter volatilitet."
+      },
+      {
+        "order": 4,
+        "title": "Volatilitet og plassering av stopp",
+        "summary": "Sette stopper som tar hensyn til volatilitet."
+      },
+      {
+        "order": 5,
+        "title": "Muligheter i volatilitet",
+        "summary": "Når høy volatilitet skaper muligheter."
+      },
+      {
+        "order": 6,
+        "title": "Ditt volatilitetsrammeverk",
+        "summary": "Bygg en personlig prosess for å vurdere volatilitet."
+      }
+    ]
+  },
+  "timeframes-expiry-logic-no-signals": {
+    "title": "Tidsrammer og utløpslogikk (ingen signaler)",
+    "description": "Forstå valg av tidsramme og utløpslogikk for binære opsjoner. Dekker hvordan du tilpasser tidsrammer til analysen, valg av utløp og hvordan du unngår signalbasert tenkning.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Valg av tidsramme",
+        "summary": "Velge riktig tidsramme for analysen din."
+      },
+      {
+        "order": 2,
+        "title": "Utløpslogikk",
+        "summary": "Hvordan du velger passende utløpstider."
+      },
+      {
+        "order": 3,
+        "title": "Tilpass analysen til utløpet",
+        "summary": "Få analysen i samsvar med valgt utløp."
+      },
+      {
+        "order": 4,
+        "title": "Hvorfor signaler svikter",
+        "summary": "Problemet med signalbasert binærhandel."
+      },
+      {
+        "order": 5,
+        "title": "Prosess fremfor spådom",
+        "summary": "Fokuser på prosess i stedet for å forutsi utfall."
+      },
+      {
+        "order": 6,
+        "title": "Bygg dine regler for tidsramme",
+        "summary": "Lag regler for valg av tidsramme og utløp."
+      }
+    ]
+  },
+  "system-robustness-for-crypto": {
+    "title": "Robuste systemer for krypto",
+    "description": "Bygg robuste handelssystemer for kryptomarkedene. Dekker tilpasning til ekstrem volatilitet, håndtering av regimeskifter og hvordan systemet ditt overlever kryptoforhold.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva som gjør krypto annerledes",
+        "summary": "Særlige utfordringer ved systembygging i krypto."
+      },
+      {
+        "order": 2,
+        "title": "Håndtering av ekstrem volatilitet",
+        "summary": "Systemdesign for volatile forhold."
+      },
+      {
+        "order": 3,
+        "title": "Tilpasning til markedsregimer",
+        "summary": "Bygg systemer som fungerer på tvers av regimer."
+      },
+      {
+        "order": 4,
+        "title": "Hensyn til likviditet",
+        "summary": "Design for varierende likviditet."
+      },
+      {
+        "order": 5,
+        "title": "Robusthetstesting",
+        "summary": "Test kryptosystemet ditt grundig."
+      },
+      {
+        "order": 6,
+        "title": "Kontinuerlig forbedring",
+        "summary": "Utvikle systemet uten overtilpasning."
+      }
+    ]
+  },
+  "system-building-1-setup-1-process": {
+    "title": "Systembygging: 1 oppsett, 1 prosess",
+    "description": "Bygg et komplett handelssystem rundt ett enkelt oppsett. Dekker kraften i enkelhet, hvordan du definerer ett oppsett tydelig, bygger prosessen rundt det og mestrer det gjennom repetisjon.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Kraften i ett",
+        "summary": "Hvorfor ett oppsett er nok til å starte."
+      },
+      {
+        "order": 2,
+        "title": "Definer oppsettet ditt",
+        "summary": "Lag en tydelig, gjentakbar definisjon av oppsettet."
+      },
+      {
+        "order": 3,
+        "title": "Bygg prosessen",
+        "summary": "Fra oppsett til komplett handelsprosess."
+      },
+      {
+        "order": 4,
+        "title": "Regler for inn- og utgang",
+        "summary": "Presise regler for ditt ene oppsett."
+      },
+      {
+        "order": 5,
+        "title": "Risikoregler for systemet",
+        "summary": "Posisjonsstørrelse og plassering av stopp."
+      },
+      {
+        "order": 6,
+        "title": "Mestring gjennom repetisjon",
+        "summary": "Hvordan repetisjon bygger ekte ferdigheter."
+      }
+    ]
+  },
+  "support-resistance-done-properly": {
+    "title": "Støtte og motstand gjort riktig",
+    "description": "Lær støtte og motstand utover det grunnleggende. Dekker identifisering av soner, vurdering av styrke, rollebytte og hvordan du bruker S/R-nivåer i faktisk handelsplanlegging.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Soner, ikke linjer",
+        "summary": "Hvorfor støtte og motstand er soner, ikke eksakte nivåer."
+      },
+      {
+        "order": 2,
+        "title": "Identifisere sterke soner",
+        "summary": "Hva som gjør en sone betydningsfull."
+      },
+      {
+        "order": 3,
+        "title": "Rollebytte",
+        "summary": "Når støtte blir motstand og omvendt."
+      },
+      {
+        "order": 4,
+        "title": "Dynamiske nivåer",
+        "summary": "Begreper for bevegelig støtte og motstand."
+      },
+      {
+        "order": 5,
+        "title": "S/R i handelsplanlegging",
+        "summary": "Bruk nivåene i faktiske handelsbeslutninger."
+      },
+      {
+        "order": 6,
+        "title": "Vanlige S/R-feil",
+        "summary": "Feil du bør unngå når du bruker støtte og motstand."
+      }
+    ]
+  },
+  "structured-decision-framework": {
+    "title": "Strukturert beslutningsrammeverk",
+    "description": "Bygg et rammeverk for å ta konsekvente handelsbeslutninger. Dekker beslutningstrær, sjekklister, analyse før handel og hvordan du fjerner uklarhet fra prosessen.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hvorfor strukturerte beslutninger er viktige",
+        "summary": "Kostnaden ved inkonsekvente beslutninger."
+      },
+      {
+        "order": 2,
+        "title": "Beslutningstrær",
+        "summary": "Bygg hvis-så-rammeverk for handel."
+      },
+      {
+        "order": 3,
+        "title": "Sjekklister før handel",
+        "summary": "Hva du skal kontrollere før hver handel."
+      },
+      {
+        "order": 4,
+        "title": "Beslutninger underveis",
+        "summary": "Styr åpne posisjoner systematisk."
+      },
+      {
+        "order": 5,
+        "title": "Analyse etter handel",
+        "summary": "Evaluer beslutninger, ikke bare utfall."
+      },
+      {
+        "order": 6,
+        "title": "Ditt beslutningsrammeverk",
+        "summary": "Bygg ditt personlige beslutningssystem."
+      }
+    ]
+  },
+  "stress-testing-your-system": {
+    "title": "Stresstesting av systemet ditt",
+    "description": "Lær å stressteste handelssystemet ditt før du risikerer kapital. Dekker scenarioanalyse, simulering av drawdown, grensetilfeller og validering av robusthet.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva er stresstesting",
+        "summary": "Hvorfor testing under ekstreme forhold er viktig."
+      },
+      {
+        "order": 2,
+        "title": "Scenarioanalyse",
+        "summary": "Test systemet mot historiske scenarier."
+      },
+      {
+        "order": 3,
+        "title": "Simulering av drawdown",
+        "summary": "Hva som skjer i verste fall."
+      },
+      {
+        "order": 4,
+        "title": "Grensetilfeller",
+        "summary": "Test uvanlige markedsforhold."
+      },
+      {
+        "order": 5,
+        "title": "Robusthetskontroller",
+        "summary": "Sørg for at systemet ikke er skjørt."
+      },
+      {
+        "order": 6,
+        "title": "Iterer og forbedre",
+        "summary": "Bruk resultatene fra stresstesten til å styrke tilnærmingen."
+      }
+    ]
+  },
+  "security-first-scams-phishing-custody": {
+    "title": "Sikkerhet først: svindel, phishing og oppbevaring",
+    "description": "Viktig sikkerhetskunnskap for deg som er aktiv i krypto. Dekker phishing-angrep, sosial manipulering, beste praksis for oppbevaring og hvordan du bygger en personlig sikkerhetsprotokoll.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Phishing-angrep",
+        "summary": "Hvordan phishing fungerer i krypto og hvordan du unngår det."
+      },
+      {
+        "order": 2,
+        "title": "Sosial manipulering",
+        "summary": "Manipulasjonsteknikker som brukes mot kryptoeiere."
+      },
+      {
+        "order": 3,
+        "title": "Beste praksis for oppbevaring",
+        "summary": "Sikre eiendelene dine på riktig måte."
+      },
+      {
+        "order": 4,
+        "title": "Tofaktorautentisering",
+        "summary": "Sette opp og bruke 2FA riktig."
+      },
+      {
+        "order": 5,
+        "title": "Bygg din sikkerhetsprotokoll",
+        "summary": "Lag en personlig sikkerhetssjekkliste."
+      }
+    ]
+  },
+  "scams-hype-false-gurus-a-red-flag-guide": {
+    "title": "Svindel, hype og falske guruer: en guide til faresignaler",
+    "description": "Lær å kjenne igjen og unngå handelssvindel, hypedrevne opplegg og falske guruer. Dekker vanlige svindelmønstre, faresignaler og hvordan du vurderer opplæringsressurser.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Vanlige svindelmønstre",
+        "summary": "De vanligste handelssvindlene og hvordan de fungerer."
+      },
+      {
+        "order": 2,
+        "title": "Hypedrevne opplegg",
+        "summary": "Pump and dump, signalgrupper og FOMO-markedsføring."
+      },
+      {
+        "order": 3,
+        "title": "Faresignaler hos falske guruer",
+        "summary": "Hvordan du avslører falske handelsinstruktører."
+      },
+      {
+        "order": 4,
+        "title": "Vurdering av opplæringsressurser",
+        "summary": "Hva som gjør en handelsressurs legitim."
+      },
+      {
+        "order": 5,
+        "title": "Beskytt deg selv",
+        "summary": "Praktiske steg for å holde deg trygg."
+      },
+      {
+        "order": 6,
+        "title": "Hvis du har blitt svindlet",
+        "summary": "Hva du gjør og hvor du melder fra."
+      }
+    ]
+  },
+  "review-error-taxonomy-for-binary": {
+    "title": "Gjennomgang og feiltaksonomi for binære opsjoner",
+    "description": "Bygg en strukturert gjennomgangsprosess for handel med binære opsjoner. Dekker klassifisering av feil, mønstergjenkjenning i feil og hvordan du lager en tilbakemeldingssløyfe.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hvorfor gjennomgang er viktigere i binære",
+        "summary": "Det høye tempoet gjør gjennomgang avgjørende."
+      },
+      {
+        "order": 2,
+        "title": "Klassifisering av feil",
+        "summary": "Kategoriser feil etter type."
+      },
+      {
+        "order": 3,
+        "title": "Prosessfeil kontra utfallsfeil",
+        "summary": "Skill dårlig prosess fra uflaks."
+      },
+      {
+        "order": 4,
+        "title": "Mønstergjenkjenning i feil",
+        "summary": "Finn gjentakende feilmønstre."
+      },
+      {
+        "order": 5,
+        "title": "Bygg ditt gjennomgangssystem",
+        "summary": "Lag en strukturert gjennomgangsprosess."
+      },
+      {
+        "order": 6,
+        "title": "Bruk gjennomganger til å forbedre deg",
+        "summary": "Gjør innsikt om til konkrete endringer."
+      }
+    ]
+  },
+  "probability-thinking-for-binary": {
+    "title": "Sannsynlighetstenkning for binære opsjoner",
+    "description": "Bruk sannsynlighetsbegreper på binære opsjoner. Dekker forventningsverdi, vurdering av sannsynlighet, husets fordel og hvorfor matematisk tenkning er avgjørende.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Grunnleggende sannsynlighet",
+        "summary": "Grunnleggende sannsynlighetsbegreper for tradere."
+      },
+      {
+        "order": 2,
+        "title": "Forventningsverdi i binære",
+        "summary": "Beregne forventningsverdi for binære opsjoner."
+      },
+      {
+        "order": 3,
+        "title": "Husets fordel",
+        "summary": "Forstå den matematiske ulempen."
+      },
+      {
+        "order": 4,
+        "title": "Vurdering av sannsynlighet",
+        "summary": "Anslå reelle sannsynligheter kontra oppgitte odds."
+      },
+      {
+        "order": 5,
+        "title": "Når matematikken sier nei",
+        "summary": "Kjenn igjen situasjoner med negativ forventning."
+      },
+      {
+        "order": 6,
+        "title": "Bruk sannsynlighetstenkning",
+        "summary": "Bruk sannsynlighet til å ta bedre beslutninger."
+      }
+    ]
+  },
+  "portfolio-thinking-education-only": {
+    "title": "Porteføljetenkning (kun opplæring)",
+    "description": "Lær å tenke på handel fra et porteføljeperspektiv. Dekker korrelasjon, diversifiseringsbegreper, styring av eksponering og hvordan du bygger en balansert tilnærming.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Enkelthandel kontra porteføljesyn",
+        "summary": "Hvorfor enkelthandler betyr mindre enn porteføljen."
+      },
+      {
+        "order": 2,
+        "title": "Bevissthet om korrelasjon",
+        "summary": "Forstå hvordan posisjoner henger sammen."
+      },
+      {
+        "order": 3,
+        "title": "Diversifiseringsbegreper",
+        "summary": "Ekte kontra falsk diversifisering."
+      },
+      {
+        "order": 4,
+        "title": "Styring av eksponering",
+        "summary": "Overvåke og styre samlet eksponering."
+      },
+      {
+        "order": 5,
+        "title": "Konsentrasjonsrisiko",
+        "summary": "Farene ved å være for konsentrert."
+      },
+      {
+        "order": 6,
+        "title": "Bygg en porteføljetankegang",
+        "summary": "Tenk i porteføljer, ikke enkelthandler."
+      }
+    ]
+  },
+  "perpetuals-risk-funding-liquidation-mechanics": {
+    "title": "Perpetuals: risiko, finansiering og likvidering",
+    "description": "Forstå evigvarende futureskontrakter (perpetuals). Dekker finansieringsrenter, mekanismene bak likvidering, margintyper og de særlige risikoene ved handel med perpetuals i kryptomarkedene.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva er perpetual-kontrakter",
+        "summary": "Hvordan perpetuals skiller seg fra tradisjonelle futures."
+      },
+      {
+        "order": 2,
+        "title": "Mekanismen bak finansieringsrenten",
+        "summary": "Hvordan finansieringsrenter fungerer og hva de signaliserer."
+      },
+      {
+        "order": 3,
+        "title": "Mekanismen bak likvidering",
+        "summary": "Hvordan og hvorfor likvideringer skjer."
+      },
+      {
+        "order": 4,
+        "title": "Kryssmargin kontra isolert margin",
+        "summary": "Velg riktig marginmodus."
+      },
+      {
+        "order": 5,
+        "title": "Risikostyring for perpetuals",
+        "summary": "Spesifikke risikoregler for handel med perpetuals."
+      },
+      {
+        "order": 6,
+        "title": "Vanlige feller med perpetuals",
+        "summary": "Feil som er særegne for handel med perpetuals."
+      }
+    ]
+  },
+  "news-macro-basics-for-forex": {
+    "title": "Nyheter og makro for Forex – grunnleggende",
+    "description": "Forstå hvordan makroøkonomiske hendelser påvirker valutamarkedet. Dekker sentralbankbeslutninger, økonomiske indikatorer, NFP, KPI og hvordan du bygger en nyhetsbevisst handelskalender.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Sentralbanker og Forex",
+        "summary": "Hvordan sentralbankpolitikk driver valutabevegelser."
+      },
+      {
+        "order": 2,
+        "title": "Viktige økonomiske indikatorer",
+        "summary": "BNP, sysselsetting, inflasjon og mer."
+      },
+      {
+        "order": 3,
+        "title": "NFP og hendelser med stor innvirkning",
+        "summary": "Handel rundt viktige datapubliseringer."
+      },
+      {
+        "order": 4,
+        "title": "KPI og inflasjonsdata",
+        "summary": "Hvordan inflasjonsdata beveger valuta."
+      },
+      {
+        "order": 5,
+        "title": "Bygg en handelskalender",
+        "summary": "Organiser uken rundt viktige hendelser."
+      },
+      {
+        "order": 6,
+        "title": "Risikostyring rundt nyheter",
+        "summary": "Beskytt deg under hendelser med stor innvirkning."
+      }
+    ]
+  },
+  "narratives-news-without-hype": {
+    "title": "Narrativer og nyheter uten hype",
+    "description": "Lær å bearbeide markedsnarrativer og nyheter uten å la deg rive med av hype. Dekker hvordan du skiller signal fra støy, forstår medienes insentiver og bygger et sunt informasjonskosthold.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hvordan narrativer oppstår",
+        "summary": "Forstå historiefortelling i markedet."
+      },
+      {
+        "order": 2,
+        "title": "Medienes insentiver",
+        "summary": "Hvorfor finansmedier ofte villeder."
+      },
+      {
+        "order": 3,
+        "title": "Signal kontra støy",
+        "summary": "Filtrer nyttig informasjon fra hype."
+      },
+      {
+        "order": 4,
+        "title": "Vurdering av nyheters innvirkning",
+        "summary": "Vurder den faktiske effekten av nyhetshendelser."
+      },
+      {
+        "order": 5,
+        "title": "Bygg et informasjonskosthold",
+        "summary": "Velg informasjonskildene dine med omhu."
+      },
+      {
+        "order": 6,
+        "title": "Narrativbevisst handel",
+        "summary": "Bruk narrativer uten å bli styrt av dem."
+      }
+    ]
+  },
+  "multi-timeframe-analysis-with-constraints": {
+    "title": "Analyse på flere tidsrammer med begrensninger",
+    "description": "Lær å analysere flere tidsrammer uten å overkomplisere prosessen. Dekker hierarki mellom tidsrammer, samsvar, konflikter og hvordan du bygger en avgrenset MTF-tilnærming.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hierarki mellom tidsrammer",
+        "summary": "Hvordan ulike tidsrammer henger sammen."
+      },
+      {
+        "order": 2,
+        "title": "Samsvar",
+        "summary": "Når flere tidsrammer peker samme vei."
+      },
+      {
+        "order": 3,
+        "title": "Konflikter",
+        "summary": "Hva du gjør når tidsrammene er uenige."
+      },
+      {
+        "order": 4,
+        "title": "Modellen med tre tidsrammer",
+        "summary": "En praktisk tilnærming med tre tidsrammer."
+      },
+      {
+        "order": 5,
+        "title": "Begrensninger og enkelhet",
+        "summary": "Unngå analyselammelse."
+      },
+      {
+        "order": 6,
+        "title": "Bygg din MTF-prosess",
+        "summary": "Lag din personlige arbeidsflyt for flere tidsrammer."
+      }
+    ]
+  },
+  "market-structure-trend-logic": {
+    "title": "Markedsstruktur og trendlogikk",
+    "description": "Lær å lese markedsstruktur og forstå hvordan trender fungerer. Dekker høyere topper, lavere bunner, strukturbrudd, tilbaketrekninger og hvordan du følger den dominerende trenden.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Definisjon av markedsstruktur",
+        "summary": "Topper, bunner og rammeverket de skaper."
+      },
+      {
+        "order": 2,
+        "title": "Identifisering av trend",
+        "summary": "Hvordan du objektivt identifiserer trender."
+      },
+      {
+        "order": 3,
+        "title": "Strukturbrudd",
+        "summary": "Hva brudd i strukturen signaliserer."
+      },
+      {
+        "order": 4,
+        "title": "Tilbaketrekninger og fortsettelser",
+        "summary": "Skill tilbaketrekninger fra vendinger."
+      },
+      {
+        "order": 5,
+        "title": "Struktur på flere tidsrammer",
+        "summary": "Hvordan struktur henger sammen på tvers av tidsrammer."
+      },
+      {
+        "order": 6,
+        "title": "Praktisk anvendelse",
+        "summary": "Bruk struktur i handelsplanleggingen."
+      }
+    ]
+  },
+  "liquidity-order-books-intro": {
+    "title": "Introduksjon til likviditet og ordrebøker",
+    "description": "Forstå hvordan likviditet former kursbevegelser. Dekker lesing av ordrebøker, dynamikken mellom kjøps- og salgskurs, likviditetspooler og hvordan institusjonell ordreflyt påvirker privatpersoner.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva er likviditet",
+        "summary": "Hva likviditet er og hvorfor det er viktig."
+      },
+      {
+        "order": 2,
+        "title": "Lesing av ordrebøker",
+        "summary": "Hvordan du tolker data fra ordreboken."
+      },
+      {
+        "order": 3,
+        "title": "Dynamikk mellom kjøp og salg",
+        "summary": "Forstå spread og dybde."
+      },
+      {
+        "order": 4,
+        "title": "Likviditetspooler",
+        "summary": "Hvor likviditet samler seg og hvorfor."
+      },
+      {
+        "order": 5,
+        "title": "Institusjonell ordreflyt",
+        "summary": "Hvordan store ordrer påvirker kursen."
+      },
+      {
+        "order": 6,
+        "title": "Praktiske konsekvenser",
+        "summary": "Bruk kunnskap om likviditet i handelen din."
+      }
+    ]
+  },
+  "intro-to-price-action-forex-friendly": {
+    "title": "Introduksjon til prisbevegelse (tilpasset Forex)",
+    "description": "Lær det grunnleggende om prisbevegelse (price action) tilpasset valutamarkedet. Dekker lesing av rene diagrammer, identifisering av nøkkelnivåer, forståelse av momentum og hvordan du bygger et rammeverk for prisbevegelse.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Lesing av rene diagrammer",
+        "summary": "Forstå kursen uten indikatorer."
+      },
+      {
+        "order": 2,
+        "title": "Nøkkelnivåer",
+        "summary": "Identifiser støtte, motstand og beslutningspunkter."
+      },
+      {
+        "order": 3,
+        "title": "Momentum og flyt",
+        "summary": "Les styrken bak kursbevegelsene."
+      },
+      {
+        "order": 4,
+        "title": "Mønstre i prisbevegelse",
+        "summary": "Mønstre som fungerer i Forex."
+      },
+      {
+        "order": 5,
+        "title": "Kombiner med struktur",
+        "summary": "Prisbevegelse innenfor markedsstrukturen."
+      },
+      {
+        "order": 6,
+        "title": "Bygg ditt rammeverk",
+        "summary": "Lag en personlig tilnærming til prisbevegelse."
+      }
+    ]
+  },
+  "i-want-to-understand-crypto-market-and-it-s-basics": {
+    "title": "Jeg vil forstå kryptomarkedet og det grunnleggende",
+    "description": "En skånsom introduksjon til kryptomarkedene for helt nybegynnere. Dekker grunnleggende blokkjede, Bitcoin og Ethereum, markedsterminologi og hvordan du navigerer trygt i kryptoøkosystemet.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva er blokkjede",
+        "summary": "Teknologien bak kryptovalutaer."
+      },
+      {
+        "order": 2,
+        "title": "Bitcoin og Ethereum",
+        "summary": "De to største kryptovalutaene forklart."
+      },
+      {
+        "order": 3,
+        "title": "Kryptoterminologi",
+        "summary": "Viktige begreper du må kunne."
+      },
+      {
+        "order": 4,
+        "title": "Kryptoøkosystemet",
+        "summary": "DeFi, NFT-er, stablecoins og mer."
+      },
+      {
+        "order": 5,
+        "title": "Naviger trygt",
+        "summary": "Hvordan du unngår svindel og beskytter deg selv."
+      }
+    ]
+  },
+  "how-forex-orders-work": {
+    "title": "Slik fungerer ordrer i Forex",
+    "description": "Et dypdykk i hvordan ordrer fungerer i valutamarkedet. Dekker markedsordrer, limitordrer, stoppordrer, OCO-ordrer og hvordan megleren behandler dem.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Markedsordrer",
+        "summary": "Umiddelbar utførelse og hva det innebærer."
+      },
+      {
+        "order": 2,
+        "title": "Limitordrer",
+        "summary": "Kjøp eller salg til en bestemt kurs."
+      },
+      {
+        "order": 3,
+        "title": "Stoppordrer",
+        "summary": "Stop loss og stop entry forklart."
+      },
+      {
+        "order": 4,
+        "title": "OCO- og bracket-ordrer",
+        "summary": "Avanserte ordrekombinasjoner."
+      },
+      {
+        "order": 5,
+        "title": "Hvordan meglere behandler ordrer",
+        "summary": "Hva som skjer bak kulissene."
+      },
+      {
+        "order": 6,
+        "title": "Beste praksis for ordrehåndtering",
+        "summary": "Bruk ordrer effektivt i handelen din."
+      }
+    ]
+  },
+  "how-crypto-markets-move": {
+    "title": "Slik beveger kryptomarkedene seg",
+    "description": "Forstå kreftene som driver kursbevegelser i krypto. Dekker aktivitet fra store aktører («hvaler»), stemning i sosiale medier, signaler på blokkjeden, finansieringsrenter og markedssykluser.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Aktivitet fra hvaler",
+        "summary": "Hvordan store eiere påvirker kursen."
+      },
+      {
+        "order": 2,
+        "title": "Stemning i sosiale medier",
+        "summary": "Sosiale mediers rolle i kryptokurser."
+      },
+      {
+        "order": 3,
+        "title": "Signaler på blokkjeden",
+        "summary": "Hva blokkjededata forteller om markedsretningen."
+      },
+      {
+        "order": 4,
+        "title": "Finansieringsrenter",
+        "summary": "Hvordan finansieringsrenter for perpetuals viser markedets posisjonering."
+      },
+      {
+        "order": 5,
+        "title": "Markedssykluser",
+        "summary": "Mønstre i opp- og nedgangssykluser i krypto."
+      },
+      {
+        "order": 6,
+        "title": "Kombiner signaler",
+        "summary": "Bygg et markedsbilde basert på flere signaler."
+      }
+    ]
+  },
+  "healthy-routine-for-traders": {
+    "title": "Sunne rutiner for tradere",
+    "description": "Bygg bærekraftige vaner som støtter langsiktige handelsresultater. Dekker søvn, trening, styring av skjermtid, stressreduksjon og hvordan du unngår utbrenthet.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Søvn og prestasjon",
+        "summary": "Hvordan søvnkvalitet direkte påvirker handelsbeslutninger."
+      },
+      {
+        "order": 2,
+        "title": "Fysisk aktivitet",
+        "summary": "Trening som prestasjonsfremmer."
+      },
+      {
+        "order": 3,
+        "title": "Styring av skjermtid",
+        "summary": "Unngå å bruke for mye tid foran diagrammene."
+      },
+      {
+        "order": 4,
+        "title": "Stressreduksjon",
+        "summary": "Praktiske teknikker for å håndtere stress."
+      },
+      {
+        "order": 5,
+        "title": "Forebygging av utbrenthet",
+        "summary": "Kjenn igjen og forebygg utbrenthet."
+      },
+      {
+        "order": 6,
+        "title": "Bygg din daglige rutine",
+        "summary": "Lag en bærekraftig dagsplan."
+      }
+    ]
+  },
+  "forex-sessions-volatility": {
+    "title": "Forex-økter og volatilitet",
+    "description": "Forstå hvordan handelsøktene i valutamarkedet skaper volatilitetsmønstre. Dekker øktene i Tokyo, London og New York, overlappende perioder og hvordan du planlegger handelen etter øktenes egenskaper.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "De tre store øktene",
+        "summary": "Kjennetegn ved Tokyo, London og New York."
+      },
+      {
+        "order": 2,
+        "title": "Overlapp mellom økter",
+        "summary": "Hvorfor overlapp gir mest bevegelse."
+      },
+      {
+        "order": 3,
+        "title": "Volatilitet per økt",
+        "summary": "Forventet volatilitet i hver økt."
+      },
+      {
+        "order": 4,
+        "title": "Valutapar og økter",
+        "summary": "Hvilke valutapar som beveger seg mest i hvilke økter."
+      },
+      {
+        "order": 5,
+        "title": "Planlegg rundt øktene",
+        "summary": "Strukturer handelsdagen etter tidspunktene for øktene."
+      },
+      {
+        "order": 6,
+        "title": "Risikoregler basert på økt",
+        "summary": "Juster risikoen etter forholdene i økten."
+      }
+    ]
+  },
+  "forex-basics-pairs-pips-lots-leverage": {
+    "title": "Forex-grunnlag: valutapar, pips, lot og giring",
+    "description": "Viktig terminologi og mekanikk i valutamarkedet. Dekker valutapar, beregning av pips, lotstørrelser, hvordan giring fungerer og marginkrav.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Valutapar forklart",
+        "summary": "Hovedpar, mindre par og eksotiske par."
+      },
+      {
+        "order": 2,
+        "title": "Pips og pipverdi",
+        "summary": "Hvordan du beregner pipverdier."
+      },
+      {
+        "order": 3,
+        "title": "Lotstørrelser",
+        "summary": "Standard-, mini- og mikrolot."
+      },
+      {
+        "order": 4,
+        "title": "Hvordan giring fungerer",
+        "summary": "Hvordan giring virker og den reelle effekten."
+      },
+      {
+        "order": 5,
+        "title": "Marginkrav",
+        "summary": "Forstå marginkrav og vedlikeholdsmargin."
+      },
+      {
+        "order": 6,
+        "title": "Sett det hele sammen",
+        "summary": "Beregn kostnad, risiko og eksponering for enhver handel."
+      }
+    ]
+  },
+  "expectancy-performance-metrics": {
+    "title": "Forventning og resultatmål",
+    "description": "Lær å måle handelsresultater på riktig måte. Dekker beregning av forventning, vinnerandel kontra gevinst/risiko-forhold, grunnleggende Sharpe-ratio og hvilke måltall som faktisk betyr noe.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva er forventning",
+        "summary": "Det viktigste tallet i handel."
+      },
+      {
+        "order": 2,
+        "title": "Vinnerandel kontra gevinstforhold",
+        "summary": "Hvordan disse to måltallene påvirker hverandre."
+      },
+      {
+        "order": 3,
+        "title": "Krav til utvalgsstørrelse",
+        "summary": "Hvor mange handler som trengs før måltallene blir meningsfulle."
+      },
+      {
+        "order": 4,
+        "title": "Nyttige resultatmål",
+        "summary": "Måltall som faktisk hjelper deg å bli bedre."
+      },
+      {
+        "order": 5,
+        "title": "Skadelige måltall",
+        "summary": "Måltall som villeder og fører til dårlige beslutninger."
+      },
+      {
+        "order": 6,
+        "title": "Bygg ditt dashbord",
+        "summary": "Lag et personlig system for resultatoppfølging."
+      }
+    ]
+  },
+  "execution-mastery-slippage-spread-liquidity-hours": {
+    "title": "Mestring av utførelse: slippage, spread, likviditet og tidspunkter",
+    "description": "Mestre mekanikken bak utførelse av handler. Dekker slippage, spread-dynamikk, likviditetsvinduer, de beste handelstidspunktene og hvordan utførelseskvalitet påvirker fordelen din.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Forstå slippage",
+        "summary": "Hva som forårsaker slippage og hvordan du minimerer det."
+      },
+      {
+        "order": 2,
+        "title": "Spread-dynamikk",
+        "summary": "Hvordan spreaden endrer seg og hva som driver den."
+      },
+      {
+        "order": 3,
+        "title": "Likviditetsvinduer",
+        "summary": "Når markedene er dype og når de er tynne."
+      },
+      {
+        "order": 4,
+        "title": "De beste handelstidspunktene",
+        "summary": "De beste tidspunktene for å handle ulike valutapar."
+      },
+      {
+        "order": 5,
+        "title": "Ordretyper for bedre utførelse",
+        "summary": "Bruk riktig ordretype i hver situasjon."
+      },
+      {
+        "order": 6,
+        "title": "Måling av utførelseskvalitet",
+        "summary": "Følg med på og forbedre utførelsen over tid."
+      }
+    ]
+  },
+  "emotional-control-under-fast-outcomes": {
+    "title": "Følelseskontroll ved raske utfall",
+    "description": "Lær å håndtere følelser når utfallene kommer raskt. Dekker nevrovitenskapen bak rask tilbakemelding, teknikker for å holde roen og hvordan du bygger følelsesmessig motstandskraft.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Raske utfall og hjernen",
+        "summary": "Hvordan raske resultater utløser følelsesmessige reaksjoner."
+      },
+      {
+        "order": 2,
+        "title": "Dopaminfellen",
+        "summary": "Hvorfor raske gevinster er farligere enn tap."
+      },
+      {
+        "order": 3,
+        "title": "Jordingsteknikker",
+        "summary": "Praktiske metoder for å holde balansen."
+      },
+      {
+        "order": 4,
+        "title": "Forhåndsforpliktelser",
+        "summary": "Beslutninger som tas før følelsene melder seg."
+      },
+      {
+        "order": 5,
+        "title": "Nedkjølingsrutiner",
+        "summary": "Hva du gjør etter en følelsesladet handel."
+      },
+      {
+        "order": 6,
+        "title": "Bygg langsiktig motstandskraft",
+        "summary": "Utvikle følelsesmessig utholdenhet over tid."
+      }
+    ]
+  },
+  "crypto-basics-exchanges-wallets-on-chain-vs-off-ch": {
+    "title": "Kryptogrunnlag: børser, lommebøker, on-chain og off-chain",
+    "description": "Grunnleggende kryptokunnskap. Dekker typer børser, sikkerhet for lommebøker, transaksjoner på og utenfor blokkjeden og infrastrukturen du må forstå før du handler.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Typer børser forklart",
+        "summary": "CEX, DEX og hybride plattformer."
+      },
+      {
+        "order": 2,
+        "title": "Grunnleggende om lommebøker",
+        "summary": "Varme lommebøker, kalde lommebøker og oppbevaring."
+      },
+      {
+        "order": 3,
+        "title": "Transaksjoner på blokkjeden",
+        "summary": "Hvordan blokkjedetransaksjoner fungerer."
+      },
+      {
+        "order": 4,
+        "title": "Handel utenfor blokkjeden",
+        "summary": "Handel på sentraliserte plattformer."
+      },
+      {
+        "order": 5,
+        "title": "Beste praksis for sikkerhet",
+        "summary": "Beskytt eiendelene og kontoene dine."
+      },
+      {
+        "order": 6,
+        "title": "Velg ditt oppsett",
+        "summary": "Velg riktig infrastruktur for dine behov."
+      }
+    ]
+  },
+  "correlation-regime-shifts": {
+    "title": "Korrelasjon og regimeskifter",
+    "description": "Forstå hvordan korrelasjoner i markedet endrer seg i ulike regimer. Lær å identifisere regimeskifter og justere tilnærmingen din deretter.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva er markedsregimer",
+        "summary": "Definer trendende, sidelengs og volatile regimer."
+      },
+      {
+        "order": 2,
+        "title": "Grunnleggende korrelasjon",
+        "summary": "Hvordan eiendeler beveger seg sammen og hver for seg."
+      },
+      {
+        "order": 3,
+        "title": "Når korrelasjoner bryter sammen",
+        "summary": "Når korrelasjoner svikter og hvorfor det er viktig."
+      },
+      {
+        "order": 4,
+        "title": "Identifisering av regimeskifter",
+        "summary": "Verktøy og signaler for å oppdage regimeskifter."
+      },
+      {
+        "order": 5,
+        "title": "Konsekvenser for porteføljen",
+        "summary": "Hvordan regimeskifter påvirker eksponering mot flere eiendeler."
+      },
+      {
+        "order": 6,
+        "title": "Tilpass tilnærmingen din",
+        "summary": "Praktiske justeringer for ulike regimer."
+      }
+    ]
+  },
+  "common-traps-martingale-overtrading-revenge": {
+    "title": "Vanlige feller: martingale, overhandel og hevnhandel",
+    "description": "Et dypdykk i de tre mest ødeleggende fellene i handel. Forstå psykologien bak martingale-strategier, overhandel og hevnhandel.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Martingale-fellen",
+        "summary": "Hvorfor dobling av innsatsen alltid svikter til slutt."
+      },
+      {
+        "order": 2,
+        "title": "Mekanismene bak overhandel",
+        "summary": "Hva som driver overdreven handel og hva det koster."
+      },
+      {
+        "order": 3,
+        "title": "Psykologien bak hevnhandel",
+        "summary": "Den følelsesmessige syklusen i hevnhandel."
+      },
+      {
+        "order": 4,
+        "title": "Identifiser utløserne dine",
+        "summary": "Kjenn igjen når du er i ferd med å gå i en felle."
+      },
+      {
+        "order": 5,
+        "title": "Nødbrytere",
+        "summary": "Regler som stopper destruktiv atferd."
+      },
+      {
+        "order": 6,
+        "title": "Gjenopprettingsrutiner",
+        "summary": "Hva du gjør etter at du har gått i en felle."
+      }
+    ]
+  },
+  "common-beginner-mistakes-and-how-to-catch-yourself": {
+    "title": "Vanlige nybegynnerfeil og hvordan du tar deg selv i dem",
+    "description": "Identifiser og unngå de vanligste feilene nybegynnere gjør. Dekker overhandel, å overse risiko, å jage oppsett og hvordan du bygger systemer for selvinnsikt.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Overhandel",
+        "summary": "Hvorfor nybegynnere handler for mye og hvordan du stopper."
+      },
+      {
+        "order": 2,
+        "title": "Å overse risikostyring",
+        "summary": "Den farligste nybegynnerfeilen."
+      },
+      {
+        "order": 3,
+        "title": "Å jage oppsett",
+        "summary": "Hvorfor FOMO fører til dårlige innganger."
+      },
+      {
+        "order": 4,
+        "title": "Ingen plan, ingen fordel",
+        "summary": "Handel uten en definert plan."
+      },
+      {
+        "order": 5,
+        "title": "Hevnhandel",
+        "summary": "Syklusen av tap og følelsesmessige reaksjoner."
+      },
+      {
+        "order": 6,
+        "title": "Bygg selvinnsikt",
+        "summary": "Systemer som stopper deg før feilene skjer."
+      }
+    ]
+  },
+  "clear-rules": {
+    "title": "Tydelige regler: bygg en regelbasert handelstilnærming",
+    "description": "Lær å lage tydelige, utvetydige handelsregler som fjerner skjønn og følelser fra beslutningsprosessen.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hvorfor regler er viktige",
+        "summary": "Argumentene for regelbasert handel."
+      },
+      {
+        "order": 2,
+        "title": "Hva som kjennetegner en god regel",
+        "summary": "Hva som gjør en handelsregel tydelig og gjennomførbar."
+      },
+      {
+        "order": 3,
+        "title": "Regler for inngang",
+        "summary": "Definer når du skal gå inn i en handel."
+      },
+      {
+        "order": 4,
+        "title": "Regler for utgang",
+        "summary": "Definer når du skal gå ut – både ved gevinst og tap."
+      },
+      {
+        "order": 5,
+        "title": "Risikoregler",
+        "summary": "Regler som beskytter kapitalen din."
+      },
+      {
+        "order": 6,
+        "title": "Ditt regelsett",
+        "summary": "Bygg ditt personlige regelsett."
+      }
+    ]
+  },
+  "candles-that-actually-matter": {
+    "title": "Lys som faktisk betyr noe",
+    "description": "Skjær gjennom støyen i lysestakeanalyse. Lær hvilke lysestakemønstre som har reell statistisk betydning og hvordan du bruker dem i kontekst.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Grunnleggende lysestaker på nytt",
+        "summary": "Hva lysene faktisk representerer."
+      },
+      {
+        "order": 2,
+        "title": "Kontekst fremfor mønster",
+        "summary": "Hvorfor konteksten betyr mer enn selve mønsteret."
+      },
+      {
+        "order": 3,
+        "title": "Mønstre med statistisk fordel",
+        "summary": "Hvilke mønstre som har reelle data bak seg."
+      },
+      {
+        "order": 4,
+        "title": "Overvurderte mønstre",
+        "summary": "Vanlige mønstre som fungerer dårlig i praksis."
+      },
+      {
+        "order": 5,
+        "title": "Kombiner lys med struktur",
+        "summary": "Bruk lys sammen med markedsstruktur."
+      },
+      {
+        "order": 6,
+        "title": "Praktisk anvendelse",
+        "summary": "Øvelser som skjerper lesingen av lysestaker."
+      }
+    ]
+  },
+  "building-a-crypto-trading-routine": {
+    "title": "Bygg en rutine for kryptohandel",
+    "description": "Lag en strukturert daglig og ukentlig rutine for kryptohandel. Dekker forberedelser før økten, disiplin under økten og gjennomgang etter økten.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hvorfor rutine er viktig i krypto",
+        "summary": "Markeder som er åpne døgnet rundt gjør rutine enda viktigere."
+      },
+      {
+        "order": 2,
+        "title": "Forberedelser før økten",
+        "summary": "Hva du gjør før du begynner å handle."
+      },
+      {
+        "order": 3,
+        "title": "Disiplin under økten",
+        "summary": "Hold fokus og følg planen din."
+      },
+      {
+        "order": 4,
+        "title": "Gjennomgang etter økten",
+        "summary": "Gå gjennom handlene og beslutningene dine."
+      },
+      {
+        "order": 5,
+        "title": "Ukentlig gjennomgang",
+        "summary": "En strukturert ukentlig gjennomgang for kryptotradere."
+      },
+      {
+        "order": 6,
+        "title": "Håndtering av døgnåpne markeder",
+        "summary": "Hvordan du unngår utbrenthet i markeder som alltid er åpne."
+      },
+      {
+        "order": 7,
+        "title": "Bygg din personlige rutine",
+        "summary": "Lag din egen rutine for kryptohandel."
+      }
+    ]
+  },
+  "binary-risk-limits-session-rules": {
+    "title": "Risikogrenser og øktregler for binære opsjoner",
+    "description": "Strenge regler for risikostyring for binære opsjoner. Dekker grenser per økt, maksimal daglig eksponering, tidsbaserte regler og hvordan du hindrer følelsesmessig opptrapping.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Risikogrenser per økt",
+        "summary": "Sett strenge grenser for eksponering per økt."
+      },
+      {
+        "order": 2,
+        "title": "Regler for daglig maksimum",
+        "summary": "Faste daglige stoppregler for binærhandel."
+      },
+      {
+        "order": 3,
+        "title": "Tidsbaserte begrensninger",
+        "summary": "Bruk tidsgrenser som et verktøy for risikostyring."
+      },
+      {
+        "order": 4,
+        "title": "Forebygging av opptrapping",
+        "summary": "Stopp følelsesstyrte beslutninger."
+      },
+      {
+        "order": 5,
+        "title": "Journalføring for binære opsjoner",
+        "summary": "Hva du skal registrere og hvorfor."
+      },
+      {
+        "order": 6,
+        "title": "Bygg din regelbok for økter",
+        "summary": "Lag dine personlige øktregler."
+      }
+    ]
+  },
+  "binary-options-reality-check-product-mechanics-ris": {
+    "title": "Binære opsjoner – en realitetssjekk: produktmekanikk og risiko",
+    "description": "En ærlig gjennomgang av binære opsjoner. Dekker hvordan produktet fungerer, den matematiske fordelen, det regulatoriske landskapet og hvorfor de fleste deltakerne taper penger.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva binære opsjoner egentlig er",
+        "summary": "Produktmekanikken tydelig forklart."
+      },
+      {
+        "order": 2,
+        "title": "Den matematiske fordelen",
+        "summary": "Hvorfor oddsen er satt opp mot privatpersoner."
+      },
+      {
+        "order": 3,
+        "title": "Regulatorisk landskap",
+        "summary": "Hvor binære opsjoner er lovlige og hvorfor mange land forbyr dem."
+      },
+      {
+        "order": 4,
+        "title": "Markedsføring kontra virkelighet",
+        "summary": "Skill hype fra fakta."
+      },
+      {
+        "order": 5,
+        "title": "Hvis du likevel velger å delta",
+        "summary": "Tilnærminger for skadereduksjon."
+      },
+      {
+        "order": 6,
+        "title": "Alternative læringsveier",
+        "summary": "Bedre måter å lære om markedene på."
+      }
+    ]
+  },
+  "beginner-forex-risk-playbook": {
+    "title": "Risikohåndbok for Forex-nybegynnere",
+    "description": "En praktisk håndbok i risikostyring for nybegynnere i Forex. Dekker lotstørrelse, bevissthet om giring, risiko i ulike økter og vaner som beskytter kapitalen fra første dag.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Grunnleggende risiko i Forex",
+        "summary": "Forstå risiko i forbindelse med valutahandel."
+      },
+      {
+        "order": 2,
+        "title": "Grunnleggende lotstørrelse",
+        "summary": "Hvordan du beregner riktig lotstørrelse."
+      },
+      {
+        "order": 3,
+        "title": "Bevissthet om giring",
+        "summary": "Forstå giring og den reelle effekten."
+      },
+      {
+        "order": 4,
+        "title": "Risiko i ulike økter",
+        "summary": "Styr risikoen på tvers av handelsøkter."
+      },
+      {
+        "order": 5,
+        "title": "Plassering av stop loss",
+        "summary": "Hvor du plasserer stopper i valutamarkedet."
+      },
+      {
+        "order": 6,
+        "title": "Din risikohåndbok for Forex",
+        "summary": "Bygg din personlige risikohåndbok for Forex."
+      }
+    ]
+  },
+  "beginner-crypto-risk-rules": {
+    "title": "Risikoregler for kryptonybegynnere",
+    "description": "Viktige risikoregler for alle som starter i kryptomarkedene. Dekker posisjonsstørrelse for volatile eiendeler, børsrisiko og hvordan du bygger et personlig risikorammeverk for krypto.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hvorfor risiko i krypto er annerledes",
+        "summary": "Særlige risikofaktorer i kryptomarkedene."
+      },
+      {
+        "order": 2,
+        "title": "Posisjonsstørrelse for volatile eiendeler",
+        "summary": "Hvordan du dimensjonerer posisjoner når volatiliteten er ekstrem."
+      },
+      {
+        "order": 3,
+        "title": "Børs- og oppbevaringsrisiko",
+        "summary": "Risiko utover kursbevegelser."
+      },
+      {
+        "order": 4,
+        "title": "Sett risikogrenser",
+        "summary": "Daglige, ukentlige og per-handel-grenser."
+      },
+      {
+        "order": 5,
+        "title": "Vanlige risikofeil i krypto",
+        "summary": "Feil nybegynnere gjør og hvordan du unngår dem."
+      },
+      {
+        "order": 6,
+        "title": "Bygg ditt risikorammeverk for krypto",
+        "summary": "Lag en personlig risikopolicy for krypto."
+      }
+    ]
+  },
+  "basic-market-structure-for-crypto": {
+    "title": "Grunnleggende markedsstruktur for krypto",
+    "description": "Lær det grunnleggende om hvordan kryptomarkedene er bygget opp. Dekker børser, ordrebøker, market makers og hvordan prisdannelse fungerer i desentraliserte markeder.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Aktører i kryptomarkedet",
+        "summary": "Hvem som opererer i kryptomarkedene og hvilke roller de har."
+      },
+      {
+        "order": 2,
+        "title": "Typer børser",
+        "summary": "Sentraliserte kontra desentraliserte børser."
+      },
+      {
+        "order": 3,
+        "title": "Grunnleggende ordrebok",
+        "summary": "Hvordan ordrebøker fungerer i krypto."
+      },
+      {
+        "order": 4,
+        "title": "Prisdannelse",
+        "summary": "Hvordan kurser dannes på tvers av flere handelsplasser."
+      },
+      {
+        "order": 5,
+        "title": "Market makers i krypto",
+        "summary": "Market makers' rolle i likviditeten i krypto."
+      },
+      {
+        "order": 6,
+        "title": "Viktige forskjeller fra tradisjonelle markeder",
+        "summary": "Hva som gjør markedsstrukturen i krypto unik."
+      }
+    ]
+  },
+  "backtesting-vs-forward-testing-without-false-confi": {
+    "title": "Tilbaketesting kontra fremovertesting uten falsk trygghet",
+    "description": "Forstå forskjellen mellom tilbaketesting og fremovertesting. Lær å unngå vanlige fallgruver som gir falsk trygghet i handelssystemer.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva tilbaketesting egentlig viser",
+        "summary": "Forstå hva tilbaketesting kan og ikke kan bevise."
+      },
+      {
+        "order": 2,
+        "title": "Vanlige feil ved tilbaketesting",
+        "summary": "Overtilpasning, overlevelsesskjevhet og fremtidsskjevhet."
+      },
+      {
+        "order": 3,
+        "title": "Grunnleggende fremovertesting",
+        "summary": "Hvordan du fremovertester en strategi på riktig måte."
+      },
+      {
+        "order": 4,
+        "title": "Utvalgsstørrelse og statistisk gyldighet",
+        "summary": "Hvor mange handler du trenger før du trekker konklusjoner."
+      },
+      {
+        "order": 5,
+        "title": "Sammenlign resultater ærlig",
+        "summary": "Rammeverk for å sammenligne tilbaketest med faktiske resultater."
+      },
+      {
+        "order": 6,
+        "title": "Bygg realistiske forventninger",
+        "summary": "Sett forventninger basert på data, ikke håp."
+      }
+    ]
+  },
+  "advanced-risk-in-high-volatility": {
+    "title": "Avansert risikostyring ved høy volatilitet",
+    "description": "Mestre teknikker for risikostyring under svært volatile markedsforhold. Lær å tilpasse størrelse, stopper og eksponering når markedene beveger seg raskt.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Volatilitetsregimer",
+        "summary": "Identifiser ulike volatilitetsmiljøer og hva de betyr for risiko."
+      },
+      {
+        "order": 2,
+        "title": "Adaptiv posisjonsstørrelse",
+        "summary": "Juster posisjonsstørrelsen etter gjeldende volatilitet."
+      },
+      {
+        "order": 3,
+        "title": "Plassering av stopp i raske markeder",
+        "summary": "Hvor du plasserer stopper når kursen beveger seg raskt."
+      },
+      {
+        "order": 4,
+        "title": "Når korrelasjoner bryter sammen",
+        "summary": "Hvordan korrelasjoner endrer seg under svært volatile hendelser."
+      },
+      {
+        "order": 5,
+        "title": "Håndtering av drawdown",
+        "summary": "Rutiner for å håndtere drawdown i volatile perioder."
+      },
+      {
+        "order": 6,
+        "title": "Hendelsesrisiko",
+        "summary": "Håndtering av planlagte og uplanlagte hendelser med stor innvirkning."
+      },
+      {
+        "order": 7,
+        "title": "Rammeverk for gjenoppretting",
+        "summary": "Strukturerte tilnærminger for å komme tilbake etter volatilitetsdrevne tap."
+      },
+      {
+        "order": 8,
+        "title": "Bygg din volatilitetshåndbok",
+        "summary": "Lag en personlig håndbok for svært volatile forhold."
+      }
+    ]
+  },
+  "risk-first-capital-protection-for-beginners": {
+    "title": "Risiko først: kapitalbeskyttelse for nybegynnere",
+    "description": "Å overleve er den første fordelen i handel. Dette kurset dekker forståelse av risiko i handel, en tankegang om kapitalbevaring, risiko per forsøk, stoppregler, giring og raske produkter, vanlige risikofeller, ansvarlig dimensjonering av beslutninger og hvordan du bygger en personlig risikopolicy.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Forstå risiko i handel",
+        "summary": "Definer hva risiko betyr i handel og hvorfor det er avgjørende å forstå det."
+      },
+      {
+        "order": 2,
+        "title": "En tankegang om kapitalbevaring",
+        "summary": "Lær å prioritere beskyttelse av kapital fremfor jakt på fortjeneste."
+      },
+      {
+        "order": 3,
+        "title": "Risiko per forsøk",
+        "summary": "Forstå hvordan du beregner og styrer risiko per handelsforsøk."
+      },
+      {
+        "order": 4,
+        "title": "Stoppregler",
+        "summary": "Lær når og hvordan du skal slutte å handle for å beskytte kapitalen."
+      },
+      {
+        "order": 5,
+        "title": "Giring og raske produkter",
+        "summary": "Forstå risikoen knyttet til giring og raske produkter."
+      },
+      {
+        "order": 6,
+        "title": "Vanlige risikofeller",
+        "summary": "Identifiser og unngå vanlige feil i risikostyring."
+      },
+      {
+        "order": 7,
+        "title": "Ansvarlig dimensjonering av beslutninger",
+        "summary": "Lær å dimensjonere beslutningene dine riktig."
+      },
+      {
+        "order": 8,
+        "title": "Bygg en personlig risikopolicy",
+        "summary": "Lag din egen policy for risikostyring."
+      }
+    ]
+  },
+  "trading-psychology-101-discipline-over-dopamine": {
+    "title": "Handelspsykologi 101: disiplin fremfor dopamin",
+    "description": "En strukturert tilnærming til handelspsykologi. Kurset dekker hjernens reaksjon på handel, følelsesmessige mønstre, kognitive skjevheter, hvordan du bygger disiplin, lager et kart over utløsere, håndterer tap, sunne rutiner og din personlige disiplinsjekkliste.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hjernens reaksjon på handel",
+        "summary": "Forstå hvordan hjernens respons på raske utfall påvirker handelsatferd."
+      },
+      {
+        "order": 2,
+        "title": "Vanlige følelsesmessige mønstre i handel",
+        "summary": "Lær om FOMO, hevnhandel, tilt, kjedsomhetshandler og overmot."
+      },
+      {
+        "order": 3,
+        "title": "Kognitive skjevheter i handel",
+        "summary": "Forstå nylighetsskjevhet, bekreftelsesfeil og gamblerens feilslutning."
+      },
+      {
+        "order": 4,
+        "title": "Disiplin som et system",
+        "summary": "Lær å utforme omgivelsene dine og bruke forhåndsforpliktelser."
+      },
+      {
+        "order": 5,
+        "title": "Lag et kart over utløsere",
+        "summary": "Identifiser tidlige varseltegn og nødtiltak."
+      },
+      {
+        "order": 6,
+        "title": "Håndtering av tap",
+        "summary": "Lær gjenopprettingsrutiner og identitetsbaserte regler."
+      },
+      {
+        "order": 7,
+        "title": "Sunne rutiner for tradere",
+        "summary": "Forstå betydningen av søvn, stressmestring og rutiner."
+      },
+      {
+        "order": 8,
+        "title": "Bygg din personlige disiplinsjekkliste",
+        "summary": "Lag dine egne atferdsregler for handel."
+      }
+    ]
+  },
+  "journaling-review-system-learn-from-your-decisions": {
+    "title": "Journal- og gjennomgangssystem: lær av beslutningene dine",
+    "description": "Bygg et grunnlag for jevn forbedring i handelen din. Kurset dekker tilbakemeldingssløyfer, hva du skal registrere i journalen, R-baserte utfall, feiltaksonomi, ukentlige gjennomganger, trygge eksperimenter, nyttige kontra skadelige måltall og maler for journalføring.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Betydningen av tilbakemeldingssløyfer",
+        "summary": "Forstå hvorfor tilbakemelding er avgjørende for forbedring i handel."
+      },
+      {
+        "order": 2,
+        "title": "Hva du skal registrere i journalen",
+        "summary": "Lær hvilken informasjon handelsjournalen bør inneholde."
+      },
+      {
+        "order": 3,
+        "title": "R-baserte utfall kontra pengeutfall",
+        "summary": "Forstå forskjellen mellom R-baserte og pengebaserte utfall."
+      },
+      {
+        "order": 4,
+        "title": "Forstå feiltaksonomi",
+        "summary": "Lær å kategorisere og forstå handelsfeil."
+      },
+      {
+        "order": 5,
+        "title": "Gjennomføring av ukentlige gjennomganger",
+        "summary": "Etabler en strukturert ukentlig gjennomgang."
+      },
+      {
+        "order": 6,
+        "title": "Gjennomføring av trygge eksperimenter",
+        "summary": "Lær å teste forbedringer på en trygg måte."
+      },
+      {
+        "order": 7,
+        "title": "Måltall som hjelper kontra måltall som skader",
+        "summary": "Identifiser hvilke måltall som er nyttige og hvilke som kan villede."
+      },
+      {
+        "order": 8,
+        "title": "Maler for journalføring og gjennomgang",
+        "summary": "Bruk maler til å strukturere journalføring og gjennomgang."
+      }
+    ]
+  },
+  "building-a-personal-trading-plan-education-only": {
+    "title": "Bygg en personlig handelsplan",
+    "description": "Utform handelsstrategien din med trygghet og klarhet. Kurset dekker formålet med og strukturen i en handelsplan, hvordan du definerer begrensninger, velger fokus, skriver regler, styrer risiko, bygger rutiner, tar ansvar og lager det endelige resultatet.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hva er en handelsplan?",
+        "summary": "Forstå formålet med og strukturen i en handelsplan."
+      },
+      {
+        "order": 2,
+        "title": "Definer begrensningene dine",
+        "summary": "Lær å identifisere og definere begrensningene dine i handel."
+      },
+      {
+        "order": 3,
+        "title": "Velg et fokus",
+        "summary": "Velg hvilke markeder og strategier du skal fokusere på."
+      },
+      {
+        "order": 4,
+        "title": "Skriv regler",
+        "summary": "Lær å skrive tydelige og gjennomførbare handelsregler."
+      },
+      {
+        "order": 5,
+        "title": "Risikodelen",
+        "summary": "Forstå hvordan du bygger risikostyring inn i planen."
+      },
+      {
+        "order": 6,
+        "title": "Rutinedelen",
+        "summary": "Etabler daglige og ukentlige rutiner for handelen din."
+      },
+      {
+        "order": 7,
+        "title": "Ansvarlighet",
+        "summary": "Lær å holde deg selv ansvarlig for planen din."
+      },
+      {
+        "order": 8,
+        "title": "Endelig resultat",
+        "summary": "Fullfør din personlige handelsplan."
+      }
+    ]
+  },
+  "position-sizing-r-multiples-plain-language": {
+    "title": "Posisjonsstørrelse og R-multipler (på enkelt språk)",
+    "description": "Lær det grunnleggende om posisjonsstørrelse og risikokontroll. Kurset dekker den avgjørende rollen posisjonsstørrelse har i risikostyring, forståelse av R-multipler, vanlige feil ved dimensjonering og praktiske øvelser for å utvikle dine egne regler.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Hvorfor posisjonsstørrelse er viktig",
+        "summary": "Forstå den avgjørende rollen posisjonsstørrelse har i risikostyring og beslutninger."
+      },
+      {
+        "order": 2,
+        "title": "Forstå R-multipler",
+        "summary": "Lær begrepet R-multipler og hvordan de forenkler risikovurdering i handel."
+      },
+      {
+        "order": 3,
+        "title": "Størrelse og ugyldiggjøring",
+        "summary": "Forstå hvordan posisjonsstørrelse henger sammen med punktet der handelen blir ugyldig."
+      },
+      {
+        "order": 4,
+        "title": "Vanlige feil ved dimensjonering",
+        "summary": "Identifiser og unngå vanlige feil ved posisjonsstørrelse."
+      },
+      {
+        "order": 5,
+        "title": "Volatilitet kontra likviditet",
+        "summary": "Lær sammenhengen mellom volatilitet, likviditet og risiko."
+      },
+      {
+        "order": 6,
+        "title": "Begreper om giring",
+        "summary": "Forstå giring og hvordan den påvirker posisjonsstørrelsen."
+      },
+      {
+        "order": 7,
+        "title": "Grunnleggende intuisjon om forventning",
+        "summary": "Lær grunnleggende begreper om forventning for å ta bedre beslutninger."
+      },
+      {
+        "order": 8,
+        "title": "Øvelser og praktisk anvendelse",
+        "summary": "Bruk det du har lært gjennom praktiske øvelser."
+      }
+    ]
+  },
+  "trading-foundations-how-markets-really-work": {
+    "title": "Grunnlaget for handel: slik fungerer markedene egentlig",
+    "description": "Dette kurset er laget for nybegynnere som vil ha et solid grunnlag i handel. Det dekker markedsaktører, hvordan kurser dannes, likviditet, handelskostnader, psykologiske utfordringer og en risiko-først-tankegang. En strukturert tilnærming til det grunnleggende i finansmarkedene.",
+    "modules": [
+      {
+        "order": 1,
+        "title": "Markedsaktører",
+        "summary": "Forstå hvem de viktigste aktørene i markedet er og hva som motiverer dem."
+      },
+      {
+        "order": 2,
+        "title": "Hvordan kurser dannes",
+        "summary": "Lær hvordan markedskurser bestemmes gjennom ordrer og tilbud og etterspørsel."
+      },
+      {
+        "order": 3,
+        "title": "Likviditet",
+        "summary": "Forstå begrepet likviditet og hvorfor det er viktig i handel."
+      },
+      {
+        "order": 4,
+        "title": "Spread og kostnader",
+        "summary": "Lær om kostnadene ved handel, inkludert spread og kurtasje."
+      },
+      {
+        "order": 5,
+        "title": "Hvorfor handel er vanskelig",
+        "summary": "Utforsk utfordringene tradere møter i markedene."
+      },
+      {
+        "order": 6,
+        "title": "Risiko-først-tankegang",
+        "summary": "Lær å prioritere risikostyring i handelen din."
+      },
+      {
+        "order": 7,
+        "title": "Oppsummering",
+        "summary": "Oppsummer de viktigste begrepene fra kurset."
+      },
+      {
+        "order": 8,
+        "title": "Flere ressurser",
+        "summary": "Mer lesestoff og ressurser for videre læring."
+      }
+    ]
+  }
+}

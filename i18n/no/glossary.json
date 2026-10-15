@@ -1,0 +1,146 @@
+{
+  "breadcrumb": {
+    "home": "Hjem",
+    "glossary": "Ordliste"
+  },
+  "hero": {
+    "title": "En praktisk ordliste for opplæring i Forex, krypto og binære opsjoner.",
+    "subtitle": "Korte, lettleste definisjoner som ligger så nær som mulig hvordan tradere faktisk bruker begrepene. Ingen hype, ikke noe markedsføringsspråk – bare kontekst for læringen din.",
+    "sideCard": {
+      "title": "Slik bruker du ordlisten",
+      "subtitle": "Støtte til kursene dine, ikke en frittstående strategiguide.",
+      "paragraph1": "Ordlisten er laget for å brukes sammen med Cur Nova-PDF-ene og AI-strategiene dine. Hvis du møter et begrep du ikke kjenner, kan du raskt slå det opp her og deretter gå tilbake til hovedmateriellet.",
+      "paragraph2": "Definisjonene er bevisst forsiktige og forsøker ikke å forutsi markeder eller fortelle deg hva du skal handle. De gir bare struktur til språket som brukes i kursene."
+    }
+  },
+  "search": {
+    "placeholder": "Søk etter et begrep",
+    "info": "Søket filtrerer begreper fortløpende mens du skriver.",
+    "noResults": "Fant ingen begreper som samsvarer med søket ditt."
+  },
+  "categories": {
+    "all": "Alle",
+    "forex": "Forex",
+    "crypto": "Krypto",
+    "binary": "Binære",
+    "risk": "Risiko",
+    "process": "Prosess",
+    "psychology": "Psykologi"
+  },
+  "terms": {
+    "title": "Utvalgte begreper fra Cur Novas ordliste.",
+    "subtitle": "I det fullstendige produktet vil du kunne søke, filtrere og åpne egne ordlistevisninger direkte fra kursmodulene.",
+    "disclaimer": "Definisjonene her er en forhåndsvisning. Den fullstendige ordlisten utvides for hver lansering.",
+    "items": [
+      {
+        "id": "leverage",
+        "label": "Giring (leverage)",
+        "category": "Risk",
+        "short": "Hvor stor eksponering du kontrollerer per enhet kapital.",
+        "explanation": "Giring er forholdet mellom størrelsen på posisjonen din og kapitalen du risikerer. Høyere giring forsterker både gevinster og tap. Feil bruk av giring er en av de raskeste måtene å tømme en konto på.",
+        "tag": "Sentralt risikobegrep"
+      },
+      {
+        "id": "drawdown",
+        "label": "Drawdown (nedgang)",
+        "category": "Risk",
+        "short": "Fallet fra toppunkt til bunnpunkt for kontoen eller systemet ditt.",
+        "explanation": "Drawdown måler hvor mye egenkapitalkurven har falt fra sitt siste toppunkt. Den uttrykkes vanligvis i prosent. Dype eller langvarige drawdowns er ofte et tegn på at risikoen er for høy eller at strategien ikke passer til dagens forhold.",
+        "tag": "Risikooppfølging"
+      },
+      {
+        "id": "risk-per-trade",
+        "label": "Risiko per handel",
+        "category": "Risk",
+        "short": "Andelen av kapitalen du setter på spill i én idé.",
+        "explanation": "Risiko per handel angir hvor mye av kontoen du er villig til å tape hvis én enkelt idé slår feil. Mange opplæringsrammeverk bruker faste prosenter (for eksempel 0,5–2 %) for å unngå for store tap fra én enkelt posisjon."
+      },
+      {
+        "id": "pip",
+        "label": "Pip",
+        "category": "Forex",
+        "short": "En liten enhet som brukes til å måle kursbevegelser i Forex.",
+        "explanation": "En pip (percentage in point) er en standardisert enhet som representerer en verdiendring mellom to valutaer. For de fleste hovedvalutapar er én pip 0,0001, selv om noen meglere oppgir brøkverdier («pipette»)."
+      },
+      {
+        "id": "lot-size",
+        "label": "Lotstørrelse",
+        "category": "Forex",
+        "short": "Hvor stor posisjonen din er i standardiserte kontraktsenheter.",
+        "explanation": "Lotstørrelse angir antall valutaenheter du kontrollerer i en Forex-handel. Standardlot er vanligvis 100 000 enheter, minilot 10 000 og mikrolot 1 000. Posisjonsstørrelse kobler lotstørrelsen til risikoen din per handel."
+      },
+      {
+        "id": "volatility",
+        "label": "Volatilitet",
+        "category": "Crypto",
+        "short": "Hvor raskt og hvor langt kursen beveger seg over tid.",
+        "explanation": "Volatilitet beskriver størrelsen på kursendringer i en gitt periode. Kryptomarkeder viser ofte høyere volatilitet enn mange tradisjonelle valutapar. Høyere volatilitet kan skape muligheter, men øker også risikoen for raske tap."
+      },
+      {
+        "id": "liquidity-zones",
+        "label": "Likviditetssoner",
+        "category": "Crypto",
+        "short": "Områder der det kan ligge et stort antall ordrer.",
+        "explanation": "Likviditetssoner er kursområder der man forventer mange ordrer: tidligere topper/bunner, konsolideringsområder eller tydelige nivåer. Å forstå hvor likviditeten kan ligge, kan hjelpe deg å ramme inn mulige «sweeps» eller kraftige bevegelser."
+      },
+      {
+        "id": "strike-price",
+        "label": "Innløsningskurs (strike)",
+        "category": "Binary",
+        "short": "Nivået som avgjør utfallet av en binær opsjon.",
+        "explanation": "Innløsningskursen er nivået du sammenligner underliggende kurs med ved utløp. I mange binære strukturer avhenger utbetalingen kun av om kursen er over eller under dette nivået på et bestemt tidspunkt."
+      },
+      {
+        "id": "expiry-time",
+        "label": "Utløpstid",
+        "category": "Binary",
+        "short": "Tidspunktet da en binær opsjon gjøres opp.",
+        "explanation": "Utløpstiden er det nøyaktige tidspunktet da den binære opsjonen din vurderes. Svært korte utløp forsterker støy og tilfeldighet. Opplæringsmateriell legger ofte vekt på å forstå hvordan utløp samspiller med volatilitet og struktur."
+      },
+      {
+        "id": "trading-plan",
+        "label": "Handelsplan",
+        "category": "Process",
+        "short": "Et dokumentert sett med regler for hvordan du opererer.",
+        "explanation": "En handelsplan beskriver når du handler, hvordan du styrer risiko, hvilke oppsett du ser etter og når du holder deg unna. Den er et levende dokument som utvikler seg med erfaring, ikke en engangssjekkliste."
+      },
+      {
+        "id": "journal",
+        "label": "Handelsjournal",
+        "category": "Process",
+        "short": "En logg over handlene, tankene og lærdommene dine.",
+        "explanation": "En handelsjournal registrerer inn- og utganger, begrunnelser og følelsesmessig tilstand. Å gå gjennom den jevnlig hjelper deg å oppdage mønstre, gjentatte feil og områder du bør justere."
+      },
+      {
+        "id": "psych-capital",
+        "label": "Psykologisk kapital",
+        "category": "Psychology",
+        "short": "Evnen din til å fortsette å ta klare beslutninger under press.",
+        "explanation": "Psykologisk kapital er den mentale kapasiteten du har til beslutninger og risiko. Overgiring, overhandel eller konstant overvåking av posisjoner kan raskt tære på den og føre til impulsive valg."
+      }
+    ]
+  },
+  "infoCards": {
+    "education": {
+      "title": "Opplæring, ikke rådgivning",
+      "subtitle": "Ordlisten forteller deg ikke hva du skal handle.",
+      "description": "Ordlisten forklarer språket som brukes i høyrisikomarkeder. Den foreslår ikke instrumenter, posisjonsstørrelser eller retninger. Alle beslutninger om å handle er fullt ut ditt eget ansvar."
+    },
+    "linkFromCourses": {
+      "title": "Lenker fra kursene",
+      "subtitle": "I appen kan du hoppe hit direkte fra PDF-ene.",
+      "description": "I produksjon vil nøkkelbegreper i Cur Nova-kursene lenke til oppføringer i ordlisten. Du kan åpne dem, lese forklaringen og deretter gå tilbake til der du var i PDF-en eller modulen."
+    },
+    "updates": {
+      "title": "Oppdateres over tid",
+      "subtitle": "Ordlisten utvikles med nye moduler og markeder.",
+      "description": "Etter hvert som Cur Nova legger til nye kurs og AI-maler, dokumenteres flere begreper her. Alle oppdateringer beholder den samme forsiktige, opplæringsfokuserte tonen."
+    }
+  },
+  "cta": {
+    "title": "Fortsett med et kurs eller en AI-strategi.",
+    "subtitle": "Bruk ordlisten som et støtteverktøy, og gå deretter tilbake til strukturert læring – PDF-er, tilpassede kurs og AI-planer.",
+    "browseCourses": "Utforsk kurs",
+    "generateAI": "Generer AI-strategi"
+  }
+}

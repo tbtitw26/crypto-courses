@@ -104,11 +104,11 @@ function CheckoutContent() {
       const result = await response.json().catch(() => ({}))
 
       if (!response.ok) {
-        throw new Error(result.error || result.message || 'Failed to create payment session')
+        throw new Error(result.error || result.message || t('extra.sessionFailed'))
       }
 
       if (!result.redirectUrl) {
-        throw new Error('No redirect URL received from payment gateway')
+        throw new Error(t('extra.noRedirect'))
       }
 
       window.location.href = result.redirectUrl
@@ -196,8 +196,8 @@ function CheckoutContent() {
           <Loader2 className="h-5 w-5 animate-spin text-brand-700" />
         </div>
         <div className="text-center">
-          <p className="text-sm font-semibold text-text-main">Preparing your checkout</p>
-          <p className="mt-1 text-sm text-text-muted">Verifying session and order details…</p>
+          <p className="text-sm font-semibold text-text-main">{t('extra.preparing')}</p>
+          <p className="mt-1 text-sm text-text-muted">{t('extra.verifying')}</p>
         </div>
       </div>
     )
@@ -400,8 +400,10 @@ function CheckoutContent() {
                           {t('payment.insufficientTokens')}
                         </p>
                         <p className="mt-1 text-sm text-gold-700">
-                          You need {total.tokens.toLocaleString('en-US')} tokens but have{' '}
-                          {userBalance.toLocaleString('en-US')}.
+                          {t('extra.needTokens', {
+                            need: total.tokens.toLocaleString('en-US'),
+                            have: userBalance.toLocaleString('en-US'),
+                          })}
                         </p>
                         <Link
                           href="/pricing"
@@ -424,7 +426,7 @@ function CheckoutContent() {
                 </div>
                 <div className="flex-1">
                   <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
-                    Token balance
+                    {t('extra.tokenBalance')}
                   </p>
                   <p className="text-lg font-bold text-text-main">
                     {userBalance.toLocaleString('en-US')}{' '}
@@ -433,7 +435,7 @@ function CheckoutContent() {
                 </div>
                 {paymentMethod === 'tokens' && (
                   <div className="text-right">
-                    <p className="text-sm text-text-muted">After purchase</p>
+                    <p className="text-sm text-text-muted">{t('extra.afterPurchase')}</p>
                     <p
                       className={`text-sm font-semibold ${
                         hasEnoughTokens ? 'text-brand-700' : 'text-rose-600'
@@ -441,7 +443,7 @@ function CheckoutContent() {
                     >
                       {hasEnoughTokens
                         ? (userBalance - total.tokens).toLocaleString('en-US')
-                        : `−${(total.tokens - userBalance).toLocaleString('en-US')} deficit`}
+                        : t('extra.deficit', { amount: (total.tokens - userBalance).toLocaleString('en-US') })}
                     </p>
                   </div>
                 )}
@@ -453,18 +455,17 @@ function CheckoutContent() {
                 <div className="flex items-center gap-2.5 border-b border-surface-200 px-5 py-4">
                   <Shield className="h-4 w-4 text-brand-700" />
                   <h3 className="font-heading text-sm font-semibold text-text-main">
-                    Secure hosted payment
+                    {t('extra.hostedTitle')}
                   </h3>
                 </div>
                 <div className="px-5 py-5">
                   <p className="text-sm leading-relaxed text-text-secondary">
-                    You’ll be redirected to APS to top up the exact token balance needed for this
-                    order. After payment, return here to complete your course purchase with tokens.
+                    {t('extra.hostedText')}
                   </p>
 
                   <div className="mt-4 space-y-2 rounded-lg bg-surface-100 px-4 py-3">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-text-secondary">Amount</span>
+                      <span className="text-text-secondary">{t('extra.amount')}</span>
                       <span className="font-semibold text-text-main">{formattedPrice}</span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
@@ -489,7 +490,7 @@ function CheckoutContent() {
                     ) : (
                       <span className="inline-flex items-center gap-2">
                         <Lock className="h-3.5 w-3.5" />
-                        Continue to APS secure checkout
+                        {t('extra.continueAps')}
                       </span>
                     )}
                   </button>
@@ -576,11 +577,11 @@ function CheckoutContent() {
                 <div className="flex items-center justify-center gap-4 pt-1">
                   <div className="flex items-center gap-1 text-text-muted">
                     <Lock className="h-3 w-3" />
-                    <span className="text-[11px] font-medium">SSL secured</span>
+                    <span className="text-[11px] font-medium">{t('extra.ssl')}</span>
                   </div>
                   <div className="flex items-center gap-1 text-text-muted">
                     <Shield className="h-3 w-3" />
-                    <span className="text-[11px] font-medium">PCI compliant</span>
+                    <span className="text-[11px] font-medium">{t('extra.pci')}</span>
                   </div>
                 </div>
               </div>
@@ -588,8 +589,7 @@ function CheckoutContent() {
               {/* Education disclaimer */}
               <div className="border-t border-surface-200 px-5 py-3">
                 <p className="text-xs leading-relaxed text-text-muted">
-                  All content is for educational purposes only. Tokens, courses and AI outputs do not
-                  constitute financial advice.
+                  {t('extra.disclaimer')}
                 </p>
               </div>
             </div>
@@ -649,6 +649,11 @@ function CheckoutItem({ item, currency, tCommon }: CheckoutItemProps) {
   )
 }
 
+function CheckoutLoadingLabel() {
+  const t = useTranslations('cart.checkout.extra')
+  return <p className="text-sm font-semibold text-text-main">{t('loading')}</p>
+}
+
 export default function CheckoutPage() {
   return (
     <Suspense
@@ -657,7 +662,7 @@ export default function CheckoutPage() {
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-surface-300 bg-white shadow-card">
             <Loader2 className="h-5 w-5 animate-spin text-brand-700" />
           </div>
-          <p className="text-sm font-semibold text-text-main">Loading checkout…</p>
+          <CheckoutLoadingLabel />
         </div>
       }
     >

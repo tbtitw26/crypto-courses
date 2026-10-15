@@ -1,0 +1,238 @@
+{
+  "title": "Alle Cur Nova-kurs.",
+  "subtitle": "Strukturerte PDF-er om Forex, krypto og binære opsjoner. Velg etter nivå og marked – alle kurs setter risiko og prosess i sentrum, ikke hype.",
+  "breadcrumb": {
+    "home": "Hjem",
+    "courses": "Kurs"
+  },
+  "meta": {
+    "coursesAvailable": "kurs tilgjengelig · flere under utarbeidelse.",
+    "paymentInfo": "Betal med tokens eller direkte i EUR, GBP eller USD."
+  },
+  "filters": {
+    "label": "Filtre",
+    "level": {
+      "all": "Alle nivåer",
+      "general": "Generelt",
+      "beginner": "Nybegynner",
+      "intermediate": "Middels",
+      "advanced": "Avansert"
+    },
+    "market": {
+      "all": "Alle markeder",
+      "general": "Generelt",
+      "forex": "Forex",
+      "crypto": "Krypto",
+      "binary": "Binære"
+    }
+  },
+  "search": {
+    "placeholder": "Søk etter tittel eller emne..."
+  },
+  "empty": {
+    "title": "Ingen kurs samsvarer med filtrene dine ennå.",
+    "description": "Prøv å nullstille et av filtrene eller tømme søkefeltet. Nytt innhold legges til jevnlig etter hvert som pensumet vårt utvides."
+  },
+  "sidebar": {
+    "educationOnly": {
+      "title": "Kun opplæring · ingen signaler",
+      "description": "Alle kurs er laget for å forklare begreper, struktur og risikostyring. De inneholder aldri handelssignaler eller løfter om avkastning."
+    },
+    "customCourse": {
+      "title": "Foretrekker du et skreddersydd løp?",
+      "description": "Hvis ingen av de ferdige kursene passer helt til din situasjon, kan du bestille en tilpasset PDF basert på din erfaring, innskuddsstørrelse og risikotoleranse.",
+      "cta": "Bestill tilpasset kurs"
+    },
+    "aiStrategy": {
+      "title": "Lite tid i dag?",
+      "description": "Bruk AI-strategibyggeren for å få en fokusert, umiddelbart generert plan, og kom tilbake til fullstendige kurs når du er klar til å gå dypere.",
+      "cta": "Åpne AI-strategibyggeren"
+    }
+  },
+  "course": {
+    "duration": "timer · i eget tempo",
+    "modules": "moduler",
+    "format": "PDF",
+    "download": "nedlasting",
+    "educationOnly": "Kun opplæring · ingen signaler",
+    "payWithTokens": "betal med tokens eller kort",
+    "viewCourse": "Se kurs",
+    "addToCart": "Legg i handlekurven"
+  },
+  "detail": {
+    "header": {
+      "backToCourses": "Tilbake til kurs",
+      "educationOnly": "Kun opplæring",
+      "pdfFormat": "PDF-format"
+    },
+    "meta": {
+      "pdfCourse": "PDF-kurs",
+      "languages": "Engelsk",
+      "duration": "Varighet",
+      "modules": "Moduler",
+      "format": "Format",
+      "focus": "Fokus",
+      "pdfDownload": "PDF-nedlasting",
+      "riskAwareness": "Risikobevissthet · grunnleggende prosess"
+    },
+    "pricing": {
+      "courseAccess": "Kurstilgang",
+      "immediateDownload": "Umiddelbar PDF-nedlasting etter betaling.",
+      "buyWithTokens": "Kjøp med tokens",
+      "buyWithCard": "Kjøp med kort",
+      "paymentNote": "Du kan bruke eksisterende saldo eller legge til tokens i kassen. Kortbetaling støtter EUR, GBP og USD.",
+      "educationDisclaimer": "Kun opplæring. Dette kurset inneholder ikke handelssignaler eller løfter om avkastning.",
+      "beforeBuying": "Før du kjøper, merk deg:",
+      "riskNote1": "Handel med Forex er høyrisiko og kan føre til fullstendig tap av kapital.",
+      "riskNote2": "Ved å fortsette bekrefter du at du har lest risikofraskrivelsen.",
+      "readDisclaimer": "Les hele risiko- og ansvarsfraskrivelsen"
+    },
+    "outline": {
+      "title": "Kursoversikt",
+      "description": "En rekke moduler som bygger på hverandre, slik at du ikke hopper mellom tilfeldige begreper."
+    },
+    "sidebar": {
+      "whoIsFor": {
+        "title": "Hvem kurset er for"
+      },
+      "notFor": {
+        "title": "Hva kurset ikke gjør"
+      },
+      "materials": {
+        "title": "Inkludert materiell"
+      },
+      "customCourse": {
+        "badge": "Foretrekker du skreddersøm?",
+        "description": "Hvis du vil ha et kurs som er bygget spesielt rundt din erfaring, ditt innskudd og din risikotoleranse, kan du bestille en tilpasset PDF.",
+        "cta": "Bestill tilpasset kurs i stedet"
+      },
+      "aiStrategy": {
+        "badge": "Kombiner med AI",
+        "description": "Har du allerede kontroll på det grunnleggende? Bruk AI-strategibyggeren til å generere en fokusert opplæringsplan basert på profilen din, og bruk den sammen med det du lærer her.",
+        "cta": "Åpne AI-strategibyggeren"
+      },
+      "riskReminder": {
+        "title": "Påminnelse om høyrisikomarked",
+        "description": "Handel med Forex er svært spekulativt. Risiker aldri penger du ikke har råd til å tape. Dette kurset forklarer kun begreper og prosesser – det tar ikke beslutninger for deg.",
+        "cta": "Les hele risiko- og ansvarsfraskrivelsen"
+      }
+    },
+    "faq": {
+      "title": "Spørsmål om dette kurset",
+      "description": "Raske svar på hvordan det fungerer, hva du får og hvordan du bruker det.",
+      "items": {
+        "receivePdf": {
+          "question": "Hvordan mottar jeg PDF-en?",
+          "answer": "Rett etter vellykket betaling legges kurset til i Cur Nova-biblioteket ditt, og en nedlastingslenke sendes til e-posten din."
+        },
+        "refund": {
+          "question": "Kan jeg få refusjon hvis jeg ikke liker det?",
+          "answer": "Siden dette er digitalt opplæringsinnhold som leveres umiddelbart, tilbys det normalt ikke refusjon. Les kursbeskrivelsen, kursoversikten og risikoinformasjonen før du kjøper."
+        },
+        "signals": {
+          "question": "Forteller dette kurset meg nøyaktig når jeg skal kjøpe eller selge?",
+          "answer": "Nei. Dette kurset fokuserer på forståelse, struktur og risikostyring. Det gir ikke handelssignaler eller eksakte inn- og utganger."
+        }
+      }
+    },
+    "cta": {
+      "title": "Klar til å starte med {courseTitle}?",
+      "description": "Ta dette kurset først, og bygg deretter på med AI-strategier eller tilpassede PDF-er etter hvert som forståelsen din vokser.",
+      "buyCourse": "Kjøp kurs",
+      "viewMore": "Se flere kurs"
+    },
+    "whatYouWillLearn": {
+      "title": "Hva du vil lære"
+    },
+    "extra": {
+      "forexBeginnerModules": [
+        {
+          "title": "Slik er Forex-markedet bygget opp",
+          "desc": "Økter, hovedvalutapar, likviditet og hvor ordrene dine faktisk går i systemet."
+        },
+        {
+          "title": "Sentrale begreper og ordretyper",
+          "desc": "Markedsordre kontra limitordre, stoppordrer, spread, slippage og hvordan dette påvirker utførelsen."
+        },
+        {
+          "title": "Risiko per handel og posisjonsstørrelse",
+          "desc": "Beregning av risiko i %, lotstørrelse og hvorfor en liten, konsekvent risikomodell betyr mer enn oppsett."
+        },
+        {
+          "title": "Grunnleggende kursstruktur og lys",
+          "desc": "Trender, sidelengs bevegelse, støtte/motstand og hvordan du leser lys uten å overkomplisere diagrammer."
+        },
+        {
+          "title": "Bygg din første enkle plan",
+          "desc": "Gjør teori om til en minimal handelsplan du faktisk kan følge og evaluere."
+        },
+        {
+          "title": "Journalføring og gjennomgang",
+          "desc": "Hva du skal registrere, hvordan du logger handler og hvordan du gjør ukentlige gjennomganger for å lære av data."
+        },
+        {
+          "title": "Vanlige nybegynnerfeller",
+          "desc": "Overhandel, hevnhandel, for rask økning av størrelse og hvordan du bygger sikringer mot dette."
+        }
+      ],
+      "genericModules": [
+        {
+          "title": "Introduksjon og grunnlag",
+          "desc": "Sentrale begreper og markedsstruktur."
+        },
+        {
+          "title": "Grunnleggende risikostyring",
+          "desc": "Forstå risiko og posisjonsstørrelse."
+        },
+        {
+          "title": "Praktisk anvendelse",
+          "desc": "Bruk begrepene i virkelige scenarier."
+        }
+      ],
+      "hours": "{min}–{max} timer",
+      "selfPaced": "i eget tempo",
+      "tokens": "tokens",
+      "learn": [
+        "Hvordan {market}-markedet er bygget opp og hvorfor det betyr noe.",
+        "Hvordan du definerer og beregner risiko per handel før du trykker på en eneste knapp.",
+        "Hvordan du bygger en enkel, minimal handelsplan og et journalrammeverk."
+      ],
+      "whoFor": [
+        "Helt nybegynnere som vil ha en strukturert introduksjon til {market} uten hype.",
+        "Tradere som har åpnet noen tilfeldige posisjoner og innsett at de trenger et ordentlig grunnlag.",
+        "Folk som bryr seg mer om risiko og prosess enn kortsiktig spenning."
+      ],
+      "notFor": [
+        "Det gir deg ikke handelsanbefalinger eller varsler om inngang.",
+        "Det lover deg ingen månedlig prosentavkastning.",
+        "Det fjerner ikke behovet for din egen disiplin, tid og øvelse."
+      ],
+      "materials": [
+        "Fullstendig PDF-kurs (rundt 80–100 sider)",
+        "Enkel risikosjekkliste for utskrift",
+        "Enkel journalmal (50–100 handler)"
+      ]
+    }
+  },
+  "catalog": {
+    "loadError": "Kunne ikke laste inn kurs. Prøv igjen senere.",
+    "loading": "Laster inn katalogen",
+    "resultCount": "{shown} av {total}",
+    "badge": "Kurskatalog",
+    "subtitleExtra": "Utforsk strukturerte PDF-er etter marked og nivå, og bruk deretter tokens eller kassen for å få tilgang til kurset.",
+    "downloadable": "Nedlastbart kursmateriell",
+    "differentPath": "Trenger du et annet løp?",
+    "differentPathTitle": "Tilpassede kurs og AI-alternativer finnes ved siden av katalogen.",
+    "differentPathText": "Hvis det ferdige biblioteket ikke passer nivået ditt, kan du bestille en skreddersydd PDF eller generere et strategidokument kun for opplæring.",
+    "reset": "Nullstill",
+    "level": "Nivå",
+    "market": "Marked",
+    "unavailable": "Kurslisten er midlertidig utilgjengelig. Last inn siden på nytt eller prøv igjen senere.",
+    "emptyTitle": "Ingen kurs samsvarer med denne visningen.",
+    "emptyText": "Prøv et bredere marked, et annet nivå eller tøm søket.",
+    "clearFilters": "Fjern filtre",
+    "showingAll": "Viser hele kursbiblioteket.",
+    "filteredBy": "Filtrert etter {filters}",
+    "searchLabel": "søk: «{query}»"
+  }
+}

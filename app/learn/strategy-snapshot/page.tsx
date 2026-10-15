@@ -3,11 +3,14 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { StrategySnapshotPage } from '@/components/StrategySnapshotPage'
-import enLearn from '@/i18n/en/learn.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: (enLearn as any).strategySnapshot?.hero?.title || 'One-Page Strategy Snapshot',
-  description: (enLearn as any).strategySnapshot?.hero?.subtitle || 'A strategy snapshot is a single page that captures the core of one approach – markets, timeframes, setup, risk and execution rules – so you can see it clearly while you trade.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('learn.strategySnapshot.hero.title'),
+    description: t('learn.strategySnapshot.hero.subtitle'),
+  }
 }
 
 function StrategySnapshotPageFallback() {

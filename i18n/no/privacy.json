@@ -1,0 +1,505 @@
+{
+  "breadcrumb": {
+    "home": "Hjem",
+    "privacy": "Personvernerklæring"
+  },
+  "hero": {
+    "title": "Personvernerklæring for Cur Novas plattform for handelsopplæring.",
+    "subtitle": "Denne personvernerklæringen forklarer hvilke personopplysninger vi samler inn, hvorfor vi bruker dem, hvor lenge vi oppbevarer dem, og hvordan du kan utøve rettighetene dine når du bruker cur-nova.com og tilknyttede tjenester («tjenesten»). Den bygger på UK GDPR og Data Protection Act 2018.",
+    "meta": [
+      {
+        "label": "Gjelder fra",
+        "value": "6. desember 2025"
+      },
+      {
+        "label": "Behandlingsansvarlig",
+        "value": "CUR NOVA LTD (17240836)"
+      },
+      {
+        "label": "Jurisdiksjon",
+        "value": "England og Wales"
+      }
+    ],
+    "badges": {
+      "dataProtection": "UK GDPR · Data Protection Act 2018",
+      "ukGdpr": "Engelskspråklig tjeneste",
+      "ageRestriction": "Kun for personer over 18 år"
+    },
+    "summaryCard": {
+      "title": "Kortversjon (for kunder)",
+      "subtitle": "Bruk denne listen for en rask oppsummering; de nummererte avsnittene inneholder alle juridiske detaljer.",
+      "items": [
+        "Vi samler bare inn opplysningene vi trenger for å drive, sikre og forbedre tjenesten.",
+        "Vi selger ikke personopplysningene dine.",
+        "Vi behandler opplysninger etter UK GDPR på følgende rettslige grunnlag: avtale, samtykke, berettiget interesse og rettslige forpliktelser.",
+        "Du har rett til innsyn, retting, sletting og begrensning av behandlingen av personopplysningene dine.",
+        "Vi bruker informasjonskapsler og lignende teknologier til nødvendige funksjoner, preferanser og analyse (med samtykke).",
+        "Vi oppbevarer opplysninger bare så lenge det er nødvendig for de beskrevne formålene eller så lenge loven krever.",
+        "Vi har innført egnede sikkerhetstiltak for å beskytte personopplysningene dine.",
+        "Tjenesten er beregnet på brukere over 18 år."
+      ],
+      "note": "Har du spørsmål om denne personvernerklæringen eller vil utøve rettighetene dine, kontakt info@cur-nova.com."
+    }
+  },
+  "toc": {
+    "title": "På denne siden",
+    "items": [
+      { "label": "Innledning", "anchor": "introduction" },
+      { "label": "Personopplysninger vi samler inn", "anchor": "personal-data" },
+      { "label": "Hvorfor vi behandler opplysningene og rettslig grunnlag", "anchor": "legal-bases" },
+      { "label": "Automatisert behandling, profilering og AI", "anchor": "automated-processing" },
+      { "label": "Deling og internasjonale overføringer", "anchor": "sharing" },
+      { "label": "Informasjonskapsler og lignende teknologier", "anchor": "cookies" },
+      { "label": "Lagringstid", "anchor": "retention" },
+      { "label": "Dine rettigheter", "anchor": "rights" },
+      { "label": "Sikkerhet", "anchor": "security" },
+      { "label": "Opplysninger om barn", "anchor": "children" },
+      { "label": "Endringer i denne erklæringen", "anchor": "changes" },
+      { "label": "Kontakt og klager", "anchor": "contact" }
+    ],
+    "reminder": {
+      "label": "Påminnelse",
+      "text": "Denne norske oversettelsen er kun ment som hjelp. Den engelske versjonen av erklæringen er den eneste juridisk bindende versjonen."
+    }
+  },
+  "sections": [
+    {
+      "id": "introduction",
+      "number": "1",
+      "title": "Innledning",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Vi respekterer personvernet ditt og er opptatt av å beskytte personopplysningene dine. Denne personvernerklæringen forklarer hvilke personopplysninger vi samler inn, hvorfor vi bruker dem, hvor lenge vi oppbevarer dem, og hvordan du kan utøve rettighetene dine når du bruker cur-nova.com og tilknyttede tjenester («tjenesten»)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Behandlingsansvarlig: CUR NOVA LTD (org.nr. 17240836), Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia («Cur Nova», «vi», «oss», «vår»).",
+            "Kontakt: info@cur-nova.com",
+            "Omfang og alder: Denne erklæringen gjelder alle brukere av tjenesten (inkludert bedriftskunder og deres autoriserte ansatte). Tjenesten er beregnet på personer over 18 år."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Ved å bruke tjenesten erkjenner du at personopplysningene dine vil bli behandlet i samsvar med denne personvernerklæringen og gjeldende personvernlovgivning, inkludert UK GDPR og Data Protection Act 2018."
+        },
+        {
+          "type": "paragraph",
+          "text": "Tjenesten er en engelskspråklig opplæringsplattform med fokus på handelsopplæring (Forex, krypto og tilknyttede markeder). Den engelske versjonen av denne erklæringen er den eneste bindende versjonen."
+        }
+      ]
+    },
+    {
+      "id": "personal-data",
+      "number": "2",
+      "title": "Personopplysninger vi samler inn",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Vi samler bare inn opplysningene vi trenger for å drive, sikre og forbedre tjenesten."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.1 Opplysninger du gir oss direkte"
+        },
+        {
+          "type": "paragraph",
+          "text": "Avhengig av hvordan du bruker tjenesten, kan du oppgi:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Konto og identitet: navn (eller visningsnavn), firmanavn, rolle, e-postadresse, passord (hashet), telefonnummer, foretrukket valuta og region.",
+            "Autentisering og sosial pålogging: hvis du logger inn via en tredjepartsleverandør (for eksempel Google), kan vi motta navn, e-postadresse, profilbilde og en unik identifikator fra leverandøren, håndtert via autentiseringslaget vårt (f.eks. NextAuth).",
+            "Læringsprofil og skjemaopplysninger: erfaringsnivå i handel, omtrentlig innskuddsstørrelse, risikotoleranse, mål, markeder du er interessert i og annen informasjon du velger å dele i skjemaer for tilpassede kurs eller AI-strategibyggeren.",
+            "Bestillinger og bibliotek: detaljer om kjøp og innløsninger, inkludert valgte ferdige kurs, tilpassede kurs og AI-strategiresultater knyttet til kontoen din.",
+            "Innspill til AI og innholdsgenerering: fritekstforespørsler, notater, handelsscenarier, strategibeskrivelser, journalnotater og annet innhold du sender inn for å generere tilpassede kurs eller AI-strategiresultater.",
+            "Fakturering: navn og adresse for fakturering, MVA-opplysninger (der det er relevant) og annen informasjon som trengs for fakturaer og kvitteringer.",
+            "Lommebok og tokens: påfyllingsbeløp, valgt valuta, token-saldo, bruksregistreringer og historikk over tokenforbruk (for eksempel hvilken funksjon eller hvilket kurs som brukte tokens og når).",
+            "Support og kommunikasjon: meldinger og vedlegg du sender oss (inkludert supporthenvendelser, tilbakemeldingsskjemaer, undersøkelser, anmeldelser eller e-poster)."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Særlige kategorier av personopplysninger: Vi søker ikke bevisst etter særlige kategorier av opplysninger (som helseopplysninger, politiske oppfatninger, religiøs overbevisning eller biometriske data). Hvis du frivillig tar med slike opplysninger i fritekstfelt, journalnotater eller opplastinger, behandler vi dem bare i den grad det er nødvendig for å levere den forespurte tjenesten, og kun på grunnlag av ditt uttrykkelige samtykke (se avsnitt 3.2). Unngå å oppgi slike opplysninger der det ikke er strengt nødvendig."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.2 Opplysninger som samles inn automatisk"
+        },
+        {
+          "type": "paragraph",
+          "text": "Når du bruker tjenesten, samler vi automatisk inn visse tekniske opplysninger og bruksdata, for eksempel:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Tekniske data: IP-adresse, enhets- og nettlesertype, operativsystem, tidssone, språk, brukeragent og øktidentifikatorer.",
+            "Sikkerhetstelemetri: påloggingsforsøk, autentiserings- og tilgangslogger, logger for hastighetsbegrensning og avvik, signaler om misbruk/svindel og lignende sikkerhetsrelatert informasjon.",
+            "Bruk og diagnostikk: sidevisninger, klikk, navigasjonsmønstre, funksjoner som brukes (for eksempel hvilke typer kurs eller verktøy du åpner), tokenpåfyllinger og -trekk, ID-er for oppgavekjøringer, feilsporinger og ytelsesmåltall."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Der det er mulig, bruker vi aggregerte eller pseudonymiserte data til analyse og diagnostikk."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.3 Opplysninger fra tredjeparter"
+        },
+        {
+          "type": "paragraph",
+          "text": "Der det er nødvendig for å levere og sikre tjenesten, kan vi motta begrensede personopplysninger fra:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Betalingsleverandører: transaksjonsreferanser, statuskoder, delvise kortopplysninger (f.eks. de siste 4 sifrene, korttype), land/region, signaler for svindelforebygging og varsler om tilbakeføringer. Vi mottar eller lagrer ikke fullstendige kortnumre eller CVV-koder.",
+            "Autentiseringsleverandører (f.eks. Google): grunnleggende profilinformasjon (som navn, e-post, profilbilde og unik ID) når du velger å logge inn via slike leverandører.",
+            "AI-tjenesteleverandører: når vi bruker eksterne AI-API-er til å generere innhold, sender vi forespørslene dine og nødvendig kontekst til disse leverandørene. Vi mottar generert tekst og medier tilbake. Disse leverandørene opptrer som databehandlere under avtalefestede garantier.",
+            "Leverandører av svindelforebygging og verifisering: risikovurderinger, kontroller og varsler som brukes til å beskytte tjenesten og betalingsflyten.",
+            "Profesjonelle rådgivere og forsikringsselskaper: informasjon som er nødvendig for juridiske, skattemessige, regeletterlevelses- eller forsikringsformål."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "2.4 Brukergenerert innhold"
+        },
+        {
+          "type": "paragraph",
+          "text": "Brukergenerert innhold (f.eks. journalnotater, strategibeskrivelser, opplastede filer, notater eller forespørselstekst) kan inneholde personopplysninger om deg eller tredjeparter. Du er ansvarlig for å sikre at du har gyldig rettslig grunnlag, nødvendig informasjon og tillatelser for å ta med tredjeparters personopplysninger i innholdet ditt."
+        }
+      ]
+    },
+    {
+      "id": "legal-bases",
+      "number": "3",
+      "title": "Hvorfor vi behandler opplysningene og rettslig grunnlag (UK GDPR)",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Vi behandler personopplysninger etter UK GDPR og Data Protection Act 2018 på følgende rettslige grunnlag:"
+        },
+        {
+          "type": "paragraph",
+          "text": "3.1 Oppfyllelse av en avtale"
+        },
+        {
+          "type": "paragraph",
+          "text": "For å inngå og oppfylle avtalen med deg behandler vi personopplysninger for å:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "opprette, vedlikeholde og sikre kontoen din;",
+            "levere tjenesten, inkludert tilgang til ferdige kurs, tilpassede kurs og AI-strategiresultater;",
+            "drive lommebøker og tokens, behandle betalinger og utstede fakturaer/kvitteringer;",
+            "levere digitalt innhold til biblioteket i dashbordet ditt og, der det er relevant, via e-post;",
+            "kommunisere med deg om bruken av tjenesten, bestillinger, bibliotekselementer og supporthenvendelser."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "3.2 Samtykke (inkludert markedsføring og særlige kategorier av opplysninger)"
+        },
+        {
+          "type": "paragraph",
+          "text": "Vi kan bygge på samtykket ditt for å:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "behandle særlige kategorier av opplysninger som du frivillig oppgir i brukergenerert innhold eller kommunikasjon;",
+            "sende markedsførings-e-poster og nyhetsbrev når du har meldt deg på (for eksempel oppdateringer om nye kurs, funksjoner eller kampanjer);",
+            "bruke tilbakemeldinger, attester eller casestudier til markedsføring eller produktforbedring når du uttrykkelig har samtykket."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Du kan når som helst trekke tilbake samtykket ditt via innstillingene (der det er tilgjengelig) eller ved å kontakte oss (se avsnitt 12). Tilbaketrekking påvirker ikke lovligheten av behandling som ble utført før samtykket ble trukket tilbake."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.3 Berettiget interesse"
+        },
+        {
+          "type": "paragraph",
+          "text": "Vi kan behandle personopplysninger der det er nødvendig for våre berettigede interesser, forutsatt at dine interesser og grunnleggende rettigheter ikke går foran disse interessene. Dette omfatter:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "å holde tjenesten sikker (svindeldeteksjon, forebygging av misbruk, logging, hastighetsbegrensning og hendelseshåndtering);",
+            "å sikre pålitelig drift av autentisering, økthåndtering og tilgang til dashbordet;",
+            "å måle og forbedre ytelse, brukervennlighet og brukeropplevelse (med aggregert eller pseudonymisert analyse der det er mulig);",
+            "å tilpasse opplæringsinnhold på et overordnet nivå (for eksempel å gruppere brukere etter erfaringsnivå for å prioritere fremtidig innhold), uten å ta automatiserte beslutninger med rettslige eller tilsvarende betydelige virkninger;",
+            "å sende nødvendig kommunikasjon som ikke er markedsføring (for eksempel tjenestemeldinger, sikkerhetsvarsler eller oppdateringer av retningslinjer);",
+            "B2B-henvendelser til eksisterende eller potensielle bedriftskunder om produkter eller tjenester knyttet til tjenesten, med forbehold om din rett til å protestere når som helst (se avsnitt 8)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "3.4 Rettslig forpliktelse"
+        },
+        {
+          "type": "paragraph",
+          "text": "Vi kan behandle personopplysninger der det er nødvendig for å oppfylle rettslige forpliktelser, inkludert:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "skatt, regnskap og selskapsrettslig dokumentasjon;",
+            "å svare på lovlige henvendelser fra offentlige myndigheter, domstoler eller tilsynsorganer;",
+            "å oppfylle våre forpliktelser etter gjeldende forbruker- og personvernlovgivning;",
+            "å overholde krav om svindelforebygging, sanksjoner og lignende regulatoriske krav som gjelder betalingsflyten og virksomheten vår."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "automated-processing",
+      "number": "4",
+      "title": "Automatisert behandling, profilering og AI",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Tjenesten bruker automatisert behandling og algoritmer til å håndtere opplysningene du oppgir, for eksempel:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "videresending av forespørsler til AI-modeller for å generere tilpassede kurs og AI-strategiresultater;",
+            "aggregering av bruksdata for statistikk og ytelsesovervåking;",
+            "oppdagelse av uvanlige mønstre for sikkerhet og svindelforebygging."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Begrenset profilering kan brukes til å tilpasse deler av tjenesten (for eksempel å justere vanskelighetsgraden i opplæringen etter erfaringsnivået du oppgir, eller å flagge mistenkelig tokenbruk for gjennomgang)."
+        },
+        {
+          "type": "paragraph",
+          "text": "Vi tar ikke beslutninger med rettslige eller tilsvarende betydelige virkninger utelukkende basert på automatiserte avgjørelser. Du kan be om manuell vurdering av enhver beslutning du mener er tatt utelukkende automatisk, ved å kontakte oss."
+        },
+        {
+          "type": "paragraph",
+          "text": "Når vi bruker AI-leverandører fra tredjeparter, skjer det under avtalefestede garantier, og vi tillater ikke bevisst at de bruker personopplysningene dine til å trene offentlige modeller på en måte som kan identifisere deg."
+        }
+      ]
+    },
+    {
+      "id": "sharing",
+      "number": "5",
+      "title": "Deling og internasjonale overføringer",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Vi deler personopplysninger bare i den grad det er nødvendig for å drive, sikre og forbedre tjenesten eller for å oppfylle rettslige forpliktelser. Dette kan omfatte:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Betalingsbehandling: leverandører som behandler Visa- og Mastercard-betalinger og tilhørende tiltak mot svindel.",
+            "Hosting og IT: sikker skyinfrastruktur, databaser, innholdsleveransenettverk, lagring/sikkerhetskopier, overvåking og feilsporingstjenester.",
+            "AI og produktverktøy: leverandører av AI-modeller, plattformer for e-postlevering, verktøy for PDF-generering, analyseplattformer (aggregert eller pseudonymisert der det er mulig), A/B-testverktøy og lignende.",
+            "Support og kommunikasjon: kundeservicesystemer, supportverktøy, plattformer for undersøkelser og tilbakemeldinger.",
+            "Profesjonelle rådgivere og forsikringsselskaper: leverandører av juridiske tjenester, regnskap, regeletterlevelse og forsikring.",
+            "Selskapstransaksjoner: hvis vi blir involvert i en fusjon, et oppkjøp, en finansiering eller et salg av hele eller deler av virksomheten, kan personopplysninger overføres som del av transaksjonen, med egnede garantier."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Noen av tjenesteleverandørene våre befinner seg utenfor Storbritannia/EØS. Når personopplysninger overføres internasjonalt, iverksetter vi egnede garantier som:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "britiske adekvansbeslutninger (der mottakerlandet er anerkjent som å ha et tilstrekkelig beskyttelsesnivå);",
+            "britiske eller EUs standard personvernbestemmelser (SCC); og",
+            "ytterligere tekniske og organisatoriske tiltak der det er hensiktsmessig (for eksempel kryptering, tilgangskontroll, dataminimering)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Vi selger ikke personopplysningene dine."
+        }
+      ]
+    },
+    {
+      "id": "cookies",
+      "number": "6",
+      "title": "Informasjonskapsler og lignende teknologier",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Vi bruker informasjonskapsler og lignende teknologier (inkludert localStorage og sessionStorage) for å:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "drive tjenestens nødvendige funksjoner (for eksempel innloggingsøkter, CSRF-beskyttelse, sikkerhet og preferanser);",
+            "huske innstillingene dine (som valuta og preferanser for grensesnittet);",
+            "måle ytelse og pålitelighet;",
+            "der du samtykker, aktivere analyse og eventuelt markedsføring eller attribusjon."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nødvendige informasjonskapsler kreves for kjernefunksjonalitet og sikkerhet og kan ikke slås av via samtykkeverktøyene våre. Ikke-nødvendige informasjonskapsler (for eksempel visse analyse- eller markedsføringskapsler) brukes bare når du har gitt samtykke, og kan når som helst slås av eller justeres via banneret for informasjonskapsler eller innstillingssenteret (der det er tilgjengelig)."
+        },
+        {
+          "type": "paragraph",
+          "text": "For mer informasjon om hvilke typer informasjonskapsler vi bruker og hvordan du kan styre preferansene dine, se retningslinjene våre for informasjonskapsler (lenket i bunnteksten på nettstedet)."
+        }
+      ]
+    },
+    {
+      "id": "retention",
+      "number": "7",
+      "title": "Lagringstid",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Vi oppbevarer personopplysninger bare så lenge det er nødvendig for formålene som er beskrevet i denne erklæringen, eller så lenge loven krever det. Særlig gjelder:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Lommebok, tokens og transaksjoner: minst 24 måneder og opptil 6 år der det er nødvendig for tvister, skatt, regnskap eller bedriftsdokumentasjon.",
+            "Konto- og profilopplysninger: så lenge kontoen din er aktiv og i en rimelig periode etter avslutning (vanligvis opptil 24 måneder), med mindre en lengre periode kreves av juridiske, sikkerhetsmessige eller driftsmessige grunner.",
+            "Logger for kurs og AI-resultater: så lenge det er rimelig nødvendig for å levere biblioteket ditt, håndtere supporthenvendelser og forbedre innholdet, vanligvis i tråd med lagringstiden for kontoen.",
+            "Logger og sikkerhetstelemetri: vanligvis 6–24 måneder, avhengig av formål og risikonivå."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Der det er mulig, minimerer, pseudonymiserer eller anonymiserer vi opplysninger så tidlig som mulig, og sletter dem deretter på en sikker måte eller anonymiserer dem ugjenkallelig når de ikke lenger trengs."
+        }
+      ]
+    },
+    {
+      "id": "rights",
+      "number": "8",
+      "title": "Dine rettigheter",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Med forbehold om visse juridiske vilkår og begrensninger har du følgende rettigheter knyttet til personopplysningene dine:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Rett til innsyn – å få bekreftet om vi behandler personopplysninger om deg, og å motta en kopi.",
+            "Rett til retting – å be om at uriktige eller ufullstendige personopplysninger rettes.",
+            "Rett til sletting («retten til å bli glemt») – å be om at personopplysningene dine slettes når vi ikke lenger har rettslig grunnlag for å beholde dem.",
+            "Rett til begrensning av behandling – å be om at vi begrenser behandlingen i visse situasjoner (for eksempel mens vi kontrollerer om opplysningene er korrekte).",
+            "Rett til dataportabilitet – å motta visse personopplysninger i et strukturert, alminnelig brukt og maskinlesbart format og å overføre dem til en annen behandlingsansvarlig der det er teknisk mulig.",
+            "Rett til å protestere – å protestere, av grunner knyttet til din særlige situasjon, mot behandling basert på våre berettigede interesser, og å protestere når som helst mot behandling for direkte markedsføring.",
+            "Rett til å trekke tilbake samtykke – der behandlingen bygger på samtykket ditt, har du rett til å trekke det tilbake når som helst (for eksempel for markedsføringskommunikasjon eller særlige kategorier av opplysninger)."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Slik utøver du rettighetene dine:"
+        },
+        {
+          "type": "paragraph",
+          "text": "Du kan utøve rettighetene dine ved å sende e-post til info@cur-nova.com fra e-postadressen som er knyttet til kontoen din. Vi kan be om ytterligere informasjon for å bekrefte identiteten din."
+        },
+        {
+          "type": "paragraph",
+          "text": "Vi tar sikte på å svare innen én måned etter at vi har mottatt henvendelsen. Fristen kan forlenges med inntil to måneder ved komplekse eller mange henvendelser, og i så fall informerer vi deg om forlengelsen og årsaken."
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "number": "9",
+      "title": "Sikkerhet",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Vi har innført egnede tekniske og organisatoriske tiltak for å beskytte personopplysninger mot uautorisert tilgang, tap, misbruk eller endring. Disse tiltakene omfatter, der det er hensiktsmessig:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "tilgangskontroll, rollebaserte tillatelser og flerfaktorautentisering for administrative grensesnitt;",
+            "kryptering under overføring (HTTPS/TLS) og, der det er hensiktsmessig, kryptering ved lagring;",
+            "nettverkssegmentering, brannmurer og jevnlige sikkerhetskopier;",
+            "logging, overvåking og rutiner for hendelseshåndtering;",
+            "kontroll av leverandører og avtalefestede forpliktelser for databehandlere;",
+            "sikker programvareutvikling og endringshåndtering."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Ingen systemer kan garanteres å være 100 % sikre, men vi forbedrer kontrollene våre fortløpende og vil raskt undersøke og, der det kreves, varsle deg og relevante myndigheter om eventuelle brudd på personopplysningssikkerheten."
+        }
+      ]
+    },
+    {
+      "id": "children",
+      "number": "10",
+      "title": "Opplysninger om barn",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Tjenesten er beregnet på brukere over 18 år. Vi samler ikke bevisst inn personopplysninger fra barn. Hvis du mener at et barn har gitt oss personopplysninger, kontakt info@cur-nova.com slik at vi kan undersøke saken og, der det er aktuelt, slette opplysningene og avslutte en eventuell tilhørende konto."
+        }
+      ]
+    },
+    {
+      "id": "changes",
+      "number": "11",
+      "title": "Endringer i denne erklæringen",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Vi kan oppdatere denne personvernerklæringen fra tid til annen for å gjenspeile endringer i tjenesten, gjeldende lovgivning eller vår personvernpraksis."
+        },
+        {
+          "type": "paragraph",
+          "text": "Vesentlige endringer varsles på e-post (der det er hensiktsmessig) og/eller via en tydelig melding i tjenesten (for eksempel i dashbordet ditt). Oppdaterte versjoner gjelder fra datoen som er angitt øverst i erklæringen og gjelder fremover."
+        }
+      ]
+    },
+    {
+      "id": "contact",
+      "number": "12",
+      "title": "Kontakt og klager",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "Behandlingsansvarlig:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "CUR NOVA LTD",
+            "Dept 6831, 196 High Road",
+            "Wood Green, London",
+            "Storbritannia",
+            "N22 8HH",
+            "E-post (personvern): info@cur-nova.com"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Hvis du har spørsmål eller bekymringer om hvordan vi behandler personopplysningene dine, kontakt oss først, slik at vi kan forsøke å løse saken."
+        },
+        {
+          "type": "paragraph",
+          "text": "Hvis du ikke er fornøyd med svaret vårt, har du rett til å klage til Information Commissioner's Office (ICO) i Storbritannia. Hvis du er bosatt i EU/EØS, kan du også ha rett til å klage til den lokale tilsynsmyndigheten (i Norge: Datatilsynet)."
+        }
+      ]
+    }
+  ],
+  "cta": {
+    "title": "Spørsmål om personvernet ditt?",
+    "subtitle": "Kontakt oss på info@cur-nova.com hvis du har spørsmål om denne personvernerklæringen eller vil utøve rettighetene dine.",
+    "backToHome": "Tilbake til forsiden",
+    "contactPrivacy": "Kontakt oss om personvern"
+  }
+}

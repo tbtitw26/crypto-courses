@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
+import { useValueLabel, useMetaLabel, useIntlLocale } from '@/hooks/use-value-label'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
@@ -47,7 +48,10 @@ interface Transaction {
 
 export function DashboardPage() {
   const t = useTranslations('dashboard')
+  const metaLabel = useMetaLabel()
+  const intlLocale = useIntlLocale()
   const tCommon = useTranslations('common.buttons')
+  const valueLabel = useValueLabel()
   const { data: session, status } = useSession()
   const router = useRouter()
   const [currency, setCurrency] = useState('GBP')
@@ -88,7 +92,7 @@ export function DashboardPage() {
             return {
               type: tx.type,
               detail: tx.detail,
-              date: new Date(tx.date).toLocaleDateString('en-US', {
+              date: new Date(tx.date).toLocaleDateString(intlLocale, {
                 month: 'short',
                 day: 'numeric',
                 year: 'numeric',
@@ -155,7 +159,7 @@ export function DashboardPage() {
 
             return {
               type: 'ai' as const,
-              label: 'AI Strategy',
+              label: t('library.item.labels.aiStrategy'),
               title: strategy.title,
               status,
               market: Array.isArray(strategy.markets) ? strategy.markets.join(', ') : '',
@@ -186,7 +190,7 @@ export function DashboardPage() {
           const customCoursesData = await customCoursesResponse.json()
           customCourses = (customCoursesData.courses || []).map((course: any) => ({
             type: 'custom' as const,
-            label: 'Custom Course',
+            label: t('library.item.labels.customCourse'),
             title: course.title,
             status: course.status,
             market: course.market,
@@ -197,7 +201,7 @@ export function DashboardPage() {
 
         const courseItems: CourseItem[] = purchasedCourses.map((course: any) => ({
           type: 'course' as const,
-          label: 'Course',
+          label: t('library.item.labels.pdfCourse'),
           title: course.title,
           status: 'Completed',
           market: course.market,
@@ -434,11 +438,11 @@ export function DashboardPage() {
                               {item.label}
                             </span>
                             <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-medium text-text-muted">
-                              {item.market}
+                              {valueLabel(item.market)}
                             </span>
                             {item.level && (
                               <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-medium text-text-muted">
-                                {item.level}
+                                {valueLabel(item.level)}
                               </span>
                             )}
                           </div>
@@ -557,22 +561,22 @@ export function DashboardPage() {
                         <div className="flex items-center justify-between sm:hidden">
                           <div className="min-w-0">
                             <div className="flex items-center gap-2">
-                              <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-semibold text-text-muted">{tx.type}</span>
+                              <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-semibold text-text-muted">{valueLabel(tx.type)}</span>
                               <span className="text-xs text-text-muted">{tx.date}</span>
                             </div>
-                            <p className="mt-1 truncate text-sm text-text-main">{tx.detail}</p>
-                            {tx.meta && <p className="text-xs text-text-muted">{tx.meta}</p>}
+                            <p className="mt-1 truncate text-sm text-text-main">{valueLabel(tx.detail)}</p>
+                            {tx.meta && <p className="text-xs text-text-muted">{metaLabel(tx.meta)}</p>}
                           </div>
                           <span className="shrink-0 pl-3 text-right text-xs font-semibold text-text-main">{tx.amount}</span>
                         </div>
                         {/* Desktop layout */}
                         <div className="hidden sm:grid sm:grid-cols-12 sm:items-center sm:gap-4">
                           <div className="col-span-3">
-                            <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-semibold text-text-muted">{tx.type}</span>
+                            <span className="rounded border border-surface-200 bg-surface-50 px-1.5 py-0.5 text-[10px] font-semibold text-text-muted">{valueLabel(tx.type)}</span>
                           </div>
                           <div className="col-span-4 min-w-0">
-                            <p className="truncate text-sm text-text-main">{tx.detail}</p>
-                            {tx.meta && <p className="truncate text-xs text-text-muted">{tx.meta}</p>}
+                            <p className="truncate text-sm text-text-main">{valueLabel(tx.detail)}</p>
+                            {tx.meta && <p className="truncate text-xs text-text-muted">{metaLabel(tx.meta)}</p>}
                           </div>
                           <div className="col-span-2 text-xs text-text-muted">{tx.date}</div>
                           <div className="col-span-3 text-right text-sm font-semibold text-text-main">{tx.amount}</div>
@@ -601,7 +605,7 @@ export function DashboardPage() {
                   { href: '/courses', icon: BookOpen, label: t('sidebar.quickActions.browseAll') },
                   { href: '/learn?tab=custom', icon: FileText, label: t('sidebar.quickActions.requestCustom') },
                   { href: '/learn?tab=ai', icon: Cpu, label: t('sidebar.quickActions.generateAI') },
-                  { href: '/dashboard/settings', icon: Settings, label: 'Account settings' },
+                  { href: '/dashboard/settings', icon: Settings, label: t('extra.accountSettings') },
                 ].map(({ href, icon: Icon, label }) => (
                   <Link
                     key={href}

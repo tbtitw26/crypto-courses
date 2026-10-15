@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useTranslations } from 'next-intl'
 
 type ToastVariant = 'default' | 'success' | 'error' | 'info'
 
@@ -31,6 +32,7 @@ const variantStyles: Record<ToastVariant, string> = {
 }
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
+  const tUi = useTranslations('common.ui')
   const [toasts, setToasts] = useState<ToastRecord[]>([])
   const [isMounted, setIsMounted] = useState(false)
   const timers = useRef<Map<string, NodeJS.Timeout>>(new Map())
@@ -94,7 +96,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                     {toast.description && <p className="text-sm text-slate-300">{toast.description}</p>}
                   </div>
                   <button
-                    aria-label="Dismiss notification"
+                    aria-label={tUi('dismiss')}
                     onClick={() => removeToast(toast.id)}
                     className="rounded-full p-1 text-sm text-current transition hover:bg-slate-800"
                   >

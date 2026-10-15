@@ -3,6 +3,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import { useTranslations } from 'next-intl'
 import { getAvailableCurrenciesList } from '@/lib/currency-config'
 import { getUserCurrency, setUserCurrency } from '@/lib/currency-client'
 
@@ -77,6 +78,7 @@ export function CurrencySelector() {
 }
 
 export function CurrencySelectorMobile() {
+  const tMenu = useTranslations('common.menu')
   const [currentCurrency, setCurrentCurrency] = useState('GBP')
 
   useEffect(() => {
@@ -93,7 +95,7 @@ export function CurrencySelectorMobile() {
 
   return (
     <div>
-      <p className="px-2 text-xs font-bold uppercase tracking-wide text-text-muted mb-2">Currency</p>
+      <p className="px-2 text-xs font-bold uppercase tracking-wide text-text-muted mb-2">{tMenu('currency')}</p>
       <div className="flex gap-1.5">
         {Object.entries(allCurrencies).map(([code, currency]) => (
           <button

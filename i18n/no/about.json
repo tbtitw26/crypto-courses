@@ -1,0 +1,132 @@
+{
+  "breadcrumb": {
+    "home": "Hjem",
+    "about": "Om oss"
+  },
+  "hero": {
+    "title": "Cur Nova: fokusert opplæring for høyrisikomarkeder.",
+    "subtitle": "Cur Nova finnes for tradere som vil ha struktur, ikke hype. Vi lager opplæring i Forex, krypto og binære opsjoner for folk i EU, Storbritannia og UAE som tar risiko på alvor og foretrekker tydelig språk fremfor løfter.",
+    "badges": {
+      "regions": "Hovedregioner: EU · Storbritannia · UAE",
+      "markets": "Markeder: Forex · Krypto · Binære",
+      "format": "Format: PDF-kurs og AI-resultater"
+    },
+    "sideCard": {
+      "title": "Hva Cur Nova er – og hva det ikke er",
+      "subtitle": "Kort oversikt før du går i dybden.",
+      "whatWeAre": {
+        "label": "Hva vi er",
+        "items": [
+          "En ren opplæringsplattform for høyrisikomarkeder.",
+          "Strukturerte PDF-kurs etter nivå og marked.",
+          "Tilpassede kurs utformet etter dine opplysninger.",
+          "AI-genererte strategier som læringsverktøy."
+        ]
+      },
+      "whatWeAreNot": {
+        "label": "Hva vi ikke er",
+        "items": [
+          "Ikke en megler eller et prop-firma.",
+          "Ikke en signal-, kopihandels- eller PAMM/MAM-tjeneste.",
+          "Ikke en investeringsrådgiver eller fondsforvalter.",
+          "Vi lover ikke fortjeneste eller avkastning."
+        ]
+      }
+    }
+  },
+  "whoIsFor": {
+    "title": "Hvem Cur Nova faktisk er laget for.",
+    "subtitle": "Tre hovedprofiler – alle med samme krav: vilje til å ta risiko på alvor og unngå forventninger om rask rikdom.",
+    "profiles": [
+      {
+        "title": "Ny i høyrisikomarkeder",
+        "description": "Du har hørt om Forex, krypto eller binære opsjoner, men vil ha et strukturert grunnlag før du setter inn ekte penger. Du foretrekker å se risikoen tydelig fremfor å jage ekstreme skjermbilder."
+      },
+      {
+        "title": "Handler allerede, ustabile resultater",
+        "description": "Du har erfaring, kanskje til og med gode perioder – men også dype nedturer og følelsesdrevet overhandel. Du vil bygge opp grunnmuren på nytt: risiko, prosess og forventninger."
+      },
+      {
+        "title": "Systemorienterte elever",
+        "description": "Du liker tydelige rammeverk, sjekklister og journalføring. Du ser ikke etter noen som forteller deg hva du skal klikke på – du vil ha et system du kan analysere, tilpasse og gjøre til ditt eget."
+      }
+    ]
+  },
+  "howWeBuild": {
+    "title": "Slik er Cur Novas kurs og AI-resultater bygget opp.",
+    "subtitle": "Enten du velger et ferdig kurs, en tilpasset PDF eller en AI-strategi, er tanken den samme: strukturert, modulært innhold du kan komme tilbake til.",
+    "items": [
+      {
+        "title": "PDF-kurs etter marked og nivå",
+        "description": "Kursene er delt inn i moduler, nøkkelbegreper, strukturerte eksempler og sjekklister. Du kan skrive dem ut eller ha dem åpne i en PDF-leser mens du ser på diagrammer."
+      },
+      {
+        "title": "Tilpassede kurs etter dine opplysninger",
+        "description": "Når du bestiller et tilpasset kurs, bruker vi din erfaring, innskuddsstørrelse, risikotoleranse og dine mål til å strukturere en PDF som passer din situasjon."
+      },
+      {
+        "title": "AI-strategier som strukturerte eksempler",
+        "description": "AI-strategier lager en plan med oppsettkriterier, logikk for inn- og utgang og en risikosjekkliste. De er ikke handelssignaler – de er eksempler på hvordan en plan kan se ut når den er tydelig skrevet."
+      }
+    ]
+  },
+  "regions": {
+    "title": "Regioner og valutaer.",
+    "subtitle": "Cur Nova er utformet med bestemte regioner i tankene. Det bidrar til at eksempler og strukturer er mer realistiske for din situasjon.",
+    "items": [
+      {
+        "title": "Hovedregioner",
+        "description": "EU, Storbritannia og UAE er hovedfokus. Eksempler og strukturer er skrevet med disse regulatoriske og praktiske realitetene i tankene."
+      },
+      {
+        "title": "Valutaer og tokens",
+        "description": "I grensesnittet kan du bruke EUR, GBP og USD. Noen produkter kan låses opp med tokens, andre med direkte betaling. Tokens er en intern saldo, ikke et investeringsprodukt."
+      },
+      {
+        "title": "Språk",
+        "description": "Alle kurs, AI-resultater og juridiske dokumenter leveres på engelsk, slik at alle elever jobber ut fra nøyaktig samme kilde."
+      }
+    ]
+  },
+  "principles": {
+    "title": "Prinsippene som former Cur Nova.",
+    "subtitle": "Disse prinsippene er bevisst konservative. Målet er å holde opplæringen jordnær og unngå de vanlige markedsføringsmønstrene i høyrisikobransjen.",
+    "items": [
+      {
+        "title": "Kun opplæring",
+        "description": "Ingen signaler, ingen kopihandel, ingen forvaltede kontoer. Kurs og AI-planer skal hjelpe deg å tenke i strukturer, ikke ta beslutninger for deg."
+      },
+      {
+        "title": "Respekt for risiko",
+        "description": "Høyrisikoinstrumenter krever et forsiktig språk. Vi fremhever gjentatte ganger muligheten for betydelig eller fullstendig tap av kapital."
+      },
+      {
+        "title": "Prosess fremfor resultater",
+        "description": "Vi legger vekt på rutiner, journalføring og regelfølge. Resultater er et biprodukt av god prosess, ikke utgangsløftet."
+      },
+      {
+        "title": "Langsiktig perspektiv",
+        "description": "Kurs og AI-resultater er laget for å leses og gjennomgås på nytt over flere måneder, ikke konsumeres én gang og glemmes."
+      }
+    ]
+  },
+  "neverDoes": {
+    "title": "Hva Cur Nova aldri gjør.",
+    "subtitle": "Viktige grenser for hvordan plattformen drives.",
+    "items": [
+      "Gir ikke handelssignaler eller «kopier dette nå»-varsler.",
+      "Forvalter ikke handelskontoer eller kundemidler.",
+      "Driver ikke PAMM/MAM- eller kopihandelsprogrammer.",
+      "Garanterer ikke noe utfall, utbetaling, vinnerandel eller avkastning.",
+      "Markedsfører ikke kurs som en stabil inntektskilde.",
+      "Fremstiller ikke AI-strategier som automatiske systemer som genererer fortjeneste."
+    ],
+    "readMore": "Les hele risiko- og ansvarsfraskrivelsen"
+  },
+  "cta": {
+    "title": "Fortsett med strukturert opplæring, ikke signaler.",
+    "subtitle": "Velg et ferdig kurs, bestill en tilpasset PDF eller eksperimenter med en AI-strategi – alltid med forståelsen av at markedene har høy risiko og at utfall aldri er garantert.",
+    "browseCourses": "Utforsk kurs",
+    "requestCustom": "Bestill tilpasset kurs"
+  }
+}

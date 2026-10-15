@@ -5,11 +5,14 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth-config'
 import { SettingsPage } from '@/components/SettingsPage'
-import enDashboard from '@/i18n/en/dashboard.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: `${enDashboard.title} - Settings`,
-  description: enDashboard.settingsPage?.subtitle || 'Update your account settings and preferences',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: `${t('dashboard.title')} - ${t('common.meta.settings')}`,
+    description: t('dashboard.settingsPage.subtitle'),
+  }
 }
 
 export default async function DashboardSettingsPageRoute() {

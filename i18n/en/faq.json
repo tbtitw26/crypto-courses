@@ -123,6 +123,9 @@
     "subtitle": "If your question is not covered here, you can reach out to us. We will respond with clear, non-promotional information about how Cur Nova works.",
     "contact": "Contact support",
     "backToHome": "Back to home"
+  },
+  "extra": {
+    "searchPlaceholder": "Search questions...",
+    "noMatch": "No questions match your search."
   }
 }
-

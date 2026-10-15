@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
+import { useIntlLocale } from '@/hooks/use-value-label'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ShieldCheck, SlidersHorizontal } from 'lucide-react'
 
@@ -64,6 +65,7 @@ function persistConsent(state: ConsentState) {
 
 export function CookieConsentBanner() {
   const t = useTranslations('cookies.banner')
+  const intlLocale = useIntlLocale()
   const preferences = t.raw('preferences') as any
   const [isMounted, setIsMounted] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -212,7 +214,7 @@ export function CookieConsentBanner() {
                       <p className="text-sm text-slate-400">{t('preferences.description')}</p>
                       {consent.updatedAt && (
                         <p className="text-[11px] text-slate-500">
-                          {t('preferences.lastUpdated')}: {new Date(consent.updatedAt).toLocaleDateString()}
+                          {t('preferences.lastUpdated')}: {new Date(consent.updatedAt).toLocaleDateString(intlLocale)}
                         </p>
                       )}
                     </div>

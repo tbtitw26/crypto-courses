@@ -3,11 +3,14 @@
 import { Metadata } from 'next'
 import { Suspense } from 'react'
 import { TradeJournalPage } from '@/components/TradeJournalPage'
-import enLearn from '@/i18n/en/learn.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: (enLearn as any).tradeJournal?.hero?.title || 'Daily Trade Journal Principles',
-  description: (enLearn as any).tradeJournal?.hero?.subtitle || 'A journal is not about writing a novel after every trade. It is a compact way to track what you planned, what actually happened and how you behaved.',
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('learn.tradeJournal.hero.title'),
+    description: t('learn.tradeJournal.hero.subtitle'),
+  }
 }
 
 function TradeJournalPageFallback() {

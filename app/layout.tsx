@@ -5,6 +5,10 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { Providers } from './providers'
 import { LocaleProvider } from './locale-provider'
+import { cookies } from 'next/headers'
+import { defaultLocale, isLocale, LOCALE_COOKIE } from '@/i18n/config'
+import { getMessages } from '@/i18n/messages'
+import { getServerLocale, getServerTranslator } from '@/i18n/server'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -16,12 +20,15 @@ const spaceGrotesk = Space_Grotesk({
   variable: '--font-space-grotesk',
 })
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  const locale = getServerLocale()
+  return {
   title: {
     default: 'Cur Nova',
     template: '%s | Cur Nova',
   },
-  description: 'Cur Nova - Premium education for high-risk markets. Structured Forex, Crypto and Binary options courses.',
+  description: t('common.meta.description'),
   keywords: ['Cur Nova', 'Forex', 'Crypto', 'Binary options', 'Trading education'],
   authors: [{ name: 'Cur Nova Team' }],
   creator: 'Cur Nova',
@@ -41,33 +48,38 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: locale === 'no' ? 'nb_NO' : 'en_US',
     url: 'https://cur-nova.com',
     siteName: 'Cur Nova',
     title: 'Cur Nova',
-    description: 'Premium education for high-risk markets. Structured Forex, Crypto and Binary options courses.',
+    description: t('common.meta.ogDescription'),
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Cur Nova',
-    description: 'Premium education for high-risk markets. Structured Forex, Crypto and Binary options courses.',
+    description: t('common.meta.ogDescription'),
   },
   robots: {
     index: true,
     follow: true,
   },
+  }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const cookieLocale = cookies().get(LOCALE_COOKIE)?.value
+  const locale = isLocale(cookieLocale) ? cookieLocale : defaultLocale
+  const messages = await getMessages(locale)
+
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html lang={locale} dir="ltr" suppressHydrationWarning>
       <body className={`${inter.variable} ${spaceGrotesk.variable} flex min-h-screen flex-col font-body antialiased`}>
-        <LocaleProvider>
-          <Providers>
+        <LocaleProvider locale={locale}>
+          <Providers locale={locale} messages={messages}>
             <Header />
             <main className="flex-1 min-w-0">{children}</main>
             <Footer />

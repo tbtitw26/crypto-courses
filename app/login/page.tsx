@@ -5,11 +5,14 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { authOptions } from '@/lib/auth-config'
 import { LoginPage } from '@/components/LoginPage'
-import enAuth from '@/i18n/en/auth.json'
+import { getServerTranslator } from '@/i18n/server'
 
-export const metadata: Metadata = {
-  title: enAuth.login.title,
-  description: enAuth.login.subtitle,
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getServerTranslator()
+  return {
+    title: t('auth.login.title'),
+    description: t('auth.login.subtitle'),
+  }
 }
 
 export default async function LoginPageRoute() {

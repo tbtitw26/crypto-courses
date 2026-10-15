@@ -22,22 +22,25 @@ import {
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
-const contactFormSchema = z.object({
-  name: z.string().min(1, 'Name is required').max(200),
-  email: z.string().email('Invalid email address').max(200),
-  region: z.string().min(1, 'Region is required'),
-  topic: z.string().min(1, 'Topic is required'),
-  accountId: z.string().max(100).optional(),
-  message: z.string().min(10, 'Message must be at least 10 characters').max(5000),
-  consent: z.boolean().refine((val) => val === true, {
-    message: 'You must agree to the terms',
-  }),
-})
+const makeContactFormSchema = (tv: (key: string) => string) =>
+  z.object({
+    name: z.string().min(1, tv('nameRequired')).max(200),
+    email: z.string().email(tv('invalidEmail')).max(200),
+    region: z.string().min(1, tv('regionRequired')),
+    topic: z.string().min(1, tv('topicRequired')),
+    accountId: z.string().max(100).optional(),
+    message: z.string().min(10, tv('messageMin')).max(5000),
+    consent: z.boolean().refine((val) => val === true, {
+      message: tv('termsRequired'),
+    }),
+  })
 
-type ContactFormData = z.infer<typeof contactFormSchema>
+type ContactFormData = z.infer<ReturnType<typeof makeContactFormSchema>>
 
 export function ContactPage() {
   const t = useTranslations('contact')
+  const tv = useTranslations('common.validation')
+  const tUi = useTranslations('common.ui')
   const tBreadcrumb = useTranslations('courses.breadcrumb')
   const { showToast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -48,7 +51,7 @@ export function ContactPage() {
     formState: { errors },
     reset,
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactFormSchema),
+    resolver: zodResolver(makeContactFormSchema(tv)),
     defaultValues: {
       consent: false,
     },
@@ -245,7 +248,7 @@ export function ContactPage() {
                   >
                     <option value="">{t('form.fields.region.placeholder')}</option>
                     {regions.map((r) => (
-                      <option key={r} value={r}>{r}</option>
+                      <option key={r} value={r}>{t(`options.regions.${r}`)}</option>
                     ))}
                   </select>
                 </div>
@@ -266,7 +269,7 @@ export function ContactPage() {
                   >
                     <option value="">{t('form.fields.topic.placeholder')}</option>
                     {topics.map((tp) => (
-                      <option key={tp} value={tp}>{tp}</option>
+                      <option key={tp} value={tp}>{t(`options.topics.${tp}`)}</option>
                     ))}
                   </select>
                 </div>
@@ -401,7 +404,7 @@ export function ContactPage() {
 
         {/* Education disclaimer */}
         <p className="mt-8 pb-8 text-center text-xs leading-relaxed text-text-muted">
-          Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.
+          {tUi('educationLine')}
         </p>
       </div>
     </div>
