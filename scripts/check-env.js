@@ -21,6 +21,18 @@ const requiredEnvVars = {
   // TransferMit Payment Gateway (legacy)
   TM_API_KEY: 'TransferMit API key',
   TM_SIGNING_KEY: 'TransferMit signing key for webhook verification',
+
+  // Madfin Gateway API
+  MADFIN_API_KEY: 'Madfin Shop API Key (Bearer token)',
+  MADFIN_SIGNING_KEY: 'Madfin Shop Signing Key for webhook HMAC-SHA256 verification',
+  MADFIN_API_URL: 'Madfin API base URL (defaults to https://engine-sandbox.madfin.tech)',
+
+  // Corefy / Sterling Pay Gateway
+  COREFY_ACCOUNT_ID: 'Corefy / Sterling Commerce Account ID (e.g. coma_...)',
+  COREFY_API_KEY: 'Corefy / Sterling Private API Key',
+  COREFY_WEBHOOK_SECRET: 'Corefy signature secret key for webhook verification',
+  COREFY_API_URL: 'Corefy base API URL (defaults to https://api.sterling-pay.com)',
+  COREFY_SERVICE_CODE: 'Corefy service code (default: auto)',
   
   // SMTP Email
   SMTP_HOST: 'SMTP server hostname',
@@ -41,6 +53,16 @@ const optionalEnvVars = [
   'TM_API_URL',
   'TM_API_KEY',
   'TM_SIGNING_KEY',
+  'MADFIN_API_URL',
+  'MADFIN_API_KEY',
+  'MADFIN_SIGNING_KEY',
+  'PAYMENT_PROVIDER',
+  'COREFY_API_URL',
+  'COREFY_ACCOUNT_ID',
+  'COREFY_API_KEY',
+  'COREFY_WEBHOOK_SECRET',
+  'COREFY_SERVICE_CODE',
+  'COREFY_TEST_MODE',
   'PUPPETEER_EXECUTABLE_PATH',
   'SMTP_FROM_NAME',
 ]

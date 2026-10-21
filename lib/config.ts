@@ -82,6 +82,23 @@ export const config = {
     apiKey: process.env.TM_API_KEY || '',
     signingKey: process.env.TM_SIGNING_KEY || '',
   },
+  madfin: {
+    apiUrl: process.env.MADFIN_API_URL || 'https://engine-sandbox.madfin.tech',
+    apiKey: process.env.MADFIN_API_KEY || '',
+    signingKey: process.env.MADFIN_SIGNING_KEY || '',
+  },
+  corefy: {
+    apiUrl: process.env.COREFY_API_URL || 'https://api.sterling-pay.com',
+    accountId: process.env.COREFY_ACCOUNT_ID || '',
+    apiKey: process.env.COREFY_API_KEY || '',
+    webhookSecret: process.env.COREFY_WEBHOOK_SECRET || '',
+    serviceCode: process.env.COREFY_SERVICE_CODE || 'auto',
+    testMode:
+      process.env.COREFY_TEST_MODE === 'true' ||
+      process.env.COREFY_TEST_MODE === '1' ||
+      (!process.env.COREFY_TEST_MODE && process.env.NODE_ENV !== 'production'),
+  },
+  paymentProvider: (process.env.PAYMENT_PROVIDER || 'corefy').toLowerCase(),
   nextauth: {
     secret: process.env.NEXTAUTH_SECRET || '',
     url: process.env.NEXTAUTH_URL || 'http://localhost:3000',
