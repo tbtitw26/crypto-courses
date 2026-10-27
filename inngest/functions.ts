@@ -838,7 +838,7 @@ export const watchdogFailStuckJobs = inngest.createFunction(
 export const sendCustomCourseDelayedEmail = inngest.createFunction(
   {
     id: "send-custom-course-delayed-email",
-    concurrency: [{ limit: 10 }], // Allow multiple emails to be sent concurrently
+    concurrency: [{ limit: 5 }], // Inngest plan allows at most 5
   },
   { event: "custom_course/email.delayed" },
   async ({ event, step }) => {
