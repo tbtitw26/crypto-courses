@@ -100,12 +100,12 @@
       "calculator": {
         "title": "Priskalkulator",
         "total": "Total kostnad",
-        "tokens": "tokens",
+        "tokens": "bruksenheter",
         "balance": "Din saldo",
         "insufficientBalance": {
           "title": "Ikke nok saldo",
-          "description": "Du har ikke nok tokens til å kjøpe dette tilpassede kurset.",
-          "message": "Du trenger flere tokens for å kjøpe dette kurset.",
+          "description": "Du har ikke nok bruksenheter til å kjøpe dette tilpassede kurset.",
+          "message": "Du trenger flere bruksenheter for å kjøpe dette kurset.",
           "topUp": "Fyll på saldo"
         }
       }
@@ -127,9 +127,9 @@
       },
       "pricing": {
         "title": "Slik fungerer prisingen",
-        "description": "Et tilpasset kurs bruker flere tokens enn én ferdig PDF. I produksjon vil prisen fastsettes per marked og dybde. Inntil videre kan du se på det som et eget produkt med egen pris i tokens og ved direkte betaling.",
+        "description": "Et tilpasset kurs bruker flere bruksenheter enn én ferdig PDF. I produksjon vil prisen fastsettes per marked og dybde. Inntil videre kan du se på det som et eget produkt med egen pris i bruksenheter og ved direkte betaling.",
         "points": {
-          "tokens": "Betal med tokens fra saldoen din.",
+          "tokens": "Betal med bruksenheter fra saldoen din.",
           "currencies": "Eller bruk EUR, GBP eller USD i kassen."
         },
         "badge": "Kun eksempel – endelig pris ikke fastsatt"
@@ -138,7 +138,7 @@
   },
   "ai": {
     "title": "AI-strategibygger",
-    "description": "Få en strukturert opplæringsplan med beskrivelse av oppsett, logikk for inn- og utgang, risikorammeverk og en sjekkliste – generert på sekunder ut fra profilen din.",
+    "description": "Få en strukturert opplæringsguide om hvordan oppsett beskrives, generelle beslutningskriterier, risikostyringsprinsipper og en sjekkliste for egenvurdering – generert i løpet av få minutter ut fra læringsprofilen du oppgir. Den inneholder aldri handelsanbefalinger.",
     "form": {
       "presets": {
         "label": "Hurtigvalg",
@@ -171,7 +171,7 @@
       },
       "detail": {
         "label": "Detaljnivå",
-        "hint": "Høyere detaljnivå bruker flere tokens",
+        "hint": "Høyere detaljnivå bruker flere bruksenheter",
         "quick": "Kort sammendrag",
         "standard": "Standardplan",
         "deep": "Grundig guide"
@@ -187,12 +187,12 @@
       "calculator": {
         "title": "Priskalkulator",
         "total": "Total kostnad",
-        "tokens": "tokens",
+        "tokens": "bruksenheter",
         "balance": "Din saldo",
         "insufficientBalance": {
           "title": "Ikke nok saldo",
-          "description": "Du har ikke nok tokens til å generere denne AI-strategien.",
-          "message": "Du trenger flere tokens for å generere denne strategien.",
+          "description": "Du har ikke nok bruksenheter til å generere denne AI-strategien.",
+          "message": "Du trenger flere bruksenheter for å generere denne strategien.",
           "topUp": "Fyll på saldo"
         }
       }
@@ -203,19 +203,19 @@
       "placeholder": "Plassholder · ingen ekte AI her",
       "sections": {
         "setup": "1. Beskrivelse av oppsett:",
-        "entry": "2. Logikk for inn- og utgang:",
+        "entry": "2. Beslutningskriterier (opplæring):",
         "risk": "3. Risikorammeverk:",
         "checklist": "4. Sjekkliste:"
       },
       "setupDesc": "Tydelig forklaring av mønsteret eller betingelsen du ba om, inkludert tidsrammer og instrumenter.",
-      "entryDesc": "Regler for når du kan vurdere å gå inn og ut, knyttet til risikoen din per handel og maks antall handler per dag.",
+      "entryDesc": "Generelle spørsmål tradere vurderer før de handler, knyttet til risikoen din per handel og daglige grenser – aldri konkrete inn- eller utganger eller kursnivåer.",
       "riskDesc": "Veiledning om plassering av stopp, delvise gevinstsikringer og når du ikke bør handle (for eksempel rundt nyheter eller lav likviditet).",
       "checklistDesc": "En enkel liste du kan lese før hver mulig handel for å unngå følelsesstyrte beslutninger."
     },
     "sidebar": {
       "depth": {
         "badge": "Justerbar dybde",
-        "description": "Du kan be om en rask oversikt eller en dypere, mer detaljert plan. I produksjon vil tokenkostnaden avhenge av dybden og kompleksiteten du velger."
+        "description": "Du kan be om en rask oversikt eller en dypere, mer detaljert plan. I produksjon vil bruksenhetskostnaden avhenge av dybden og kompleksiteten du velger."
       },
       "courses": {
         "title": "Hvordan AI-strategier henger sammen med kursene",
@@ -1113,5 +1113,17 @@
     "startFailed": "Kunne ikke starte genereringen",
     "processing": "Behandler…",
     "generating": "Genererer…"
+  },
+  "order": {
+    "title": "Din bestilling",
+    "product": "Produkt",
+    "customProduct": "Tilpasset kurs",
+    "aiProduct": "AI-strategi (opplæring)",
+    "format": "Format",
+    "formatPdf": "PDF – på e-post og i dashbordet",
+    "price": "Pris",
+    "delivery": "Levering",
+    "customDelivery": "Innen 2–4 dager (48–96 timer)",
+    "aiDelivery": "Vanligvis innen 5 minutter"
   }
 }

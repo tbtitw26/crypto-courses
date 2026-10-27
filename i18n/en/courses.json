@@ -7,7 +7,7 @@
   },
   "meta": {
     "coursesAvailable": "courses available · more in preparation.",
-    "paymentInfo": "Pay with tokens or directly in EUR, GBP or USD."
+    "paymentInfo": "Pay with Usage Units or directly in EUR, GBP or USD."
   },
   "filters": {
     "label": "Filters",
@@ -55,7 +55,7 @@
     "format": "PDF",
     "download": "download",
     "educationOnly": "Education only · no signals",
-    "payWithTokens": "pay with tokens or card",
+    "payWithTokens": "pay with Usage Units or card",
     "viewCourse": "View course",
     "addToCart": "Add to cart"
   },
@@ -78,9 +78,9 @@
     "pricing": {
       "courseAccess": "Course access",
       "immediateDownload": "Immediate PDF download after payment.",
-      "buyWithTokens": "Buy with tokens",
+      "buyWithTokens": "Buy with Usage Units",
       "buyWithCard": "Buy with card",
-      "paymentNote": "You can use existing balance or add tokens at checkout. Card payments support EUR, GBP and USD.",
+      "paymentNote": "You can use existing balance or add Usage Units at checkout. Card payments support EUR, GBP and USD.",
       "educationDisclaimer": "Education only. This course does not contain trading signals or promises of performance.",
       "beforeBuying": "Before buying, please note:",
       "riskNote1": "Trading Forex is high risk and may lead to total loss of capital.",
@@ -191,7 +191,7 @@
       ],
       "hours": "{min}–{max} hours",
       "selfPaced": "self-paced",
-      "tokens": "tokens",
+      "tokens": "Usage Units",
       "learn": [
         "How the {market} market is structured and why that matters.",
         "How to define and calculate risk per trade before pressing any button.",
@@ -219,7 +219,7 @@
     "loading": "Loading catalog",
     "resultCount": "{shown} of {total}",
     "badge": "Course catalog",
-    "subtitleExtra": "Browse structured PDFs by market and level, then use tokens or checkout to access your course.",
+    "subtitleExtra": "Browse structured PDFs by market and level, then use Usage Units or checkout to access your course.",
     "downloadable": "Downloadable course materials",
     "differentPath": "Need a different path?",
     "differentPathTitle": "Custom and AI options sit beside the catalog.",

@@ -31,6 +31,7 @@ import { calculateCustomCoursePrice } from '@/lib/custom-course-pricing'
 import { calculateAIStrategyPrice } from '@/lib/ai-strategy-pricing'
 import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
+import { EMPTY_CONSENT, OrderConsentFields, OrderFacts, consentPayload, isConsentComplete } from '@/components/OrderConsentFields'
 
 type TabKey = 'custom' | 'ai'
 
@@ -217,6 +218,7 @@ function CustomCourseForm() {
   const tAuth = useTranslations('learn.auth')
   const tCommon = useTranslations('common.auth')
   const tUi = useTranslations('learn.ui')
+  const tOrder = useTranslations('learn.order')
 
   const jobIdFromUrl = searchParams.get('jobId') || undefined
   const [activeJobs, setActiveJobs] = useState<Array<{ jobId: string; language: string }>>([])
@@ -241,7 +243,7 @@ function CustomCourseForm() {
   const [notes, setNotes] = useState('')
   const selectedLanguages: string[] = ['en']
   const [consentEducation, setConsentEducation] = useState(false)
-  const [consentTerms, setConsentTerms] = useState(false)
+  const [orderConsent, setOrderConsent] = useState(EMPTY_CONSENT)
   const [isLoading, setIsLoading] = useState(false)
   const [currency, setCurrency] = useState('GBP')
   const [showNewGenerationConfirm, setShowNewGenerationConfirm] = useState(false)
@@ -325,7 +327,7 @@ function CustomCourseForm() {
       return
     }
 
-    if (!experience || markets.length === 0 || !deposit || !riskTolerance || !tradingStyle || !goals || selectedLanguages.length === 0 || !consentEducation || !consentTerms) {
+    if (!experience || markets.length === 0 || !deposit || !riskTolerance || !tradingStyle || !goals || selectedLanguages.length === 0 || !consentEducation || !isConsentComplete(orderConsent, true)) {
       showToast({
         title: tUi('fillRequired'),
         variant: 'error',
@@ -405,6 +407,7 @@ function CustomCourseForm() {
           additionalNotes: notes || (platformsText ? `Platforms: ${platformsText}` : undefined),
           languages: selectedLanguages,
           tokensCost: totalTokens,
+          consent: consentPayload(orderConsent, true),
         }),
       })
 
@@ -608,6 +611,21 @@ function CustomCourseForm() {
             </div>
           </FormSection>
 
+          {/* Order summary */}
+          <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
+              {tOrder('title')}
+            </p>
+            <OrderFacts
+              rows={[
+                { label: tOrder('product'), value: tOrder('customProduct') },
+                { label: tOrder('format'), value: tOrder('formatPdf') },
+                { label: tOrder('price'), value: `${totalTokens.toLocaleString('en-US')} ${tForm('calculator.tokens')} ≈ ${formattedPrice} ${currency}` },
+                { label: tOrder('delivery'), value: tOrder('customDelivery') },
+              ]}
+            />
+          </div>
+
           {/* Consent */}
           <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
             <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
@@ -623,31 +641,17 @@ function CustomCourseForm() {
                 />
                 <span>{tForm('consents.education')}</span>
               </label>
-              <label className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary">
-                <input
-                  type="checkbox"
-                  checked={consentTerms}
-                  onChange={(e) => setConsentTerms(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-surface-400 accent-brand-600"
-                />
-                <span>
-                  {tForm('consents.termsBefore')}{' '}
-                  <Link href="/terms" className="font-medium text-brand-700 underline hover:text-brand-800">
-                    {tForm('consents.termsLink')}
-                  </Link>{' '}
-                  {tForm('consents.termsAnd')}{' '}
-                  <Link href="/risk-and-disclaimer" className="font-medium text-brand-700 underline hover:text-brand-800">
-                    {tForm('consents.riskLink')}
-                  </Link>
-                  .
-                </span>
-              </label>
+              <OrderConsentFields value={orderConsent} onChange={setOrderConsent} requireImmediateSupply />
             </div>
           </div>
 
           {/* Submit area */}
           <div className="flex flex-wrap items-center gap-3 pt-1">
-            <button type="submit" disabled={isGenerateDisabled} className="btn-primary">
+            <button
+              type="submit"
+              disabled={isGenerateDisabled || !consentEducation || !isConsentComplete(orderConsent, true)}
+              className="btn-primary"
+            >
               {isLoading ? (
                 <span className="inline-flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -808,6 +812,7 @@ function AIStrategyForm() {
   const tAuth = useTranslations('learn.auth')
   const tCommon = useTranslations('common.auth')
   const tUi = useTranslations('learn.ui')
+  const tOrder = useTranslations('learn.order')
 
   const jobIdFromUrl = searchParams.get('jobId') || undefined
   const [activeJobs, setActiveJobs] = useState<Array<{ jobId: string; language: string }>>([])
@@ -831,7 +836,7 @@ function AIStrategyForm() {
   const [detailLevel, setDetailLevel] = useState<'quick' | 'standard' | 'deep' | ''>('')
   const selectedLanguages: Array<'en'> = ['en']
   const [consent, setConsent] = useState(false)
-  const [consentTerms, setConsentTerms] = useState(false)
+  const [orderConsent, setOrderConsent] = useState(EMPTY_CONSENT)
   const [experienceYears, setExperienceYears] = useState<'0' | '1-2' | '3+' | ''>('')
   const [depositBudget, setDepositBudget] = useState<
     '€500 - €1,000' | '€1,000 - €5,000' | '€5,000 - €20,000' | '€20,000+' | ''
@@ -948,7 +953,7 @@ function AIStrategyForm() {
       !detailLevel ||
       selectedLanguages.length === 0 ||
       !consent ||
-      !consentTerms ||
+      !isConsentComplete(orderConsent, true) ||
       !experienceYears ||
       !depositBudget ||
       !riskTolerance ||
@@ -997,6 +1002,7 @@ function AIStrategyForm() {
           ...(detailLevel && { detailLevel }),
           languages: selectedLanguages,
           tokensCost: totalTokens,
+          consent: consentPayload(orderConsent, true),
         }),
       })
 
@@ -1179,6 +1185,21 @@ function AIStrategyForm() {
             </div>
           </FormSection>
 
+          {/* Order summary */}
+          <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
+              {tOrder('title')}
+            </p>
+            <OrderFacts
+              rows={[
+                { label: tOrder('product'), value: tOrder('aiProduct') },
+                { label: tOrder('format'), value: tOrder('formatPdf') },
+                { label: tOrder('price'), value: `${totalTokens.toLocaleString('en-US')} ${tForm('calculator.tokens')} ≈ ${formattedPrice} ${currency}` },
+                { label: tOrder('delivery'), value: tOrder('aiDelivery') },
+              ]}
+            />
+          </div>
+
           {/* Consent */}
           <div className="rounded-xl border border-surface-300 bg-white p-5 shadow-card">
             <p className="mb-3 text-xs font-bold uppercase tracking-wider text-text-muted">
@@ -1194,25 +1215,7 @@ function AIStrategyForm() {
                 />
                 <span>{tForm('consent')}</span>
               </label>
-              <label className="flex items-start gap-2.5 text-sm leading-relaxed text-text-secondary">
-                <input
-                  type="checkbox"
-                  checked={consentTerms}
-                  onChange={(e) => setConsentTerms(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-surface-400 accent-brand-600"
-                />
-                <span>
-                  {tForm('consentTermsBefore')}{' '}
-                  <Link href="/terms" className="font-medium text-brand-700 underline hover:text-brand-800">
-                    {tForm('consentTermsLink')}
-                  </Link>{' '}
-                  {tForm('consentTermsAnd')}{' '}
-                  <Link href="/risk-and-disclaimer" className="font-medium text-brand-700 underline hover:text-brand-800">
-                    {tForm('consentRiskLink')}
-                  </Link>
-                  .
-                </span>
-              </label>
+              <OrderConsentFields value={orderConsent} onChange={setOrderConsent} requireImmediateSupply />
             </div>
           </div>
 
@@ -1221,7 +1224,7 @@ function AIStrategyForm() {
             <button
               type="submit"
               className="btn-primary"
-              disabled={!consent || !consentTerms || isGenerateDisabled}
+              disabled={!consent || !isConsentComplete(orderConsent, true) || isGenerateDisabled}
             >
               {isLoading ? (
                 <span className="inline-flex items-center gap-2">

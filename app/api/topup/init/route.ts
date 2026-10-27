@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { config } from '@/lib/config'
 import { createHostedTopupSession } from '@/lib/topup-payment-flow'
+import { CONSENT_REQUIRED_ERROR, recordOrderConsent, topupConsentSchema } from '@/lib/consent'
+import { LOCALE_COOKIE } from '@/i18n/config'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -21,6 +23,14 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
+
+    // Usage Units purchase: Terms & Refund Policy only. This is not consent to supply any product.
+    if (!topupConsentSchema.safeParse(body?.consent).success) {
+      return NextResponse.json(
+        { ...CONSENT_REQUIRED_ERROR, message: 'Please accept the Terms & Refund Policy before paying.' },
+        { status: 400 }
+      )
+    }
     const requestOrigin = request.nextUrl.origin
     const isLocalRequest = /localhost|127\.0\.0\.1|0\.0\.0\.0/i.test(requestOrigin)
     const baseUrl = isLocalRequest ? requestOrigin : config.site.baseUrl || requestOrigin
@@ -34,6 +44,15 @@ export async function POST(request: NextRequest) {
         request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
         request.headers.get('x-real-ip') ||
         null,
+      recordConsent: (referenceId) =>
+        recordOrderConsent({
+          userId,
+          orderType: 'topup',
+          orderRef: referenceId,
+          immediateSupply: false,
+          locale: request.cookies.get(LOCALE_COOKIE)?.value,
+          request,
+        }),
     })
 
     return NextResponse.json(result)

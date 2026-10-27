@@ -66,7 +66,7 @@
       },
       {
         "title": "AI-strategier som strukturerte eksempler",
-        "description": "AI-strategier lager en plan med oppsettkriterier, logikk for inn- og utgang og en risikosjekkliste. De er ikke handelssignaler – de er eksempler på hvordan en plan kan se ut når den er tydelig skrevet."
+        "description": "AI-strategier lager en opplæringsguide med generelle oppsettkriterier, beslutningsprinsipper og en risikosjekkliste. De er ikke handelssignaler – de er eksempler på hvordan en plan kan se ut når den er tydelig skrevet."
       }
     ]
   },
@@ -79,8 +79,8 @@
         "description": "EU, Storbritannia og UAE er hovedfokus. Eksempler og strukturer er skrevet med disse regulatoriske og praktiske realitetene i tankene."
       },
       {
-        "title": "Valutaer og tokens",
-        "description": "I grensesnittet kan du bruke EUR, GBP og USD. Noen produkter kan låses opp med tokens, andre med direkte betaling. Tokens er en intern saldo, ikke et investeringsprodukt."
+        "title": "Valutaer og bruksenheter",
+        "description": "I grensesnittet kan du bruke EUR, GBP og USD. Noen produkter kan låses opp med bruksenheter, andre med direkte betaling. Bruksenheter er en intern saldo, ikke et investeringsprodukt."
       },
       {
         "title": "Språk",

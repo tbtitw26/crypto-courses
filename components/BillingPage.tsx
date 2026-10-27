@@ -20,13 +20,14 @@ import {
   Clock,
   CheckCircle2,
   XCircle,
+  RotateCcw,
   Loader2,
 } from 'lucide-react'
 import { DashboardNavigation } from './DashboardNavigation'
 import { calculatePriceForTokens, formatPrice, convertAmount, calculateTokens } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 
-type TransactionStatus = 'Completed' | 'Pending' | 'Failed'
+type TransactionStatus = 'Completed' | 'Pending' | 'Failed' | 'Processing' | 'Delayed' | 'Cancelled' | 'Refunded'
 
 interface Transaction {
   date: string
@@ -53,10 +54,18 @@ function StatusPill({ status, t }: { status: TransactionStatus; t: any }) {
       </span>
     )
   }
-  if (status === 'Pending') {
+  if (status === 'Pending' || status === 'Processing' || status === 'Delayed') {
     return (
       <span className={`${base} border-amber-200 bg-amber-50 text-amber-700`}>
         <Clock className="h-3 w-3" />
+        <span>{t(`status.${status.toLowerCase()}`)}</span>
+      </span>
+    )
+  }
+  if (status === 'Cancelled' || status === 'Refunded') {
+    return (
+      <span className={`${base} border-surface-300 bg-surface-100 text-text-secondary`}>
+        <RotateCcw className="h-3 w-3" />
         <span>{t(`status.${status.toLowerCase()}`)}</span>
       </span>
     )

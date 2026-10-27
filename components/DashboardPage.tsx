@@ -22,6 +22,17 @@ import {
 import { DashboardNavigation } from './DashboardNavigation'
 import { calculatePriceForTokens, formatPrice, convertAmount } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
+import { OrderStatusBadge } from './OrderStatusBadge'
+import type { OrderStatus } from '@/lib/order-status'
+
+// Delayed, cancelled and refunded orders keep their order status in the library list
+const RESOLUTION_STATUSES: OrderStatus[] = ['delayed', 'cancelled', 'refunded']
+
+function toLibraryStatus(status: OrderStatus): string {
+  if (status === 'ready') return 'Completed'
+  if (status === 'processing') return 'Processing'
+  return status
+}
 
 interface CourseItem {
   type: 'course' | 'ai' | 'custom'
@@ -147,12 +158,7 @@ export function DashboardPage() {
           })
 
           aiStrategies = strategiesArray.map((strategy: any) => {
-            const status =
-              strategy.status === 'ready'
-                ? 'Completed'
-                : strategy.status === 'failed'
-                ? 'Failed'
-                : 'Processing'
+            const status = toLibraryStatus(strategy.status)
 
             const downloadUrl = strategy.pdfLinks?.[0]?.url ||
               (status === 'Completed' ? `/api/download/ai-strategy/${strategy.id}` : null)
@@ -192,7 +198,7 @@ export function DashboardPage() {
             type: 'custom' as const,
             label: t('library.item.labels.customCourse'),
             title: course.title,
-            status: course.status,
+            status: toLibraryStatus(course.status),
             market: course.market,
             level: course.level,
             id: course.id,
@@ -459,6 +465,9 @@ export function DashboardPage() {
                                 <Clock className="h-3 w-3" />
                                 {t('library.item.status.inprogress')}
                               </span>
+                            )}
+                            {RESOLUTION_STATUSES.includes(item.status as OrderStatus) && (
+                              <OrderStatusBadge status={item.status as OrderStatus} />
                             )}
                             {item.status === 'Ready' && (
                               <span className="inline-flex items-center gap-1 text-brand-600">

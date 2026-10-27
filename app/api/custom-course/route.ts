@@ -8,6 +8,10 @@ import { getModelForFeature } from '@/lib/openai/client'
 import { z } from 'zod'
 import { inngest } from '@/inngest/client'
 import type { CustomCourseRequestedEvent } from '@/inngest/types'
+import { CONSENT_REQUIRED_ERROR, productConsentSchema, recordOrderConsent } from '@/lib/consent'
+import { CUSTOM_COURSE_DELIVERY_HOURS, formatOrderRef } from '@/lib/order-status'
+import { sendPurchaseConfirmationEmail } from '@/lib/email'
+import { LOCALE_COOKIE } from '@/i18n/config'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -28,6 +32,7 @@ const customCourseSchema = z.object({
   additionalNotes: z.string().optional(),
   languages: z.array(z.enum(['en', 'ar'])).min(1).max(2), // Required: at least 1, max 2 languages
   tokensCost: z.number().int().min(BASE_PRICE_TOKENS).optional(), // Optional for backward compatibility, but should be provided
+  consent: productConsentSchema.optional(),
 })
 
 export async function POST(request: NextRequest) {
@@ -60,13 +65,17 @@ export async function POST(request: NextRequest) {
 
     const data = validationResult.data
 
+    if (!data.consent) {
+      return NextResponse.json(CONSENT_REQUIRED_ERROR, { status: 400 })
+    }
+
     // Get tokens cost from request, or use base price as fallback
     const tokensCost = data.tokensCost || BASE_PRICE_TOKENS
 
     // Validate that tokensCost is at least base price (security check)
     if (tokensCost < BASE_PRICE_TOKENS) {
       return NextResponse.json(
-        { error: 'Invalid tokens cost', message: `Tokens cost must be at least ${BASE_PRICE_TOKENS}` },
+        { error: 'Invalid Usage Units cost', message: `Usage Units cost must be at least ${BASE_PRICE_TOKENS}` },
         { status: 400 }
       )
     }
@@ -85,13 +94,16 @@ export async function POST(request: NextRequest) {
     const balance = Number(user.balance)
     if (balance < tokensCost) {
       return NextResponse.json(
-        { error: 'Insufficient token balance', required: tokensCost, current: balance },
+        { error: 'Insufficient Usage Balance', required: tokensCost, current: balance },
         { status: 402 }
       )
     }
 
-    // Calculate estimated ready time (for testing: set to now, will be changed back to 48-96 hours later)
-    const estimatedReadyAt = new Date(Date.now() + 5 * 60 * 1000) // For testing: 5 minutes from now (was: 72 hours)
+    // Delivery date: a random point 48–96 hours from now. The PDF is generated straight away,
+    // but the dashboard and the delivery email only release it at this time.
+    const { min, max } = CUSTOM_COURSE_DELIVERY_HOURS
+    const deliveryHours = min + Math.random() * (max - min)
+    const estimatedReadyAt = new Date(Date.now() + deliveryHours * 60 * 60 * 1000)
 
     // Step 1: Create job row(s) in Neon - one per language
     const languages = data.languages || ['en']
@@ -116,6 +128,7 @@ export async function POST(request: NextRequest) {
               language: lang,
               tokens_cost: tokensCost,
               estimated_ready_at: estimatedReadyAt,
+              request_payload: { timeCommitment: data.timeCommitment ?? null },
               ai_model: getModelForFeature('course'),
             },
             include: {
@@ -152,8 +165,9 @@ export async function POST(request: NextRequest) {
             prisma.customCourseRequest.update({
               where: { id: courseRequest.id },
               data: {
-                status: 'failed',
+                status: 'cancelled',
                 status_stage: 'error',
+                cancelled_at: new Date(),
                 status_error: `Token deduction failed: ${tokenError instanceof Error ? tokenError.message : String(tokenError)}`,
               },
             })
@@ -161,12 +175,48 @@ export async function POST(request: NextRequest) {
         )
       )
       return NextResponse.json(
-        { error: 'Failed to deduct tokens', message: 'Token deduction failed. Please try again.' },
+        { error: 'Failed to deduct Usage Units', message: 'Usage Unit deduction failed. Please try again.' },
         { status: 500 }
       )
     }
 
-    // Step 3: Send Inngest events (one per job)
+    // Step 3: Record consent and confirm the order by email (non-blocking for the order itself)
+    const locale = request.cookies.get(LOCALE_COOKIE)?.value
+    for (const courseRequest of courseRequests) {
+      const orderRef = formatOrderRef('custom', courseRequest.id)
+      try {
+        const consent = await recordOrderConsent({
+          userId,
+          orderType: 'custom_course',
+          orderRef,
+          immediateSupply: true,
+          locale,
+          request,
+        })
+        await sendPurchaseConfirmationEmail({
+          type: 'custom-course',
+          transactionId: `custom-${courseRequest.id}`,
+          userEmail: courseRequest.user.email,
+          userName: `${courseRequest.user.first_name} ${courseRequest.user.last_name || ''}`.trim(),
+          locale: 'en',
+          invoiceNumber: orderRef,
+          orderRef,
+          productName: `Custom course (PDF): ${data.goalsFreeText.substring(0, 50)}${data.goalsFreeText.length > 50 ? '...' : ''}`,
+          deliveryEstimate: `By ${estimatedReadyAt.toLocaleDateString('en-GB', { dateStyle: 'medium' })} (within 2–4 days), by email and in your dashboard`,
+          tokens: -tokensCost,
+          amountGbp: 0,
+          customCourseDeliveryInfo: true,
+          consent: { recordedAt: consent.created_at, immediateSupply: true },
+        })
+      } catch (consentError) {
+        console.error('[Custom Course API] Failed to record consent or send confirmation:', {
+          courseRequestId: courseRequest.id,
+          error: consentError instanceof Error ? consentError.message : String(consentError),
+        })
+      }
+    }
+
+    // Step 4: Send Inngest events (one per job)
     const requestedAt = new Date().toISOString()
     const inngestEvents = courseRequests.map((courseRequest) => ({
       id: `custom_course/requested:${courseRequest.id}`, // Dedupe: prevents duplicate events for 24h
@@ -204,7 +254,7 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Step 4: Return response with jobs array
+    // Step 5: Return response with jobs array
     const jobs = courseRequests.map((courseRequest) => ({
       jobId: courseRequest.id,
       language: courseRequest.language,

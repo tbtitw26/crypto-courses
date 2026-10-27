@@ -21,8 +21,10 @@ import {
   Loader2,
 } from 'lucide-react'
 import { DashboardNavigation } from './DashboardNavigation'
+import { DelayedOrderNotice, OrderStatusBadge } from './OrderStatusBadge'
+import { formatOrderRef, type OrderStatus } from '@/lib/order-status'
 
-type AiStrategyStatus = 'processing' | 'ready' | 'failed'
+type AiStrategyStatus = OrderStatus
 
 interface AiStrategy {
   id: string
@@ -31,34 +33,8 @@ interface AiStrategy {
   status: AiStrategyStatus
   created: string
   tokens: number
+  proposedReadyAt?: string | null
   pdfLinks: Array<{ url: string }>
-}
-
-function StatusBadge({ status, t }: { status: AiStrategyStatus; t: any }) {
-  let classes = 'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium'
-  let icon: React.ReactNode = null
-
-  switch (status) {
-    case 'processing':
-      classes += ' border-blue-200 bg-blue-50 text-blue-700'
-      icon = <Clock className="h-3 w-3 shrink-0" />
-      break
-    case 'ready':
-      classes += ' border-emerald-200 bg-emerald-50 text-emerald-700'
-      icon = <CheckCircle2 className="h-3 w-3 shrink-0" />
-      break
-    case 'failed':
-      classes += ' border-rose-200 bg-rose-50 text-rose-700'
-      icon = <XCircle className="h-3 w-3 shrink-0" />
-      break
-  }
-
-  return (
-    <span className={classes}>
-      {icon}
-      <span>{t(`status.${status}`)}</span>
-    </span>
-  )
 }
 
 export function AiStrategiesPage() {
@@ -115,6 +91,10 @@ export function AiStrategiesPage() {
       return matchesSearch && matchesStatus
     })
   }, [strategies, searchQuery, statusFilter])
+
+  const handleDelayResolved = (strategyId: string, result: { status: OrderStatus }) => {
+    setStrategies((prev) => prev.map((s) => (s.id === strategyId ? { ...s, status: result.status } : s)))
+  }
 
   if (status === 'loading') {
     return (
@@ -179,7 +159,7 @@ export function AiStrategiesPage() {
           </div>
           <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
             <span className="mr-1 text-text-muted">{t('filters.status')}:</span>
-            {(['all', 'processing', 'ready', 'failed'] as const).map((f) => (
+            {(['all', 'processing', 'ready', 'delayed', 'cancelled', 'refunded'] as const).map((f) => (
               <button
                 type="button"
                 key={f}
@@ -190,7 +170,7 @@ export function AiStrategiesPage() {
                     : 'border-surface-200 bg-white text-text-secondary hover:border-surface-300'
                 }`}
               >
-                {t(`filters.statusOptions.${f}`)}
+                {f === 'all' ? t('filters.statusOptions.all') : tDashboard(`orderStatus.labels.${f}`)}
               </button>
             ))}
           </div>
@@ -220,17 +200,27 @@ export function AiStrategiesPage() {
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
                           <h3 className="text-sm font-semibold text-text-main">{strategy.title}</h3>
-                          <StatusBadge status={strategy.status} t={t} />
+                          <OrderStatusBadge status={strategy.status} />
                         </div>
                         <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-text-muted">
-                          <span>#{strategy.id}</span>
+                          <span>{formatOrderRef('ai', Number(strategy.id))}</span>
                           <span>{strategy.markets.length > 0 ? strategy.markets.map(valueLabel).join(', ') : t('table.noMarket')}</span>
                           <span>{new Date(strategy.created).toLocaleDateString(intlLocale)}</span>
                         </div>
                         <div className="mt-2 flex items-center gap-1 text-xs text-text-secondary">
                           <Coins className="h-3.5 w-3.5 text-brand-600" />
-                          <span>{strategy.tokens.toLocaleString('en-US')} tokens</span>
+                          <span>{strategy.tokens.toLocaleString('en-US')} {valueLabel('tokens')}</span>
                         </div>
+                        {strategy.status === 'delayed' && (
+                          <DelayedOrderNotice
+                            kind="ai"
+                            orderId={strategy.id}
+                            proposedReadyAt={strategy.proposedReadyAt}
+                            tokens={strategy.tokens}
+                            intlLocale={intlLocale}
+                            onResolved={(result) => handleDelayResolved(strategy.id, result)}
+                          />
+                        )}
                       </div>
 
                       <div className="shrink-0">
@@ -254,9 +244,9 @@ export function AiStrategiesPage() {
                             <AlertTriangle className="h-3 w-3" />
                             <span>{t('actions.checkEmail')}</span>
                           </span>
-                        ) : (
+                        ) : strategy.status === 'processing' ? (
                           <span className="text-xs text-text-muted">{t('actions.processing')}</span>
-                        )}
+                        ) : null}
                       </div>
                     </div>
                   </div>

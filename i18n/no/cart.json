@@ -21,7 +21,7 @@
       "title": "Ordresammendrag",
       "subtotal": "Delsum",
       "total": "Totalt",
-      "tokens": "tokens",
+      "tokens": "bruksenheter",
       "goToCheckout": "Gå til kassen",
       "continueShopping": "Fortsett å handle"
     },
@@ -33,16 +33,16 @@
       "startHere": "Start her",
       "browseTitle": "Utforsk kurs",
       "browseDesc": "Ferdige strukturerte PDF-er om Forex, krypto og binære opsjoner på alle nivåer.",
-      "tokensTitle": "Fyll på en token-saldo",
-      "tokensDesc": "Kjøp en tokenpakke og bruk den på kurs, tilpassede PDF-er og AI-strategier.",
-      "tokensCta": "Se tokenpakker",
+      "tokensTitle": "Fyll på en bruksbalanse",
+      "tokensDesc": "Kjøp en bruksenhetspakke og bruk den på kurs, tilpassede PDF-er og AI-strategier.",
+      "tokensCta": "Se bruksenhetspakker",
       "customTitle": "Tilpasset innhold eller AI-innhold",
       "customDesc": "Bestill en skreddersydd kurs-PDF eller generer et AI-strategidokument.",
       "customCta": "Kom i gang",
       "orderReview": "Gjennomgang av bestillingen",
       "item": "element",
       "items": "elementer",
-      "disclaimer": "Alt innhold er kun ment for opplæring. Tokens, kurs og AI-resultater utgjør ikke finansiell rådgivning."
+      "disclaimer": "Alt innhold er kun ment for opplæring. Bruksenheter, kurs og AI-resultater utgjør ikke finansiell rådgivning."
     }
   },
   "checkout": {
@@ -52,20 +52,24 @@
       "title": "Ordresammendrag",
       "subtotal": "Delsum",
       "total": "Totalt",
-      "tokens": "tokens"
+      "tokens": "bruksenheter",
+      "delivery": "Levering",
+      "deliveryCourse": "Umiddelbart etter kjøp",
+      "format": "Format",
+      "formatCourse": "PDF-kurs (nedlasting)"
     },
     "payment": {
       "title": "Betalingsmåte",
-      "withTokens": "Betal med tokens",
+      "withTokens": "Betal med bruksenheter",
       "withCard": "Betal med kort",
-      "insufficientTokens": "Ikke nok tokens",
-      "buyTokens": "Kjøp tokens",
+      "insufficientTokens": "Ikke nok bruksenheter",
+      "buyTokens": "Kjøp bruksenheter",
       "success": "Betalingen var vellykket",
       "successDescription": "Bestillingen din er registrert.",
       "failed": "Betalingen mislyktes",
       "failedDescription": "Kunne ikke behandle betalingen. Prøv igjen.",
       "processing": "Behandler...",
-      "tokenPurchaseOnlyCard": "Tokenpakker og valgfrie påfyllinger kan kun kjøpes med kort."
+      "tokenPurchaseOnlyCard": "Bruksenhetspakker og valgfrie påfyllinger kan kun kjøpes med kort."
     },
     "placeOrder": "Bestill",
     "backToCart": "Tilbake til handlekurven",
@@ -122,18 +126,25 @@
       "noRedirect": "Mottok ingen videresendingsadresse fra betalingsløsningen",
       "preparing": "Forbereder kassen",
       "verifying": "Kontrollerer økt og ordredetaljer…",
-      "needTokens": "Du trenger {need} tokens, men har {have}.",
-      "tokenBalance": "Token-saldo",
+      "needTokens": "Du trenger {need} bruksenheter, men har {have}.",
+      "tokenBalance": "Bruksbalanse",
       "afterPurchase": "Etter kjøp",
       "deficit": "−{amount} underskudd",
       "hostedTitle": "Sikker ekstern betaling",
-      "hostedText": "Du sendes videre til APS for å fylle på nøyaktig den token-saldoen som trengs for denne bestillingen. Etter betaling kommer du tilbake hit for å fullføre kurskjøpet med tokens.",
+      "hostedText": "Du sendes videre til APS for å fylle på nøyaktig den bruksbalansen som trengs for denne bestillingen. Etter betaling kommer du tilbake hit for å fullføre kurskjøpet med bruksenheter.",
       "amount": "Beløp",
       "continueAps": "Fortsett til sikker betaling hos APS",
       "ssl": "SSL-sikret",
       "pci": "PCI-kompatibel",
-      "disclaimer": "Alt innhold er kun ment for opplæring. Tokens, kurs og AI-resultater utgjør ikke finansiell rådgivning.",
+      "disclaimer": "Alt innhold er kun ment for opplæring. Bruksenheter, kurs og AI-resultater utgjør ikke finansiell rådgivning.",
       "loading": "Laster inn kassen…"
+    },
+    "consent": {
+      "title": "Vilkår og samtykke",
+      "legalBefore": "Ved å bestille godtar du våre",
+      "termsLink": "vilkår",
+      "legalAnd": "og",
+      "refundLink": "refusjonspolicy"
     }
   },
   "messages": {

@@ -51,7 +51,7 @@
       { "label": "Cryptoasset-specific risks", "anchor": "crypto-risks" },
       { "label": "Use of AI and automated tools", "anchor": "ai-tools" },
       { "label": "Third-party brokers, exchanges & platforms", "anchor": "third-parties" },
-      { "label": "Tokens, pricing and non-investment nature", "anchor": "tokens" },
+      { "label": "Usage Units, pricing and non-investment nature", "anchor": "tokens" },
       { "label": "Suitability, independent advice and tax", "anchor": "suitability" },
       { "label": "No guarantees & limitation of liability", "anchor": "no-guarantees" },
       { "label": "Jurisdiction & regulatory status", "anchor": "jurisdiction" },
@@ -280,11 +280,11 @@
     {
       "id": "tokens",
       "number": "8",
-      "title": "Tokens, pricing and non-investment nature",
+      "title": "Usage Units, pricing and non-investment nature",
       "content": [
         {
           "type": "paragraph",
-          "text": "8.1 Tokens are not investments. Cur Nova's Tokens and Wallet Credit are utility credits that allow you to access digital learning assets and features on the Service. They are not:"
+          "text": "8.1 Usage Units are not investments. Cur Nova's Usage Units and Wallet Credit are utility credits that allow you to access digital learning assets and features on the Service. They are not:"
         },
         {
           "type": "list",
@@ -296,11 +296,11 @@
         },
         {
           "type": "paragraph",
-          "text": "8.2 No profit expectation. Purchasing Tokens should not be viewed as an investment or a way to share in any profits or revenues of Cur Nova or any trading activity. Tokens have no intrinsic value outside the Service and cannot be traded on external markets."
+          "text": "8.2 No profit expectation. Purchasing Usage Units should not be viewed as an investment or a way to share in any profits or revenues of Cur Nova or any trading activity. Usage Units have no intrinsic value outside the Service and cannot be traded on external markets."
         },
         {
           "type": "paragraph",
-          "text": "8.3 No guarantee of outcomes. Paying for courses, AI tools or custom content via Tokens or card payments does not guarantee that you will:"
+          "text": "8.3 No guarantee of outcomes. Paying for courses, AI tools or custom content via Usage Units or card payments does not guarantee that you will:"
         },
         {
           "type": "list",
@@ -415,7 +415,7 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "By creating an Account, purchasing Tokens, or using any part of the Service, you expressly acknowledge that:"
+          "text": "By creating an Account, purchasing Usage Units, or using any part of the Service, you expressly acknowledge that:"
         },
         {
           "type": "list",

@@ -8,6 +8,9 @@ import { z } from 'zod'
 import { cookies } from 'next/headers'
 import { sendPurchaseConfirmationEmail } from '@/lib/email'
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
+import { CONSENT_REQUIRED_ERROR, productConsentSchema, recordOrderConsent } from '@/lib/consent'
+import { formatOrderRef } from '@/lib/order-status'
+import { LOCALE_COOKIE } from '@/i18n/config'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -15,6 +18,7 @@ export const revalidate = 0
 const purchaseCourseSchema = z.object({
   courseSlug: z.string().min(1),
   language: z.enum(['en', 'ar']).optional(),
+  consent: productConsentSchema.optional(),
 })
 
 export async function POST(request: NextRequest) {
@@ -54,6 +58,10 @@ export async function POST(request: NextRequest) {
     }
 
     const data = validationResult.data
+
+    if (!data.consent) {
+      return NextResponse.json(CONSENT_REQUIRED_ERROR, { status: 400 })
+    }
 
     // Get course from database
     let course
@@ -147,7 +155,7 @@ export async function POST(request: NextRequest) {
       })
       return NextResponse.json(
         {
-          error: 'Insufficient token balance',
+          error: 'Insufficient Usage Balance',
           required: tokensCost,
           current: balance,
         },
@@ -251,7 +259,15 @@ export async function POST(request: NextRequest) {
     if (purchaseRecord) {
       try {
         // Generate invoice PDF
-        const invoiceNumber = `INV-${purchaseRecord.created_at.getFullYear()}-${purchaseRecord.id.toString().padStart(6, '0')}`
+        const invoiceNumber = formatOrderRef('course', purchaseRecord.id, purchaseRecord.created_at)
+        const consent = await recordOrderConsent({
+          userId,
+          orderType: 'course',
+          orderRef: invoiceNumber,
+          immediateSupply: true,
+          locale: cookieStore.get(LOCALE_COOKIE)?.value,
+          request,
+        })
         const receiptData = {
           id: `course-${purchaseRecord.id}`,
           type: 'Course purchase',
@@ -277,6 +293,10 @@ export async function POST(request: NextRequest) {
           tokens: -tokensCost,
           amountGbp: amountGbp,
           courseSlug: course.slug, // Add course slug for link in email
+          orderRef: invoiceNumber,
+          productName: `${purchaseRecord.course.title} (PDF course)`,
+          deliveryEstimate: 'Immediately – download from your dashboard',
+          consent: { recordedAt: consent.created_at, immediateSupply: true },
         })
 
         if (!invoicePdfBuffer) {

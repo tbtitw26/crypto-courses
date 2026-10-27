@@ -51,7 +51,7 @@
       { "label": "Særlige risikoer ved kryptoeiendeler", "anchor": "crypto-risks" },
       { "label": "Bruk av AI og automatiserte verktøy", "anchor": "ai-tools" },
       { "label": "Tredjeparts meglere, børser og plattformer", "anchor": "third-parties" },
-      { "label": "Tokens, priser og at de ikke er investeringer", "anchor": "tokens" },
+      { "label": "Bruksenheter, priser og at de ikke er investeringer", "anchor": "tokens" },
       { "label": "Egnethet, uavhengig rådgivning og skatt", "anchor": "suitability" },
       { "label": "Ingen garantier og ansvarsbegrensning", "anchor": "no-guarantees" },
       { "label": "Jurisdiksjon og regulatorisk status", "anchor": "jurisdiction" },
@@ -280,11 +280,11 @@
     {
       "id": "tokens",
       "number": "8",
-      "title": "Tokens, priser og at de ikke er investeringer",
+      "title": "Bruksenheter, priser og at de ikke er investeringer",
       "content": [
         {
           "type": "paragraph",
-          "text": "8.1 Tokens er ikke investeringer. Cur Novas tokens og lommeboksaldo er brukskreditter som gir deg tilgang til digitalt læremateriell og funksjoner i tjenesten. De er ikke:"
+          "text": "8.1 Bruksenheter er ikke investeringer. Cur Novas bruksenheter og lommeboksaldo er brukskreditter som gir deg tilgang til digitalt læremateriell og funksjoner i tjenesten. De er ikke:"
         },
         {
           "type": "list",
@@ -296,11 +296,11 @@
         },
         {
           "type": "paragraph",
-          "text": "8.2 Ingen forventning om fortjeneste. Kjøp av tokens skal ikke betraktes som en investering eller en måte å ta del i fortjeneste eller inntekter fra Cur Nova eller noen handelsaktivitet. Tokens har ingen egenverdi utenfor tjenesten og kan ikke omsettes i eksterne markeder."
+          "text": "8.2 Ingen forventning om fortjeneste. Kjøp av bruksenheter skal ikke betraktes som en investering eller en måte å ta del i fortjeneste eller inntekter fra Cur Nova eller noen handelsaktivitet. Bruksenheter har ingen egenverdi utenfor tjenesten og kan ikke omsettes i eksterne markeder."
         },
         {
           "type": "paragraph",
-          "text": "8.3 Ingen garanti for utfall. Å betale for kurs, AI-verktøy eller tilpasset innhold med tokens eller kort garanterer ikke at du vil:"
+          "text": "8.3 Ingen garanti for utfall. Å betale for kurs, AI-verktøy eller tilpasset innhold med bruksenheter eller kort garanterer ikke at du vil:"
         },
         {
           "type": "list",
@@ -415,7 +415,7 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "Ved å opprette en konto, kjøpe tokens eller bruke noen del av tjenesten bekrefter du uttrykkelig at:"
+          "text": "Ved å opprette en konto, kjøpe bruksenheter eller bruke noen del av tjenesten bekrefter du uttrykkelig at:"
         },
         {
           "type": "list",

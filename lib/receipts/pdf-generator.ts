@@ -370,7 +370,7 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
         <thead>
           <tr>
             <th>Description</th>
-            <th class="text-right">Tokens</th>
+            <th class="text-right">Usage Units</th>
             <th class="text-right">Amount (GBP)</th>
             <th class="text-right">Amount (EUR)</th>
             <th class="text-right">Amount (USD)</th>

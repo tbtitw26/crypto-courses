@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
 import { resolveDownloadUrl } from '@/lib/storage'
+import { getOrderStatus } from '@/lib/order-status'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -43,6 +44,8 @@ export async function GET(
           pdf_url: true,
           updated_at: true,
           user_id: true,
+          estimated_ready_at: true,
+          proposed_ready_at: true,
         },
       })
     )
@@ -56,9 +59,11 @@ export async function GET(
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
     }
 
-    // Map status to expected format
-    const status = courseRequest.status as 'in_queue' | 'processing' | 'ready' | 'failed' | 'completed'
-    const stage = (courseRequest.status_stage || 'queued') as 'queued' | 'generating' | 'rendering' | 'uploading' | 'done' | 'error'
+    // A generated course is only released on its delivery date
+    const orderStatus = getOrderStatus(courseRequest)
+    const isScheduled = courseRequest.status === 'ready' && orderStatus === 'processing'
+    const status = isScheduled ? 'processing' : courseRequest.status
+    const stage = isScheduled ? 'scheduled' : courseRequest.status_stage || 'queued'
 
     // Resolve PDF URL (signed URL for private bucket, public URL for public bucket)
     let pdfUrl: string | null = null
@@ -78,6 +83,9 @@ export async function GET(
       progress: courseRequest.status_progress ?? 0,
       error: courseRequest.status_error || null,
       result: pdfUrl ? { pdfUrl } : null,
+      orderStatus,
+      estimatedReadyAt: courseRequest.estimated_ready_at?.toISOString() ?? null,
+      proposedReadyAt: courseRequest.proposed_ready_at?.toISOString() ?? null,
       updatedAt: courseRequest.updated_at.toISOString(),
     })
   } catch (error) {

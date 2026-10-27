@@ -1,23 +1,23 @@
 {
-  "title": "Top up your token balance",
-  "subtitle": "Choose a token pack that fits your learning goals. Tokens work across all Cur Nova courses and AI strategies.",
+  "title": "Top up your Usage Balance",
+  "subtitle": "Choose a Usage Unit Package that fits your learning goals. Usage Units work across all Cur Nova courses and AI strategies.",
   "packs": {
-    "title": "Token packs",
+    "title": "Usage Unit Packages",
     "subtitle": "Pre-configured packs with the best value for different learning needs.",
     "mostPopular": "Most popular"
   },
   "customTopUp": {
     "title": "Custom top-up",
-    "subtitle": "Set any amount, we convert it to tokens automatically.",
+    "subtitle": "Set any amount, we convert it to Usage Units automatically.",
     "amountLabel": "Amount",
-    "minAmount": "Minimum 0.01 in the currency selected in the header. No maximum – larger top-ups are simply converted to tokens.",
+    "minAmount": "Minimum 0.01 in the currency selected in the header. No maximum – larger top-ups are simply converted to Usage Units.",
     "cta": "Continue to payment"
   },
   "buyPack": "Buy {name}",
-  "tokens": "tokens",
+  "tokens": "Usage Units",
   "status": {
     "successTitle": "Payment Successful!",
-    "successDesc": "Your payment has been confirmed and the tokens were added to your account.",
+    "successDesc": "Your payment has been confirmed and the Usage Units were added to your account.",
     "failedTitle": "Payment Not Completed",
     "failedDesc": "The payment was not completed. You can try again whenever you are ready.",
     "pendingTitle": "Payment Pending",
@@ -29,10 +29,10 @@
     "reference": "Reference",
     "details": "Payment details",
     "status": "Status",
-    "tokens": "Tokens",
+    "tokens": "Usage Units",
     "charged": "Charged",
     "autoRefresh": "Auto-refreshing until the provider confirms your payment",
-    "balanceUpdated": "Your balance has been updated. Return to checkout to finish the course purchase with tokens.",
+    "balanceUpdated": "Your balance has been updated. Return to checkout to finish the course purchase with Usage Units.",
     "returnCheckout": "Return to checkout",
     "viewAccount": "View my account",
     "viewReceipt": "View receipt",
@@ -48,7 +48,7 @@
     }
   },
   "form": {
-    "youGet": "You'll get {tokens} Tokens",
+    "youGet": "You'll get {tokens} Usage Units",
     "invalidAmountMsg": "Please enter a valid amount (minimum 0.01)",
     "invalidAmount": "Invalid amount",
     "processing": "Processing...",
@@ -56,29 +56,40 @@
     "genericError": "An error occurred. Please try again.",
     "paymentError": "Payment error",
     "choosePackage": "Choose a package",
-    "tokensN": "{tokens} Tokens",
-    "bonus": "{tokens} Tokens (+{percent}% Bonus)",
+    "tokensN": "{tokens} Usage Units",
+    "bonus": "{tokens} Usage Units (+{percent}% Bonus)",
     "custom": "Custom",
     "anyAmount": "Any amount",
     "orCustom": "Or enter custom amount",
-    "addTokens": "Add Tokens",
+    "addTokens": "Add Usage Units",
     "error": "Error"
   },
   "page": {
     "steps": [
       "Choose amount",
       "Secure checkout",
-      "Tokens credited"
+      "Usage Units credited"
     ],
     "selectedPack": "Selected pack",
     "price": "Price",
-    "tokens": "Tokens",
-    "trust": "Token purchases are processed securely via hosted payment. All content is for educational purposes only. Tokens do not constitute financial advice or tradable instruments."
+    "tokens": "Usage Units",
+    "trust": "Usage Unit purchases are processed securely via hosted payment. All content is for educational purposes only. Usage Units do not constitute financial advice or tradable instruments."
   },
   "checkout": {
     "sessionFailed": "Failed to create payment session",
     "noRedirect": "No redirect URL received from payment gateway",
     "failed": "Payment failed",
     "tryLater": "Please try again in a moment."
+  },
+  "confirm": {
+    "title": "Review your order",
+    "product": "Product",
+    "customProduct": "Custom Usage Unit top-up",
+    "units": "Usage Units",
+    "total": "Total price",
+    "delivery": "Delivery",
+    "deliveryValue": "Credited to your Usage Balance immediately after payment",
+    "cancel": "Cancel",
+    "pay": "Pay {price}"
   }
 }

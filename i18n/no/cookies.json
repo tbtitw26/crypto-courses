@@ -24,7 +24,7 @@
       "items": [
         "Behandlingsansvarlig: CUR NOVA LTD (org.nr. 17240836).",
         "Kontakt: info@cur-nova.com · Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia.",
-        "Omfang: verktøy for handelsopplæring, tokenkjøp, generering av AI-kurs/-strategier.",
+        "Omfang: verktøy for handelsopplæring, bruksenhetskjøp, generering av AI-kurs/-strategier.",
         "Betaling: Visa/Mastercard i GBP med visning i EUR og USD.",
         "Teknologier som omfattes: informasjonskapsler, localStorage, sessionStorage, piksler, SDK-er.",
         "Samtykke: lagres i minst 24 måneder (opptil 6 år ved behov)."
@@ -46,7 +46,7 @@
       },
       {
         "label": "Kontekst",
-        "value": "Plattform for handelsopplæring med ferdige PDF-er, AI-genererte tilpassede kurs/strategier, tokenpakker og betaling med Visa/Mastercard"
+        "value": "Plattform for handelsopplæring med ferdige PDF-er, AI-genererte tilpassede kurs/strategier, bruksenhetspakker og betaling med Visa/Mastercard"
       }
     ]
   },
@@ -79,13 +79,13 @@
       "number": "1",
       "title": "Oversikt",
       "content": [
-        "Disse retningslinjene for informasjonskapsler forklarer hvordan Cur Nova bruker informasjonskapsler og lignende teknologier (localStorage, sessionStorage, SDK-identifikatorer og piksler) på cur-nova.com og tilknyttede tjenester. De utfyller personvernerklæringen vår og gjelder ved siden av tokenkjøp, dashbord og AI-drevet levering av kurs/strategier.",
+        "Disse retningslinjene for informasjonskapsler forklarer hvordan Cur Nova bruker informasjonskapsler og lignende teknologier (localStorage, sessionStorage, SDK-identifikatorer og piksler) på cur-nova.com og tilknyttede tjenester. De utfyller personvernerklæringen vår og gjelder ved siden av bruksenhetskjøp, dashbord og AI-drevet levering av kurs/strategier.",
         "Ved å bruke banneret for informasjonskapsler eller innstillingssenteret styrer du samtykket for hver ikke-nødvendige kategori. Nødvendige informasjonskapsler forblir aktive for å holde plattformen sikker og funksjonell."
       ],
       "list": [
         "Behandlingsansvarlig: CUR NOVA LTD, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia.",
         "Kontakt: info@cur-nova.com",
-        "Omfang: bibliotek med ferdige PDF-er, AI-genererte tilpassede kurs/strategier, tokenkjøp og betalingsflyter."
+        "Omfang: bibliotek med ferdige PDF-er, AI-genererte tilpassede kurs/strategier, bruksenhetskjøp og betalingsflyter."
       ]
     },
     {
@@ -113,7 +113,7 @@
         {
           "icon": "settings",
           "title": "Funksjonelle / preferanser",
-          "description": "Valuta, tema, dashbordfiltre, påminnelser om tokenpakker og lagrede forhåndsvalg i AI-skjemaer."
+          "description": "Valuta, tema, dashbordfiltre, påminnelser om bruksenhetspakker og lagrede forhåndsvalg i AI-skjemaer."
         },
         {
           "icon": "cpu",
@@ -185,7 +185,7 @@
           },
           {
             "name": "cur-nova_wallet_hint (localStorage)",
-            "purpose": "Husker sist viste lommebok-/påfyllingsvisning eller foretrukket tokenpakke",
+            "purpose": "Husker sist viste lommebok-/påfyllingsvisning eller foretrukket bruksenhetspakke",
             "category": "Funksjonell",
             "lifetime": "Til den slettes"
           },

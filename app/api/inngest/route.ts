@@ -5,6 +5,7 @@ import {
   generateCustomCourse,
   generateAIStrategy,
   watchdogFailStuckJobs,
+  sendCustomCourseDelayedEmail,
   generateCustomCourseAssets,
   generateAIStrategyAssets,
 } from "../../../inngest/functions";
@@ -21,6 +22,7 @@ export const { GET, POST, PUT } = serve({
     generateCustomCourse,
     generateAIStrategy,
     watchdogFailStuckJobs,
+    sendCustomCourseDelayedEmail,
     generateCustomCourseAssets,
     generateAIStrategyAssets,
   ],

@@ -24,7 +24,7 @@
       "items": [
         "Controller: CUR NOVA LTD (Company No. 17240836).",
         "Contact: info@cur-nova.com · Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom.",
-        "Scope: trading-education tools, token purchases, AI course/strategy generation.",
+        "Scope: trading-education tools, Usage Unit purchases, AI course/strategy generation.",
         "Payments: Visa/Mastercard in GBP with display in EUR and USD.",
         "Technologies covered: cookies, localStorage, sessionStorage, pixels, SDKs.",
         "Consent: recorded for at least 24 months (up to 6 years where needed)."
@@ -46,7 +46,7 @@
       },
       {
         "label": "Context",
-        "value": "Trading-education platform with ready-made PDFs, AI-generated custom courses/strategies, token packs, Visa/Mastercard payments"
+        "value": "Trading-education platform with ready-made PDFs, AI-generated custom courses/strategies, Usage Unit Packages, Visa/Mastercard payments"
       }
     ]
   },
@@ -79,13 +79,13 @@
       "number": "1",
       "title": "Overview",
       "content": [
-        "This Cookies Policy explains how Cur Nova uses cookies and similar technologies (localStorage, sessionStorage, SDK identifiers and pixels) across cur-nova.com and related services. It complements our Privacy Policy and sits alongside token purchases, dashboards and AI-powered course/strategy delivery.",
+        "This Cookies Policy explains how Cur Nova uses cookies and similar technologies (localStorage, sessionStorage, SDK identifiers and pixels) across cur-nova.com and related services. It complements our Privacy Policy and sits alongside Usage Unit purchases, dashboards and AI-powered course/strategy delivery.",
         "By interacting with the cookie banner or the preferences centre, you manage consent for every non-essential category. Essential cookies remain active to keep the platform secure and functional."
       ],
       "list": [
         "Controller: CUR NOVA LTD, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom.",
         "Contact: info@cur-nova.com",
-        "Scope: ready-made PDF library, AI-generated custom courses/strategies, token purchases and billing flows."
+        "Scope: ready-made PDF library, AI-generated custom courses/strategies, Usage Unit purchases and billing flows."
       ]
     },
     {
@@ -113,7 +113,7 @@
         {
           "icon": "settings",
           "title": "Functional / Preferences",
-          "description": "Currency, theme, dashboard filters, token pack reminders and saved AI form presets."
+          "description": "Currency, theme, dashboard filters, Usage Unit Package reminders and saved AI form presets."
         },
         {
           "icon": "cpu",
@@ -185,7 +185,7 @@
           },
           {
             "name": "cur-nova_wallet_hint (localStorage)",
-            "purpose": "Remembers last wallet/top-up view or preferred token pack",
+            "purpose": "Remembers last wallet/top-up view or preferred Usage Unit Package",
             "category": "Functional",
             "lifetime": "Until cleared"
           },

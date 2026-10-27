@@ -5,6 +5,7 @@ import { config } from '@/lib/config'
 import { calculateTokens, convertAmount } from '@/lib/currency-utils'
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
 import { sendPurchaseConfirmationEmail } from '@/lib/email'
+import { findOrderConsent } from '@/lib/consent'
 
 type PaymentState =
   | 'INITIATED'
@@ -143,6 +144,7 @@ async function creditTopup(referenceId: string) {
     typeof completed.tokens === 'number'
   ) {
     void sendTopupConfirmationEmail({
+      referenceId,
       topupId: completed.topupId,
       userId: completed.userId,
       amountGbp: completed.amountGbp,
@@ -155,6 +157,7 @@ async function creditTopup(referenceId: string) {
 }
 
 async function sendTopupConfirmationEmail(input: {
+  referenceId: string
   topupId: number
   userId: number
   amountGbp: number
@@ -190,11 +193,12 @@ async function sendTopupConfirmationEmail(input: {
       date: topupRecord.created_at,
       amount: Number(topupRecord.amount),
       tokens: topupRecord.tokens,
-      description: topupRecord.tokens > 0 ? 'Token pack purchase' : 'Custom top-up',
+      description: topupRecord.tokens > 0 ? 'Usage Unit Package purchase' : 'Custom top-up',
       user: topupRecord.user,
     }
 
     const invoicePdfBuffer = await generateReceiptPdf(receiptData)
+    const consent = await findOrderConsent('topup', input.referenceId)
 
     await sendPurchaseConfirmationEmail({
       type: 'topup',
@@ -207,6 +211,10 @@ async function sendTopupConfirmationEmail(input: {
       tokens: input.tokens,
       amountGbp: input.amountGbp,
       newBalance: input.newBalance,
+      orderRef: input.referenceId,
+      productName: `${input.tokens.toLocaleString('en-US')} Usage Units`,
+      deliveryEstimate: 'Credited to your Usage Balance immediately after payment',
+      consent: consent ? { recordedAt: consent.created_at, immediateSupply: false } : undefined,
     })
   } catch (error) {
     console.error('[Top-up Payment Flow] Failed to send confirmation email:', error)
@@ -223,6 +231,8 @@ export async function createHostedTopupSession(input: {
   body: unknown
   baseUrl: string
   customerIpAddress?: string | null
+  /** Stores the checkout consent against the new reference before any payment is taken. */
+  recordConsent?: (referenceId: string) => Promise<unknown>
 }) {
   const parsed = parseTopupRequest(input.body)
   const referenceId = createTopupReference(input.userId)
@@ -239,6 +249,8 @@ export async function createHostedTopupSession(input: {
       state: 'INITIATED',
     },
   })
+
+  await input.recordConsent?.(referenceId)
 
   await creditTopup(referenceId)
 

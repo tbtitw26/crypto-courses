@@ -58,7 +58,7 @@ export async function GET(
           date: topup.created_at,
           amount: Number(topup.amount),
           tokens: topup.tokens,
-          description: topup.tokens > 0 ? 'Token pack purchase' : 'Custom top-up',
+          description: topup.tokens > 0 ? 'Usage Unit Package purchase' : 'Custom top-up',
           user: topup.user,
         }
       }

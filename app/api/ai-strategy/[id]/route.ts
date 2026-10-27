@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
 import { resolveDownloadUrl } from '@/lib/storage'
+import { getOrderStatus } from '@/lib/order-status'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -43,6 +44,7 @@ export async function GET(
           pdf_url: true,
           updated_at: true,
           user_id: true,
+          proposed_ready_at: true,
         },
       })
     )
@@ -78,6 +80,8 @@ export async function GET(
       progress: strategyRun.status_progress ?? 0,
       error: strategyRun.status_error || null,
       result: pdfUrl ? { pdfUrl } : null,
+      orderStatus: getOrderStatus(strategyRun),
+      proposedReadyAt: strategyRun.proposed_ready_at?.toISOString() ?? null,
       updatedAt: strategyRun.updated_at.toISOString(),
     })
   } catch (error) {

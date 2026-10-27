@@ -409,6 +409,27 @@ export interface PurchaseEmailData {
   newBalance?: number // For topup
   customCourseDeliveryInfo?: boolean // Flag to show delivery info for custom course
   courseSlug?: string // For course purchases: slug to link to course page
+  orderRef?: string // Order number the consent was recorded against
+  productName?: string
+  deliveryEstimate?: string // e.g. "Immediately", "Within 2–4 days"
+  consent?: {
+    recordedAt: Date
+    immediateSupply: boolean
+  }
+}
+
+function formatConsentDate(date: Date): string {
+  return date.toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }) + ' UTC'
+}
+
+/** Plain-language record of what the customer agreed to at checkout. */
+function describeConsent(data: PurchaseEmailData): string | null {
+  if (!data.consent) return null
+  const when = formatConsentDate(data.consent.recordedAt)
+  const order = data.orderRef || data.invoiceNumber
+  return data.consent.immediateSupply
+    ? `On ${when} (order ${order}) you accepted our Terms & Conditions and Refund Policy, requested immediate supply of this digital content and confirmed that you lose the right to cancel once supply has started.`
+    : `On ${when} (order ${order}) you accepted our Terms & Conditions and Refund Policy. Topping up Usage Units does not start the supply of any course or AI product.`
 }
 
 /**
@@ -428,10 +449,10 @@ function generatePurchaseEmailHtml(data: PurchaseEmailData): string {
       confirmation: 'Your purchase has been confirmed. Details below:',
       invoiceNumber: 'Invoice Number',
       date: 'Date',
-      tokens: 'Tokens',
+      tokens: 'Usage Units',
       amount: 'Amount',
       newBalance: 'New Balance',
-      topupDescription: 'Token pack purchase',
+      topupDescription: 'Usage Unit Package purchase',
       customCourseDescription: 'Custom course request',
       aiStrategyDescription: 'AI strategy generation',
       courseDescription: 'Course purchase',
@@ -629,6 +650,18 @@ function generatePurchaseEmailHtml(data: PurchaseEmailData): string {
               <div class="confirmation-text">${translations.confirmation}</div>
               
               <div class="details-box">
+                ${data.productName ? `
+                <div class="detail-row">
+                  <span class="detail-label">Product</span>
+                  <span class="detail-value">${data.productName}</span>
+                </div>
+                ` : ''}
+                ${data.orderRef && data.orderRef !== data.invoiceNumber ? `
+                <div class="detail-row">
+                  <span class="detail-label">Order number</span>
+                  <span class="detail-value">${data.orderRef}</span>
+                </div>
+                ` : ''}
                 <div class="detail-row">
                   <span class="detail-label">${translations.invoiceNumber}</span>
                   <span class="detail-value">${data.invoiceNumber}</span>
@@ -653,7 +686,20 @@ function generatePurchaseEmailHtml(data: PurchaseEmailData): string {
                   <span class="detail-value">${data.newBalance.toLocaleString(data.locale === 'ar' ? 'ar-SA' : 'en-US')} ${translations.tokens}</span>
                 </div>
                 ` : ''}
+                ${data.deliveryEstimate ? `
+                <div class="detail-row">
+                  <span class="detail-label">Delivery</span>
+                  <span class="detail-value">${data.deliveryEstimate}</span>
+                </div>
+                ` : ''}
               </div>
+
+              ${describeConsent(data) ? `
+              <div class="education-notice">
+                <strong>Your consent</strong><br>
+                ${describeConsent(data)}
+              </div>
+              ` : ''}
 
               ${data.customCourseDeliveryInfo ? `
               <div class="delivery-info">
@@ -1000,11 +1046,11 @@ Hello ${data.userName},
 Thank you for your purchase!
 
 Your purchase has been confirmed. Details:
-- Invoice Number: ${data.invoiceNumber}
+${data.productName ? `- Product: ${data.productName}\n` : ''}${data.orderRef && data.orderRef !== data.invoiceNumber ? `- Order number: ${data.orderRef}\n` : ''}- Invoice Number: ${data.invoiceNumber}
 - Date: ${new Date().toLocaleDateString(data.locale === 'ar' ? 'ar-SA' : 'en-GB')}
-- Tokens: ${data.tokens > 0 ? '+' : ''}${data.tokens}
-${data.amountGbp > 0 ? `- Amount: £${data.amountGbp.toFixed(2)}\n` : ''}${data.newBalance !== undefined ? `- New Balance: ${data.newBalance} tokens\n` : ''}
-${data.customCourseDeliveryInfo ? '\nIn the coming days, our trader will send you a personalized course via email.\n' : ''}
+- Usage Units: ${data.tokens > 0 ? '+' : ''}${data.tokens}
+${data.amountGbp > 0 ? `- Amount: £${data.amountGbp.toFixed(2)}\n` : ''}${data.newBalance !== undefined ? `- New Balance: ${data.newBalance} Usage Units\n` : ''}${data.deliveryEstimate ? `- Delivery: ${data.deliveryEstimate}\n` : ''}
+${describeConsent(data) ? `Your consent: ${describeConsent(data)}\n` : ''}${data.customCourseDeliveryInfo ? '\nIn the coming days, our trader will send you a personalized course via email.\n' : ''}
 
 View your dashboard: ${config.nextauth.url}/dashboard
 
@@ -1147,3 +1193,114 @@ ${translations.footer}
   }
 }
 
+
+export interface OrderStatusEmailData {
+  event: 'delayed' | 'refunded' | 'rescheduled'
+  userEmail: string
+  userName: string
+  productName: string
+  orderRef: string
+  newDate?: Date // delayed: proposed date, rescheduled: agreed date
+  refundedTokens?: number
+}
+
+/**
+ * Notify the customer about a delayed, rescheduled or refunded order
+ */
+export async function sendOrderStatusEmail(data: OrderStatusEmailData): Promise<{ messageId?: string; error?: string }> {
+  if (!config.features.emailNotifications) {
+    return { error: 'Email notifications disabled' }
+  }
+
+  if (!resendClient) {
+    return { error: 'RESEND_API_KEY is missing' }
+  }
+
+  const appBaseUrl = process.env.APP_BASE_URL || config.site.baseUrl
+  const ordersUrl = `${appBaseUrl}/dashboard`
+  const newDate = data.newDate ? formatConsentDate(data.newDate) : ''
+
+  const copy = {
+    delayed: {
+      subject: `Your order ${data.orderRef} is delayed`,
+      body: [
+        `Unfortunately "${data.productName}" (order ${data.orderRef}) could not be delivered on time.`,
+        `We propose a new delivery date: ${newDate}.`,
+        'In your dashboard you can accept the new date or cancel the order. If you cancel, the Usage Units you paid are returned to your balance.',
+      ],
+      cta: 'Review my order',
+    },
+    rescheduled: {
+      subject: `New delivery date for order ${data.orderRef}`,
+      body: [
+        `Thank you for accepting the new date. "${data.productName}" (order ${data.orderRef}) is now scheduled for ${newDate}.`,
+        'We will email you as soon as it is ready.',
+      ],
+      cta: 'View my orders',
+    },
+    refunded: {
+      subject: `Order ${data.orderRef} cancelled and refunded`,
+      body: [
+        `Your order "${data.productName}" (order ${data.orderRef}) has been cancelled.`,
+        `${(data.refundedTokens ?? 0).toLocaleString('en-US')} Usage Units have been returned to your Usage Balance.`,
+      ],
+      cta: 'View my Usage Balance',
+    },
+  }[data.event]
+
+  const footer = 'This is an automated message. Please do not reply to this email.'
+
+  const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${copy.subject}</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px 20px;">
+    <div style="text-align: center; margin-bottom: 30px;">
+      <h1 style="color: #0f172a; font-size: 24px; margin: 0;">Cur Nova</h1>
+    </div>
+
+    <div style="color: #334155; font-size: 16px; line-height: 1.6;">
+      <p style="margin: 0 0 20px 0;">Hello ${data.userName},</p>
+      ${copy.body.map((line) => `<p style="margin: 0 0 16px 0;">${line}</p>`).join('\n      ')}
+
+      <div style="text-align: center; margin: 40px 0;">
+        <a href="${ordersUrl}" style="display: inline-block; padding: 14px 28px; background-color: #06b6d4; color: #ffffff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">
+          ${copy.cta}
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; font-size: 12px; color: #94a3b8;">
+      <p style="margin: 0;">${footer}</p>
+    </div>
+  </div>
+</body>
+</html>
+  `.trim()
+
+  const textContent = `
+${copy.subject}
+
+Hello ${data.userName},
+
+${copy.body.join('\n\n')}
+
+${copy.cta}: ${ordersUrl}
+
+${footer}
+  `.trim()
+
+  try {
+    await sendEmail({ to: data.userEmail, subject: copy.subject, html: htmlContent, text: textContent })
+    return {}
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    console.error('[sendOrderStatusEmail] Failed to send email:', errorMessage)
+    return { error: errorMessage }
+  }
+}

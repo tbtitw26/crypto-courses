@@ -100,12 +100,12 @@
       "calculator": {
         "title": "Price calculator",
         "total": "Total cost",
-        "tokens": "tokens",
+        "tokens": "Usage Units",
         "balance": "Your balance",
         "insufficientBalance": {
           "title": "Insufficient balance",
-          "description": "You don't have enough tokens to purchase this custom course.",
-          "message": "You need more tokens to purchase this course.",
+          "description": "You don't have enough Usage Units to purchase this custom course.",
+          "message": "You need more Usage Units to purchase this course.",
           "topUp": "Top up balance"
         }
       }
@@ -127,9 +127,9 @@
       },
       "pricing": {
         "title": "How pricing works",
-        "description": "A custom course uses more tokens than a single ready-made PDF. In production, pricing will be defined per market and depth. For now, treat it as a separate product with its own price in tokens and direct payment.",
+        "description": "A custom course uses more Usage Units than a single ready-made PDF. In production, pricing will be defined per market and depth. For now, treat it as a separate product with its own price in Usage Units and direct payment.",
         "points": {
-          "tokens": "Pay with tokens from your balance.",
+          "tokens": "Pay with Usage Units from your balance.",
           "currencies": "Or use EUR, GBP or USD at checkout."
         },
         "badge": "Example only – final pricing TBD"
@@ -138,7 +138,7 @@
   },
   "ai": {
     "title": "AI Strategy Builder",
-    "description": "Get a structured, educational plan with setup description, entry/exit logic, risk framework and a checklist – generated in seconds from your profile.",
+    "description": "Get a structured educational study guide covering how setups are described, general decision criteria, risk management principles and a self-review checklist – generated within minutes from the learning profile you provide. It never contains trade recommendations.",
     "form": {
       "presets": {
         "label": "Quick presets",
@@ -171,7 +171,7 @@
       },
       "detail": {
         "label": "Output detail level",
-        "hint": "Higher detail uses more tokens",
+        "hint": "Higher detail uses more Usage Units",
         "quick": "Quick summary",
         "standard": "Standard plan",
         "deep": "Deep-dive guide"
@@ -187,12 +187,12 @@
       "calculator": {
         "title": "Price calculator",
         "total": "Total cost",
-        "tokens": "tokens",
+        "tokens": "Usage Units",
         "balance": "Your balance",
         "insufficientBalance": {
           "title": "Insufficient balance",
-          "description": "You don't have enough tokens to generate this AI strategy.",
-          "message": "You need more tokens to generate this strategy.",
+          "description": "You don't have enough Usage Units to generate this AI strategy.",
+          "message": "You need more Usage Units to generate this strategy.",
           "topUp": "Top up balance"
         }
       }
@@ -203,19 +203,19 @@
       "placeholder": "Placeholder · no real AI here",
       "sections": {
         "setup": "1. Setup description:",
-        "entry": "2. Entry & exit logic:",
+        "entry": "2. Decision criteria (educational):",
         "risk": "3. Risk framework:",
         "checklist": "4. Checklist:"
       },
       "setupDesc": "Clear explanation of the pattern or condition you asked for, including time frames and instruments.",
-      "entryDesc": "Rules for when to consider entering and exiting, linked to your risk per trade and max trades per day.",
+      "entryDesc": "General questions traders study before acting, linked to your risk per trade and daily limits – never specific entries, exits or price levels.",
       "riskDesc": "Guidance on stop placement, partials and when not to trade (for example around news or low liquidity).",
       "checklistDesc": "A simple list you can read before each potential trade to avoid emotional decisions."
     },
     "sidebar": {
       "depth": {
         "badge": "Adjustable depth",
-        "description": "You can request a quick overview or a deeper, more detailed plan. In production, token cost will scale with the depth and complexity you choose."
+        "description": "You can request a quick overview or a deeper, more detailed plan. In production, Usage Unit cost will scale with the depth and complexity you choose."
       },
       "courses": {
         "title": "How AI strategies fit with courses",
@@ -1113,5 +1113,17 @@
     "startFailed": "Failed to start generation",
     "processing": "Processing…",
     "generating": "Generating…"
+  },
+  "order": {
+    "title": "Your order",
+    "product": "Product",
+    "customProduct": "Custom course",
+    "aiProduct": "AI strategy (educational)",
+    "format": "Format",
+    "formatPdf": "PDF – by email and in your dashboard",
+    "price": "Price",
+    "delivery": "Delivery",
+    "customDelivery": "Within 2–4 days (48–96 hours)",
+    "aiDelivery": "Usually within 5 minutes"
   }
 }

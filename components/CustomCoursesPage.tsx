@@ -22,63 +22,22 @@ import {
   Loader2,
 } from 'lucide-react'
 import { DashboardNavigation } from './DashboardNavigation'
-
-type CustomCourseStatus =
-  | 'Intake draft'
-  | 'Awaiting review'
-  | 'In progress'
-  | 'Delivered'
-  | 'Failed'
-  | 'Processing'
-  | 'Completed'
+import { DelayedOrderNotice, OrderStatusBadge, orderStatusBorder } from './OrderStatusBadge'
+import { formatOrderRef, type OrderStatus } from '@/lib/order-status'
 
 interface CustomCourse {
   id: string
   title: string
   market: string
   level: string
-  status: CustomCourseStatus
+  status: OrderStatus
   created: string
   eta?: string
+  proposedReadyAt?: string | null
+  tokens: number
   pdfUrl?: string
   coverUrl?: string | null
   assetsStatus?: string | null
-}
-
-function StatusBadge({ status, t }: { status: CustomCourseStatus; t: any }) {
-  let classes = 'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium'
-  let icon: React.ReactNode = null
-
-  switch (status) {
-    case 'In progress':
-    case 'Processing':
-      classes += ' border-blue-200 bg-blue-50 text-blue-700'
-      icon = <Clock className="h-3 w-3 shrink-0" />
-      break
-    case 'Delivered':
-    case 'Completed':
-      classes += ' border-emerald-200 bg-emerald-50 text-emerald-700'
-      icon = <CheckCircle2 className="h-3 w-3 shrink-0" />
-      break
-    case 'Awaiting review':
-      classes += ' border-amber-200 bg-amber-50 text-amber-700'
-      icon = <AlertTriangle className="h-3 w-3 shrink-0" />
-      break
-    case 'Failed':
-      classes += ' border-rose-200 bg-rose-50 text-rose-700'
-      icon = <XCircle className="h-3 w-3 shrink-0" />
-      break
-    case 'Intake draft':
-      classes += ' border-surface-200 bg-surface-50 text-text-secondary'
-      break
-  }
-
-  return (
-    <span className={classes}>
-      {icon}
-      <span>{t(`status.${status.toLowerCase().replace(/\s+/g, '')}`)}</span>
-    </span>
-  )
 }
 
 export function CustomCoursesPage() {
@@ -89,9 +48,7 @@ export function CustomCoursesPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
   const [searchQuery, setSearchQuery] = useState('')
-  const [statusFilter, setStatusFilter] = useState<
-    'All' | 'Intake draft' | 'Awaiting review' | 'In progress' | 'Delivered' | 'Failed'
-  >('All')
+  const [statusFilter, setStatusFilter] = useState<'all' | OrderStatus>('all')
   const [customCourses, setCustomCourses] = useState<CustomCourse[]>([])
   const [isLoadingCourses, setIsLoadingCourses] = useState(true)
 
@@ -112,27 +69,16 @@ export function CustomCoursesPage() {
         if (response.ok) {
           const data = await response.json()
           const courses: CustomCourse[] = (data.courses || []).map((course: any) => {
-            let uiStatus: CustomCourseStatus = 'In progress'
-            if (course.status === 'Completed' || course.dbStatus === 'completed') {
-              uiStatus = 'Delivered'
-            } else if (course.dbStatus === 'ready') {
-              uiStatus = 'Delivered'
-            } else if (course.dbStatus === 'failed') {
-              uiStatus = 'Failed'
-            } else if (course.dbStatus === 'processing') {
-              uiStatus = 'In progress'
-            } else {
-              uiStatus = 'In progress'
-            }
-
             return {
               id: course.id,
               title: course.title,
               market: course.market,
               level: course.level,
-              status: uiStatus,
+              status: course.status as OrderStatus,
               created: new Date(course.created).toLocaleDateString(intlLocale),
               eta: course.estimatedReadyAt ? new Date(course.estimatedReadyAt).toLocaleDateString(intlLocale) : undefined,
+              proposedReadyAt: course.proposedReadyAt,
+              tokens: course.tokens ?? 0,
               pdfUrl: course.pdfUrl,
               coverUrl: course.coverUrl,
               assetsStatus: course.assetsStatus,
@@ -173,26 +119,19 @@ export function CustomCoursesPage() {
       course.id.toLowerCase().includes(searchQuery.toLowerCase())
 
     const matchesStatus =
-      statusFilter === 'All' || course.status === statusFilter
+      statusFilter === 'all' || course.status === statusFilter
 
     return matchesSearch && matchesStatus
   })
 
-  const statusColor = (s: CustomCourseStatus) => {
-    switch (s) {
-      case 'In progress':
-      case 'Processing':
-        return 'border-l-blue-500'
-      case 'Delivered':
-      case 'Completed':
-        return 'border-l-emerald-500'
-      case 'Awaiting review':
-        return 'border-l-amber-500'
-      case 'Failed':
-        return 'border-l-rose-500'
-      default:
-        return 'border-l-surface-300'
-    }
+  const handleDelayResolved = (courseId: string, result: { status: OrderStatus; newDate?: string }) => {
+    setCustomCourses((prev) =>
+      prev.map((c) =>
+        c.id === courseId
+          ? { ...c, status: result.status, eta: result.newDate ? new Date(result.newDate).toLocaleDateString(intlLocale) : c.eta }
+          : c
+      )
+    )
   }
 
   return (
@@ -246,7 +185,7 @@ export function CustomCoursesPage() {
           </div>
           <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
             <span className="mr-1 text-text-muted">{t('filters.status')}:</span>
-            {(['All', 'In progress', 'Delivered', 'Failed'] as const).map((f) => (
+            {(['all', 'processing', 'ready', 'delayed', 'cancelled', 'refunded'] as const).map((f) => (
               <button
                 type="button"
                 key={f}
@@ -257,7 +196,7 @@ export function CustomCoursesPage() {
                     : 'border-surface-200 bg-white text-text-secondary hover:border-surface-300'
                 }`}
               >
-                {t(`filters.statusOptions.${f.toLowerCase().replace(/\s+/g, '')}`)}
+                {f === 'all' ? t('filters.statusOptions.all') : tDashboard(`orderStatus.labels.${f}`)}
               </button>
             ))}
           </div>
@@ -281,7 +220,7 @@ export function CustomCoursesPage() {
                 {filteredCourses.map((course) => (
                   <div
                     key={course.id}
-                    className={`rounded-xl border border-surface-200 border-l-4 bg-white p-4 shadow-card ${statusColor(course.status)}`}
+                    className={`rounded-xl border border-surface-200 border-l-4 bg-white p-4 shadow-card ${orderStatusBorder(course.status)}`}
                   >
                     <div className="flex items-start gap-3">
                       <div className="h-14 w-10 shrink-0 overflow-hidden rounded-md border border-surface-200 bg-surface-50">
@@ -303,18 +242,30 @@ export function CustomCoursesPage() {
                       <div className="min-w-0 flex-1">
                         <div className="flex flex-wrap items-center gap-2">
                           <h3 className="truncate text-sm font-semibold text-text-main">{course.title}</h3>
-                          <StatusBadge status={course.status} t={t} />
+                          <OrderStatusBadge status={course.status} />
                         </div>
                         <div className="mt-1 flex flex-wrap items-center gap-3 text-xs text-text-muted">
                           <span>{valueLabel(course.market)} · {valueLabel(course.level)}</span>
-                          <span>ID: {course.id}</span>
-                          <span>Created {course.created}</span>
-                          {course.eta && <span>ETA {course.eta}</span>}
+                          <span>{formatOrderRef('custom', Number(course.id))}</span>
+                          <span>{t('meta.created', { date: course.created })}</span>
+                          {course.eta && (course.status === 'processing' || course.status === 'ready') && (
+                            <span>{t('meta.delivery', { date: course.eta })}</span>
+                          )}
                         </div>
+                        {course.status === 'delayed' && (
+                          <DelayedOrderNotice
+                            kind="custom"
+                            orderId={course.id}
+                            proposedReadyAt={course.proposedReadyAt}
+                            tokens={course.tokens}
+                            intlLocale={intlLocale}
+                            onResolved={(result) => handleDelayResolved(course.id, result)}
+                          />
+                        )}
                       </div>
 
                       <div className="shrink-0">
-                        {course.status === 'Delivered' && course.pdfUrl ? (
+                        {course.status === 'ready' && course.pdfUrl ? (
                           <a
                             href={course.pdfUrl}
                             target="_blank"
@@ -324,7 +275,7 @@ export function CustomCoursesPage() {
                             <span>{t('actions.downloadPDF')}</span>
                             <ArrowRight className="h-3 w-3" />
                           </a>
-                        ) : course.status === 'Delivered' ? (
+                        ) : course.status === 'ready' ? (
                           <span className="inline-flex items-center gap-1 text-xs text-text-muted">
                             <AlertTriangle className="h-3 w-3" />
                             <span>{t('actions.pdfPending')}</span>

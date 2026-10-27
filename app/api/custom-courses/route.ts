@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
 import { resolvePublicUrl } from '@/lib/storage'
+import { getOrderStatus } from '@/lib/order-status'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -44,6 +45,9 @@ export async function GET(request: NextRequest) {
           created_at: true,
           updated_at: true,
           estimated_ready_at: true,
+          proposed_ready_at: true,
+          tokens_cost: true,
+          refunded_tokens: true,
         },
       }) as any
     )
@@ -59,17 +63,8 @@ export async function GET(request: NextRequest) {
         level = 'Advanced'
       }
 
-      // Determine status for UI
-      let uiStatus: 'Processing' | 'Completed' | 'Failed' = 'Processing'
-      if (course.status === 'completed') {
-        uiStatus = 'Completed'
-      } else if (course.status === 'ready') {
-        uiStatus = 'Completed' // Ready means PDF is generated, treat as completed
-      } else if (course.status === 'failed') {
-        uiStatus = 'Failed'
-      } else {
-        uiStatus = 'Processing'
-      }
+      // Ready only from the delivery date on, even if the PDF was generated earlier
+      const orderStatus = getOrderStatus(course)
 
       let resolvedCoverUrl: string | undefined
       try {
@@ -88,12 +83,14 @@ export async function GET(request: NextRequest) {
         title: course.goals_free_text.substring(0, 100) + (course.goals_free_text.length > 100 ? '...' : ''),
         market: course.markets.join(', '),
         level,
-        status: uiStatus,
-        dbStatus: course.status, // Keep original status for reference
+        status: orderStatus,
         created: course.created_at.toISOString(),
         updated: course.updated_at.toISOString(),
         estimatedReadyAt: course.estimated_ready_at?.toISOString(),
-        pdfUrl: course.pdf_url ? `/api/download/custom/${course.id}` : undefined,
+        proposedReadyAt: course.proposed_ready_at?.toISOString() ?? null,
+        tokens: course.tokens_cost,
+        refundedTokens: course.refunded_tokens ?? null,
+        pdfUrl: orderStatus === 'ready' && course.pdf_url ? `/api/download/custom/${course.id}` : undefined,
         coverUrl: resolvedCoverUrl,
         assetsStatus: course.assets_status ?? null,
         assetsError: course.assets_error ?? null,

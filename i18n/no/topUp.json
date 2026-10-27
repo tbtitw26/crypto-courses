@@ -1,23 +1,23 @@
 {
-  "title": "Fyll på token-saldoen din",
-  "subtitle": "Velg en tokenpakke som passer læringsmålene dine. Tokens kan brukes på alle Cur Nova-kurs og AI-strategier.",
+  "title": "Fyll på bruksbalansen din",
+  "subtitle": "Velg en bruksenhetspakke som passer læringsmålene dine. Bruksenheter kan brukes på alle Cur Nova-kurs og AI-strategier.",
   "packs": {
-    "title": "Tokenpakker",
+    "title": "Bruksenhetspakker",
     "subtitle": "Ferdigsatte pakker med best verdi for ulike læringsbehov.",
     "mostPopular": "Mest populær"
   },
   "customTopUp": {
     "title": "Valgfri påfylling",
-    "subtitle": "Velg et hvilket som helst beløp, så konverterer vi det automatisk til tokens.",
+    "subtitle": "Velg et hvilket som helst beløp, så konverterer vi det automatisk til bruksenheter.",
     "amountLabel": "Beløp",
-    "minAmount": "Minimum 0,01 i valutaen som er valgt i toppmenyen. Ingen maksgrense – større påfyllinger konverteres ganske enkelt til tokens.",
+    "minAmount": "Minimum 0,01 i valutaen som er valgt i toppmenyen. Ingen maksgrense – større påfyllinger konverteres ganske enkelt til bruksenheter.",
     "cta": "Fortsett til betaling"
   },
   "buyPack": "Kjøp {name}",
-  "tokens": "tokens",
+  "tokens": "bruksenheter",
   "status": {
     "successTitle": "Betalingen var vellykket!",
-    "successDesc": "Betalingen er bekreftet, og tokens er lagt til på kontoen din.",
+    "successDesc": "Betalingen er bekreftet, og bruksenhetene er lagt til på kontoen din.",
     "failedTitle": "Betalingen ble ikke fullført",
     "failedDesc": "Betalingen ble ikke fullført. Du kan prøve igjen når du er klar.",
     "pendingTitle": "Betalingen behandles",
@@ -29,10 +29,10 @@
     "reference": "Referanse",
     "details": "Betalingsdetaljer",
     "status": "Status",
-    "tokens": "Tokens",
+    "tokens": "Bruksenheter",
     "charged": "Belastet",
     "autoRefresh": "Oppdateres automatisk til leverandøren bekrefter betalingen",
-    "balanceUpdated": "Saldoen din er oppdatert. Gå tilbake til kassen for å fullføre kurskjøpet med tokens.",
+    "balanceUpdated": "Saldoen din er oppdatert. Gå tilbake til kassen for å fullføre kurskjøpet med bruksenheter.",
     "returnCheckout": "Tilbake til kassen",
     "viewAccount": "Se kontoen min",
     "viewReceipt": "Se kvittering",
@@ -48,7 +48,7 @@
     }
   },
   "form": {
-    "youGet": "Du får {tokens} tokens",
+    "youGet": "Du får {tokens} bruksenheter",
     "invalidAmountMsg": "Skriv inn et gyldig beløp (minimum 0,01)",
     "invalidAmount": "Ugyldig beløp",
     "processing": "Behandler...",
@@ -56,29 +56,40 @@
     "genericError": "Det oppstod en feil. Prøv igjen.",
     "paymentError": "Betalingsfeil",
     "choosePackage": "Velg en pakke",
-    "tokensN": "{tokens} tokens",
-    "bonus": "{tokens} tokens (+{percent} % bonus)",
+    "tokensN": "{tokens} bruksenheter",
+    "bonus": "{tokens} bruksenheter (+{percent} % bonus)",
     "custom": "Valgfritt",
     "anyAmount": "Hvilket som helst beløp",
     "orCustom": "Eller skriv inn et valgfritt beløp",
-    "addTokens": "Legg til tokens",
+    "addTokens": "Legg til bruksenheter",
     "error": "Feil"
   },
   "page": {
     "steps": [
       "Velg beløp",
       "Sikker betaling",
-      "Tokens godskrevet"
+      "Bruksenheter godskrevet"
     ],
     "selectedPack": "Valgt pakke",
     "price": "Pris",
-    "tokens": "Tokens",
-    "trust": "Tokenkjøp behandles sikkert via en ekstern betalingsside. Alt innhold er kun ment for opplæring. Tokens utgjør ikke finansiell rådgivning eller omsettelige instrumenter."
+    "tokens": "Bruksenheter",
+    "trust": "Bruksenhetskjøp behandles sikkert via en ekstern betalingsside. Alt innhold er kun ment for opplæring. Bruksenheter utgjør ikke finansiell rådgivning eller omsettelige instrumenter."
   },
   "checkout": {
     "sessionFailed": "Kunne ikke opprette betalingsøkt",
     "noRedirect": "Mottok ingen videresendingsadresse fra betalingsløsningen",
     "failed": "Betalingen mislyktes",
     "tryLater": "Prøv igjen om et øyeblikk."
+  },
+  "confirm": {
+    "title": "Se over bestillingen",
+    "product": "Produkt",
+    "customProduct": "Valgfri påfylling av bruksenheter",
+    "units": "Bruksenheter",
+    "total": "Totalpris",
+    "delivery": "Levering",
+    "deliveryValue": "Godskrives bruksbalansen din rett etter betaling",
+    "cancel": "Avbryt",
+    "pay": "Betal {price}"
   }
 }

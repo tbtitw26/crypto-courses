@@ -10,6 +10,7 @@ import { uploadPrivateAsset, uploadPublicAsset, encodeSupabasePath } from "@/lib
 import { GeneratedCourse } from "@/lib/pdf/types";
 import { config } from "@/lib/config";
 import { sendPdfReadyEmail } from "@/lib/email";
+import { markJobDelayed } from "@/lib/orders";
 
 const formatErrorMessage = (error: unknown) => {
   const msg = error instanceof Error ? error.message : String(error);
@@ -52,18 +53,10 @@ export const generateCustomCourse = inngest.createFunction(
       // Ensure job is marked as failed even if main function throws
       const data = event.data as unknown as CustomCourseRequestedEvent;
       const { jobId } = data;
+      // All retries used up: the order is delayed and the customer chooses a new date or a refund
       const statusError = formatErrorMessage(error);
       try {
-        await prisma.customCourseRequest.update({
-          where: { id: jobId },
-          data: {
-            status: "failed",
-            status_stage: "failed",
-            status_progress: 100,
-            status_error: statusError,
-            status_message: `Generation failed: ${statusError}`,
-          },
-        });
+        await markJobDelayed("custom", jobId, statusError);
       } catch (dbError) {
         console.error(`[Inngest onFailure] Failed to update job ${jobId}:`, dbError);
       }
@@ -302,9 +295,10 @@ export const generateCustomCourse = inngest.createFunction(
 
       // (I) Mark ready (store path)
       await step.run("db:set-ready", async () => {
+        // updateMany: never revive an order the customer already cancelled
         await withPrismaRetry(() =>
-          prisma.customCourseRequest.update({
-            where: { id: jobId },
+          prisma.customCourseRequest.updateMany({
+            where: { id: jobId, status: { notIn: ["cancelled", "refunded"] } },
             data: {
               status: "ready",
               status_stage: "done",
@@ -333,35 +327,35 @@ export const generateCustomCourse = inngest.createFunction(
         });
       }
 
-      // (K) Schedule delayed email notification (48-96 hours after PDF generation)
+      // (K) Schedule the delivery email for the order's delivery date (set when the order was placed)
       await step.run("email:schedule-delayed-notification", async () => {
-        const user = await withPrismaRetry(() =>
-          prisma.user.findUnique({
-            where: { id: userId },
-            select: { email: true, first_name: true, last_name: true },
-          })
-        );
+        const [user, job] = await Promise.all([
+          withPrismaRetry(() =>
+            prisma.user.findUnique({
+              where: { id: userId },
+              select: { email: true, first_name: true, last_name: true },
+            })
+          ),
+          withPrismaRetry(() =>
+            prisma.customCourseRequest.findUnique({
+              where: { id: jobId },
+              select: { estimated_ready_at: true },
+            })
+          ),
+        ]);
 
         if (user?.email) {
           const userName = `${user.first_name} ${user.last_name || ''}`.trim() || 'User';
           const title = data.goalsFreeText.substring(0, 50) + (data.goalsFreeText.length > 50 ? '...' : '');
-          
-          // Calculate random delay between 48-96 hours (in milliseconds)
-          // 48 hours = 48 * 60 * 60 * 1000 = 172,800,000 ms
-          // 96 hours = 96 * 60 * 60 * 1000 = 345,600,000 ms
-          const minDelayMs = 48 * 60 * 60 * 1000; // 48 hours
-          const maxDelayMs = 96 * 60 * 60 * 1000; // 96 hours
-          const randomDelayMs = Math.floor(Math.random() * (maxDelayMs - minDelayMs + 1)) + minDelayMs;
-          
-          // Calculate scheduled time (timestamp in milliseconds)
-          const scheduledTimestamp = Date.now() + randomDelayMs;
+
+          const scheduledTimestamp = Math.max(job?.estimated_ready_at?.getTime() ?? 0, Date.now());
           const scheduledTime = new Date(scheduledTimestamp);
-          
-          console.log(`[Inngest] Scheduling email for custom course ${jobId} at ${scheduledTime.toISOString()} (${Math.round(randomDelayMs / (60 * 60 * 1000))} hours delay)`);
+
+          console.log(`[Inngest] Scheduling email for custom course ${jobId} at ${scheduledTime.toISOString()}`);
           
           // Send delayed event (ts is timestamp in milliseconds)
           await inngest.send({
-            id: `custom_course/email.delayed:${jobId}:${language}`,
+            id: `custom_course/email.delayed:${jobId}:${language}:${scheduledTimestamp}`,
             name: "custom_course/email.delayed",
             data: {
               jobId,
@@ -431,18 +425,10 @@ export const generateAIStrategy = inngest.createFunction(
       // Ensure job is marked as failed even if main function throws
       const data = event.data as unknown as AIStrategyRequestedEvent;
       const { jobId } = data;
+      // All retries used up: the order is delayed and the customer chooses a new date or a refund
       const statusError = formatErrorMessage(error);
       try {
-        await prisma.aiStrategyRun.update({
-          where: { id: jobId },
-          data: {
-            status: "failed",
-            status_stage: "failed",
-            status_progress: 100,
-            status_error: statusError,
-            status_message: `Generation failed: ${statusError}`,
-          },
-        });
+        await markJobDelayed("ai", jobId, statusError);
       } catch (dbError) {
         console.error(`[Inngest onFailure] Failed to update job ${jobId}:`, dbError);
       }
@@ -692,9 +678,10 @@ export const generateAIStrategy = inngest.createFunction(
 
       // (I) Mark ready (store path)
       await step.run("db:set-ready", async () => {
+        // updateMany: never revive an order the customer already cancelled
         await withPrismaRetry(() =>
-          prisma.aiStrategyRun.update({
-            where: { id: jobId },
+          prisma.aiStrategyRun.updateMany({
+            where: { id: jobId, status: { notIn: ["cancelled", "refunded"] } },
             data: {
               status: "ready",
               status_stage: "done",
@@ -811,19 +798,8 @@ export const watchdogFailStuckJobs = inngest.createFunction(
         })
       );
 
-      if (stuck.length > 0) {
-        await withPrismaRetry(() =>
-          prisma.customCourseRequest.updateMany({
-            where: { id: { in: stuck.map((s) => s.id) } },
-            data: {
-              status: "failed",
-              status_stage: "timeout",
-              status_progress: 100,
-              status_message: timeoutMessage,
-              status_error: timeoutMessage,
-            },
-          })
-        );
+      for (const job of stuck) {
+        await markJobDelayed("custom", job.id, timeoutMessage);
       }
 
       return { count: stuck.length };
@@ -840,19 +816,8 @@ export const watchdogFailStuckJobs = inngest.createFunction(
         })
       );
 
-      if (stuck.length > 0) {
-        await withPrismaRetry(() =>
-          prisma.aiStrategyRun.updateMany({
-            where: { id: { in: stuck.map((s) => s.id) } },
-            data: {
-              status: "failed",
-              status_stage: "timeout",
-              status_progress: 100,
-              status_message: timeoutMessage,
-              status_error: timeoutMessage,
-            },
-          })
-        );
+      for (const job of stuck) {
+        await markJobDelayed("ai", job.id, timeoutMessage);
       }
 
       return { count: stuck.length };

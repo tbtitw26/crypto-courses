@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
 import { resolveDownloadUrl } from '@/lib/storage'
+import { getOrderStatus } from '@/lib/order-status'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -52,6 +53,8 @@ export async function GET() {
           main_objective: true,
           markets: true,
           tokens_cost: true,
+          proposed_ready_at: true,
+          refunded_tokens: true,
           created_at: true,
           language: true,
           ai_response_structured: true,
@@ -70,8 +73,12 @@ export async function GET() {
         const primaryLanguage = (run.language || 'en').toLowerCase()
         const pdfLinks: Array<{ language: 'en' | 'ar'; url: string }> = []
 
+        const orderStatus = getOrderStatus(run)
+
         // Use pdf_url from database if available, otherwise fallback to courseId-based URL
-        if (run.pdf_url) {
+        if (orderStatus !== 'ready') {
+          // No download links until the order is ready
+        } else if (run.pdf_url) {
           const downloadUrl = await resolveDownloadUrl(run.pdf_url)
           if (downloadUrl) {
             // Determine language from filename or use primary language
@@ -93,7 +100,9 @@ export async function GET() {
           id: String(run.id),
           title: run.main_objective?.trim() || `Strategy #${run.id}`,
           markets: run.markets,
-          status: run.status as 'processing' | 'ready' | 'failed',
+          status: orderStatus,
+          proposedReadyAt: run.proposed_ready_at?.toISOString() ?? null,
+          refundedTokens: run.refunded_tokens ?? null,
           created: run.created_at.toISOString(),
           tokens: run.tokens_cost,
           languages: [primaryLanguage],

@@ -1,50 +1,50 @@
 {
-  "title": "Pricing & tokens",
+  "title": "Pricing & Usage Units",
   "breadcrumb": {
     "home": "Home",
-    "pricing": "Pricing & tokens"
+    "pricing": "Pricing & Usage Units"
   },
   "header": {
     "badges": {
-      "tokensAcross": "Use tokens across courses and AI",
+      "tokensAcross": "Use Usage Units across courses and AI",
       "educationOnly": "Education only"
     },
     "backToHome": "Back to home"
   },
   "hero": {
     "title": "One balance for courses and AI strategies.",
-    "subtitle": "Load a token balance once and use it across Cur Nova: structured PDF courses, custom courses and AI-generated strategies. Or pay directly for a single course if you prefer.",
+    "subtitle": "Load a Usage Balance once and use it across Cur Nova: structured PDF courses, custom courses and AI-generated strategies. Or pay directly for a single course if you prefer.",
     "bullets": {
       "oneBalance": "One balance for Forex, Crypto and Binary content.",
-      "payWithTokens": "Pay with tokens or direct in EUR, GBP or USD.",
-      "topUpAnytime": "Top up any time – tokens do not expire."
+      "payWithTokens": "Pay with Usage Units or direct in EUR, GBP or USD.",
+      "topUpAnytime": "Top up any time – Usage Units do not expire."
     },
     "exampleRate": {
       "title": "Example effective rate",
       "subtitle": "For visual purposes only",
       "badge": "Non-binding",
-      "description": "In production, token pricing will be defined per region and currency. Here we simply show how packs and custom top-ups could work inside the interface.",
+      "description": "In production, Usage Unit pricing will be defined per region and currency. Here we simply show how packs and custom top-ups could work inside the interface.",
       "example": "For example: <tokens>{tokens}</tokens> might correspond to approximately <price>{price}</price> (or regional equivalent), but final values will be defined in legal terms and payment settings.",
-      "tokens": "100 tokens",
+      "tokens": "100 Usage Units",
       "price": "£1.00"
     }
   },
   "tokenPacks": {
-    "title": "Token packs.",
-    "subtitle": "Start small or commit for longer – each pack loads tokens into your Cur Nova balance for use across courses and AI.",
+    "title": "Usage Unit Packages.",
+    "subtitle": "Start small or commit for longer – each pack loads Usage Units into your Cur Nova balance for use across courses and AI.",
     "note": "Currency shown here is illustrative. Final pricing may differ.",
-    "info": "Exact token conversion will be defined in production.",
+    "info": "Exact Usage Unit conversion will be defined in production.",
     "mostPopular": "Most popular",
     "selectPack": "Select {name}",
     "buyPack": "Buy {name}"
   },
   "customTopUp": {
     "title": "Custom top-up",
-    "subtitle": "Set any amount in your preferred currency. In production, the system converts it to tokens automatically.",
+    "subtitle": "Set any amount in your preferred currency. In production, the system converts it to Usage Units automatically.",
     "amountLabel": "Amount",
     "currencies": "GBP · EUR · USD",
-    "minAmount": "Minimum 0.01 in any supported currency. No formal maximum – larger top-ups are simply converted into more tokens.",
-    "previewCta": "Preview in tokens",
+    "minAmount": "Minimum 0.01 in any supported currency. No formal maximum – larger top-ups are simply converted into more Usage Units.",
+    "previewCta": "Preview in Usage Units",
     "buyCta": "Buy custom top-up"
   },
   "directPayment": {
@@ -52,54 +52,54 @@
     "subtitle": "If you prefer not to manage a balance, you can pay for individual courses or custom PDFs directly in your currency.",
     "bullets": {
       "currencies": "Use EUR, GBP or USD depending on your region.",
-      "noTokens": "Tokens are not required – direct payment simply unlocks that specific product.",
-      "convertLater": "In future, you can always convert to a token-based workflow if you prefer."
+      "noTokens": "Usage Units are not required – direct payment simply unlocks that specific product.",
+      "convertLater": "In future, you can always convert to a usage-based workflow if you prefer."
     },
     "cta": "See example checkout"
   },
   "howTokensWork": {
-    "title": "How tokens work inside Cur Nova.",
+    "title": "How Usage Units work inside Cur Nova.",
     "subtitle": "A simple balance that powers both structured courses and AI-based tools.",
     "steps": {
       "step1": {
         "number": "Step 1",
-        "title": "Add tokens",
+        "title": "Add Usage Units",
         "description": "Buy a pack or set a custom top-up using your preferred currency."
       },
       "step2": {
         "number": "Step 2",
-        "title": "Use tokens on content",
-        "description": "Spend tokens on ready-made courses, custom PDFs and AI strategies."
+        "title": "Use Usage Units on content",
+        "description": "Spend Usage Units on ready-made courses, custom PDFs and AI strategies."
       },
       "step3": {
         "number": "Step 3",
         "title": "Track in your dashboard",
-        "description": "See balance, usage and history – including which products used how many tokens."
+        "description": "See balance, usage and history – including which products used how many Usage Units."
       },
       "step4": {
         "number": "Step 4",
         "title": "Top up when needed",
-        "description": "Tokens do not expire, so you can top up at your own pace when the balance gets low."
+        "description": "Usage Units do not expire, so you can top up at your own pace when the balance gets low."
       }
     }
   },
   "riskNotice": {
-    "title": "Important risk and token notice.",
-    "paragraph1": "Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. Tokens, courses and AI outputs on Cur Nova are for educational purposes only. They do not contain financial advice or trading signals.",
-    "paragraph2": "Tokens themselves are a way to access digital educational content inside Cur Nova. They are not a separate financial product or investment. Token pricing, refund rules and any region-specific limitations will be defined in the final Terms & Conditions and Risk & Disclaimer.",
+    "title": "Important risk and Usage Unit notice.",
+    "paragraph1": "Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. Usage Units, courses and AI outputs on Cur Nova are for educational purposes only. They do not contain financial advice or trading signals.",
+    "paragraph2": "Usage Units themselves are a way to access digital educational content inside Cur Nova. They are not a separate financial product or investment. Usage Unit pricing, refund rules and any region-specific limitations will be defined in the final Terms & Conditions and Risk & Disclaimer.",
     "cta": "Read full risk & disclaimer"
   },
   "cta": {
     "title": "Ready to load your first balance?",
     "subtitle": "Start with a small pack or custom top-up. You can always switch to a different approach later – your focus stays on structured learning.",
-    "choosePack": "Choose a token pack",
+    "choosePack": "Choose a Usage Unit Package",
     "setTopUp": "Set custom top-up"
   },
   "extra": {
     "workflow": "Wallet workflow",
     "steps": [
       {
-        "title": "Load tokens",
+        "title": "Load Usage Units",
         "desc": "Buy a pack or set a custom top-up using your preferred currency."
       },
       {
@@ -111,7 +111,7 @@
         "desc": "Access your educational materials from the dashboard library."
       }
     ],
-    "topUpTitle": "Top up token balance",
-    "topUpText": "Load tokens once and use them across all Cur Nova products — courses, custom PDFs, and AI-generated strategies. Tokens do not expire."
+    "topUpTitle": "Top up Usage Balance",
+    "topUpText": "Load Usage Units once and use them across all Cur Nova products — courses, custom PDFs, and AI-generated strategies. Usage Units do not expire."
   }
 }

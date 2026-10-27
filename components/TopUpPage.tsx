@@ -17,6 +17,7 @@ import {
 import { calculatePriceForTokens, formatPrice, getCurrencySymbol } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { useTopupCheckout } from '@/hooks/use-topup-checkout'
+import { TopupConfirmDialog } from '@/components/TopupConfirmDialog'
 
 const WORKFLOW_ICONS = [Coins, CreditCard, Wallet]
 
@@ -27,7 +28,7 @@ export function TopUpPage() {
   const [currency, setCurrency] = useState('GBP')
   const [customAmount, setCustomAmount] = useState('0.01')
   const [selectedPack, setSelectedPack] = useState(1)
-  const { startTopup, pendingKey, isPending } = useTopupCheckout('/top-up')
+  const { startTopup, pendingKey, isPending, confirmDialog } = useTopupCheckout('/top-up')
 
   useEffect(() => {
     setCurrency(getUserCurrency())
@@ -218,7 +219,7 @@ export function TopUpPage() {
                   disabled={isPending}
                   onClick={() =>
                     startTopup(
-                      { tokens: active.tokens, currency, slug: `token-pack-${active.id}` },
+                      { tokens: active.tokens, currency, slug: `token-pack-${active.id}`, label: active.name },
                       active.id
                     )
                   }
@@ -302,6 +303,8 @@ export function TopUpPage() {
           </p>
         </div>
       </section>
+
+      <TopupConfirmDialog {...confirmDialog} />
     </div>
   )
 }

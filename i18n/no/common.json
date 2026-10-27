@@ -39,7 +39,7 @@
   },
   "header": {
     "balance": "Saldo",
-    "tokens": "Tokens",
+    "tokens": "Bruksenheter",
     "topUp": "Fyll på",
     "topUpBalance": "Fyll på saldo",
     "openMainMenu": "Åpne hovedmeny"
@@ -69,7 +69,7 @@
       "contact": "Kontakt"
     },
     "extra": {
-      "tokenWallet": "Token-lommebok",
+      "tokenWallet": "Bruksbalanse",
       "login": "Logg inn",
       "register": "Registrer deg",
       "ctaTitle": "Begynn å bygge din handelsopplæring i dag",
@@ -80,7 +80,7 @@
       "structuredCourses": "Strukturerte kurs",
       "aiStrategyDocs": "AI-strategidokumenter",
       "riskFrameworks": "Risikorammeverk",
-      "brandBlurb": "Kurs, tokenpåfyllinger, tilpassede PDF-er og AI-strategidokumenter tilbys for opplæring og research.",
+      "brandBlurb": "Kurs, bruksenhetspåfyllinger, tilpassede PDF-er og AI-strategidokumenter tilbys for opplæring og research.",
       "products": "Produkter",
       "legalPolicies": "Juridiske retningslinjer",
       "securePayment": "Sikker betaling",
@@ -92,13 +92,13 @@
   },
   "buttons": {
     "viewAllCourses": "Se alle kurs",
-    "viewFullPricing": "Se alle priser og tokens",
+    "viewFullPricing": "Se alle priser og bruksenheter",
     "openFullGlossary": "Åpne hele ordlisten",
     "viewAllResources": "Se alle ressurser",
     "readFullRiskDisclaimer": "Les hele risiko- og ansvarsfraskrivelsen",
     "viewDetails": "Se detaljer",
     "courseCover": "Kursbilde",
-    "tokens": "tokens"
+    "tokens": "bruksenheter"
   },
   "badges": {
     "educationOnly": "Kun opplæring",
@@ -115,7 +115,7 @@
     "libraryDesc": "Bibliotek",
     "customCourseShort": "Skreddersydd PDF",
     "aiStrategyShort": "Strategi-PDF",
-    "pricingDesc": "Tokens og pakker",
+    "pricingDesc": "Bruksenheter og pakker",
     "wallet": "Lommebok",
     "cart": "Handlekurv",
     "shoppingCart": "Handlekurv",
@@ -149,7 +149,7 @@
     "All levels": "Alle nivåer",
     "Cross-market": "På tvers av markeder",
     "Top-up": "Påfylling",
-    "Token top-up": "Tokenpåfylling",
+    "Token top-up": "Bruksenhetspåfylling",
     "Custom course": "Tilpasset kurs",
     "AI strategy": "AI-strategi",
     "Course purchase": "Kurskjøp",
@@ -167,16 +167,23 @@
     "Failed": "Mislyktes",
     "Pending": "Venter",
     "Ready": "Klar",
-    "tokens": "tokens",
+    "tokens": "bruksenheter",
     "forex": "Forex",
     "crypto": "krypto",
     "binary": "binære",
-    "Token pack purchase": "Kjøp av tokenpakke",
+    "Token pack purchase": "Kjøp av bruksenhetspakke",
     "Custom top-up": "Valgfri påfylling",
-    "Hosted token top-up": "Tokenpåfylling via betalingsside",
+    "Hosted token top-up": "Bruksenhetspåfylling via betalingsside",
     "Custom course request": "Bestilling av tilpasset kurs",
     "AI strategy generation": "Generering av AI-strategi",
-    "Delivered": "Levert"
+    "Delivered": "Levert",
+    "Delayed": "Forsinket",
+    "Cancelled": "Kansellert",
+    "Refunded": "Refundert",
+    "Refund": "Refusjon",
+    "delayed": "forsinket",
+    "cancelled": "kansellert",
+    "refunded": "refundert"
   },
   "meta": {
     "description": "Cur Nova – førsteklasses opplæring for høyrisikomarkeder. Strukturerte kurs i Forex, krypto og binære opsjoner.",
@@ -189,7 +196,7 @@
     "library": "Bibliotek",
     "customCourses": "Tilpassede kurs",
     "topUpResult": "Betalingsstatus for påfylling",
-    "topUpResultDesc": "Følg statusen for betalingen av tokenpåfyllingen din.",
+    "topUpResultDesc": "Følg statusen for betalingen av bruksenhetspåfyllingen din.",
     "paymentStatus": "Betalingsstatus"
   },
   "validation": {
@@ -220,5 +227,13 @@
     "riskDisclosure": "Risikoopplysninger",
     "educationLine": "Ren opplæringsplattform. Vi gir ikke finansiell rådgivning, forvalter ikke kontoer og utfører ikke handler på dine vegne.",
     "courseNotFound": "Fant ikke kurset"
+  },
+  "orderConsent": {
+    "termsBefore": "Jeg har lest og godtar",
+    "termsLink": "vilkårene",
+    "termsAnd": "og",
+    "refundLink": "refusjonspolicyen",
+    "immediateSupply": "Jeg ber om umiddelbar levering av dette digitale innholdet og forstår at jeg mister angreretten og retten til refusjon når leveringen har startet, med mindre loven sier noe annet.",
+    "topupNotice": "Kjøp av bruksenheter starter ikke noe kurs, tilpasset kurs eller noen AI-strategi. Du bekrefter hvert produkt separat når du bruker bruksenhetene dine."
   }
 }

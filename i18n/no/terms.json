@@ -4,8 +4,8 @@
     "terms": "Vilkår og betingelser"
   },
   "hero": {
-    "title": "Fullstendige vilkår for bruk av Cur Novas kurs, tokens og AI-funksjoner.",
-    "subtitle": "Les disse vilkårene nøye før du kjøper tokenpakker, ferdige kurs, tilpassede kurs eller resultater fra AI-strategibyggeren. De oppsummerer reglene som holder vår rene opplæringsplattform trygg, regelverksmessig og åpen for alle kunder.",
+    "title": "Fullstendige vilkår for bruk av Cur Novas kurs, bruksenheter og AI-funksjoner.",
+    "subtitle": "Les disse vilkårene nøye før du kjøper bruksenhetspakker, ferdige kurs, tilpassede kurs eller resultater fra AI-strategibyggeren. De oppsummerer reglene som holder vår rene opplæringsplattform trygg, regelverksmessig og åpen for alle kunder.",
     "meta": [
       {
         "label": "Gjelder fra",
@@ -30,7 +30,7 @@
       "subtitle": "Bruk de fullstendige avsnittene nedenfor for bindende ordlyd – denne boksen fremhever bare intensjonen i retningslinjene våre.",
       "items": [
         "Cur Nova er en ren opplæringsplattform: ingen handel, ingen signaler, ingen forvaltede kontoer.",
-        "Tokens er forhåndsbetalte kreditter for digitalt innhold; de er ikke penger eller verdipapirer.",
+        "Bruksenheter er forhåndsbetalte kreditter for digitalt innhold; de er ikke penger eller verdipapirer.",
         "Alle kurs, PDF-er og AI-resultater er eksempler. Du er selv ansvarlig for hver handel.",
         "Vi overholder britisk forbrukerlovgivning og EUs forbrukerregler, men digitale leveranser har begrenset refusjonsrett."
       ],
@@ -47,7 +47,7 @@
       { "label": "Tjenestenes omfang og digitalt innhold", "anchor": "scope" },
       { "label": "Kundedata og ansvar", "anchor": "client-data" },
       { "label": "Akseptabel bruk", "anchor": "acceptable-use" },
-      { "label": "Tokens, priser og betaling", "anchor": "tokens" },
+      { "label": "Bruksenheter, priser og betaling", "anchor": "tokens" },
       { "label": "Kansellering, refusjon og tilbakeføring", "anchor": "refunds" },
       { "label": "Immaterielle rettigheter", "anchor": "ip" },
       { "label": "Konfidensialitet", "anchor": "confidentiality" },
@@ -74,7 +74,7 @@
       "title": "Innledning",
       "content": [
         { "type": "paragraph", "text": "1.1. Disse vilkårene og betingelsene («vilkårene») regulerer din tilgang til og bruk av cur-nova.com, tilhørende dashbord, applikasjoner og nedlastbart innhold («tjenesten»), som drives av CUR NOVA LTD (organisasjonsnummer 17240836, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia) («Cur Nova», «vi», «oss»)." },
-        { "type": "paragraph", "text": "1.2. Ved å opprette en konto, kjøpe tokens, bestille ferdige eller tilpassede kurs eller bruke en AI-drevet funksjon, godtar du disse vilkårene. Hvis du ikke er enig, må du ikke bruke tjenesten." },
+        { "type": "paragraph", "text": "1.2. Ved å opprette en konto, kjøpe bruksenheter, bestille ferdige eller tilpassede kurs eller bruke en AI-drevet funksjon, godtar du disse vilkårene. Hvis du ikke er enig, må du ikke bruke tjenesten." },
         {
           "type": "list",
           "items": [
@@ -94,13 +94,13 @@
           "type": "definition",
           "items": [
             { "term": "Konto", "description": "Profilen din i tjenesten, opprettet med e-post/passord eller støttet enkel pålogging (f.eks. Google)." },
-            { "term": "Tokens / lommebok", "description": "Forhåndsbetalte, ikke-overførbare digitale kreditter som brukes til å få tilgang til betalte funksjoner. Ikke kontanter, e-penger eller verdipapirer." },
+            { "term": "Bruksenheter / lommebok", "description": "Forhåndsbetalte, ikke-overførbare digitale kreditter som brukes til å få tilgang til betalte funksjoner. Ikke kontanter, e-penger eller verdipapirer." },
             { "term": "Ferdige kurs", "description": "PDF-kurs med fast pris." },
-            { "term": "Tilpassede kurs", "description": "Skreddersydde PDF-er utarbeidet av erfarne mentorer basert på skjemaene du fyller ut, vanligvis betalt med tokens." },
+            { "term": "Tilpassede kurs", "description": "Skreddersydde PDF-er utarbeidet av erfarne mentorer basert på skjemaene du fyller ut, vanligvis betalt med bruksenheter." },
             { "term": "AI-strategiresultater", "description": "Strukturerte strategier, diagrammer og forsidebilder generert med AI og levert digitalt." },
             { "term": "Bibliotek / dashbord", "description": "Innlogget område (f.eks. /dashboard) som viser saldo, kjøp, fakturaer og innstillinger." },
             { "term": "Kundedata", "description": "Informasjon du sender inn (erfaring, risikovilje, mål, notater, opplastinger osv.)." },
-            { "term": "Ordre / transaksjon", "description": "Et bekreftet kjøp av tokens, kurs eller andre betalte funksjoner i tjenesten." },
+            { "term": "Ordre / transaksjon", "description": "Et bekreftet kjøp av bruksenheter, kurs eller andre betalte funksjoner i tjenesten." },
             { "term": "Tredjepartsplattformer", "description": "Eksterne systemer som betalingsleverandører, meglere, AI-leverandører eller hostingtjenester." },
             { "term": "Juridiske retningslinjer", "description": "Personvernerklæring, retningslinjer for informasjonskapsler, refusjonspolicy, risiko- og ansvarsfraskrivelse og eventuelle lenkede retningslinjer." }
           ]
@@ -127,7 +127,7 @@
           "type": "list",
           "items": [
             "4.1. Vi tilbyr selvbetjente opplæringsverktøy: ferdige kurs, tilpassede kurs, resultater fra AI-strategibyggeren, risikoressurser og ordlister.",
-            "4.2. En avtale inngås når du oppretter en konto, og hver gang du kjøper tokens eller kurs, eller løser inn tokens for tilpassede resultater/AI-resultater.",
+            "4.2. En avtale inngås når du oppretter en konto, og hver gang du kjøper bruksenheter eller kurs, eller løser inn bruksenheter for tilpassede resultater/AI-resultater.",
             "4.3. Ingenting vi publiserer er investeringsrådgivning, handelsanbefalinger eller garantier for avkastning.",
             "4.4. Vi er ikke din agent, megler, kapitalforvalter eller depotmottaker og åpner eller overvåker ikke handelskontoer.",
             "4.5. Du er selv ansvarlig for å overholde lover, meglerregler og retningslinjer for eventuelle tredjepartsplattformer."
@@ -143,8 +143,8 @@
         {
           "type": "list",
           "items": [
-            "5.1. Tjenestene kan omfatte tospråklige kurs, tokenpakker, tilpassede kurs, AI-resultater, maler for risiko/journal, dashbord, faktureringshistorikk og kalkulatorer.",
-            "5.2. Tilpassede resultater og AI-resultater bygger på kundedataene dine; ufullstendige opplysninger gir mindre relevant innhold. Ny generering krever normalt ekstra tokens.",
+            "5.1. Tjenestene kan omfatte tospråklige kurs, bruksenhetspakker, tilpassede kurs, AI-resultater, maler for risiko/journal, dashbord, faktureringshistorikk og kalkulatorer.",
+            "5.2. Tilpassede resultater og AI-resultater bygger på kundedataene dine; ufullstendige opplysninger gir mindre relevant innhold. Ny generering krever normalt ekstra bruksenheter.",
             "5.3. Vi tilstreber sammenhengende, strukturert innhold, men kan ikke garantere feilfrihet eller markedsnøyaktighet i sanntid.",
             "5.4. Levering skjer når filene er tilgjengelige i dashbordet ditt og/eller via lenker på e-post. Problemer med e-post gjør ikke leveringen ugyldig hvis kopien finnes i dashbordet.",
             "5.5. Vi kan oppdatere eller fjerne produkter i katalogen for fremtidige kunder uten at det påvirker innhold du allerede eier."
@@ -186,20 +186,20 @@
     {
       "id": "tokens",
       "number": "8",
-      "title": "Tokens, priser og betaling",
+      "title": "Bruksenheter, priser og betaling",
       "content": [
         { "type": "note", "text": "Godkjente betalingsmåter: Visa og Mastercard. Flere betalingsmåter kan legges til med varsel." },
         {
           "type": "list",
           "items": [
-            "8.1. Tokenpakker (f.eks. Focused Start, Structured Growth, Discipline Pro) og valgfrie påfyllinger viser tydelig pris og antall inkluderte tokens.",
+            "8.1. Bruksenhetspakker (f.eks. Focused Start, Structured Growth, Discipline Pro) og valgfrie påfyllinger viser tydelig pris og antall inkluderte bruksenheter.",
             "8.2. GBP er basisvaluta. Priser kan vises i EUR, USD eller andre valutaer; endelig belastning og valutahåndtering vises i kassen.",
             "8.3. Lommeboksaldo er forskuddsbetaling for digitale funksjoner og er ikke bank- eller e-pengekontoer.",
             "8.4. Ved å oppgi et kort bekrefter du at du har rett til å bruke det; betalinger behandles av pålitelige betalingsleverandører, og vi lagrer ikke fullstendige kortnumre/CVV.",
-            "8.5. Tokens trekkes når du betaler med tokens, bestiller tilpassede kurs, kjører AI-strategier eller bruker en funksjon som er priset i tokens.",
+            "8.5. Bruksenheter trekkes når du betaler med bruksenheter, bestiller tilpassede kurs, kjører AI-strategier eller bruker en funksjon som er priset i bruksenheter.",
             "8.6. Noen ferdige kurs kan kjøpes direkte med kort; alternativet vises før kassen.",
-            "8.7. Tokens har for øyeblikket ingen utløpsdato, men vi kan innføre regler om rimelig bruk eller inaktivitet med varsel.",
-            "8.8. Vi utsteder elektroniske kvitteringer/fakturaer for tokenkjøp og kortbestillinger; du finner dem i dashbordet og på e-post."
+            "8.7. Bruksenheter har for øyeblikket ingen utløpsdato, men vi kan innføre regler om rimelig bruk eller inaktivitet med varsel.",
+            "8.8. Vi utsteder elektroniske kvitteringer/fakturaer for bruksenhetskjøp og kortbestillinger; du finner dem i dashbordet og på e-post."
           ]
         }
       ]
@@ -213,9 +213,9 @@
           "type": "list",
           "items": [
             "9.1. Fordi produktene er digitale, kan leveringen starte umiddelbart; den lovfestede angreretten kan være begrenset når leveringen har startet.",
-            "9.2. Tokenpåfyllinger refunderes som hovedregel ikke, med unntak av tydelige tekniske feil eller dobbeltbetalinger som skyldes oss.",
-            "9.3. Hvis du ikke får tilgang til kjøpt innhold, kontakt oss raskt. Vi kan etter eget skjønn levere filen på nytt, kreditere tokens eller refundere.",
-            "9.4. Uberettigede tilbakeføringer (chargebacks) kan føre til suspensjon, fjerning av tokens og krav om dekning av undersøkelseskostnader der loven tillater det."
+            "9.2. Bruksenhetspåfyllinger refunderes som hovedregel ikke, med unntak av tydelige tekniske feil eller dobbeltbetalinger som skyldes oss.",
+            "9.3. Hvis du ikke får tilgang til kjøpt innhold, kontakt oss raskt. Vi kan etter eget skjønn levere filen på nytt, kreditere bruksenheter eller refundere.",
+            "9.4. Uberettigede tilbakeføringer (chargebacks) kan føre til suspensjon, fjerning av bruksenheter og krav om dekning av undersøkelseskostnader der loven tillater det."
           ]
         }
       ]
@@ -287,7 +287,7 @@
           "type": "list",
           "items": [
             "14.1. Ingenting begrenser ansvar for død/personskade forårsaket av uaktsomhet, svindel eller andre forpliktelser som ikke kan fraskrives.",
-            "14.2. Med forbehold om punkt 14.1 er vårt samlede ansvar i en løpende 12-månedersperiode begrenset til de samlede gebyrene/tokens du har betalt til oss i den perioden.",
+            "14.2. Med forbehold om punkt 14.1 er vårt samlede ansvar i en løpende 12-månedersperiode begrenset til de samlede gebyrene/bruksenheter du har betalt til oss i den perioden.",
             "14.3. Vi er ikke ansvarlige for tapt fortjeneste, inntekt, goodwill eller data, indirekte tap eller følgetap, handelstap eller handlinger fra tredjepartsplattformer."
           ]
         }
@@ -326,7 +326,7 @@
           "type": "list",
           "items": [
             "17.1. Vi kan suspendere/avslutte tilgangen hvis du bryter disse vilkårene, begår svindel, utgjør en sikkerhetsrisiko, eller hvis det kreves av lov, myndigheter eller partnere.",
-            "17.2. Du kan når som helst avslutte kontoen din, men avslutning gir ikke automatisk refusjon av ubrukte tokens (se punkt 9).",
+            "17.2. Du kan når som helst avslutte kontoen din, men avslutning gir ikke automatisk refusjon av ubrukte bruksenheter (se punkt 9).",
             "17.3. Ved avslutning opphører retten din til å bruke tjenesten; vi oppbevarer opplysninger som kreves for skatt, svindelforebygging og regeletterlevelse."
           ]
         }
@@ -397,7 +397,7 @@
   ],
   "cta": {
     "title": "Å bruke Cur Nova betyr å godta disse prinsippene.",
-    "subtitle": "Hvis du trenger et tilpasset tillegg, en regulatorisk gjennomgang eller en signert PDF, gi oss beskjed før du kjøper. Ellers gjelder dette dokumentet for hver tokenpåfylling og nedlasting.",
+    "subtitle": "Hvis du trenger et tilpasset tillegg, en regulatorisk gjennomgang eller en signert PDF, gi oss beskjed før du kjøper. Ellers gjelder dette dokumentet for hver bruksenhetspåfylling og nedlasting.",
     "backToHome": "Tilbake til forsiden",
     "viewCourses": "Se kurs"
   }

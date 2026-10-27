@@ -116,7 +116,7 @@
             "Orders & library: details of your purchases and redemptions, including selected Ready-Made Courses, Custom Courses and AI Strategy Outputs associated with your Account.",
             "Project inputs for AI and content generation: free-text prompts, notes, trading scenarios, strategy descriptions, journal entries and other content you submit to generate Custom Courses or AI Strategy Outputs.",
             "Billing: billing name and address, VAT details (if applicable), and other information needed for invoicing and receipts.",
-            "Wallet & Tokens: top-up amounts, chosen currency, Token balances, usage records and history of Token consumption (for example, which feature or course consumed Tokens and when).",
+            "Wallet & Usage Units: top-up amounts, chosen currency, Usage Balances, usage records and history of Usage Unit consumption (for example, which feature or course consumed Usage Units and when).",
             "Support & communications: messages and attachments you send to us (including support tickets, feedback forms, surveys, reviews or emails)."
           ]
         },
@@ -137,7 +137,7 @@
           "items": [
             "Technical data: IP address, device and browser type, operating system, timezone, language, user agent, and session identifiers.",
             "Security telemetry: login attempts, authentication and access logs, rate-limiting and anomaly logs, abuse/fraud signals, and similar security-related information.",
-            "Usage & diagnostics: page views, clicks, navigation paths, features used (for example, which types of courses or tools you access), Token top-ups and deductions, task run identifiers, error traces and performance metrics."
+            "Usage & diagnostics: page views, clicks, navigation paths, features used (for example, which types of courses or tools you access), Usage Unit top-ups and deductions, task run identifiers, error traces and performance metrics."
           ]
         },
         {
@@ -194,7 +194,7 @@
           "items": [
             "create, maintain and secure your Account;",
             "provide the Service, including access to Ready-Made Courses, Custom Courses and AI Strategy Outputs;",
-            "operate Wallets and Tokens, process payments and issue invoices/receipts;",
+            "operate Wallets and Usage Units, process payments and issue invoices/receipts;",
             "deliver digital content to your dashboard library and, where relevant, via email;",
             "communicate with you about your use of the Service, Orders, library items and support requests."
           ]
@@ -276,7 +276,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Limited profiling may be used to tailor aspects of the Service (for example, adjusting educational difficulty based on your stated experience level, or flagging suspicious Token usage for review)."
+          "text": "Limited profiling may be used to tailor aspects of the Service (for example, adjusting educational difficulty based on your stated experience level, or flagging suspicious Usage Unit consumption for review)."
         },
         {
           "type": "paragraph",
@@ -366,7 +366,7 @@
         {
           "type": "list",
           "items": [
-            "Wallet, Tokens & transactions: at least 24 months and up to 6 years where needed for disputes, tax, accounting or enterprise records.",
+            "Wallet, Usage Units & transactions: at least 24 months and up to 6 years where needed for disputes, tax, accounting or enterprise records.",
             "Account & profile data: for as long as your Account is active and for a reasonable period after closure (typically up to 24 months), unless a longer period is required for legal, security or business continuity reasons.",
             "Course and AI output logs: for as long as reasonably necessary to provide your library, handle support requests and improve content, typically aligned with Account retention timelines.",
             "Logs & security telemetry: typically 6–24 months, depending on the purpose and risk level."

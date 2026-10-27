@@ -1,8 +1,9 @@
 // hooks/use-topup-checkout.ts - Direct card checkout for token packs and custom top-ups
 //
-// Token purchases never go through the cart: they are card-only and are sent
-// straight to the hosted payment session. The cart is reserved for courses,
-// which can be paid with either a card or an existing token balance.
+// Token purchases never go through the cart: they are card-only. Before the
+// hosted payment session starts, the buyer reviews the order and accepts the
+// Terms & Refund Policy in a confirmation dialog. The cart is reserved for
+// courses, which can be paid with either a card or an existing token balance.
 
 'use client'
 
@@ -20,6 +21,15 @@ interface TopupRequest {
   currency: string
   /** Identifier used for the hosted session, e.g. `token-pack-focused-start`. */
   slug?: string
+  /** Product name shown in the confirmation dialog, e.g. the pack name. */
+  label?: string
+}
+
+export interface TopupConfirmState {
+  request: TopupRequest | null
+  isSubmitting: boolean
+  onCancel: () => void
+  onConfirm: (consent: { termsAccepted: boolean }) => void
 }
 
 export function useTopupCheckout(callbackUrl: string) {
@@ -28,15 +38,23 @@ export function useTopupCheckout(callbackUrl: string) {
   const { showToast } = useToast()
   const t = useTranslations('topUp.checkout')
   const [pendingKey, setPendingKey] = useState<string | null>(null)
+  const [confirmRequest, setConfirmRequest] = useState<{ request: TopupRequest; key: string } | null>(null)
 
+  /** Opens the confirmation dialog; payment starts only after the buyer confirms. */
   const startTopup = useCallback(
-    async (request: TopupRequest, key = request.slug ?? 'custom') => {
+    (request: TopupRequest, key = request.slug ?? 'custom') => {
       if (status === 'unauthenticated') {
         router.push(`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`)
         return
       }
       if (status === 'loading' || pendingKey) return
+      setConfirmRequest({ request, key })
+    },
+    [status, router, callbackUrl, pendingKey]
+  )
 
+  const submitTopup = useCallback(
+    async (request: TopupRequest, key: string, consent: { termsAccepted: boolean }) => {
       setPendingKey(key)
       try {
         const body =
@@ -57,7 +75,7 @@ export function useTopupCheckout(callbackUrl: string) {
         const response = await fetch('/api/topup/init', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
+          body: JSON.stringify({ ...body, consent }),
         })
 
         const result = await response.json().catch(() => ({}))
@@ -83,8 +101,17 @@ export function useTopupCheckout(callbackUrl: string) {
         setPendingKey(null)
       }
     },
-    [status, router, callbackUrl, pendingKey, showToast, t]
+    [router, callbackUrl, showToast, t]
   )
 
-  return { startTopup, pendingKey, isPending: pendingKey !== null }
+  const confirmDialog: TopupConfirmState = {
+    request: confirmRequest?.request ?? null,
+    isSubmitting: pendingKey !== null,
+    onCancel: () => setConfirmRequest(null),
+    onConfirm: (consent) => {
+      if (confirmRequest) void submitTopup(confirmRequest.request, confirmRequest.key, consent)
+    },
+  }
+
+  return { startTopup, pendingKey, isPending: pendingKey !== null, confirmDialog }
 }

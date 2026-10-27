@@ -40,6 +40,7 @@ model User {
   aiStrategyRuns       AiStrategyRun[]
   passwordResetTokens  PasswordResetToken[]
   coursePurchases      CoursePurchase[]
+  orderConsents        OrderConsent[]
 }
 
 // NextAuth Sessions
@@ -172,7 +173,7 @@ model CoursePurchase {
 model CustomCourseRequest {
   id                     Int       @id @default(autoincrement())
   user_id                Int
-  status                 String // draft, pending_payment, in_queue, processing, ready, failed
+  status                 String // draft, pending_payment, in_queue, processing, ready, failed, delayed, cancelled, refunded
   status_stage           String? // generating_en, generating_cover, error, etc.
   status_progress        Int? // 0-100
   status_message         String?
@@ -200,6 +201,12 @@ model CustomCourseRequest {
   ai_prompt              String?   @db.Text
   ai_response_structured Json? // JSON blueprint
   pdf_url                String?
+  proposed_ready_at      DateTime? // New delivery date offered to the user after a delay
+  delay_notified_at      DateTime?
+  request_payload        Json? // Original request, used to re-run generation after a delay
+  cancelled_at           DateTime?
+  refunded_at            DateTime?
+  refunded_tokens        Int?
   created_at             DateTime  @default(now())
   updated_at             DateTime  @updatedAt
 
@@ -212,9 +219,9 @@ model CustomCourseRequest {
 
 // AI Strategy Runs
 model AiStrategyRun {
-  id                     Int      @id @default(autoincrement())
+  id                     Int       @id @default(autoincrement())
   user_id                Int
-  status                 String // in_queue, processing, ready, failed
+  status                 String // in_queue, processing, ready, failed, delayed, cancelled, refunded
   status_stage           String?
   status_progress        Int?
   status_message         String?
@@ -233,19 +240,25 @@ model AiStrategyRun {
   markets                String[] // Array of: Forex, Crypto, Binary
   trading_style          String // scalp, day, swing
   time_commitment        String?
-  main_objective         String   @db.Text
-  language               String   @default("en") // en, ar
-  tokens_cost            Int      @default(2000)
-  ai_model               String   @default("gpt-4o")
-  ai_prompt              String?  @db.Text
+  main_objective         String    @db.Text
+  language               String    @default("en") // en, ar
+  tokens_cost            Int       @default(2000)
+  ai_model               String    @default("gpt-4o")
+  ai_prompt              String?   @db.Text
   ai_response_structured Json? // Structured response
-  rendered_text          String?  @db.Text // Markdown/HTML for UI
+  rendered_text          String?   @db.Text // Markdown/HTML for UI
   pdf_url                String? // Supabase path to PDF file (e.g., supabase://course-pdf/ai-strategy/courseId-en.pdf)
   prompt_tokens          Int?
   completion_tokens      Int?
   total_tokens           Int?
-  created_at             DateTime @default(now())
-  updated_at             DateTime @updatedAt
+  proposed_ready_at      DateTime? // New delivery date offered to the user after a delay
+  delay_notified_at      DateTime?
+  request_payload        Json? // Original request, used to re-run generation after a delay
+  cancelled_at           DateTime?
+  refunded_at            DateTime?
+  refunded_tokens        Int?
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
 
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
@@ -254,11 +267,33 @@ model AiStrategyRun {
   @@index([created_at])
 }
 
+// Checkout consents, stored per order before Usage Units or money are taken
+model OrderConsent {
+  id                  Int      @id @default(autoincrement())
+  user_id             Int
+  order_type          String // topup, course, custom_course, ai_strategy
+  order_ref           String // Order number shown to the user (invoice / reference)
+  terms_accepted      Boolean // Terms & Refund Policy
+  immediate_supply    Boolean // Request to start supply of digital content immediately
+  withdrawal_loss_ack Boolean // Acknowledged loss of the right to cancel once supply starts
+  consent_version     String
+  consent_text        String   @db.Text // Exact statements shown to the user
+  locale              String?
+  ip_address          String?
+  user_agent          String?
+  created_at          DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id])
+  @@index([order_type, order_ref])
+}
+
 // Generation logs for serverless (persisted debug)
 model GenerationLog {
   id         Int      @id @default(autoincrement())
-  run_id     Int      // ID of CustomCourseRequest or AiStrategyRun
-  run_type   String   // 'custom-course' or 'ai-strategy'
+  run_id     Int // ID of CustomCourseRequest or AiStrategyRun
+  run_type   String // 'custom-course' or 'ai-strategy'
   level      String
   message    String   @db.Text
   meta       Json?

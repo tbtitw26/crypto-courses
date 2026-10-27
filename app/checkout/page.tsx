@@ -26,6 +26,12 @@ import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useState, useEffect, useRef, Suspense } from 'react'
 import { useSession } from 'next-auth/react'
 import { useToast } from '@/hooks/use-toast'
+import {
+  EMPTY_CONSENT,
+  OrderConsentFields,
+  consentPayload,
+  isConsentComplete,
+} from '@/components/OrderConsentFields'
 
 const STEP_LABELS = ['Review order', 'Payment', 'Confirm']
 
@@ -40,6 +46,10 @@ function CheckoutContent() {
   const [currency, setCurrency] = useState('GBP')
   const [paymentMethod, setPaymentMethod] = useState<'tokens' | 'card'>('tokens')
   const [isProcessingPayment, setIsProcessingPayment] = useState(false)
+  const [consent, setConsent] = useState(EMPTY_CONSENT)
+  // Paying with Usage Units supplies the course at once; paying by card only tops up Usage Units
+  const requireImmediateSupply = paymentMethod === 'tokens'
+  const hasConsent = isConsentComplete(consent, requireImmediateSupply)
   const hasRedirected = useRef(false)
 
   // Token packs and custom top-ups are card-only and never go through the cart.
@@ -98,6 +108,7 @@ function CheckoutContent() {
           })),
           currency: currency,
           totalTokens,
+          consent: consentPayload(consent, false),
         }),
       })
 
@@ -147,12 +158,13 @@ function CheckoutContent() {
           body: JSON.stringify({
             courseSlug: item.slug,
             language: 'en',
+            consent: consentPayload(consent, true),
           }),
         })
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}))
-          throw new Error(errorData.error || `Failed to purchase course: ${item.title}`)
+          throw new Error(errorData.message || errorData.error || `Failed to purchase course: ${item.title}`)
         }
 
         const result = await response.json()
@@ -303,7 +315,7 @@ function CheckoutContent() {
 
               <div className="divide-y divide-surface-200">
                 {courseItems.map((item) => (
-                  <CheckoutItem key={item.slug} item={item} currency={currency} tCommon={tCommon} />
+                  <CheckoutItem key={item.slug} item={item} currency={currency} tCommon={tCommon} t={t} />
                 ))}
               </div>
             </div>
@@ -449,6 +461,21 @@ function CheckoutContent() {
                 )}
             </div>
 
+            {/* ─── Terms & consent (never pre-ticked) ─── */}
+            <div className="rounded-xl border border-surface-300 bg-white shadow-card">
+              <div className="flex items-center gap-2.5 border-b border-surface-200 px-5 py-4">
+                <Shield className="h-4 w-4 text-text-muted" />
+                <h2 className="font-heading text-sm font-semibold text-text-main">{t('consent.title')}</h2>
+              </div>
+              <div className="px-5 py-5">
+                <OrderConsentFields
+                  value={consent}
+                  onChange={setConsent}
+                  requireImmediateSupply={requireImmediateSupply}
+                />
+              </div>
+            </div>
+
             {/* ─── Hosted payment details (card selected) ─── */}
             {paymentMethod === 'card' && (
               <div className="rounded-xl border border-surface-300 bg-white shadow-card">
@@ -479,7 +506,7 @@ function CheckoutContent() {
                   <button
                     type="button"
                     onClick={handleHostedTopupCheckout}
-                    disabled={isProcessingPayment}
+                    disabled={isProcessingPayment || !hasConsent}
                     className="btn-primary mt-5 w-full text-center"
                   >
                     {isProcessingPayment ? (
@@ -549,9 +576,27 @@ function CheckoutContent() {
                     <span className="font-heading text-sm font-semibold text-text-main">
                       {t('orderSummary.total')}
                     </span>
-                    <span className="font-heading text-xl font-bold text-text-main">{formattedPrice}</span>
+                    <span className="font-heading text-xl font-bold text-text-main">
+                      {formattedPrice} <span className="text-sm font-semibold text-text-muted">{currency}</span>
+                    </span>
+                  </div>
+                  <div className="mt-2 flex items-center justify-between text-sm">
+                    <span className="text-text-secondary">{t('orderSummary.delivery')}</span>
+                    <span className="font-medium text-text-main">{t('orderSummary.deliveryCourse')}</span>
                   </div>
                 </div>
+
+                <p className="mt-3 text-xs leading-relaxed text-text-muted">
+                  {t('consent.legalBefore')}{' '}
+                  <Link href="/terms" target="_blank" className="font-medium text-brand-700 underline hover:text-brand-800">
+                    {t('consent.termsLink')}
+                  </Link>{' '}
+                  {t('consent.legalAnd')}{' '}
+                  <Link href="/refund-policy" target="_blank" className="font-medium text-brand-700 underline hover:text-brand-800">
+                    {t('consent.refundLink')}
+                  </Link>
+                  .
+                </p>
               </div>
 
               {/* CTA area */}
@@ -559,7 +604,7 @@ function CheckoutContent() {
                 {paymentMethod === 'tokens' && (
                   <button
                     onClick={handleTokenPayment}
-                    disabled={!hasEnoughTokens || isProcessingPayment}
+                    disabled={!hasEnoughTokens || isProcessingPayment || !hasConsent}
                     className="btn-primary w-full text-center"
                   >
                     {isProcessingPayment ? (
@@ -606,9 +651,10 @@ interface CheckoutItemProps {
   item: any
   currency: string
   tCommon: any
+  t: any
 }
 
-function CheckoutItem({ item, currency, tCommon }: CheckoutItemProps) {
+function CheckoutItem({ item, currency, tCommon, t }: CheckoutItemProps) {
   const imagePath = item.image ?? getCourseImagePath(item.slug)
   const displayTitle = item.title
   const itemPrice = calculatePriceForTokens(item.tokens, currency)
@@ -640,6 +686,10 @@ function CheckoutItem({ item, currency, tCommon }: CheckoutItemProps) {
             {item.tokens.toLocaleString('en-US')} {tCommon('tokens')}
           </span>
         </div>
+        <p className="mt-1 text-xs text-text-muted">
+          {t('orderSummary.format')}: {t('orderSummary.formatCourse')} · {t('orderSummary.delivery')}:{' '}
+          {t('orderSummary.deliveryCourse')}
+        </p>
       </div>
 
       <span className="shrink-0 rounded-md bg-brand-50 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-700">

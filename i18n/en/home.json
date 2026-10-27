@@ -9,7 +9,7 @@
     "bullets": [
       "No financial advice – education only.",
       "Courses delivered as structured PDFs.",
-      "AI strategies with token-based access."
+      "AI strategies with usage-based access."
     ]
   },
   "heroSlideshow": {
@@ -104,7 +104,7 @@
       },
       {
         "title": "AI strategy in seconds",
-        "text": "Generate a structured trading plan with entry/exit logic and a risk checklist, based on your inputs.",
+        "text": "Generate a structured educational strategy guide with general decision criteria and a risk checklist, based on your learning profile.",
         "badge": "Instant",
         "cta": "Open AI Strategy Builder"
       }
@@ -120,7 +120,7 @@
       },
       {
         "title": "Add balance or pay directly",
-        "text": "Use tokens across products or pay in EUR, GBP or USD at checkout."
+        "text": "Use Usage Units across products or pay in EUR, GBP or USD at checkout."
       },
       {
         "title": "Get your PDF",
@@ -133,28 +133,28 @@
     ]
   },
   "tokensTeaser": {
-    "title": "Tokens and direct payments.",
-    "subtitle": "Pick what's more convenient: token packs, custom top-ups or direct payments for courses.",
+    "title": "Usage Units and direct payments.",
+    "subtitle": "Pick what's more convenient: Usage Unit Packages, custom top-ups or direct payments for courses.",
     "items": [
       {
-        "title": "Token packs",
-        "text": "Buy predefined token packs and use them across all Cur Nova products."
+        "title": "Usage Unit Packages",
+        "text": "Buy predefined Usage Unit Packages and use them across all Cur Nova products."
       },
       {
         "title": "Custom top-up",
-        "text": "Add any amount to your balance and spend tokens as you go."
+        "text": "Add any amount to your balance and spend Usage Units as you go."
       },
       {
         "title": "Direct course payments",
         "text": "Pay for ready-made courses in EUR, GBP or USD at checkout."
       }
     ],
-    "ctaPricing": "View full pricing & tokens"
+    "ctaPricing": "View full pricing & Usage Units"
   },
   "tokenPacks": {
-    "title": "Token packs & custom top-up.",
-    "subtitle": "Start small or load a balance – tokens work across Cur Nova courses and AI strategies.",
-    "tokens": "tokens",
+    "title": "Usage Unit Packages & custom top-up.",
+    "subtitle": "Start small or load a balance – Usage Units work across Cur Nova courses and AI strategies.",
+    "tokens": "Usage Units",
     "mostPopular": "Most popular",
     "packs": [
       {
@@ -174,7 +174,7 @@
         "name": "Structured Growth",
         "subtitle": "Most popular balance.",
         "tokens": 17544,
-        "description": "better rate per token.",
+        "description": "better rate per Usage Unit.",
         "benefits": [
           "Comfortable room for several courses and AI strategies.",
           "Good fit if you plan to explore more than one market."
@@ -186,7 +186,7 @@
         "name": "Discipline Pro",
         "subtitle": "For long-term learners.",
         "tokens": 30702,
-        "description": "best value per token.",
+        "description": "best value per Usage Unit.",
         "benefits": [
           "For systematic study across levels and markets.",
           "Leave headroom for future AI strategies and custom content."
@@ -196,10 +196,10 @@
     ],
     "customTopUp": {
       "title": "Custom top-up",
-      "subtitle": "Set any amount, we convert it to tokens.",
+      "subtitle": "Set any amount, we convert it to Usage Units.",
       "amountLabel": "Amount",
-      "minAmount": "Minimum 0.01 in the currency selected in the header. No maximum – larger top-ups are simply converted to tokens.",
-      "cta": "Preview top-up in tokens"
+      "minAmount": "Minimum 0.01 in the currency selected in the header. No maximum – larger top-ups are simply converted to Usage Units.",
+      "cta": "Preview top-up in Usage Units"
     }
   },
   "glossaryResources": {
@@ -261,8 +261,8 @@
       {
         "id": "how-tokens-work",
         "category": "payments",
-        "question": "How do tokens work?",
-        "answer": "Tokens are credits used to access Cur Nova products. 1.00 GBP equals 100 tokens. You can buy token packs, make custom top-ups, or pay directly for courses. Tokens do not expire and can be used across all products."
+        "question": "How do Usage Units work?",
+        "answer": "Usage Units are credits used to access Cur Nova products. 1.00 GBP equals 100 Usage Units. You can buy Usage Unit Packages, make custom top-ups, or pay directly for courses. Usage Units do not expire and can be used across all products."
       },
       {
         "id": "what-in-courses",
@@ -274,7 +274,7 @@
         "id": "can-cancel",
         "category": "payments",
         "question": "Can I cancel an order?",
-        "answer": "For ready-made courses, you can cancel before payment is processed. For custom course requests, cancellation is possible within 24 hours of submission. Once a course is generated or delivered, tokens are consumed and cannot be refunded unless there is a technical issue on our side."
+        "answer": "For ready-made courses, you can cancel before payment is processed. For custom course requests, cancellation is possible within 24 hours of submission. Once a course is generated or delivered, Usage Units are consumed and cannot be refunded unless there is a technical issue on our side."
       },
       {
         "id": "refund-policy",
@@ -286,7 +286,7 @@
         "id": "need-account",
         "category": "account",
         "question": "Do I need an account?",
-        "answer": "Yes, an account is required to purchase courses, track your token balance, access purchased PDFs, and request custom courses. You can sign up with email or use Google OAuth for quick registration."
+        "answer": "Yes, an account is required to purchase courses, track your Usage Balance, access purchased PDFs, and request custom courses. You can sign up with email or use Google OAuth for quick registration."
       },
       {
         "id": "financial-advice",
@@ -322,7 +322,7 @@
       "forexMeta": "Beginner · 12 modules",
       "aiStrategy": "AI Strategy",
       "aiMeta": "Generated · Ready",
-      "tokenBalance": "Token Balance",
+      "tokenBalance": "Usage Balance",
       "aiPowered": "AI-Powered"
     },
     "proof": [
@@ -339,7 +339,7 @@
         "label": "Strategy documents"
       },
       {
-        "value": "Token-Based",
+        "value": "Usage-Based",
         "label": "Flexible access"
       }
     ],
@@ -383,10 +383,10 @@
         {
           "label": "I want a structured strategy",
           "path": "AI Strategy Builder",
-          "desc": "Generate a structured trading plan with entry/exit logic and a risk checklist. Choose your market, timeframe and risk parameters.",
+          "desc": "Generate a structured educational strategy guide with general decision criteria and a risk checklist. Choose your market, timeframe and risk parameters.",
           "products": [
             "AI Strategy PDF",
-            "Entry/Exit Logic",
+            "Decision Criteria (Educational)",
             "Risk Checklist"
           ],
           "cta": "Open AI Strategy Builder"
@@ -414,14 +414,14 @@
         },
         {
           "title": "Track progress inside the dashboard",
-          "desc": "Access purchased courses, monitor token balance, download PDFs and review all transactions from your personal dashboard."
+          "desc": "Access purchased courses, monitor Usage Balance, download PDFs and review all transactions from your personal dashboard."
         }
       ]
     },
     "platform": {
       "badge": "The platform",
       "title": "A connected education system, not a content dump.",
-      "subtitle": "Every product feeds into a single dashboard. Courses, custom PDFs, AI strategies, tokens and receipts — all in one place.",
+      "subtitle": "Every product feeds into a single dashboard. Courses, custom PDFs, AI strategies, Usage Units and receipts — all in one place.",
       "marketByLevel": "{market} courses by level",
       "browseLibrary": "Browse library",
       "capabilities": [
@@ -435,10 +435,10 @@
         },
         {
           "title": "AI Strategy Generator",
-          "desc": "Generate structured trading plans with entry/exit logic and risk parameters in seconds."
+          "desc": "Generate structured educational strategy guides with general decision criteria and risk principles in minutes."
         },
         {
-          "title": "Token Wallet",
+          "title": "Usage Balance",
           "desc": "One balance across all products. Buy packs or top up custom amounts."
         },
         {
@@ -473,7 +473,7 @@
       "customDocSub": "Built by a professional trader",
       "aiTags": [
         "Strategy PDF",
-        "Entry/exit logic",
+        "Decision criteria (educational)",
         "Risk checklist"
       ],
       "customTags": [
@@ -485,10 +485,10 @@
     "dashboardPreview": {
       "badge": "Dashboard",
       "title": "Everything in one place.",
-      "subtitle": "Access purchased courses, track token balance, download PDFs, monitor AI strategy generation status, and review all transactions from your personal dashboard.",
+      "subtitle": "Access purchased courses, track Usage Balance, download PDFs, monitor AI strategy generation status, and review all transactions from your personal dashboard.",
       "features": [
         "PDF Downloads",
-        "Token Balance",
+        "Usage Balance",
         "Transaction History",
         "AI Generation Status"
       ],
@@ -496,7 +496,7 @@
       "mockTitle": "Personal Dashboard",
       "courses": "Courses",
       "strategies": "Strategies",
-      "tokens": "Tokens",
+      "tokens": "Usage Units",
       "mockCourses": [
         "Forex Foundations",
         "Crypto Volatility"
@@ -504,7 +504,7 @@
       "pdfReady": "PDF Ready"
     },
     "tokens": {
-      "badge": "Token economy",
+      "badge": "Usage Unit economy",
       "topUp": "Top up balance"
     },
     "lab": {

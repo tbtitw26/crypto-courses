@@ -21,7 +21,7 @@
       "title": "Order Summary",
       "subtotal": "Subtotal",
       "total": "Total",
-      "tokens": "tokens",
+      "tokens": "Usage Units",
       "goToCheckout": "Go to checkout",
       "continueShopping": "Continue shopping"
     },
@@ -33,16 +33,16 @@
       "startHere": "Start here",
       "browseTitle": "Browse courses",
       "browseDesc": "Ready-made structured PDFs for Forex, Crypto, and Binary options at every level.",
-      "tokensTitle": "Load a token balance",
-      "tokensDesc": "Buy a token pack and use it across courses, custom PDFs, and AI strategies.",
-      "tokensCta": "View token packs",
+      "tokensTitle": "Load a Usage Balance",
+      "tokensDesc": "Buy a Usage Unit Package and use it across courses, custom PDFs, and AI strategies.",
+      "tokensCta": "View Usage Unit Packages",
       "customTitle": "Custom or AI content",
       "customDesc": "Request a tailored course PDF or generate an AI trading strategy document.",
       "customCta": "Get started",
       "orderReview": "Order review",
       "item": "item",
       "items": "items",
-      "disclaimer": "All content is for educational purposes only. Tokens, courses and AI outputs do not constitute financial advice."
+      "disclaimer": "All content is for educational purposes only. Usage Units, courses and AI outputs do not constitute financial advice."
     }
   },
   "checkout": {
@@ -52,20 +52,24 @@
       "title": "Order Summary",
       "subtotal": "Subtotal",
       "total": "Total",
-      "tokens": "tokens"
+      "tokens": "Usage Units",
+      "delivery": "Delivery",
+      "deliveryCourse": "Immediately after purchase",
+      "format": "Format",
+      "formatCourse": "PDF course (download)"
     },
     "payment": {
       "title": "Payment Method",
-      "withTokens": "Pay with tokens",
+      "withTokens": "Pay with Usage Units",
       "withCard": "Pay with card",
-      "insufficientTokens": "Insufficient tokens",
-      "buyTokens": "Buy tokens",
+      "insufficientTokens": "Insufficient Usage Units",
+      "buyTokens": "Purchase Usage Units",
       "success": "Payment successful",
       "successDescription": "Your order has been placed successfully.",
       "failed": "Payment failed",
       "failedDescription": "Unable to process payment. Please try again.",
       "processing": "Processing...",
-      "tokenPurchaseOnlyCard": "Token packs and custom top-ups can only be purchased with a card."
+      "tokenPurchaseOnlyCard": "Usage Unit Packages and custom top-ups can only be purchased with a card."
     },
     "placeOrder": "Place order",
     "backToCart": "Back to cart",
@@ -122,18 +126,25 @@
       "noRedirect": "No redirect URL received from payment gateway",
       "preparing": "Preparing your checkout",
       "verifying": "Verifying session and order details…",
-      "needTokens": "You need {need} tokens but have {have}.",
-      "tokenBalance": "Token balance",
+      "needTokens": "You need {need} Usage Units but have {have}.",
+      "tokenBalance": "Usage Balance",
       "afterPurchase": "After purchase",
       "deficit": "−{amount} deficit",
       "hostedTitle": "Secure hosted payment",
-      "hostedText": "You’ll be redirected to APS to top up the exact token balance needed for this order. After payment, return here to complete your course purchase with tokens.",
+      "hostedText": "You’ll be redirected to APS to top up the exact Usage Balance needed for this order. After payment, return here to complete your course purchase with Usage Units.",
       "amount": "Amount",
       "continueAps": "Continue to APS secure checkout",
       "ssl": "SSL secured",
       "pci": "PCI compliant",
-      "disclaimer": "All content is for educational purposes only. Tokens, courses and AI outputs do not constitute financial advice.",
+      "disclaimer": "All content is for educational purposes only. Usage Units, courses and AI outputs do not constitute financial advice.",
       "loading": "Loading checkout…"
+    },
+    "consent": {
+      "title": "Terms & consent",
+      "legalBefore": "By ordering you agree to our",
+      "termsLink": "Terms & Conditions",
+      "legalAnd": "and",
+      "refundLink": "Refund Policy"
     }
   },
   "messages": {

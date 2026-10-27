@@ -3,10 +3,14 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import type { OrderStatus } from '@/lib/order-status'
 
 export type JobStatus = {
   jobId: string
-  status: 'in_queue' | 'processing' | 'ready' | 'failed'
+  status: 'in_queue' | 'processing' | 'ready' | 'failed' | 'delayed' | 'cancelled' | 'refunded'
+  orderStatus?: OrderStatus
+  estimatedReadyAt?: string | null
+  proposedReadyAt?: string | null
   stage?: string | null
   progress?: number | null
   error?: string | null
@@ -58,8 +62,10 @@ export function useJobStatus(jobType: 'custom-course' | 'ai-strategy', jobId?: s
         setData(json)
         setError(null)
 
+        // Delayed/cancelled/refunded need a customer decision; 'scheduled' waits for its delivery date
         const status = json?.status
-        const terminal = status === 'ready' || status === 'failed'
+        const terminal =
+          ['ready', 'delayed', 'cancelled', 'refunded'].includes(status) || json?.stage === 'scheduled'
 
         // Stop polling if terminal state
         if (!terminal) {
@@ -85,7 +91,8 @@ export function useJobStatus(jobType: 'custom-course' | 'ai-strategy', jobId?: s
     }
   }, [jobType, jobId])
 
-  const isTerminal = data?.status === 'ready' || data?.status === 'failed'
+  const isTerminal =
+    ['ready', 'delayed', 'cancelled', 'refunded'].includes(data?.status ?? '') || data?.stage === 'scheduled'
 
   return {
     data,

@@ -66,7 +66,7 @@
       },
       {
         "title": "AI strategies as structured examples",
-        "description": "AI strategies produce a plan with setup criteria, entry/exit logic and a risk checklist. They are not trade signals – they are examples of how a plan might look when written clearly."
+        "description": "AI strategies produce an educational study guide with general setup criteria, decision principles and a risk checklist. They are not trade signals – they are examples of how a plan might look when written clearly."
       }
     ]
   },
@@ -79,8 +79,8 @@
         "description": "EU, UK and UAE are the main focus points. Examples and structures are written with these regulatory and practical realities in mind."
       },
       {
-        "title": "Currencies & tokens",
-        "description": "Inside the interface you can work with EUR, GBP and USD. Some products can be unlocked via tokens, others via direct payments. Tokens are an internal balance, not an investment product."
+        "title": "Currencies & Usage Units",
+        "description": "Inside the interface you can work with EUR, GBP and USD. Some products can be unlocked via Usage Units, others via direct payments. Usage Units are an internal balance, not an investment product."
       },
       {
         "title": "Language",

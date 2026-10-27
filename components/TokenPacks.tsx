@@ -10,12 +10,13 @@ import { HomeSection } from './HomeSection'
 import { calculatePriceForTokens, formatPrice, getCurrencySymbol } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { useTopupCheckout } from '@/hooks/use-topup-checkout'
+import { TopupConfirmDialog } from '@/components/TopupConfirmDialog'
 
 export function TokenPacks() {
   const t = useTranslations('home.tokenPacks')
   const [currency, setCurrency] = useState('GBP')
   const [customAmount, setCustomAmount] = useState('0.01')
-  const { startTopup, pendingKey, isPending } = useTopupCheckout('/')
+  const { startTopup, pendingKey, isPending, confirmDialog } = useTopupCheckout('/')
 
   useEffect(() => {
     setCurrency(getUserCurrency())
@@ -117,7 +118,7 @@ export function TokenPacks() {
                     disabled={isPending}
                     onClick={() =>
                       startTopup(
-                        { tokens: pack.tokens, currency, slug: `token-pack-${pack.id}` },
+                        { tokens: pack.tokens, currency, slug: `token-pack-${pack.id}`, label: pack.name },
                         pack.id
                       )
                     }
@@ -183,6 +184,8 @@ export function TokenPacks() {
           </motion.div>
         </div>
       </div>
+
+      <TopupConfirmDialog {...confirmDialog} />
     </HomeSection>
   )
 }

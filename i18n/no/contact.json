@@ -5,7 +5,7 @@
   },
   "hero": {
     "title": "Kontakt Cur Nova med klare, praktiske spørsmål.",
-    "subtitle": "Bruk dette skjemaet for spørsmål om kurs, fakturering, tokens eller kontoen din. Vi svarer med tydelig informasjon – aldri handelsanbefalinger eller løfter.",
+    "subtitle": "Bruk dette skjemaet for spørsmål om kurs, fakturering, bruksenheter eller kontoen din. Vi svarer med tydelig informasjon – aldri handelsanbefalinger eller løfter.",
     "quickNotes": {
       "responseWindow": {
         "label": "Vanlig svartid:",
@@ -28,7 +28,7 @@
       "channels": [
         {
           "title": "Supportskjema i appen",
-          "description": "Raskest for spørsmål om konto, kurs og tokens."
+          "description": "Raskest for spørsmål om konto, kurs og bruksenheter."
         },
         {
           "title": "Support-e-post",
@@ -66,7 +66,7 @@
       "topic": {
         "label": "Emne *",
         "placeholder": "Velg et emne",
-        "hint": "Eksempler: Kurs, Tokens og fakturering, Kontotilgang, Juridisk og compliance, Annet."
+        "hint": "Eksempler: Kurs, Bruksenheter og fakturering, Kontotilgang, Juridisk og compliance, Annet."
       },
       "accountId": {
         "label": "Konto-ID (valgfritt)",
@@ -137,7 +137,7 @@
   },
   "cta": {
     "title": "Vil du heller starte med selvbetjening?",
-    "subtitle": "Mange spørsmål om kurs, tokens og kontotilgang er dekket i FAQ, ordlisten og ressursene våre. Du kan alltid komme tilbake hit hvis du fortsatt trenger hjelp.",
+    "subtitle": "Mange spørsmål om kurs, bruksenheter og kontotilgang er dekket i FAQ, ordlisten og ressursene våre. Du kan alltid komme tilbake hit hvis du fortsatt trenger hjelp.",
     "openFaq": "Åpne FAQ",
     "viewResources": "Se ressurser"
   },
@@ -150,7 +150,7 @@
     },
     "topics": {
       "Courses": "Kurs",
-      "Tokens & billing": "Tokens og fakturering",
+      "Tokens & billing": "Bruksenheter og fakturering",
       "Account access": "Kontotilgang",
       "Legal & compliance": "Juridisk og compliance",
       "Other": "Annet"

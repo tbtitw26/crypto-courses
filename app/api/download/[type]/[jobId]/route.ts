@@ -5,6 +5,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth-config'
 import { prisma, withPrismaRetry } from '@/lib/prisma'
 import { resolveDownloadUrl } from '@/lib/storage'
+import { getOrderStatus } from '@/lib/order-status'
 
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
@@ -45,6 +46,7 @@ export async function GET(
             user_id: true,
             status: true,
             pdf_url: true,
+            estimated_ready_at: true,
           },
         })
       )
@@ -70,7 +72,8 @@ export async function GET(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 })
     }
 
-    if (job.status !== 'ready' && job.status !== 'completed') {
+    // Custom courses are released on their delivery date
+    if (getOrderStatus(job) !== 'ready') {
       return NextResponse.redirect(
         new URL(`/dashboard${type === 'custom' ? '/custom-courses' : '/ai-strategies'}?error=not_ready`, request.url)
       )

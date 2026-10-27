@@ -5,7 +5,7 @@
   },
   "hero": {
     "title": "Før du starter: her er hva Cur Nova er – og hva det ikke er.",
-    "subtitle": "Denne siden tar for seg sentrale spørsmål om kursene, de tilpassede PDF-ene, AI-strategiene, tokens og risiko. Den er bevisst direkte og forsiktig. Vi foretrekker klarhet fremfor hype.",
+    "subtitle": "Denne siden tar for seg sentrale spørsmål om kursene, de tilpassede PDF-ene, AI-strategiene, bruksenheter og risiko. Den er bevisst direkte og forsiktig. Vi foretrekker klarhet fremfor hype.",
     "bullets": {
       "courses": "Strukturerte PDF-kurs om Forex, krypto og binære opsjoner.",
       "ai": "AI-genererte strategier som opplæringsplaner.",
@@ -21,7 +21,7 @@
   },
   "faq": {
     "title": "Vanlige spørsmål om å lære med Cur Nova.",
-    "subtitle": "Gruppert etter tema, slik at du raskt ser hvordan kurs, tilpassede PDF-er, AI-strategier og tokens fungerer på plattformen.",
+    "subtitle": "Gruppert etter tema, slik at du raskt ser hvordan kurs, tilpassede PDF-er, AI-strategier og bruksenheter fungerer på plattformen.",
     "disclaimer": "Denne FAQ-en er ikke et juridisk dokument. Se alltid vilkårene og betingelsene.",
     "items": [
       {
@@ -57,7 +57,7 @@
       {
         "category": "AI-strategi",
         "question": "Hva er en AI-strategi i Cur Nova?",
-        "answer": "En AI-strategi er en umiddelbart generert plan som beskriver oppsettkriterier, logikk for inn- og utgang og en risikosjekkliste basert på dine opplysninger. Det er ikke et sanntidssignal eller et automatisk handelssystem. Det er opplæringsmateriell som skal hjelpe deg å tenke i strukturerte scenarier."
+        "answer": "En AI-strategi er en opplæringsguide som forklarer generelle oppsettkriterier, beslutningsprinsipper og en risikosjekkliste, tilpasset læringsprofilen du oppgir. Det er ikke et sanntidssignal eller et automatisk handelssystem. Det er opplæringsmateriell som skal hjelpe deg å tenke i strukturerte scenarier."
       },
       {
         "category": "AI-strategi",
@@ -65,24 +65,24 @@
         "answer": "Nei. AI-strategier er ikke handelssignaler, anbefalinger eller personlig finansiell rådgivning. De er eksempler på hvordan en strukturert plan kan se ut. Du er selv fullt ansvarlig for alle handler du gjør på din egen konto."
       },
       {
-        "category": "Tokens og betaling",
-        "question": "Hvordan fungerer tokens på Cur Nova?",
-        "answer": "Tokens er en intern saldo du kan bruke til å låse opp kurs, tilpassede PDF-er og AI-strategier. Du kan fylle på tokens ved å kjøpe tokenpakker eller velge en valgfri påfylling. Tokens er ikke et eget finansielt produkt eller en investering."
+        "category": "Bruksenheter og betaling",
+        "question": "Hvordan fungerer bruksenheter på Cur Nova?",
+        "answer": "Bruksenheter er en intern saldo du kan bruke til å låse opp kurs, tilpassede PDF-er og AI-strategier. Du kan fylle på bruksenheter ved å kjøpe bruksenhetspakker eller velge en valgfri påfylling. Bruksenheter er ikke et eget finansielt produkt eller en investering."
       },
       {
-        "category": "Tokens og betaling",
-        "question": "Kan jeg betale direkte uten å bruke tokens?",
-        "answer": "Ja. I mange tilfeller kan du betale direkte i din lokale valuta (for eksempel EUR, GBP eller USD) for ett enkelt kurs eller produkt. Da trenger du ikke tokens for det kjøpet."
+        "category": "Bruksenheter og betaling",
+        "question": "Kan jeg betale direkte uten å bruke bruksenheter?",
+        "answer": "Ja. I mange tilfeller kan du betale direkte i din lokale valuta (for eksempel EUR, GBP eller USD) for ett enkelt kurs eller produkt. Da trenger du ikke bruksenheter for det kjøpet."
       },
       {
-        "category": "Tokens og betaling",
+        "category": "Bruksenheter og betaling",
         "question": "Hvilke valutaer og betalingsmåter støtter dere?",
         "answer": "Valutaene som støttes i grensesnittet er blant annet EUR, GBP og USD. Spesifikke betalingsmåter (for eksempel korttyper eller lokale betalingsleverandører) kan variere etter region og vises i kassen."
       },
       {
         "category": "Tilgang og konto",
         "question": "Trenger jeg en konto for å få tilgang til Cur Nova-kursene?",
-        "answer": "Du kan se kursbeskrivelser uten konto. For å kjøpe kurs, bestille et tilpasset kurs, generere AI-strategier eller administrere token-saldoen din, må du opprette en konto og logge inn."
+        "answer": "Du kan se kursbeskrivelser uten konto. For å kjøpe kurs, bestille et tilpasset kurs, generere AI-strategier eller administrere bruksbalansen din, må du opprette en konto og logge inn."
       },
       {
         "category": "Tilgang og konto",
@@ -102,15 +102,15 @@
     ]
   },
   "tokensCard": {
-    "title": "Tokens i Cur Nova",
+    "title": "Bruksenheter i Cur Nova",
     "subtitle": "Intern saldo, ikke en omsettelig eiendel.",
-    "description": "Tokens brukes til å låse opp opplæringsinnhold (kurs, tilpassede PDF-er, AI-strategier). De kan ikke omsettes i markeder, brukes som margin eller tas ut som kontanter.",
-    "cta": "Les siden om priser og tokens"
+    "description": "Bruksenheter brukes til å låse opp opplæringsinnhold (kurs, tilpassede PDF-er, AI-strategier). De kan ikke omsettes i markeder, brukes som margin eller tas ut som kontanter.",
+    "cta": "Les siden om priser og bruksenheter"
   },
   "paymentsCard": {
     "title": "Valutaer og regioner",
     "subtitle": "Grensesnitt kontra faktisk behandling.",
-    "description": "Du kan vanligvis velge mellom tokens og direkte betaling i EUR, GBP eller USD. De nøyaktige betalingsmåtene og betalingspartnerne kan variere etter region og vises i kassen.",
+    "description": "Du kan vanligvis velge mellom bruksenheter og direkte betaling i EUR, GBP eller USD. De nøyaktige betalingsmåtene og betalingspartnerne kan variere etter region og vises i kassen.",
     "regions": "EU, Storbritannia og UAE er hovedregionene."
   },
   "deliveryCard": {

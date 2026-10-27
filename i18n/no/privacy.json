@@ -116,7 +116,7 @@
             "Bestillinger og bibliotek: detaljer om kjøp og innløsninger, inkludert valgte ferdige kurs, tilpassede kurs og AI-strategiresultater knyttet til kontoen din.",
             "Innspill til AI og innholdsgenerering: fritekstforespørsler, notater, handelsscenarier, strategibeskrivelser, journalnotater og annet innhold du sender inn for å generere tilpassede kurs eller AI-strategiresultater.",
             "Fakturering: navn og adresse for fakturering, MVA-opplysninger (der det er relevant) og annen informasjon som trengs for fakturaer og kvitteringer.",
-            "Lommebok og tokens: påfyllingsbeløp, valgt valuta, token-saldo, bruksregistreringer og historikk over tokenforbruk (for eksempel hvilken funksjon eller hvilket kurs som brukte tokens og når).",
+            "Lommebok og bruksenheter: påfyllingsbeløp, valgt valuta, bruksbalanse, bruksregistreringer og historikk over bruksenhetsforbruk (for eksempel hvilken funksjon eller hvilket kurs som brukte bruksenheter og når).",
             "Support og kommunikasjon: meldinger og vedlegg du sender oss (inkludert supporthenvendelser, tilbakemeldingsskjemaer, undersøkelser, anmeldelser eller e-poster)."
           ]
         },
@@ -137,7 +137,7 @@
           "items": [
             "Tekniske data: IP-adresse, enhets- og nettlesertype, operativsystem, tidssone, språk, brukeragent og øktidentifikatorer.",
             "Sikkerhetstelemetri: påloggingsforsøk, autentiserings- og tilgangslogger, logger for hastighetsbegrensning og avvik, signaler om misbruk/svindel og lignende sikkerhetsrelatert informasjon.",
-            "Bruk og diagnostikk: sidevisninger, klikk, navigasjonsmønstre, funksjoner som brukes (for eksempel hvilke typer kurs eller verktøy du åpner), tokenpåfyllinger og -trekk, ID-er for oppgavekjøringer, feilsporinger og ytelsesmåltall."
+            "Bruk og diagnostikk: sidevisninger, klikk, navigasjonsmønstre, funksjoner som brukes (for eksempel hvilke typer kurs eller verktøy du åpner), bruksenhetspåfyllinger og -trekk, ID-er for oppgavekjøringer, feilsporinger og ytelsesmåltall."
           ]
         },
         {
@@ -194,7 +194,7 @@
           "items": [
             "opprette, vedlikeholde og sikre kontoen din;",
             "levere tjenesten, inkludert tilgang til ferdige kurs, tilpassede kurs og AI-strategiresultater;",
-            "drive lommebøker og tokens, behandle betalinger og utstede fakturaer/kvitteringer;",
+            "drive lommebøker og bruksenheter, behandle betalinger og utstede fakturaer/kvitteringer;",
             "levere digitalt innhold til biblioteket i dashbordet ditt og, der det er relevant, via e-post;",
             "kommunisere med deg om bruken av tjenesten, bestillinger, bibliotekselementer og supporthenvendelser."
           ]
@@ -276,7 +276,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Begrenset profilering kan brukes til å tilpasse deler av tjenesten (for eksempel å justere vanskelighetsgraden i opplæringen etter erfaringsnivået du oppgir, eller å flagge mistenkelig tokenbruk for gjennomgang)."
+          "text": "Begrenset profilering kan brukes til å tilpasse deler av tjenesten (for eksempel å justere vanskelighetsgraden i opplæringen etter erfaringsnivået du oppgir, eller å flagge mistenkelig forbruk av bruksenheter for gjennomgang)."
         },
         {
           "type": "paragraph",
@@ -366,7 +366,7 @@
         {
           "type": "list",
           "items": [
-            "Lommebok, tokens og transaksjoner: minst 24 måneder og opptil 6 år der det er nødvendig for tvister, skatt, regnskap eller bedriftsdokumentasjon.",
+            "Lommebok, bruksenheter og transaksjoner: minst 24 måneder og opptil 6 år der det er nødvendig for tvister, skatt, regnskap eller bedriftsdokumentasjon.",
             "Konto- og profilopplysninger: så lenge kontoen din er aktiv og i en rimelig periode etter avslutning (vanligvis opptil 24 måneder), med mindre en lengre periode kreves av juridiske, sikkerhetsmessige eller driftsmessige grunner.",
             "Logger for kurs og AI-resultater: så lenge det er rimelig nødvendig for å levere biblioteket ditt, håndtere supporthenvendelser og forbedre innholdet, vanligvis i tråd med lagringstiden for kontoen.",
             "Logger og sikkerhetstelemetri: vanligvis 6–24 måneder, avhengig av formål og risikonivå."

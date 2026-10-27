@@ -252,7 +252,7 @@ export function ReceiptsPage() {
                             })}
                           </span>
                           {tx.status && (
-                            <span className="text-xs text-text-muted">Status: {tx.status}</span>
+                            <span className="text-xs text-text-muted">{valueLabel(tx.status)}</span>
                           )}
                         </div>
                         <p className="mt-0.5 truncate text-sm font-medium text-text-main">{tx.detail}</p>
@@ -261,7 +261,7 @@ export function ReceiptsPage() {
                           {tx.tokens !== 0 && (
                             <span>
                               {tx.tokens > 0 ? '+' : ''}
-                              {tx.tokens.toLocaleString('en-US')} tokens
+                              {tx.tokens.toLocaleString('en-US')} {valueLabel('tokens')}
                             </span>
                           )}
                           {tx.amount > 0 && (

@@ -5,7 +5,7 @@
   },
   "hero": {
     "title": "Contact Cur Nova with clear, practical questions.",
-    "subtitle": "Use this form for questions about courses, billing, tokens or your account. We respond with straightforward information – never trade calls or promises.",
+    "subtitle": "Use this form for questions about courses, billing, Usage Units or your account. We respond with straightforward information – never trade calls or promises.",
     "quickNotes": {
       "responseWindow": {
         "label": "Typical response window:",
@@ -28,7 +28,7 @@
       "channels": [
         {
           "title": "In-app support form",
-          "description": "Fastest for account, course and token questions."
+          "description": "Fastest for account, course and Usage Unit questions."
         },
         {
           "title": "Support email",
@@ -66,7 +66,7 @@
       "topic": {
         "label": "Topic *",
         "placeholder": "Choose a topic",
-        "hint": "Examples: Courses, Tokens & billing, Account access, Legal & compliance, Other."
+        "hint": "Examples: Courses, Usage Units & billing, Account access, Legal & compliance, Other."
       },
       "accountId": {
         "label": "Account ID (optional)",
@@ -137,7 +137,7 @@
   },
   "cta": {
     "title": "Prefer to start with self-service?",
-    "subtitle": "Many questions about courses, tokens and account access are covered in our FAQ, glossary and resources. You can always come back here if you still need help.",
+    "subtitle": "Many questions about courses, Usage Units and account access are covered in our FAQ, glossary and resources. You can always come back here if you still need help.",
     "openFaq": "Open FAQ",
     "viewResources": "View resources"
   },
@@ -150,7 +150,7 @@
     },
     "topics": {
       "Courses": "Courses",
-      "Tokens & billing": "Tokens & billing",
+      "Tokens & billing": "Usage Units & billing",
       "Account access": "Account access",
       "Legal & compliance": "Legal & compliance",
       "Other": "Other"

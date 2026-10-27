@@ -1,50 +1,50 @@
 {
-  "title": "Priser og tokens",
+  "title": "Priser og bruksenheter",
   "breadcrumb": {
     "home": "Hjem",
-    "pricing": "Priser og tokens"
+    "pricing": "Priser og bruksenheter"
   },
   "header": {
     "badges": {
-      "tokensAcross": "Bruk tokens på kurs og AI",
+      "tokensAcross": "Bruk bruksenheter på kurs og AI",
       "educationOnly": "Kun opplæring"
     },
     "backToHome": "Tilbake til forsiden"
   },
   "hero": {
     "title": "Én saldo for kurs og AI-strategier.",
-    "subtitle": "Fyll på en token-saldo én gang og bruk den på tvers av Cur Nova: strukturerte PDF-kurs, tilpassede kurs og AI-genererte strategier. Eller betal direkte for ett enkelt kurs hvis du foretrekker det.",
+    "subtitle": "Fyll på en bruksbalanse én gang og bruk den på tvers av Cur Nova: strukturerte PDF-kurs, tilpassede kurs og AI-genererte strategier. Eller betal direkte for ett enkelt kurs hvis du foretrekker det.",
     "bullets": {
       "oneBalance": "Én saldo for innhold om Forex, krypto og binære opsjoner.",
-      "payWithTokens": "Betal med tokens eller direkte i EUR, GBP eller USD.",
-      "topUpAnytime": "Fyll på når som helst – tokens utløper ikke."
+      "payWithTokens": "Betal med bruksenheter eller direkte i EUR, GBP eller USD.",
+      "topUpAnytime": "Fyll på når som helst – bruksenheter utløper ikke."
     },
     "exampleRate": {
       "title": "Eksempel på effektiv kurs",
       "subtitle": "Kun til illustrasjon",
       "badge": "Ikke bindende",
-      "description": "I produksjon vil tokenprisene fastsettes per region og valuta. Her viser vi bare hvordan pakker og valgfrie påfyllinger kan fungere i grensesnittet.",
+      "description": "I produksjon vil bruksenhetsprisene fastsettes per region og valuta. Her viser vi bare hvordan pakker og valgfrie påfyllinger kan fungere i grensesnittet.",
       "example": "For eksempel kan <tokens>{tokens}</tokens> tilsvare omtrent <price>{price}</price> (eller tilsvarende i din region), men endelige verdier fastsettes i vilkårene og betalingsinnstillingene.",
-      "tokens": "100 tokens",
+      "tokens": "100 bruksenheter",
       "price": "£1.00"
     }
   },
   "tokenPacks": {
-    "title": "Tokenpakker.",
-    "subtitle": "Start i det små eller satse mer langsiktig – hver pakke fyller tokens på Cur Nova-saldoen din til bruk på kurs og AI.",
+    "title": "Bruksenhetspakker.",
+    "subtitle": "Start i det små eller satse mer langsiktig – hver pakke fyller bruksenheter på Cur Nova-saldoen din til bruk på kurs og AI.",
     "note": "Valutaen som vises her er kun illustrativ. Endelige priser kan avvike.",
-    "info": "Nøyaktig tokenomregning fastsettes i produksjon.",
+    "info": "Nøyaktig bruksenhetsomregning fastsettes i produksjon.",
     "mostPopular": "Mest populær",
     "selectPack": "Velg {name}",
     "buyPack": "Kjøp {name}"
   },
   "customTopUp": {
     "title": "Valgfri påfylling",
-    "subtitle": "Velg et hvilket som helst beløp i ønsket valuta. I produksjon konverterer systemet det automatisk til tokens.",
+    "subtitle": "Velg et hvilket som helst beløp i ønsket valuta. I produksjon konverterer systemet det automatisk til bruksenheter.",
     "amountLabel": "Beløp",
     "currencies": "GBP · EUR · USD",
-    "minAmount": "Minimum 0,01 i en hvilken som helst støttet valuta. Ingen formell maksgrense – større påfyllinger blir ganske enkelt til flere tokens.",
-    "previewCta": "Forhåndsvis i tokens",
+    "minAmount": "Minimum 0,01 i en hvilken som helst støttet valuta. Ingen formell maksgrense – større påfyllinger blir ganske enkelt til flere bruksenheter.",
+    "previewCta": "Forhåndsvis i bruksenheter",
     "buyCta": "Kjøp valgfri påfylling"
   },
   "directPayment": {
@@ -52,54 +52,54 @@
     "subtitle": "Hvis du ikke vil administrere en saldo, kan du betale for enkeltkurs eller tilpassede PDF-er direkte i din valuta.",
     "bullets": {
       "currencies": "Bruk EUR, GBP eller USD avhengig av regionen din.",
-      "noTokens": "Tokens er ikke nødvendig – direkte betaling låser ganske enkelt opp det aktuelle produktet.",
-      "convertLater": "Senere kan du alltid gå over til en tokenbasert arbeidsflyt hvis du foretrekker det."
+      "noTokens": "Bruksenheter er ikke nødvendig – direkte betaling låser ganske enkelt opp det aktuelle produktet.",
+      "convertLater": "Senere kan du alltid gå over til en bruksbasert arbeidsflyt hvis du foretrekker det."
     },
     "cta": "Se eksempel på kasse"
   },
   "howTokensWork": {
-    "title": "Slik fungerer tokens i Cur Nova.",
+    "title": "Slik fungerer bruksenheter i Cur Nova.",
     "subtitle": "En enkel saldo som brukes både til strukturerte kurs og AI-baserte verktøy.",
     "steps": {
       "step1": {
         "number": "Steg 1",
-        "title": "Legg til tokens",
+        "title": "Legg til bruksenheter",
         "description": "Kjøp en pakke eller velg en valgfri påfylling i ønsket valuta."
       },
       "step2": {
         "number": "Steg 2",
-        "title": "Bruk tokens på innhold",
-        "description": "Bruk tokens på ferdige kurs, tilpassede PDF-er og AI-strategier."
+        "title": "Bruk bruksenheter på innhold",
+        "description": "Bruk bruksenheter på ferdige kurs, tilpassede PDF-er og AI-strategier."
       },
       "step3": {
         "number": "Steg 3",
         "title": "Følg med i dashbordet",
-        "description": "Se saldo, forbruk og historikk – inkludert hvor mange tokens hvert produkt brukte."
+        "description": "Se saldo, forbruk og historikk – inkludert hvor mange bruksenheter hvert produkt brukte."
       },
       "step4": {
         "number": "Steg 4",
         "title": "Fyll på ved behov",
-        "description": "Tokens utløper ikke, så du kan fylle på i ditt eget tempo når saldoen blir lav."
+        "description": "Bruksenheter utløper ikke, så du kan fylle på i ditt eget tempo når saldoen blir lav."
       }
     }
   },
   "riskNotice": {
-    "title": "Viktig informasjon om risiko og tokens.",
-    "paragraph1": "Handel med Forex, krypto og binære opsjoner er svært spekulativt og kan føre til betydelig eller fullstendig tap av kapital. Tokens, kurs og AI-resultater på Cur Nova er kun ment for opplæring. De inneholder ikke finansiell rådgivning eller handelssignaler.",
-    "paragraph2": "Tokens er i seg selv en måte å få tilgang til digitalt opplæringsinnhold i Cur Nova. De er ikke et eget finansielt produkt eller en investering. Tokenpriser, refusjonsregler og eventuelle regionale begrensninger fastsettes i de endelige vilkårene og betingelsene samt risiko- og ansvarsfraskrivelsen.",
+    "title": "Viktig informasjon om risiko og bruksenheter.",
+    "paragraph1": "Handel med Forex, krypto og binære opsjoner er svært spekulativt og kan føre til betydelig eller fullstendig tap av kapital. Bruksenheter, kurs og AI-resultater på Cur Nova er kun ment for opplæring. De inneholder ikke finansiell rådgivning eller handelssignaler.",
+    "paragraph2": "Bruksenheter er i seg selv en måte å få tilgang til digitalt opplæringsinnhold i Cur Nova. De er ikke et eget finansielt produkt eller en investering. Bruksenhetspriser, refusjonsregler og eventuelle regionale begrensninger fastsettes i de endelige vilkårene og betingelsene samt risiko- og ansvarsfraskrivelsen.",
     "cta": "Les hele risiko- og ansvarsfraskrivelsen"
   },
   "cta": {
     "title": "Klar til å fylle på din første saldo?",
     "subtitle": "Start med en liten pakke eller en valgfri påfylling. Du kan alltid bytte tilnærming senere – fokuset ditt forblir på strukturert læring.",
-    "choosePack": "Velg en tokenpakke",
+    "choosePack": "Velg en bruksenhetspakke",
     "setTopUp": "Velg valgfri påfylling"
   },
   "extra": {
     "workflow": "Slik fungerer lommeboken",
     "steps": [
       {
-        "title": "Fyll på tokens",
+        "title": "Fyll på bruksenheter",
         "desc": "Kjøp en pakke eller velg en valgfri påfylling i ønsket valuta."
       },
       {
@@ -111,7 +111,7 @@
         "desc": "Få tilgang til opplæringsmateriellet ditt fra biblioteket i dashbordet."
       }
     ],
-    "topUpTitle": "Fyll på token-saldo",
-    "topUpText": "Fyll på tokens én gang og bruk dem på alle Cur Nova-produkter – kurs, tilpassede PDF-er og AI-genererte strategier. Tokens utløper ikke."
+    "topUpTitle": "Fyll på bruksbalanse",
+    "topUpText": "Fyll på bruksenheter én gang og bruk dem på alle Cur Nova-produkter – kurs, tilpassede PDF-er og AI-genererte strategier. Bruksenheter utløper ikke."
   }
 }

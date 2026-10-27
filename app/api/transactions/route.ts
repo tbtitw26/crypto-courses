@@ -7,6 +7,15 @@ import { prisma, withPrismaRetry } from '@/lib/prisma'
 import { Prisma } from '@prisma/client'
 import { getCourseTranslation } from '@/lib/course-i18n'
 import { getServerLocale } from '@/i18n/server'
+import { formatOrderRef, getOrderStatus, type OrderStatus } from '@/lib/order-status'
+
+const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
+  processing: 'Processing',
+  ready: 'Completed',
+  delayed: 'Delayed',
+  cancelled: 'Cancelled',
+  refunded: 'Refunded',
+}
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -33,6 +42,9 @@ type CustomCourseRecord = {
   tokens_cost: number
   status: string
   markets: string[]
+  estimated_ready_at: Date | null
+  refunded_tokens: number | null
+  refunded_at: Date | null
   created_at: Date
 }
 
@@ -41,6 +53,8 @@ type AiStrategyRecord = {
   tokens_cost: number
   status: string
   markets: string[]
+  refunded_tokens: number | null
+  refunded_at: Date | null
   created_at: Date
 }
 
@@ -135,6 +149,9 @@ export async function GET(request: NextRequest) {
               id: true,
               tokens_cost: true,
               status: true,
+              estimated_ready_at: true,
+              refunded_tokens: true,
+              refunded_at: true,
               markets: true,
               created_at: true,
             },
@@ -151,6 +168,8 @@ export async function GET(request: NextRequest) {
               id: true,
               tokens_cost: true,
               status: true,
+              refunded_tokens: true,
+              refunded_at: true,
               markets: true,
               created_at: true,
             },
@@ -255,8 +274,8 @@ export async function GET(request: NextRequest) {
           date: course.created_at.toISOString(),
           tokens: -course.tokens_cost,
           amount: 0, // Paid with tokens, not fiat
-          meta: `${course.markets.join(', ')} · ${course.status}`,
-          status: course.status === 'failed' ? 'Failed' : 'Completed',
+          meta: `${course.markets.join(', ')} · ${getOrderStatus(course)}`,
+          status: ORDER_STATUS_LABELS[getOrderStatus(course)],
           receiptAvailable: true,
         })),
         // AI strategies (negative amounts)
@@ -267,10 +286,27 @@ export async function GET(request: NextRequest) {
           date: strategy.created_at.toISOString(),
           tokens: -strategy.tokens_cost,
           amount: 0, // Paid with tokens, not fiat
-          meta: `${strategy.markets.join(', ')} · ${strategy.status}`,
-          status: strategy.status === 'failed' ? 'Failed' : 'Completed',
+          meta: `${strategy.markets.join(', ')} · ${getOrderStatus(strategy)}`,
+          status: ORDER_STATUS_LABELS[getOrderStatus(strategy)],
           receiptAvailable: true,
         })),
+        // Refunds of cancelled custom courses and AI strategies (positive amounts)
+        ...[
+          ...customCourses.map((order) => ({ order, kind: 'custom' as const })),
+          ...aiStrategies.map((order) => ({ order, kind: 'ai' as const })),
+        ]
+          .filter(({ order }) => order.refunded_at && order.refunded_tokens)
+          .map(({ order, kind }) => ({
+            id: `refund-${kind}-${order.id}`,
+            type: 'Refund',
+            detail: `Refund for order ${formatOrderRef(kind, order.id)}`,
+            date: order.refunded_at!.toISOString(),
+            tokens: order.refunded_tokens!,
+            amount: 0,
+            meta: `${order.refunded_tokens!.toLocaleString('en-US')} tokens`,
+            status: 'Refunded',
+            receiptAvailable: false,
+          })),
         // Course purchases (negative amounts)
         ...coursePurchases.map((purchase) => ({
           id: `course-${purchase.id}`,

@@ -5,7 +5,7 @@
   },
   "hero": {
     "title": "Before you start, here is what Cur Nova is – and what it is not.",
-    "subtitle": "This page highlights key questions about our courses, custom PDFs, AI strategies, tokens and risk. It is intentionally direct and conservative. We prefer clarity over hype.",
+    "subtitle": "This page highlights key questions about our courses, custom PDFs, AI strategies, Usage Units and risk. It is intentionally direct and conservative. We prefer clarity over hype.",
     "bullets": {
       "courses": "Structured PDF courses for Forex, Crypto and Binary.",
       "ai": "AI-generated strategies as educational plans.",
@@ -21,7 +21,7 @@
   },
   "faq": {
     "title": "Common questions about learning with Cur Nova.",
-    "subtitle": "Grouped by topic so you can quickly see how courses, custom PDFs, AI strategies and tokens behave inside the platform.",
+    "subtitle": "Grouped by topic so you can quickly see how courses, custom PDFs, AI strategies and Usage Units behave inside the platform.",
     "disclaimer": "This FAQ is not a legal document. Always refer to Terms & Conditions.",
     "items": [
       {
@@ -57,7 +57,7 @@
       {
         "category": "AI strategy",
         "question": "What is an AI strategy inside Cur Nova?",
-        "answer": "An AI strategy is an instantly generated plan that describes setup criteria, entry/exit logic, and a risk checklist based on your inputs. It is not a live signal or an auto-trading system. It is educational material intended to help you think in structured scenarios."
+        "answer": "An AI strategy is an educational study guide that explains general setup criteria, decision principles and a risk checklist, tailored to the learning profile you provide. It is not a live signal or an auto-trading system. It is educational material intended to help you think in structured scenarios."
       },
       {
         "category": "AI strategy",
@@ -65,24 +65,24 @@
         "answer": "No. AI strategies are not trade signals, recommendations, or personalised financial advice. They are examples of how a structured plan could look. You are fully responsible for any trades you take in your own account."
       },
       {
-        "category": "Tokens & payments",
-        "question": "How do tokens work on Cur Nova?",
-        "answer": "Tokens are an internal balance that you can use to unlock courses, custom PDFs and AI strategies. You can load tokens by purchasing token packs or by setting a custom top-up. Tokens are not a separate financial product or investment."
+        "category": "Usage Units & payments",
+        "question": "How do Usage Units work on Cur Nova?",
+        "answer": "Usage Units are an internal balance that you can use to unlock courses, custom PDFs and AI strategies. You can load Usage Units by purchasing Usage Unit Packages or by setting a custom top-up. Usage Units are not a separate financial product or investment."
       },
       {
-        "category": "Tokens & payments",
-        "question": "Can I pay directly without using tokens?",
-        "answer": "Yes. In many cases you can pay directly in your local currency (for example EUR, GBP or USD) for a single course or product. In that case, tokens are not required for that purchase."
+        "category": "Usage Units & payments",
+        "question": "Can I pay directly without using Usage Units?",
+        "answer": "Yes. In many cases you can pay directly in your local currency (for example EUR, GBP or USD) for a single course or product. In that case, Usage Units are not required for that purchase."
       },
       {
-        "category": "Tokens & payments",
+        "category": "Usage Units & payments",
         "question": "Which currencies and payment methods do you support?",
         "answer": "Supported currencies in the interface include EUR, GBP and USD. Specific payment methods (for example card brands or local processors) can vary by region and will be shown at checkout."
       },
       {
         "category": "Access & account",
         "question": "Do I need an account to access Cur Nova courses?",
-        "answer": "You can browse course descriptions without an account. To purchase courses, request a custom course, generate AI strategies or manage your token balance, you will need to create an account and sign in."
+        "answer": "You can browse course descriptions without an account. To purchase courses, request a custom course, generate AI strategies or manage your Usage Balance, you will need to create an account and sign in."
       },
       {
         "category": "Access & account",
@@ -102,15 +102,15 @@
     ]
   },
   "tokensCard": {
-    "title": "Tokens inside Cur Nova",
+    "title": "Usage Units inside Cur Nova",
     "subtitle": "Internal balance, not a tradeable asset.",
-    "description": "Tokens are used to unlock educational content (courses, custom PDFs, AI strategies). They cannot be traded on markets, used as margin or withdrawn as cash.",
-    "cta": "Read pricing & tokens page"
+    "description": "Usage Units are used to unlock educational content (courses, custom PDFs, AI strategies). They cannot be traded on markets, used as margin or withdrawn as cash.",
+    "cta": "Read pricing & Usage Units page"
   },
   "paymentsCard": {
     "title": "Currencies & regions",
     "subtitle": "Interface vs. actual processing.",
-    "description": "You can usually choose between tokens and direct payment in EUR, GBP or USD. The exact methods and processing partners can differ by region and will be shown at checkout.",
+    "description": "You can usually choose between Usage Units and direct payment in EUR, GBP or USD. The exact methods and processing partners can differ by region and will be shown at checkout.",
     "regions": "EU, UK and UAE are primary focus regions."
   },
   "deliveryCard": {

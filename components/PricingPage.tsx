@@ -21,6 +21,7 @@ import {
 import { calculatePriceForTokens, formatPrice, getCurrencySymbol } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { useTopupCheckout } from '@/hooks/use-topup-checkout'
+import { TopupConfirmDialog } from '@/components/TopupConfirmDialog'
 
 export function PricingPage() {
   const t = useTranslations('pricing')
@@ -28,7 +29,7 @@ export function PricingPage() {
   const [currency, setCurrency] = useState('GBP')
   const [customAmount, setCustomAmount] = useState('0.01')
   const [selectedPack, setSelectedPack] = useState(1)
-  const { startTopup, pendingKey, isPending } = useTopupCheckout('/pricing')
+  const { startTopup, pendingKey, isPending, confirmDialog } = useTopupCheckout('/pricing')
 
   useEffect(() => {
     setCurrency(getUserCurrency())
@@ -200,7 +201,7 @@ export function PricingPage() {
                   onClick={(e) => {
                     e.stopPropagation()
                     setSelectedPack(index)
-                    startTopup({ tokens: pack.tokens, currency, slug: `token-pack-${pack.id}` }, pack.id)
+                    startTopup({ tokens: pack.tokens, currency, slug: `token-pack-${pack.id}`, label: pack.name }, pack.id)
                   }}
                   className={`mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 font-heading text-sm font-semibold transition-all duration-200 disabled:opacity-60 ${
                     selectedPack === index
@@ -371,6 +372,8 @@ export function PricingPage() {
           </div>
         </div>
       </section>
+
+      <TopupConfirmDialog {...confirmDialog} />
     </div>
   )
 }

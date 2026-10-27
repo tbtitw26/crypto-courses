@@ -39,7 +39,7 @@
   },
   "header": {
     "balance": "Balance",
-    "tokens": "Tokens",
+    "tokens": "Usage Units",
     "topUp": "Top-Up",
     "topUpBalance": "Top-Up Balance",
     "openMainMenu": "Open main menu"
@@ -69,7 +69,7 @@
       "contact": "Contact"
     },
     "extra": {
-      "tokenWallet": "Token Wallet",
+      "tokenWallet": "Usage Balance",
       "login": "Login",
       "register": "Register",
       "ctaTitle": "Start building your trading education today",
@@ -80,7 +80,7 @@
       "structuredCourses": "Structured Courses",
       "aiStrategyDocs": "AI Strategy Docs",
       "riskFrameworks": "Risk Frameworks",
-      "brandBlurb": "Courses, token top-ups, custom PDFs, and AI strategy documents are provided for education and research workflows.",
+      "brandBlurb": "Courses, Usage Unit top-ups, custom PDFs, and AI strategy documents are provided for education and research workflows.",
       "products": "Products",
       "legalPolicies": "Legal policies",
       "securePayment": "Secure payment",
@@ -92,13 +92,13 @@
   },
   "buttons": {
     "viewAllCourses": "View all courses",
-    "viewFullPricing": "View full pricing & tokens",
+    "viewFullPricing": "View full pricing & Usage Units",
     "openFullGlossary": "Open full glossary",
     "viewAllResources": "View all resources",
     "readFullRiskDisclaimer": "Read full risk & disclaimer",
     "viewDetails": "View details",
     "courseCover": "Course cover",
-    "tokens": "tokens"
+    "tokens": "Usage Units"
   },
   "badges": {
     "educationOnly": "Education only",
@@ -115,7 +115,7 @@
     "libraryDesc": "Library",
     "customCourseShort": "Tailored PDF",
     "aiStrategyShort": "Strategy PDF",
-    "pricingDesc": "Tokens & packs",
+    "pricingDesc": "Usage Units & packs",
     "wallet": "Wallet",
     "cart": "Cart",
     "shoppingCart": "Shopping cart",
@@ -149,7 +149,7 @@
     "All levels": "All levels",
     "Cross-market": "Cross-market",
     "Top-up": "Top-up",
-    "Token top-up": "Token top-up",
+    "Token top-up": "Usage Unit top-up",
     "Custom course": "Custom course",
     "AI strategy": "AI strategy",
     "Course purchase": "Course purchase",
@@ -167,16 +167,23 @@
     "Failed": "Failed",
     "Pending": "Pending",
     "Ready": "Ready",
-    "tokens": "tokens",
+    "tokens": "Usage Units",
     "forex": "forex",
     "crypto": "crypto",
     "binary": "binary",
-    "Token pack purchase": "Token pack purchase",
+    "Token pack purchase": "Usage Unit Package purchase",
     "Custom top-up": "Custom top-up",
-    "Hosted token top-up": "Hosted token top-up",
+    "Hosted token top-up": "Hosted Usage Unit top-up",
     "Custom course request": "Custom course request",
     "AI strategy generation": "AI strategy generation",
-    "Delivered": "Delivered"
+    "Delivered": "Delivered",
+    "Delayed": "Delayed",
+    "Cancelled": "Cancelled",
+    "Refunded": "Refunded",
+    "Refund": "Refund",
+    "delayed": "delayed",
+    "cancelled": "cancelled",
+    "refunded": "refunded"
   },
   "meta": {
     "description": "Cur Nova - Premium education for high-risk markets. Structured Forex, Crypto and Binary options courses.",
@@ -189,7 +196,7 @@
     "library": "Library",
     "customCourses": "Custom Courses",
     "topUpResult": "Top-up payment status",
-    "topUpResultDesc": "Track the status of your token top-up payment.",
+    "topUpResultDesc": "Track the status of your Usage Unit top-up payment.",
     "paymentStatus": "Payment Status"
   },
   "validation": {
@@ -220,5 +227,13 @@
     "riskDisclosure": "Risk Disclosure",
     "educationLine": "Education-only platform. We do not provide financial advice, manage accounts, or execute trades on your behalf.",
     "courseNotFound": "Course not found"
+  },
+  "orderConsent": {
+    "termsBefore": "I have read and accept the",
+    "termsLink": "Terms & Conditions",
+    "termsAnd": "and the",
+    "refundLink": "Refund Policy",
+    "immediateSupply": "I request immediate supply of this digital content and understand that once supply has started I lose my right to cancel and to a refund, except where the law says otherwise.",
+    "topupNotice": "Buying Usage Units does not start any course, custom course or AI strategy. You confirm each product separately when you spend your Usage Units."
   }
 }

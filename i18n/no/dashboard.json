@@ -22,7 +22,7 @@
   },
   "overview": {
     "title": "Velkommen tilbake. Her er læringsoversikten din.",
-    "subtitle": "Følg med på token-saldoen, statusen for tilpassede kurs og de siste AI-strategiene i én visning. Cur Nova er fortsatt kun opplæring – ingen signaler eller forvaltede kontoer.",
+    "subtitle": "Følg med på bruksbalansen, statusen for tilpassede kurs og de siste AI-strategiene i én visning. Cur Nova er fortsatt kun opplæring – ingen signaler eller forvaltede kontoer.",
     "badges": {
       "learningOverview": "Læringsoversikt",
       "recentActivity": "Nylig aktivitet"
@@ -31,7 +31,7 @@
   "aiStrategiesPage": {
     "title": "AI-strategier",
     "heading": "AI-strategier generert for deg",
-    "subtitle": "Alle forespørsler fra AI-strategibyggeren samles her. Følg med på status, tokenforbruk og nedlastingslenker når en PDF er klar.",
+    "subtitle": "Alle forespørsler fra AI-strategibyggeren samles her. Følg med på status, bruksenhetsforbruk og nedlastingslenker når en PDF er klar.",
     "deliveryInfo": {
       "title": "Vanlig levering",
       "subtitle": "Minutter for AI-generering, levering til innboksen kort tid etter."
@@ -55,7 +55,7 @@
     "table": {
       "title": "Mål",
       "marketLevel": "Markeder",
-      "tokens": "Tokens",
+      "tokens": "Bruksenheter",
       "status": "Status",
       "created": "Opprettet",
       "actions": "Handlinger",
@@ -103,7 +103,7 @@
   },
   "kpi": {
     "balance": {
-      "title": "Token-saldo",
+      "title": "Bruksbalanse",
       "subtitle": "Tilsvarer ca. {price} – nøyaktig verdi avhenger av gjeldende priser.",
       "topUp": "Fyll på saldo",
       "viewPricing": "Se priser"
@@ -163,9 +163,9 @@
       "cta": "Les hele risiko- og ansvarsfraskrivelsen"
     },
     "billing": {
-      "title": "Fakturering og tokens",
-      "subtitle": "Et øyeblikksbilde av nylige betalinger og tokenforbruk.",
-      "tokensSpent": "Tokens brukt siste 30 dager",
+      "title": "Fakturering og bruksenheter",
+      "subtitle": "Et øyeblikksbilde av nylige betalinger og bruksenhetsforbruk.",
+      "tokensSpent": "Bruksenheter brukt siste 30 dager",
       "aiGenerated": "AI-strategier generert",
       "coursesUnlocked": "Kurs låst opp",
       "viewHistory": "Åpne full faktureringshistorikk"
@@ -178,8 +178,8 @@
     }
   },
   "transactions": {
-    "title": "Nylig token- og betalingsaktivitet",
-    "subtitle": "En enkel logg over hvordan tokens og betalinger beveger seg på kontoen din.",
+    "title": "Nylig bruksenhets- og betalingsaktivitet",
+    "subtitle": "En enkel logg over hvordan bruksenheter og betalinger beveger seg på kontoen din.",
     "viewAll": "Se all aktivitet",
     "table": {
       "type": "Type",
@@ -202,7 +202,7 @@
     "title": "Bibliotek",
     "heading": "Biblioteket ditt",
     "subtitle": "Alle kjøpte kurs og AI-strategier samlet på ett sted. Fortsett der du slapp, eller last ned PDF-er for studier uten nett.",
-    "tokensAvailable": "tokens tilgjengelig",
+    "tokensAvailable": "bruksenheter tilgjengelig",
     "tokensHint": "Nok til 1–2 kurs eller flere AI-strategier.",
     "topUp": "Fyll på",
     "viewBilling": "Se fakturering",
@@ -273,7 +273,7 @@
         "customCourses": "Tilpassede kurs",
         "customCoursesDesc": "fokuserer på bestillinger som pågår.",
         "billing": "Fakturering",
-        "billingDesc": "følger med på tokenpåfyllinger og direkte kjøp.",
+        "billingDesc": "følger med på bruksenhetspåfyllinger og direkte kjøp.",
         "settings": "Innstillinger",
         "settingsDesc": "inneholder preferanser som valuta og risikopåminnelser."
       }
@@ -281,17 +281,17 @@
   },
   "billingPage": {
     "title": "Fakturering",
-    "heading": "Fakturering og tokens",
-    "subtitle": "Se token-saldoen, nylige kjøp og fakturaer. Betalinger håndteres sikkert – Cur Nova rører aldri handelskontoene dine.",
-    "tokensAvailable": "tokens tilgjengelig",
-    "tokensApprox": "Ca. {price} etter gjeldende tokenkurs.",
+    "heading": "Fakturering og bruksenheter",
+    "subtitle": "Se bruksbalansen, nylige kjøp og fakturaer. Betalinger håndteres sikkert – Cur Nova rører aldri handelskontoene dine.",
+    "tokensAvailable": "bruksenheter tilgjengelig",
+    "tokensApprox": "Ca. {price} etter gjeldende bruksenhetskurs.",
     "topUp": "Fyll på",
-    "viewPricing": "Se priser og tokenpakker",
-    "tokens": "tokens",
+    "viewPricing": "Se priser og bruksenhetspakker",
+    "tokens": "bruksenheter",
     "balance": {
-      "title": "Oversikt over token-saldo",
-      "subtitle": "Tokens kan brukes på kurs, tilpassede PDF-er og AI-strategier.",
-      "tokensInfo": "Tokens er ikke et innskudd og gir ingen rente.",
+      "title": "Oversikt over bruksbalanse",
+      "subtitle": "Bruksenheter kan brukes på kurs, tilpassede PDF-er og AI-strategier.",
+      "tokensInfo": "Bruksenheter er ikke et innskudd og gir ingen rente.",
       "currentBalance": "Nåværende saldo",
       "currentBalanceHint": "Tilsvarer ca. {price} i Cur Nova-tjenester.",
       "thisMonthSpent": "Brukt denne måneden",
@@ -303,7 +303,7 @@
       "usageDistributionHint": "Kurs 65 % · AI 25 % · Tilpassede PDF-er 10 %",
       "usageDistributionValue": "Kurs {courses} % · AI {ai} % · Tilpassede kurs {custom} %",
       "noUsageYet": "Ingen forbruksdata ennå",
-      "refundWarning": "Tokenkjøp kan vanligvis ikke refunderes når de er brukt til å låse opp digitalt innhold. Lokal forbrukerlovgivning kan likevel gjelde.",
+      "refundWarning": "Bruksenhetskjøp kan vanligvis ikke refunderes når de er brukt til å låse opp digitalt innhold. Lokal forbrukerlovgivning kan likevel gjelde.",
       "supportInfo": "Ved spørsmål om fakturering, kontakt support med kontoens e-postadresse og kun de siste 4 sifrene i kortnummeret – del aldri fullstendige kortopplysninger."
     },
     "paymentMethods": {
@@ -316,7 +316,7 @@
     },
     "invoices": {
       "title": "Fakturaer og kvitteringer",
-      "description": "Hvert vellykket tokenkjøp eller hver direkte betaling genererer en kvittering. Enkelte regioner kan også kreve fullstendige skattefakturaer.",
+      "description": "Hvert vellykket bruksenhetskjøp eller hver direkte betaling genererer en kvittering. Enkelte regioner kan også kreve fullstendige skattefakturaer.",
       "lastReceipt": {
         "title": "Siste kvittering – Structured Growth-pakke",
         "details": "28. nov. 2025 · £69.99 · Kort som slutter på ••42"
@@ -327,18 +327,18 @@
     },
     "transactions": {
       "title": "Transaksjonshistorikk",
-      "subtitle": "Tokenpåfyllinger, kurskjøp og bruk av AI-strategier.",
-      "structuredGrowthPack": "Structured Growth-tokenpakke",
+      "subtitle": "Bruksenhetspåfyllinger, kurskjøp og bruk av AI-strategier.",
+      "structuredGrowthPack": "Structured Growth-bruksenhetspakke",
       "cryptoVolatilityCourse": "Kurs: Volatilitetsstrukturer i krypto",
       "btcIntradayPlan": "AI-plan: BTC intradagstruktur",
       "forexStructuredPlan": "Bestilling av tilpasset kurs: strukturert Forex-plan",
-      "tokenAdjustment": "Tokenjustering (support)"
+      "tokenAdjustment": "Bruksenhetsjustering (support)"
     },
     "filters": {
       "type": "Type",
       "types": {
         "all": "Alle",
-        "tokentop-ups": "Tokenpåfyllinger",
+        "tokentop-ups": "Bruksenhetspåfyllinger",
         "courses": "Kurs",
         "aistrategies": "AI-strategier",
         "adjustments": "Justeringer"
@@ -350,12 +350,12 @@
       "description": "Beskrivelse",
       "type": "Type",
       "currency": "Valuta",
-      "tokens": "Tokens",
+      "tokens": "Bruksenheter",
       "balance": "Saldo",
       "status": "Status"
     },
     "types": {
-      "tokentop-up": "Tokenpåfylling",
+      "tokentop-up": "Bruksenhetspåfylling",
       "coursepurchase": "Kurskjøp",
       "aistrategy": "AI-strategi",
       "adjustment": "Justering",
@@ -364,7 +364,11 @@
     "status": {
       "completed": "Fullført",
       "pending": "Venter",
-      "failed": "Mislyktes"
+      "failed": "Mislyktes",
+      "processing": "Behandles",
+      "delayed": "Forsinket",
+      "cancelled": "Kansellert",
+      "refunded": "Refundert"
     },
     "emptyState": {
       "title": "Fant ingen transaksjoner",
@@ -372,10 +376,10 @@
     },
     "emptyStatePreview": {
       "title": "Eksempel: ny konto uten transaksjoner",
-      "description": "Hvis en bruker ikke har kjøpt tokens ennå, vis en rolig tom tilstand og en tydelig vei til prissiden.",
+      "description": "Hvis en bruker ikke har kjøpt bruksenheter ennå, vis en rolig tom tilstand og en tydelig vei til prissiden.",
       "noActivity": "Ingen faktureringsaktivitet ennå",
-      "hint": "Når du kjøper din første tokenpakke, vises kvitteringene og historikken din her.",
-      "viewTokenPacks": "Se tokenpakker"
+      "hint": "Når du kjøper din første bruksenhetspakke, vises kvitteringene og historikken din her.",
+      "viewTokenPacks": "Se bruksenhetspakker"
     }
   },
   "customCoursesPage": {
@@ -449,7 +453,7 @@
         "market": "Foretrukket marked (Forex, krypto, binære).",
         "style": "Stil (scalping, dag, swing) og tilgjengelig tid.",
         "goals": "Hva du vil oppnå, med dine egne ord.",
-        "note": "Forhåndsvisningen gjør dette åpent, slik at brukerne vet hva som skjer før de bruker tokens."
+        "note": "Forhåndsvisningen gjør dette åpent, slik at brukerne vet hva som skjer før de bruker bruksenheter."
       },
       "emptyState": {
         "title": "Eksempel: tom tilstand",
@@ -458,6 +462,10 @@
         "hint": "Når du bestiller en skreddersydd PDF, ser du status og forventet levering her.",
         "requestFirstCourse": "Bestill ditt første kurs"
       }
+    },
+    "meta": {
+      "created": "Opprettet {date}",
+      "delivery": "Levering {date}"
     }
   },
   "settingsPage": {
@@ -485,7 +493,7 @@
       "currency": {
         "label": "Standard valutavisning",
         "description": "Følger valget ditt i toppmenyen ({currencies}).",
-        "note": "Tokenpriser konverteres automatisk og vises til referanse."
+        "note": "Bruksenhetspriser konverteres automatisk og vises til referanse."
       },
       "educationalFocus": {
         "label": "Opplæringsfokus",
@@ -505,7 +513,7 @@
         "description": "Eksempler på hvordan du bruker AI-byggeren mer effektivt."
       },
       "billingReceipts": {
-        "label": "Fakturerings- og tokenkvitteringer",
+        "label": "Fakturerings- og bruksenhetskvitteringer",
         "description": "Bekreftelser på påfyllinger og kjøp. Anbefales."
       },
       "accountAlerts": {
@@ -593,13 +601,13 @@
   "receiptsPage": {
     "title": "Kvitteringer",
     "heading": "Fakturaer og kvitteringer",
-    "subtitle": "Last ned PDF-kvitteringer for alle kjøp og tokenpåfyllinger.",
+    "subtitle": "Last ned PDF-kvitteringer for alle kjøp og bruksenhetspåfyllinger.",
     "searchPlaceholder": "Søk i kvitteringer…",
     "filters": {
       "type": "Type",
       "types": {
         "all": "Alle",
-        "tokentop-ups": "Tokenpåfyllinger",
+        "tokentop-ups": "Bruksenhetspåfyllinger",
         "courses": "Kurs",
         "aistrategies": "AI-strategier",
         "customcourses": "Tilpassede kurs"
@@ -616,5 +624,26 @@
   },
   "extra": {
     "accountSettings": "Kontoinnstillinger"
+  },
+  "orderStatus": {
+    "labels": {
+      "processing": "Behandles",
+      "ready": "Klar",
+      "delayed": "Forsinket",
+      "cancelled": "Kansellert",
+      "refunded": "Refundert"
+    },
+    "delayed": {
+      "title": "Denne bestillingen er forsinket",
+      "description": "Vi klarte ikke å levere i tide. Foreslått ny leveringsdato: {date}. Godta den nye datoen, eller kanseller og få bruksenhetene tilbake.",
+      "dateToBeAgreed": "bekreftes når du godtar",
+      "accept": "Godta ny dato",
+      "cancel": "Kanseller og refunder {tokens} bruksenheter",
+      "failed": "Kunne ikke oppdatere bestillingen",
+      "acceptedTitle": "Ny dato godtatt",
+      "acceptedDescription": "Vi sender deg en e-post så snart bestillingen er klar.",
+      "refundedTitle": "Bestillingen er kansellert",
+      "refundedDescription": "{tokens} bruksenheter er ført tilbake til bruksbalansen din."
+    }
   }
 }

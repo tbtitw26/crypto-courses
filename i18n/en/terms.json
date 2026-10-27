@@ -4,8 +4,8 @@
     "terms": "Terms & Conditions"
   },
   "hero": {
-    "title": "Full terms for using Cur Nova courses, tokens and AI features.",
-    "subtitle": "Please read these Terms carefully before purchasing token packs, ready-made courses, custom courses or AI Strategy Builder outputs. They summarise the rules that keep our education-only platform safe, compliant and transparent for every customer.",
+    "title": "Full terms for using Cur Nova courses, Usage Units and AI features.",
+    "subtitle": "Please read these Terms carefully before purchasing Usage Unit Packages, ready-made courses, custom courses or AI Strategy Builder outputs. They summarise the rules that keep our education-only platform safe, compliant and transparent for every customer.",
     "meta": [
       {
         "label": "Effective date",
@@ -30,7 +30,7 @@
       "subtitle": "Use the full sections below for binding wording — this box only highlights the spirit of our policy.",
       "items": [
         "Cur Nova is an education-only platform: no trading, no signals, no managed accounts.",
-        "Tokens are advance credits for digital content; they are not money or securities.",
+        "Usage Units are advance credits for digital content; they are not money or securities.",
         "All courses, PDFs and AI outputs are examples. You stay responsible for every trade.",
         "We comply with UK/EU consumer law, but digital deliveries have limited refunds."
       ],
@@ -47,7 +47,7 @@
       { "label": "Scope of services & digital content", "anchor": "scope" },
       { "label": "Client data & responsibilities", "anchor": "client-data" },
       { "label": "Acceptable use", "anchor": "acceptable-use" },
-      { "label": "Tokens, pricing & payment", "anchor": "tokens" },
+      { "label": "Usage Units, pricing & payment", "anchor": "tokens" },
       { "label": "Cancellations, refunds & chargebacks", "anchor": "refunds" },
       { "label": "Intellectual property", "anchor": "ip" },
       { "label": "Confidentiality", "anchor": "confidentiality" },
@@ -74,7 +74,7 @@
       "title": "Introduction",
       "content": [
         { "type": "paragraph", "text": "1.1. These Terms and Conditions (\"Terms\") govern your access to and use of cur-nova.com, its dashboards, applications and downloadable content (the \"Service\"), operated by CUR NOVA LTD (company number 17240836, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom) (“Cur Nova”, “we”, “us”)." },
-        { "type": "paragraph", "text": "1.2. By creating an account, purchasing Tokens, ordering ready-made or custom courses, or using any AI-powered feature, you agree to these Terms. If you disagree, you must not use the Service." },
+        { "type": "paragraph", "text": "1.2. By creating an account, purchasing Usage Units, ordering ready-made or custom courses, or using any AI-powered feature, you agree to these Terms. If you disagree, you must not use the Service." },
         {
           "type": "list",
           "items": [
@@ -94,13 +94,13 @@
           "type": "definition",
           "items": [
             { "term": "Account", "description": "Your profile on the Service, created via email/password or supported SSO (e.g., Google)." },
-            { "term": "Tokens / Wallet", "description": "Pre-paid, non-transferable digital credits used to access paid features. Not cash, e-money or securities." },
+            { "term": "Usage Units / Wallet", "description": "Pre-paid, non-transferable digital credits used to access paid features. Not cash, e-money or securities." },
             { "term": "Ready-Made Courses", "description": "Deterministically priced PDF courses." },
-            { "term": "Custom Courses", "description": "Trader-tailored PDFs prepared by senior mentors based on your intake forms, typically paid with Tokens." },
+            { "term": "Custom Courses", "description": "Trader-tailored PDFs prepared by senior mentors based on your intake forms, typically paid with Usage Units." },
             { "term": "AI Strategy Outputs", "description": "Structured strategies, diagrams and cover art generated with AI and delivered digitally." },
             { "term": "Library / Dashboard", "description": "Authenticated area (e.g., /dashboard) showing balances, purchases, invoices and settings." },
             { "term": "Client Data", "description": "Information you submit (experience, risk appetite, goals, notes, uploads, etc.)." },
-            { "term": "Order / Transaction", "description": "A confirmed purchase of Tokens, courses or other paid features within the Service." },
+            { "term": "Order / Transaction", "description": "A confirmed purchase of Usage Units, courses or other paid features within the Service." },
             { "term": "Third-Party Platforms", "description": "External systems such as payment processors, brokers, AI providers or hosting services." },
             { "term": "Legal Policies", "description": "Privacy Policy, Cookies Policy, Refund Policy, Risk & Disclaimer and any linked policies." }
           ]
@@ -127,7 +127,7 @@
           "type": "list",
           "items": [
             "4.1. We provide self-service educational tools: ready-made courses, custom courses, AI Strategy Builder outputs, risk resources and glossaries.",
-            "4.2. A contract arises when you create an Account and each time you buy Tokens, courses, or redeem Tokens for custom/AI outputs.",
+            "4.2. A contract arises when you create an Account and each time you purchase Usage Units, courses, or redeem Usage Units for custom/AI outputs.",
             "4.3. Nothing we publish is investment advice, trade recommendations or performance guarantees.",
             "4.4. We are not your agent, broker, asset manager or custodian and do not open or monitor trading accounts.",
             "4.5. You remain responsible for complying with laws, broker rules and any third-party platform policies."
@@ -143,8 +143,8 @@
         {
           "type": "list",
           "items": [
-            "5.1. Services may include bilingual courses, token packs, custom coursework, AI outputs, risk/journal templates, dashboards, billing history and calculators.",
-            "5.2. Custom and AI outputs rely on your Client Data; incomplete inputs lead to less relevant content. Regeneration normally requires extra Tokens.",
+            "5.1. Services may include bilingual courses, Usage Unit Packages, custom coursework, AI outputs, risk/journal templates, dashboards, billing history and calculators.",
+            "5.2. Custom and AI outputs rely on your Client Data; incomplete inputs lead to less relevant content. Regeneration normally requires extra Usage Units.",
             "5.3. We strive for coherent, structured content but cannot guarantee error-free or real-time market accuracy.",
             "5.4. Delivery occurs when files are available in your dashboard and/or via email links. Email issues do not invalidate delivery if the dashboard copy exists.",
             "5.5. We may update or retire catalogue items for future customers without affecting content you already own."
@@ -186,20 +186,20 @@
     {
       "id": "tokens",
       "number": "8",
-      "title": "Tokens, pricing & payment",
+      "title": "Usage Units, pricing & payment",
       "content": [
         { "type": "note", "text": "Accepted payment methods: Visa and Mastercard. Additional methods may be added with notice." },
         {
           "type": "list",
           "items": [
-            "8.1. Token packs (e.g., Focused Start, Structured Growth, Discipline Pro) and custom top-ups clearly display price and included Tokens.",
+            "8.1. Usage Unit Packages (e.g., Focused Start, Structured Growth, Discipline Pro) and custom top-ups clearly display price and included Usage Units.",
             "8.2. GBP is the base currency. Prices may be shown in EUR, USD or other currencies; final charges and FX handling appear at checkout.",
             "8.3. Wallet balances are advance payments for digital features and are not bank or e-money accounts.",
             "8.4. By submitting a card you confirm authority to use it; payments are processed by trusted PSPs and we do not store full PAN/CVV data.",
-            "8.5. Tokens are deducted when you pay with Tokens, request custom courses, run AI strategies or use any Token-priced feature.",
+            "8.5. Usage Units are deducted when you pay with Usage Units, request custom courses, run AI strategies or use any Usage Unit-priced feature.",
             "8.6. Some ready-made courses can be purchased directly by card; the option is shown before checkout.",
-            "8.7. Tokens currently have no expiry date, but we may introduce fair-use or dormancy rules with notice.",
-            "8.8. We issue electronic receipts/invoices for token purchases and card-based orders; access them via your dashboard and email."
+            "8.7. Usage Units currently have no expiry date, but we may introduce fair-use or dormancy rules with notice.",
+            "8.8. We issue electronic receipts/invoices for Usage Unit purchases and card-based orders; access them via your dashboard and email."
           ]
         }
       ]
@@ -213,9 +213,9 @@
           "type": "list",
           "items": [
             "9.1. Because products are digital, performance can begin immediately; statutory cancellation rights may be limited once delivery starts.",
-            "9.2. Token top-ups are generally non-refundable, except for clear technical errors or duplicate payments attributable to us.",
-            "9.3. If you cannot access purchased content, contact us promptly. We may re-provide the file, re-credit Tokens or refund at our discretion.",
-            "9.4. Initiating unjustified chargebacks may lead to suspension, Token removal and recovery of investigation costs where lawful."
+            "9.2. Usage Unit top-ups are generally non-refundable, except for clear technical errors or duplicate payments attributable to us.",
+            "9.3. If you cannot access purchased content, contact us promptly. We may re-provide the file, re-credit Usage Units or refund at our discretion.",
+            "9.4. Initiating unjustified chargebacks may lead to suspension, Usage Unit removal and recovery of investigation costs where lawful."
           ]
         }
       ]
@@ -287,7 +287,7 @@
           "type": "list",
           "items": [
             "14.1. Nothing limits liability for death/personal injury caused by negligence, fraud or other non-excludable obligations.",
-            "14.2. Subject to 14.1, our aggregate liability in any rolling 12-month period is capped at the total fees/Tokens you paid to us during that period.",
+            "14.2. Subject to 14.1, our aggregate liability in any rolling 12-month period is capped at the total fees/Usage Units you paid to us during that period.",
             "14.3. We are not liable for lost profits, revenue, goodwill, data, indirect or consequential loss, trading losses, or actions of third-party platforms."
           ]
         }
@@ -326,7 +326,7 @@
           "type": "list",
           "items": [
             "17.1. We may suspend/terminate access if you breach these Terms, commit fraud, pose security risks, or if mandated by law/regulators/partners.",
-            "17.2. You may close your account at any time, but closure does not automatically refund unused Tokens (see clause 9).",
+            "17.2. You may close your account at any time, but closure does not automatically refund unused Usage Units (see clause 9).",
             "17.3. Upon termination your right to access the Service ceases; we retain records required for tax, fraud prevention and compliance."
           ]
         }
@@ -397,7 +397,7 @@
   ],
   "cta": {
     "title": "Using Cur Nova means accepting these principles.",
-    "subtitle": "If you need a bespoke rider, regulated review or signed PDF, let us know before you buy. Otherwise this document governs every token top-up and download.",
+    "subtitle": "If you need a bespoke rider, regulated review or signed PDF, let us know before you buy. Otherwise this document governs every Usage Unit top-up and download.",
     "backToHome": "Back to home",
     "viewCourses": "View courses"
   }
