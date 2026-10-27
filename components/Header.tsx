@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
@@ -46,6 +47,8 @@ export default function Header() {
   const [isMobileLearnOpen, setIsMobileLearnOpen] = useState(false)
   const [isMobileResourcesOpen, setIsMobileResourcesOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const headerRef = useRef<HTMLElement>(null)
+  const [mobileMenuTop, setMobileMenuTop] = useState(0)
   const { itemCount } = useCart()
   const tNav = useTranslations('common.nav')
   const tAuth = useTranslations('common.auth')
@@ -115,6 +118,21 @@ export default function Header() {
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
+  // The drawer sits right under the header, whose distance from the top changes as the top bar scrolls away
+  const toggleMobileMenu = () => {
+    setMobileMenuTop(headerRef.current?.getBoundingClientRect().bottom ?? 0)
+    setIsMobileMenuOpen((v) => !v)
+  }
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isMobileMenuOpen])
+
   const navLinkClass = (href: string) =>
     `inline-flex h-9 items-center rounded-lg px-3 text-[13px] font-medium transition-colors ${
       isActive(href)
@@ -147,6 +165,7 @@ export default function Header() {
 
       {/* ── Main header ── */}
       <header
+        ref={headerRef}
         className={`sticky top-0 z-40 transition-all duration-200 ${
           scrolled
             ? 'border-b border-surface-200 bg-white/95 shadow-sm backdrop-blur-xl'
@@ -515,7 +534,7 @@ export default function Header() {
 
             <button
               type="button"
-              onClick={() => setIsMobileMenuOpen((v) => !v)}
+              onClick={toggleMobileMenu}
               className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-text-main transition-colors hover:bg-surface-100"
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-navigation"
@@ -526,11 +545,14 @@ export default function Header() {
           </div>
         </div>
 
-        {/* ── Mobile menu (fullscreen drawer) ── */}
-        {isMobileMenuOpen && (
+        {/* ── Mobile menu (fullscreen drawer) ──
+            Portalled to <body>: the header's backdrop-filter would otherwise become the
+            containing block of this fixed element and collapse it to zero height. */}
+        {isMobileMenuOpen && createPortal(
           <div
             id="mobile-navigation"
-            className="fixed inset-x-0 top-[calc(2.25rem+3.5rem)] bottom-0 z-50 overflow-y-auto bg-white lg:hidden"
+            style={{ top: mobileMenuTop }}
+            className="fixed inset-x-0 bottom-0 z-50 overflow-y-auto bg-white lg:hidden"
           >
             <div className="mx-auto max-w-page px-4 pb-8 pt-4 sm:px-6">
               {/* Learn & Build */}
@@ -714,7 +736,8 @@ export default function Header() {
                 )}
               </div>
             </div>
-          </div>
+          </div>,
+          document.body
         )}
       </header>
     </>

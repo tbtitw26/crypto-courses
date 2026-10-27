@@ -98,6 +98,30 @@ export default function TopUpSuccessContent() {
   }, [status, t])
 
   useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      const data = event.data
+      if (data?.source === 'payment-checkout' && data?.type === 'checkout.state') {
+        console.log('[Madfin Checkout PostMessage]:', data.paymentId, data.state, data.returnUrl)
+        if (referenceId) {
+          void fetch(`/api/topup/status?reference=${encodeURIComponent(referenceId)}`, { cache: 'no-store' })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data && data.found) {
+                setStatus(data)
+              }
+            })
+            .catch(() => {})
+        }
+      }
+    }
+
+    window.addEventListener('message', handleMessage)
+    return () => {
+      window.removeEventListener('message', handleMessage)
+    }
+  }, [referenceId])
+
+  useEffect(() => {
     if (!referenceId) {
       setError(t('missingRef'))
       setIsLoading(false)

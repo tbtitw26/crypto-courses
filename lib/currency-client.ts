@@ -12,13 +12,19 @@ const CURRENCY_COOKIE_NAME = 'user_currency'
 export function getUserCurrency(): string {
   if (typeof window === 'undefined') return 'GBP'
 
+  try {
+    const localCurrency = localStorage.getItem('currency')?.trim().toUpperCase()
+    if (localCurrency) {
+      return localCurrency
+    }
+  } catch {}
+
   const cookies = document.cookie.split(';')
   const currencyCookie = cookies.find((c) => c.trim().startsWith(`${CURRENCY_COOKIE_NAME}=`))
   
   if (currencyCookie) {
-    const currency = currencyCookie.split('=')[1]
-    const currencies = getAvailableCurrenciesList()
-    if (currencies[currency]) {
+    const currency = currencyCookie.split('=')[1]?.trim().toUpperCase()
+    if (currency) {
       return currency
     }
   }
@@ -27,19 +33,21 @@ export function getUserCurrency(): string {
 }
 
 /**
- * Set user's selected currency in cookie
+ * Set user's selected currency in localStorage and cookie
  */
 export function setUserCurrency(currencyCode: string): boolean {
   if (typeof window === 'undefined') return false
 
-  const currencies = getAvailableCurrenciesList()
-  if (currencies[currencyCode]) {
-    // Set cookie for 1 year
-    const expiryDate = new Date()
-    expiryDate.setFullYear(expiryDate.getFullYear() + 1)
-    document.cookie = `${CURRENCY_COOKIE_NAME}=${currencyCode}; expires=${expiryDate.toUTCString()}; path=/`
-    return true
-  }
-  return false
+  const cleanCode = String(currencyCode || '').trim().toUpperCase()
+  if (!cleanCode) return false
+
+  try {
+    localStorage.setItem('currency', cleanCode)
+  } catch {}
+
+  const expiryDate = new Date()
+  expiryDate.setFullYear(expiryDate.getFullYear() + 1)
+  document.cookie = `${CURRENCY_COOKIE_NAME}=${cleanCode}; expires=${expiryDate.toUTCString()}; path=/`
+  return true
 }
 
