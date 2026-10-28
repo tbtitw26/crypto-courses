@@ -1,415 +1,382 @@
 {
   "breadcrumb": {
-    "home": "Home",
     "privacy": "Privacy Policy"
   },
   "hero": {
-    "title": "Privacy Policy for Cur Nova trading education platform.",
-    "subtitle": "This Privacy Policy explains what personal data we collect, why we use it, how long we keep it, and how you can exercise your rights when using cur-nova.com and related services (the \"Service\"). It is based on UK GDPR and the Data Protection Act 2018.",
-    "meta": [
-      {
-        "label": "Effective date",
-        "value": "6 December 2025"
-      },
-      {
-        "label": "Controller",
-        "value": "CUR NOVA LTD (17240836)"
-      },
-      {
-        "label": "Jurisdiction",
-        "value": "England & Wales"
-      }
-    ],
-    "badges": {
-      "dataProtection": "UK GDPR · Data Protection Act 2018",
-      "ukGdpr": "English-language service",
-      "ageRestriction": "Age 18+ only"
+    "title": "Privacy Policy",
+    "effectiveDate": {
+      "label": "Effective date",
+      "value": "28 October 2026"
     },
-    "summaryCard": {
-      "title": "Quick points (customer-facing)",
-      "subtitle": "Use this list for a fast recap; the numbered sections carry the full legal detail.",
-      "items": [
-        "We collect only the data we need to operate, secure and improve the Service.",
-        "We do not sell your personal data.",
-        "We process data under UK GDPR on legal bases: contract, consent, legitimate interests and legal obligations.",
-        "You have rights to access, correct, delete and restrict processing of your personal data.",
-        "We use cookies and similar technologies for essential functions, preferences and analytics (with consent).",
-        "We keep data only as long as necessary for the purposes described or as required by law.",
-        "We implement appropriate security measures to protect your personal data.",
-        "The Service is intended for users aged 18 and over."
-      ],
-      "note": "For questions about this Privacy Policy or to exercise your rights, contact info@cur-nova.com."
-    }
+    "intro": [
+      "This Policy explains how CUR NOVA LTD collects, uses, shares and retains personal data when you visit cur-nova.com, hold an Account, purchase educational materials, use Usage Units or request AI-generated Content. It also explains your rights and how to contact us."
+    ]
+  },
+  "keyPoints": {
+    "title": "Key points",
+    "items": [
+      "We use personal data to operate the Service, fulfil Orders, provide support, protect accounts and comply with legal obligations.",
+      "We use OpenAI through its API for AI generation. We send prompts and the fields needed for the requested generation. We do not attach your account email, internal account ID or payment card data from our account or payment systems to these generation requests.",
+      "Information you type into a prompt may itself contain personal data, so please avoid unnecessary personal or sensitive details.",
+      "OpenAI API inputs and outputs are not used for model training by default without opt-in. Provider-side retention is separate from the periods for which Cur Nova keeps its own records.",
+      "We normally retain generation prompts for up to 90 days, temporary technical records for up to 30 days and purchased materials for the period of your access. Separate records may be kept where needed for transactions, security, disputes or legal duties, as explained in section 7.",
+      "We do not sell personal data. You can contact info@cur-nova.com to exercise your applicable rights or raise a concern."
+    ]
   },
   "toc": {
-    "title": "On this page",
-    "items": [
-      { "label": "Introduction", "anchor": "introduction" },
-      { "label": "Personal data we collect", "anchor": "personal-data" },
-      { "label": "Why we process your data & legal bases", "anchor": "legal-bases" },
-      { "label": "Automated processing, profiling and AI", "anchor": "automated-processing" },
-      { "label": "Sharing and international transfers", "anchor": "sharing" },
-      { "label": "Cookies and similar technologies", "anchor": "cookies" },
-      { "label": "Retention", "anchor": "retention" },
-      { "label": "Your rights", "anchor": "rights" },
-      { "label": "Security", "anchor": "security" },
-      { "label": "Children's data", "anchor": "children" },
-      { "label": "Changes to this Policy", "anchor": "changes" },
-      { "label": "Contact & complaints", "anchor": "contact" }
-    ],
-    "reminder": {
-      "label": "Reminder",
-      "text": "This Policy is published in English. The English version is the only binding version."
-    }
+    "title": "On this page"
   },
   "sections": [
     {
-      "id": "introduction",
+      "id": "who-we-are-and-the-scope-of-this-policy",
       "number": "1",
-      "title": "Introduction",
+      "title": "Who we are and the scope of this Policy",
       "content": [
         {
           "type": "paragraph",
-          "text": "We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains what personal data we collect, why we use it, how long we keep it, and how you can exercise your rights when using cur-nova.com and related services (the \"Service\")."
-        },
-        {
-          "type": "list",
-          "items": [
-            "Controller: CUR NOVA LTD (Company No. 17240836), Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom (\"Cur Nova\", \"we\", \"us\", \"our\").",
-            "Contact: info@cur-nova.com",
-            "Scope & age: This Policy applies to all users of the Service (including business customers and their authorised staff). The Service is intended for individuals aged 18 and over."
-          ]
+          "text": "1.1. The controller is CUR NOVA LTD, company number 17240836, registered at Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom. References to “Cur Nova”, “we”, “us” and “our” mean that company."
         },
         {
           "type": "paragraph",
-          "text": "By using the Service, you acknowledge that your personal data will be processed in accordance with this Privacy Policy and applicable data protection laws, including the UK GDPR and the Data Protection Act 2018."
+          "text": "1.2. You can contact us about privacy at info@cur-nova.com or by writing to the address above."
         },
         {
           "type": "paragraph",
-          "text": "The Service is an English-language educational platform focused on trading education (forex, crypto and related markets). The English version of this Policy is the only binding version."
+          "text": "1.3. This Policy covers personal data processed for visitors, customers, business contacts and authorised users of the Service. The Service is intended for people aged 18 and over."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.4. We process personal data under applicable data protection law, including the UK GDPR and the Data Protection Act 2018, as amended. Where another mandatory data protection regime applies to a particular activity, its requirements also apply."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.5. This Policy provides information about our processing. Reading it or using the website does not, by itself, constitute consent to processing that requires a separate choice."
         }
       ]
     },
     {
-      "id": "personal-data",
+      "id": "personal-data-we-collect-and-exchange",
       "number": "2",
-      "title": "Personal data we collect",
+      "title": "Personal data we collect and exchange",
       "content": [
         {
-          "type": "paragraph",
-          "text": "We collect only the data we need to operate, secure and improve the Service."
+          "type": "subheading",
+          "id": "information-you-provide",
+          "number": "2.1",
+          "title": "Information you provide"
         },
         {
           "type": "paragraph",
-          "text": "2.1 Data you provide directly"
-        },
-        {
-          "type": "paragraph",
-          "text": "Depending on how you use the Service, you may provide:"
+          "text": "Depending on the features you use, we may process:"
         },
         {
           "type": "list",
           "items": [
-            "Account & identity: name (or display name), company name, role, email address, password (hashed), telephone number, preferred currency and region.",
-            "Authentication & social login: if you sign in via a third-party provider (for example, Google), we may receive your name, email address, profile image and a unique identifier from that provider, managed via our authentication layer (e.g. NextAuth).",
-            "Learning profile & intake: trading experience level, approximate deposit range, risk tolerance, goals, markets of interest, and other information you choose to share in intake forms for Custom Courses or AI Strategy Builder.",
-            "Orders & library: details of your purchases and redemptions, including selected Ready-Made Courses, Custom Courses and AI Strategy Outputs associated with your Account.",
-            "Project inputs for AI and content generation: free-text prompts, notes, trading scenarios, strategy descriptions, journal entries and other content you submit to generate Custom Courses or AI Strategy Outputs.",
-            "Billing: billing name and address, VAT details (if applicable), and other information needed for invoicing and receipts.",
-            "Wallet & Usage Units: top-up amounts, chosen currency, Usage Balances, usage records and history of Usage Unit consumption (for example, which feature or course consumed Usage Units and when).",
-            "Support & communications: messages and attachments you send to us (including support tickets, feedback forms, surveys, reviews or emails)."
-          ]
-        },
-        {
-          "type": "note",
-          "text": "Special-category data: We do not intentionally seek special-category data (such as health data, political views, religious beliefs or biometric data). If you voluntarily include such data in free-text fields, journal entries or uploads, we will process it only as necessary to provide the requested Service and only on the basis of your explicit consent (see section 3.2). Please avoid including special-category data where it is not strictly necessary."
-        },
-        {
-          "type": "paragraph",
-          "text": "2.2 Data collected automatically"
-        },
-        {
-          "type": "paragraph",
-          "text": "When you use the Service, we automatically collect certain technical and usage information, such as:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "Technical data: IP address, device and browser type, operating system, timezone, language, user agent, and session identifiers.",
-            "Security telemetry: login attempts, authentication and access logs, rate-limiting and anomaly logs, abuse/fraud signals, and similar security-related information.",
-            "Usage & diagnostics: page views, clicks, navigation paths, features used (for example, which types of courses or tools you access), Usage Unit top-ups and deductions, task run identifiers, error traces and performance metrics."
+            "Account details, such as your name or display name, company information where relevant, email address, authentication details, telephone number, preferred currency and region.",
+            "Learning and order requirements, such as your experience, educational goals, markets of interest, approximate deposit range, risk preferences and information provided for a Trader Custom Course, AI Custom Course or AI Strategy Output.",
+            "Generation inputs, including prompts, selected form fields, notes, strategy descriptions, educational scenarios and any other content you choose to submit.",
+            "Purchase and Usage Unit information, including top-ups, balances, redemptions, transaction references, purchased materials and delivery records.",
+            "Billing information needed for receipts, invoices and tax treatment, such as billing name, address and relevant business tax details.",
+            "Support communications, feedback and attachments you send to us."
           ]
         },
         {
           "type": "paragraph",
-          "text": "Where feasible, we use aggregated or pseudonymised data for analytics and diagnostics."
+          "text": "Account passwords, where used, are held in hashed form rather than as readable passwords. We do not ask you to send passwords or full payment card details in support messages or prompts."
+        },
+        {
+          "type": "subheading",
+          "id": "information-collected-automatically",
+          "number": "2.2",
+          "title": "Information collected automatically"
         },
         {
           "type": "paragraph",
-          "text": "2.3 Data from third parties"
+          "text": "We may collect technical and usage data needed for operation and security, including IP address, browser and device information, operating system, language, time zone, session identifiers, login attempts, access events, requested features, generation status, error identifiers and performance records."
         },
         {
           "type": "paragraph",
-          "text": "Where necessary to provide and secure the Service, we may receive limited personal data from:"
+          "text": "Non-essential analytics and similar tracking are used only where permitted by applicable law and subject to the choices described in section 6. We use aggregated or pseudonymised information where suitable; pseudonymised data is still treated as personal data where it can be linked back to a person."
         },
         {
-          "type": "list",
-          "items": [
-            "Payment processors: transaction references, status codes, partial card data (e.g. last 4 digits, card type), country/region, fraud-prevention signals and chargeback notifications. We do not receive or store full card numbers or CVV codes.",
-            "Authentication providers (e.g. Google): basic profile information (such as name, email, profile picture and unique ID) when you choose to log in via such providers.",
-            "AI service providers: where we use external AI APIs to generate content, we send your prompts and necessary context to these providers. We receive generated text and media outputs back. These providers act as processors under contractual safeguards.",
-            "Fraud-prevention and verification providers: risk scores, checks and alerts used to protect the Service and payment flows.",
-            "Professional advisers and insurers: information necessary for legal, tax, compliance or insurance purposes."
-          ]
+          "type": "subheading",
+          "id": "information-exchanged-with-service-providers",
+          "number": "2.3",
+          "title": "Information exchanged with service providers"
         },
         {
           "type": "paragraph",
-          "text": "2.4 User-Generated Content (UGC)"
+          "text": "Payment providers. We receive information needed to identify and reconcile transactions, such as payment status, transaction references, payment method type, limited card information such as the last four digits where provided, and relevant dispute or fraud-prevention information. Card details are processed by the payment provider. We do not receive or store full card numbers or CVV codes in our own payment records."
         },
         {
           "type": "paragraph",
-          "text": "User-Generated Content (e.g. journal entries, strategy descriptions, uploaded files, notes, or prompt text) may contain personal data about you or third parties. You are responsible for ensuring that you have an appropriate lawful basis, notices and permissions to include any third-party personal data in your UGC."
+          "text": "Authentication providers. If you choose a supported third-party sign-in method, such as Google, we may receive basic profile and authentication information, including your name, email, profile image and the identifier supplied by that provider."
+        },
+        {
+          "type": "paragraph",
+          "text": "OpenAI. We use OpenAI's API to generate AI Custom Courses and AI Strategy Outputs. We send the prompt and the generation fields needed for your request, such as the selected market, educational level, goals and other relevant instructions. We receive the resulting generated Content and technical status information."
+        },
+        {
+          "type": "paragraph",
+          "text": "We do not attach your account email address, internal Account ID or payment card data from our account or payment systems to OpenAI generation requests. This describes the account and payment data we include in those requests; it is not a claim that free-text prompts are anonymous. If you type personal information into a prompt or submitted field, that information may be included in the material sent to OpenAI. Please avoid names, contact details, card information or sensitive information that is unnecessary for the educational task."
+        },
+        {
+          "type": "paragraph",
+          "text": "Other relevant providers. We may receive limited information from hosting, security, verification and support providers to operate the Service, investigate faults or protect payments. Professional advisers may provide information relevant to a legal, accounting or compliance matter."
+        },
+        {
+          "type": "subheading",
+          "id": "user-content-and-sensitive-information",
+          "number": "2.4",
+          "title": "User content and sensitive information"
+        },
+        {
+          "type": "paragraph",
+          "text": "Prompts, notes and uploaded material may contain information about you or other people. Only include third-party personal data where you have an appropriate legal basis and the information is necessary for your request."
+        },
+        {
+          "type": "paragraph",
+          "text": "We do not require special-category data, such as health information, political opinions, religious beliefs or biometric identifiers, to provide trading education. Please do not include it in prompts or ordinary intake fields. Voluntarily typing sensitive information does not, by itself, establish valid explicit consent for every use of it. If such information is received, we assess the lawful basis and any additional legal condition before using or retaining it, and remove or restrict it where there is no appropriate basis."
         }
       ]
     },
     {
-      "id": "legal-bases",
+      "id": "purposes-and-legal-bases",
       "number": "3",
-      "title": "Why we process your data & legal bases (UK GDPR)",
+      "title": "Purposes and legal bases",
       "content": [
         {
-          "type": "paragraph",
-          "text": "We process personal data under the UK GDPR and the Data Protection Act 2018 on the following legal bases:"
+          "type": "subheading",
+          "id": "performing-our-agreement",
+          "number": "3.1",
+          "title": "Performing our agreement"
         },
         {
           "type": "paragraph",
-          "text": "3.1 Performance of a contract"
+          "text": "We use the information necessary to enter into and perform an agreement with you, including to create and maintain your Account, process Orders, administer Usage Units, generate requested materials, provide access to purchased Content and communicate about delivery, cancellation or support."
         },
         {
           "type": "paragraph",
-          "text": "To enter into and perform our contract with you, we process personal data to:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "create, maintain and secure your Account;",
-            "provide the Service, including access to Ready-Made Courses, Custom Courses and AI Strategy Outputs;",
-            "operate Wallets and Usage Units, process payments and issue invoices/receipts;",
-            "deliver digital content to your dashboard library and, where relevant, via email;",
-            "communicate with you about your use of the Service, Orders, library items and support requests."
-          ]
+          "text": "This includes transmitting the necessary inputs to OpenAI when you choose an AI generation feature. We do not treat a request for AI generation as consent to unrelated marketing or model training."
         },
         {
           "type": "paragraph",
-          "text": "3.2 Consent (including marketing & special-category data)"
+          "text": "Where a customer organisation is the contracting party and you are its contact or authorised user, relevant processing may instead be based on our legitimate interests in providing and administering that organisation's access."
+        },
+        {
+          "type": "subheading",
+          "id": "consent",
+          "number": "3.2",
+          "title": "Consent"
         },
         {
           "type": "paragraph",
-          "text": "We may rely on your consent to:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "process any special-category data that you voluntarily provide in UGC or communications;",
-            "send marketing emails and newsletters where you opt in (for example, updates on new courses, features or promotions);",
-            "use your feedback, testimonials or case studies for marketing or product-improvement purposes where you explicitly agree."
-          ]
+          "text": "Where required, we rely on consent for non-essential cookies and tracking, optional marketing communications, or publication of an identifiable testimonial. Any processing of special-category data requires a separate applicable legal condition; explicit consent is used only where it is appropriate and validly obtained."
         },
         {
           "type": "paragraph",
-          "text": "You may withdraw your consent at any time via the settings (where available) or by contacting us (see section 12). Withdrawal does not affect the lawfulness of processing prior to withdrawal."
+          "text": "You can withdraw consent through the relevant preference control, unsubscribe link or by contacting us. Withdrawal does not affect processing already lawfully carried out. We will explain if a requested optional activity cannot continue without the data or consent concerned."
+        },
+        {
+          "type": "subheading",
+          "id": "legitimate-interests",
+          "number": "3.3",
+          "title": "Legitimate interests"
         },
         {
           "type": "paragraph",
-          "text": "3.3 Legitimate interests"
+          "text": "Where the law permits and our interests are not overridden by your rights, we process necessary information to keep the Service secure, investigate suspected misuse, troubleshoot faults, administer business relationships, defend legal claims and improve reliability and usability."
         },
         {
           "type": "paragraph",
-          "text": "We may process personal data where necessary for our legitimate interests, provided that your interests and fundamental rights do not override those interests. This includes:"
+          "text": "We assess the purpose, necessity and impact of such processing. Product improvement does not give us an unrestricted right to reuse private prompts or enable provider training. Marketing and tracking must also meet any separate communications or cookie requirements."
         },
         {
-          "type": "list",
-          "items": [
-            "keeping the Service secure (fraud detection, abuse prevention, logging, rate-limiting and incident response);",
-            "ensuring reliable operation of authentication, session management and dashboard access;",
-            "measuring and improving performance, usability and user experience (using aggregated or pseudonymised analytics where feasible);",
-            "tailoring educational content at a high level (for example, grouping users by experience level to prioritise future content), without making automated decisions with legal or similarly significant effects;",
-            "sending essential, non-marketing communications (for example, service announcements, security alerts or policy updates);",
-            "B2B outreach to existing or potential business customers about products or services related to the Service, subject to your right to object at any time (see section 8)."
-          ]
+          "type": "subheading",
+          "id": "legal-obligations",
+          "number": "3.4",
+          "title": "Legal obligations"
         },
         {
           "type": "paragraph",
-          "text": "3.4 Legal obligation"
+          "text": "We process information where necessary to meet applicable tax, accounting, consumer protection and data protection duties, comply with lawful requests and preserve records that we are legally required to keep."
         },
         {
           "type": "paragraph",
-          "text": "We may process personal data where necessary to comply with legal obligations, including:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "tax, accounting and corporate record-keeping;",
-            "responding to lawful requests from public authorities, courts or regulators;",
-            "fulfilling our obligations under applicable consumer protection and data protection laws;",
-            "complying with anti-fraud, sanctions and similar regulatory requirements applicable to our payment flows and business operations."
-          ]
+          "text": "If information is needed to fulfil an Order or meet a legal requirement and you do not provide it, we may be unable to complete the relevant transaction. We will explain this where relevant rather than treating every field as compulsory."
         }
       ]
     },
     {
-      "id": "automated-processing",
+      "id": "ai-processing-and-automated-features",
       "number": "4",
-      "title": "Automated processing, profiling and AI",
+      "title": "AI processing and automated features",
       "content": [
         {
           "type": "paragraph",
-          "text": "The Service uses automated processing and algorithms to handle your inputs, for example:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "routing prompts to AI models to generate Custom Courses and AI Strategy Outputs;",
-            "aggregating usage data for statistics and performance monitoring;",
-            "detecting unusual patterns for security and fraud-prevention."
-          ]
+          "text": "4.1. AI generation uses your submitted inputs to produce educational material. We also use automated functions for account operation, generation status, transaction administration, diagnostics and security screening."
         },
         {
           "type": "paragraph",
-          "text": "Limited profiling may be used to tailor aspects of the Service (for example, adjusting educational difficulty based on your stated experience level, or flagging suspicious Usage Unit consumption for review)."
+          "text": "4.2. OpenAI states that inputs and outputs sent through its API are not used to train or improve its models by default unless the API customer explicitly opts in. Our use of the API for the Service does not include an opt-in to share customer generation inputs or outputs for that training purpose."
         },
         {
           "type": "paragraph",
-          "text": "We do not make decisions with legal or similarly significant effects solely based on automated decision-making. You may request human review of any decision that you believe has been taken solely by automated means by contacting us."
+          "text": "4.3. No training by default does not mean no storage. OpenAI may process and retain data for service operation, abuse monitoring, security and legal compliance under the applicable API arrangements. Its standard abuse-monitoring retention is generally up to 30 days, subject to documented exceptions. Some API features store application data for different periods depending on the endpoint and configuration. We do not represent that Cur Nova's deletion periods automatically delete all provider-side records or that a special zero-retention arrangement applies."
         },
         {
           "type": "paragraph",
-          "text": "When we use third-party AI providers, we do so under contractual safeguards, and we do not knowingly permit them to use your personal data to train public models in a way that would identify you."
+          "text": "4.4. Information about OpenAI API data controls is available at https://developers.openai.com/api/docs/guides/your-data. Our responsibilities for the data we disclose remain subject to applicable law and our arrangements with the provider."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.5. We do not use AI generation to make solely automated decisions that produce legal or similarly significant effects about you. Educational personalisation based on your stated level or goals is used to tailor learning material. If you believe an account or other decision has been made solely by automated means and affects you significantly, contact us so we can investigate and provide any review or safeguards required by law."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.6. AI outputs may contain errors or reproduce personal information included in the input. Please check generated material before sharing it and contact us if you identify a privacy issue."
         }
       ]
     },
     {
-      "id": "sharing",
+      "id": "recipients-and-international-transfers",
       "number": "5",
-      "title": "Sharing and international transfers",
+      "title": "Recipients and international transfers",
       "content": [
         {
           "type": "paragraph",
-          "text": "We share personal data only as necessary to operate, secure and improve the Service or to comply with legal obligations. This may include:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "Payment processing: providers that process Visa and Mastercard payments and related anti-fraud measures.",
-            "Hosting & IT: secure cloud infrastructure, databases, content delivery networks, storage/backups, monitoring and error-tracking services.",
-            "AI & product tooling: AI model providers, email delivery platforms, PDF generation tools, analytics platforms (aggregated or pseudonymised where feasible), A/B testing tools and similar.",
-            "Support & communications: helpdesk ticketing systems, customer support tools, survey and feedback platforms.",
-            "Professional advisers & insurers: legal, accounting, compliance and insurance providers.",
-            "Corporate transactions: if we are involved in a merger, acquisition, financing, or sale of all or part of our business, personal data may be transferred as part of that transaction, subject to appropriate safeguards."
-          ]
+          "text": "5.1. We disclose personal data only where necessary for the stated purposes and with an appropriate legal basis. Relevant recipients may include payment providers, hosting and storage providers, authentication providers, OpenAI, email and PDF-delivery services, monitoring and security providers, support tools and professional advisers. Analytics providers receive information only as permitted by law and the relevant choices."
         },
         {
           "type": "paragraph",
-          "text": "Some of our service providers are located outside the UK/EEA. Where personal data is transferred internationally, we implement appropriate safeguards such as:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "UK adequacy regulations (where the destination country has been recognised as providing an adequate level of protection);",
-            "the UK or EU Standard Contractual Clauses (SCCs); and",
-            "additional technical and organisational measures where appropriate (for example, encryption, access controls, data minimisation)."
-          ]
+          "text": "5.2. Providers acting as our processors are subject to appropriate contractual obligations. Some recipients, including payment providers or professional advisers, may act as independent controllers for particular activities under their own legal responsibilities. We do not describe every recipient as a processor regardless of its actual role."
         },
         {
           "type": "paragraph",
-          "text": "We do not sell your personal data."
+          "text": "5.3. For a Trader Custom Course, the person preparing the material receives only the information reasonably needed for that assignment, subject to appropriate confidentiality and data-handling arrangements."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.4. We may disclose relevant information to banks, payment providers or card-scheme participants to handle a refund, disputed transaction or suspected unauthorised payment, and to competent authorities where lawfully required. Information provided for a dispute is limited to what is relevant; the existence of a chargeback does not justify unrestricted disclosure of Account data or prompts."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.5. If a lawful merger, acquisition or business transfer involves personal data, we use appropriate safeguards and give notice where required. We do not sell personal data as a separate commercial product."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.6. Some providers may process data outside the UK or the European Economic Area. Where a transfer is restricted by applicable data protection law, it is made only with the necessary lawful transfer mechanism. Depending on the destination and legal regime, this may be an applicable adequacy arrangement or appropriate contractual safeguards, such as the UK International Data Transfer Agreement or the EU Standard Contractual Clauses together with the UK Addendum where required. EU clauses alone are not treated as sufficient for a restricted UK transfer when the UK regime requires an additional mechanism."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.7. We assess additional measures where required, including access restrictions and security safeguards. Contact info@cur-nova.com for information about the transfer safeguards relevant to your data and how to obtain a copy, subject to lawful redactions."
         }
       ]
     },
     {
-      "id": "cookies",
+      "id": "cookies-and-similar-technologies",
       "number": "6",
       "title": "Cookies and similar technologies",
       "content": [
         {
           "type": "paragraph",
-          "text": "We use cookies and similar technologies (including localStorage and sessionStorage) to:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "run essential functions of the Service (for example, login sessions, CSRF protection, security and preferences);",
-            "remember your settings (such as currency and interface preferences);",
-            "measure performance and reliability;",
-            "where you consent, enable analytics and, if applicable, marketing or attribution."
-          ]
+          "text": "6.1. We use cookies and similar storage technologies for functions such as authentication, session security and operation of requested features. Technologies that are strictly necessary for a service you request may operate without cookie consent where the law permits."
         },
         {
           "type": "paragraph",
-          "text": "Essential cookies are necessary for core functionality and security and cannot be disabled through our consent tools. Non-essential cookies (for example, certain analytics or marketing cookies) are used only where you provide consent and can be disabled or adjusted at any time via our cookie banner or preference centre (where available)."
+          "text": "6.2. Non-essential analytics, marketing or similar technologies are used only where legally permitted and, where required, after your consent. A preference or performance function is not automatically treated as essential merely because it is useful to us."
         },
         {
           "type": "paragraph",
-          "text": "For more details on the types of cookies we use and how you can manage your preferences, please see our Cookies Policy (linked in the footer of the website)."
+          "text": "6.3. You can manage relevant choices through the site's cookie controls and your browser settings. Blocking essential technologies may affect login or other requested functions. See the Cookie Policy at https://www.cur-nova.com/cookies for further information."
         }
       ]
     },
     {
-      "id": "retention",
+      "id": "retention-and-deletion",
       "number": "7",
-      "title": "Retention",
+      "title": "Retention and deletion",
       "content": [
         {
           "type": "paragraph",
-          "text": "We keep personal data only for as long as necessary for the purposes described in this Policy or as required by law. In particular:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "Wallet, Usage Units & transactions: at least 24 months and up to 6 years where needed for disputes, tax, accounting or enterprise records.",
-            "Account & profile data: for as long as your Account is active and for a reasonable period after closure (typically up to 24 months), unless a longer period is required for legal, security or business continuity reasons.",
-            "Course and AI output logs: for as long as reasonably necessary to provide your library, handle support requests and improve content, typically aligned with Account retention timelines.",
-            "Logs & security telemetry: typically 6–24 months, depending on the purpose and risk level."
-          ]
+          "text": "7.1. We retain personal data for the period necessary for its stated purpose and delete or irreversibly anonymise it when no longer needed, subject to lawful preservation requirements. The following periods distinguish generation working data from purchased materials and records needed for other purposes."
         },
         {
           "type": "paragraph",
-          "text": "Where feasible, we minimise, pseudonymise or anonymise data as early as possible and then securely delete or irreversibly anonymise it once it is no longer needed."
+          "text": "7.2. Generation prompts and input fields. We normally retain submitted prompts and the associated source fields used for generation for up to 90 days from submission, to complete generation, handle related support and investigate problems. They are then deleted or irreversibly anonymised unless a specific legal, security or dispute-related reason requires limited preservation. This period concerns source generation records; information that forms part of a purchased final material is governed by clause 7.4."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.3. Temporary technical records. Routine temporary processing records, generation diagnostics and transient technical logs are normally retained for up to 30 days from creation. Records separately required for a transaction, identified security incident or dispute are not treated as routine temporary records and follow the relevant purpose-specific period below. We do not retain a routine copy of every prompt beyond 90 days merely by labelling it a technical record."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.4. Purchased materials. Purchased courses, PDFs and AI outputs, together with the information necessary to associate them with your purchase and provide access, are retained for the duration of your applicable access entitlement. Once that entitlement ends, we delete or anonymise the associated personal data when it is no longer needed, subject to the limited preservation described below. This is a retention rule, not a separate promise of lifetime access. A copy you download and keep on your own device is under your control."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.5. Account and profile data. We retain the data needed to administer an active Account. Following closure, residual account records are normally kept for no longer than 24 months where necessary for unresolved support, fraud prevention or legal claims. Information with a shorter applicable period, such as ordinary generation inputs, follows that shorter period unless a specific exception applies."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.6. Payments and accounting. Relevant purchase, payment, Usage Unit, invoice and refund records are retained for the applicable accounting, tax and legal periods, normally up to six years where necessary for those purposes. These records do not require us to retain the full text of unrelated prompts for the same period."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.7. Security and disputes. Necessary incident, fraud-prevention and dispute records may be kept beyond the routine 30-day technical period, normally for 6–24 months depending on the purpose and risk. Where a specific claim, payment dispute, legal hold or statutory obligation requires longer preservation, the relevant limited records may be retained for the duration needed to resolve it or meet the legal requirement, including up to six years where appropriate for a legal claim. Longer retention must have a specific justification and is not applied automatically to all generation data."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.8. Support and communications. We retain correspondence for as long as reasonably needed to resolve the matter and document the outcome. Where a message is evidence for an Order, complaint or claim, the relevant transaction or dispute period applies. Optional marketing records are retained while the lawful marketing purpose continues, with limited suppression records kept where necessary to honour an opt-out."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.9. Backups and exceptions. Data removed from active systems may remain in protected backups until those copies are replaced or expire under the applicable backup cycle. Such copies are restricted to recovery, security and legal purposes and are not used as a separate active archive. If restoration occurs, applicable deletion requirements are reapplied. We preserve only what is necessary where law, an active dispute or a substantiated security matter justifies an exception."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.10. Provider-side records. These periods describe records under Cur Nova's control. OpenAI and other providers may have separate retention obligations or feature-specific storage, subject to their role, contractual arrangements and applicable law. OpenAI's API processing is further explained in section 4."
         }
       ]
     },
     {
-      "id": "rights",
+      "id": "your-data-protection-rights",
       "number": "8",
-      "title": "Your rights",
+      "title": "Your data protection rights",
       "content": [
         {
           "type": "paragraph",
-          "text": "Subject to certain legal conditions and limitations, you have the following rights regarding your personal data:"
+          "text": "8.1. Depending on the applicable law and relevant conditions, you may have the right to:"
         },
         {
           "type": "list",
           "items": [
-            "Right of access – to obtain confirmation as to whether we process your personal data and to receive a copy.",
-            "Right to rectification – to request correction of inaccurate or incomplete personal data.",
-            "Right to erasure (\"right to be forgotten\") – to request deletion of your personal data where there is no longer a legal basis for us to retain it.",
-            "Right to restriction of processing – to request that we restrict processing in certain circumstances (for example, while we verify the accuracy of data).",
-            "Right to data portability – to receive certain personal data in a structured, commonly used and machine-readable format and to transmit it to another controller where technically feasible.",
-            "Right to object – to object, on grounds relating to your particular situation, to processing based on our legitimate interests, and to object at any time to processing for direct marketing.",
-            "Right to withdraw consent – where processing is based on your consent, you have the right to withdraw that consent at any time (for example, for marketing communications or special-category data)."
+            "Obtain confirmation of processing and access to your personal data.",
+            "Correct inaccurate or incomplete information.",
+            "Request deletion where there is no lawful reason for continued retention.",
+            "Restrict processing in relevant circumstances.",
+            "Receive certain data in a portable format and request its transfer where the legal requirements are met.",
+            "Object to processing based on legitimate interests, including related profiling, on grounds relating to your situation.",
+            "Object to direct marketing at any time.",
+            "Withdraw consent where processing relies on consent.",
+            "Receive information, review or other safeguards for automated decision-making where the law provides them."
           ]
         },
         {
           "type": "paragraph",
-          "text": "How to exercise your rights:"
+          "text": "8.2. To exercise a right, email info@cur-nova.com. Using your registered email helps us identify your Account, but we will consider another reasonable verification method if you cannot use it. We ask only for identification information reasonably necessary to protect your data."
         },
         {
           "type": "paragraph",
-          "text": "You can exercise your rights by emailing info@cur-nova.com from your Account email address. We may need to request additional information to verify your identity."
+          "text": "8.3. We respond within the period required by applicable law, normally one month. Where a lawful extension or other permitted adjustment applies, we explain it and any steps you need to take. We do not use unnecessary information requests to delay a response."
         },
         {
           "type": "paragraph",
-          "text": "We aim to respond within one month of receiving your request. This period may be extended by up to two further months for complex or numerous requests, in which case we will inform you of the extension and reasons."
+          "text": "8.4. Requests are normally free. A charge or refusal is considered only where the law permits it, and we explain the reason and available complaint rights."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.5. Deletion is not absolute. For example, necessary transaction or claim records may need to be retained after account closure. We will explain a relevant exception rather than treating closure as a waiver of your rights."
         }
       ]
     },
@@ -420,86 +387,76 @@
       "content": [
         {
           "type": "paragraph",
-          "text": "We implement appropriate technical and organisational measures designed to protect personal data against unauthorised access, loss, misuse or alteration. These measures include, where appropriate:"
-        },
-        {
-          "type": "list",
-          "items": [
-            "access controls, role-based permissions and multi-factor authentication for administrative interfaces;",
-            "encryption in transit (HTTPS/TLS) and, where appropriate, encryption at rest;",
-            "network segregation, firewalls and regular backups;",
-            "logging, monitoring and incident-response procedures;",
-            "vendor due diligence and contractual obligations for processors;",
-            "secure software development and change-management practices."
-          ]
+          "text": "9.1. We use technical and organisational measures appropriate to the nature and risks of processing. These include appropriate access controls, secure transmission, protection of authentication information, backup and recovery measures and procedures for handling security incidents."
         },
         {
           "type": "paragraph",
-          "text": "No system can be guaranteed to be 100% secure, but we continuously improve our controls and will promptly investigate and, where required, notify you and relevant authorities of any personal data breach."
+          "text": "9.2. Access to customer information is limited to people and providers who need it for an authorised purpose. We assess relevant providers and apply appropriate confidentiality and processing obligations."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.3. No online service can guarantee absolute security. If a personal data breach occurs, we investigate, take appropriate action and notify affected people and authorities where required by law."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.4. Protect your login details and avoid submitting unnecessary personal or sensitive information. Contact us promptly if you suspect an account or privacy incident."
         }
       ]
     },
     {
       "id": "children",
       "number": "10",
-      "title": "Children's data",
+      "title": "Children",
       "content": [
         {
           "type": "paragraph",
-          "text": "The Service is intended for users aged 18+. We do not knowingly collect personal data from children. If you believe that a child has provided personal data to us, please contact info@cur-nova.com so that we can investigate and, where appropriate, delete the data and close any related Account."
+          "text": "10.1. The Service is intended for adults aged 18 and over. We do not knowingly seek personal data from children for use of the Service."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.2. If you believe a child has supplied personal data, contact info@cur-nova.com. We will investigate and take appropriate action, including deletion or account closure where required, while retaining only records that must lawfully be preserved."
         }
       ]
     },
     {
-      "id": "changes",
+      "id": "changes-to-this-policy",
       "number": "11",
       "title": "Changes to this Policy",
       "content": [
         {
           "type": "paragraph",
-          "text": "We may update this Privacy Policy from time to time to reflect changes in the Service, applicable law or our data protection practices."
+          "text": "11.1. We may revise this Policy to reflect changes in the Service, providers, processing or applicable law. The current version states its effective date."
         },
         {
           "type": "paragraph",
-          "text": "Material changes will be notified by email (where appropriate) and/or via a prominent notice within the Service (for example, in your dashboard). Updated versions will be effective from the date indicated at the top of this Policy and will apply prospectively."
+          "text": "11.2. We communicate material changes through an appropriate notice, such as email or a prominent website or Dashboard message. If a new activity requires consent or another legal step, a policy update alone does not replace that requirement."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.3. A revision does not retrospectively create consent or legitimise an incompatible use of previously collected information."
         }
       ]
     },
     {
-      "id": "contact",
+      "id": "contact-and-complaints",
       "number": "12",
-      "title": "Contact & complaints",
+      "title": "Contact and complaints",
       "content": [
         {
-          "type": "paragraph",
-          "text": "Controller:"
-        },
-        {
-          "type": "list",
-          "items": [
+          "type": "address",
+          "lines": [
             "CUR NOVA LTD",
-            "Dept 6831, 196 High Road",
-            "Wood Green, London",
-            "United Kingdom",
-            "N22 8HH",
-            "Email (privacy): info@cur-nova.com"
+            "Company number: 17240836",
+            "Registered office: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom",
+            "Privacy email: info@cur-nova.com",
+            "Website: https://www.cur-nova.com/"
           ]
         },
         {
           "type": "paragraph",
-          "text": "If you have questions or concerns about how we handle your personal data, please contact us first so we can try to resolve the issue."
-        },
-        {
-          "type": "paragraph",
-          "text": "If you are not satisfied with our response, you have the right to lodge a complaint with the Information Commissioner's Office (ICO) in the UK. If you are resident in the EU, you may also have the right to complain to your local supervisory authority."
+          "text": "Please contact us if you have questions or concerns about personal data. You also have the right to complain to the UK Information Commissioner's Office at https://ico.org.uk/make-a-complaint/ or to another supervisory authority available under applicable law, including your relevant EU authority where applicable. You do not need our permission or have to complete our internal process before exercising a statutory right to complain to a regulator."
         }
       ]
     }
-  ],
-  "cta": {
-    "title": "Questions about your privacy?",
-    "subtitle": "Contact us at info@cur-nova.com if you have questions about this Privacy Policy or wish to exercise your rights.",
-    "backToHome": "Back to home",
-    "contactPrivacy": "Contact privacy"
-  }
+  ]
 }

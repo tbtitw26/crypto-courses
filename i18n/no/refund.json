@@ -3,291 +3,389 @@
     "refund": "Refusjons- og returpolicy"
   },
   "hero": {
-    "title": "Refusjons- og returpolicy for bruksenhetspakker, kurs og AI-funksjoner.",
-    "subtitle": "Her forklarer vi hvordan vi vurderer refusjonskrav for bruksenhetspåfyllinger, ferdige kurs, tilpassede PDF-er og resultater fra AI-strategibyggeren hos Cur Nova. Policyen bygger på britisk forbrukerlovgivning og er tilpasset ren digital levering.",
-    "meta": [
-      { "label": "Gjelder fra", "value": "6. desember 2025" },
-      { "label": "Operatør", "value": "CUR NOVA LTD (17240836)" },
-      { "label": "Jurisdiksjon", "value": "England og Wales" }
-    ],
-    "badges": {
-      "payments": "Betaling: Visa · Mastercard · GBP/EUR/USD",
-      "support": "Support: info@cur-nova.com",
-      "digitalOnly": "Digital levering · Ingen fysiske returer"
+    "title": "Refusjons- og returpolicy",
+    "effectiveDate": {
+      "label": "Gjelder fra",
+      "value": "28. oktober 2026"
     },
-    "summaryCard": {
-      "title": "Kortversjon (for kunder)",
-      "subtitle": "Bruk denne listen for en rask oppsummering; de nummererte avsnittene inneholder alle juridiske detaljer.",
-      "items": [
-        "Refusjoner vurderes etter denne policyen og britisk forbrukerlovgivning.",
-        "Behandlingstid: 5–10 virkedager etter godkjenning (bankene kan bruke lengre tid).",
-        "Refusjoner overstiger aldri det du opprinnelig betalte for bestillingen.",
-        "Brukte bruksenheter refunderes ikke; lommeboksaldo kan ikke overføres.",
-        "Bonus-/kampanjekreditter kan fjernes, men refunderes aldri i kontanter.",
-        "Cur Nova leverer kun digitalt innhold – ingenting skal sendes tilbake.",
-        "Send e-post til info@cur-nova.com med kontoens e-postadresse, ordre-ID og bakgrunn.",
-        "Valutaer: GBP, EUR, USD. Betalingsmåter: Visa, Mastercard.",
-        "Referansekurs: 100 bruksenheter = £1.00 / €1.17 / $1.29."
-      ],
-      "note": "Snakk alltid med supportteamet vårt før du kontakter banken din; det gir raskere og sporbare løsninger."
-    }
+    "intro": [
+      "Denne policyen forklarer hvordan du avbestiller en ordre, ber om refusjon eller melder fra om et problem med bruksenheter, ferdige kurs, trader-tilpassede kurs, AI-tilpassede kurs og AI-strategiresultater kjøpt gjennom Cur Nova.",
+      "Selgeren er CUR NOVA LTD, organisasjonsnummer 17240836, registrert på Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom. Kontakt info@cur-nova.com for hjelp.",
+      "Produktene våre leveres digitalt. Det finnes ingen fysiske varer som skal sendes tilbake. At det ikke skjer noen fysisk retur, hindrer ikke en gyldig avbestilling, refusjon eller et gyldig kvalitetskrav."
+    ]
   },
   "toc": {
-    "title": "På denne siden",
-    "items": [
-      { "label": "Sammendrag", "anchor": "summary" },
-      { "label": "Omfang og juridisk merknad", "anchor": "scope" },
-      { "label": "Sentrale definisjoner", "anchor": "definitions" },
-      { "label": "Generelle refusjonsprinsipper", "anchor": "principles" },
-      { "label": "Påfylling av lommebok (bruksenheter)", "anchor": "wallet" },
-      { "label": "Kansellering av betalte funksjoner", "anchor": "cancellations" },
-      { "label": "Kvalitetsproblemer og ny kjøring", "anchor": "quality" },
-      { "label": "Slik ber du om refusjon", "anchor": "request" },
-      { "label": "Tilbakeføringer og tvister", "anchor": "chargebacks" },
-      { "label": "Skatter og fakturering", "anchor": "taxes" },
-      { "label": "Arkivering og data", "anchor": "records" },
-      { "label": "Illustrerende eksempler", "anchor": "examples" },
-      { "label": "Endringer i denne policyen", "anchor": "changes" },
-      { "label": "Kontaktopplysninger", "anchor": "contact" }
-    ],
-    "reminder": {
-      "label": "Påminnelse",
-      "text": "Denne policyen er en del av Cur Novas vilkår og betingelser. Digital levering kan starte umiddelbart, noe som kan begrense den lovfestede angreretten."
-    }
+    "title": "På denne siden"
   },
   "sections": [
     {
       "id": "summary",
       "number": "1",
-      "title": "Sammendrag (for kunder)",
+      "title": "Sammendrag",
       "content": [
         {
           "type": "list",
           "items": [
-            "Refusjoner vurderes etter denne policyen sammen med gjeldende britisk forbrukerregelverk.",
-            "Vanlig behandlingstid: 5–10 virkedager etter godkjenning; banker eller betalingsleverandører kan bruke lengre tid på å bokføre midlene.",
-            "Refusjoner overstiger ikke det opprinnelige beløpet som ble betalt for den aktuelle bruksenhetspakken eller funksjonen.",
-            "Bruksenheter som allerede er brukt, refunderes ikke.",
-            "Lommeboksaldo er knyttet til kontoen, kan ikke overføres og kan ikke veksles inn i kontanter (se avsnitt 5).",
-            "Kampanje- eller bonuskreditter kan utløpe og refunderes aldri.",
-            "Alle Cur Nova-produkter er digitale; det finnes ingen fysiske varer å returnere.",
-            "Send henvendelser til info@cur-nova.com med kontoens e-postadresse, ordrereferanse og relevante detaljer.",
-            "Godkjente valutaer: GBP (£), EUR (€), USD ($). Betalingsmåter: Visa, Mastercard.",
-            "Referansekurs for visning: 100 bruksenheter = £1.00 / €1.17 / $1.29."
+            "Denne policyen skiller mellom rettigheter du har etter gjeldende lov, og ytterligere refusjoner vi kan tilby frivillig.",
+            "Kjøp av bruksenheter innebærer ikke i seg selv at du gir avkall på retten til å avbestille et senere kurskjøp. Samtykke til umiddelbar digital levering må oppfylle de gjeldende lovkravene.",
+            "Ubrukte betalte bruksenheter refunderes der loven krever det. Utenom slike tilfeller vurderes refusjoner etter de frivillige vilkårene nedenfor.",
+            "Bruk av enheter eller mottak av en fil fjerner ikke beføyelser ved mangelfullt eller kontraktsstridig innhold.",
+            "Meld fra om et problem raskt, helst innen sju dager etter at du oppdaget det. Denne anbefalingen forkorter ikke dine lovfestede rettigheter eller lovbestemte frister for krav.",
+            "Legitime tilbakeføringer (chargebacks) fører ikke til sanksjoner eller automatisk suspensjon av kontoen.",
+            "Lovpålagte refusjoner følger det beløpet, den tidsfristen og den betalingsmåten loven krever. Vi erstatter ikke en lovpålagt pengerefusjon med kontokreditt uten ditt uttrykkelige samtykke der loven krever at penger tilbakebetales."
           ]
         }
       ]
     },
     {
-      "id": "scope",
+      "id": "scope-and-legal-rights",
       "number": "2",
-      "title": "Omfang og juridisk merknad",
+      "title": "Virkeområde og lovfestede rettigheter",
       "content": [
         {
           "type": "paragraph",
-          "text": "Denne policyen gjelder kansellering og refusjon for kjøp gjort via cur-nova.com, inkludert påfylling av lommeboken (bruksenhetskjøp) og betalte opplæringsfunksjoner (ferdige kurs, tilpassede PDF-er, resultater fra AI-strategibyggeren og kalkulatorer) som drives av CUR NOVA LTD («Cur Nova», «vi»)."
+          "text": "2.1. Denne policyen er en del av vilkårene og betingelsene og gjelder for relevante ordrer lagt inn via cur-nova.com, enten de betales direkte eller med bruksenheter. Definisjonene i vilkårene gjelder med mindre denne policyen forklarer dem annerledes."
         },
         {
           "type": "paragraph",
-          "text": "Tjenesten leverer utelukkende digitalt innhold og verktøy. Ingenting skal sendes tilbake eller returneres fysisk under denne policyen."
+          "text": "2.2. Ingenting i denne policyen utelukker eller begrenser rettigheter eller beføyelser som ikke lovlig kan utelukkes. Disse kan følge av UK Consumer Rights Act 2015, Consumer Contracts Regulations 2013 og ufravikelig forbrukerlovgivning som gjelder i ditt land."
         },
         {
           "type": "paragraph",
-          "text": "Ingenting her fjerner lovfestede rettigheter etter britisk lov, herunder Consumer Rights Act 2015 og, der det er relevant, Consumer Contracts Regulations 2013."
+          "text": "2.3. Lovfestede rettigheter avhenger av transaksjonen og gjeldende lov. De kan omfatte angrerett, beføyelser ved mangelfullt digitalt innhold eller mangelfulle tjenester og rettigheter der en ordre ikke leveres som avtalt. De avhenger ikke av vår vilje til å gjøre et skjønnsmessig unntak."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.4. En frivillig refusjon er en ytterligere kommersiell innrømmelse utenfor et eksisterende rettskrav. En begrensning som gjelder frivillige refusjoner, skal ikke brukes til å nekte en refusjon eller annen beføyelse som loven krever."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.5. Rettigheter som er forbeholdt forbrukere, gjelder ikke automatisk for kjøp gjort av bedrifter. Bedriftskunder har fortsatt rett til den avtalte ytelsen og til de beføyelsene som følger av deres avtale og gjeldende lov."
         }
       ]
     },
     {
       "id": "definitions",
       "number": "3",
-      "title": "Sentrale definisjoner",
+      "title": "Definisjoner",
       "content": [
         {
-          "type": "definition",
-          "items": [
-            { "term": "Lommebok / lommeboksaldo", "description": "Forhåndsbetalt saldo (i bruksenheter) på Cur Nova-kontoen din. Den er ikke kontanter, e-penger eller et finansielt instrument." },
-            { "term": "Bruksenheter", "description": "Enheter som brukes til å låse opp kurs, generere tilpassede PDF-er, kjøre AI-strategier eller aktivere andre betalte funksjoner." },
-            { "term": "Resultater / innhold", "description": "Digitale PDF-er, strategifiler, diagrammer og støttemateriell som genereres av tjenesten." },
-            { "term": "Ordre / transaksjon", "description": "En bekreftet påfylling av lommeboken, et kurskjøp eller aktivering av en betalt funksjon." },
-            { "term": "Misbruk / svindel", "description": "All atferd som bryter Cur Novas vilkår (for eksempel misbruk av tilbakeføringer, automatisert bruksenhetsinnsamling, uautoriserte betalinger eller forsøk på å omgå begrensninger)." }
-          ]
+          "type": "paragraph",
+          "text": "3.1. «Bruksenheter» er forhåndsbetalte kreditter som kan innløses mot kvalifiserende innhold eller betalte funksjoner fra Cur Nova. «Lommebok» eller «bruksbalanse» er kontooversikten over disse enhetene."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.2. «Påfylling» betyr et kjøp av betalte bruksenheter. «Innløsning» betyr bruk av enheter for en bestemt ordre. Kjøp av enheter og innløsning av dem mot innhold er separate hendelser."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.3. «Betalte enheter» er enheter som kan henføres til penger du har betalt. «Bonusenheter» er ytterligere kampanjekreditter som gis uten separat betaling. En rett til refusjon av betalt verdi fjernes ikke ved at bonusenheter inngår i et tilbud."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.4. «Innhold» omfatter ferdige kurs, trader-tilpassede kurs, AI-tilpassede kurs, AI-strategiresultater og tilhørende digitalt opplæringsmateriell."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.5. En «lovfestet avbestilling» er utøvelse av en lovbestemt rett til å gå fra en kvalifiserende avtale. Et «kvalitetskrav» (reklamasjon) gjelder manglende, mangelfullt eller kontraktsstridig innhold eller en tjeneste som ikke er utført som påkrevd. En anmodning om «frivillig refusjon» er en anmodning til oss om refusjon utenfor disse lovfestede rettighetene."
         }
       ]
     },
     {
-      "id": "principles",
+      "id": "general-principles",
       "number": "4",
-      "title": "Generelle refusjonsprinsipper",
+      "title": "Generelle prinsipper",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "4.1. Refusjonstak – refusjoner overstiger aldri det du betalte for bestillingen og kan, der loven tillater det, utelate gebyrer fra betalingsleverandøren som ikke kan kreves tilbake.",
-            "4.2. Digital levering – når du ber oss om å starte umiddelbart (ved å bruke bruksenheter rett etter en påfylling), erkjenner du at en eventuell lovfestet angrerett kan gå tapt for det aktuelle innholdet når leveringen har startet.",
-            "4.3. Brukte bruksenheter – bruksenheter brukt på fullførte handlinger (nedlastinger, AI-kjøringer, generering av tilpassede kurs) kan ikke returneres.",
-            "4.4. Riktige opplysninger – resultatene bygger på opplysningene du oppgir. Hvis opplysningene er feil eller ufullstendige, vil ny generering av innhold bruke nye bruksenheter.",
-            "4.5. Refusjonsvaluta – refusjoner utbetales om mulig i samme valuta og til samme betalingsmåte som ble brukt opprinnelig.",
-            "4.6. Valutavisning – priser i flere valutaer er veiledende; kortutstederen din bestemmer endelig valutakurs og gebyrer.",
-            "4.7. Kampanjer – kampanje- eller bonuskreditter refunderes ikke og kan utløpe i henhold til egne vilkår.",
-            "4.8. Misbruk eller svindel – vi kan avslå refusjon, suspendere kontoer og trekke tilbake bruksenheter der vi mistenker misbruk, svindel eller brudd på retningslinjene."
-          ]
+          "type": "paragraph",
+          "text": "4.1. En refusjon tilbakebetaler det beløpet som skyldes for det berørte kjøpet eller en del av det. Vi refunderer ikke den samme betalingen to ganger. Dette begrenser ikke et separat krav på erstatning eller en annen beføyelse etter gjeldende lov. Vi trekker ikke betalingsbehandlingsgebyrer, administrasjonsgebyrer eller skatter og avgifter fra en lovpålagt refusjon der dette ville redusere beløpet loven krever at vi tilbakebetaler."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.2. Kjøp eller mottak av bruksenheter utgjør ikke i seg selv en anmodning om umiddelbar levering av et fremtidig kurs eller en erkjennelse av at angreretten for den fremtidige ordren vil gå tapt. En bestemt innløsning eller et bestemt kjøp må vurderes for seg. Der tidlig levering krever uttrykkelig samtykke og erkjennelse, innhenter vi dette i forbindelse med den aktuelle leveringen og gir den bekreftelsen loven krever. En generell aksept av vilkårene eller et trekk av enheter erstatter ikke disse kravene."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.3. Enheter brukt på korrekt fullførte ordrer refunderes normalt ikke bare fordi du ombestemmer deg etter at en eventuell angrerett lovlig har opphørt. Forbruk av enheter er likevel ikke et absolutt hinder for refusjon, retting, erstatning, ny utførelse eller prisavslag som loven krever. At en prosess starter eller et trekk skjer, fastslår ikke i seg selv at leveringen var vellykket."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.4. Dersom vi korrekt oppfyller de avtalte instruksjonene, men du senere endrer dem eller ber om et utvidet omfang, kan en ny betaling påløpe dersom den er opplyst før det nye arbeidet starter. Vi tar ikke betalt for en beføyelse vi skylder fordi vår opprinnelige ytelse var mangelfull eller ikke samsvarte med avtalen."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.5. Lovpålagte refusjoner utbetales til det opprinnelige betalingsmiddelet, med mindre du uttrykkelig samtykker til en annen lovlig metode eller gjeldende lov tillater en annen ordning. Vi bruker den opprinnelige transaksjonsvalutaen når refusjonen utbetales. Separate valutaeffekter eller gebyrer som banken din pålegger, reguleres av bankens vilkår og reduserer ikke det vi er forpliktet til å tilbakebetale."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.6. Der et kjøp gjort med betalte enheter må refunderes i penger, beregner vi den refunderbare verdien ut fra det faktiske beløpet som ble betalt for de aktuelle enhetene og den berørte ordren. En senere veiledende vekslingskurs eller gjeldende pakkepris erstatter ikke den opprinnelige kjøpsverdien. Kontokreditt er et alternativ bare der det er lovlig tillatt og avtalt slik det kreves."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.7. Bonusenheter som gis uten separat betaling, har normalt ingen selvstendig kontantrefusjonsverdi. Eventuelle kampanjevilkår må ha vært opplyst da tilbudet ble gitt, og kan ikke redusere den lovfestede refusjonen av penger som faktisk er betalt."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.8. Vi kan undersøke tegn på svindel eller uautorisert bruk og iverksette forholdsmessige tiltak i henhold til vilkårene. En reell klage eller betalingstvist er ikke i seg selv svindel. Undersøkelser, anmodninger om dokumentasjon eller begrensninger skal ikke brukes til å sette til side et gyldig rettskrav eller til å forlenge en lovfestet frist for refusjon."
         }
       ]
     },
     {
-      "id": "wallet",
+      "id": "top-ups-and-unused-balances",
       "number": "5",
-      "title": "Påfylling av lommebok (bruksenheter)",
+      "title": "Påfyllinger og ubrukt saldo",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "5.1. Art – påfyllinger av lommeboken er forskuddsbetaling for digitale tjenester. Lommeboken er ikke en bank-, betalings- eller e-pengekonto og gir ingen avkastning.",
-            "5.2. Ubrukt saldo – ubrukte bruksenheter kan normalt ikke tas ut. Unntaksvise refusjoner (dobbeltbetalinger, tydelige tekniske feil) er skjønnsmessige og kan utelate gebyrer som ikke kan kreves tilbake.",
-            "5.3. Delvis brukte påfyllinger – kun den ubrukte delen av en bestemt påfylling kan vurderes for refusjon, begrenset til det opprinnelige beløpet for påfyllingen.",
-            "5.4. Ingen overføring – lommeboksaldo kan ikke selges, byttes eller overføres til andre brukere."
-          ]
+          "type": "paragraph",
+          "text": "5.1. Påfyllinger er forhåndsbetaling for kvalifiserende produkter og funksjoner fra Cur Nova. Bruksbalansen tilbys ikke som et bankinnskudd, en investering eller en generell betalingskonto og gir ikke renter. Den kan normalt ikke overføres eller tas ut som kontanter, med forbehold om refusjonsrettighetene i denne policyen."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.2. Vi refunderer ubrukte betalte enheter når gjeldende lov krever det. Avhengig av omstendighetene kan dette omfatte en gyldig avbestilling av en påfyllingsavtale, et kjøp som ikke er levert, eller manglende levering av betalte rettigheter. Utenfor et rettskrav kan du be om frivillig refusjon av en ubrukt betalt saldo; vi vurderer omstendighetene i stedet for å love en generell utbetalingsordning. Doble belastninger eller tekniske betalingsfeil korrigeres, og tilbakebetaling som loven krever, behandles ikke som skjønnsmessig."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.3. Dersom en påfylling er delvis brukt, fastslår vi ut fra transaksjonsoversikten hvilket beløp som fortsatt kan henføres til ubrukte betalte enheter. En refusjon av den ubrukte saldoen baseres på dens andel av det faktiske beløpet som ble betalt. Denne beregningen hindrer ikke en separat refusjon av den brukte delen der det aktuelle innholdet eller den aktuelle tjenesten gir grunnlag for en lovfestet beføyelse. Den samlede tilbakebetalingen av kjøpesummen vil ikke dobbeltregne beløp som allerede er tilbakebetalt."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.4. Enheter kan ikke selges eller overføres til en annen kunde. Denne begrensningen er ikke til hinder for en gyldig refusjon til kjøperen."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.5. Avslutning av en konto gir ikke automatisk rett til en frivillig refusjon, men innebærer ikke avkall på et eksisterende lovfestet krav og hindrer deg ikke i å be om refusjon i etterkant."
         }
       ]
     },
     {
-      "id": "cancellations",
+      "id": "cancellation-of-content-orders",
       "number": "6",
-      "title": "Kansellering av betalte funksjoner",
+      "title": "Avbestilling av innholdsordrer",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "6.1. Før levering – hvis ingen bruksenheter er brukt og ingen PDF-/AI-prosess har startet, kan du be om kansellering og refusjon av det aktuelle beløpet.",
-            "6.2. Etter at leveringen har startet – når en generering har startet (bruksenheter brukt, filer generert), er kansellering og refusjon ikke tilgjengelig, med unntak av der ufravikelige rettigheter gjelder."
-          ]
+          "type": "paragraph",
+          "text": "6.1. Før utførelse. Kontakt oss så snart du ønsker å avbestille. Dersom det bestemte innholdet ikke er levert og den aktuelle utarbeidelsen eller genereringen ikke har startet, kan du be om avbestilling og tilbakebetaling eller reversering av belastningen for den ordren. Vi vil også vurdere en eventuell lovfestet angrerett uavhengig av status for trekket av enheter. Det kreves ingen bestemt ordlyd eller begrunnelse for å utøve en lovfestet angrerett."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.2. Digitalt innhold og umiddelbar levering. For kvalifiserende britiske fjernsalgsavtaler om digitalt innhold som leveres uten fysisk medium, er den normale angrefristen 14 dager etter at avtalen er inngått, med forbehold om gjeldende unntak og forlengelser. Retten går tapt når den digitale leveringen starter i denne perioden bare dersom det påkrevde uttrykkelige samtykket og erkjennelsen av at retten går tapt, er innhentet. Vi må også gi den lovpålagte bekreftelsen i en form du kan oppbevare. Der de nødvendige lovvilkårene ikke er oppfylt, rettferdiggjør ikke start av generering, fremstilling av en fil, trekk av enheter eller tildeling av tilgang i seg selv at en gyldig lovfestet avbestilling avvises, eller at det tas betalt for levering der loven sier at ingen betaling skal ytes. Selv om en angrerett lovlig har opphørt, består rettighetene knyttet til mangelfullt eller kontraktsstridig innhold."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.3. Tjenesteelementer. Dersom en ordre omfatter en tjeneste som består i å utarbeide et kurs, behandles enhver anmodning om å starte tjenesten i en lovfestet angrefrist etter de reglene som gjelder for tjenester. Etter de relevante britiske reglene avslutter ikke oppstart av arbeidet i seg selv angreretten: tap av denne retten krever normalt full utførelse etter den påkrevde anmodningen og erkjennelsen. Et lovlig og forholdsmessig vederlag for en tjeneste levert før avbestillingen kan bare kreves når lovkravene til informasjon og anmodning er oppfylt. Vi beholder ikke automatisk hele vederlaget bare fordi utarbeidelsen har startet."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.4. Personlig tilpasning. At et produkt kalles «tilpasset» eller utarbeides ut fra dine opplysninger, fjerner ikke i seg selv lovfestet angrerett for digitalt innhold eller tjenester. Et unntak må faktisk gjelde for den konkrete avtalen."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.5. Leveringstider. Ferdige kurs er tilgjengelige umiddelbart etter vellykket betaling eller bekreftet innløsning, med forbehold om lovpålagt samtykke til tidlig levering. Trader-tilpassede kurs tar normalt 48–96 timer etter betaling eller innløsning og mottak av opplysningene som trengs for ordren. AI-tilpassede kurs og AI-strategiresultater tar normalt noen få minutter etter bekreftelse av forespørselen og de påkrevde opplysningene og betalingen eller innløsningen."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.6. Utilgjengelighet og forsinkelse. Dersom vi før en ordre vet at den normale leveringstiden ikke kan overholdes, vil vi opplyse om dette og avtale en annen leveringstid før betaling eller innløsning for den ordren. Dersom en uventet forsinkelse oppstår, vil vi varsle deg uten unødig opphold og tilby en ny dato. Du kan godta den eller avbestille den berørte, ikke-leverte ordren og få den refusjonen du har krav på. Taushet fra deg betyr ikke at du godtar en forlengelse. Enhver sterkere lovfestet beføyelse er fortsatt tilgjengelig."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.7. Avbestillingens omfang. Avbestilling av én ordre avbestiller ikke automatisk kjøp som ikke henger sammen med den. For en delvis levert ordre avhenger beløpet som skyldes, av gjeldende lovregler og av hva som er korrekt levert; vi vil ikke behandle delvis oppfyllelse som en automatisk grunn til å beholde hele prisen."
         }
       ]
     },
     {
-      "id": "quality",
+      "id": "quality-issues-and-remedies",
       "number": "7",
-      "title": "Kvalitetsproblemer og ny kjøring",
+      "title": "Kvalitetsproblemer og beføyelser",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "7.1. Vurdering i god tro – meld fra om filer med vesentlige feil (ødelagt PDF, tom eksport, åpenbart avvik) innen 7 dager, og legg ved skjermbilder, tidsstempler eller feil-ID-er.",
-            "7.2. Utbedring – hvis vi bekrefter en feil hos Cur Nova, kjører vi prosessen på nytt uten bruksenhetskostnad eller krediterer tilsvarende bruksenheter hvis ny kjøring ikke er mulig.",
-            "7.3. Ekstern godkjenning – avslag fra en megler, markedsplass eller tilsynsmyndighet betyr ikke automatisk at innholdet er mangelfullt, og gir ikke rett til refusjon."
-          ]
+          "type": "paragraph",
+          "text": "7.1. Gi oss beskjed om et problem raskt, helst innen sju dager etter at du oppdaget det. Dette er en anbefaling som skal hjelpe oss å løse problemer raskt, ikke en lovbestemt frist for krav eller et vilkår som fjerner lovfestede rettigheter. Et senere krav vurderes i samsvar med gjeldende lov. Der det er rimelig tilgjengelig, oppgi ordrereferansen, en beskrivelse av problemet og et relevant skjermbilde eller en feilmelding. Vi vil ikke kreve unødvendig dokumentasjon eller behandle manglende skjermbilde som en automatisk grunn til å avvise et gyldig krav."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.2. Dersom betalt digitalt innhold ikke oppfyller gjeldende avtalemessige eller lovfestede krav, gir vi den beføyelsen loven krever. Etter de relevante britiske reglene for digitalt innhold betyr dette generelt utbedring eller erstatning uten ekstra kostnad, innen rimelig tid og uten vesentlig ulempe. Der disse beføyelsene ikke er tilgjengelige eller ikke gis som påkrevd, kan du ha krav på et passende prisavslag, som kan utgjøre hele prisen. Andre gjeldende beføyelser, herunder beføyelser knyttet til tjenester eller til manglende rett til å levere innhold, består. En ny kjøring eller kreditering av enheter er ikke den eneste beføyelsen der du har krav på en annen form for oppreisning."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.3. Et tradingtap, uenighet i en pedagogisk tilnærming eller avvisning fra en megler eller annen ekstern part beviser ikke alene at innholdet er mangelfullt. En pedagogisk ansvarsfraskrivelse eller AI-ansvarsfraskrivelse unnskylder likevel ikke en skadet fil, manglende levering, vesentlig avvik fra beskrivelsen eller annen manglende oppfyllelse av den avtalte eller lovpålagte standarden."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.4. Vi skiller mellom en teknisk feil eller mangelfull ytelse og en ny preferanse eller en endring i instruksjonene. Dersom den opprinnelige ordren ble korrekt oppfylt, kan et annet ønsket resultat være en ny betalt ordre. Dersom en retting skyldes etter den opprinnelige avtalen eller loven, gis den uten ekstra betaling."
         }
       ]
     },
     {
-      "id": "request",
+      "id": "how-to-cancel-or-request-a-refund",
       "number": "8",
-      "title": "Slik ber du om refusjon",
+      "title": "Slik avbestiller du eller ber om refusjon",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "Send e-post til info@cur-nova.com med kontoens e-postadresse, ordre-/transaksjonsreferanse, om henvendelsen gjelder en påfylling av lommeboken eller en bestemt funksjon, samt relevant dokumentasjon (skjermbilder, bankbekreftelser, lenker).",
-            "Vi bekrefter mottak innen 5 virkedager, kan be om mer informasjon og har som mål å behandle godkjente refusjoner innen 5–10 virkedager (bokføringstiden avhenger av banken din)."
-          ]
+          "type": "paragraph",
+          "text": "8.1. Send en tydelig avbestilling, refusjonsanmodning eller klage til info@cur-nova.com. Du kan også skrive til CUR NOVA LTD, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom. Du trenger ikke en aktiv konto for å utøve en eksisterende rettighet."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.2. For å hjelpe oss å finne transaksjonen, oppgi e-postadressen til kontoen din eller andre identifiserende ordreopplysninger, ordre- eller transaksjonsreferansen hvis den er tilgjengelig, og om anmodningen gjelder en påfylling eller et bestemt produkt. Ved en kvalitetsklage, forklar hva som gikk galt. Ikke send fullstendige kortnumre, CVV-koder eller unødvendige identitetsdokumenter på e-post."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.3. En lovfestet avbestilling innenfor angrefristen krever ingen begrunnelse, ingen skjermbilder og ingen forhåndsgodkjenning fra oss. Du kan bruke enhver tydelig erklæring om beslutningen din. Den valgfrie ordlyden nedenfor er tilstrekkelig når den fylles ut med de relevante opplysningene:"
+        },
+        {
+          "type": "quote",
+          "text": "«Jeg meddeler herved at jeg avbestiller min avtale om [produkt eller påfylling], bestilt den [dato], med ordrereferanse [referanse, hvis tilgjengelig]. Mitt navn er [navn], og min konto-e-post eller kontaktadresse er [opplysninger].»"
+        },
+        {
+          "type": "paragraph",
+          "text": "8.4. Vi tar sikte på å bekrefte mottak av anmodninger innen fem virkedager og kan be om opplysninger som er rimelig nødvendige for å identifisere kjøpet eller vurdere et kvalitetsproblem. Dette servicemålet utsetter ikke en virksom avbestilling og forlenger ikke noen lovbestemt frist for refusjon."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.5. Ved en gyldig lovfestet avbestilling etter britisk rett av digitalt innhold eller tjenester skjer tilbakebetalingen uten unødig opphold og senest 14 dager etter at vi er informert om beslutningen om å avbestille, med forbehold om en eventuell lovlig justering for tjenester som allerede er levert. Ved prisavslag etter de britiske reglene for digitalt innhold utbetales refusjonen uten unødig opphold og innen 14 dager etter at vi er enige om at du har krav på det. Dersom en annen ufravikelig frist gjelder, følger vi den fristen."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.6. For en frivillig refusjon utenfor et lovfestet krav tar vi sikte på å utbetale en godkjent refusjon innen 5–10 virkedager. Betalingsleverandøren din kan bruke ytterligere tid på å vise krediteringen. Dette frivillige behandlingsmålet erstatter ikke en kortere frist som er fastsatt i lov."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.7. Vi forklarer beslutningen og en eventuell beregning av en delvis refusjon eller betalt saldo. Dersom du er uenig, kan du be oss om å vurdere saken på nytt og benytte enhver ekstern klageordning, domstol eller betalingstvistordning som er tilgjengelig for deg."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.8. Dersom en refusjon annullerer et kjøp eller fullt ut tilbakebetaler prisen, kan tilgangen til det berørte innholdet eller de tilsvarende enhetene fjernes for å gjenspeile dette utfallet, i den utstrekning det er lovlig og hensiktsmessig. Vi fjerner ikke andre betalte rettigheter som ikke henger sammen med kjøpet, som en sanksjon. Dersom beføyelsen er et prisavslag mens avtalen fortsetter, annulleres ikke tilgangen automatisk bare fordi det er gitt en delvis refusjon."
         }
       ]
     },
     {
-      "id": "chargebacks",
+      "id": "chargebacks-and-disputes",
       "number": "9",
-      "title": "Tilbakeføringer, tvister og undersøkelser",
+      "title": "Tilbakeføringer og tvister",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "9.1. Å starte en tilbakeføring (chargeback) behandles som en formell tvist; vi sender inn logger (ordrer, bruksenhetsforbruk, IP-/enhetsdata) og kan suspendere kontoen din inntil saken er avklart.",
-            "9.2. Hvis midler tilbakeføres fra oss, kan vi fjerne tilsvarende bruksenheter/lommeboksaldo og kreve inn beløp som lovlig skyldes.",
-            "9.3. Å kontakte Cur Nova-support først er den raskeste måten å løse spørsmål om fakturering på."
-          ]
+          "type": "paragraph",
+          "text": "9.1. Du kan utøve en legitim rett til å bestride en betaling gjennom banken din eller betalingsleverandøren din. Å innlede en slik tvist utløser ikke i seg selv en sanksjon, automatisk suspensjon av kontoen eller tap av kjøp som ikke henger sammen med betalingen. Vi kan svare med relevant transaksjons- og leveringsdokumentasjon, behandlet i samsvar med personvernerklæringen. Det oppfordres til å kontakte kundestøtten vår først, men det er ikke et obligatorisk trinn før du kontakter banken din."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.2. Der en betaling refunderes eller reverseres, kan vi foreta en forholdsmessig justering av enhetene eller tilgangen som kan henføres til den betalingen, slik at kontoen korrekt gjenspeiler utfallet og det ikke skjer dobbel tilbakebetaling. En slik justering er ikke en straff. Ethvert krav om dekning av beløp eller kostnader krever et gyldig rettslig grunnlag og må være tillatt både etter gjeldende lov og etter de relevante reglene til betalingsleverandøren og kortordningen. En tvist, også en som ikke fører frem, fastslår ikke automatisk svindel eller en gjeld for undersøkelsesgebyrer. Tiltak basert på separat dokumentasjon av svindel eller sikkerhetsrisiko er fortsatt underlagt vilkårene og ufravikelige rettigheter."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.3. Der en banktvist og en direkte refusjonsanmodning gjelder den samme transaksjonen, kan vi samordne prosessene med betalingsleverandøren for å hindre dobbel tilbakebetaling. Vi vil ikke bruke denne samordningen til å nekte en refusjon som skyldes etter loven, eller kreve at du gir avkall på rettigheter som vilkår for å motta den."
         }
       ]
     },
     {
-      "id": "taxes",
+      "id": "taxes-and-invoicing",
       "number": "10",
-      "title": "Skatter og fakturering",
+      "title": "Skatter, avgifter og fakturering",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "10.1. Vi utsteder elektroniske kvitteringer/fakturaer for bruksenhetskjøp og betalte funksjoner, med eventuell merverdiavgift eller andre indirekte skatter som kreves basert på faktureringsopplysningene dine.",
-            "10.2. Der skatt allerede er innbetalt og ikke kan kreves tilbake, kan refunderte beløp være fratrukket disse skattene, med mindre loven krever noe annet."
-          ]
+          "type": "paragraph",
+          "text": "10.1. Kjøpsoversikter og fakturaer gjenspeiler skattene og avgiftene som gjelder for den aktuelle transaksjonen. Der en refusjon krever en korrigering, foretar vi den nødvendige justeringen av fakturaen eller avgiftsregistreringen."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.2. Vi reduserer ikke en lovpålagt refusjon bare fordi skatt eller avgift allerede er innbetalt eller en betalingsleverandør beholder et gebyr. Ethvert lovlig fradrag må knytte seg til det konkrete rettslige grunnlaget for fradraget, ikke til en generell administrativ praksis."
         }
       ]
     },
     {
-      "id": "records",
+      "id": "records-and-privacy",
       "number": "11",
-      "title": "Arkivering og personvern",
+      "title": "Registreringer og personvern",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "11.1. Vi oppbevarer opplysninger som er relevante for refusjoner, tilbakeføringer og tvister (ordre-ID-er, påfyllinger, bruksenhetsforbruk, logger, tidsstempler, enhets-/IP-data) i minst 24 måneder og opptil 6 år for bedriftstransaksjoner eller omtvistede transaksjoner, i tråd med skattemessige og juridiske plikter.",
-            "11.2. Personopplysninger behandles av oss som behandlingsansvarlig i henhold til UK GDPR og Data Protection Act 2018, som forklart i personvernerklæringen vår."
-          ]
+          "type": "paragraph",
+          "text": "11.1. Vi bruker relevante transaksjonsregistreringer, bevegelser av enheter, leveringsregistreringer og nødvendig kommunikasjon til å vurdere anmodninger og svare på tvister. Vi oppbevarer disse registreringene bare for de aktuelle formålene og periodene som er forklart i personvernerklæringen."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.2. Generelle slettefrister for forespørsler (prompter) og midlertidige logger krever ikke at vi sletter en begrenset registrering som lovlig må bevares for en pågående tvist, en regnskapsforpliktelse eller et rettskrav. Slik oppbevaring er begrenset til det som er nødvendig."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.3. Opplysninger som gis til en betalingsleverandør eller bank, er begrenset til det som er relevant og lovlig. Se personvernerklæringen for flere detaljer og dine personvernrettigheter."
         }
       ]
     },
     {
-      "id": "examples",
+      "id": "illustrative-examples",
       "number": "12",
-      "title": "Illustrerende eksempler (ikke juridisk bindende)",
+      "title": "Illustrerende eksempler",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "Umiddelbar levering – du fyller på og bruker straks bruksenheter på AI-strategier. Disse brukte bruksenhetene refunderes ikke.",
-            "Ikke levert ennå – du kjøper en plass for et tilpasset kurs, men kansellerer før noen bruksenheter er trukket; vi kan refundere beløpet.",
-            "Ødelagt resultat – en PDF-eksport mislykkes på grunn av en systemfeil; vi kjører den på nytt eller krediterer tilsvarende bruksenheter.",
-            "Ubrukt påfylling – du legger inn €200, bruker dem aldri og bestemmer deg senere for å forlate Cur Nova. Vi kan refundere €200 minus gebyrer som ikke kan kreves tilbake.",
-            "Avslag fra markedsplass – en megler eller markedsplass avviser planen din av egne policygrunner. Det alene gir deg ikke rett til refusjon."
-          ]
+          "type": "paragraph",
+          "text": "12.1. Umiddelbar AI-levering med gyldig samtykke. Du kjøper enheter og bestiller senere et AI-strategiresultat. Dersom det påkrevde samtykket, erkjennelsen og bekreftelsen er korrekt innhentet og den digitale leveringen starter, kan angreretten for det innholdet opphøre. At du senere ombestemmer deg, vil alene normalt ikke kreve refusjon. Rettigheter ved mangler og andre ufravikelige rettigheter består."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.2. Påfylling uten innholdsordre. Du fyller på bruksbalansen din, men bestiller ikke et kurs. Påfyllingen betyr ikke i seg selv at du har samtykket til umiddelbar levering av et fremtidig kurs. Vi vurderer en eventuell angrerett eller rett til refusjon av ubrukt saldo på sitt eget rettslige grunnlag."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.3. Avbestilling før utarbeidelse. Du bestiller et trader-tilpasset kurs og avbestiller før utarbeidelsen starter. Vi vurderer avbestillingen og beløpet som skyldes, etter punkt 6. Et tidligere trekk av enheter er ikke i seg selv en grunn til å avvise anmodningen."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.4. Mangelfull PDF. En kjøpt fil er skadet eller avviker vesentlig fra beskrivelsen. Vi gir den aktuelle rettingen eller erstatningen uten ytterligere betaling. Der lovvilkårene for prisavslag eller refusjon er oppfylt, gir vi den beføyelsen i stedet for å insistere på enheter som eneste alternativ."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.5. Ubrukt betalt saldo. Du slutter å bruke tjenesten med en ubrukt saldo som kan henføres til en påfylling på €200. Vi refunderer det beløpet loven krever dersom et krav foreligger. Utenfor et slikt krav vurderer vi en frivillig anmodning etter punkt 5. Vi trekker ikke automatisk betalingsgebyrer fra en lovpålagt refusjon."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.6. Forsinket tilpasset kurs. Vi kan ikke overholde den avtalte leveringstiden. Vi gir deg beskjed, tilbyr en ny dato og gir deg muligheten til å avbestille den berørte, ikke-leverte ordren og få den refusjonen du har krav på. Vi antar ikke at du har godtatt den nye datoen bare fordi du ikke svarte."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.7. Ekstern avvisning. En megler avslår å godta en opplæringsplan. Dette alene fastslår ikke en mangel eller krever refusjon. Dersom materialet i tillegg ikke oppfyller den avtalte beskrivelsen eller en annen lovfestet standard, vurderer vi det forholdet separat."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.8. Legitim betalingstvist. Du bestrider en betaling du med rimelig grunn mener var uautorisert eller gjelder innhold som ikke er levert. Vi kan undersøke saken og svare banken, men det å bestride betalingen fører ikke automatisk til suspensjon av kontoen din eller til en sanksjon."
+        },
+        {
+          "type": "paragraph",
+          "text": "Disse eksemplene forklarer policyen. De går ikke foran de fullstendige bestemmelsene eller gjeldende lov."
         }
       ]
     },
     {
-      "id": "changes",
+      "id": "changes-to-this-policy",
       "number": "13",
       "title": "Endringer i denne policyen",
       "content": [
         {
           "type": "paragraph",
-          "text": "Vi kan oppdatere denne policyen. Vesentlige endringer varsles via e-post og/eller meldinger i dashbordet. Endringer gjelder fremover og påvirker ikke refusjoner som allerede er behandlet, med mindre loven krever noe annet."
+          "text": "13.1. Vi kan oppdatere denne policyen for å gjenspeile endringer i lovgivningen eller tjenesten. Vesentlige endringer vil bli kommunisert gjennom en egnet kanal og gjelder fra den oppgitte ikrafttredelsesdatoen."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.2. Endringer fjerner ikke med tilbakevirkende kraft en eksisterende angrerett, et eksisterende refusjonskrav eller en eksisterende beføyelse for en tidligere ordre. Ny ordlyd reduserer ikke rettigheter som følger av ufravikelig lov."
         }
       ]
     },
     {
-      "id": "contact",
+      "id": "contact-details",
       "number": "14",
       "title": "Kontaktopplysninger",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "Cur Nova — drevet av CUR NOVA LTD",
-            "Registrert kontor: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia",
+          "type": "address",
+          "lines": [
+            "CUR NOVA LTD",
             "Organisasjonsnummer: 17240836",
-            "E-post: info@cur-nova.com",
-            "Tlf.: {phone}",
-            "Godkjente valutaer: GBP, EUR, USD",
-            "Betalingsmåter: Visa, Mastercard"
+            "Registrert kontor: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom",
+            "E-post for avbestillinger, refusjoner og klager: info@cur-nova.com",
+            "Telefon: {phone}",
+            "Nettsted: https://www.cur-nova.com/"
           ]
         }
       ]
     }
-  ],
-  "cta": {
-    "title": "Trenger du hjelp med en belastning eller refusjon?",
-    "subtitle": "Kontakt supportteamet vårt før du åpner en tvist. Vi kan spore hver påfylling, hvert bruksenhetstrekk og hver AI-kjøring på få minutter.",
-    "contactSupport": "Kontakt support",
-    "backHome": "Tilbake til forsiden"
-  }
+  ]
 }

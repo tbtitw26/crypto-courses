@@ -1,71 +1,33 @@
 {
   "breadcrumb": {
-    "home": "Hjem",
     "terms": "Vilkår og betingelser"
   },
   "hero": {
-    "title": "Fullstendige vilkår for bruk av Cur Novas kurs, bruksenheter og AI-funksjoner.",
-    "subtitle": "Les disse vilkårene nøye før du kjøper bruksenhetspakker, ferdige kurs, tilpassede kurs eller resultater fra AI-strategibyggeren. De oppsummerer reglene som holder vår rene opplæringsplattform trygg, regelverksmessig og åpen for alle kunder.",
-    "meta": [
-      {
-        "label": "Gjelder fra",
-        "value": "6. desember 2025"
-      },
-      {
-        "label": "Operatør",
-        "value": "CUR NOVA LTD (17240836)"
-      },
-      {
-        "label": "Jurisdiksjon",
-        "value": "England og Wales"
-      }
-    ],
-    "badges": {
-      "regions": "Hovedregioner: EU · Storbritannia",
-      "payments": "Betaling: EUR · GBP · USD",
-      "highRisk": "Høy risiko · Ingen garantier"
+    "title": "Vilkår og betingelser",
+    "effectiveDate": {
+      "label": "Gjelder fra",
+      "value": "28. oktober 2026"
     },
-    "summaryCard": {
-      "title": "Kort oversikt (ikke juridisk sammendrag)",
-      "subtitle": "Bruk de fullstendige avsnittene nedenfor for bindende ordlyd – denne boksen fremhever bare intensjonen i retningslinjene våre.",
-      "items": [
-        "Cur Nova er en ren opplæringsplattform: ingen handel, ingen signaler, ingen forvaltede kontoer.",
-        "Bruksenheter er forhåndsbetalte kreditter for digitalt innhold; de er ikke penger eller verdipapirer.",
-        "Alle kurs, PDF-er og AI-resultater er eksempler. Du er selv ansvarlig for hver handel.",
-        "Vi overholder britisk forbrukerlovgivning og EUs forbrukerregler, men digitale leveranser har begrenset refusjonsrett."
-      ],
-      "note": "Trenger du en signert kopi eller en tilpasset klausul? Kontakt info@cur-nova.com, så gir vi deg ordlyd tilpasset din jurisdiksjon."
-    }
+    "intro": [
+      "Disse vilkårene forklarer hvordan du kan bruke Cur Nova og kjøpe opplæringskurs, bruksenheter og AI-generert materiell. De forklarer også levering, avbestilling, refusjoner og hver parts ansvar.",
+      "Tjenesten drives av CUR NOVA LTD, organisasjonsnummer 17240836, med registrert kontor i Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom. I disse vilkårene viser «Cur Nova», «vi», «oss» og «vår» til dette selskapet.",
+      "Spørsmål om en ordre eller disse vilkårene kan rettes til info@cur-nova.com."
+    ]
+  },
+  "keyPoints": {
+    "title": "Hovedpunkter",
+    "items": [
+      "Cur Nova leverer opplæringsmateriell. Vi utfører ikke handler, forvalter ikke investeringer og lover ikke handelsresultater.",
+      "Du kan kjøpe aktuelle produkter direkte eller bruke forhåndsbetalte bruksenheter der dette alternativet tilbys.",
+      "Ferdige PDF-er er tilgjengelige umiddelbart etter vellykket betaling eller innløsning. Trader-tilpassede kurs tar normalt 48–96 timer etter betaling og mottak av nødvendig informasjon. AI-materiell tar normalt noen få minutter.",
+      "Enhver avvikende leveringsordning må opplyses om og avtales før betaling eller innløsning for den berørte ordren. Vi varsler deg om forsinkelser og tilbyr en ny dato eller avbestilling med den refusjonen du har krav på.",
+      "Digital levering fjerner ikke dine rettigheter ved mangelfullt innhold. Et eventuelt tap av lovfestet angrerett er underlagt de lovkravene som er forklart nedenfor.",
+      "En berettiget betalingstvist fører ikke i seg selv til en sanksjon eller automatisk suspensjon av kontoen."
+    ],
+    "note": "Disse punktene er et lesehjelpemiddel. De nummererte bestemmelsene nedenfor forklarer vilkårene i sin helhet, alltid med forbehold om ufravikelig lov."
   },
   "toc": {
-    "title": "På denne siden",
-    "items": [
-      { "label": "Innledning", "anchor": "introduction" },
-      { "label": "Definisjoner", "anchor": "definitions" },
-      { "label": "Krav og kontoregistrering", "anchor": "eligibility" },
-      { "label": "Tjenestenes art og avtalestruktur", "anchor": "nature" },
-      { "label": "Tjenestenes omfang og digitalt innhold", "anchor": "scope" },
-      { "label": "Kundedata og ansvar", "anchor": "client-data" },
-      { "label": "Akseptabel bruk", "anchor": "acceptable-use" },
-      { "label": "Bruksenheter, priser og betaling", "anchor": "tokens" },
-      { "label": "Kansellering, refusjon og tilbakeføring", "anchor": "refunds" },
-      { "label": "Immaterielle rettigheter", "anchor": "ip" },
-      { "label": "Konfidensialitet", "anchor": "confidentiality" },
-      { "label": "Tredjepartsplattformer og lenker", "anchor": "third-parties" },
-      { "label": "Garantier og ansvarsfraskrivelser", "anchor": "warranties" },
-      { "label": "Ansvarsbegrensning", "anchor": "liability" },
-      { "label": "Skadesløsholdelse", "anchor": "indemnity" },
-      { "label": "Personvern", "anchor": "privacy" },
-      { "label": "Suspensjon og oppsigelse", "anchor": "termination" },
-      { "label": "Endringer i tjenesten eller vilkårene", "anchor": "changes" },
-      { "label": "Lovvalg og verneting", "anchor": "law" },
-      { "label": "Diverse", "anchor": "misc" },
-      { "label": "Kontaktopplysninger", "anchor": "contact" }
-    ],
-    "reminder": {
-      "label": "Påminnelse",
-      "text": "Denne norske oversettelsen er kun ment som hjelp. Den engelske versjonen av vilkårene er den eneste juridisk bindende versjonen."
-    }
+    "title": "På denne siden"
   },
   "sections": [
     {
@@ -73,15 +35,29 @@
       "number": "1",
       "title": "Innledning",
       "content": [
-        { "type": "paragraph", "text": "1.1. Disse vilkårene og betingelsene («vilkårene») regulerer din tilgang til og bruk av cur-nova.com, tilhørende dashbord, applikasjoner og nedlastbart innhold («tjenesten»), som drives av CUR NOVA LTD (organisasjonsnummer 17240836, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia) («Cur Nova», «vi», «oss»)." },
-        { "type": "paragraph", "text": "1.2. Ved å opprette en konto, kjøpe bruksenheter, bestille ferdige eller tilpassede kurs eller bruke en AI-drevet funksjon, godtar du disse vilkårene. Hvis du ikke er enig, må du ikke bruke tjenesten." },
         {
-          "type": "list",
-          "items": [
-            "1.3. Cur Nova tilbyr kun opplæring. Vi utfører ikke handler, oppbevarer ikke kundemidler, opererer ikke som megler/børs og tilbyr ikke kapitalforvaltning eller personlig finansiell rådgivning.",
-            "1.4. Henvisninger til strategier, signaler eller systemer er kun illustrasjoner. Ingenting i tjenesten er en anbefaling om å handle eller å bruke en bestemt megler eller et bestemt instrument.",
-            "1.5. Tjenesten og alle tilhørende dokumenter leveres på engelsk. Norske oversettelser av grensesnittet og retningslinjene er kun ment som hjelp."
-          ]
+          "type": "paragraph",
+          "text": "1.1. Disse vilkårene gjelder for cur-nova.com, kundedashbordet, tilhørende funksjoner og nedlastbart opplæringsinnhold, samlet «tjenesten»."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.2. Les disse vilkårene før du oppretter en konto eller legger inn en ordre. De utgjør en del av avtalen din med oss når du registrerer deg for tjenesten eller foretar et kjøp. Ordreinformasjonen som vises før du forplikter deg til betaling, utgjør også en del av den aktuelle kjøpsavtalen."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.3. Refusjons- og returpolicyen forklarer prosedyrene for avbestilling og refusjon. Personvernerklæringen forklarer behandlingen av personopplysninger, og retningslinjene for informasjonskapsler forklarer informasjonskapsler og lignende teknologier. Siden Risiko og ansvarsfraskrivelse inneholder ytterligere informasjon om risiko knyttet til opplæringen. Ingen av disse dokumentene begrenser rettigheter som ikke lovlig kan fraskrives."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.4. Cur Nova tilbyr opplæring om trading og finansmarkeder. Vi opptrer ikke som din megler, børs, investeringsforvalter, handelsagent eller oppbevarer av handelsaktiva. Vi plasserer eller overvåker ikke handler for deg og gir ikke personlig investeringsrådgivning."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.5. Henvisninger til strategier, handelsmetoder eller markedsscenarier er illustrasjoner i opplæringsøyemed. De er ikke en instruks eller anbefaling om å inngå en transaksjon eller velge en megler eller et finansielt instrument."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.6. Disse vilkårene er publisert på engelsk. Med mindre ufravikelig lov bestemmer noe annet, er den engelske teksten styrende for tolkningen av enhver oversettelse. Produktets språk er angitt i den aktuelle beskrivelsen."
         }
       ]
     },
@@ -91,80 +67,184 @@
       "title": "Definisjoner",
       "content": [
         {
-          "type": "definition",
-          "items": [
-            { "term": "Konto", "description": "Profilen din i tjenesten, opprettet med e-post/passord eller støttet enkel pålogging (f.eks. Google)." },
-            { "term": "Bruksenheter / lommebok", "description": "Forhåndsbetalte, ikke-overførbare digitale kreditter som brukes til å få tilgang til betalte funksjoner. Ikke kontanter, e-penger eller verdipapirer." },
-            { "term": "Ferdige kurs", "description": "PDF-kurs med fast pris." },
-            { "term": "Tilpassede kurs", "description": "Skreddersydde PDF-er utarbeidet av erfarne mentorer basert på skjemaene du fyller ut, vanligvis betalt med bruksenheter." },
-            { "term": "AI-strategiresultater", "description": "Strukturerte strategier, diagrammer og forsidebilder generert med AI og levert digitalt." },
-            { "term": "Bibliotek / dashbord", "description": "Innlogget område (f.eks. /dashboard) som viser saldo, kjøp, fakturaer og innstillinger." },
-            { "term": "Kundedata", "description": "Informasjon du sender inn (erfaring, risikovilje, mål, notater, opplastinger osv.)." },
-            { "term": "Ordre / transaksjon", "description": "Et bekreftet kjøp av bruksenheter, kurs eller andre betalte funksjoner i tjenesten." },
-            { "term": "Tredjepartsplattformer", "description": "Eksterne systemer som betalingsleverandører, meglere, AI-leverandører eller hostingtjenester." },
-            { "term": "Juridiske retningslinjer", "description": "Personvernerklæring, retningslinjer for informasjonskapsler, refusjonspolicy, risiko- og ansvarsfraskrivelse og eventuelle lenkede retningslinjer." }
-          ]
+          "type": "paragraph",
+          "text": "2.1. «Konto» betyr din registrerte kundeprofil og tilgang til tjenesten."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.2. «Bruksenheter» betyr forhåndsbetalte, ikke-overførbare kreditter som kan innløses mot aktuelle opplæringsprodukter og funksjoner i Cur Nova. «Bruksbalanse» eller «lommebok» betyr registreringen av disse kredittene på kontoen din. Bruksenheter tilbys ikke som en investering, et bankinnskudd eller et betalingsmiddel utenfor tjenesten. Retten til refusjon er behandlet i punkt 9 og i refusjons- og returpolicyen."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.3. «Ferdige kurs» betyr eksisterende PDF-kurs som tilbys for digital tilgang eller nedlasting etter kjøp eller innløsning."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.4. «Trader-tilpassede kurs» betyr individuelle PDF-opplæringskurs utarbeidet av menneskelige tradere eller mentorer ved hjelp av informasjonen og kravene som er oppgitt for ordren."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.5. «AI-tilpassede kurs» betyr opplæringskurs laget ved hjelp av AI ut fra dine prompter og valgte genereringsfelt. Menneskelig utarbeidelse eller gjennomgang inngår bare dersom produktbeskrivelsen uttrykkelig sier det."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.6. «AI-strategiresultater» betyr strategidokumenter i opplæringsøyemed og eventuelle tilhørende diagrammer eller støttemateriell generert gjennom AI-strategibyggeren. De er ikke handelssignaler eller personlige investeringsanbefalinger."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.7. «Tilpassede kurs» viser samlet til trader-tilpassede kurs og AI-tilpassede kurs. «Innhold» omfatter ferdige kurs, tilpassede kurs, AI-strategiresultater og annet opplæringsmateriell som leveres gjennom tjenesten."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.8. «Kundedata» betyr informasjon du sender inn, inkludert prompter, svar på innledende spørsmål, opplæringsmål, erfaring, preferanser, notater og filer."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.9. «Ordre» betyr et kjøp av bruksenheter eller innhold, eller en bekreftet innløsning av bruksenheter mot et bestemt produkt eller en betalt funksjon. En påfylling og en senere innløsning er separate transaksjoner."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.10. «Bibliotek» eller «dashbord» betyr kundeområdet som brukes for tilgang til tilgjengelige kjøp, saldoer, ordreinformasjon og kontoinnstillinger."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.11. «Forbruker» betyr en fysisk person som handler helt eller hovedsakelig utenfor sin næringsvirksomhet, sitt håndverk eller sitt yrke, slik dette fastsettes etter gjeldende lov. Det at du kjøper gjennom en konto, avgjør ikke i seg selv om du er forbruker."
         }
       ]
     },
     {
-      "id": "eligibility",
+      "id": "eligibility-and-account-registration",
       "number": "3",
       "title": "Krav og kontoregistrering",
       "content": [
-        { "type": "paragraph", "text": "3.1. Du må være over 18 år eller ha gyldig fullmakt til å binde organisasjonen din." },
-        { "type": "paragraph", "text": "3.2. Oppgi korrekte og oppdaterte opplysninger ved registrering, og hold dem oppdatert. Vi kan bekrefte opplysninger som eierskap til e-postadressen." },
-        { "type": "paragraph", "text": "3.3. Du er ansvarlig for sikkerheten til påloggingsopplysningene dine og må varsle info@cur-nova.com ved mistanke om misbruk." },
-        { "type": "paragraph", "text": "3.4. Vi kan avslå, suspendere eller avslutte kontoer av hensyn til regelverk, svindel, sanksjoner eller drift." }
+        {
+          "type": "paragraph",
+          "text": "3.1. Du må være minst 18 år for å bruke tjenesten. Hvis du handler på vegne av en organisasjon, må du også ha fullmakt til å inngå den aktuelle avtalen på dens vegne."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.2. Oppgi korrekte registrerings- og faktureringsopplysninger, og oppdater dem ved behov. Vi kan treffe rimelige tiltak for å bekrefte eierskap til kontoen eller undersøke mistanke om uautorisert bruk."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.3. Hold påloggingsopplysningene dine sikre. Gi oss beskjed uten opphold på info@cur-nova.com hvis du tror at kontoen eller betalingsopplysningene dine er brukt uten autorisasjon."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.4. Du er ansvarlig for aktivitet du autoriserer gjennom kontoen din. Dette gjør deg ikke automatisk ansvarlig for uautorisert aktivitet og fjerner ikke noe vern du har etter gjeldende lov."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.5. Begrensning og avslutning av kontoer reguleres av punkt 17. Det å utøve en berettiget rett til avbestilling, refusjon eller betalingstvist er ikke i seg selv et brudd på disse vilkårene."
+        }
       ]
     },
     {
-      "id": "nature",
+      "id": "nature-of-the-service-and-orders",
       "number": "4",
-      "title": "Tjenestenes art og avtalestruktur",
+      "title": "Tjenestens art og ordrer",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "4.1. Vi tilbyr selvbetjente opplæringsverktøy: ferdige kurs, tilpassede kurs, resultater fra AI-strategibyggeren, risikoressurser og ordlister.",
-            "4.2. En avtale inngås når du oppretter en konto, og hver gang du kjøper bruksenheter eller kurs, eller løser inn bruksenheter for tilpassede resultater/AI-resultater.",
-            "4.3. Ingenting vi publiserer er investeringsrådgivning, handelsanbefalinger eller garantier for avkastning.",
-            "4.4. Vi er ikke din agent, megler, kapitalforvalter eller depotmottaker og åpner eller overvåker ikke handelskontoer.",
-            "4.5. Du er selv ansvarlig for å overholde lover, meglerregler og retningslinjer for eventuelle tredjepartsplattformer."
-          ]
+          "type": "paragraph",
+          "text": "4.1. Tjenesten kan tilby ferdige kurs, trader-tilpassede kurs, AI-tilpassede kurs, AI-strategiresultater, maler, opplæringsressurser, kalkulatorer og tilhørende dashbordfunksjoner. Tilgjengelighet og funksjonene som inngår i et bestemt kjøp, beskrives før ordren legges inn."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.2. Registrering etablerer en avtale som regulerer tilgangen til kontoen. Et kjøp eller en bekreftet innløsning etablerer en separat avtale for den aktuelle ordren. Kjøp av bruksenheter er ikke i seg selv en bestilling av et fremtidig kurs og utgjør ikke samtykke til umiddelbar levering av hvert produkt som senere kjøpes med disse enhetene."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.3. Før du legger inn en ordre, gir vi deg den aktuelle produktbeskrivelsen, prisen eller kostnaden i bruksenheter, leveringsinformasjon og eventuelle vesentlige krav eller begrensninger. Kontroller denne informasjonen og instruksjonene du har sendt inn, før du bekrefter."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.4. Vi bekrefter kjøp og innløsninger elektronisk. Der det er aktuelt, omfatter bekreftelsen din forespørsel om eller ditt samtykke til tidlig oppfyllelse og din erkjennelse av hvilken virkning dette har for angreretten, i en form du kan oppbevare."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.5. Hvis vi ikke kan oppfylle en ordre, gir vi deg beskjed og tilbyr et avtalt alternativ eller avbestilling med den refusjonen du har krav på. Vi erstatter ikke et produkt med et vesentlig annerledes produkt uten ditt samtykke."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.6. Du er fortsatt ansvarlig for dine handelsbeslutninger og for å overholde regler som gjelder for din virksomhet. Dette reduserer ikke vårt ansvar for å levere opplæringsproduktene og -tjenestene du har kjøpt, i samsvar med avtalen og gjeldende lov."
         }
       ]
     },
     {
-      "id": "scope",
+      "id": "content-and-delivery",
       "number": "5",
-      "title": "Tjenestenes omfang og digitalt innhold",
+      "title": "Innhold og levering",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "5.1. Tjenestene kan omfatte tospråklige kurs, bruksenhetspakker, tilpassede kurs, AI-resultater, maler for risiko/journal, dashbord, faktureringshistorikk og kalkulatorer.",
-            "5.2. Tilpassede resultater og AI-resultater bygger på kundedataene dine; ufullstendige opplysninger gir mindre relevant innhold. Ny generering krever normalt ekstra bruksenheter.",
-            "5.3. Vi tilstreber sammenhengende, strukturert innhold, men kan ikke garantere feilfrihet eller markedsnøyaktighet i sanntid.",
-            "5.4. Levering skjer når filene er tilgjengelige i dashbordet ditt og/eller via lenker på e-post. Problemer med e-post gjør ikke leveringen ugyldig hvis kopien finnes i dashbordet.",
-            "5.5. Vi kan oppdatere eller fjerne produkter i katalogen for fremtidige kunder uten at det påvirker innhold du allerede eier."
-          ]
+          "type": "paragraph",
+          "text": "5.1. Den aktuelle beskrivelsen angir innholdets format, emne, språk, omfang og eventuelle tekniske krav. Tilpassede produkter bruker kundedataene som er sendt inn for ordren."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.2. Nye instruksjoner, utvidet omfang eller en ytterligere generering som bestilles etter at en ordre er korrekt oppfylt, kan kreve en separat betaling eller flere bruksenheter, noe som opplyses før du går videre. Vi krever ikke ny betaling for en retting, erstatning eller gjentatt oppfyllelse som vi er forpliktet til å levere fordi vi ikke oppfylte den opprinnelige avtalen."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.3. AI-materiell kan inneholde unøyaktigheter og må vurderes kritisk. Opplæringsinnhold kan også bli utdatert etter hvert som markedene endrer seg. Disse begrensningene fritar ikke for manglende samsvar med den avtalte beskrivelsen eller gjeldende lovfestede kvalitetskrav."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.4. Levering skjer når det kjøpte materiellet gjøres tilgjengelig gjennom leveringskanalen som er angitt for ordren, for eksempel biblioteket ditt eller en nedlastingslenke på e-post. Der levering til dashbordet er avtalt, hindrer ikke et problem med e-postvarselet levering dersom materiellet faktisk er tilgjengelig der. En statusmerking eller en utilgjengelig lenke alene fastslår ikke at brukbart innhold er levert."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.5. Vi kan endre katalogen for fremtidige kjøp. Endringer reduserer ikke med tilbakevirkende kraft det avtalte omfanget eller tilgangsperioden for et eksisterende kjøp, unntatt der en lovlig og forholdsmessig begrensning er nødvendig etter disse vilkårene. Dine gjeldende misligholdsbeføyelser er fortsatt tilgjengelige."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.6. Ferdige kurs gjøres tilgjengelige umiddelbart etter vellykket betaling eller bekreftet innløsning av bruksenheter, med forbehold om eventuelt samtykke som loven krever for umiddelbar digital levering."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.7. Trader-tilpassede kurs leveres normalt innen 48–96 timer etter vellykket betaling eller bekreftet innløsning av bruksenheter og mottak av informasjonen som er nødvendig for å utarbeide det avtalte kurset. Hvis nødvendig informasjon mangler, angir vi hva som trengs. Vi behandler ikke en unngåelig intern forsinkelse som manglende kundeinformasjon."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.8. AI-tilpassede kurs og AI-strategiresultater genereres og gjøres normalt tilgjengelige innen noen få minutter etter at du har bekreftet forespørselen, de nødvendige opplysningene er gitt og betaling eller innløsning av bruksenheter er bekreftet. Dette er den normale behandlingstiden og ikke en garanti for at hver forespørsel blir fullført innen et bestemt antall minutter."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.9. Hvis et produkt ikke er tilgjengelig eller ikke kan leveres innen den normale perioden, opplyser vi om dette og avtaler en alternativ leveringsperiode med deg før vi tar imot betaling eller trekker bruksenheter for den aktuelle ordren. En generell påfylling forplikter deg ikke til å godta et forsinket produkt."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.10. Hvis vi blir kjent med en forsinkelse etter at en ordre er lagt inn, varsler vi deg uten unødig opphold, forklarer situasjonen og tilbyr en ny leveringsdato. Du kan godta den nye datoen eller avbestille den berørte ordren som ikke er levert, og motta den refusjonen du har krav på etter refusjons- og returpolicyen og gjeldende lov. Vi behandler ikke din taushet som samtykke til en forlenget frist. Enhver ytterligere rett til å avbestille umiddelbart eller til å få en annen misligholdsbeføyelse etter ufravikelig lov består."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.11. Det skjer ingen fysisk forsendelse. Du trenger egnet programvare og en kompatibel enhet for å åpne formatene som er opplyst før kjøp. Kontakt oss hvis en fil mangler, er skadet eller ikke er tilgjengelig, slik at vi kan undersøke saken og gi den aktuelle misligholdsbeføyelsen."
         }
       ]
     },
     {
-      "id": "client-data",
+      "id": "client-data-and-responsibilities",
       "number": "6",
       "title": "Kundedata og ansvar",
       "content": [
-        { "type": "paragraph", "text": "6.1. Du garanterer at du har rett til å sende inn kundedataene, og at de er lovlige og korrekte." },
         {
-          "type": "list",
-          "items": [
-            "6.2. Kundedata må ikke krenke tredjeparts rettigheter, inneholde unødvendige sensitive opplysninger eller inneholde skadevare.",
-            "6.3. Ta sikkerhetskopi av notater eller journaler du vil beholde; vi garanterer ikke langtidsarkivering.",
-            "6.4. Du gir Cur Nova en verdensomspennende, vederlagsfri lisens til å bruke kundedata for å levere tjenesten, forbedre den (i aggregert form) og overholde loven, som beskrevet i personvernerklæringen."
-          ]
+          "type": "paragraph",
+          "text": "6.1. Oppgi informasjon som er rimelig korrekt og relevant for opplæringsproduktet du ber om. Hvis vi trenger en avklaring for å oppfylle en ordre, kan vi be om det. Enhver endring av det avtalte omfanget eller leveringsordningen som følger av dette, må meddeles deg."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.2. Du må ha de nødvendige rettighetene til å sende inn kundedata. Ikke last opp skadelig programvare, ulovlig materiale, unødvendige sensitive opplysninger eller personopplysninger om andre personer uten et passende rettslig grunnlag."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.3. Ta vare på dine egne kopier av notater, journaler og nedlastet materiell som du ønsker å bevare. Dette fjerner ikke en tilgangsforpliktelse vi uttrykkelig har avtalt for kjøpt innhold."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.4. Du beholder rettighetene til kundedataene dine. Du gir oss og tjenesteleverandørene som handler på våre vegne, tillatelse til å behandle dem for å oppfylle forespørslene dine, drifte og sikre tjenesten og oppfylle rettslige forpliktelser, som forklart i personvernerklæringen. Denne tillatelsen gir ikke adgang til urelatert publisering av dine private innsendinger og går ikke foran personvernlovgivningen."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.5. Vår bruk av OpenAI og behandlingen av prompter, genereringsfelt og resultater er beskrevet i personvernerklæringen. Godkjenning av kontoen utgjør ikke samtykke til urelatert modelltrening eller markedsføring."
         }
       ]
     },
@@ -174,231 +254,347 @@
       "title": "Akseptabel bruk",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "7.1. Ikke forsøk å få tilgang til andres kontoer, omgå sikkerhetstiltak, hente ut store datamengder eller kjøre automatisering som belaster tjenesten.",
-            "7.2. Ikke fremme ulovlig aktivitet eller markedsmisbruk, og ikke videreselg innholdet vårt som om det var personlig finansiell rådgivning.",
-            "7.3. Vi kan begrense, suspendere eller avslutte kontoer når vi mistenker misbruk, juridisk risiko eller trusler mot systemets integritet."
-          ]
+          "type": "paragraph",
+          "text": "7.1. Ikke skaff deg tilgang til en annen persons konto uten fullmakt, omgå sikkerhets- eller betalingskontroller, introduser skadelig kode eller bruk automatisering som vesentlig forstyrrer tjenesten."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.2. Ikke bruk tjenesten til ulovlig aktivitet, markedsmisbruk eller villedning, og ikke distribuer opplæringsmateriellet vårt som om det var autorisert personlig finansiell rådgivning."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.3. Ikke videreselg eller distribuer lisensiert innhold offentlig uten tillatelse, og krenk ikke på annen måte immaterielle rettigheter eller personvern."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.4. Vi kan innføre forholdsmessige grenser eller begrensninger for å undersøke og håndtere misbruk eller sikkerhetsrisikoer. Begrensninger er underlagt punkt 17 og fjerner ikke ufravikelige forbrukerrettigheter."
         }
       ]
     },
     {
-      "id": "tokens",
+      "id": "usage-units-and-payment",
       "number": "8",
-      "title": "Bruksenheter, priser og betaling",
+      "title": "Bruksenheter og betaling",
       "content": [
-        { "type": "note", "text": "Godkjente betalingsmåter: Visa og Mastercard. Flere betalingsmåter kan legges til med varsel." },
         {
-          "type": "list",
-          "items": [
-            "8.1. Bruksenhetspakker (f.eks. Focused Start, Structured Growth, Discipline Pro) og valgfrie påfyllinger viser tydelig pris og antall inkluderte bruksenheter.",
-            "8.2. GBP er basisvaluta. Priser kan vises i EUR, USD eller andre valutaer; endelig belastning og valutahåndtering vises i kassen.",
-            "8.3. Lommeboksaldo er forskuddsbetaling for digitale funksjoner og er ikke bank- eller e-pengekontoer.",
-            "8.4. Ved å oppgi et kort bekrefter du at du har rett til å bruke det; betalinger behandles av pålitelige betalingsleverandører, og vi lagrer ikke fullstendige kortnumre/CVV.",
-            "8.5. Bruksenheter trekkes når du betaler med bruksenheter, bestiller tilpassede kurs, kjører AI-strategier eller bruker en funksjon som er priset i bruksenheter.",
-            "8.6. Noen ferdige kurs kan kjøpes direkte med kort; alternativet vises før kassen.",
-            "8.7. Bruksenheter har for øyeblikket ingen utløpsdato, men vi kan innføre regler om rimelig bruk eller inaktivitet med varsel.",
-            "8.8. Vi utsteder elektroniske kvitteringer/fakturaer for bruksenhetskjøp og kortbestillinger; du finner dem i dashbordet og på e-post."
-          ]
+          "type": "paragraph",
+          "text": "8.1. Bruksenhetspakker og tilpassede påfyllinger viser pris og antall enheter som inngår, før kjøp. Et produkts pris eller kostnad i enheter vises før den aktuelle ordren bekreftes."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.2. GBP er basisvalutaen for prising. Der andre valutaer tilbys, angir kassen valutaen og beløpet som belastes, samt eventuelle gjeldende skatter, avgifter eller gebyrer som skal betales til oss. Kortutstederen din kan ta egne vekslings- eller betalingsgebyrer etter sine egne vilkår."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.3. Bruksbalanser registrerer forskuddskjøp av aktuelle Cur Nova-produkter. De gir ikke renter og kan ikke omsettes eller overføres til andre kunder. Ordinært kontantuttak tilbys ikke; refusjoner som loven krever eller som gis etter refusjons- og returpolicyen, er fortsatt tilgjengelige."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.4. Betalingsmåtene som er tilgjengelige for ordren din, vises i kassen og omfatter Visa og Mastercard der det støttes. Du må ha rett til å bruke den valgte betalingsmåten. Betalingsleverandører behandler kortopplysninger; vi lagrer ikke fullstendige kortnumre eller CVV-koder."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.5. Bruksenheter trekkes når du bekrefter en innløsning for det aktuelle betalte produktet eller den aktuelle handlingen. Trekket registrerer transaksjonen; det beviser ikke i seg selv levering eller tap av angrerett."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.6. Direkte kortkjøp er tilgjengelig for produkter der dette alternativet vises. Retten til refusjon og kvalitetsrettigheter fjernes ikke fordi du brukte bruksenheter i stedet for direkte kortbetaling."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.7. Kjøpte bruksenheter har for tiden ingen utløpsdato. Enhver fremtidig endring som påvirker saldoer, varsles på forhånd og vil ikke med tilbakevirkende kraft frata deg verdien av et eksisterende kjøp eller rettigheter som loven krever. Bonuskreditter kan ha egne vilkår som opplyses når de tilbys."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.8. Elektroniske kjøpsregistreringer og kvitteringer gjøres tilgjengelige gjennom den aktuelle kontoen eller via e-post. Gi oss beskjed hvis du mener at en betaling eller et trekk av enheter er feil."
         }
       ]
     },
     {
-      "id": "refunds",
+      "id": "cancellations-refunds-and-payment-disputes",
       "number": "9",
-      "title": "Kansellering, refusjon og tilbakeføring",
+      "title": "Avbestillinger, refusjoner og betalingstvister",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "9.1. Fordi produktene er digitale, kan leveringen starte umiddelbart; den lovfestede angreretten kan være begrenset når leveringen har startet.",
-            "9.2. Bruksenhetspåfyllinger refunderes som hovedregel ikke, med unntak av tydelige tekniske feil eller dobbeltbetalinger som skyldes oss.",
-            "9.3. Hvis du ikke får tilgang til kjøpt innhold, kontakt oss raskt. Vi kan etter eget skjønn levere filen på nytt, kreditere bruksenheter eller refundere.",
-            "9.4. Uberettigede tilbakeføringer (chargebacks) kan føre til suspensjon, fjerning av bruksenheter og krav om dekning av undersøkelseskostnader der loven tillater det."
-          ]
+          "type": "paragraph",
+          "text": "9.1. Dine lovfestede rettigheter består. Hvis du er forbruker, kan gjeldende lov gi deg en angrefrist, rettigheter der levering er forsinket eller uteblir, og misligholdsbeføyelser der digitalt innhold eller digitale tjenester ikke er i samsvar med avtalen. For kvalifiserende britiske fjernsalgsavtaler om digitalt innhold eller digitale tjenester er den normale angrefristen 14 dager etter at avtalen er inngått, med forbehold om lovlige unntak og forlengelser. Umiddelbar digital levering påvirker denne retten bare når det påkrevde uttrykkelige samtykket, erkjennelsen og bekreftelsen er gitt. Der en ordre omfatter en tjeneste, gjelder reglene om tidlig oppfyllelse av tjenester for denne delen. Refusjons- og returpolicyen forklarer disse forskjellene og fremgangsmåten for å fremsette krav."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.2. Ubrukte bruksenheter refunderes der gjeldende lov krever det. Utenfor disse tilfellene kan refusjon være tilgjengelig etter våre vilkår for frivillig refusjon. Bruk av enheter fjerner ikke misligholdsbeføyelser for mangelfullt, manglende eller ikke-avtalemessig innhold, ugyldig samtykke til tidlig levering eller andre forhold der loven krever tilbakebetaling. Avslutning av kontoen innebærer ikke at du gir avkall på et eksisterende krav. En obligatorisk pengerefusjon erstattes ikke med kontokreditt uten ditt uttrykkelige samtykke der loven krever at pengene betales tilbake til deg."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.3. Du kan fremme en berettiget betalingstvist eller tilbakeføring (chargeback) hos banken eller betalingsleverandøren din. Det medfører ikke i seg selv en sanksjon, tap av urelaterte kjøp eller automatisk suspensjon av kontoen din. Vi kan fremlegge relevant dokumentasjon og foreta forholdsmessige justeringer av den berørte transaksjonen for å gjenspeile en refusjon eller tilbakeføring av betalingen og unngå dobbel inndrivelse. Separate bevis for svindel, uautorisert bruk eller en sikkerhetstrussel kan begrunne tiltak etter punkt 17; at det foreligger en tvist, eller utfallet av den, fastslår ikke alene slik mislighet. Vi oppfordrer deg til å kontakte kundestøtten vår først, men det er ikke en betingelse for å utøve rettigheter knyttet til betalingstvister."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.4. Vi kan bare kreve inn beløp eller kostnader som det finnes et gyldig rettslig grunnlag for, og bare i den grad gjeldende lov og de relevante reglene til betalingsleverandøren og kortordningen tillater det. Vi ilegger ikke et fast gebyr for tilbakeføringer og velter ikke automatisk over undersøkelses-, behandlings- eller ordningsgebyrer fordi en kunde har utøvd en berettiget rettighet. Vi krever ikke inn det samme beløpet to ganger og bruker ikke et kostnadskrav til å undergrave en ufravikelig rett til refusjon."
         }
       ]
     },
     {
-      "id": "ip",
+      "id": "intellectual-property",
       "number": "10",
       "title": "Immaterielle rettigheter",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "10.1. Tjenesten (programvare, grensesnitt, merkevare, maler, videoer) tilhører Cur Nova eller våre lisensgivere.",
-            "10.2. Vi gir deg en personlig, ikke-overførbar lisens til å bruke leverte PDF-er og AI-resultater til egen læring eller intern opplæring.",
-            "10.3. Du må ikke videreselge, distribuere offentlig, hevde opphavsrett eller fjerne eiendomsmerknader uten skriftlig samtykke.",
-            "10.4. Eierskapet til våre immaterielle rettigheter forblir hos oss. Vi gjør ikke krav på eierskap til kundedataene dine utover lisensen i punkt 6.4."
-          ]
+          "type": "paragraph",
+          "text": "10.1. Rettighetene til tjenestens programvare, merkevare, kursmateriell og andre beskyttede elementer tilhører Cur Nova eller de aktuelle rettighetshaverne. Kjøpet ditt gir deg bruksrettighetene som er beskrevet her og i eventuelle særskilte lisenser som opplyses før kjøp."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.2. Forutsatt betaling og eventuell avtalt tilgangsperiode kan du bruke kjøpt innhold til din personlige læring eller til intern opplæring i organisasjonen din, slik det er aktuelt for kjøpet. Tilgangsopplysninger skal ikke deles for å unngå kjøp av ytterligere tilgang der dette kreves."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.3. Du kan ikke videreselge, distribuere offentlig eller kommersielt viderelisensiere vårt beskyttede materiell, fjerne rettighetsmerknader eller falskt utgi deg for å være opphavsperson. Dette begrenser ikke bruk som er tillatt etter ufravikelig lov."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.4. AI-resultater kan ligne på materiell som er generert for andre brukere, og beskyttelse eller eksklusivitet kan avhenge av gjeldende lov. Vi lover ikke at et AI-resultat er unikt eller at hvert element kan oppnå opphavsrettslig beskyttelse."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.5. Du beholder rettighetene til kundedata med forbehold om de begrensede tillatelsene i punkt 6. Vi blir ikke eier av dine opprinnelige innsendinger bare fordi du bruker tjenesten."
         }
       ]
     },
     {
-      "id": "confidentiality",
+      "id": "confidential-information",
       "number": "11",
-      "title": "Konfidensialitet",
-      "content": [
-        { "type": "paragraph", "text": "11.1. Hver part kan motta konfidensiell informasjon. Den skal kun brukes til å levere/bruke tjenesten og beskyttes med rimelig aktsomhet." },
-        { "type": "paragraph", "text": "11.2. Konfidensialitet gjelder ikke der informasjonen er offentlig, allerede kjent, utviklet uavhengig eller må utleveres etter lov (med varsel der det er lovlig)." }
-      ]
-    },
-    {
-      "id": "third-parties",
-      "number": "12",
-      "title": "Tredjepartsplattformer og lenker",
+      "title": "Konfidensiell informasjon",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "12.1. Tjenesten er avhengig av tredjeparter (betaling, hosting, AI, video, analyse). Deres egne vilkår gjelder.",
-            "12.2. Vi er ikke ansvarlige for tilgjengeligheten eller ytelsen til tredjepartsplattformer og går ikke god for dem.",
-            "12.3. Du er ansvarlig for at integrasjoner (f.eks. Google-pålogging, innebygde videoer) er lovlige for din bruk."
-          ]
+          "type": "paragraph",
+          "text": "11.1. En part som mottar informasjon som er konfidensiell av natur eller tydelig merket som konfidensiell, skal bare bruke den for den aktuelle avtalen eller et annet lovlig formål og beskytte den med rimelig aktsomhet."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.2. Denne begrensningen omfatter ikke informasjon som er lovlig offentlig kjent, allerede lovlig kjent, utviklet uavhengig eller innhentet fra en annen autorisert kilde. Nødvendig utlevering til tjenesteleverandører eller profesjonelle rådgivere må være underlagt passende forpliktelser."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.3. Informasjon kan utleveres der loven krever det. Der det er tillatt og praktisk mulig, vil den berørte parten bli informert. Personopplysninger er fortsatt underlagt personvernerklæringen og gjeldende lov."
         }
       ]
     },
     {
-      "id": "warranties",
-      "number": "13",
-      "title": "Garantier og ansvarsfraskrivelser",
+      "id": "third-party-services-and-links",
+      "number": "12",
+      "title": "Tredjepartstjenester og lenker",
       "content": [
-        { "type": "paragraph", "text": "13.1. Vi garanterer at vi har rett til å drive tjenesten og at vi vil utvise rimelig dyktighet og aktsomhet." },
         {
-          "type": "list",
-          "items": [
-            "13.2. Utover dette leveres tjenesten og alt digitalt innhold «som det er», uten underforståtte garantier om salgbarhet, egnethet, at den ikke krenker rettigheter eller at driften er uavbrutt.",
-            "13.3. Vi garanterer ikke fullstendighet, nøyaktighet, lønnsomhet, tilgjengelighet, feilfri drift eller bedre handelsresultater.",
-            "13.4. Handel med Forex, krypto og binære opsjoner har høy risiko og kan føre til fullstendig tap. Tidligere eller hypotetiske resultater er ikke pålitelige.",
-            "13.5. Ytterligere opplysninger finnes i risiko- og ansvarsfraskrivelsen, som er en del av disse vilkårene."
-          ]
+          "type": "paragraph",
+          "text": "12.1. Vi bruker eksterne leverandører til funksjoner som betaling, hosting, autentisering og AI-behandling. At de er involvert, fjerner ikke vårt ansvar for å oppfylle avtalen med deg eller gi de misligholdsbeføyelsene loven krever."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.2. Hvis du velger å bruke et uavhengig eksternt nettsted eller produkt som det lenkes til fra tjenesten, kan dets egne vilkår gjelde. En lenke innebærer ikke en anbefaling av leverandørens finansielle produkter eller handelstjenester."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.3. Vi kontrollerer ikke uavhengige eksterne plattformer. Enhver ansvarsbegrensning for dem er underlagt punkt 14 og fritar ikke for vårt eget avtalebrudd eller overfører våre kontraktsforpliktelser til deg."
+        }
+      ]
+    },
+    {
+      "id": "quality-and-educational-limitations",
+      "number": "13",
+      "title": "Kvalitet og begrensninger ved opplæringen",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "13.1. Vi leverer tjenester med rimelig aktsomhet og faglig dyktighet og leverer betalt digitalt innhold i samsvar med gjeldende krav til kvalitet, egnethet for et formål som er gjort kjent og akseptert, beskrivelse og retten til å levere det."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.2. Med unntak av forpliktelser som er uttrykkelig avtalt eller kreves etter loven, lover vi ikke uavbrutt drift, kontinuerlige markedsoppdateringer eller at opplærings- eller AI-innhold er fritt for enhver feil. Dette forbeholdet utelukker ikke lovfestede standarder eller misligholdsbeføyelsene ved manglende oppfyllelse av dem."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.3. Vi garanterer ikke fortjeneste, handelssuksess, godkjenning fra en megler eller annen tredjepart eller noen bestemt forbedring av økonomiske resultater. Eksempler i opplæringen og hypotetiske resultater er ikke pålitelige prognoser."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.4. Handel med valuta (forex), kryptoaktiva, binære opsjoner og tilhørende instrumenter kan innebære betydelig risiko, inkludert tap av all innsatt kapital. Vurder informasjon selvstendig og innhent rådgivning fra kvalifiserte rådgivere ved behov."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.5. Siden Risiko og ansvarsfraskrivelse gir ytterligere kontekst. Den utelukker ikke ansvar som ikke lovlig kan utelukkes, og fritar ikke for manglende levering av det kjøpte opplæringsproduktet."
         }
       ]
     },
     {
       "id": "liability",
       "number": "14",
-      "title": "Ansvarsbegrensning",
-      "accent": "warning",
+      "title": "Ansvar",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "14.1. Ingenting begrenser ansvar for død/personskade forårsaket av uaktsomhet, svindel eller andre forpliktelser som ikke kan fraskrives.",
-            "14.2. Med forbehold om punkt 14.1 er vårt samlede ansvar i en løpende 12-månedersperiode begrenset til de samlede gebyrene/bruksenheter du har betalt til oss i den perioden.",
-            "14.3. Vi er ikke ansvarlige for tapt fortjeneste, inntekt, goodwill eller data, indirekte tap eller følgetap, handelstap eller handlinger fra tredjepartsplattformer."
-          ]
+          "type": "paragraph",
+          "text": "14.1. Ingenting i disse vilkårene utelukker eller begrenser ansvar for svindel, svikaktig villedning, død eller personskade forårsaket av uaktsomhet, eller annet ansvar, andre rettigheter eller misligholdsbeføyelser som ikke lovlig kan utelukkes eller begrenses."
+        },
+        {
+          "type": "paragraph",
+          "text": "14.2. Hvis du er forbruker, er vi ansvarlige for tap eller skade som er en påregnelig følge av vårt brudd på avtalen eller av at vi ikke har utvist rimelig aktsomhet og faglig dyktighet, i den grad gjeldende lov krever det. Dette omfatter de gjeldende lovfestede misligholdsbeføyelsene for digitalt innhold og digitale tjenester. Ansvarsbegrensningen for bedriftskunder i punkt 14.4 gjelder ikke for forbrukere."
+        },
+        {
+          "type": "paragraph",
+          "text": "14.3. Bruk i opplæringsøyemed gjør oss ikke ansvarlige for utfallet av handler du på egen hånd velger å gjøre. Henvisninger til handelstap eller tredjeparters handlinger utelukker likevel ikke ansvar der et tap rettslig kan kreves dekket av oss og det aktuelle ansvaret ikke rimelig eller lovlig kan utelukkes."
+        },
+        {
+          "type": "paragraph",
+          "text": "14.4. For kunder som handler som ledd i næringsvirksomhet, og med forbehold om punkt 14.1 og enhver annen ufravikelig begrensning, er vårt samlede ansvar som følger av tjenesten i en løpende 12-månedersperiode begrenset til det samlede beløpet som er betalt til oss for tjenesten i den perioden. En påfylling og den senere innløsningen av den telles ikke to ganger. For slike bedriftskunder er vi ikke ansvarlige for indirekte tap eller følgetap eller for tap av fortjeneste, inntekter, goodwill eller forretningsmuligheter, i den grad loven tillater det."
         }
       ]
     },
     {
-      "id": "indemnity",
+      "id": "responsibility-for-third-party-claims",
       "number": "15",
-      "title": "Skadesløsholdelse",
+      "title": "Ansvar for krav fra tredjeparter",
       "content": [
-        { "type": "paragraph", "text": "Du samtykker i å holde Cur Nova og våre ansatte skadesløse for krav, skader, kostnader og advokatutgifter som følge av din ulovlige bruk av tjenesten, brudd på disse vilkårene eller krenkelser forårsaket av kundedataene dine eller misbruk av innholdet vårt." }
+        {
+          "type": "paragraph",
+          "text": "15.1. Hvis du bruker tjenesten i næringsøyemed, samtykker du i å dekke rimelige tap og kostnader som følger av et krav fra en tredjepart forårsaket av din ulovlige bruk av tjenesten, krenkelse gjennom kundedata eller forsettlig misbruk av vårt beskyttede innhold, i den grad det kan tilskrives din opptreden. Vi varsler deg om kravet og treffer rimelige tiltak for å begrense tapet. Denne forpliktelsen omfatter ikke vår egen skyld eller forhold der en slik dekning ville være ulovlig."
+        },
+        {
+          "type": "paragraph",
+          "text": "15.2. Hvis du er forbruker, er du ansvarlig for din opptreden bare i den grad gjeldende lov bestemmer det. Dette punktet pålegger deg ingen generell forpliktelse til å dekke våre juridiske kostnader fordi du utøver en berettiget rett til å klage, kreve refusjon eller fremme en betalingstvist."
+        }
       ]
     },
     {
-      "id": "privacy",
+      "id": "data-protection",
       "number": "16",
       "title": "Personvern",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "16.1. Vi er behandlingsansvarlig etter UK GDPR/Data Protection Act 2018. Se personvernerklæringen for detaljer.",
-            "16.2. Vi deler nødvendige personopplysninger med pålitelige databehandlere (betaling, hosting, analyse, AI-leverandører, e-post) utelukkende for å drive og sikre tjenesten.",
-            "16.3. Internasjonale overføringer bruker lovlige garantier som standard personvernbestemmelser.",
-            "16.4. Du kan utøve rettighetene dine til innsyn, retting, sletting, begrensning, dataportabilitet eller innsigelse via info@cur-nova.com."
-          ]
+          "type": "paragraph",
+          "text": "16.1. CUR NOVA LTD er behandlingsansvarlig for personopplysninger som behandles for selskapets egen drift av tjenesten. Personvernerklæringen forklarer formålene, behandlingsgrunnlagene, mottakerne, lagringsperiodene og de tilgjengelige rettighetene."
+        },
+        {
+          "type": "paragraph",
+          "text": "16.2. Nødvendig informasjon deles med relevante tjenesteleverandører, inkludert OpenAI for AI-generering, som beskrevet i personvernerklæringen. Personvernerklæringen forklarer også forskjellen mellom våre lagringsperioder og behandlingen hos leverandørene."
+        },
+        {
+          "type": "paragraph",
+          "text": "16.3. Internasjonale overføringer må ha et lovlig grunnlag og eventuelle garantier som det gjeldende personvernregelverket krever."
+        },
+        {
+          "type": "paragraph",
+          "text": "16.4. Kontakt info@cur-nova.com for å stille et spørsmål om personvern eller utøve gjeldende personvernrettigheter."
         }
       ]
     },
     {
-      "id": "termination",
+      "id": "account-restrictions-and-termination",
       "number": "17",
-      "title": "Suspensjon og oppsigelse",
+      "title": "Kontobegrensninger og avslutning",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "17.1. Vi kan suspendere/avslutte tilgangen hvis du bryter disse vilkårene, begår svindel, utgjør en sikkerhetsrisiko, eller hvis det kreves av lov, myndigheter eller partnere.",
-            "17.2. Du kan når som helst avslutte kontoen din, men avslutning gir ikke automatisk refusjon av ubrukte bruksenheter (se punkt 9).",
-            "17.3. Ved avslutning opphører retten din til å bruke tjenesten; vi oppbevarer opplysninger som kreves for skatt, svindelforebygging og regeletterlevelse."
-          ]
+          "type": "paragraph",
+          "text": "17.1. Vi kan begrense, suspendere eller avslutte tilgang der det er rimelig nødvendig for å håndtere et vesentlig brudd, dokumentert misbruk, mistanke om uautorisert aktivitet, en sikkerhetstrussel eller et lovkrav. Tiltakene må stå i forhold til formålet. Der det er lovlig og praktisk mulig, forklarer vi årsaken og gir deg anledning til å svare eller rette forholdet. En berettiget tilbakeføring eller refusjonsforespørsel alene er ikke grunnlag for automatisk suspensjon."
+        },
+        {
+          "type": "paragraph",
+          "text": "17.2. Du kan når som helst be om at kontoen avsluttes. Avslutning garanterer ikke i seg selv frivillig refusjon av enhver ubrukt saldo, men den opphever, frafaller eller reduserer ikke lovfestet angrerett, et krav på refusjon av ubrukte bruksenheter eller noen misligholdsbeføyelse knyttet til en eksisterende ordre. Du kan fremme eller forfølge et gyldig krav etter avslutning ved å bruke kontaktopplysningene i punkt 21."
+        },
+        {
+          "type": "paragraph",
+          "text": "17.3. Når tilgangen til kontoen opphører, kan tilgangen gjennom dashbordet falle bort. Vi håndterer utestående ordrer, eventuelle avtalte tilgangsforpliktelser og beløp som skyldes etter disse vilkårene og refusjons- og returpolicyen. Avslutning tilbakekaller ikke automatisk en lisens til å bruke et lovlig nedlastet kjøp innenfor det avtalte omfanget; begrensninger kan likevel gjelde for refundert innhold eller ulovlig bruk."
+        },
+        {
+          "type": "paragraph",
+          "text": "17.4. Der vi avvikler tjenesten eller avslutter tilgang av grunner som ikke skyldes ditt brudd, gir vi passende varsel der det er praktisk mulig og håndterer ordrer som ikke er levert, betalt tilgang som ikke er oppfylt, og ubrukte betalte saldoer i samsvar med våre forpliktelser. Vi bruker ikke avslutning som et middel til å beholde beløp som skal refunderes."
+        },
+        {
+          "type": "paragraph",
+          "text": "17.5. Personopplysninger slettes, anonymiseres eller oppbevares etter avslutning i samsvar med personvernerklæringen og gjeldende rettslige forpliktelser."
         }
       ]
     },
     {
-      "id": "changes",
+      "id": "changes-to-the-service-and-these-terms",
       "number": "18",
-      "title": "Endringer i tjenesten eller vilkårene",
+      "title": "Endringer i tjenesten og i disse vilkårene",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "18.1. Vi kan oppdatere, endre eller avvikle funksjoner, priser eller katalogprodukter for å gjenspeile driftsmessige eller juridiske endringer.",
-            "18.2. Vesentlige endringer i disse vilkårene eller retningslinjene varsles via e-post, varsler i dashbordet eller meldinger på nettstedet.",
-            "18.3. Fortsatt bruk etter at endringene har trådt i kraft, innebærer aksept. Hvis du ikke er enig, slutt å bruke tjenesten og be om at kontoen avsluttes."
-          ]
+          "type": "paragraph",
+          "text": "18.1. Vi kan endre produkter, funksjoner og priser for fremtidige ordrer. Eksisterende ordrer er fortsatt underlagt de avtalte vilkårene, med mindre en endring kreves etter loven eller på annen måte er lovlig avtalt."
+        },
+        {
+          "type": "paragraph",
+          "text": "18.2. Vesentlige endringer som påvirker fortsatt bruk av kontoen, varsles gjennom en egnet kanal, for eksempel e-post, dashbordet eller et varsel på nettstedet. Vi forklarer virkningen av dem og når de trer i kraft."
+        },
+        {
+          "type": "paragraph",
+          "text": "18.3. En endring vil ikke med tilbakevirkende kraft fjerne opparbeidede rettigheter eller pålegge nye kostnader for et gjennomført kjøp uten lovlig grunnlag. Hvis en foreslått endring vesentlig reduserer en eksisterende betalt rettighet, håndterer vi eventuelt påkrevd samtykke, mulighet for avbestilling eller refusjon. Fortsatt bruk erstatter ikke uttrykkelig samtykke der loven krever det."
         }
       ]
     },
     {
-      "id": "law",
+      "id": "governing-law-and-courts",
       "number": "19",
-      "title": "Lovvalg og verneting",
+      "title": "Lovvalg og domstoler",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "19.1. Disse vilkårene er underlagt lovgivningen i England og Wales.",
-            "19.2. Domstolene i England og Wales har eksklusiv jurisdiksjon, men forbrukere bosatt i Skottland, Nord-Irland eller EU-land kan benytte lokale domstoler der det er tillatt."
-          ]
+          "type": "paragraph",
+          "text": "19.1. Disse vilkårene reguleres av lovgivningen i England og Wales, med forbehold om ufravikelige forbrukervernregler som gjelder uavhengig av dette lovvalget."
+        },
+        {
+          "type": "paragraph",
+          "text": "19.2. Hvis du er forbruker, beholder du enhver rett etter gjeldende lov til å påberope deg ufravikelige vernregler i landet der du har ditt vanlige bosted, og til å reise sak for en domstol som er tilgjengelig for deg etter denne loven. Ingenting her krever at du bare bruker domstolene i England og Wales der et slikt krav ville begrense disse rettighetene."
+        },
+        {
+          "type": "paragraph",
+          "text": "19.3. For bedriftskunder har domstolene i England og Wales eksklusiv jurisdiksjon, med mindre ufravikelig lov krever noe annet."
         }
       ]
     },
     {
-      "id": "misc",
+      "id": "general-provisions",
       "number": "20",
-      "title": "Diverse",
+      "title": "Alminnelige bestemmelser",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "20.1. Hvis en bestemmelse ikke kan håndheves, skal den håndheves i størst mulig lovlig utstrekning; resten forblir gyldig.",
-            "20.2. Forsinkelse med å utøve rettigheter innebærer ikke at de frafalles.",
-            "20.3. Du kan ikke overdra forpliktelser uten vårt samtykke; vi kan overdra til tilknyttede selskaper eller som del av selskapstransaksjoner.",
-            "20.4. Disse vilkårene sammen med de refererte juridiske retningslinjene utgjør hele avtalen om tjenesten."
-          ]
+          "type": "paragraph",
+          "text": "20.1. Hvis en bestemmelse ikke lovlig kan håndheves, fortsetter de øvrige bestemmelsene å gjelde så langt det er mulig. Et forbrukervilkår som ikke kan håndheves, anvendes ikke bare for å oppnå den største begrensningen av dine rettigheter som ordlyden kunne tillate."
+        },
+        {
+          "type": "paragraph",
+          "text": "20.2. En forsinkelse i å utøve en rettighet innebærer ikke i seg selv at det gis avkall på denne rettigheten."
+        },
+        {
+          "type": "paragraph",
+          "text": "20.3. Du kan bare overdra kontraktsforpliktelser med vårt samtykke, med mindre gjeldende lov bestemmer noe annet. Vi kan overdra våre rettigheter eller forpliktelser som ledd i en lovlig virksomhetsoverdragelse, forutsatt at dette ikke reduserer vernet du har etter avtalen din. Vi gir varsel der det kreves."
+        },
+        {
+          "type": "paragraph",
+          "text": "20.4. Disse vilkårene, den aktuelle ordreinformasjonen og gjeldende retningslinjer utgjør avtalen for tjenesten. Ved motstrid i ordlyden går ufravikelig lov foran. Særskilte vilkår som er opplyst og avtalt for en ordre, går foran generelle beskrivelser i den grad de ikke reduserer ufravikelige rettigheter. Refusjons- og returpolicyen supplerer og går ikke foran rettighetene som er bevart i punkt 9."
         }
       ]
     },
     {
-      "id": "contact",
+      "id": "contact-details",
       "number": "21",
       "title": "Kontaktopplysninger",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "Cur Nova — drevet av CUR NOVA LTD",
-            "Registrert kontor: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, Storbritannia",
+          "type": "address",
+          "lines": [
+            "CUR NOVA LTD",
             "Organisasjonsnummer: 17240836",
+            "Registrert kontor: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom",
             "E-post: info@cur-nova.com",
-            "Tlf.: {phone}"
+            "Telefon: {phone}",
+            "Nettsted: https://www.cur-nova.com/"
           ]
+        },
+        {
+          "type": "paragraph",
+          "text": "For spørsmål om en ordre, avbestilling eller klage kan du kontakte oss på e-post eller på postadressen ovenfor. Oppgi nok informasjon til å identifisere den aktuelle transaksjonen der dette er tilgjengelig. Du trenger ikke å ha en aktiv konto for å forfølge et eksisterende lovfestet krav."
         }
       ]
     }
-  ],
-  "cta": {
-    "title": "Å bruke Cur Nova betyr å godta disse prinsippene.",
-    "subtitle": "Hvis du trenger et tilpasset tillegg, en regulatorisk gjennomgang eller en signert PDF, gi oss beskjed før du kjøper. Ellers gjelder dette dokumentet for hver bruksenhetspåfylling og nedlasting.",
-    "backToHome": "Tilbake til forsiden",
-    "viewCourses": "Se kurs"
-  }
+  ]
 }

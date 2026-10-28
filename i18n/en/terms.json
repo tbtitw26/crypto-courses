@@ -1,71 +1,33 @@
 {
   "breadcrumb": {
-    "home": "Home",
-    "terms": "Terms & Conditions"
+    "terms": "Terms and Conditions"
   },
   "hero": {
-    "title": "Full terms for using Cur Nova courses, Usage Units and AI features.",
-    "subtitle": "Please read these Terms carefully before purchasing Usage Unit Packages, ready-made courses, custom courses or AI Strategy Builder outputs. They summarise the rules that keep our education-only platform safe, compliant and transparent for every customer.",
-    "meta": [
-      {
-        "label": "Effective date",
-        "value": "6 December 2025"
-      },
-      {
-        "label": "Operator",
-        "value": "CUR NOVA LTD (17240836)"
-      },
-      {
-        "label": "Jurisdiction",
-        "value": "England & Wales"
-      }
-    ],
-    "badges": {
-      "regions": "Primary regions: EU · UK",
-      "payments": "Payments: EUR · GBP · USD",
-      "highRisk": "High risk · No guarantees"
+    "title": "Terms and Conditions",
+    "effectiveDate": {
+      "label": "Effective date",
+      "value": "28 October 2026"
     },
-    "summaryCard": {
-      "title": "Snapshot (non-legal summary)",
-      "subtitle": "Use the full sections below for binding wording — this box only highlights the spirit of our policy.",
-      "items": [
-        "Cur Nova is an education-only platform: no trading, no signals, no managed accounts.",
-        "Usage Units are advance credits for digital content; they are not money or securities.",
-        "All courses, PDFs and AI outputs are examples. You stay responsible for every trade.",
-        "We comply with UK/EU consumer law, but digital deliveries have limited refunds."
-      ],
-      "note": "Need a signed copy or custom clause? Contact info@cur-nova.com and we will provide jurisdiction-specific wording."
-    }
+    "intro": [
+      "These Terms explain how you may use Cur Nova and purchase its educational courses, Usage Units and AI-generated materials. They also explain delivery, cancellation, refunds and the responsibilities of each party.",
+      "The Service is operated by CUR NOVA LTD, company number 17240836, whose registered office is Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom. In these Terms, “Cur Nova”, “we”, “us” and “our” refer to that company.",
+      "For questions about an order or these Terms, contact info@cur-nova.com."
+    ]
+  },
+  "keyPoints": {
+    "title": "Key points",
+    "items": [
+      "Cur Nova provides educational materials. It does not execute trades, manage investments or promise trading results.",
+      "You can purchase eligible products directly or use prepaid Usage Units where that option is offered.",
+      "Ready-made PDFs are available immediately after successful payment or redemption. Trader Custom Courses normally take 48–96 hours after payment and receipt of the required information. AI materials normally take a few minutes.",
+      "Any different delivery arrangement must be disclosed and agreed before payment or redemption for the affected order. We will notify you of delays and offer a revised date or cancellation with the refund due.",
+      "Digital delivery does not remove your rights concerning defective content. Any loss of a statutory cooling-off right is subject to the legal requirements explained below.",
+      "A legitimate payment dispute does not, by itself, result in a penalty or automatic account suspension."
+    ],
+    "note": "These points are a reading aid. The numbered provisions below explain the terms in full, subject always to applicable mandatory law."
   },
   "toc": {
-    "title": "On this page",
-    "items": [
-      { "label": "Introduction", "anchor": "introduction" },
-      { "label": "Definitions", "anchor": "definitions" },
-      { "label": "Eligibility & account registration", "anchor": "eligibility" },
-      { "label": "Nature of services & contract structure", "anchor": "nature" },
-      { "label": "Scope of services & digital content", "anchor": "scope" },
-      { "label": "Client data & responsibilities", "anchor": "client-data" },
-      { "label": "Acceptable use", "anchor": "acceptable-use" },
-      { "label": "Usage Units, pricing & payment", "anchor": "tokens" },
-      { "label": "Cancellations, refunds & chargebacks", "anchor": "refunds" },
-      { "label": "Intellectual property", "anchor": "ip" },
-      { "label": "Confidentiality", "anchor": "confidentiality" },
-      { "label": "Third-party platforms & links", "anchor": "third-parties" },
-      { "label": "Warranties & disclaimers", "anchor": "warranties" },
-      { "label": "Limitation of liability", "anchor": "liability" },
-      { "label": "Indemnity", "anchor": "indemnity" },
-      { "label": "Data protection & privacy", "anchor": "privacy" },
-      { "label": "Suspension & termination", "anchor": "termination" },
-      { "label": "Changes to the service or terms", "anchor": "changes" },
-      { "label": "Governing law & jurisdiction", "anchor": "law" },
-      { "label": "Miscellaneous", "anchor": "misc" },
-      { "label": "Contact details", "anchor": "contact" }
-    ],
-    "reminder": {
-      "label": "Reminder",
-      "text": "These Terms are published in English. The English version is the only binding version."
-    }
+    "title": "On this page"
   },
   "sections": [
     {
@@ -73,15 +35,29 @@
       "number": "1",
       "title": "Introduction",
       "content": [
-        { "type": "paragraph", "text": "1.1. These Terms and Conditions (\"Terms\") govern your access to and use of cur-nova.com, its dashboards, applications and downloadable content (the \"Service\"), operated by CUR NOVA LTD (company number 17240836, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom) (“Cur Nova”, “we”, “us”)." },
-        { "type": "paragraph", "text": "1.2. By creating an account, purchasing Usage Units, ordering ready-made or custom courses, or using any AI-powered feature, you agree to these Terms. If you disagree, you must not use the Service." },
         {
-          "type": "list",
-          "items": [
-            "1.3. Cur Nova is education-only. We do not execute trades, hold client funds, operate as a broker/exchange, deliver investment management or personalised financial advice.",
-            "1.4. References to strategies, signals or systems are illustrative only. Nothing on the Service is a recommendation to trade or to use any broker or instrument.",
-            "1.5. The Service and all of its documents are provided in English."
-          ]
+          "type": "paragraph",
+          "text": "1.1. These Terms apply to cur-nova.com, its customer dashboard, associated features and downloadable educational content, collectively the “Service”."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.2. Please read these Terms before opening an account or placing an order. They form part of your agreement with us when you register for the Service or make a purchase. The order information shown before you commit to payment also forms part of the relevant purchase agreement."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.3. The Refund and Return Policy explains cancellation and refund procedures. The Privacy Policy explains personal data processing, and the Cookie Policy explains cookies and similar technologies. The Risk and Disclaimer page contains further educational risk information. None of these documents limits rights that cannot lawfully be excluded."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.4. Cur Nova offers education about trading and financial markets. We do not act as your broker, exchange, investment manager, trading agent or custodian of trading assets. We do not place or monitor trades for you or provide personalised investment advice."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.5. References to strategies, trading methods or market scenarios are educational illustrations. They are not an instruction or recommendation to enter a transaction or select a broker or financial instrument."
+        },
+        {
+          "type": "paragraph",
+          "text": "1.6. These Terms are published in English. Unless mandatory law provides otherwise, the English text governs the interpretation of any translation. Product language is stated in the relevant description."
         }
       ]
     },
@@ -91,80 +67,184 @@
       "title": "Definitions",
       "content": [
         {
-          "type": "definition",
-          "items": [
-            { "term": "Account", "description": "Your profile on the Service, created via email/password or supported SSO (e.g., Google)." },
-            { "term": "Usage Units / Wallet", "description": "Pre-paid, non-transferable digital credits used to access paid features. Not cash, e-money or securities." },
-            { "term": "Ready-Made Courses", "description": "Deterministically priced PDF courses." },
-            { "term": "Custom Courses", "description": "Trader-tailored PDFs prepared by senior mentors based on your intake forms, typically paid with Usage Units." },
-            { "term": "AI Strategy Outputs", "description": "Structured strategies, diagrams and cover art generated with AI and delivered digitally." },
-            { "term": "Library / Dashboard", "description": "Authenticated area (e.g., /dashboard) showing balances, purchases, invoices and settings." },
-            { "term": "Client Data", "description": "Information you submit (experience, risk appetite, goals, notes, uploads, etc.)." },
-            { "term": "Order / Transaction", "description": "A confirmed purchase of Usage Units, courses or other paid features within the Service." },
-            { "term": "Third-Party Platforms", "description": "External systems such as payment processors, brokers, AI providers or hosting services." },
-            { "term": "Legal Policies", "description": "Privacy Policy, Cookies Policy, Refund Policy, Risk & Disclaimer and any linked policies." }
-          ]
+          "type": "paragraph",
+          "text": "2.1. “Account” means your registered customer profile and access to the Service."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.2. “Usage Units” means prepaid, non-transferable credits that can be redeemed for eligible educational products and features within Cur Nova. “Usage Balance” or “Wallet” means the record of those credits in your Account. Usage Units are not offered as an investment, a bank deposit or a means of payment outside the Service. Refund rights are addressed in section 9 and the Refund and Return Policy."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.3. “Ready-Made Courses” means existing PDF courses offered for digital access or download after purchase or redemption."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.4. “Trader Custom Courses” means individual educational PDF courses prepared by human traders or mentors using the information and requirements supplied for the order."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.5. “AI Custom Courses” means educational courses created using AI from your prompts and selected generation fields. Human preparation or review is included only if the product description expressly says so."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.6. “AI Strategy Outputs” means educational strategy documents and any associated diagrams or supporting assets generated through the AI Strategy Builder. They are not trading signals or personalised investment recommendations."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.7. “Custom Courses” collectively refers to Trader Custom Courses and AI Custom Courses. “Content” includes Ready-Made Courses, Custom Courses, AI Strategy Outputs and other educational materials supplied through the Service."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.8. “Client Data” means information you submit, including prompts, intake responses, educational goals, experience, preferences, notes and files."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.9. “Order” means a purchase of Usage Units or Content, or a confirmed redemption of Usage Units for a specific product or paid feature. A top-up and a later redemption are distinct transactions."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.10. “Library” or “Dashboard” means the customer area used to access available purchases, balances, order information and account settings."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.11. “Consumer” means an individual acting wholly or mainly outside their trade, business, craft or profession, as determined by applicable law. Buying through an Account does not, by itself, determine whether you are a Consumer."
         }
       ]
     },
     {
-      "id": "eligibility",
+      "id": "eligibility-and-account-registration",
       "number": "3",
-      "title": "Eligibility & account registration",
+      "title": "Eligibility and account registration",
       "content": [
-        { "type": "paragraph", "text": "3.1. You must be 18+ or properly authorised to bind your organisation." },
-        { "type": "paragraph", "text": "3.2. Provide accurate, current information when registering and keep it updated. We may verify details such as email ownership." },
-        { "type": "paragraph", "text": "3.3. You are responsible for credential security and must notify info@cur-nova.com of any suspected misuse." },
-        { "type": "paragraph", "text": "3.4. We may refuse, suspend or cancel accounts for compliance, fraud, sanctions or operational reasons." }
+        {
+          "type": "paragraph",
+          "text": "3.1. You must be at least 18 years old to use the Service. If you act for an organisation, you must also have authority to enter into the relevant agreement on its behalf."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.2. Provide accurate registration and billing information and update it when necessary. We may take reasonable steps to verify account ownership or investigate suspected unauthorised use."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.3. Keep your login details secure. Tell us promptly at info@cur-nova.com if you believe your Account or payment details have been used without authorisation."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.4. You are responsible for activity you authorise through your Account. This does not make you automatically responsible for unauthorised activity or remove any protection available under applicable law."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.5. Account restrictions and termination are governed by section 17. Exercising a legitimate cancellation, refund or payment-dispute right is not, by itself, a breach of these Terms."
+        }
       ]
     },
     {
-      "id": "nature",
+      "id": "nature-of-the-service-and-orders",
       "number": "4",
-      "title": "Nature of services & contract structure",
+      "title": "Nature of the Service and orders",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "4.1. We provide self-service educational tools: ready-made courses, custom courses, AI Strategy Builder outputs, risk resources and glossaries.",
-            "4.2. A contract arises when you create an Account and each time you purchase Usage Units, courses, or redeem Usage Units for custom/AI outputs.",
-            "4.3. Nothing we publish is investment advice, trade recommendations or performance guarantees.",
-            "4.4. We are not your agent, broker, asset manager or custodian and do not open or monitor trading accounts.",
-            "4.5. You remain responsible for complying with laws, broker rules and any third-party platform policies."
-          ]
+          "type": "paragraph",
+          "text": "4.1. The Service may offer Ready-Made Courses, Trader Custom Courses, AI Custom Courses, AI Strategy Outputs, templates, educational resources, calculators and related dashboard features. Availability and the features included in a particular purchase are described before the order is placed."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.2. Registration creates an agreement governing account access. A purchase or confirmed redemption creates a separate agreement for the relevant Order. Buying Usage Units does not itself order a future course or constitute consent to the immediate supply of every product later purchased with those Units."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.3. Before you place an Order, we provide the relevant product description, price or Usage Unit cost, delivery information and any material requirements or restrictions. Check that information and your submitted instructions before confirming."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.4. We confirm purchases or redemptions electronically. Where applicable, confirmation includes your request or consent for early performance and your acknowledgement of its effect on cancellation rights, in a form you can retain."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.5. If we cannot fulfil an Order, we will tell you and offer an agreed alternative or cancellation with the refund due. We will not substitute a materially different product without your agreement."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.6. You remain responsible for your trading decisions and compliance with rules applicable to your activities. This does not reduce our responsibility to provide the educational products and services you purchased in accordance with the agreement and applicable law."
         }
       ]
     },
     {
-      "id": "scope",
+      "id": "content-and-delivery",
       "number": "5",
-      "title": "Scope of services & digital content",
+      "title": "Content and delivery",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "5.1. Services may include bilingual courses, Usage Unit Packages, custom coursework, AI outputs, risk/journal templates, dashboards, billing history and calculators.",
-            "5.2. Custom and AI outputs rely on your Client Data; incomplete inputs lead to less relevant content. Regeneration normally requires extra Usage Units.",
-            "5.3. We strive for coherent, structured content but cannot guarantee error-free or real-time market accuracy.",
-            "5.4. Delivery occurs when files are available in your dashboard and/or via email links. Email issues do not invalidate delivery if the dashboard copy exists.",
-            "5.5. We may update or retire catalogue items for future customers without affecting content you already own."
-          ]
+          "type": "paragraph",
+          "text": "5.1. The relevant description specifies the format, subject, language, scope and any technical requirements of the Content. Custom products use the Client Data submitted for the Order."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.2. New instructions, additional scope or a further generation requested after a correctly fulfilled Order may require a separate payment or additional Usage Units, disclosed before you proceed. We do not charge you again for a correction, replacement or repeat performance that we are required to provide because of our failure to fulfil the original agreement."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.3. AI materials can contain inaccuracies and require critical review. Educational content may also become outdated as markets change. These limitations do not excuse failure to meet the agreed description or applicable statutory quality standards."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.4. Delivery takes place when the purchased material is made accessible through the delivery channel specified for the Order, such as your Library or an email download link. Where delivery to the Dashboard was agreed, an email notification problem does not prevent delivery if the material is actually accessible there. A status label or inaccessible link alone does not establish that usable Content has been delivered."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.5. We may change the catalogue for future purchases. Changes do not retrospectively reduce the agreed scope or access period of an existing purchase, except where a lawful and proportionate restriction is necessary under these Terms. Your applicable remedies remain available."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.6. Ready-Made Courses are made available immediately after successful payment or confirmed Usage Unit redemption, subject to any consent required by law for immediate digital supply."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.7. Trader Custom Courses are normally delivered within 48–96 hours after successful payment or confirmed Usage Unit redemption and receipt of the information necessary to prepare the agreed course. If required information is missing, we will identify what is needed. We will not treat an avoidable internal delay as missing customer information."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.8. AI Custom Courses and AI Strategy Outputs are normally generated and made available within a few minutes after you confirm the request, the required inputs are provided and payment or Usage Unit redemption is confirmed. This is the normal processing period rather than a guarantee that every request will finish within a fixed number of minutes."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.9. If a product is unavailable or cannot be supplied within its normal period, we will disclose this and agree an alternative delivery period with you before accepting payment or deducting Usage Units for that specific Order. A general top-up does not commit you to accept a delayed product."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.10. If we become aware of a delay after an Order is placed, we will notify you without undue delay, explain the situation and offer a revised delivery date. You may accept the revised date or cancel the affected undelivered Order and receive the refund due under the Refund and Return Policy and applicable law. We will not treat your silence as agreement to an extended deadline. Any additional right to cancel immediately or obtain another remedy under mandatory law remains available."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.11. No physical shipping is involved. You need suitable software and a compatible device to access the formats disclosed before purchase. Contact us if a file is missing, corrupted or inaccessible so we can investigate and provide the applicable remedy."
         }
       ]
     },
     {
-      "id": "client-data",
+      "id": "client-data-and-responsibilities",
       "number": "6",
-      "title": "Client data & responsibilities",
+      "title": "Client Data and responsibilities",
       "content": [
-        { "type": "paragraph", "text": "6.1. You warrant you have rights to submit Client Data and that it is lawful and accurate." },
         {
-          "type": "list",
-          "items": [
-            "6.2. Client Data must not infringe third-party rights, include unnecessary sensitive data, or contain malware.",
-            "6.3. Back up any notes or journals you want to keep; we do not guarantee long-term archiving.",
-            "6.4. You grant Cur Nova a worldwide, royalty-free licence to use Client Data to deliver the Service, improve it (in aggregate) and comply with law, as detailed in the Privacy Policy."
-          ]
+          "type": "paragraph",
+          "text": "6.1. Supply information that is reasonably accurate and relevant to the educational product requested. If we need clarification to fulfil an Order, we may ask for it. Any resulting change to the agreed scope or delivery arrangement must be communicated to you."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.2. You must have the necessary rights to submit Client Data. Do not upload malware, unlawful material, unnecessary sensitive information or personal data about other people without an appropriate legal basis."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.3. Keep your own copies of notes, journals and downloaded materials that you wish to preserve. This does not remove any access obligation we have expressly agreed for purchased Content."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.4. You retain rights in your Client Data. You permit us and the service providers acting for us to process it to fulfil your requests, operate and secure the Service and meet legal obligations, as explained in the Privacy Policy. This permission does not authorise unrelated publication of your private submissions or override data protection law."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.5. Our use of OpenAI and the treatment of prompts, generation fields and outputs are described in the Privacy Policy. Account acceptance does not constitute consent to unrelated model training or marketing."
         }
       ]
     },
@@ -174,231 +254,347 @@
       "title": "Acceptable use",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "7.1. Do not attempt to access others’ accounts, bypass security, scrape large volumes, or run automation that stresses the Service.",
-            "7.2. Do not promote illegal activity, market abuse or resell our content as if it were personalised financial advice.",
-            "7.3. We may rate-limit, suspend or terminate accounts when we suspect abuse, legal risk or threats to system integrity."
-          ]
+          "type": "paragraph",
+          "text": "7.1. Do not access another person's Account without authority, bypass security or payment controls, introduce harmful code or use automation that materially disrupts the Service."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.2. Do not use the Service for unlawful activity, market abuse or deception, or distribute our educational materials as if they were authorised personalised financial advice."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.3. Do not resell or publicly distribute licensed Content without permission or otherwise infringe intellectual property or privacy rights."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.4. We may apply proportionate limits or restrictions to investigate and address misuse or security risks. Restrictions are subject to section 17 and do not remove mandatory consumer rights."
         }
       ]
     },
     {
-      "id": "tokens",
+      "id": "usage-units-and-payment",
       "number": "8",
-      "title": "Usage Units, pricing & payment",
+      "title": "Usage Units and payment",
       "content": [
-        { "type": "note", "text": "Accepted payment methods: Visa and Mastercard. Additional methods may be added with notice." },
         {
-          "type": "list",
-          "items": [
-            "8.1. Usage Unit Packages (e.g., Focused Start, Structured Growth, Discipline Pro) and custom top-ups clearly display price and included Usage Units.",
-            "8.2. GBP is the base currency. Prices may be shown in EUR, USD or other currencies; final charges and FX handling appear at checkout.",
-            "8.3. Wallet balances are advance payments for digital features and are not bank or e-money accounts.",
-            "8.4. By submitting a card you confirm authority to use it; payments are processed by trusted PSPs and we do not store full PAN/CVV data.",
-            "8.5. Usage Units are deducted when you pay with Usage Units, request custom courses, run AI strategies or use any Usage Unit-priced feature.",
-            "8.6. Some ready-made courses can be purchased directly by card; the option is shown before checkout.",
-            "8.7. Usage Units currently have no expiry date, but we may introduce fair-use or dormancy rules with notice.",
-            "8.8. We issue electronic receipts/invoices for Usage Unit purchases and card-based orders; access them via your dashboard and email."
-          ]
+          "type": "paragraph",
+          "text": "8.1. Usage Unit Packages and custom top-ups display their price and the Units included before purchase. A product's price or Unit cost is shown before the relevant Order is confirmed."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.2. GBP is the base pricing currency. Where other currencies are offered, the checkout identifies the currency and amount of the charge and any applicable taxes or charges payable to us. Your card issuer may apply separate conversion or payment fees under its own terms."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.3. Usage Balances record advance purchases for eligible Cur Nova products. They do not earn interest and cannot be traded or transferred to other customers. Ordinary cash withdrawal is not offered; refunds required by law or provided under the Refund and Return Policy remain available."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.4. Payment methods available for your Order are displayed at checkout and include Visa and Mastercard where supported. You must be authorised to use the selected payment method. Payment providers process card details; we do not store full card numbers or CVV codes."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.5. Usage Units are deducted when you confirm a redemption for the relevant paid product or action. Deduction records the transaction; it does not by itself prove delivery or the loss of a cancellation right."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.6. Direct card purchase is available for products where that option is displayed. Refund and quality rights are not removed because you used Usage Units instead of a direct card payment."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.7. Purchased Usage Units currently have no expiry date. Any future change affecting balances will be communicated in advance and will not retrospectively deprive you of the value of an existing purchase or rights required by law. Bonus credits may have separate conditions disclosed when offered."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.8. Electronic purchase records and receipts are provided through the relevant account or email channels. Tell us if you believe a payment or Unit deduction is incorrect."
         }
       ]
     },
     {
-      "id": "refunds",
+      "id": "cancellations-refunds-and-payment-disputes",
       "number": "9",
-      "title": "Cancellations, refunds & chargebacks",
+      "title": "Cancellations refunds and payment disputes",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "9.1. Because products are digital, performance can begin immediately; statutory cancellation rights may be limited once delivery starts.",
-            "9.2. Usage Unit top-ups are generally non-refundable, except for clear technical errors or duplicate payments attributable to us.",
-            "9.3. If you cannot access purchased content, contact us promptly. We may re-provide the file, re-credit Usage Units or refund at our discretion.",
-            "9.4. Initiating unjustified chargebacks may lead to suspension, Usage Unit removal and recovery of investigation costs where lawful."
-          ]
+          "type": "paragraph",
+          "text": "9.1. Your statutory rights are preserved. If you are a Consumer, applicable law may give you a cooling-off period, rights where delivery is late or missing, and remedies where digital content or services do not conform to the contract. For qualifying UK distance contracts for digital content or services, the normal cooling-off period is 14 days after the contract is made, subject to lawful exceptions and extensions. Immediate digital supply affects this right only when the required express consent, acknowledgement and confirmation have been provided. Where an Order includes a service, the rules for early service performance apply to that element. The Refund and Return Policy explains these distinctions and the request procedure."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.2. Unused Usage Units are refundable where required by applicable law. Outside those circumstances, a refund may be available under our voluntary refund terms. Spending Units does not remove remedies for defective, missing or non-conforming Content, invalid early-supply consent or another matter for which the law requires reimbursement. Account closure does not waive an existing entitlement. A compulsory monetary refund will not be replaced with account credit without your express agreement where the law requires payment back to you."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.3. You may raise a legitimate payment dispute or chargeback with your bank or payment provider. Doing so does not, by itself, attract a penalty, forfeiture of unrelated purchases or automatic suspension of your Account. We may provide relevant evidence and make proportionate adjustments to the affected transaction to reflect a refund or payment reversal and avoid duplicate recovery. Separate evidence of fraud, unauthorised use or a security threat may justify measures under section 17; the existence or outcome of a dispute alone does not establish such misconduct. Contacting our support team first is encouraged but is not a condition of exercising payment-dispute rights."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.4. We may seek recovery only of amounts or costs for which a valid legal basis exists and only to the extent permitted by applicable law and the relevant payment-provider and card-scheme rules. We do not impose a fixed chargeback penalty or automatically pass on investigation, processing or scheme fees because a customer has exercised a legitimate right. We will not recover the same sum twice or use a cost claim to defeat a mandatory refund right."
         }
       ]
     },
     {
-      "id": "ip",
+      "id": "intellectual-property",
       "number": "10",
       "title": "Intellectual property",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "10.1. The Service (software, UI, branding, templates, videos) belongs to Cur Nova or its licensors.",
-            "10.2. We grant you a personal, non-transferable licence to use delivered PDFs and AI outputs for your own learning or internal training.",
-            "10.3. You must not resell, publicly distribute, claim authorship, or remove proprietary notices without written consent.",
-            "10.4. Ownership of our IP stays with us. We do not claim ownership of your Client Data beyond the licence in clause 6.4."
-          ]
+          "type": "paragraph",
+          "text": "10.1. Rights in the Service's software, branding, course materials and other protected elements belong to Cur Nova or the relevant rights holders. Your purchase gives you the usage rights described here and in any specific licence disclosed before purchase."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.2. Subject to payment and any agreed access period, you may use purchased Content for your personal learning or your organisation's internal training, as applicable to the purchase. Access credentials must not be shared to avoid the purchase of additional access where required."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.3. You may not resell, publicly distribute or commercially sublicense our protected materials, remove rights notices or falsely claim authorship. This does not restrict uses permitted by mandatory law."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.4. AI outputs may resemble materials generated for other users, and protection or exclusivity may depend on applicable law. We do not promise that an AI output is unique or that every element is capable of copyright protection."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.5. You retain rights in Client Data subject to the limited permissions in section 6. We do not acquire ownership of your original submissions merely because you use the Service."
         }
       ]
     },
     {
-      "id": "confidentiality",
+      "id": "confidential-information",
       "number": "11",
-      "title": "Confidentiality",
-      "content": [
-        { "type": "paragraph", "text": "11.1. Each party may receive confidential information. It must be used only for providing/using the Service and protected with reasonable care." },
-        { "type": "paragraph", "text": "11.2. Confidentiality does not apply where information is public, already known, independently developed, or legally required to be disclosed (with notice where lawful)." }
-      ]
-    },
-    {
-      "id": "third-parties",
-      "number": "12",
-      "title": "Third-party platforms & links",
+      "title": "Confidential information",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "12.1. The Service relies on third parties (payments, hosting, AI, video, analytics). Their own terms apply.",
-            "12.2. We are not responsible for availability or performance of third-party platforms and do not endorse them.",
-            "12.3. You are responsible for ensuring integrations (e.g., Google login, embedded videos) are lawful for your use case."
-          ]
+          "type": "paragraph",
+          "text": "11.1. A party receiving information that is confidential by its nature or clearly identified as confidential must use it only for the relevant agreement or another lawful purpose and protect it with reasonable care."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.2. This restriction does not cover information lawfully public, already lawfully known, independently developed or obtained from another authorised source. Necessary disclosures to service providers or professional advisers must be subject to appropriate obligations."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.3. Information may be disclosed where lawfully required. Where permitted and practicable, the affected party will be informed. Personal data remains subject to the Privacy Policy and applicable law."
         }
       ]
     },
     {
-      "id": "warranties",
-      "number": "13",
-      "title": "Warranties & disclaimers",
+      "id": "third-party-services-and-links",
+      "number": "12",
+      "title": "Third party services and links",
       "content": [
-        { "type": "paragraph", "text": "13.1. We warrant we are entitled to operate the Service and will use reasonable skill and care." },
         {
-          "type": "list",
-          "items": [
-            "13.2. Otherwise, the Service and all digital content are provided “as is” without implied warranties of merchantability, fitness, non-infringement or uninterrupted operation.",
-            "13.3. We do not guarantee completeness, accuracy, profitability, availability, bug-free performance, or improved trading outcomes.",
-            "13.4. Trading forex, crypto and binaries is high risk and may result in total loss. Past or hypothetical performance is not reliable.",
-            "13.5. Additional disclosures appear in the Risk & Disclaimer policy, which forms part of these Terms."
-          ]
+          "type": "paragraph",
+          "text": "12.1. We use external providers for functions such as payments, hosting, authentication and AI processing. Their involvement does not remove our responsibility to fulfil our agreement with you or provide remedies required by law."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.2. If you choose to use an independent external website or product linked from the Service, its separate terms may apply. A link does not amount to an endorsement of that provider's financial products or trading services."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.3. We do not control independent external platforms. Any restriction of liability for them is subject to section 14 and does not excuse our own breach or transfer our contractual obligations to you."
+        }
+      ]
+    },
+    {
+      "id": "quality-and-educational-limitations",
+      "number": "13",
+      "title": "Quality and educational limitations",
+      "content": [
+        {
+          "type": "paragraph",
+          "text": "13.1. We will provide services with reasonable care and skill and supply paid digital content in accordance with applicable requirements concerning quality, fitness for a purpose made known and accepted, description and the right to supply it."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.2. Except for obligations expressly agreed or required by law, we do not promise uninterrupted operation, continuous market updates or that educational or AI content will be free of every error. This qualification does not exclude statutory standards or the remedies for a failure to meet them."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.3. We do not guarantee profits, trading success, acceptance by a broker or other third party, or any particular improvement in financial performance. Educational examples and hypothetical results are not reliable forecasts."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.4. Trading forex, cryptoassets, binary options and related instruments can involve substantial risk, including loss of all capital committed. Assess information independently and obtain appropriately qualified advice when needed."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.5. The Risk and Disclaimer page provides further context. It does not exclude liability that cannot lawfully be excluded or excuse failure to supply the purchased educational product."
         }
       ]
     },
     {
       "id": "liability",
       "number": "14",
-      "title": "Limitation of liability",
-      "accent": "warning",
+      "title": "Liability",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "14.1. Nothing limits liability for death/personal injury caused by negligence, fraud or other non-excludable obligations.",
-            "14.2. Subject to 14.1, our aggregate liability in any rolling 12-month period is capped at the total fees/Usage Units you paid to us during that period.",
-            "14.3. We are not liable for lost profits, revenue, goodwill, data, indirect or consequential loss, trading losses, or actions of third-party platforms."
-          ]
+          "type": "paragraph",
+          "text": "14.1. Nothing in these Terms excludes or limits liability for fraud, fraudulent misrepresentation, death or personal injury caused by negligence, or any other liability, right or remedy that cannot lawfully be excluded or limited."
+        },
+        {
+          "type": "paragraph",
+          "text": "14.2. If you are a Consumer, we are responsible for loss or damage that is a foreseeable result of our breach of the agreement or failure to use reasonable care and skill, to the extent required by applicable law. This includes the applicable statutory remedies for digital content and services. The business liability cap in clause 14.4 does not apply to Consumers."
+        },
+        {
+          "type": "paragraph",
+          "text": "14.3. Educational use does not make us responsible for the outcome of trades you independently choose to make. However, references to trading losses or third-party conduct do not exclude responsibility where a loss is legally recoverable from us and the relevant liability cannot fairly or lawfully be excluded."
+        },
+        {
+          "type": "paragraph",
+          "text": "14.4. For customers acting in the course of business, and subject to clause 14.1 and any other mandatory restriction, our total aggregate liability arising from the Service in a rolling 12-month period is limited to the total amount paid to us for the Service during that period. A top-up and its later redemption are not counted twice. For those business customers, we are not liable for indirect or consequential loss or loss of profit, revenue, goodwill or business opportunity, to the extent permitted by law."
         }
       ]
     },
     {
-      "id": "indemnity",
+      "id": "responsibility-for-third-party-claims",
       "number": "15",
-      "title": "Indemnity",
+      "title": "Responsibility for third party claims",
       "content": [
-        { "type": "paragraph", "text": "You agree to indemnify and hold harmless Cur Nova and its personnel against claims, damages, costs and legal fees arising from your unlawful use of the Service, breach of these Terms or infringement caused by your Client Data or misuse of our content." }
+        {
+          "type": "paragraph",
+          "text": "15.1. If you use the Service for business purposes, you agree to reimburse reasonable losses and costs arising from a third-party claim caused by your unlawful use of the Service, infringement through Client Data or deliberate misuse of our protected Content, to the extent attributable to your conduct. We will notify you of the claim and take reasonable steps to limit the loss. This obligation does not cover our own fault or matters for which reimbursement would be unlawful."
+        },
+        {
+          "type": "paragraph",
+          "text": "15.2. If you are a Consumer, you are responsible for your conduct only to the extent provided by applicable law. This section does not impose a general obligation on you to reimburse our legal costs for exercising a legitimate complaint, refund or payment-dispute right."
+        }
       ]
     },
     {
-      "id": "privacy",
+      "id": "data-protection",
       "number": "16",
-      "title": "Data protection & privacy",
+      "title": "Data protection",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "16.1. We act as a data controller under UK GDPR/Data Protection Act 2018. See the Privacy Policy for details.",
-            "16.2. We share necessary personal data with trusted processors (payments, hosting, analytics, AI providers, email) strictly to operate and secure the Service.",
-            "16.3. International transfers use lawful safeguards such as standard contractual clauses.",
-            "16.4. You can exercise access, rectification, erasure, restriction, portability or objection rights via info@cur-nova.com."
-          ]
+          "type": "paragraph",
+          "text": "16.1. CUR NOVA LTD acts as controller of personal data processed for its own operation of the Service. The Privacy Policy explains the purposes, legal bases, recipients, retention periods and available rights."
+        },
+        {
+          "type": "paragraph",
+          "text": "16.2. Necessary information is shared with relevant service providers, including OpenAI for AI generation, as described in the Privacy Policy. That Policy also explains the distinction between our retention periods and provider-side processing."
+        },
+        {
+          "type": "paragraph",
+          "text": "16.3. International transfers must have a lawful basis and any safeguards required by the applicable data protection regime."
+        },
+        {
+          "type": "paragraph",
+          "text": "16.4. Contact info@cur-nova.com to raise a privacy question or exercise applicable data protection rights."
         }
       ]
     },
     {
-      "id": "termination",
+      "id": "account-restrictions-and-termination",
       "number": "17",
-      "title": "Suspension & termination",
+      "title": "Account restrictions and termination",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "17.1. We may suspend/terminate access if you breach these Terms, commit fraud, pose security risks, or if mandated by law/regulators/partners.",
-            "17.2. You may close your account at any time, but closure does not automatically refund unused Usage Units (see clause 9).",
-            "17.3. Upon termination your right to access the Service ceases; we retain records required for tax, fraud prevention and compliance."
-          ]
+          "type": "paragraph",
+          "text": "17.1. We may restrict, suspend or end access where reasonably necessary to address a material breach, substantiated misuse, suspected unauthorised activity, a security threat or a legal requirement. Measures must be proportionate to their purpose. Where lawful and practicable, we will explain the reason and allow you to respond or remedy the issue. A legitimate chargeback or refund request alone is not a ground for automatic suspension."
+        },
+        {
+          "type": "paragraph",
+          "text": "17.2. You may request account closure at any time. Closure does not itself guarantee a voluntary refund of every unused balance, but it does not cancel, waive or reduce statutory cancellation rights, an entitlement to refund unused Usage Units or any remedy concerning an existing Order. You may submit or pursue a valid claim after closure using the contact details in section 21."
+        },
+        {
+          "type": "paragraph",
+          "text": "17.3. When account access ends, access through the Dashboard may cease. We will address outstanding Orders, any agreed access commitments and amounts due under these Terms and the Refund and Return Policy. Closure does not automatically revoke a licence to use a lawfully downloaded purchase within its agreed scope; restrictions may still apply to refunded Content or unlawful use."
+        },
+        {
+          "type": "paragraph",
+          "text": "17.4. Where we discontinue the Service or end access for reasons unrelated to your breach, we will provide appropriate notice where practicable and address undelivered Orders, unfulfilled paid access and unused paid balances in accordance with our obligations. We will not treat termination as a means of retaining amounts that must be refunded."
+        },
+        {
+          "type": "paragraph",
+          "text": "17.5. Personal data is deleted, anonymised or retained following closure in accordance with the Privacy Policy and applicable legal obligations."
         }
       ]
     },
     {
-      "id": "changes",
+      "id": "changes-to-the-service-and-these-terms",
       "number": "18",
-      "title": "Changes to the service or terms",
+      "title": "Changes to the Service and these Terms",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "18.1. We may update, modify or discontinue features, pricing or catalogue items to reflect operational or legal changes.",
-            "18.2. Material updates to these Terms or policies will be communicated via email, dashboard alerts or on-site notices.",
-            "18.3. Continued use after the effective date of updates constitutes acceptance. If you disagree, stop using the Service and request account closure."
-          ]
+          "type": "paragraph",
+          "text": "18.1. We may change products, features and prices for future Orders. Existing Orders remain subject to the agreed terms unless a change is required by law or otherwise lawfully agreed."
+        },
+        {
+          "type": "paragraph",
+          "text": "18.2. Material changes affecting continuing account use will be notified through an appropriate channel, such as email, the Dashboard or an on-site notice. We will explain their effect and when they take effect."
+        },
+        {
+          "type": "paragraph",
+          "text": "18.3. A change will not retrospectively remove accrued rights or impose new charges on a completed purchase without lawful grounds. If a proposed change materially reduces an existing paid entitlement, we will address any required consent, cancellation option or refund. Continued use does not replace express consent where the law requires it."
         }
       ]
     },
     {
-      "id": "law",
+      "id": "governing-law-and-courts",
       "number": "19",
-      "title": "Governing law & jurisdiction",
+      "title": "Governing law and courts",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "19.1. These Terms are governed by the laws of England and Wales.",
-            "19.2. Courts of England and Wales have exclusive jurisdiction, except consumer residents of Scotland, Northern Ireland or EU states may rely on local courts where permitted."
-          ]
+          "type": "paragraph",
+          "text": "19.1. The law of England and Wales governs these Terms, subject to mandatory consumer protections that apply regardless of this choice of law."
+        },
+        {
+          "type": "paragraph",
+          "text": "19.2. If you are a Consumer, you retain any right under applicable law to rely on mandatory protections in your country of habitual residence and to bring a claim before a court available to you under that law. Nothing here requires you to use only the courts of England and Wales where such a requirement would restrict those rights."
+        },
+        {
+          "type": "paragraph",
+          "text": "19.3. For business customers, the courts of England and Wales have exclusive jurisdiction, except where mandatory law requires otherwise."
         }
       ]
     },
     {
-      "id": "misc",
+      "id": "general-provisions",
       "number": "20",
-      "title": "Miscellaneous",
+      "title": "General provisions",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "20.1. If any provision is unenforceable, it will be enforced to the maximum lawful extent; the rest remain effective.",
-            "20.2. Delay in exercising rights is not a waiver.",
-            "20.3. You may not assign obligations without our consent; we may assign to affiliates or as part of corporate transactions.",
-            "20.4. These Terms plus referenced Legal Policies are the entire agreement regarding the Service."
-          ]
+          "type": "paragraph",
+          "text": "20.1. If a provision cannot lawfully be enforced, the remaining provisions continue to apply to the extent possible. An unenforceable consumer term will not be applied merely to achieve the greatest restriction on your rights that the wording might permit."
+        },
+        {
+          "type": "paragraph",
+          "text": "20.2. A delay in exercising a right does not, by itself, waive that right."
+        },
+        {
+          "type": "paragraph",
+          "text": "20.3. You may transfer contractual obligations only with our consent, unless applicable law provides otherwise. We may transfer our rights or obligations as part of a lawful business transfer, provided this does not reduce the protections you have under your agreement. We will give notice where required."
+        },
+        {
+          "type": "paragraph",
+          "text": "20.4. These Terms, the relevant Order information and applicable policies form the agreement for the Service. If wording conflicts, mandatory law prevails. Specific terms disclosed and agreed for an Order prevail over general descriptions to the extent they do not reduce mandatory rights. The Refund and Return Policy supplements rather than overrides the rights preserved in section 9."
         }
       ]
     },
     {
-      "id": "contact",
+      "id": "contact-details",
       "number": "21",
       "title": "Contact details",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "Cur Nova — operated by CUR NOVA LTD",
-            "Registered office: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom",
+          "type": "address",
+          "lines": [
+            "CUR NOVA LTD",
             "Company number: 17240836",
+            "Registered office: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom",
             "Email: info@cur-nova.com",
-            "Tel: {phone}"
+            "Telephone: {phone}",
+            "Website: https://www.cur-nova.com/"
           ]
+        },
+        {
+          "type": "paragraph",
+          "text": "For an order query, cancellation or complaint, contact us by email or at the postal address above. Include enough information to identify the relevant transaction where available. You do not need to keep an active Account to pursue an existing statutory claim."
         }
       ]
     }
-  ],
-  "cta": {
-    "title": "Using Cur Nova means accepting these principles.",
-    "subtitle": "If you need a bespoke rider, regulated review or signed PDF, let us know before you buy. Otherwise this document governs every Usage Unit top-up and download.",
-    "backToHome": "Back to home",
-    "viewCourses": "View courses"
-  }
+  ]
 }

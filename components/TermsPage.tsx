@@ -1,115 +1,115 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { withContactPhone } from '@/lib/contact'
-import {
-  Info,
-  FileText,
-  Globe2,
-  CreditCard,
-  AlertTriangle,
-  Shield,
-  ArrowRight,
-  ChevronRight,
-} from 'lucide-react'
+import { Info, FileText, Shield, AlertTriangle, CalendarDays, CreditCard, ChevronRight } from 'lucide-react'
 
-type SummaryCard = {
-  title: string
-  subtitle: string
-  items: string[]
-  note: string
-}
+// Policy text lives in i18n/{locale}/terms.json. Section and clause numbers are part of
+// the data (clause numbers are inside the paragraph text), so nothing here auto-numbers.
 
-type HeroMeta = {
-  label: string
-  value: string
-}[]
+type EffectiveDate = { label: string; value: string }
 
-type TocItem = {
-  label: string
-  anchor: string
-}
-
-type Toc = {
-  title: string
-  items: TocItem[]
-  reminder: {
-    label: string
-    text: string
-  }
-}
-
-type DefinitionItem = {
-  term: string
-  description: string
-}
+type KeyPoints = { title: string; items: string[]; note?: string }
 
 type ContentBlock =
   | { type: 'paragraph'; text: string }
   | { type: 'list'; items: string[] }
-  | { type: 'definition'; items: DefinitionItem[] }
-  | { type: 'note'; text: string }
+  | { type: 'quote'; text: string }
+  | { type: 'address'; lines: string[] }
+  | { type: 'subheading'; id: string; number: string; title: string }
 
-type TermsSection = {
+type PolicySection = {
   id: string
   number: string
   title: string
-  accent?: 'default' | 'warning'
   content: ContentBlock[]
+}
+
+const LINK_PATTERN = /(https?:\/\/[^\s]*[^\s.,;:)]|[\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g
+const linkClass = 'text-brand-600 underline-offset-2 hover:underline'
+
+// Turns e-mail addresses and URLs inside policy text into working links.
+function linkify(text: string): ReactNode[] {
+  return text.split(LINK_PATTERN).map((part, idx) => {
+    if (idx % 2 === 0) return part
+    if (!part.startsWith('http')) {
+      return (
+        <a key={idx} href={`mailto:${part}`} className={linkClass}>
+          {part}
+        </a>
+      )
+    }
+    const external = !part.startsWith('https://www.cur-nova.com')
+    return (
+      <a
+        key={idx}
+        href={part}
+        className={`${linkClass} break-all`}
+        {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
+        {part}
+      </a>
+    )
+  })
+}
+
+function renderContentBlock(block: ContentBlock, idx: number) {
+  switch (block.type) {
+    case 'subheading':
+      return (
+        <h3 key={`h-${idx}`} id={block.id} className="scroll-mt-24 pt-1 text-sm font-semibold text-text-main">
+          <span className="mr-1.5 text-text-muted">{block.number}</span>
+          {block.title}
+        </h3>
+      )
+    case 'list':
+      return (
+        <ul key={`list-${idx}`} className="space-y-1.5 pl-5 text-sm text-text-secondary">
+          {block.items.map((item, itemIdx) => (
+            <li key={itemIdx} className="relative before:absolute before:-left-3 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-surface-400">
+              {linkify(item)}
+            </li>
+          ))}
+        </ul>
+      )
+    case 'quote':
+      return (
+        <blockquote key={`q-${idx}`} className="rounded-lg border border-surface-200 bg-surface-50 px-4 py-3 text-sm italic leading-relaxed text-text-secondary">
+          {linkify(block.text)}
+        </blockquote>
+      )
+    case 'address':
+      return (
+        <address key={`addr-${idx}`} className="rounded-lg border border-surface-200 bg-surface-50 p-4 text-sm not-italic leading-relaxed text-text-secondary">
+          {withContactPhone(block.lines).map((line, lineIdx) => (
+            <span key={lineIdx} className="block">
+              {linkify(line)}
+            </span>
+          ))}
+        </address>
+      )
+    case 'paragraph':
+    default:
+      return (
+        <p key={`p-${idx}`} className="text-sm leading-relaxed text-text-secondary">
+          {linkify(block.text)}
+        </p>
+      )
+  }
 }
 
 export function TermsPage() {
   const t = useTranslations('terms')
   const tUi = useTranslations('common.ui')
+  const tRefund = useTranslations('refund')
   const tBreadcrumb = useTranslations('courses.breadcrumb')
 
-  const summaryCard = t.raw('hero.summaryCard') as SummaryCard
-  const heroMeta = t.raw('hero.meta') as HeroMeta
-  const toc = t.raw('toc') as Toc
-  const sections = t.raw('sections') as TermsSection[]
-
-  const renderContentBlock = (block: ContentBlock, idx: number) => {
-    switch (block.type) {
-      case 'list':
-        return (
-          <ul key={`list-${idx}`} className="space-y-1.5 pl-5 text-sm text-text-secondary">
-            {withContactPhone(block.items).map((item, itemIdx) => (
-              <li key={itemIdx} className="relative before:absolute before:-left-3 before:top-[0.55em] before:h-1 before:w-1 before:rounded-full before:bg-surface-400">
-                {item}
-              </li>
-            ))}
-          </ul>
-        )
-      case 'definition':
-        return (
-          <div key={`def-${idx}`} className="rounded-lg border border-surface-200 bg-surface-50 p-4">
-            <dl className="space-y-3">
-              {block.items.map((item, defIdx) => (
-                <div key={defIdx} className="flex flex-col gap-0.5">
-                  <dt className="text-sm font-semibold text-text-main">{item.term}</dt>
-                  <dd className="text-sm text-text-secondary">{item.description}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        )
-      case 'note':
-        return (
-          <div key={`note-${idx}`} className="flex items-start gap-2 rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-700">
-            <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-600" />
-            <span>{block.text}</span>
-          </div>
-        )
-      case 'paragraph':
-      default:
-        return (
-          <p key={`p-${idx}`} className="text-sm leading-relaxed text-text-secondary">
-            {block.type === 'paragraph' ? block.text : (block as any)}
-          </p>
-        )
-    }
-  }
+  const effectiveDate = t.raw('hero.effectiveDate') as EffectiveDate
+  const intro = t.raw('hero.intro') as string[]
+  const keyPoints = t.raw('keyPoints') as KeyPoints
+  const sections = t.raw('sections') as PolicySection[]
 
   return (
     <div className="min-h-screen">
@@ -126,122 +126,84 @@ export function TermsPage() {
           </div>
 
           <div className="mb-6 flex items-start gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-200 bg-brand-50">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-brand-200 bg-brand-50">
               <FileText className="h-6 w-6 text-brand-600" />
             </div>
-            <div>
+            <div className="min-w-0">
               <h1 className="text-2xl font-semibold text-text-main sm:text-3xl">{t('hero.title')}</h1>
-              <p className="mt-1 max-w-2xl text-sm text-text-secondary">{t('hero.subtitle')}</p>
+              <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-xs text-text-secondary">
+                <CalendarDays className="h-3 w-3 text-brand-600" />
+                <span className="text-text-muted">{effectiveDate.label}:</span>
+                <span>{effectiveDate.value}</span>
+              </span>
+              <div className="mt-4 max-w-3xl space-y-2">
+                {intro.map((paragraph, idx) => (
+                  <p key={idx} className="text-sm leading-relaxed text-text-secondary">
+                    {linkify(paragraph)}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Meta badges */}
-          <div className="mb-6 flex flex-wrap items-center gap-2 text-xs">
-            {heroMeta?.map((meta) => (
-              <span key={meta.label} className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
-                <Shield className="h-3 w-3 text-brand-600" />
-                <span className="text-text-muted">{meta.label}:</span>
-                <span>{meta.value}</span>
-              </span>
-            ))}
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
-              <Globe2 className="h-3 w-3 text-brand-600" />
-              {t('hero.badges.regions')}
-            </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-200 bg-surface-50 px-3 py-1.5 text-text-secondary">
-              <CreditCard className="h-3 w-3 text-brand-600" />
-              {t('hero.badges.payments')}
-            </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-amber-700">
-              <AlertTriangle className="h-3 w-3" />
-              {t('hero.badges.highRisk')}
-            </span>
-          </div>
-
-          {/* Summary panel */}
+          {/* Key points panel */}
           <div className="rounded-xl border border-surface-200 bg-surface-50 p-5">
             <div className="mb-3 flex items-center gap-2">
               <Info className="h-4 w-4 text-brand-600" />
-              <span className="text-xs font-semibold text-text-main">{summaryCard?.title}</span>
-              <span className="text-xs text-text-muted">— {summaryCard?.subtitle}</span>
+              <h2 className="text-xs font-semibold text-text-main">{keyPoints.title}</h2>
             </div>
             <ul className="mb-3 grid grid-cols-1 gap-1.5 text-xs text-text-secondary sm:grid-cols-2">
-              {summaryCard?.items?.map((item: string, idx: number) => (
+              {keyPoints.items.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-2">
                   <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500" />
-                  {item}
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
-            <p className="text-xs text-text-muted">{summaryCard?.note}</p>
+            {keyPoints.note && <p className="text-xs text-text-muted">{keyPoints.note}</p>}
           </div>
         </div>
       </section>
 
       {/* Horizontal TOC strip */}
-      <section className="border-b border-surface-200 bg-white">
+      <nav aria-label={t('toc.title')} className="border-b border-surface-200 bg-white">
         <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 py-2">
             <FileText className="h-3.5 w-3.5 shrink-0 text-brand-600" />
-            <span className="shrink-0 text-xs font-semibold text-text-main">{toc?.title}</span>
+            <span className="shrink-0 text-xs font-semibold text-text-main">{t('toc.title')}</span>
             <span className="mx-1 h-4 w-px shrink-0 bg-surface-200" />
             <div className="flex min-w-0 gap-0 overflow-x-auto scrollbar-hide">
-              {toc?.items?.map((item, idx: number) => (
+              {sections.map((section) => (
                 <a
-                  key={item.anchor}
-                  href={`#${item.anchor}`}
+                  key={section.id}
+                  href={`#${section.id}`}
                   className="whitespace-nowrap px-3 py-2 text-xs text-text-muted transition hover:text-brand-600"
                 >
-                  {idx + 1}. {item.label}
+                  {section.number} {section.title}
                 </a>
               ))}
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Reminder strip */}
-      <section className="border-b border-surface-200 bg-gold-50 py-3">
-        <div className="mx-auto flex max-w-page items-center gap-3 px-4 sm:px-6 lg:px-8">
-          <AlertTriangle className="h-4 w-4 shrink-0 text-gold-600" />
-          <div>
-            <span className="text-[11px] font-semibold uppercase tracking-widest text-gold-700">{toc?.reminder?.label}</span>
-            <p className="text-xs text-text-secondary">{toc?.reminder?.text}</p>
-          </div>
-        </div>
-      </section>
+      </nav>
 
       {/* Document body — single column */}
       <section className="bg-surface-50 py-10">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="space-y-6">
-            {sections?.map((section) => {
-              const isWarning = section.accent === 'warning'
-              return (
-                <article
-                  key={section.id}
-                  id={section.id}
-                  className={`rounded-xl border p-5 sm:p-6 ${
-                    isWarning
-                      ? 'border-amber-200 bg-amber-50'
-                      : 'border-surface-200 bg-white shadow-card'
-                  }`}
-                >
-                  <div className="mb-4 flex items-center gap-2">
-                    {isWarning && <AlertTriangle className="h-4 w-4 text-amber-600" />}
-                    <span className={`text-xs font-semibold ${isWarning ? 'text-amber-600' : 'text-text-muted'}`}>
-                      {section.number}.
-                    </span>
-                    <h2 className={`text-sm font-semibold ${isWarning ? 'text-amber-900' : 'text-text-main'}`}>
-                      {section.title}
-                    </h2>
-                  </div>
-                  <div className="space-y-3">
-                    {section.content?.map((block, idx) => renderContentBlock(block, idx))}
-                  </div>
-                </article>
-              )
-            })}
+            {sections.map((section) => (
+              <article
+                key={section.id}
+                id={section.id}
+                className="scroll-mt-24 rounded-xl border border-surface-200 bg-white p-5 shadow-card sm:p-6"
+              >
+                <h2 className="mb-4 text-sm font-semibold text-text-main">
+                  <span className="mr-2 text-xs text-text-muted">{section.number}</span>
+                  {section.title}
+                </h2>
+                <div className="space-y-3">{section.content.map(renderContentBlock)}</div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -250,7 +212,12 @@ export function TermsPage() {
       <section className="border-t border-surface-200 bg-white py-8">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <h3 className="mb-4 text-xs font-semibold uppercase tracking-widest text-text-muted">{tUi('relatedPolicies')}</h3>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <Link href="/refund-policy" className="group flex items-center gap-2 rounded-lg border border-surface-200 bg-surface-50 px-4 py-3 transition hover:border-brand-200">
+              <CreditCard className="h-4 w-4 text-brand-600" />
+              <span className="flex-1 text-xs font-medium text-text-main">{tRefund('breadcrumb.refund')}</span>
+              <ChevronRight className="h-3.5 w-3.5 text-text-muted transition group-hover:text-brand-600" />
+            </Link>
             <Link href="/privacy" className="group flex items-center gap-2 rounded-lg border border-surface-200 bg-surface-50 px-4 py-3 transition hover:border-brand-200">
               <Shield className="h-4 w-4 text-brand-600" />
               <span className="flex-1 text-xs font-medium text-text-main">{tUi('privacy')}</span>
@@ -266,26 +233,6 @@ export function TermsPage() {
               <span className="flex-1 text-xs font-medium text-text-main">{tUi('riskDisclosure')}</span>
               <ChevronRight className="h-3.5 w-3.5 text-text-muted transition group-hover:text-brand-600" />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="border-t border-surface-200 bg-surface-50 py-10">
-        <div className="mx-auto max-w-page px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-start justify-between gap-4 rounded-xl border border-surface-200 bg-white p-6 shadow-card md:flex-row md:items-center">
-            <div>
-              <h2 className="text-lg font-semibold text-text-main">{t('cta.title')}</h2>
-              <p className="mt-1 text-sm text-text-secondary">{t('cta.subtitle')}</p>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <Link href="/" className="btn-primary rounded-lg px-5 py-2.5 text-sm font-semibold">
-                {t('cta.backToHome')}
-              </Link>
-              <Link href="/courses" className="btn-secondary rounded-lg px-5 py-2.5 text-sm">
-                {t('cta.viewCourses')}
-              </Link>
-            </div>
           </div>
         </div>
       </section>

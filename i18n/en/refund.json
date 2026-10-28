@@ -1,295 +1,391 @@
 {
   "breadcrumb": {
-    "refund": "Refund & Return Policy"
+    "refund": "Refund and Return Policy"
   },
   "hero": {
-    "title": "Refund & Return Policy for Usage Unit Packages, courses and AI features.",
-    "subtitle": "Everything here explains how we review refund requests for Cur Nova Usage Unit top-ups, ready-made courses, custom PDFs and AI Strategy Builder outputs. It is based on UK consumer law and tailored to digital-only delivery.",
-    "meta": [
-      { "label": "Effective date", "value": "6 December 2025" },
-      { "label": "Operator", "value": "CUR NOVA LTD (17240836)" },
-      { "label": "Jurisdiction", "value": "England & Wales" }
-    ],
-    "badges": {
-      "payments": "Payments: Visa · Mastercard · GBP/EUR/USD",
-      "support": "Support: info@cur-nova.com",
-      "digitalOnly": "Digital delivery · No physical returns"
+    "title": "Refund and Return Policy",
+    "effectiveDate": {
+      "label": "Effective date",
+      "value": "28 October 2026"
     },
-    "summaryCard": {
-      "title": "Quick points (customer-facing)",
-      "subtitle": "Use this list for a fast recap; the numbered sections carry the full legal detail.",
-      "items": [
-        "Refunds are assessed under this Policy plus UK consumer law.",
-        "Processing time: 5–10 business days after approval (banks may take longer).",
-        "Refunds never exceed what you originally paid for that order.",
-        "Consumed Usage Units are non-refundable; Wallet credit is non-transferable.",
-        "Bonus/promo credits can be removed but are never refunded in cash.",
-        "Cur Nova delivers digital content only – nothing needs to be shipped back.",
-        "Email info@cur-nova.com with your account email, order ID and context.",
-        "Currencies: GBP, EUR, USD. Methods: Visa, Mastercard.",
-        "Reference rate: 100 Usage Units = £1.00 / €1.17 / $1.29."
-      ],
-      "note": "Always talk to our support team before you contact your bank; it results in faster, traceable resolutions."
-    }
+    "intro": [
+      "This Policy explains how to cancel an Order, request a refund or report a problem with Usage Units, Ready-Made Courses, Trader Custom Courses, AI Custom Courses and AI Strategy Outputs purchased through Cur Nova.",
+      "The seller is CUR NOVA LTD, company number 17240836, registered at Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom. Contact info@cur-nova.com for assistance.",
+      "Our products are supplied digitally. There are no physical goods to post back. The absence of a physical return does not prevent a valid cancellation, refund or quality claim."
+    ]
   },
   "toc": {
-    "title": "On this page",
-    "items": [
-      { "label": "Summary", "anchor": "summary" },
-      { "label": "Scope & legal notice", "anchor": "scope" },
-      { "label": "Key definitions", "anchor": "definitions" },
-      { "label": "General refund principles", "anchor": "principles" },
-      { "label": "Wallet top-ups (Usage Units)", "anchor": "wallet" },
-      { "label": "Cancellations of paid features", "anchor": "cancellations" },
-      { "label": "Quality issues & re-runs", "anchor": "quality" },
-      { "label": "How to request a refund", "anchor": "request" },
-      { "label": "Chargebacks & disputes", "anchor": "chargebacks" },
-      { "label": "Taxes & invoicing", "anchor": "taxes" },
-      { "label": "Record-keeping & data", "anchor": "records" },
-      { "label": "Illustrative examples", "anchor": "examples" },
-      { "label": "Changes to this Policy", "anchor": "changes" },
-      { "label": "Contact details", "anchor": "contact" }
-    ],
-    "reminder": {
-      "label": "Reminder",
-      "text": "This Policy forms part of the Cur Nova Terms & Conditions. Digital performance can start immediately, which may limit statutory cooling-off rights."
-    }
+    "title": "On this page"
   },
   "sections": [
     {
       "id": "summary",
       "number": "1",
-      "title": "Summary (customer-facing)",
+      "title": "Summary",
       "content": [
         {
           "type": "list",
           "items": [
-            "Refunds are reviewed under this Policy together with applicable UK consumer regulations.",
-            "Typical processing time: 5–10 business days after approval; banks or payment providers may take longer to post funds.",
-            "Refunds do not exceed the original amount paid for the relevant Usage Unit Package or feature.",
-            "Usage Units that were already consumed remain non-refundable.",
-            "Wallet credit is bound to the account, non-transferable and not exchangeable for cash (see section 5).",
-            "Promotional or bonus credits can expire and are never refundable.",
-            "All Cur Nova products are digital; there are no physical items to return.",
-            "Submit requests via info@cur-nova.com, including your account email, order reference and supporting details.",
-            "Accepted currencies: GBP (£), EUR (€), USD ($). Payment methods: Visa, Mastercard.",
-            "Reference rate for display purposes: 100 Usage Units = £1.00 / €1.17 / $1.29."
+            "This Policy distinguishes rights you have under applicable law from additional refunds we may offer voluntarily.",
+            "Buying Usage Units does not itself waive the right to cancel a later course purchase. Consent for immediate digital supply must meet the applicable legal requirements.",
+            "Unused paid Usage Units are refundable where required by law. Outside those cases, refunds are considered under the voluntary terms below.",
+            "Using Units or receiving a file does not remove remedies for defective or non-conforming Content.",
+            "Please report a problem promptly, preferably within seven days of discovery. This recommendation does not shorten your statutory rights or legal claim periods.",
+            "Legitimate chargebacks do not result in penalties or automatic account suspension.",
+            "Mandatory refunds follow the legally required amount, timing and payment method. We do not replace a required monetary refund with account credit without your express agreement where the law requires money to be returned."
           ]
         }
       ]
     },
     {
-      "id": "scope",
+      "id": "scope-and-legal-rights",
       "number": "2",
-      "title": "Scope and legal notice",
+      "title": "Scope and legal rights",
       "content": [
         {
           "type": "paragraph",
-          "text": "This Policy governs cancellations and refunds for purchases made via cur-nova.com, including Wallet top-ups (Usage Unit purchases) and paid educational features (ready-made courses, custom PDFs, AI Strategy Builder outputs and calculators) operated by CUR NOVA LTD (“Cur Nova”, “we”)."
+          "text": "2.1. This Policy forms part of the Terms and Conditions and applies to relevant Orders made through cur-nova.com, whether paid directly or through Usage Units. Definitions in the Terms apply unless this Policy explains them differently."
         },
         {
           "type": "paragraph",
-          "text": "The Service delivers digital-only content and tooling. Nothing needs to be shipped back or physically returned under this Policy."
+          "text": "2.2. Nothing in this Policy excludes or restricts rights or remedies that cannot lawfully be excluded. These may arise under the UK Consumer Rights Act 2015, the Consumer Contracts Regulations 2013 and mandatory consumer law applicable in your country."
         },
         {
           "type": "paragraph",
-          "text": "Nothing here removes statutory protections provided by UK law, including the Consumer Rights Act 2015 and, where applicable, the Consumer Contracts Regulations 2013."
+          "text": "2.3. Statutory rights depend on the transaction and applicable law. They may include a cooling-off right, remedies for faulty digital content or services and rights where an Order is not delivered as agreed. They do not depend on our willingness to make a discretionary exception."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.4. A voluntary refund is an additional commercial concession outside an existing legal entitlement. A restriction applicable to voluntary refunds must not be used to refuse a refund or other remedy required by law."
+        },
+        {
+          "type": "paragraph",
+          "text": "2.5. Rights reserved for Consumers do not automatically apply to business purchases. Business customers remain entitled to the agreed performance and any remedies available under their agreement and applicable law."
         }
       ]
     },
     {
       "id": "definitions",
       "number": "3",
-      "title": "Key definitions",
+      "title": "Definitions",
       "content": [
         {
-          "type": "definition",
-          "items": [
-            { "term": "Wallet / Wallet Credit", "description": "Pre-paid balance (in Usage Units) held inside your Cur Nova account. It is not cash, e-money or a financial instrument." },
-            { "term": "Usage Units", "description": "Units consumed to unlock courses, generate custom PDFs, run AI strategies or trigger other paid features." },
-            { "term": "Outputs / Content", "description": "Digital PDFs, strategy files, diagrams and supporting assets generated by the Service." },
-            { "term": "Order / Transaction", "description": "A confirmed Wallet top-up, course purchase or paid feature activation." },
-            { "term": "Abuse / Fraud", "description": "Any behaviour that breaches the Cur Nova Terms (for example, chargeback abuse, automated Usage Unit farming, unauthorised payments or attempts to bypass limits)." }
-          ]
+          "type": "paragraph",
+          "text": "3.1. “Usage Units” are prepaid credits redeemable for eligible Cur Nova Content or paid features. “Wallet” or “Usage Balance” is the account record of those Units."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.2. “Top-up” means a purchase of paid Usage Units. “Redemption” means using Units for a specific Order. Purchasing Units and redeeming them for Content are separate events."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.3. “Paid Units” are Units attributable to money you paid. “Bonus Units” are additional promotional credits supplied without a separate payment. An entitlement to refund paid value is not removed by the inclusion of Bonus Units in an offer."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.4. “Content” includes Ready-Made Courses, Trader Custom Courses, AI Custom Courses, AI Strategy Outputs and associated educational digital materials."
+        },
+        {
+          "type": "paragraph",
+          "text": "3.5. A “statutory cancellation” is the exercise of a legal right to withdraw from a qualifying contract. A “quality claim” concerns missing, defective or non-conforming Content or a service not performed as required. A request for a “voluntary refund” asks us to refund outside those legal entitlements."
         }
       ]
     },
     {
-      "id": "principles",
+      "id": "general-principles",
       "number": "4",
-      "title": "General refund principles",
+      "title": "General principles",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "4.1. Refund cap – refunds never exceed what you paid for that order and may exclude non-recoverable processor fees where the law allows.",
-            "4.2. Digital performance – when you ask us to begin immediately (by consuming Usage Units straight after a top-up), you acknowledge that any statutory cooling-off right may be lost for that content once delivery starts.",
-            "4.3. Consumed Usage Units – Usage Units spent on completed actions (downloads, AI runs, custom course generations) are non-returnable.",
-            "4.4. Accuracy of inputs – Outputs rely on your intake data. If your inputs are wrong or incomplete, recreating content consumes new Usage Units.",
-            "4.5. Refund currency – refunds are issued, where possible, in the same currency and to the same payment method used originally.",
-            "4.6. FX display – multi-currency prices are indicative; your card issuer controls the final FX rate/fees.",
-            "4.7. Promotions – promotional or bonus credits are non-refundable and may expire per their own terms.",
-            "4.8. Abuse or fraud – we can decline refunds, suspend accounts and claw back Usage Units where we suspect abuse, fraud or policy breaches."
-          ]
+          "type": "paragraph",
+          "text": "4.1. A refund repays the amount due for the affected purchase or part of it. We do not refund the same payment twice. This does not cap a separate entitlement to damages or another remedy under applicable law. We do not deduct payment-processing fees, administration charges or taxes from a mandatory refund where doing so would reduce the amount the law requires us to return."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.2. Buying or receiving Usage Units does not itself amount to a request for immediate supply of a future course or acknowledgement that cancellation rights for that future Order will be lost. A specific redemption or purchase must be assessed separately. Where early supply requires express consent and acknowledgement, we obtain these in connection with the relevant supply and provide the confirmation required by law. A general acceptance of the Terms or a Unit deduction is not a substitute for those requirements."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.3. Units used for correctly completed Orders are normally not refunded merely because you change your mind after any applicable cancellation right has lawfully ended. However, consumption of Units is not an absolute bar to a refund, correction, replacement, repeat performance or price reduction required by law. A process starting or a deduction occurring does not by itself establish successful delivery."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.4. If we correctly fulfil the agreed instructions but you later change them or request additional scope, a new charge may apply if disclosed before the new work begins. We do not charge for a remedy we owe because our original performance was defective or did not match the agreement."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.5. Mandatory refunds are made by the original means of payment unless you expressly agree to another lawful method or applicable law permits a different arrangement. We use the original transaction currency when issuing the refund. Separate conversion effects or charges imposed by your bank are governed by its terms and do not reduce what we are required to reimburse."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.6. Where a purchase made with Paid Units must be refunded in money, we calculate the refundable value by reference to the actual amount paid for the relevant Units and the affected Order. A later indicative exchange rate or current package price does not replace the original purchase value. Account credit is an alternative only where legally permitted and agreed as required."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.7. Bonus Units supplied without a separate payment do not ordinarily have an independent cash refund value. Any promotion conditions must have been disclosed when offered and cannot reduce the statutory refund of the money actually paid."
+        },
+        {
+          "type": "paragraph",
+          "text": "4.8. We may investigate evidence of fraud or unauthorised use and take proportionate action under the Terms. A genuine complaint or payment dispute is not, by itself, fraud. Any investigation, evidence request or restriction must not be used to defeat a valid legal entitlement or extend a statutory refund deadline."
         }
       ]
     },
     {
-      "id": "wallet",
+      "id": "top-ups-and-unused-balances",
       "number": "5",
-      "title": "Wallet top-ups (Usage Units)",
+      "title": "Top ups and unused balances",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "5.1. Nature – Wallet top-ups are advance payments for digital services. The Wallet is not a bank, payment or e-money account and does not earn returns.",
-            "5.2. Unused balances – unused Usage Units are normally non-withdrawable. Exceptional refunds (duplicate payments, clear technical faults) are discretionary and may exclude non-recoverable fees.",
-            "5.3. Partially used top-ups – only the unused portion of a specific top-up may be considered for refund, capped at the original fiat amount of that top-up.",
-            "5.4. No transfer – Wallet credit cannot be sold, exchanged or transferred to other users."
-          ]
+          "type": "paragraph",
+          "text": "5.1. Top-ups prepay for eligible Cur Nova products and features. The Usage Balance is not offered as a bank deposit, investment or general payment account and does not earn interest. It cannot ordinarily be transferred or withdrawn as cash, subject to the refund rights in this Policy."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.2. We refund unused Paid Units whenever applicable law requires us to do so. Depending on the circumstances, this may include a valid cancellation of a top-up contract, an undelivered purchase or a failure to provide paid entitlements. Outside a legal entitlement, you may request a voluntary refund of an unused paid balance; we consider the circumstances rather than promise a general cash-out facility. Duplicate charges or technical payment errors are corrected, and any reimbursement required by law is not treated as discretionary."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.3. If a top-up has been partly used, we identify the amount still attributable to unused Paid Units from the transaction records. A refund of that unused balance is based on its proportion of the actual amount paid. This calculation does not prevent a separate refund of the used portion where the relevant Content or service gives rise to a legal remedy. The total repayment of purchase money will not duplicate amounts already returned."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.4. Units cannot be sold or transferred to another customer. This restriction does not prohibit a valid refund to the purchaser."
+        },
+        {
+          "type": "paragraph",
+          "text": "5.5. Closing an Account does not automatically create a right to a voluntary refund, but it does not waive an existing statutory entitlement or prevent you from requesting a refund afterwards."
         }
       ]
     },
     {
-      "id": "cancellations",
+      "id": "cancellation-of-content-orders",
       "number": "6",
-      "title": "Cancellations of paid features",
+      "title": "Cancellation of Content orders",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "6.1. Before performance – if no Usage Units have been consumed and no PDF/AI process has started, you may request cancellation and a refund of the relevant fee.",
-            "6.2. After performance begins – once a generation has started (Usage Units consumed, files rendered), cancellations and refunds are unavailable except where non-excludable rights apply."
-          ]
+          "type": "paragraph",
+          "text": "6.1. Before performance. Contact us as soon as you wish to cancel. If the specific Content has not been supplied and the relevant preparation or generation has not started, you may request cancellation and repayment or reversal of the charge for that Order. We will also assess any statutory cancellation right independently of the Unit deduction status. No particular wording or reason is required to exercise a legal cooling-off right."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.2. Digital content and immediate supply. For qualifying UK distance contracts for digital content supplied without a physical medium, the normal cancellation period is 14 days after the contract is made, subject to applicable exceptions and extensions. The right is lost on the start of digital supply during that period only where the required express consent and acknowledgement of the loss of that right have been obtained. We must also provide the legally required confirmation in a form you can retain. Where the necessary legal conditions have not been satisfied, starting generation, rendering a file, deducting Units or granting access does not by itself justify refusing a valid statutory cancellation or charging for supply where the law says no charge is due. Even if a cooling-off right has lawfully ended, rights concerning defective or non-conforming Content remain."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.3. Service elements. If an Order includes a service of preparing a course, any request to start that service during a statutory cancellation period is treated under the applicable rules for services. Under the relevant UK rules, starting work alone does not end the cancellation right: loss of that right normally requires full performance after the required request and acknowledgement. A lawful proportionate charge for a service supplied before cancellation may apply only when the legal information and request requirements have been met. We do not automatically retain the whole fee merely because preparation has begun."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.4. Personalisation. Calling a product “custom” or preparing it from your inputs does not, by itself, remove statutory cancellation rights for digital content or services. Any exception must actually apply to the particular agreement."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.5. Delivery periods. Ready-Made Courses are available immediately after successful payment or confirmed redemption, subject to legally required early-supply consent. Trader Custom Courses normally take 48–96 hours after payment or redemption and receipt of the information needed for the Order. AI Custom Courses and AI Strategy Outputs normally take a few minutes after confirmation of the request and the required inputs and payment or redemption."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.6. Unavailability and delay. If we know before an Order that its normal delivery period cannot be met, we will disclose this and agree a different period before payment or redemption for that Order. If an unexpected delay occurs, we will notify you without undue delay and offer a revised date. You may accept it or cancel the affected undelivered Order and receive the refund due. Your silence does not mean agreement to an extension. Any stronger statutory remedy remains available."
+        },
+        {
+          "type": "paragraph",
+          "text": "6.7. Scope of cancellation. Cancellation of one Order does not automatically cancel unrelated purchases. For a partly supplied Order, the amount due depends on the applicable legal rules and what was properly supplied; we will not treat partial performance as an automatic reason to retain the entire price."
         }
       ]
     },
     {
-      "id": "quality",
+      "id": "quality-issues-and-remedies",
       "number": "7",
-      "title": "Quality issues and re-runs",
+      "title": "Quality issues and remedies",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "7.1. Good-faith review – report materially defective files (corrupted PDF, empty export, obvious mismatch) within 7 days and include screenshots, timestamps or error IDs.",
-            "7.2. Remedy – if we confirm an Cur Nova-side fault, we will re-run the process at no Usage Unit cost or credit equivalent Usage Units if re-running is not feasible.",
-            "7.3. External acceptance – broker, marketplace or regulator rejection does not automatically mean the content is defective and does not create refund rights."
-          ]
+          "type": "paragraph",
+          "text": "7.1. Please tell us about a problem promptly, preferably within seven days after you discover it. This is a recommendation to help us resolve issues quickly, not a legal claim deadline or a condition that removes statutory rights. A later claim is considered in accordance with applicable law. Where reasonably available, provide the Order reference, a description of the problem and a relevant screenshot or error message. We will not require unnecessary evidence or treat the absence of a screenshot as an automatic reason to reject a valid claim."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.2. If paid digital content fails to meet applicable contractual or statutory standards, we provide the remedy required by law. Under the relevant UK digital-content rules, this generally means repair or replacement at no additional cost, within a reasonable time and without significant inconvenience. Where those remedies are unavailable or not provided as required, you may be entitled to an appropriate price reduction, which may be the full price. Other applicable remedies, including those for services or failure to have the right to supply Content, are preserved. A re-run or credit of Units is not the exclusive remedy where you are entitled to another form of redress."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.3. A trading loss, disagreement with an educational approach or rejection by a broker or other external party does not, on its own, prove that Content is defective. However, an educational or AI disclaimer does not excuse a corrupted file, missing delivery, material mismatch with the description or another failure to meet the agreed or legally required standard."
+        },
+        {
+          "type": "paragraph",
+          "text": "7.4. We distinguish a technical failure or deficient performance from a new preference or a change in instructions. If the original Order was correctly fulfilled, a different requested output may be a new paid Order. If a correction is owed under the original agreement or law, it is provided without an additional charge."
         }
       ]
     },
     {
-      "id": "request",
+      "id": "how-to-cancel-or-request-a-refund",
       "number": "8",
-      "title": "How to request a refund",
+      "title": "How to cancel or request a refund",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "Email info@cur-nova.com with your account email, order / transaction reference, whether you are querying a Wallet top-up or a specific feature, and any relevant evidence (screens, bank confirmations, links).",
-            "We acknowledge within 5 business days, may request more information, and aim to process approved refunds within 5–10 business days (posting times depend on your bank)."
-          ]
+          "type": "paragraph",
+          "text": "8.1. Send a clear cancellation, refund request or complaint to info@cur-nova.com. You may also write to CUR NOVA LTD, Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom. You do not need an active Account to exercise an existing right."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.2. To help us locate the transaction, provide your account email or other identifying order details, the Order or transaction reference if available, and whether the request concerns a top-up or a specific product. For a quality complaint, explain what went wrong. Do not email full card numbers, CVV codes or unnecessary identity documents."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.3. A legal cooling-off cancellation does not require a reason, screenshots or our prior approval. You may use any clear statement of your decision. The optional wording below is sufficient if completed with the relevant details:"
+        },
+        {
+          "type": "quote",
+          "text": "“I give notice that I cancel my contract for [product or top-up], ordered on [date], under order reference [reference, if available]. My name is [name] and my account email or contact address is [details].”"
+        },
+        {
+          "type": "paragraph",
+          "text": "8.4. We aim to acknowledge requests within five business days and may ask for information reasonably necessary to identify the purchase or assess a quality issue. This service target does not postpone an effective cancellation or extend any legal refund deadline."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.5. For a valid UK statutory cancellation of digital content or services, reimbursement is made without undue delay and no later than 14 days after we are informed of the decision to cancel, subject to any lawful adjustment for services already supplied. For a price reduction under the UK digital-content rules, the refund is made without undue delay and within 14 days after we agree that you are entitled to it. If a different mandatory deadline applies, we follow that deadline."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.6. For a voluntary refund outside a statutory entitlement, we aim to issue an approved refund within 5–10 business days. Your payment provider may take additional time to display the credit. This voluntary processing target does not replace a shorter deadline imposed by law."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.7. We explain the decision and any calculation of a partial refund or paid balance. If you disagree, you may ask us to review the matter and use any external complaint, court or payment-dispute route available to you."
+        },
+        {
+          "type": "paragraph",
+          "text": "8.8. If a refund cancels a purchase or fully reimburses its price, access to the affected Content or corresponding Units may be removed to reflect that outcome, to the extent lawful and appropriate. We do not remove unrelated paid entitlements as a penalty. If the remedy is a price reduction while the contract continues, access is not automatically cancelled merely because a partial refund was made."
         }
       ]
     },
     {
-      "id": "chargebacks",
+      "id": "chargebacks-and-disputes",
       "number": "9",
-      "title": "Chargebacks, disputes and investigations",
+      "title": "Chargebacks and disputes",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "9.1. Initiating a chargeback is treated as a formal dispute; we will submit logs (orders, Usage Unit consumption, IP/device data) and may suspend your account pending resolution.",
-            "9.2. If funds are reversed from us, we may remove equivalent Usage Units/Wallet credit and recover any amounts lawfully owed.",
-            "9.3. Contacting Cur Nova support first is the fastest way to resolve billing concerns."
-          ]
+          "type": "paragraph",
+          "text": "9.1. You may exercise a legitimate right to dispute a payment through your bank or payment provider. Initiating such a dispute does not, by itself, trigger a penalty, automatic account suspension or forfeiture of unrelated purchases. We may respond with relevant transaction and delivery evidence, processed in accordance with the Privacy Policy. Contacting our support team first is encouraged but is not a compulsory step before contacting your bank."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.2. Where a payment is refunded or reversed, we may make a proportionate adjustment to the Units or access attributable to that payment so that the account accurately reflects the outcome and there is no duplicate reimbursement. Such an adjustment is not a punishment. Any recovery of amounts or costs requires a valid legal basis and must be permitted by both applicable law and the relevant payment-provider and card-scheme rules. A dispute, including one that is unsuccessful, does not automatically establish fraud or a debt for investigation fees. Measures based on separate evidence of fraud or security risk remain subject to the Terms and mandatory rights."
+        },
+        {
+          "type": "paragraph",
+          "text": "9.3. Where a bank dispute and a direct refund request concern the same transaction, we may coordinate the processes with the payment provider to prevent duplicate repayment. We will not use that coordination to refuse a refund that is legally due or require you to abandon rights as a condition of receiving it."
         }
       ]
     },
     {
-      "id": "taxes",
+      "id": "taxes-and-invoicing",
       "number": "10",
       "title": "Taxes and invoicing",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "10.1. We issue electronic receipts/invoices for Usage Unit purchases and paid features, showing any VAT or indirect taxes required based on your billing data.",
-            "10.2. Where tax has already been remitted and cannot be reclaimed, refunded amounts may be net of those taxes unless the law requires otherwise."
-          ]
+          "type": "paragraph",
+          "text": "10.1. Purchase records and invoices reflect taxes applicable to the relevant transaction. Where a refund requires a correction, we make the appropriate adjustment to the invoice or tax record."
+        },
+        {
+          "type": "paragraph",
+          "text": "10.2. We do not reduce a mandatory refund merely because tax has already been remitted or a payment provider retains a fee. Any lawful deduction must relate to the specific legal basis for that deduction, not a general administrative practice."
         }
       ]
     },
     {
-      "id": "records",
+      "id": "records-and-privacy",
       "number": "11",
-      "title": "Record-keeping and data protection",
+      "title": "Records and privacy",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "11.1. We retain records relevant to refunds, chargebacks and disputes (order IDs, top-ups, Usage Unit consumption, logs, timestamps, device/IP data) for at least 24 months and up to 6 years for enterprise or disputed transactions, in line with tax and legal duties.",
-            "11.2. Personal data is processed as a controller under UK GDPR and the Data Protection Act 2018, as explained in our Privacy Policy."
-          ]
+          "type": "paragraph",
+          "text": "11.1. We use relevant transaction records, Unit movements, delivery records and necessary communications to assess requests and respond to disputes. We retain these records only for the applicable purposes and periods explained in the Privacy Policy."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.2. General prompt and temporary-log deletion periods do not require us to erase a limited record that must lawfully be preserved for an active dispute, accounting obligation or legal claim. Any such retention is restricted to what is necessary."
+        },
+        {
+          "type": "paragraph",
+          "text": "11.3. Information disclosed to a payment provider or bank is limited to what is relevant and lawful. See the Privacy Policy for further details and your data protection rights."
         }
       ]
     },
     {
-      "id": "examples",
+      "id": "illustrative-examples",
       "number": "12",
-      "title": "Illustrative examples (not legally binding)",
+      "title": "Illustrative examples",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "Immediate performance – you top up and instantly spend Usage Units on AI strategies. Those consumed Usage Units are not refundable.",
-            "Not yet performed – you purchase a custom course slot but cancel before any Usage Units are deducted; we may refund that amount.",
-            "Corrupted output – a PDF export fails due to a system error; we re-run it or credit equivalent Usage Units.",
-            "Unused top-up – you add €200, never spend it and later decide to leave Cur Nova. We may refund the €200 minus non-recoverable fees.",
-            "Marketplace rejection – a broker or marketplace rejects your plan for their own policy reasons. That alone does not entitle you to a refund."
-          ]
+          "type": "paragraph",
+          "text": "12.1. Immediate AI supply with valid consent. You buy Units and later order an AI Strategy Output. If the required consent, acknowledgement and confirmation are properly obtained and digital supply begins, the cooling-off right for that Content may end. A later change of mind alone will not normally require a refund. Defect and other mandatory rights remain."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.2. Top-up without a Content order. You add money to your Usage Balance but do not order a course. The top-up does not itself mean that you consented to the immediate supply of a future course. We assess any cancellation or unused-balance refund right on its own legal basis."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.3. Cancellation before preparation. You order a Trader Custom Course and cancel before preparation begins. We assess the cancellation and amount due under section 6. A prior deduction of Units is not, by itself, a reason to reject the request."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.4. Defective PDF. A purchased file is corrupted or materially fails to match its description. We provide the applicable correction or replacement without a further charge. Where the legal conditions for a price reduction or refund are met, we provide that remedy rather than insisting on Units as the only option."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.5. Unused paid balance. You leave the Service with an unused balance attributable to a €200 top-up. We refund the amount required by law if an entitlement exists. Outside such an entitlement, we consider a voluntary request under section 5. We do not automatically deduct payment fees from a mandatory refund."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.6. Delayed custom course. We cannot meet the agreed delivery period. We tell you, offer a revised date and give you the option to cancel the affected undelivered Order with the refund due. We do not assume that you accepted the new date merely because you did not reply."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.7. External rejection. A broker declines to accept an educational plan. That fact alone does not establish a defect or require a refund. If the material also fails the agreed description or another legal standard, we assess that issue separately."
+        },
+        {
+          "type": "paragraph",
+          "text": "12.8. Legitimate payment dispute. You challenge a payment you reasonably believe was unauthorised or relates to undelivered Content. We may investigate and respond to the bank, but the act of disputing the payment does not automatically suspend your Account or attract a penalty."
+        },
+        {
+          "type": "paragraph",
+          "text": "These examples explain the Policy. They do not override the full provisions or applicable law."
         }
       ]
     },
     {
-      "id": "changes",
+      "id": "changes-to-this-policy",
       "number": "13",
       "title": "Changes to this Policy",
       "content": [
         {
           "type": "paragraph",
-          "text": "We may update this Policy. Material updates will be communicated via email and/or dashboard notices. Changes apply prospectively and do not impact refunds already processed unless the law requires otherwise."
+          "text": "13.1. We may update this Policy to reflect changes in law or the Service. Material changes will be communicated through an appropriate channel and apply from the stated effective date."
+        },
+        {
+          "type": "paragraph",
+          "text": "13.2. Changes do not retrospectively remove an existing cancellation right, refund entitlement or remedy for an earlier Order. New wording does not reduce rights that mandatory law provides."
         }
       ]
     },
     {
-      "id": "contact",
+      "id": "contact-details",
       "number": "14",
       "title": "Contact details",
       "content": [
         {
-          "type": "list",
-          "items": [
-            "Cur Nova — operated by CUR NOVA LTD",
-            "Registered office: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom",
+          "type": "address",
+          "lines": [
+            "CUR NOVA LTD",
             "Company number: 17240836",
-            "Email: info@cur-nova.com",
-            "Tel: {phone}",
-            "Accepted currencies: GBP, EUR, USD",
-            "Payment methods: Visa, Mastercard"
+            "Registered office: Dept 6831, 196 High Road, Wood Green, London, N22 8HH, United Kingdom",
+            "Email for cancellations, refunds and complaints: info@cur-nova.com",
+            "Telephone: {phone}",
+            "Website: https://www.cur-nova.com/"
           ]
         }
       ]
     }
-  ],
-  "cta": {
-    "title": "Need help with a charge or refund?",
-    "subtitle": "Reach out to our support team before opening a dispute. We can trace every top-up, Usage Unit deduction and AI run in minutes.",
-    "contactSupport": "Contact support",
-    "backHome": "Back to home"
-  }
+  ]
 }
-
-
