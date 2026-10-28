@@ -256,7 +256,7 @@ async function prepareHtmlWithImages(
   // This is more reliable than file:// paths which can have issues with Puppeteer
   
   // Convert logo to base64 (used in cover and header)
-  const logoPath = '/avenqor.webp'
+  const logoPath = '/logo.png'
   try {
     const logoFullPath = path.join(publicPath, logoPath.replace(/^\//, ''))
     await logger.info(`Loading logo from: ${logoFullPath}`)
@@ -264,13 +264,13 @@ async function prepareHtmlWithImages(
     await fs.access(logoFullPath)
     const logoBuffer = await fs.readFile(logoFullPath)
     const logoBase64 = logoBuffer.toString('base64')
-    const logoDataUrl = `data:image/webp;base64,${logoBase64}`
+    const logoDataUrl = `data:image/png;base64,${logoBase64}`
     
     // Replace logo in HTML (both in cover and CSS @page)
     // Replace in CSS background-image
-    processedHtml = processedHtml.replace(/background-image:\s*url\(\/avenqor\.webp\)/g, `background-image: url(${logoDataUrl})`)
+    processedHtml = processedHtml.replace(/background-image:\s*url\(\/logo\.png\)/g, `background-image: url(${logoDataUrl})`)
     // Replace in img src
-    processedHtml = processedHtml.replace(/src="\/avenqor\.webp"/g, `src="${logoDataUrl}"`)
+    processedHtml = processedHtml.replace(/src="\/logo\.png"/g, `src="${logoDataUrl}"`)
     
     await logger.info(`Logo converted to base64 (${logoBuffer.length} bytes)`)
   } catch (error) {
