@@ -7,7 +7,7 @@
   },
   "meta": {
     "coursesAvailable": "courses available · more in preparation.",
-    "paymentInfo": "Pay with Usage Units or directly in EUR, GBP or USD."
+    "paymentInfo": "Pay with Usage Units or directly in EUR."
   },
   "filters": {
     "label": "Filters",
@@ -80,7 +80,7 @@
       "immediateDownload": "Immediate PDF download after payment.",
       "buyWithTokens": "Buy with Usage Units",
       "buyWithCard": "Buy with card",
-      "paymentNote": "You can use existing balance or add Usage Units at checkout. Card payments support EUR, GBP and USD.",
+      "paymentNote": "You can use existing balance or add Usage Units at checkout. Card payments are made in EUR.",
       "educationDisclaimer": "Education only. This course does not contain trading signals or promises of performance.",
       "beforeBuying": "Before buying, please note:",
       "riskNote1": "Trading Forex is high risk and may lead to total loss of capital.",

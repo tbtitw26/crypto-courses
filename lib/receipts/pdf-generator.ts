@@ -197,9 +197,9 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
   })
 
   const userName = `${receiptData.user.first_name} ${receiptData.user.last_name || ''}`.trim()
+  // Amounts are stored in GBP (the internal pricing base) and shown in the site currency
   const amountGbp = receiptData.amount
   const amountEur = convertAmount(amountGbp, 'GBP', 'EUR')
-  const amountUsd = convertAmount(amountGbp, 'GBP', 'USD')
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -371,23 +371,19 @@ function generateReceiptHtml(receiptData: ReceiptData): string {
           <tr>
             <th>Description</th>
             <th class="text-right">Usage Units</th>
-            <th class="text-right">Amount (GBP)</th>
             <th class="text-right">Amount (EUR)</th>
-            <th class="text-right">Amount (USD)</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>${receiptData.description}</td>
             <td class="text-right">${receiptData.tokens > 0 ? '+' : ''}${receiptData.tokens.toLocaleString('en-US')}</td>
-            <td class="text-right">${amountGbp > 0 ? formatPrice(amountGbp, 'GBP') : '—'}</td>
             <td class="text-right">${amountGbp > 0 ? formatPrice(amountEur, 'EUR') : '—'}</td>
-            <td class="text-right">${amountGbp > 0 ? formatPrice(amountUsd, 'USD') : '—'}</td>
           </tr>
           ${amountGbp > 0 ? `
           <tr class="total-row">
-            <td colspan="4" class="text-right">Total:</td>
-            <td class="text-right">${formatPrice(amountGbp, 'GBP')}</td>
+            <td colspan="2" class="text-right">Total:</td>
+            <td class="text-right">${formatPrice(amountEur, 'EUR')}</td>
           </tr>
           ` : ''}
         </tbody>

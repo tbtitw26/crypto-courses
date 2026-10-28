@@ -104,7 +104,7 @@
   "kpi": {
     "balance": {
       "title": "Usage Balance",
-      "subtitle": "Worth {price} at the fixed rate of 100 Usage Units per 1.00 GBP.",
+      "subtitle": "Worth {price} at the fixed rate of 100 Usage Units = €1.14.",
       "topUp": "Top up balance",
       "viewPricing": "View pricing"
     },
@@ -302,7 +302,7 @@
       "title": "Payments & methods",
       "description": "Payments are processed by a secure payment provider. Cur Nova does not store full card numbers or CVV codes.",
       "supportedCards": "Supported cards: Visa and Mastercard.",
-      "supportedCurrencies": "Supported currencies: GBP, EUR, USD.",
+      "supportedCurrencies": "Currency: EUR.",
       "chargesDescriptor": "Charges appear under the Cur Nova or partner descriptor.",
       "note": "To use a different card, simply enter it on the secure payment page at your next top-up."
     },

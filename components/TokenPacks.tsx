@@ -11,10 +11,11 @@ import { calculatePriceForTokens, formatPrice, getCurrencySymbol } from '@/lib/c
 import { getUserCurrency } from '@/lib/currency-client'
 import { useTopupCheckout } from '@/hooks/use-topup-checkout'
 import { TopupConfirmDialog } from '@/components/TopupConfirmDialog'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 export function TokenPacks() {
   const t = useTranslations('home.tokenPacks')
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [customAmount, setCustomAmount] = useState('0.01')
   const { startTopup, pendingKey, isPending, confirmDialog } = useTopupCheckout('/')
 

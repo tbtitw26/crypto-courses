@@ -32,6 +32,7 @@ import { calculateAIStrategyPrice } from '@/lib/ai-strategy-pricing'
 import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { EMPTY_CONSENT, OrderConsentFields, OrderFacts, consentPayload, isConsentComplete } from '@/components/OrderConsentFields'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 type TabKey = 'custom' | 'ai'
 
@@ -245,7 +246,7 @@ function CustomCourseForm() {
   const [consentEducation, setConsentEducation] = useState(false)
   const [orderConsent, setOrderConsent] = useState(EMPTY_CONSENT)
   const [isLoading, setIsLoading] = useState(false)
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [showNewGenerationConfirm, setShowNewGenerationConfirm] = useState(false)
 
   const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -845,7 +846,7 @@ function AIStrategyForm() {
   const [markets, setMarkets] = useState<Array<'Forex' | 'Crypto' | 'Binary'>>(['Forex'])
   const [tradingStyle, setTradingStyle] = useState<'scalp' | 'day' | 'swing' | ''>('')
   const [isLoading, setIsLoading] = useState(false)
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [showNewGenerationConfirm, setShowNewGenerationConfirm] = useState(false)
 
   useEffect(() => {

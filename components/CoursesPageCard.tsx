@@ -14,6 +14,7 @@ import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useCart } from '@/contexts/CartContext'
 import { useToast } from '@/hooks/use-toast'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 interface CoursesPageCardProps {
   priority?: boolean
@@ -33,7 +34,7 @@ interface CoursesPageCardProps {
 }
 
 export function CoursesPageCard({ course, priority = false }: CoursesPageCardProps) {
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const { addToCart } = useCart()
   const { showToast } = useToast()
   const t = useTranslations('courses.course')

@@ -80,7 +80,7 @@
       },
       {
         "title": "Valutaer og bruksenheter",
-        "description": "I grensesnittet kan du bruke EUR, GBP og USD. Noen produkter kan låses opp med bruksenheter, andre med direkte betaling. Bruksenheter er en intern saldo, ikke et investeringsprodukt."
+        "description": "Alle priser i grensesnittet vises i EUR. Noen produkter kan låses opp med bruksenheter, andre med direkte betaling. Bruksenheter er en intern saldo, ikke et investeringsprodukt."
       },
       {
         "title": "Språk",

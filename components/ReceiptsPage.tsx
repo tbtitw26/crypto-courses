@@ -21,6 +21,7 @@ import {
 import { DashboardNavigation } from './DashboardNavigation'
 import { formatPrice, convertAmount } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 interface ReceiptTransaction {
   id: string
@@ -42,7 +43,7 @@ export function ReceiptsPage() {
   const tDashboard = useTranslations('dashboard')
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [transactions, setTransactions] = useState<ReceiptTransaction[]>([])
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true)
   const [typeFilter, setTypeFilter] = useState<

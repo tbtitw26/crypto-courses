@@ -130,7 +130,7 @@
         "description": "Et tilpasset kurs koster flere bruksenheter enn én ferdig PDF. Prisen avhenger av valgene dine i skjemaet og vises i kalkulatoren før du bestiller.",
         "points": {
           "tokens": "Betal med bruksenheter fra saldoen din.",
-          "currencies": "Kalkulatoren viser også prisen i valgt valuta (GBP, EUR eller USD)."
+          "currencies": "Kalkulatoren viser også prisen i EUR."
         },
         "badge": "Endelig pris vises før bestilling"
       }

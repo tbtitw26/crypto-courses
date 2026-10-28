@@ -16,14 +16,14 @@
     "subtitle": "Fyll på en bruksbalanse én gang og bruk den på tvers av Cur Nova: strukturerte PDF-kurs, tilpassede kurs og AI-genererte strategier. Eller betal direkte for ett enkelt kurs hvis du foretrekker det.",
     "bullets": {
       "oneBalance": "Én saldo for innhold om Forex, krypto og binære opsjoner.",
-      "payWithTokens": "Betal med bruksenheter eller direkte i EUR, GBP eller USD.",
+      "payWithTokens": "Betal med bruksenheter eller direkte i EUR.",
       "topUpAnytime": "Fyll på når som helst – bruksenheter utløper ikke."
     },
     "exampleRate": {
       "title": "Kurs for bruksenheter",
       "subtitle": "Fast kurs",
       "badge": "Fast kurs",
-      "description": "Bruksenheter prises alltid til 100 bruksenheter per 1,00 GBP. Priser i EUR og USD regnes om fra GBP og vises nøyaktig før du betaler.",
+      "description": "Bruksenheter prises alltid til en fast kurs på 100 bruksenheter = €1,14. Du ser nøyaktig pris før du betaler.",
       "example": "<tokens>{tokens}</tokens> = <price>{price}</price>. Du ser nøyaktig pris, valuta og antall bruksenheter før du betaler.",
       "tokens": "100 bruksenheter",
       "price": "£1.00"
@@ -40,9 +40,9 @@
   },
   "customTopUp": {
     "title": "Valgfri påfylling",
-    "subtitle": "Velg et hvilket som helst beløp i ønsket valuta. Vi regner det om til bruksenheter med 100 bruksenheter per 1,00 GBP.",
+    "subtitle": "Velg et hvilket som helst beløp i EUR. Vi regner det om til bruksenheter med fast kurs på 100 bruksenheter = €1,14.",
     "amountLabel": "Beløp",
-    "currencies": "GBP · EUR · USD",
+    "currencies": "EUR",
     "minAmount": "Minimum 0,01 i en hvilken som helst støttet valuta. Ingen formell maksgrense – større påfyllinger blir ganske enkelt til flere bruksenheter.",
     "previewCta": "Forhåndsvis i bruksenheter",
     "buyCta": "Kjøp valgfri påfylling",
@@ -52,7 +52,7 @@
     "title": "Betal direkte for ett enkelt kurs",
     "subtitle": "Hvis du ikke vil administrere en saldo, kan du betale for enkeltkurs eller tilpassede PDF-er direkte i din valuta.",
     "bullets": {
-      "currencies": "Bruk EUR, GBP eller USD avhengig av regionen din.",
+      "currencies": "Betal i EUR med Visa eller Mastercard.",
       "noTokens": "Bruksenheter er ikke nødvendig – direkte betaling låser ganske enkelt opp det aktuelle produktet.",
       "convertLater": "Senere kan du alltid gå over til en bruksbasert arbeidsflyt hvis du foretrekker det."
     },

@@ -24,6 +24,7 @@ import { calculatePriceForTokens, formatPrice, convertAmount } from '@/lib/curre
 import { getUserCurrency } from '@/lib/currency-client'
 import { OrderStatusBadge } from './OrderStatusBadge'
 import type { OrderStatus } from '@/lib/order-status'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 // Delayed, cancelled and refunded orders keep their order status in the library list
 const RESOLUTION_STATUSES: OrderStatus[] = ['delayed', 'cancelled', 'refunded']
@@ -65,7 +66,7 @@ export function DashboardPage() {
   const valueLabel = useValueLabel()
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true)
   const [recentItems, setRecentItems] = useState<CourseItem[]>([])

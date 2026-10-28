@@ -18,6 +18,7 @@ import { calculatePriceForTokens, formatPrice, getCurrencySymbol } from '@/lib/c
 import { getUserCurrency } from '@/lib/currency-client'
 import { useTopupCheckout } from '@/hooks/use-topup-checkout'
 import { TopupConfirmDialog } from '@/components/TopupConfirmDialog'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 const WORKFLOW_ICONS = [Coins, CreditCard, Wallet]
 
@@ -25,7 +26,7 @@ export function TopUpPage() {
   const t = useTranslations('topUp')
   const WORKFLOW_STEPS = (t.raw('page.steps') as string[]).map((label, i) => ({ label, icon: WORKFLOW_ICONS[i] }))
   const tHome = useTranslations('home.tokenPacks')
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [customAmount, setCustomAmount] = useState('0.01')
   const [selectedPack, setSelectedPack] = useState(1)
   const { startTopup, pendingKey, isPending, confirmDialog } = useTopupCheckout('/top-up')

@@ -11,6 +11,9 @@ export interface CurrencyConfig {
   is_default: boolean
 }
 
+/** The only currency shown and charged on the site. GBP stays the internal pricing base (100 Usage Units = 1.00 GBP). */
+export const SITE_CURRENCY = 'EUR'
+
 export const currencies: Record<string, CurrencyConfig> = {
   GBP: {
     code: 'GBP',
@@ -45,11 +48,11 @@ export const currencies: Record<string, CurrencyConfig> = {
 }
 
 export function getAvailableCurrencies(): Record<string, CurrencyConfig> {
-  return currencies
+  return { [SITE_CURRENCY]: currencies[SITE_CURRENCY] }
 }
 
 export function getCurrencyConfig(code: string): CurrencyConfig {
-  return currencies[code] || currencies.GBP
+  return currencies[code] || currencies[SITE_CURRENCY]
 }
 
 /**

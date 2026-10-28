@@ -26,6 +26,7 @@ import {
 import { DashboardNavigation } from './DashboardNavigation'
 import { calculatePriceForTokens, formatPrice, convertAmount, calculateTokens } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 type TransactionStatus = 'Completed' | 'Pending' | 'Failed' | 'Processing' | 'Delayed' | 'Cancelled' | 'Refunded'
 
@@ -97,7 +98,7 @@ export function BillingPage() {
   const tDashboard = useTranslations('dashboard')
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [typeFilter, setTypeFilter] = useState<
     'All' | 'Token top-ups' | 'Courses' | 'AI strategies' | 'Adjustments'
   >('All')

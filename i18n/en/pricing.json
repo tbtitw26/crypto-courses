@@ -16,14 +16,14 @@
     "subtitle": "Load a Usage Balance once and use it across Cur Nova: structured PDF courses, custom courses and AI-generated strategies. Or pay directly for a single course if you prefer.",
     "bullets": {
       "oneBalance": "One balance for Forex, Crypto and Binary content.",
-      "payWithTokens": "Pay with Usage Units or direct in EUR, GBP or USD.",
+      "payWithTokens": "Pay with Usage Units or directly in EUR.",
       "topUpAnytime": "Top up any time – Usage Units do not expire."
     },
     "exampleRate": {
       "title": "Usage Unit rate",
       "subtitle": "Fixed rate",
       "badge": "Fixed rate",
-      "description": "Usage Units are always priced at 100 Usage Units per 1.00 GBP. Prices in EUR and USD are converted from GBP and shown exactly before you pay.",
+      "description": "Usage Units are always priced at a fixed rate of 100 Usage Units = €1.14. You see the exact price before you pay.",
       "example": "<tokens>{tokens}</tokens> = <price>{price}</price>. You see the exact price, currency and number of Usage Units before you pay.",
       "tokens": "100 Usage Units",
       "price": "£1.00"
@@ -40,9 +40,9 @@
   },
   "customTopUp": {
     "title": "Custom top-up",
-    "subtitle": "Set any amount in your preferred currency. We convert it to Usage Units at 100 Usage Units per 1.00 GBP.",
+    "subtitle": "Set any amount in EUR. We convert it to Usage Units at the fixed rate of 100 Usage Units = €1.14.",
     "amountLabel": "Amount",
-    "currencies": "GBP · EUR · USD",
+    "currencies": "EUR",
     "minAmount": "Minimum 0.01 in any supported currency. No formal maximum – larger top-ups are simply converted into more Usage Units.",
     "previewCta": "Preview in Usage Units",
     "buyCta": "Buy custom top-up",
@@ -52,7 +52,7 @@
     "title": "Pay directly for a single course",
     "subtitle": "If you prefer not to manage a balance, you can pay for individual courses or custom PDFs directly in your currency.",
     "bullets": {
-      "currencies": "Use EUR, GBP or USD depending on your region.",
+      "currencies": "Pay in EUR by Visa or Mastercard.",
       "noTokens": "Usage Units are not required – direct payment simply unlocks that specific product.",
       "convertLater": "In future, you can always convert to a usage-based workflow if you prefer."
     },

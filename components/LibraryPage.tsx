@@ -22,6 +22,7 @@ import { DashboardNavigation } from './DashboardNavigation'
 import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 interface CourseItem {
   title: string
@@ -117,7 +118,7 @@ export function LibraryPage() {
   const tDashboard = useTranslations('dashboard')
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [searchQuery, setSearchQuery] = useState('')
   const [typeFilter, setTypeFilter] = useState<'All' | 'Courses' | 'AI strategies'>('All')
   const [levelFilter, setLevelFilter] = useState<string>('All levels')

@@ -20,6 +20,7 @@ import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useState, useEffect } from 'react'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 export default function CartPage() {
   const { items, removeFromCart, getCartTotal } = useCart()
@@ -27,7 +28,7 @@ export default function CartPage() {
   const tEmpty = useTranslations('cart.page.empty')
   const tCommon = useTranslations('common.buttons')
   const tNav = useTranslations('common.nav')
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
 
   useEffect(() => {
     setCurrency(getUserCurrency())

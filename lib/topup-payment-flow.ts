@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { prisma } from '@/lib/prisma'
 import { config } from '@/lib/config'
 import { calculateTokens, convertAmount } from '@/lib/currency-utils'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 import { generateReceiptPdf } from '@/lib/receipts/pdf-generator'
 import { sendPurchaseConfirmationEmail } from '@/lib/email'
 import { findOrderConsent } from '@/lib/consent'
@@ -76,8 +77,9 @@ function createTopupReference(userId: number): string {
   return `topup-${safeUserId}-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`
 }
 
-function normalizeCurrency(currency: string): string {
-  return String(currency || '').trim().toUpperCase()
+// Top-ups are always charged in the site currency, whatever the client sends
+function normalizeCurrency(_currency: string): string {
+  return SITE_CURRENCY
 }
 
 /**

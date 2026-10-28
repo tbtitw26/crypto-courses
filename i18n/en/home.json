@@ -120,7 +120,7 @@
       },
       {
         "title": "Add balance or pay directly",
-        "text": "Use Usage Units across products or pay in EUR, GBP or USD at checkout."
+        "text": "Use Usage Units across products or pay in EUR at checkout."
       },
       {
         "title": "Get your PDF",
@@ -146,7 +146,7 @@
       },
       {
         "title": "Direct course payments",
-        "text": "Pay for ready-made courses in EUR, GBP or USD at checkout."
+        "text": "Pay for ready-made courses in EUR at checkout."
       }
     ],
     "ctaPricing": "View full pricing & Usage Units"
@@ -262,7 +262,7 @@
         "id": "how-tokens-work",
         "category": "payments",
         "question": "How do Usage Units work?",
-        "answer": "Usage Units are credits used to access Cur Nova products. 1.00 GBP equals 100 Usage Units. You can buy Usage Unit Packages, make custom top-ups, or pay directly for courses. Usage Units do not expire and can be used across all products."
+        "answer": "Usage Units are credits used to access Cur Nova products. €1.14 equals 100 Usage Units. You can buy Usage Unit Packages, make custom top-ups, or pay directly for courses. Usage Units do not expire and can be used across all products."
       },
       {
         "id": "what-in-courses",

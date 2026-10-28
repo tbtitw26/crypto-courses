@@ -120,7 +120,7 @@
       },
       {
         "title": "Fyll på saldo eller betal direkte",
-        "text": "Bruk bruksenheter på tvers av produktene eller betal i EUR, GBP eller USD i kassen."
+        "text": "Bruk bruksenheter på tvers av produktene eller betal i EUR i kassen."
       },
       {
         "title": "Få PDF-en din",
@@ -146,7 +146,7 @@
       },
       {
         "title": "Direkte betaling for kurs",
-        "text": "Betal for ferdige kurs i EUR, GBP eller USD i kassen."
+        "text": "Betal for ferdige kurs i EUR i kassen."
       }
     ],
     "ctaPricing": "Se alle priser og bruksenheter"
@@ -262,7 +262,7 @@
         "id": "how-tokens-work",
         "category": "payments",
         "question": "Hvordan fungerer bruksenheter?",
-        "answer": "Bruksenheter er kreditter som brukes til å få tilgang til Cur Nova-produkter. 1,00 GBP tilsvarer 100 bruksenheter. Du kan kjøpe bruksenhetspakker, gjøre valgfrie påfyllinger eller betale direkte for kurs. Bruksenheter utløper ikke og kan brukes på alle produkter."
+        "answer": "Bruksenheter er kreditter som brukes til å få tilgang til Cur Nova-produkter. €1,14 tilsvarer 100 bruksenheter. Du kan kjøpe bruksenhetspakker, gjøre valgfrie påfyllinger eller betale direkte for kurs. Bruksenheter utløper ikke og kan brukes på alle produkter."
       },
       {
         "id": "what-in-courses",

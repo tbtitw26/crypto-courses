@@ -22,11 +22,12 @@ import { calculatePriceForTokens, calculateTokens, formatPrice, getCurrencySymbo
 import { getUserCurrency } from '@/lib/currency-client'
 import { useTopupCheckout } from '@/hooks/use-topup-checkout'
 import { TopupConfirmDialog } from '@/components/TopupConfirmDialog'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 export function PricingPage() {
   const t = useTranslations('pricing')
   const tHome = useTranslations('home.tokenPacks')
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [customAmount, setCustomAmount] = useState('0.01')
   const [selectedPack, setSelectedPack] = useState(1)
   const { startTopup, pendingKey, isPending, confirmDialog } = useTopupCheckout('/pricing')
@@ -261,11 +262,7 @@ export function PricingPage() {
                 />
               </div>
               <div className="flex items-center gap-1.5 rounded-xl border border-surface-300 bg-surface-50 px-4 py-3.5 text-xs font-semibold text-text-secondary">
-                <span>GBP</span>
-                <span className="text-surface-400">&middot;</span>
-                <span>EUR</span>
-                <span className="text-surface-400">&middot;</span>
-                <span>USD</span>
+                <span>{t('customTopUp.currencies')}</span>
               </div>
             </div>
             {parseFloat(customAmount) > 0 && (

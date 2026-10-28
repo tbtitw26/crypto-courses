@@ -104,7 +104,7 @@
   "kpi": {
     "balance": {
       "title": "Bruksbalanse",
-      "subtitle": "Verdt {price} med fast kurs på 100 bruksenheter per 1,00 GBP.",
+      "subtitle": "Verdt {price} med fast kurs på 100 bruksenheter = €1,14.",
       "topUp": "Fyll på saldo",
       "viewPricing": "Se priser"
     },
@@ -302,7 +302,7 @@
       "title": "Betalinger og betalingsmåter",
       "description": "Betalinger behandles av en sikker betalingsleverandør. Cur Nova lagrer ikke fullstendige kortnumre eller CVV-koder.",
       "supportedCards": "Kort som støttes: Visa og Mastercard.",
-      "supportedCurrencies": "Valutaer som støttes: GBP, EUR, USD.",
+      "supportedCurrencies": "Valuta: EUR.",
       "chargesDescriptor": "Belastninger vises under Cur Nova eller en partners betegnelse.",
       "note": "Vil du bruke et annet kort, oppgir du det på den sikre betalingssiden ved neste påfylling."
     },

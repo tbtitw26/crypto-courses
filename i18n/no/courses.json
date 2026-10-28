@@ -7,7 +7,7 @@
   },
   "meta": {
     "coursesAvailable": "kurs tilgjengelig · flere under utarbeidelse.",
-    "paymentInfo": "Betal med bruksenheter eller direkte i EUR, GBP eller USD."
+    "paymentInfo": "Betal med bruksenheter eller direkte i EUR."
   },
   "filters": {
     "label": "Filtre",
@@ -80,7 +80,7 @@
       "immediateDownload": "Umiddelbar PDF-nedlasting etter betaling.",
       "buyWithTokens": "Kjøp med bruksenheter",
       "buyWithCard": "Kjøp med kort",
-      "paymentNote": "Du kan bruke eksisterende saldo eller legge til bruksenheter i kassen. Kortbetaling støtter EUR, GBP og USD.",
+      "paymentNote": "Du kan bruke eksisterende saldo eller legge til bruksenheter i kassen. Kortbetaling skjer i EUR.",
       "educationDisclaimer": "Kun opplæring. Dette kurset inneholder ikke handelssignaler eller løfter om avkastning.",
       "beforeBuying": "Før du kjøper, merk deg:",
       "riskNote1": "Handel med Forex er høyrisiko og kan føre til fullstendig tap av kapital.",

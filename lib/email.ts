@@ -1,6 +1,7 @@
 // lib/email.ts - Email sending utility using nodemailer
 
 import { config } from './config'
+import { convertAmount, formatPrice } from './currency-utils'
 import { Resend } from 'resend'
 
 const resendApiKey = process.env.RESEND_API_KEY
@@ -677,7 +678,7 @@ function generatePurchaseEmailHtml(data: PurchaseEmailData): string {
                 ${data.amountGbp > 0 ? `
                 <div class="detail-row">
                   <span class="detail-label">${translations.amount}</span>
-                  <span class="detail-value">£${data.amountGbp.toFixed(2)}</span>
+                  <span class="detail-value">${formatPrice(convertAmount(data.amountGbp, 'GBP', 'EUR'), 'EUR')}</span>
                 </div>
                 ` : ''}
                 ${data.newBalance !== undefined ? `
@@ -1049,7 +1050,7 @@ Your purchase has been confirmed. Details:
 ${data.productName ? `- Product: ${data.productName}\n` : ''}${data.orderRef && data.orderRef !== data.invoiceNumber ? `- Order number: ${data.orderRef}\n` : ''}- Invoice Number: ${data.invoiceNumber}
 - Date: ${new Date().toLocaleDateString(data.locale === 'ar' ? 'ar-SA' : 'en-GB')}
 - Usage Units: ${data.tokens > 0 ? '+' : ''}${data.tokens}
-${data.amountGbp > 0 ? `- Amount: £${data.amountGbp.toFixed(2)}\n` : ''}${data.newBalance !== undefined ? `- New Balance: ${data.newBalance} Usage Units\n` : ''}${data.deliveryEstimate ? `- Delivery: ${data.deliveryEstimate}\n` : ''}
+${data.amountGbp > 0 ? `- Amount: ${formatPrice(convertAmount(data.amountGbp, 'GBP', 'EUR'), 'EUR')}\n` : ''}${data.newBalance !== undefined ? `- New Balance: ${data.newBalance} Usage Units\n` : ''}${data.deliveryEstimate ? `- Delivery: ${data.deliveryEstimate}\n` : ''}
 ${describeConsent(data) ? `Your consent: ${describeConsent(data)}\n` : ''}${data.customCourseDeliveryInfo ? '\nIn the coming days, our trader will send you a personalized course via email.\n' : ''}
 
 View your dashboard: ${config.nextauth.url}/dashboard

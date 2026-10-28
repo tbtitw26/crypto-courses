@@ -32,6 +32,7 @@ import {
   consentPayload,
   isConsentComplete,
 } from '@/components/OrderConsentFields'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 const STEP_LABELS = ['Review order', 'Payment', 'Confirm']
 
@@ -43,7 +44,7 @@ function CheckoutContent() {
   const { showToast } = useToast()
   const t = useTranslations('cart.checkout')
   const tCommon = useTranslations('common.buttons')
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [paymentMethod, setPaymentMethod] = useState<'tokens' | 'card'>('tokens')
   const [isProcessingPayment, setIsProcessingPayment] = useState(false)
   const [consent, setConsent] = useState(EMPTY_CONSENT)

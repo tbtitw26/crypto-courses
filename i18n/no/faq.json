@@ -72,12 +72,12 @@
       {
         "category": "Bruksenheter og betaling",
         "question": "Kan jeg betale direkte uten å bruke bruksenheter?",
-        "answer": "Ja. I mange tilfeller kan du betale direkte i din lokale valuta (for eksempel EUR, GBP eller USD) for ett enkelt kurs eller produkt. Da trenger du ikke bruksenheter for det kjøpet."
+        "answer": "Ja. I mange tilfeller kan du betale direkte i EUR for ett enkelt kurs eller produkt. Da trenger du ikke bruksenheter for det kjøpet."
       },
       {
         "category": "Bruksenheter og betaling",
         "question": "Hvilke valutaer og betalingsmåter støtter dere?",
-        "answer": "Valutaene som støttes i grensesnittet er blant annet EUR, GBP og USD. Spesifikke betalingsmåter (for eksempel korttyper eller lokale betalingsleverandører) kan variere etter region og vises i kassen."
+        "answer": "Alle priser vises og belastes i EUR. Spesifikke betalingsmåter (for eksempel korttyper eller lokale betalingsleverandører) kan variere etter region og vises i kassen."
       },
       {
         "category": "Tilgang og konto",
@@ -110,7 +110,7 @@
   "paymentsCard": {
     "title": "Valutaer og regioner",
     "subtitle": "Grensesnitt kontra faktisk behandling.",
-    "description": "Du kan vanligvis velge mellom bruksenheter og direkte betaling i EUR, GBP eller USD. De nøyaktige betalingsmåtene og betalingspartnerne kan variere etter region og vises i kassen.",
+    "description": "Du kan vanligvis velge mellom bruksenheter og direkte betaling i EUR. De nøyaktige betalingsmåtene og betalingspartnerne kan variere etter region og vises i kassen.",
     "regions": "EU, Storbritannia og UAE er hovedregionene."
   },
   "deliveryCard": {

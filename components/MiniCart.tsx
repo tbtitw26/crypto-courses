@@ -11,6 +11,7 @@ import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useState, useEffect } from 'react'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 interface MiniCartProps {
   onMouseEnter?: () => void
@@ -23,7 +24,7 @@ export function MiniCart({ onMouseEnter, onMouseLeave }: MiniCartProps = {}) {
   const tEmpty = useTranslations('cart.empty')
   const tCommon = useTranslations('common.buttons')
   const tUi = useTranslations('common.ui')
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
 
   useEffect(() => {
     setCurrency(getUserCurrency())

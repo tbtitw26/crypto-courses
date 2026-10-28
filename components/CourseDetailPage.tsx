@@ -28,6 +28,7 @@ import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useCart } from '@/contexts/CartContext'
 import { useToast } from '@/hooks/use-toast'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 interface CourseModule {
   order: number
@@ -73,7 +74,7 @@ export function CourseDetailPage({ course }: CourseDetailPageProps) {
   const marketLabel = valueLabel(course.market)
   const tCart = useTranslations('cart.messages')
   const tBreadcrumb = useTranslations('courses.breadcrumb')
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [showStickyBar, setShowStickyBar] = useState(false)
   const heroCTARef = useRef<HTMLDivElement>(null)
   const resolvedImagePath = course.cover_image ?? getCourseImagePath(course.slug)

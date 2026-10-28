@@ -130,7 +130,7 @@
         "description": "A custom course costs more Usage Units than a single ready-made PDF. The price depends on your choices in the form and is shown in the calculator before you order.",
         "points": {
           "tokens": "Pay with Usage Units from your balance.",
-          "currencies": "The calculator also shows the price in your selected currency (GBP, EUR or USD)."
+          "currencies": "The calculator also shows the price in EUR."
         },
         "badge": "Final price shown before ordering"
       }

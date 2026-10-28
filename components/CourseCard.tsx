@@ -11,6 +11,7 @@ import { calculatePriceForTokens, formatPrice } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { getCourseImagePath } from '@/lib/course-image-utils'
 import { useState, useEffect } from 'react'
+import { SITE_CURRENCY } from '@/lib/currency-config'
 
 interface CourseCardProps {
   course: {
@@ -33,7 +34,7 @@ const levelColors: Record<string, string> = {
 }
 
 export function CourseCard({ course }: CourseCardProps) {
-  const [currency, setCurrency] = useState('GBP')
+  const [currency, setCurrency] = useState(SITE_CURRENCY)
   const t = useTranslations('common.buttons')
   const valueLabel = useValueLabel()
 

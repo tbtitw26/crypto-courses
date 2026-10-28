@@ -27,7 +27,6 @@ import {
   Wallet,
   X,
 } from 'lucide-react'
-import { CurrencySelector, CurrencySelectorMobile } from './CurrencySelector'
 import { LanguageSelector, LanguageSelectorMobile } from './LanguageSelector'
 import { MiniCart } from './MiniCart'
 import { useCart } from '@/contexts/CartContext'
@@ -340,7 +339,6 @@ export default function Header() {
           {/* ── Desktop right ── */}
           <div className="ml-auto hidden shrink-0 items-center gap-1 lg:flex">
             <LanguageSelector />
-            <CurrencySelector />
 
             <div className="mx-1 h-5 w-px bg-surface-200" />
 
@@ -677,7 +675,6 @@ export default function Header() {
               <div className="border-b border-surface-100 py-4 space-y-4">
                 <p className="py-1 text-[11px] font-bold uppercase tracking-widest text-text-muted">{tMenu('preferences')}</p>
                 <LanguageSelectorMobile />
-                <CurrencySelectorMobile />
               </div>
 
               {/* Account */}

@@ -72,12 +72,12 @@
       {
         "category": "Usage Units & payments",
         "question": "Can I pay directly without using Usage Units?",
-        "answer": "Yes. In many cases you can pay directly in your local currency (for example EUR, GBP or USD) for a single course or product. In that case, Usage Units are not required for that purchase."
+        "answer": "Yes. In many cases you can pay directly in EUR for a single course or product. In that case, Usage Units are not required for that purchase."
       },
       {
         "category": "Usage Units & payments",
         "question": "Which currencies and payment methods do you support?",
-        "answer": "Supported currencies in the interface include EUR, GBP and USD. Specific payment methods (for example card brands or local processors) can vary by region and will be shown at checkout."
+        "answer": "All prices are shown and charged in EUR. Specific payment methods (for example card brands or local processors) can vary by region and will be shown at checkout."
       },
       {
         "category": "Access & account",
@@ -110,7 +110,7 @@
   "paymentsCard": {
     "title": "Currencies & regions",
     "subtitle": "Interface vs. actual processing.",
-    "description": "You can usually choose between Usage Units and direct payment in EUR, GBP or USD. The exact methods and processing partners can differ by region and will be shown at checkout.",
+    "description": "You can usually choose between Usage Units and direct payment in EUR. The exact methods and processing partners can differ by region and will be shown at checkout.",
     "regions": "EU, UK and UAE are primary focus regions."
   },
   "deliveryCard": {
