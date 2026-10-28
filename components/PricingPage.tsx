@@ -18,7 +18,7 @@ import {
   Sparkles,
   Wallet,
 } from 'lucide-react'
-import { calculatePriceForTokens, formatPrice, getCurrencySymbol } from '@/lib/currency-utils'
+import { calculatePriceForTokens, calculateTokens, formatPrice, getCurrencySymbol } from '@/lib/currency-utils'
 import { getUserCurrency } from '@/lib/currency-client'
 import { useTopupCheckout } from '@/hooks/use-topup-checkout'
 import { TopupConfirmDialog } from '@/components/TopupConfirmDialog'
@@ -116,7 +116,11 @@ export function PricingPage() {
               <span>
                 {t.rich('hero.exampleRate.example', {
                   tokens: () => <span className="font-semibold text-text-main">{t('hero.exampleRate.tokens')}</span>,
-                  price: () => <span className="font-semibold text-text-main">{t('hero.exampleRate.price')}</span>,
+                  price: () => (
+                    <span className="font-semibold text-text-main">
+                      {formatPrice(calculatePriceForTokens(100, currency), currency)} {currency}
+                    </span>
+                  ),
                 })}
               </span>
             </div>
@@ -183,7 +187,9 @@ export function PricingPage() {
                 <p className="text-lg font-semibold text-text-main">{pack.name}</p>
                 <p className="text-xs text-text-muted">{pack.subtitle}</p>
 
-                <p className="mt-4 font-heading text-3xl font-bold text-text-main">{pack.formattedPrice}</p>
+                <p className="mt-4 font-heading text-3xl font-bold text-text-main">
+                  {pack.formattedPrice} <span className="text-base font-semibold text-text-muted">{currency}</span>
+                </p>
                 <p className="text-sm text-text-muted">{pack.tokens.toLocaleString('en-US')} {tHome('tokens')}</p>
 
                 <ul className="mt-4 flex-1 space-y-2">
@@ -217,7 +223,7 @@ export function PricingPage() {
           </div>
 
           <div className="mt-4 flex flex-col items-start gap-0.5 text-xs text-text-muted">
-            <span>{t('tokenPacks.note')}</span>
+            <span>{t('tokenPacks.note', { currency })}</span>
             <span className="inline-flex items-center gap-1">
               <span className="h-1 w-1 rounded-full bg-brand-600" />
               {t('tokenPacks.info')}
@@ -262,6 +268,15 @@ export function PricingPage() {
                 <span>USD</span>
               </div>
             </div>
+            {parseFloat(customAmount) > 0 && (
+              <p className="mt-3 text-sm font-medium text-text-main">
+                {t('customTopUp.youGet', {
+                  price: formatPrice(parseFloat(customAmount), currency),
+                  currency,
+                  units: Math.round(calculateTokens(parseFloat(customAmount), currency)).toLocaleString('en-US'),
+                })}
+              </p>
+            )}
             <p className="mt-2 text-xs text-text-muted">{t('customTopUp.minAmount')}</p>
             <button
               type="button"

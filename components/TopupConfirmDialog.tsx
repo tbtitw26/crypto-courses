@@ -21,7 +21,7 @@ export function TopupConfirmDialog({ request, isSubmitting, onCancel, onConfirm 
 
   if (!request) return null
 
-  const units = request.tokens ?? Math.floor(calculateTokens(request.amount ?? 0, request.currency))
+  const units = request.tokens ?? Math.round(calculateTokens(request.amount ?? 0, request.currency))
   const price = request.tokens ? calculatePriceForTokens(request.tokens, request.currency) : request.amount ?? 0
   const canConfirm = isConsentComplete(consent, false) && !isSubmitting
 

@@ -127,12 +127,12 @@
       },
       "pricing": {
         "title": "How pricing works",
-        "description": "A custom course uses more Usage Units than a single ready-made PDF. In production, pricing will be defined per market and depth. For now, treat it as a separate product with its own price in Usage Units and direct payment.",
+        "description": "A custom course costs more Usage Units than a single ready-made PDF. The price depends on your choices in the form and is shown in the calculator before you order.",
         "points": {
           "tokens": "Pay with Usage Units from your balance.",
-          "currencies": "Or use EUR, GBP or USD at checkout."
+          "currencies": "The calculator also shows the price in your selected currency (GBP, EUR or USD)."
         },
-        "badge": "Example only – final pricing TBD"
+        "badge": "Final price shown before ordering"
       }
     }
   },
@@ -215,7 +215,7 @@
     "sidebar": {
       "depth": {
         "badge": "Adjustable depth",
-        "description": "You can request a quick overview or a deeper, more detailed plan. In production, Usage Unit cost will scale with the depth and complexity you choose."
+        "description": "You can request a quick overview or a deeper, more detailed plan. Deeper plans cost more Usage Units – the calculator shows the exact cost before you generate."
       },
       "courses": {
         "title": "How AI strategies fit with courses",

@@ -20,11 +20,11 @@
       "topUpAnytime": "Top up any time – Usage Units do not expire."
     },
     "exampleRate": {
-      "title": "Example effective rate",
-      "subtitle": "For visual purposes only",
-      "badge": "Non-binding",
-      "description": "In production, Usage Unit pricing will be defined per region and currency. Here we simply show how packs and custom top-ups could work inside the interface.",
-      "example": "For example: <tokens>{tokens}</tokens> might correspond to approximately <price>{price}</price> (or regional equivalent), but final values will be defined in legal terms and payment settings.",
+      "title": "Usage Unit rate",
+      "subtitle": "Fixed rate",
+      "badge": "Fixed rate",
+      "description": "Usage Units are always priced at 100 Usage Units per 1.00 GBP. Prices in EUR and USD are converted from GBP and shown exactly before you pay.",
+      "example": "<tokens>{tokens}</tokens> = <price>{price}</price>. You see the exact price, currency and number of Usage Units before you pay.",
       "tokens": "100 Usage Units",
       "price": "£1.00"
     }
@@ -32,20 +32,21 @@
   "tokenPacks": {
     "title": "Usage Unit Packages.",
     "subtitle": "Start small or commit for longer – each pack loads Usage Units into your Cur Nova balance for use across courses and AI.",
-    "note": "Currency shown here is illustrative. Final pricing may differ.",
-    "info": "Exact Usage Unit conversion will be defined in production.",
+    "note": "All prices are final and shown in {currency}.",
+    "info": "You receive exactly the number of Usage Units shown on each package.",
     "mostPopular": "Most popular",
     "selectPack": "Select {name}",
     "buyPack": "Buy {name}"
   },
   "customTopUp": {
     "title": "Custom top-up",
-    "subtitle": "Set any amount in your preferred currency. In production, the system converts it to Usage Units automatically.",
+    "subtitle": "Set any amount in your preferred currency. We convert it to Usage Units at 100 Usage Units per 1.00 GBP.",
     "amountLabel": "Amount",
     "currencies": "GBP · EUR · USD",
     "minAmount": "Minimum 0.01 in any supported currency. No formal maximum – larger top-ups are simply converted into more Usage Units.",
     "previewCta": "Preview in Usage Units",
-    "buyCta": "Buy custom top-up"
+    "buyCta": "Buy custom top-up",
+    "youGet": "You pay {price} {currency} and receive {units} Usage Units."
   },
   "directPayment": {
     "title": "Pay directly for a single course",
@@ -55,7 +56,7 @@
       "noTokens": "Usage Units are not required – direct payment simply unlocks that specific product.",
       "convertLater": "In future, you can always convert to a usage-based workflow if you prefer."
     },
-    "cta": "See example checkout"
+    "cta": "Browse courses"
   },
   "howTokensWork": {
     "title": "How Usage Units work inside Cur Nova.",
@@ -86,7 +87,7 @@
   "riskNotice": {
     "title": "Important risk and Usage Unit notice.",
     "paragraph1": "Trading Forex, Crypto and Binary options is highly speculative and can lead to substantial or total loss of capital. Usage Units, courses and AI outputs on Cur Nova are for educational purposes only. They do not contain financial advice or trading signals.",
-    "paragraph2": "Usage Units themselves are a way to access digital educational content inside Cur Nova. They are not a separate financial product or investment. Usage Unit pricing, refund rules and any region-specific limitations will be defined in the final Terms & Conditions and Risk & Disclaimer.",
+    "paragraph2": "Usage Units themselves are a way to access digital educational content inside Cur Nova. They are not a separate financial product or investment. Usage Unit pricing, refund rules and any region-specific limitations are set out in our Terms & Conditions, Refund Policy and Risk & Disclaimer.",
     "cta": "Read full risk & disclaimer"
   },
   "cta": {

@@ -20,11 +20,11 @@
       "topUpAnytime": "Fyll på når som helst – bruksenheter utløper ikke."
     },
     "exampleRate": {
-      "title": "Eksempel på effektiv kurs",
-      "subtitle": "Kun til illustrasjon",
-      "badge": "Ikke bindende",
-      "description": "I produksjon vil bruksenhetsprisene fastsettes per region og valuta. Her viser vi bare hvordan pakker og valgfrie påfyllinger kan fungere i grensesnittet.",
-      "example": "For eksempel kan <tokens>{tokens}</tokens> tilsvare omtrent <price>{price}</price> (eller tilsvarende i din region), men endelige verdier fastsettes i vilkårene og betalingsinnstillingene.",
+      "title": "Kurs for bruksenheter",
+      "subtitle": "Fast kurs",
+      "badge": "Fast kurs",
+      "description": "Bruksenheter prises alltid til 100 bruksenheter per 1,00 GBP. Priser i EUR og USD regnes om fra GBP og vises nøyaktig før du betaler.",
+      "example": "<tokens>{tokens}</tokens> = <price>{price}</price>. Du ser nøyaktig pris, valuta og antall bruksenheter før du betaler.",
       "tokens": "100 bruksenheter",
       "price": "£1.00"
     }
@@ -32,20 +32,21 @@
   "tokenPacks": {
     "title": "Bruksenhetspakker.",
     "subtitle": "Start i det små eller satse mer langsiktig – hver pakke fyller bruksenheter på Cur Nova-saldoen din til bruk på kurs og AI.",
-    "note": "Valutaen som vises her er kun illustrativ. Endelige priser kan avvike.",
-    "info": "Nøyaktig bruksenhetsomregning fastsettes i produksjon.",
+    "note": "Alle priser er endelige og vises i {currency}.",
+    "info": "Du får nøyaktig det antallet bruksenheter som vises på hver pakke.",
     "mostPopular": "Mest populær",
     "selectPack": "Velg {name}",
     "buyPack": "Kjøp {name}"
   },
   "customTopUp": {
     "title": "Valgfri påfylling",
-    "subtitle": "Velg et hvilket som helst beløp i ønsket valuta. I produksjon konverterer systemet det automatisk til bruksenheter.",
+    "subtitle": "Velg et hvilket som helst beløp i ønsket valuta. Vi regner det om til bruksenheter med 100 bruksenheter per 1,00 GBP.",
     "amountLabel": "Beløp",
     "currencies": "GBP · EUR · USD",
     "minAmount": "Minimum 0,01 i en hvilken som helst støttet valuta. Ingen formell maksgrense – større påfyllinger blir ganske enkelt til flere bruksenheter.",
     "previewCta": "Forhåndsvis i bruksenheter",
-    "buyCta": "Kjøp valgfri påfylling"
+    "buyCta": "Kjøp valgfri påfylling",
+    "youGet": "Du betaler {price} {currency} og får {units} bruksenheter."
   },
   "directPayment": {
     "title": "Betal direkte for ett enkelt kurs",
@@ -55,7 +56,7 @@
       "noTokens": "Bruksenheter er ikke nødvendig – direkte betaling låser ganske enkelt opp det aktuelle produktet.",
       "convertLater": "Senere kan du alltid gå over til en bruksbasert arbeidsflyt hvis du foretrekker det."
     },
-    "cta": "Se eksempel på kasse"
+    "cta": "Se kurs"
   },
   "howTokensWork": {
     "title": "Slik fungerer bruksenheter i Cur Nova.",
@@ -86,7 +87,7 @@
   "riskNotice": {
     "title": "Viktig informasjon om risiko og bruksenheter.",
     "paragraph1": "Handel med Forex, krypto og binære opsjoner er svært spekulativt og kan føre til betydelig eller fullstendig tap av kapital. Bruksenheter, kurs og AI-resultater på Cur Nova er kun ment for opplæring. De inneholder ikke finansiell rådgivning eller handelssignaler.",
-    "paragraph2": "Bruksenheter er i seg selv en måte å få tilgang til digitalt opplæringsinnhold i Cur Nova. De er ikke et eget finansielt produkt eller en investering. Bruksenhetspriser, refusjonsregler og eventuelle regionale begrensninger fastsettes i de endelige vilkårene og betingelsene samt risiko- og ansvarsfraskrivelsen.",
+    "paragraph2": "Bruksenheter er i seg selv en måte å få tilgang til digitalt opplæringsinnhold i Cur Nova. De er ikke et eget finansielt produkt eller en investering. Priser for bruksenheter, refusjonsregler og eventuelle regionale begrensninger står i vilkårene, refusjonspolicyen og risiko- og ansvarsfraskrivelsen.",
     "cta": "Les hele risiko- og ansvarsfraskrivelsen"
   },
   "cta": {

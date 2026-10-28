@@ -127,12 +127,12 @@
       },
       "pricing": {
         "title": "Slik fungerer prisingen",
-        "description": "Et tilpasset kurs bruker flere bruksenheter enn én ferdig PDF. I produksjon vil prisen fastsettes per marked og dybde. Inntil videre kan du se på det som et eget produkt med egen pris i bruksenheter og ved direkte betaling.",
+        "description": "Et tilpasset kurs koster flere bruksenheter enn én ferdig PDF. Prisen avhenger av valgene dine i skjemaet og vises i kalkulatoren før du bestiller.",
         "points": {
           "tokens": "Betal med bruksenheter fra saldoen din.",
-          "currencies": "Eller bruk EUR, GBP eller USD i kassen."
+          "currencies": "Kalkulatoren viser også prisen i valgt valuta (GBP, EUR eller USD)."
         },
-        "badge": "Kun eksempel – endelig pris ikke fastsatt"
+        "badge": "Endelig pris vises før bestilling"
       }
     }
   },
@@ -215,7 +215,7 @@
     "sidebar": {
       "depth": {
         "badge": "Justerbar dybde",
-        "description": "Du kan be om en rask oversikt eller en dypere, mer detaljert plan. I produksjon vil bruksenhetskostnaden avhenge av dybden og kompleksiteten du velger."
+        "description": "Du kan be om en rask oversikt eller en dypere, mer detaljert plan. Dypere planer koster flere bruksenheter – kalkulatoren viser nøyaktig pris før du genererer."
       },
       "courses": {
         "title": "Hvordan AI-strategier henger sammen med kursene",
