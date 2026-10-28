@@ -462,9 +462,7 @@ export function BillingPage() {
                       : t('invoices.lastReceipt.title')}
                   </p>
                   <p className="text-xs text-text-muted">
-                    {lastReceiptId
-                      ? t('invoices.lastReceipt.details')
-                      : t('invoices.noReceipts')}
+                    {lastReceiptId ? t('invoices.lastReceipt.details') : t('invoices.noReceipts')}
                   </p>
                 </div>
                 {lastReceiptId ? (
@@ -610,27 +608,6 @@ export function BillingPage() {
             </div>
           )}
 
-          {/* Empty state preview */}
-          <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
-            <div className="mb-2 flex items-center gap-2">
-              <Info className="h-4 w-4 text-brand-600" />
-              <h3 className="text-xs font-semibold text-text-main">{t('emptyStatePreview.title')}</h3>
-            </div>
-            <p className="text-xs leading-relaxed text-text-secondary">{t('emptyStatePreview.description')}</p>
-            <div className="mt-3 flex flex-col items-start justify-between gap-3 rounded-lg border border-surface-200 bg-surface-50 p-3 sm:flex-row sm:items-center">
-              <div>
-                <p className="text-xs font-medium text-text-main">{t('emptyStatePreview.noActivity')}</p>
-                <p className="text-xs text-text-muted">{t('emptyStatePreview.hint')}</p>
-              </div>
-              <Link
-                href="/pricing"
-                className="btn-primary inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold"
-              >
-                <Coins className="h-3 w-3" />
-                <span>{t('emptyStatePreview.viewTokenPacks')}</span>
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </div>

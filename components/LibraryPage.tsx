@@ -13,8 +13,6 @@ import {
   SlidersHorizontal,
   AlertTriangle,
   Download,
-  FolderOpen,
-  ShoppingCart,
   Info,
   Sparkles,
   ChevronRight,
@@ -352,31 +350,6 @@ export function LibraryPage() {
 
           {/* Sidebar */}
           <div className="space-y-4">
-            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
-              <div className="mb-3 flex items-center gap-2">
-                <FolderOpen className="h-4 w-4 text-brand-600" />
-                <h3 className="text-sm font-semibold text-text-main">{t('emptyState.title')}</h3>
-              </div>
-              <p className="text-xs leading-relaxed text-text-secondary">{t('emptyState.description')}</p>
-              <div className="mt-3 rounded-lg border border-surface-200 bg-surface-50 p-3">
-                <div className="mb-2 flex items-center gap-1.5">
-                  <AlertTriangle className="h-3.5 w-3.5 text-text-muted" />
-                  <span className="text-sm font-semibold text-text-main">{t('emptyState.noItems')}</span>
-                </div>
-                <p className="mb-3 text-xs text-text-muted">{t('emptyState.hint')}</p>
-                <div className="flex flex-wrap gap-2">
-                  <Link href="/courses" className="btn-primary inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold">
-                    <ShoppingCart className="h-3 w-3" />
-                    <span>{t('emptyState.browseCourses')}</span>
-                  </Link>
-                  <Link href="/learn?tab=ai" className="btn-secondary inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs">
-                    <Cpu className="h-3 w-3" />
-                    <span>{t('emptyState.openAIStrategy')}</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
             <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
               <div className="mb-3 flex items-center gap-2">
                 <Info className="h-4 w-4 text-brand-600" />

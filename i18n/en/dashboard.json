@@ -104,7 +104,7 @@
   "kpi": {
     "balance": {
       "title": "Usage Balance",
-      "subtitle": "Approx. {price} equivalent – exact value depends on current pricing.",
+      "subtitle": "Worth {price} at the fixed rate of 100 Usage Units per 1.00 GBP.",
       "topUp": "Top up balance",
       "viewPricing": "View pricing"
     },
@@ -257,14 +257,6 @@
       "weekAgo": "1 week ago"
     },
     "new": "New",
-    "emptyState": {
-      "title": "Example: empty library state",
-      "description": "If a new user has not purchased any courses or generated any AI strategies, show a calm empty state instead of a blank page.",
-      "noItems": "No items in your library yet",
-      "hint": "Once you purchase a course or generate an AI strategy, it will appear here.",
-      "browseCourses": "Browse courses",
-      "openAIStrategy": "Open AI Strategy Builder"
-    },
     "sidebar": {
       "howLibraryFits": {
         "title": "How library fits with other dashboard pages",
@@ -284,7 +276,7 @@
     "heading": "Billing & Usage Units",
     "subtitle": "See your Usage Balance, recent purchases and invoices. Payments are handled securely – Cur Nova never touches your trading accounts.",
     "tokensAvailable": "Usage Units available",
-    "tokensApprox": "Approx. {price} at the current Usage Unit rate.",
+    "tokensApprox": "Worth {price} at the fixed Usage Unit rate.",
     "topUp": "Top up",
     "viewPricing": "View pricing & Usage Unit Packages",
     "tokens": "Usage Units",
@@ -293,11 +285,11 @@
       "subtitle": "Usage Units can be used across courses, custom PDFs and AI strategies.",
       "tokensInfo": "Usage Units are not a deposit and carry no interest.",
       "currentBalance": "Current balance",
-      "currentBalanceHint": "Approx. {price} worth of Cur Nova services.",
+      "currentBalanceHint": "Worth {price} at the fixed Usage Unit rate.",
       "thisMonthSpent": "This month spent",
       "thisMonthSpentHint": "Courses, AI strategies and custom requests.",
       "lastTopUp": "Last top-up",
-      "lastTopUpHint": "Structured Growth pack.",
+      "lastTopUpHint": "Your most recent Usage Unit top-up.",
       "noTopUpYet": "No top-ups yet",
       "usageDistribution": "Rough usage distribution",
       "usageDistributionHint": "Courses 65% · AI 25% · Custom PDFs 10%",
@@ -312,14 +304,14 @@
       "supportedCards": "Supported cards: Visa and Mastercard.",
       "supportedCurrencies": "Supported currencies: GBP, EUR, USD.",
       "chargesDescriptor": "Charges appear under the Cur Nova or partner descriptor.",
-      "note": "In the live product this card would link to a secure portal where users can update payment details."
+      "note": "To use a different card, simply enter it on the secure payment page at your next top-up."
     },
     "invoices": {
       "title": "Invoices & receipts",
       "description": "Every successful Usage Unit purchase or direct payment generates a receipt. Some regions may also require full tax invoices.",
       "lastReceipt": {
-        "title": "Last receipt – Structured Growth pack",
-        "details": "28 Nov 2025 · £69.99 · Card ending ••42"
+        "title": "Latest receipt",
+        "details": "Your latest receipt is ready to download."
       },
       "noReceipts": "No receipts yet",
       "downloadPDF": "Download PDF",
@@ -373,13 +365,6 @@
     "emptyState": {
       "title": "No transactions found",
       "description": "Try adjusting your filters."
-    },
-    "emptyStatePreview": {
-      "title": "Example: new account with no transactions",
-      "description": "If a user has not purchased any Usage Units yet, show a calm empty state and a clear path to the pricing page.",
-      "noActivity": "No billing activity yet",
-      "hint": "Once you buy your first Usage Unit Package, your receipts and history will appear here.",
-      "viewTokenPacks": "View Usage Unit Packages"
     }
   },
   "customCoursesPage": {
@@ -392,7 +377,7 @@
     },
     "switchToAIStrategy": "Switch to AI Strategy Builder",
     "requestNewCourse": "Request new custom course",
-    "viewIntakeFormPreview": "View intake form preview",
+    "viewIntakeFormPreview": "View intake form",
     "searchPlaceholder": "Search by title or ID…",
     "filtersLabel": "Filters",
     "filters": {
@@ -453,14 +438,7 @@
         "market": "Preferred market (Forex, Crypto, Binary).",
         "style": "Style (scalp, day, swing) and time availability.",
         "goals": "What you want to achieve in your own words.",
-        "note": "The preview keeps this transparent so users know what happens before they commit Usage Units."
-      },
-      "emptyState": {
-        "title": "Example: empty state",
-        "description": "If no custom courses have been requested yet, show a simple message instead of an empty table.",
-        "noCourses": "No custom courses yet",
-        "hint": "Once you request a tailored PDF, you will see its status and ETA here.",
-        "requestFirstCourse": "Request your first course"
+        "note": "We show this upfront so you know exactly what we ask before you commit Usage Units."
       }
     },
     "meta": {
@@ -525,7 +503,6 @@
       "title": "Security",
       "password": {
         "label": "Password",
-        "lastUpdated": "Last updated: 3 months ago (example).",
         "resetButton": "Reset password"
       },
       "changePassword": {
@@ -567,12 +544,12 @@
       "title": "Data & privacy",
       "description": "Manage how your data is used in Cur Nova. This is separate from any data your broker or exchange holds about your trading.",
       "export": {
-        "label": "Export my Cur Nova data (preview)",
-        "description": "Download a copy of your courses, AI plans and billing metadata."
+        "label": "Request a copy of my data",
+        "description": "Contact support and we will send you a copy of your courses, AI plans and billing metadata."
       },
       "delete": {
-        "label": "Request account deletion (preview)",
-        "description": "In the live product this would start a verified deletion process."
+        "label": "Request account deletion",
+        "description": "Contact support to start a verified deletion of your account."
       },
       "note": "For details, refer to the full Privacy Policy and Terms & Conditions linked in the footer."
     },

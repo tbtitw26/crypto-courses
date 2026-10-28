@@ -104,7 +104,7 @@
   "kpi": {
     "balance": {
       "title": "Bruksbalanse",
-      "subtitle": "Tilsvarer ca. {price} – nøyaktig verdi avhenger av gjeldende priser.",
+      "subtitle": "Verdt {price} med fast kurs på 100 bruksenheter per 1,00 GBP.",
       "topUp": "Fyll på saldo",
       "viewPricing": "Se priser"
     },
@@ -257,14 +257,6 @@
       "weekAgo": "1 uke siden"
     },
     "new": "Ny",
-    "emptyState": {
-      "title": "Eksempel: tomt bibliotek",
-      "description": "Hvis en ny bruker ikke har kjøpt noen kurs eller generert noen AI-strategier, vis en rolig tom tilstand i stedet for en blank side.",
-      "noItems": "Ingen elementer i biblioteket ennå",
-      "hint": "Når du kjøper et kurs eller genererer en AI-strategi, vises det her.",
-      "browseCourses": "Utforsk kurs",
-      "openAIStrategy": "Åpne AI-strategibyggeren"
-    },
     "sidebar": {
       "howLibraryFits": {
         "title": "Hvordan biblioteket henger sammen med andre dashbordsider",
@@ -284,7 +276,7 @@
     "heading": "Fakturering og bruksenheter",
     "subtitle": "Se bruksbalansen, nylige kjøp og fakturaer. Betalinger håndteres sikkert – Cur Nova rører aldri handelskontoene dine.",
     "tokensAvailable": "bruksenheter tilgjengelig",
-    "tokensApprox": "Ca. {price} etter gjeldende bruksenhetskurs.",
+    "tokensApprox": "Verdt {price} med fast kurs for bruksenheter.",
     "topUp": "Fyll på",
     "viewPricing": "Se priser og bruksenhetspakker",
     "tokens": "bruksenheter",
@@ -293,11 +285,11 @@
       "subtitle": "Bruksenheter kan brukes på kurs, tilpassede PDF-er og AI-strategier.",
       "tokensInfo": "Bruksenheter er ikke et innskudd og gir ingen rente.",
       "currentBalance": "Nåværende saldo",
-      "currentBalanceHint": "Tilsvarer ca. {price} i Cur Nova-tjenester.",
+      "currentBalanceHint": "Verdt {price} med fast kurs for bruksenheter.",
       "thisMonthSpent": "Brukt denne måneden",
       "thisMonthSpentHint": "Kurs, AI-strategier og tilpassede bestillinger.",
       "lastTopUp": "Siste påfylling",
-      "lastTopUpHint": "Structured Growth-pakke.",
+      "lastTopUpHint": "Den siste påfyllingen av bruksenheter.",
       "noTopUpYet": "Ingen påfyllinger ennå",
       "usageDistribution": "Omtrentlig fordeling av forbruk",
       "usageDistributionHint": "Kurs 65 % · AI 25 % · Tilpassede PDF-er 10 %",
@@ -312,14 +304,14 @@
       "supportedCards": "Kort som støttes: Visa og Mastercard.",
       "supportedCurrencies": "Valutaer som støttes: GBP, EUR, USD.",
       "chargesDescriptor": "Belastninger vises under Cur Nova eller en partners betegnelse.",
-      "note": "I det ferdige produktet vil dette kortet lenke til en sikker portal der brukere kan oppdatere betalingsopplysninger."
+      "note": "Vil du bruke et annet kort, oppgir du det på den sikre betalingssiden ved neste påfylling."
     },
     "invoices": {
       "title": "Fakturaer og kvitteringer",
       "description": "Hvert vellykket bruksenhetskjøp eller hver direkte betaling genererer en kvittering. Enkelte regioner kan også kreve fullstendige skattefakturaer.",
       "lastReceipt": {
-        "title": "Siste kvittering – Structured Growth-pakke",
-        "details": "28. nov. 2025 · £69.99 · Kort som slutter på ••42"
+        "title": "Siste kvittering",
+        "details": "Den siste kvitteringen er klar til nedlasting."
       },
       "noReceipts": "Ingen kvitteringer ennå",
       "downloadPDF": "Last ned PDF",
@@ -373,13 +365,6 @@
     "emptyState": {
       "title": "Fant ingen transaksjoner",
       "description": "Prøv å justere filtrene."
-    },
-    "emptyStatePreview": {
-      "title": "Eksempel: ny konto uten transaksjoner",
-      "description": "Hvis en bruker ikke har kjøpt bruksenheter ennå, vis en rolig tom tilstand og en tydelig vei til prissiden.",
-      "noActivity": "Ingen faktureringsaktivitet ennå",
-      "hint": "Når du kjøper din første bruksenhetspakke, vises kvitteringene og historikken din her.",
-      "viewTokenPacks": "Se bruksenhetspakker"
     }
   },
   "customCoursesPage": {
@@ -392,7 +377,7 @@
     },
     "switchToAIStrategy": "Bytt til AI-strategibyggeren",
     "requestNewCourse": "Bestill nytt tilpasset kurs",
-    "viewIntakeFormPreview": "Se forhåndsvisning av skjemaet",
+    "viewIntakeFormPreview": "Se skjemaet",
     "searchPlaceholder": "Søk etter tittel eller ID…",
     "filtersLabel": "Filtre",
     "filters": {
@@ -453,14 +438,7 @@
         "market": "Foretrukket marked (Forex, krypto, binære).",
         "style": "Stil (scalping, dag, swing) og tilgjengelig tid.",
         "goals": "Hva du vil oppnå, med dine egne ord.",
-        "note": "Forhåndsvisningen gjør dette åpent, slik at brukerne vet hva som skjer før de bruker bruksenheter."
-      },
-      "emptyState": {
-        "title": "Eksempel: tom tilstand",
-        "description": "Hvis det ikke er bestilt noen tilpassede kurs ennå, vis en enkel melding i stedet for en tom tabell.",
-        "noCourses": "Ingen tilpassede kurs ennå",
-        "hint": "Når du bestiller en skreddersydd PDF, ser du status og forventet levering her.",
-        "requestFirstCourse": "Bestill ditt første kurs"
+        "note": "Vi viser dette på forhånd, slik at du vet nøyaktig hva vi spør om før du bruker bruksenheter."
       }
     },
     "meta": {
@@ -525,7 +503,6 @@
       "title": "Sikkerhet",
       "password": {
         "label": "Passord",
-        "lastUpdated": "Sist oppdatert: for 3 måneder siden (eksempel).",
         "resetButton": "Tilbakestill passord"
       },
       "changePassword": {
@@ -567,12 +544,12 @@
       "title": "Data og personvern",
       "description": "Styr hvordan dataene dine brukes i Cur Nova. Dette er atskilt fra data megleren eller børsen din har om handelen din.",
       "export": {
-        "label": "Eksporter mine Cur Nova-data (forhåndsvisning)",
-        "description": "Last ned en kopi av kursene, AI-planene og faktureringsmetadataene dine."
+        "label": "Be om en kopi av dataene mine",
+        "description": "Kontakt support, så sender vi deg en kopi av kursene, AI-planene og faktureringsdataene dine."
       },
       "delete": {
-        "label": "Be om sletting av kontoen (forhåndsvisning)",
-        "description": "I det ferdige produktet vil dette starte en verifisert sletteprosess."
+        "label": "Be om sletting av kontoen",
+        "description": "Kontakt support for å starte en verifisert sletting av kontoen din."
       },
       "note": "For detaljer, se den fullstendige personvernerklæringen og vilkårene og betingelsene som er lenket i bunnteksten."
     },

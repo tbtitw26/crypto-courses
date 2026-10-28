@@ -16,7 +16,6 @@ import {
   PlusCircle,
   ChevronRight,
   ArrowRight,
-  Info,
   FolderKanban,
   XCircle,
   Loader2,
@@ -310,28 +309,6 @@ export function CustomCoursesPage() {
                 <li>• {t('sidebar.intakeForm.goals')}</li>
               </ul>
               <p className="mt-2 text-xs text-text-muted">{t('sidebar.intakeForm.note')}</p>
-            </div>
-
-            <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">
-              <div className="mb-3 flex items-center gap-2">
-                <Info className="h-4 w-4 text-brand-600" />
-                <h3 className="text-xs font-semibold text-text-main">{t('sidebar.emptyState.title')}</h3>
-              </div>
-              <p className="text-sm leading-relaxed text-text-secondary">{t('sidebar.emptyState.description')}</p>
-              <div className="mt-3 rounded-lg border border-surface-200 bg-surface-50 p-3">
-                <div className="mb-2 flex items-center gap-1.5">
-                  <AlertTriangle className="h-3.5 w-3.5 text-text-muted" />
-                  <span className="text-xs font-semibold text-text-main">{t('sidebar.emptyState.noCourses')}</span>
-                </div>
-                <p className="mb-3 text-xs text-text-muted">{t('sidebar.emptyState.hint')}</p>
-                <Link
-                  href="/learn?tab=custom"
-                  className="btn-primary inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-[11px] font-semibold"
-                >
-                  <PlusCircle className="h-3 w-3" />
-                  <span>{t('sidebar.emptyState.requestFirstCourse')}</span>
-                </Link>
-              </div>
             </div>
 
             <div className="rounded-xl border border-surface-200 bg-white p-5 shadow-card">

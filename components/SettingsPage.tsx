@@ -484,7 +484,6 @@ export function SettingsPage() {
                 <div className="flex items-center justify-between gap-2">
                   <div>
                     <p className="font-medium text-text-main">{t('security.password.label')}</p>
-                    <p className="text-text-muted">{t('security.password.lastUpdated')}</p>
                   </div>
                   <button
                     type="button"
@@ -520,20 +519,20 @@ export function SettingsPage() {
               <div className="p-5 space-y-3 text-[11px]">
                 <p className="text-text-secondary">{t('dataPrivacy.description')}</p>
                 <div className="space-y-2">
-                  <button type="button" className="flex w-full items-center gap-3 rounded-lg border border-surface-200 bg-surface-50 p-3 text-left transition hover:border-surface-300">
+                  <Link href="/contact" className="flex w-full items-center gap-3 rounded-lg border border-surface-200 bg-surface-50 p-3 text-left transition hover:border-surface-300">
                     <Download className="h-4 w-4 shrink-0 text-text-main" />
                     <div>
                       <p className="text-[11px] font-medium text-text-main">{t('dataPrivacy.export.label')}</p>
-                      <p className="text-[11px] text-text-muted\">{t('dataPrivacy.export.description')}</p>
+                      <p className="text-[11px] text-text-muted">{t('dataPrivacy.export.description')}</p>
                     </div>
-                  </button>
-                  <button type="button" className="flex w-full items-center gap-3 rounded-lg border border-surface-200 bg-surface-50 p-3 text-left transition hover:border-rose-300">
+                  </Link>
+                  <Link href="/contact" className="flex w-full items-center gap-3 rounded-lg border border-surface-200 bg-surface-50 p-3 text-left transition hover:border-rose-300">
                     <Trash2 className="h-4 w-4 shrink-0 text-rose-500" />
                     <div>
                       <p className="text-[11px] font-medium text-rose-600">{t('dataPrivacy.delete.label')}</p>
                       <p className="text-[11px] text-text-muted">{t('dataPrivacy.delete.description')}</p>
                     </div>
-                  </button>
+                  </Link>
                 </div>
                 <p className="text-text-muted">{t('dataPrivacy.note')}</p>
               </div>
