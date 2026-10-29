@@ -17,6 +17,7 @@ import {
   Sparkles,
   ShoppingCart,
   Loader2,
+  RotateCcw,
 } from 'lucide-react'
 import { DashboardNavigation } from './DashboardNavigation'
 import { formatPrice, convertAmount } from '@/lib/currency-utils'
@@ -25,7 +26,7 @@ import { SITE_CURRENCY } from '@/lib/currency-config'
 
 interface ReceiptTransaction {
   id: string
-  type: 'Top-up' | 'Custom course' | 'AI strategy' | 'Course purchase'
+  type: 'Top-up' | 'Custom course' | 'AI strategy' | 'Course purchase' | 'Refund'
   detail: string
   date: string
   tokens: number
@@ -163,6 +164,8 @@ export function ReceiptsPage() {
         return <FileText className="h-4 w-4 text-brand-600" />
       case 'AI strategy':
         return <Sparkles className="h-4 w-4 text-brand-600" />
+      case 'Refund':
+        return <RotateCcw className="h-4 w-4 text-brand-600" />
     }
   }
 
@@ -256,7 +259,7 @@ export function ReceiptsPage() {
                             <span className="text-xs text-text-muted">{valueLabel(tx.status)}</span>
                           )}
                         </div>
-                        <p className="mt-0.5 truncate text-sm font-medium text-text-main">{tx.detail}</p>
+                        <p className="mt-0.5 truncate text-sm font-medium text-text-main">{valueLabel(tx.detail)}</p>
                         <p className="truncate text-xs text-text-muted">{metaLabel(tx.meta)}</p>
                         <div className="mt-1 flex items-center gap-4 text-xs text-text-secondary">
                           {tx.tokens !== 0 && (

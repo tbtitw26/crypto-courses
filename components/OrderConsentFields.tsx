@@ -17,6 +17,8 @@ interface OrderConsentFieldsProps {
   onChange: (value: OrderConsentState) => void
   /** Digital content supplied straight away (courses, custom courses, AI). Not shown for Usage Unit top-ups. */
   requireImmediateSupply: boolean
+  /** Custom courses are prepared over 48–96 hours, so they ask to start preparation instead of immediate supply. */
+  supplyConsent?: 'immediate' | 'preparation'
 }
 
 /** Payload sent to the API; the server rejects orders without it. */
@@ -30,7 +32,12 @@ export function isConsentComplete(value: OrderConsentState, requireImmediateSupp
   return value.termsAccepted && (!requireImmediateSupply || value.immediateSupply)
 }
 
-export function OrderConsentFields({ value, onChange, requireImmediateSupply }: OrderConsentFieldsProps) {
+export function OrderConsentFields({
+  value,
+  onChange,
+  requireImmediateSupply,
+  supplyConsent = 'immediate',
+}: OrderConsentFieldsProps) {
   const t = useTranslations('common.orderConsent')
   const linkClass = 'font-medium text-brand-700 underline hover:text-brand-800'
 
@@ -64,7 +71,7 @@ export function OrderConsentFields({ value, onChange, requireImmediateSupply }: 
             onChange={(e) => onChange({ ...value, immediateSupply: e.target.checked })}
             className="mt-0.5 h-4 w-4 shrink-0 rounded border-surface-400 accent-brand-600"
           />
-          <span>{t('immediateSupply')}</span>
+          <span>{t(supplyConsent === 'preparation' ? 'startPreparation' : 'immediateSupply')}</span>
         </label>
       ) : (
         <p className="text-xs leading-relaxed text-text-muted">{t('topupNotice')}</p>

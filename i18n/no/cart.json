@@ -61,7 +61,8 @@
     "payment": {
       "title": "Betalingsmåte",
       "withTokens": "Betal med bruksenheter",
-      "withCard": "Betal med kort",
+      "withCard": "Fyll på bruksenheter med kort",
+      "withCardHint": "Kjøp de manglende bruksenhetene i {currency}",
       "insufficientTokens": "Ikke nok bruksenheter",
       "buyTokens": "Kjøp bruksenheter",
       "success": "Betalingen var vellykket",

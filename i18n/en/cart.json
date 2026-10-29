@@ -61,7 +61,8 @@
     "payment": {
       "title": "Payment Method",
       "withTokens": "Pay with Usage Units",
-      "withCard": "Pay with card",
+      "withCard": "Top up Usage Units by card",
+      "withCardHint": "Buy the missing Usage Units in {currency}",
       "insufficientTokens": "Insufficient Usage Units",
       "buyTokens": "Purchase Usage Units",
       "success": "Payment successful",

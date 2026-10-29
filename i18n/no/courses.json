@@ -7,7 +7,7 @@
   },
   "meta": {
     "coursesAvailable": "kurs tilgjengelig · flere under utarbeidelse.",
-    "paymentInfo": "Betal med bruksenheter eller direkte i EUR."
+    "paymentInfo": "Betal med bruksenheter. Bruksenheter kjøpes med kort i EUR."
   },
   "filters": {
     "label": "Filtre",
@@ -45,7 +45,7 @@
     },
     "aiStrategy": {
       "title": "Lite tid i dag?",
-      "description": "Bruk AI-strategibyggeren for å få en fokusert, umiddelbart generert plan, og kom tilbake til fullstendige kurs når du er klar til å gå dypere.",
+      "description": "Bruk AI-strategibyggeren for å få en fokusert plan, vanligvis generert innen 5 minutter, og kom tilbake til fullstendige kurs når du er klar til å gå dypere.",
       "cta": "Åpne AI-strategibyggeren"
     }
   },
@@ -55,7 +55,7 @@
     "format": "PDF",
     "download": "nedlasting",
     "educationOnly": "Kun opplæring · ingen signaler",
-    "payWithTokens": "betal med bruksenheter eller kort",
+    "payWithTokens": "betal med bruksenheter",
     "viewCourse": "Se kurs",
     "addToCart": "Legg i handlekurven"
   },
@@ -79,8 +79,8 @@
       "courseAccess": "Kurstilgang",
       "immediateDownload": "Umiddelbar PDF-nedlasting etter betaling.",
       "buyWithTokens": "Kjøp med bruksenheter",
-      "buyWithCard": "Kjøp med kort",
-      "paymentNote": "Du kan bruke eksisterende saldo eller legge til bruksenheter i kassen. Kortbetaling skjer i EUR.",
+      "buyWithCard": "Fyll på med kort",
+      "paymentNote": "Kurs betales med bruksenheter. Hvis saldoen er for lav, kan du kjøpe de manglende bruksenhetene med kort i EUR i kassen og deretter fullføre kjøpet med bruksenheter.",
       "educationDisclaimer": "Kun opplæring. Dette kurset inneholder ikke handelssignaler eller løfter om avkastning.",
       "beforeBuying": "Før du kjøper, merk deg:",
       "riskNote1": "Handel med Forex er høyrisiko og kan føre til fullstendig tap av kapital.",
@@ -127,7 +127,7 @@
         },
         "refund": {
           "question": "Kan jeg få refusjon hvis jeg ikke liker det?",
-          "answer": "Siden dette er digitalt opplæringsinnhold som leveres umiddelbart, tilbys det normalt ikke refusjon. Les kursbeskrivelsen, kursoversikten og risikoinformasjonen før du kjøper."
+          "answer": "Rettighetene dine følger av refusjonsreglene våre og forbrukerlovgivningen som gjelder for deg. Hvis du ba om umiddelbar tilgang og bekreftet at du mister angreretten når leveringen starter, opphører den lovbestemte angreretten når kurset gjøres tilgjengelig. Du beholder likevel dine lovfestede rettigheter hvis kurset er mangelfullt, ikke som beskrevet, ikke levert eller belastet ved en feil. Les kursbeskrivelsen, kursoversikten og risikoinformasjonen før du kjøper."
         },
         "signals": {
           "question": "Forteller dette kurset meg nøyaktig når jeg skal kjøpe eller selge?",

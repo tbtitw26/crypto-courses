@@ -7,7 +7,7 @@
   },
   "meta": {
     "coursesAvailable": "courses available · more in preparation.",
-    "paymentInfo": "Pay with Usage Units or directly in EUR."
+    "paymentInfo": "Pay with Usage Units. Usage Units are purchased by card in EUR."
   },
   "filters": {
     "label": "Filters",
@@ -45,7 +45,7 @@
     },
     "aiStrategy": {
       "title": "Short on time today?",
-      "description": "Use the AI Strategy Builder to get a focused, instantly generated plan, then come back to full courses when you are ready to go deeper.",
+      "description": "Use the AI Strategy Builder to get a focused plan, usually generated within 5 minutes, then come back to full courses when you are ready to go deeper.",
       "cta": "Open AI Strategy Builder"
     }
   },
@@ -55,7 +55,7 @@
     "format": "PDF",
     "download": "download",
     "educationOnly": "Education only · no signals",
-    "payWithTokens": "pay with Usage Units or card",
+    "payWithTokens": "pay with Usage Units",
     "viewCourse": "View course",
     "addToCart": "Add to cart"
   },
@@ -79,8 +79,8 @@
       "courseAccess": "Course access",
       "immediateDownload": "Immediate PDF download after payment.",
       "buyWithTokens": "Buy with Usage Units",
-      "buyWithCard": "Buy with card",
-      "paymentNote": "You can use existing balance or add Usage Units at checkout. Card payments are made in EUR.",
+      "buyWithCard": "Top up by card",
+      "paymentNote": "Courses are paid with Usage Units. If your balance is too low, you can buy the missing Usage Units by card in EUR at checkout and then complete the purchase with Units.",
       "educationDisclaimer": "Education only. This course does not contain trading signals or promises of performance.",
       "beforeBuying": "Before buying, please note:",
       "riskNote1": "Trading Forex is high risk and may lead to total loss of capital.",
@@ -127,7 +127,7 @@
         },
         "refund": {
           "question": "Can I get a refund if I do not like it?",
-          "answer": "As this is digital educational content delivered instantly, refunds are typically not offered. Please review the course description, outline and risk notice before purchasing."
+          "answer": "Your rights depend on our Refund Policy and the consumer law that applies to you. If you asked for immediate access and confirmed that you lose the right to cancel once supply starts, the statutory cancellation right ends when the course is made available. You still keep your legal rights if the course is faulty, not as described, not supplied, or charged in error. Please review the course description, outline and risk notice before purchasing."
         },
         "signals": {
           "question": "Does this course tell me exactly when to buy or sell?",

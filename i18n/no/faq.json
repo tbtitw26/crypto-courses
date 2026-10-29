@@ -71,8 +71,8 @@
       },
       {
         "category": "Bruksenheter og betaling",
-        "question": "Kan jeg betale direkte uten å bruke bruksenheter?",
-        "answer": "Ja. I mange tilfeller kan du betale direkte i EUR for ett enkelt kurs eller produkt. Da trenger du ikke bruksenheter for det kjøpet."
+        "question": "Kan jeg kjøpe et kurs direkte med kort?",
+        "answer": "Alle produkter betales med bruksenheter. En kortbetaling kjøper bruksenheter til bruksbalansen din; den kjøper ikke et kurs i seg selv. Hvis saldoen er for lav i kassen, kan du kjøpe nøyaktig de bruksenhetene som trengs med kort i EUR og deretter fullføre kjøpet med disse."
       },
       {
         "category": "Bruksenheter og betaling",
@@ -116,7 +116,7 @@
   "deliveryCard": {
     "title": "Leveringstider",
     "subtitle": "Umiddelbart kontra forsinket innhold.",
-    "description": "Ferdige kurs låses opp umiddelbart etter vellykket betaling. AI-strategier genereres i løpet av sekunder. Tilpassede kurs leveres på e-post etter bekreftelse."
+    "description": "Ferdige kurs låses opp umiddelbart etter at kjøpet er bekreftet. AI-strategier genereres vanligvis innen 5 minutter. Tilpassede kurs leveres innen 48–96 timer på e-post og i dashbordet ditt."
   },
   "cta": {
     "title": "Fortsatt usikker på noe?",

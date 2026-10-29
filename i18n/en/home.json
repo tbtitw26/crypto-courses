@@ -103,9 +103,9 @@
         "cta": "Request custom course"
       },
       {
-        "title": "AI strategy in seconds",
+        "title": "AI strategy within minutes",
         "text": "Generate a structured educational strategy guide with general decision criteria and a risk checklist, based on your learning profile.",
-        "badge": "Instant",
+        "badge": "Usually within 5 minutes",
         "cta": "Open AI Strategy Builder"
       }
     ]
@@ -119,8 +119,8 @@
         "text": "Choose between ready-made courses, a custom PDF or an AI-generated strategy."
       },
       {
-        "title": "Add balance or pay directly",
-        "text": "Use Usage Units across products or pay in EUR at checkout."
+        "title": "Add Usage Units",
+        "text": "Buy Usage Units by card in EUR and use them across all products."
       },
       {
         "title": "Get your PDF",
@@ -262,7 +262,7 @@
         "id": "how-tokens-work",
         "category": "payments",
         "question": "How do Usage Units work?",
-        "answer": "Usage Units are credits used to access Cur Nova products. €1.14 equals 100 Usage Units. You can buy Usage Unit Packages, make custom top-ups, or pay directly for courses. Usage Units do not expire and can be used across all products."
+        "answer": "Usage Units are credits used to access Cur Nova products. €1.14 equals 100 Usage Units. You can buy Usage Unit Packages or make custom top-ups by card in EUR, then use the Units for courses, custom courses and AI strategies."
       },
       {
         "id": "what-in-courses",
@@ -274,13 +274,13 @@
         "id": "can-cancel",
         "category": "payments",
         "question": "Can I cancel an order?",
-        "answer": "For ready-made courses, you can cancel before payment is processed. For custom course requests, cancellation is possible within 24 hours of submission. Once a course is generated or delivered, Usage Units are consumed and cannot be refunded unless there is a technical issue on our side."
+        "answer": "Yes, within the rights set out in our Refund Policy. A custom course can be cancelled until it is delivered; where the law allows, a proportionate amount may be charged for preparation already carried out. If a custom course or AI strategy is delayed, you can accept the new date or cancel and get your Usage Units back. For ready-made courses and AI outputs supplied at your request, the statutory cancellation right ends once supply starts, but your rights for faulty or undelivered content remain."
       },
       {
         "id": "refund-policy",
         "category": "payments",
         "question": "What is your refund policy?",
-        "answer": "Refunds are available for duplicate purchases, technical failures, or unauthorized charges. We do not offer refunds for subjective dissatisfaction with course content. Contact support with your payment ID and details for review. We respond within 2 business days."
+        "answer": "Unused paid Usage Units can be refunded where the law requires it. Refunds are also given for duplicate or unauthorised charges, technical failures, content that is faulty or not as described, and orders that are not delivered. Your statutory consumer rights are not affected. Contact support with your order number; we respond within 2 business days."
       },
       {
         "id": "need-account",
@@ -469,7 +469,7 @@
       "ctaAi": "Build AI strategy",
       "aiDoc": "AI Strategy Document",
       "customDoc": "Custom Course PDF",
-      "aiDocSub": "Generated in seconds",
+      "aiDocSub": "Usually within 5 minutes",
       "customDocSub": "Built by a professional trader",
       "aiTags": [
         "Strategy PDF",

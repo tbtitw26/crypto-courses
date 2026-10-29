@@ -47,17 +47,16 @@ export function ResourcesPage() {
     return null
   }
 
-  const getResourceHref = (title: string): string | null => {
-    const routeMap: Record<string, string> = {
-      'Risk Management Foundations': '/learn/risk-management',
-      'Daily Trade Journal Principles': '/learn/trade-journal',
-      'Weekly Review Playbook': '/learn/weekly-review',
-      'Pre-Session Preparation': '/learn/pre-session',
-      'Position Sizing Made Simple': '/learn/position-sizing',
-      'Strategy Snapshot Overview': '/learn/strategy-snapshot',
-    }
-    return routeMap[title] || null
-  }
+  // Guide pages in the same order as resources.items (titles are translated, so match by position)
+  const RESOURCE_ROUTES = [
+    '/learn/risk-management',
+    '/learn/position-sizing',
+    '/learn/trade-journal',
+    '/learn/weekly-review',
+    '/learn/pre-session',
+    '/learn/strategy-snapshot',
+  ]
+  const getResourceHref = (index: number): string | null => RESOURCE_ROUTES[index] ?? null
 
   const typeLabel = (type: string) => {
     switch (type) {
@@ -145,8 +144,8 @@ export function ResourcesPage() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {resources.map((item) => {
-              const href = getResourceHref(item.title)
+            {resources.map((item, index) => {
+              const href = getResourceHref(index)
               return (
                 <div
                   key={item.title}

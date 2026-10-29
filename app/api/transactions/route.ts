@@ -8,6 +8,7 @@ import { Prisma } from '@prisma/client'
 import { getCourseTranslation } from '@/lib/course-i18n'
 import { getServerLocale } from '@/i18n/server'
 import { formatOrderRef, getOrderStatus, type OrderStatus } from '@/lib/order-status'
+import { convertAmount } from '@/lib/currency-utils'
 
 const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
   processing: 'Processing',
@@ -241,11 +242,11 @@ export async function GET(request: NextRequest) {
           return {
             id: `topup-${topup.id}`,
             type: 'Top-up',
-            detail: calculatedTokens > 0 ? `Token pack purchase` : 'Custom top-up',
+            detail: calculatedTokens > 0 ? 'Usage Unit Package purchase' : 'Custom top-up',
             date: topup.created_at.toISOString(),
             tokens: calculatedTokens,
             amount: amountGbp, // Amount in GBP for currency conversion
-            meta: `${calculatedTokens.toLocaleString('en-US')} tokens`,
+            meta: `${calculatedTokens.toLocaleString('en-US')} Usage Units`,
             status: 'Completed',
             receiptAvailable: true,
           }
@@ -253,11 +254,11 @@ export async function GET(request: NextRequest) {
         ...pendingTopups.map((topup) => ({
           id: `payment-${topup.id}`,
           type: 'Top-up',
-          detail: 'Hosted token top-up',
+          detail: 'Hosted Usage Unit top-up',
           date: topup.created_at.toISOString(),
           tokens: topup.tokens,
-          amount: 0,
-          meta: `${topup.tokens.toLocaleString('en-US')} tokens · ${topup.amount.toFixed(2)} ${topup.currency}`,
+          amount: convertAmount(Number(topup.amount), topup.currency, 'GBP'), // Amount in GBP for currency conversion
+          meta: `${topup.tokens.toLocaleString('en-US')} Usage Units`,
           status:
             topup.state === 'COMPLETED'
               ? 'Completed'
@@ -303,7 +304,7 @@ export async function GET(request: NextRequest) {
             date: order.refunded_at!.toISOString(),
             tokens: order.refunded_tokens!,
             amount: 0,
-            meta: `${order.refunded_tokens!.toLocaleString('en-US')} tokens`,
+            meta: `${order.refunded_tokens!.toLocaleString('en-US')} Usage Units`,
             status: 'Refunded',
             receiptAvailable: false,
           })),

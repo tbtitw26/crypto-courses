@@ -395,7 +395,7 @@ function CheckoutContent() {
                           </div>
                           <div className="flex-1">
                             <p className="text-sm font-semibold text-text-main">{t('payment.withCard')}</p>
-                            <p className="mt-0.5 text-sm text-text-secondary">Pay with {currency}</p>
+                            <p className="mt-0.5 text-sm text-text-secondary">{t('payment.withCardHint', { currency })}</p>
                           </div>
                           {paymentMethod === 'card' && (
                             <div className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-600">

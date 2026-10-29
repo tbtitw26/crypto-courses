@@ -71,8 +71,8 @@
       },
       {
         "category": "Usage Units & payments",
-        "question": "Can I pay directly without using Usage Units?",
-        "answer": "Yes. In many cases you can pay directly in EUR for a single course or product. In that case, Usage Units are not required for that purchase."
+        "question": "Can I buy a course directly by card?",
+        "answer": "All products are paid with Usage Units. A card payment buys Usage Units for your Usage Balance; it does not buy a course by itself. If your balance is too low at checkout, you can buy the exact Usage Units needed by card in EUR and then complete the purchase with those Units."
       },
       {
         "category": "Usage Units & payments",
@@ -116,7 +116,7 @@
   "deliveryCard": {
     "title": "Delivery times",
     "subtitle": "Instant vs. delayed content.",
-    "description": "Ready-made courses unlock immediately after successful payment. AI strategies are generated within seconds. Custom courses are delivered by email after confirmation."
+    "description": "Ready-made courses unlock immediately after the purchase is confirmed. AI strategies are usually generated within 5 minutes. Custom courses are delivered within 48–96 hours by email and in your dashboard."
   },
   "cta": {
     "title": "Still unsure about something?",

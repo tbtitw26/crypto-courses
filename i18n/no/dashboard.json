@@ -295,7 +295,7 @@
       "usageDistributionHint": "Kurs 65 % · AI 25 % · Tilpassede PDF-er 10 %",
       "usageDistributionValue": "Kurs {courses} % · AI {ai} % · Tilpassede kurs {custom} %",
       "noUsageYet": "Ingen forbruksdata ennå",
-      "refundWarning": "Bruksenhetskjøp kan vanligvis ikke refunderes når de er brukt til å låse opp digitalt innhold. Lokal forbrukerlovgivning kan likevel gjelde.",
+      "refundWarning": "Ubrukte betalte bruksenheter kan refunderes der loven krever det. Refusjon for produkter kjøpt med bruksenheter følger refusjonsreglene våre og dine lovfestede rettigheter.",
       "supportInfo": "Ved spørsmål om fakturering, kontakt support med kontoens e-postadresse og kun de siste 4 sifrene i kortnummeret – del aldri fullstendige kortopplysninger."
     },
     "paymentMethods": {
@@ -333,6 +333,7 @@
         "tokentop-ups": "Bruksenhetspåfyllinger",
         "courses": "Kurs",
         "aistrategies": "AI-strategier",
+        "refunds": "Refusjoner",
         "adjustments": "Justeringer"
       }
     },
@@ -350,6 +351,7 @@
       "tokentop-up": "Bruksenhetspåfylling",
       "coursepurchase": "Kurskjøp",
       "aistrategy": "AI-strategi",
+      "refund": "Refusjon",
       "adjustment": "Justering",
       "customcourse": "Tilpasset kurs"
     },

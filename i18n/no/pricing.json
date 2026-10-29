@@ -13,10 +13,10 @@
   },
   "hero": {
     "title": "Én saldo for kurs og AI-strategier.",
-    "subtitle": "Fyll på en bruksbalanse én gang og bruk den på tvers av Cur Nova: strukturerte PDF-kurs, tilpassede kurs og AI-genererte strategier. Eller betal direkte for ett enkelt kurs hvis du foretrekker det.",
+    "subtitle": "Fyll på en bruksbalanse én gang og bruk den på tvers av Cur Nova: strukturerte PDF-kurs, tilpassede kurs og AI-genererte strategier. Bruksenheter kjøpes med kort i EUR.",
     "bullets": {
       "oneBalance": "Én saldo for innhold om Forex, krypto og binære opsjoner.",
-      "payWithTokens": "Betal med bruksenheter eller direkte i EUR.",
+      "payWithTokens": "Kjøp bruksenheter med kort i EUR og bruk dem på hvilket som helst produkt.",
       "topUpAnytime": "Fyll på når som helst – bruksenheter utløper ikke."
     },
     "exampleRate": {
@@ -49,12 +49,12 @@
     "youGet": "Du betaler {price} {currency} og får {units} bruksenheter."
   },
   "directPayment": {
-    "title": "Betal direkte for ett enkelt kurs",
-    "subtitle": "Hvis du ikke vil administrere en saldo, kan du betale for enkeltkurs eller tilpassede PDF-er direkte i din valuta.",
+    "title": "Kjøpe ett enkelt kurs",
+    "subtitle": "Ingen saldo ennå? I kassen kan du med kort kjøpe nøyaktig de bruksenhetene et kurs koster, og deretter fullføre kjøpet med disse.",
     "bullets": {
-      "currencies": "Betal i EUR med Visa eller Mastercard.",
-      "noTokens": "Bruksenheter er ikke nødvendig – direkte betaling låser ganske enkelt opp det aktuelle produktet.",
-      "convertLater": "Senere kan du alltid gå over til en bruksbasert arbeidsflyt hvis du foretrekker det."
+      "currencies": "Kortbetalinger belastes i EUR med Visa eller Mastercard.",
+      "noTokens": "En kortbetaling legger bruksenheter til bruksbalansen din. Selve kurset kjøpes deretter med bruksenheter.",
+      "convertLater": "Eventuelle gjenværende bruksenheter blir stående i bruksbalansen din til senere kjøp."
     },
     "cta": "Se kurs"
   },

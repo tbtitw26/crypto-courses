@@ -190,6 +190,7 @@ export async function POST(request: NextRequest) {
           orderType: 'custom_course',
           orderRef,
           immediateSupply: true,
+          supplyKind: 'preparation',
           locale,
           request,
         })
@@ -206,7 +207,7 @@ export async function POST(request: NextRequest) {
           tokens: -tokensCost,
           amountGbp: 0,
           customCourseDeliveryInfo: true,
-          consent: { recordedAt: consent.created_at, immediateSupply: true },
+          consent: { recordedAt: consent.created_at, immediateSupply: true, supplyKind: 'preparation' },
         })
       } catch (consentError) {
         console.error('[Custom Course API] Failed to record consent or send confirmation:', {

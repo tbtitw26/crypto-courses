@@ -171,6 +171,8 @@
     "forex": "forex",
     "crypto": "crypto",
     "binary": "binary",
+    "Usage Unit Package purchase": "Usage Unit Package purchase",
+    "Hosted Usage Unit top-up": "Hosted Usage Unit top-up",
     "Token pack purchase": "Usage Unit Package purchase",
     "Custom top-up": "Custom top-up",
     "Hosted token top-up": "Hosted Usage Unit top-up",
@@ -234,6 +236,7 @@
     "termsAnd": "and the",
     "refundLink": "Refund Policy",
     "immediateSupply": "I request immediate supply of this digital content and understand that once supply has started I lose my right to cancel and to a refund, except where the law says otherwise.",
+    "startPreparation": "I request that preparation of my custom course starts now. I understand that I can still cancel until the course is delivered and that, where the law allows, a proportionate amount may be charged for preparation already carried out.",
     "topupNotice": "Buying Usage Units does not start any course, custom course or AI strategy. You confirm each product separately when you spend your Usage Units."
   }
 }

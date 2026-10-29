@@ -5,7 +5,7 @@
   },
   "hero": {
     "title": "Checklists and templates to support your routines.",
-    "subtitle": "Short, focused PDFs that live next to your Cur Nova courses and AI strategies. Print them, pin them, or keep them open while you work – they are built for real trading desks, not slideshows.",
+    "subtitle": "Short, focused guides that sit next to your Cur Nova courses and AI strategies. Keep them open while you work or print them – they are built for real routines, not slideshows.",
     "features": {
       "checklists": "Risk and process checklists that fit on a single page.",
       "templates": "Templates for sizing, journaling and weekly reviews.",
@@ -13,23 +13,23 @@
     },
     "sideCard": {
       "title": "How resources connect to your courses",
-      "subtitle": "Think of them as tools that sit next to your PDFs.",
-      "paragraph1": "When you work through an Cur Nova course, you will see references to supporting resources: checklists, templates and review sheets. This page is the hub where you can access them in one place.",
-      "paragraph2": "Some resources may unlock together with specific courses, while others will be available to all signed-in users as part of general education material."
+      "subtitle": "Think of them as tools that sit next to your courses.",
+      "paragraph1": "Cur Nova courses refer to supporting topics such as risk limits, position sizing, journaling and weekly reviews. This page collects the guides on those topics in one place.",
+      "paragraph2": "All guides on this page are free to read and do not require a purchase."
     }
   },
   "resources": {
     "title": "Core Cur Nova resources.",
-    "subtitle": "This is a preview set. In production, the list will grow as new courses and AI templates are released.",
-    "disclaimer": "Downloads here are placeholders – links will be wired to real PDFs in-app.",
-    "downloadPreview": "Download preview",
+    "subtitle": "Six free guides covering risk, sizing, journaling, reviews, preparation and strategy documentation.",
+    "disclaimer": "Educational material only. These guides do not contain trading signals or recommendations, and trading involves a high risk of loss.",
+    "downloadPreview": "Open guide",
     "items": [
       {
         "type": "template",
         "title": "Risk Management Foundations",
         "subtitle": "Guide · Start here",
         "description": "A clear overview of how to limit risk before you even think about entries: account-level risk, risk per trade, daily loss limits and what to do after a losing streak.",
-        "format": "PDF · A4",
+        "format": "Online guide",
         "focus": "Risk · All markets",
         "cta": "Learn more"
       },
@@ -38,7 +38,7 @@
         "title": "Position Sizing Made Simple",
         "subtitle": "Guide · Sizing basics",
         "description": "How to connect account size, risk percentage and stop distance to position size or lot size – with simple examples for Forex, Crypto and Binary structures.",
-        "format": "PDF · A4",
+        "format": "Online guide",
         "focus": "Risk / Sizing · Forex · Crypto",
         "cta": "Learn more"
       },
@@ -47,7 +47,7 @@
         "title": "Daily Trade Journal Principles",
         "subtitle": "Framework · Process",
         "description": "What a useful trading journal actually tracks: entries and exits, reasoning, rule breaks, screenshots and emotional notes – without turning journaling into a second job.",
-        "format": "PDF · A4",
+        "format": "Online guide",
         "focus": "Process · All markets",
         "cta": "See framework"
       },
@@ -56,7 +56,7 @@
         "title": "Weekly Review Playbook",
         "subtitle": "Framework · Review",
         "description": "A simple loop to review the last week: what worked, what did not, where rules were broken and which adjustments you'll test next week.",
-        "format": "PDF · A4",
+        "format": "Online guide",
         "focus": "Process / Psychology · All markets",
         "cta": "See framework"
       },
@@ -65,7 +65,7 @@
         "title": "Pre-Session Preparation",
         "subtitle": "Checklist · Routine",
         "description": "A short, repeatable routine for the 15–20 minutes before you look at any chart: environment, focus, key levels, important news and risk limits for the session.",
-        "format": "PDF · A4",
+        "format": "Online guide",
         "focus": "Routine · All markets",
         "cta": "View checklist"
       },
@@ -74,7 +74,7 @@
         "title": "Strategy Snapshot Overview",
         "subtitle": "Guide · Strategy map",
         "description": "How to summarise any strategy on a single page: market conditions, setup criteria, entry/exit rules, risk model and the typical mistakes to watch for.",
-        "format": "PDF · A4",
+        "format": "Online guide",
         "focus": "Strategy · All markets",
         "cta": "View overview"
       }
@@ -83,8 +83,8 @@
   "infoCards": {
     "useWithCourses": {
       "title": "Use with your courses",
-      "subtitle": "Attach each resource to a specific module.",
-      "description": "Many Cur Nova PDFs will include small icons or notes that link directly to a matching resource – for example, a risk checklist near the risk chapter or a journal sheet near a process module."
+      "subtitle": "Pair each guide with the matching course topic.",
+      "description": "Read the guide that matches the chapter you are working on – for example, the risk guide next to a risk chapter or the journal principles next to a process module."
     },
     "buildRoutines": {
       "title": "Build steady routines",

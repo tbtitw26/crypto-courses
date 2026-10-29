@@ -171,6 +171,8 @@
     "forex": "Forex",
     "crypto": "krypto",
     "binary": "binære",
+    "Usage Unit Package purchase": "Kjøp av bruksenhetspakke",
+    "Hosted Usage Unit top-up": "Bruksenhetspåfylling via betalingsside",
     "Token pack purchase": "Kjøp av bruksenhetspakke",
     "Custom top-up": "Valgfri påfylling",
     "Hosted token top-up": "Bruksenhetspåfylling via betalingsside",
@@ -234,6 +236,7 @@
     "termsAnd": "og",
     "refundLink": "refusjonspolicyen",
     "immediateSupply": "Jeg ber om umiddelbar levering av dette digitale innholdet og forstår at jeg mister angreretten og retten til refusjon når leveringen har startet, med mindre loven sier noe annet.",
+    "startPreparation": "Jeg ber om at utarbeidelsen av mitt tilpassede kurs starter nå. Jeg forstår at jeg fortsatt kan kansellere til kurset er levert, og at et forholdsmessig beløp kan kreves for utarbeidelse som allerede er utført, der loven tillater det.",
     "topupNotice": "Kjøp av bruksenheter starter ikke noe kurs, tilpasset kurs eller noen AI-strategi. Du bekrefter hvert produkt separat når du bruker bruksenhetene dine."
   }
 }

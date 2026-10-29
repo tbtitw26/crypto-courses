@@ -5,7 +5,7 @@
   },
   "hero": {
     "title": "Sjekklister og maler som støtter rutinene dine.",
-    "subtitle": "Korte, fokuserte PDF-er som hører sammen med Cur Nova-kursene og AI-strategiene dine. Skriv dem ut, heng dem opp eller ha dem åpne mens du jobber – de er laget for ekte handelspulter, ikke lysbildefremvisninger.",
+    "subtitle": "Korte, fokuserte veiledninger som hører sammen med Cur Nova-kursene og AI-strategiene dine. Ha dem åpne mens du jobber eller skriv dem ut – de er laget for ekte rutiner, ikke lysbildefremvisninger.",
     "features": {
       "checklists": "Sjekklister for risiko og prosess som får plass på én side.",
       "templates": "Maler for posisjonsstørrelse, journalføring og ukentlige gjennomganger.",
@@ -13,23 +13,23 @@
     },
     "sideCard": {
       "title": "Hvordan ressursene henger sammen med kursene dine",
-      "subtitle": "Tenk på dem som verktøy som ligger ved siden av PDF-ene dine.",
-      "paragraph1": "Når du jobber deg gjennom et Cur Nova-kurs, vil du se henvisninger til støtteressurser: sjekklister, maler og gjennomgangsark. Denne siden er knutepunktet der du finner alt samlet.",
-      "paragraph2": "Noen ressurser kan låses opp sammen med bestemte kurs, mens andre vil være tilgjengelige for alle innloggede brukere som en del av det generelle opplæringsmateriellet."
+      "subtitle": "Tenk på dem som verktøy som ligger ved siden av kursene dine.",
+      "paragraph1": "Cur Nova-kursene viser til støttetemaer som risikogrenser, posisjonsstørrelse, journalføring og ukentlige gjennomganger. Denne siden samler veiledningene om disse temaene på ett sted.",
+      "paragraph2": "Alle veiledningene på denne siden er gratis å lese og krever ikke kjøp."
     }
   },
   "resources": {
     "title": "Sentrale Cur Nova-ressurser.",
-    "subtitle": "Dette er et forhåndsutvalg. I produksjon vil listen vokse etter hvert som nye kurs og AI-maler lanseres.",
-    "disclaimer": "Nedlastingene her er plassholdere – lenkene kobles til ekte PDF-er i appen.",
-    "downloadPreview": "Last ned forhåndsvisning",
+    "subtitle": "Seks gratis veiledninger om risiko, posisjonsstørrelse, journalføring, gjennomganger, forberedelse og strategidokumentasjon.",
+    "disclaimer": "Kun opplæringsmateriell. Veiledningene inneholder ikke handelssignaler eller anbefalinger, og handel innebærer høy risiko for tap.",
+    "downloadPreview": "Åpne veiledning",
     "items": [
       {
         "type": "template",
         "title": "Grunnleggende risikostyring",
         "subtitle": "Guide · Start her",
         "description": "En tydelig oversikt over hvordan du begrenser risiko før du i det hele tatt tenker på inngangspunkter: risiko på kontonivå, risiko per handel, daglige tapsgrenser og hva du gjør etter en tapsrekke.",
-        "format": "PDF · A4",
+        "format": "Nettveiledning",
         "focus": "Risiko · Alle markeder",
         "cta": "Les mer"
       },
@@ -38,7 +38,7 @@
         "title": "Posisjonsstørrelse gjort enkelt",
         "subtitle": "Guide · Grunnleggende størrelse",
         "description": "Hvordan du kobler kontostørrelse, risikoprosent og stoppavstand til posisjons- eller lotstørrelse – med enkle eksempler for Forex, krypto og binære strukturer.",
-        "format": "PDF · A4",
+        "format": "Nettveiledning",
         "focus": "Risiko / størrelse · Forex · Krypto",
         "cta": "Les mer"
       },
@@ -47,7 +47,7 @@
         "title": "Prinsipper for daglig handelsjournal",
         "subtitle": "Rammeverk · Prosess",
         "description": "Hva en nyttig handelsjournal faktisk registrerer: inn- og utganger, begrunnelse, regelbrudd, skjermbilder og følelsesnotater – uten at journalføringen blir en ekstra jobb.",
-        "format": "PDF · A4",
+        "format": "Nettveiledning",
         "focus": "Prosess · Alle markeder",
         "cta": "Se rammeverket"
       },
@@ -56,7 +56,7 @@
         "title": "Håndbok for ukentlig gjennomgang",
         "subtitle": "Rammeverk · Gjennomgang",
         "description": "En enkel syklus for å gå gjennom forrige uke: hva fungerte, hva fungerte ikke, hvor ble reglene brutt og hvilke justeringer du skal teste neste uke.",
-        "format": "PDF · A4",
+        "format": "Nettveiledning",
         "focus": "Prosess / psykologi · Alle markeder",
         "cta": "Se rammeverket"
       },
@@ -65,7 +65,7 @@
         "title": "Forberedelser før økten",
         "subtitle": "Sjekkliste · Rutine",
         "description": "En kort, gjentakbar rutine for de 15–20 minuttene før du ser på et diagram: omgivelser, fokus, nøkkelnivåer, viktige nyheter og risikogrenser for økten.",
-        "format": "PDF · A4",
+        "format": "Nettveiledning",
         "focus": "Rutine · Alle markeder",
         "cta": "Se sjekklisten"
       },
@@ -74,7 +74,7 @@
         "title": "Strategioversikt",
         "subtitle": "Guide · Strategikart",
         "description": "Hvordan du oppsummerer en hvilken som helst strategi på én side: markedsforhold, oppsettkriterier, regler for inn- og utgang, risikomodell og typiske feil du bør se opp for.",
-        "format": "PDF · A4",
+        "format": "Nettveiledning",
         "focus": "Strategi · Alle markeder",
         "cta": "Se oversikten"
       }
@@ -83,8 +83,8 @@
   "infoCards": {
     "useWithCourses": {
       "title": "Bruk sammen med kursene dine",
-      "subtitle": "Knytt hver ressurs til en bestemt modul.",
-      "description": "Mange Cur Nova-PDF-er vil inneholde små ikoner eller notater som lenker direkte til en tilhørende ressurs – for eksempel en risikosjekkliste ved risikokapittelet eller et journalark ved en prosessmodul."
+      "subtitle": "Koble hver veiledning til det tilhørende kurstemaet.",
+      "description": "Les veiledningen som passer til kapittelet du jobber med – for eksempel risikoveiledningen ved et risikokapittel eller journalprinsippene ved en prosessmodul."
     },
     "buildRoutines": {
       "title": "Bygg stabile rutiner",

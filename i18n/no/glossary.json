@@ -29,8 +29,8 @@
   },
   "terms": {
     "title": "Utvalgte begreper fra Cur Novas ordliste.",
-    "subtitle": "I det fullstendige produktet vil du kunne søke, filtrere og åpne egne ordlistevisninger direkte fra kursmodulene.",
-    "disclaimer": "Definisjonene her er en forhåndsvisning. Den fullstendige ordlisten utvides for hver lansering.",
+    "subtitle": "Søk i begrepene eller filtrer dem etter kategori. Hver oppføring gir en kort definisjon og en forklaring på vanlig språk.",
+    "disclaimer": "Definisjonene er forenklede og ment for opplæring. De er ikke finansiell rådgivning.",
     "items": [
       {
         "id": "leverage",
@@ -127,9 +127,9 @@
       "description": "Ordlisten forklarer språket som brukes i høyrisikomarkeder. Den foreslår ikke instrumenter, posisjonsstørrelser eller retninger. Alle beslutninger om å handle er fullt ut ditt eget ansvar."
     },
     "linkFromCourses": {
-      "title": "Lenker fra kursene",
-      "subtitle": "I appen kan du hoppe hit direkte fra PDF-ene.",
-      "description": "I produksjon vil nøkkelbegreper i Cur Nova-kursene lenke til oppføringer i ordlisten. Du kan åpne dem, lese forklaringen og deretter gå tilbake til der du var i PDF-en eller modulen."
+      "title": "Bruk den sammen med kursene",
+      "subtitle": "Slå opp et begrep mens du leser en kurs-PDF.",
+      "description": "Når et kurs eller en AI-strategi bruker et begrep du er usikker på, kan du søke etter det her, lese forklaringen og deretter gå tilbake til der du var i PDF-en."
     },
     "updates": {
       "title": "Oppdateres over tid",

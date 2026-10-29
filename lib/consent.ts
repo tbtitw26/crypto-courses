@@ -11,14 +11,19 @@ const CONSENT_TEXT = {
   terms: 'I have read and accept the Terms & Conditions and the Refund Policy.',
   immediateSupply:
     'I request immediate supply of this digital content and understand that once supply has started I lose my right to cancel and to a refund, except where the law says otherwise.',
+  preparation:
+    'I request that preparation of my custom course starts now. I understand that I can still cancel until the course is delivered and that, where the law allows, a proportionate amount may be charged for preparation already carried out.',
 }
+
+/** Ready-made courses and AI outputs are supplied at once; custom courses are a service prepared over 48–96 hours. */
+export type SupplyConsentKind = 'immediate' | 'preparation'
 
 /** Usage Unit top-ups: Terms & Refund Policy only. Buying Units is not consent to supply any product. */
 export const topupConsentSchema = z.object({
   termsAccepted: z.literal(true),
 })
 
-/** Products paid with Usage Units: Terms plus a separate immediate-supply consent. */
+/** Products paid with Usage Units: Terms plus a separate supply consent (immediate supply or start of preparation). */
 export const productConsentSchema = z.object({
   termsAccepted: z.literal(true),
   immediateSupply: z.literal(true),
@@ -28,7 +33,7 @@ export type OrderType = 'topup' | 'course' | 'custom_course' | 'ai_strategy'
 
 export const CONSENT_REQUIRED_ERROR = {
   error: 'Consent required',
-  message: 'Please accept the Terms & Refund Policy and confirm immediate supply before ordering.',
+  message: 'Please accept the Terms & Refund Policy and confirm the supply request before ordering.',
 }
 
 export async function recordOrderConsent(params: {
@@ -36,11 +41,13 @@ export async function recordOrderConsent(params: {
   orderType: OrderType
   orderRef: string
   immediateSupply: boolean
+  supplyKind?: SupplyConsentKind
   locale?: string
   request?: NextRequest
 }) {
-  const { userId, orderType, orderRef, immediateSupply, locale, request } = params
-  const consentText = immediateSupply ? `${CONSENT_TEXT.terms}\n${CONSENT_TEXT.immediateSupply}` : CONSENT_TEXT.terms
+  const { userId, orderType, orderRef, immediateSupply, supplyKind = 'immediate', locale, request } = params
+  const supplyText = supplyKind === 'preparation' ? CONSENT_TEXT.preparation : CONSENT_TEXT.immediateSupply
+  const consentText = immediateSupply ? `${CONSENT_TEXT.terms}\n${supplyText}` : CONSENT_TEXT.terms
 
   return withPrismaRetry(() =>
     prisma.orderConsent.create({
@@ -50,7 +57,8 @@ export async function recordOrderConsent(params: {
         order_ref: orderRef,
         terms_accepted: true,
         immediate_supply: immediateSupply,
-        withdrawal_loss_ack: immediateSupply,
+        // Starting preparation of a custom course does not end the right to cancel
+        withdrawal_loss_ack: immediateSupply && supplyKind === 'immediate',
         consent_version: CONSENT_VERSION,
         consent_text: consentText,
         locale: locale ?? null,

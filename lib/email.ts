@@ -416,6 +416,7 @@ export interface PurchaseEmailData {
   consent?: {
     recordedAt: Date
     immediateSupply: boolean
+    supplyKind?: 'immediate' | 'preparation'
   }
 }
 
@@ -428,6 +429,9 @@ function describeConsent(data: PurchaseEmailData): string | null {
   if (!data.consent) return null
   const when = formatConsentDate(data.consent.recordedAt)
   const order = data.orderRef || data.invoiceNumber
+  if (data.consent.immediateSupply && data.consent.supplyKind === 'preparation') {
+    return `On ${when} (order ${order}) you accepted our Terms & Conditions and Refund Policy and asked us to start preparing your custom course. You can still cancel until the course is delivered; where the law allows, a proportionate amount may be charged for preparation already carried out.`
+  }
   return data.consent.immediateSupply
     ? `On ${when} (order ${order}) you accepted our Terms & Conditions and Refund Policy, requested immediate supply of this digital content and confirmed that you lose the right to cancel once supply has started.`
     : `On ${when} (order ${order}) you accepted our Terms & Conditions and Refund Policy. Topping up Usage Units does not start the supply of any course or AI product.`

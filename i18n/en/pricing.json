@@ -13,10 +13,10 @@
   },
   "hero": {
     "title": "One balance for courses and AI strategies.",
-    "subtitle": "Load a Usage Balance once and use it across Cur Nova: structured PDF courses, custom courses and AI-generated strategies. Or pay directly for a single course if you prefer.",
+    "subtitle": "Load a Usage Balance once and use it across Cur Nova: structured PDF courses, custom courses and AI-generated strategies. Usage Units are bought by card in EUR.",
     "bullets": {
       "oneBalance": "One balance for Forex, Crypto and Binary content.",
-      "payWithTokens": "Pay with Usage Units or directly in EUR.",
+      "payWithTokens": "Buy Usage Units by card in EUR, then spend them on any product.",
       "topUpAnytime": "Top up any time – Usage Units do not expire."
     },
     "exampleRate": {
@@ -49,12 +49,12 @@
     "youGet": "You pay {price} {currency} and receive {units} Usage Units."
   },
   "directPayment": {
-    "title": "Pay directly for a single course",
-    "subtitle": "If you prefer not to manage a balance, you can pay for individual courses or custom PDFs directly in your currency.",
+    "title": "Buying a single course",
+    "subtitle": "No balance yet? At checkout you can buy, by card, exactly the Usage Units a course costs and then complete the purchase with those Units.",
     "bullets": {
-      "currencies": "Pay in EUR by Visa or Mastercard.",
-      "noTokens": "Usage Units are not required – direct payment simply unlocks that specific product.",
-      "convertLater": "In future, you can always convert to a usage-based workflow if you prefer."
+      "currencies": "Card payments are charged in EUR by Visa or Mastercard.",
+      "noTokens": "A card payment adds Usage Units to your Usage Balance. The course itself is then bought with Usage Units.",
+      "convertLater": "Any Usage Units left over stay in your Usage Balance for later purchases."
     },
     "cta": "Browse courses"
   },

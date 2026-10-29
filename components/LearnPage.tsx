@@ -642,7 +642,7 @@ function CustomCourseForm() {
                 />
                 <span>{tForm('consents.education')}</span>
               </label>
-              <OrderConsentFields value={orderConsent} onChange={setOrderConsent} requireImmediateSupply />
+              <OrderConsentFields value={orderConsent} onChange={setOrderConsent} requireImmediateSupply supplyConsent="preparation" />
             </div>
           </div>
 

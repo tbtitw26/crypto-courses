@@ -8,7 +8,7 @@ export function useValueLabel() {
   return useCallback((value: string) => (value && t.has(value) ? t(value) : value), [t])
 }
 
-/** Localizes API "meta" lines such as "Beginner · Forex" or "1,000 tokens · 10.00 GBP". */
+/** Localizes API "meta" lines such as "Beginner · Forex" or "1,000 Usage Units". */
 export function useMetaLabel() {
   const valueLabel = useValueLabel()
   return useCallback(
@@ -19,7 +19,7 @@ export function useMetaLabel() {
           part
             .split(', ')
             .map((word) => {
-              const tokens = word.match(/^([\d,.]+) tokens$/)
+              const tokens = word.match(/^([\d,.]+) (?:tokens|Usage Units)$/)
               return tokens ? `${tokens[1]} ${valueLabel('tokens')}` : valueLabel(word)
             })
             .join(', ')

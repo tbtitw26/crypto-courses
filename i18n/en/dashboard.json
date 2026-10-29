@@ -295,7 +295,7 @@
       "usageDistributionHint": "Courses 65% · AI 25% · Custom PDFs 10%",
       "usageDistributionValue": "Courses {courses}% · AI {ai}% · Custom courses {custom}%",
       "noUsageYet": "No usage data yet",
-      "refundWarning": "Usage Unit purchases are typically non-refundable once used to unlock digital content. Local consumer law may still apply.",
+      "refundWarning": "Unused paid Usage Units can be refunded where the law requires it. Refunds for products bought with Units follow our Refund Policy and your statutory rights.",
       "supportInfo": "For billing questions, contact support with your account email and the last 4 digits of your card only – never share full card details."
     },
     "paymentMethods": {
@@ -333,6 +333,7 @@
         "tokentop-ups": "Usage Unit top-ups",
         "courses": "Courses",
         "aistrategies": "AI strategies",
+        "refunds": "Refunds",
         "adjustments": "Adjustments"
       }
     },
@@ -350,6 +351,7 @@
       "tokentop-up": "Usage Unit top-up",
       "coursepurchase": "Course purchase",
       "aistrategy": "AI strategy",
+      "refund": "Refund",
       "adjustment": "Adjustment",
       "customcourse": "Custom course"
     },

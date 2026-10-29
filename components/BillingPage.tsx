@@ -35,7 +35,7 @@ interface Transaction {
   time: string
   isoDate: string
   description: string
-  type: 'Token top-up' | 'Course purchase' | 'AI strategy' | 'Custom course' | 'Adjustment'
+  type: 'Token top-up' | 'Course purchase' | 'AI strategy' | 'Custom course' | 'Refund'
   currencyAmount: string
   tokensDelta: string
   balanceAfter: string
@@ -100,7 +100,7 @@ export function BillingPage() {
   const router = useRouter()
   const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [typeFilter, setTypeFilter] = useState<
-    'All' | 'Token top-ups' | 'Courses' | 'AI strategies' | 'Adjustments'
+    'All' | 'Token top-ups' | 'Courses' | 'AI strategies' | 'Refunds'
   >('All')
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true)
@@ -144,7 +144,7 @@ export function BillingPage() {
             if (amountGBP > 0) {
               const priceAmount = convertAmount(amountGBP, 'GBP', currency)
               currencyAmount = formatPrice(priceAmount, currency)
-            } else if (tx.tokens && tx.tokens < 0) {
+            } else if (tx.tokens) {
               const tokensAbs = Math.abs(tx.tokens)
               const priceAmount = calculatePriceForTokens(tokensAbs, currency)
               currencyAmount = formatPrice(priceAmount, currency)
@@ -156,9 +156,11 @@ export function BillingPage() {
               ? `+${tx.tokens.toLocaleString('en-US')}`
               : `${tx.tokens.toLocaleString('en-US')}`
 
-            let componentType: Transaction['type'] = 'Adjustment'
+            let componentType: Transaction['type'] = 'Refund'
             if (tx.type === 'Top-up') {
               componentType = 'Token top-up'
+            } else if (tx.type === 'Course purchase') {
+              componentType = 'Course purchase'
             } else if (tx.type === 'Custom course') {
               componentType = 'Custom course'
             } else if (tx.type === 'AI strategy') {
@@ -243,7 +245,7 @@ export function BillingPage() {
     if (typeFilter === 'Token top-ups' && tx.type === 'Token top-up') return true
     if (typeFilter === 'Courses' && (tx.type === 'Course purchase' || tx.type === 'Custom course')) return true
     if (typeFilter === 'AI strategies' && tx.type === 'AI strategy') return true
-    if (typeFilter === 'Adjustments' && tx.type === 'Adjustment') return true
+    if (typeFilter === 'Refunds' && tx.type === 'Refund') return true
     return false
   })
 
@@ -262,7 +264,7 @@ export function BillingPage() {
   })
   const thisMonthSpent = thisMonthTransactions.reduce((sum, entry) => sum + entry.usageTokens, 0)
 
-  const topUpTransactions = transactions.filter((tx) => tx.type === 'Token top-up')
+  const topUpTransactions = transactions.filter((tx) => tx.type === 'Token top-up' && tx.status === 'Completed')
   const lastTopUpTx = topUpTransactions[0]
   const lastTopUp = lastTopUpTx
     ? parseFloat(lastTopUpTx.currencyAmount.replace(/[^0-9.]/g, '')) || 0
@@ -508,7 +510,7 @@ export function BillingPage() {
                 <SlidersHorizontal className="h-3 w-3" />
                 <span>{t('filters.type')}</span>
               </div>
-              {(['All', 'Token top-ups', 'Courses', 'AI strategies', 'Adjustments'] as const).map((f) => (
+              {(['All', 'Token top-ups', 'Courses', 'AI strategies', 'Refunds'] as const).map((f) => (
                 <button
                   type="button"
                   key={f}
@@ -558,7 +560,7 @@ export function BillingPage() {
                           {tx.type === 'Course purchase' && <ShoppingCart className="h-3 w-3" />}
                           {tx.type === 'Token top-up' && <Coins className="h-3 w-3" />}
                           {tx.type === 'AI strategy' && <Sparkles className="h-3 w-3" />}
-                          {tx.type === 'Adjustment' && <AlertTriangle className="h-3 w-3 text-gold-600" />}
+                          {tx.type === 'Refund' && <RotateCcw className="h-3 w-3" />}
                           <span>{t(`types.${tx.type.toLowerCase().replace(/\s+/g, '')}`)}</span>
                         </span>
                       </div>

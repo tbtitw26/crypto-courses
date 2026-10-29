@@ -103,9 +103,9 @@
         "cta": "Bestill tilpasset kurs"
       },
       {
-        "title": "AI-strategi på sekunder",
+        "title": "AI-strategi på få minutter",
         "text": "Generer en strukturert opplæringsguide med generelle beslutningskriterier og en risikosjekkliste, basert på læringsprofilen din.",
-        "badge": "Umiddelbart",
+        "badge": "Vanligvis innen 5 minutter",
         "cta": "Åpne AI-strategibyggeren"
       }
     ]
@@ -119,8 +119,8 @@
         "text": "Velg mellom ferdige kurs, en tilpasset PDF eller en AI-generert strategi."
       },
       {
-        "title": "Fyll på saldo eller betal direkte",
-        "text": "Bruk bruksenheter på tvers av produktene eller betal i EUR i kassen."
+        "title": "Legg til bruksenheter",
+        "text": "Kjøp bruksenheter med kort i EUR og bruk dem på alle produkter."
       },
       {
         "title": "Få PDF-en din",
@@ -262,7 +262,7 @@
         "id": "how-tokens-work",
         "category": "payments",
         "question": "Hvordan fungerer bruksenheter?",
-        "answer": "Bruksenheter er kreditter som brukes til å få tilgang til Cur Nova-produkter. €1,14 tilsvarer 100 bruksenheter. Du kan kjøpe bruksenhetspakker, gjøre valgfrie påfyllinger eller betale direkte for kurs. Bruksenheter utløper ikke og kan brukes på alle produkter."
+        "answer": "Bruksenheter er kreditter som brukes til å få tilgang til Cur Nova-produkter. €1,14 tilsvarer 100 bruksenheter. Du kan kjøpe bruksenhetspakker eller gjøre valgfrie påfyllinger med kort i EUR, og deretter bruke enhetene på kurs, tilpassede kurs og AI-strategier."
       },
       {
         "id": "what-in-courses",
@@ -274,13 +274,13 @@
         "id": "can-cancel",
         "category": "payments",
         "question": "Kan jeg kansellere en bestilling?",
-        "answer": "For ferdige kurs kan du kansellere før betalingen er behandlet. For bestillinger av tilpassede kurs er kansellering mulig innen 24 timer etter innsending. Når et kurs er generert eller levert, er bruksenheter brukt og kan ikke refunderes med mindre det har oppstått en teknisk feil hos oss."
+        "answer": "Ja, innenfor rettighetene i refusjonsreglene våre. Et tilpasset kurs kan kanselleres til det er levert; der loven tillater det, kan et forholdsmessig beløp kreves for utarbeidelse som allerede er utført. Hvis et tilpasset kurs eller en AI-strategi blir forsinket, kan du godta den nye datoen eller kansellere og få bruksenhetene tilbake. For ferdige kurs og AI-resultater som leveres etter din forespørsel, opphører den lovbestemte angreretten når leveringen starter, men rettighetene dine ved mangelfullt eller ikke levert innhold består."
       },
       {
         "id": "refund-policy",
         "category": "payments",
         "question": "Hva er refusjonspolicyen deres?",
-        "answer": "Refusjon er tilgjengelig ved dobbeltkjøp, tekniske feil eller uautoriserte belastninger. Vi gir ikke refusjon på grunn av subjektiv misnøye med kursinnholdet. Kontakt support med betalings-ID og detaljer for vurdering. Vi svarer innen 2 virkedager."
+        "answer": "Ubrukte betalte bruksenheter kan refunderes der loven krever det. Refusjon gis også ved dobbelt- eller uautoriserte belastninger, tekniske feil, innhold som er mangelfullt eller ikke som beskrevet, og bestillinger som ikke blir levert. Dine lovfestede forbrukerrettigheter påvirkes ikke. Kontakt support med ordrenummeret ditt; vi svarer innen 2 virkedager."
       },
       {
         "id": "need-account",
@@ -469,7 +469,7 @@
       "ctaAi": "Bygg AI-strategi",
       "aiDoc": "AI-strategidokument",
       "customDoc": "Tilpasset kurs-PDF",
-      "aiDocSub": "Generert på sekunder",
+      "aiDocSub": "Vanligvis innen 5 minutter",
       "customDocSub": "Laget av en profesjonell trader",
       "aiTags": [
         "Strategi-PDF",
