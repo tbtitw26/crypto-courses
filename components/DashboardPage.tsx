@@ -69,6 +69,7 @@ export function DashboardPage() {
   const [currency, setCurrency] = useState(SITE_CURRENCY)
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [isLoadingTransactions, setIsLoadingTransactions] = useState(true)
+  const [tokensSpentLast30Days, setTokensSpentLast30Days] = useState(0)
   const [recentItems, setRecentItems] = useState<CourseItem[]>([])
   const [isLoadingCourses, setIsLoadingCourses] = useState(true)
 
@@ -82,9 +83,19 @@ export function DashboardPage() {
 
       try {
         setIsLoadingTransactions(true)
-        const response = await fetch('/api/transactions?limit=10')
+        // Fetch more than the 10 rows shown so the 30-day spend total is complete
+        const response = await fetch('/api/transactions?limit=100')
         if (response.ok) {
           const data = await response.json()
+          const since = Date.now() - 30 * 24 * 60 * 60 * 1000
+          setTokensSpentLast30Days(
+            data.transactions
+              .filter((tx: any) => tx.tokens < 0 && new Date(tx.date).getTime() >= since)
+              .reduce((sum: number, tx: any) => sum + Math.abs(tx.tokens), 0) -
+              data.transactions
+                .filter((tx: any) => tx.type === 'Refund' && new Date(tx.date).getTime() >= since)
+                .reduce((sum: number, tx: any) => sum + tx.tokens, 0)
+          )
           const formattedTransactions: Transaction[] = data.transactions.map((tx: any) => {
             let priceInCurrency = ''
             if (tx.amount && tx.amount > 0) {
@@ -254,12 +265,23 @@ export function DashboardPage() {
   const balancePrice = calculatePriceForTokens(userBalance, currency)
   const formattedBalancePrice = formatPrice(balancePrice, currency)
 
-  const customCourseStatus = null
-  const customCourseTitle = ''
+  // Latest custom course that is still relevant to show (API returns newest first)
+  const latestCustomCourse = recentItems.find(
+    (item) => item.type === 'custom' && item.status !== 'cancelled' && item.status !== 'refunded'
+  )
+  const customCourseStatus = latestCustomCourse
+    ? latestCustomCourse.status === 'Completed'
+      ? 'ready'
+      : latestCustomCourse.status === 'delayed'
+        ? 'delayed'
+        : 'inProgress'
+    : null
+  const customCourseTitle = latestCustomCourse?.title ?? ''
 
-  const tokensSpentLast30Days = 0
-  const aiStrategiesGenerated = 0
-  const coursesUnlocked = 0
+  const aiStrategiesGenerated = recentItems.filter((item) => item.type === 'ai' && item.status === 'Completed').length
+  const coursesUnlocked = recentItems.filter(
+    (item) => item.type === 'course' || (item.type === 'custom' && item.status === 'Completed')
+  ).length
 
   return (
     <div className="min-h-screen bg-surface-50">
@@ -334,7 +356,7 @@ export function DashboardPage() {
                         : 'bg-gold-50 text-gold-700 border border-gold-200'
                     }`}>
                       <Clock className="h-2.5 w-2.5" />
-                      {customCourseStatus === 'pending' && t('kpi.customCourse.status.pending')}
+                      {customCourseStatus === 'delayed' && t('kpi.customCourse.status.delayed')}
                       {customCourseStatus === 'inProgress' && t('kpi.customCourse.status.inProgress')}
                       {customCourseStatus === 'ready' && t('kpi.customCourse.status.ready')}
                     </span>
@@ -565,7 +587,7 @@ export function DashboardPage() {
                     <div className="col-span-3 text-right text-xs font-bold uppercase tracking-wider text-text-muted">{t('transactions.table.amount')}</div>
                   </div>
                   <div>
-                    {transactions.map((tx, index) => (
+                    {transactions.slice(0, 10).map((tx, index) => (
                       <div key={index} className={`px-5 py-3.5 ${index > 0 ? 'border-t border-surface-200' : ''}`}>
                         {/* Mobile layout */}
                         <div className="flex items-center justify-between sm:hidden">

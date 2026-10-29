@@ -114,13 +114,14 @@
       "status": {
         "pending": "Pending",
         "inProgress": "In progress",
+        "delayed": "Delayed",
         "ready": "Ready"
       },
       "explanation": "Once ready, your PDF will be emailed to you and appear in your library."
     },
     "recentActivity": {
       "title": "Recent activity",
-      "subtitle": "{count} learning items this week",
+      "subtitle": "{count} items in your library",
       "noActivity": "No recent activity yet.",
       "completedCourse": "Completed \"{title}\".",
       "generatedAI": "Generated AI strategy for {title}.",

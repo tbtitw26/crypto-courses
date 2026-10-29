@@ -114,13 +114,14 @@
       "status": {
         "pending": "Venter",
         "inProgress": "Pågår",
+        "delayed": "Forsinket",
         "ready": "Klar"
       },
       "explanation": "Når PDF-en er klar, sendes den til deg på e-post og vises i biblioteket ditt."
     },
     "recentActivity": {
       "title": "Nylig aktivitet",
-      "subtitle": "{count} læringselementer denne uken",
+      "subtitle": "{count} elementer i biblioteket ditt",
       "noActivity": "Ingen nylig aktivitet ennå.",
       "completedCourse": "Fullførte «{title}».",
       "generatedAI": "Genererte AI-strategi for {title}.",
