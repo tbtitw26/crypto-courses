@@ -158,7 +158,7 @@ export async function POST(request: NextRequest) {
                 status: 'cancelled',
                 status_stage: 'error',
                 cancelled_at: new Date(),
-                status_error: `Token deduction failed: ${tokenError instanceof Error ? tokenError.message : String(tokenError)}`,
+                status_error: `Usage Unit deduction failed: ${tokenError instanceof Error ? tokenError.message : String(tokenError)}`,
               },
             })
           )

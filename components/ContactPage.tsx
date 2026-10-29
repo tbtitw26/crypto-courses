@@ -101,7 +101,7 @@ export function ContactPage() {
   const regions = ['EU', 'UK', 'UAE', 'Other']
   const topics = [
     'Courses',
-    'Tokens & billing',
+    'Usage Units & billing',
     'Account access',
     'Legal & compliance',
     'Other',
