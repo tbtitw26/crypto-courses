@@ -98,8 +98,8 @@ export function DashboardPage() {
 
             const tokensDisplay =
               tx.tokens > 0
-                ? `+${tx.tokens.toLocaleString('en-US')} tokens`
-                : `${tx.tokens.toLocaleString('en-US')} tokens`
+                ? `+${tx.tokens.toLocaleString('en-US')} ${tCommon('tokens')}`
+                : `${tx.tokens.toLocaleString('en-US')} ${tCommon('tokens')}`
 
             return {
               type: tx.type,
@@ -127,7 +127,7 @@ export function DashboardPage() {
     if (status === 'authenticated') {
       fetchTransactions()
     }
-  }, [session?.user?.id, status, currency])
+  }, [session?.user?.id, status, currency, tCommon])
 
   useEffect(() => {
     async function fetchCourses() {
